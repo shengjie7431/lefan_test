@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BusinessRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BusinessRole" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="role_desc" property="roleDesc" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="role_code" property="roleCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_name, role_desc, create_time, create_by,role_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from business_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from business_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.BusinessRole" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into business_role (role_name, role_desc, create_time, 
+      create_by,role_code)
+    values (#{roleName,jdbcType=VARCHAR}, #{roleDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR},#{roleCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.BusinessRole" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into business_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="roleDesc != null" >
+        role_desc,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="roleCode != null" >
+        role_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null" >
+        #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null" >
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.BusinessRole" >
+    update business_role
+    <set >
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null" >
+        role_desc = #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null" >
+        role_code = #{roleCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.BusinessRole" >
+    update business_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      role_desc = #{roleDesc,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+       role_code = #{roleCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List" />
+        from business_role where 1 =1
+        <if test="roleName != null">
+            and role_name  like  CONCAT(CONCAT('%',#{roleName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="ids !=null">
+            and find_in_set(id,#{ids})
+        </if>
+        order by id
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="selectAllCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) from business_role where 1 =1
+        <if test="roleName != null">
+            and role_name  like  CONCAT(CONCAT('%',#{roleName,jdbcType=VARCHAR}), '%')
+        </if>
+    </select>
+    
+    <select id="selectUserRoles" parameterType="long" resultType="string">
+        SELECT GROUP_CONCAT(role_id) FROM bus_user_role WHERE user_id=#{userId}
+    </select>
+
+    <select id="selectInvestigatorRoles" parameterType="map" resultType="string">
+      SELECT GROUP_CONCAT(a.role_id) as role_id FROM bus_user_role a LEFT JOIN business_role b ON a.role_id=b.id WHERE a.user_id=#{userId}
+        <if test="roleCode != null ">
+          and b.role_code=#{roleCode}
+        </if>
+    </select>
+
+    <select id="selectInvestigatorRoleList" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM business_role
+        <where>
+           <if test="roleCode != null ">
+             and role_code=#{roleCode}
+           </if>
+            <if test="notRole != null ">
+                and id != #{notRole,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteByUserIdAndInvest" parameterType="map" >
+        delete from bus_user_role
+        where user_id = #{userId,jdbcType=BIGINT}
+        <if test="roleCode != null ">
+            and role_id in (SELECT id FROM business_role WHERE role_code=#{roleCode})
+        </if>
+    </delete>
+
+  <select id="selectDtoByLeftId" parameterType="map" resultType="com.lefancrm.apicenter.dto.BusinessRoleDto">
+    select a.id,a.role_name as roleName,a.role_desc as roleDesc,(case when r.id is null then 0 else 1 end) as selected from business_role a
+    <if test="leftType == 1">
+      left join bus_apply_product_role r on a.id = r.role_id and r.product_id = #{leftId,jdbcType=BIGINT}
+    </if>
+    <if test="leftType == 2">
+      left join bus_apply_org_role r on a.id = r.role_id and r.org_id = #{leftId,jdbcType=BIGINT}
+    </if>
+    <if test="leftType == 3">
+      left join bus_apply_corporation_role r on a.id = r.role_id and r.corporation_id = #{leftId,jdbcType=BIGINT}
+    </if>
+    <if test="leftType == 4">
+      left join bus_apply_enum_role r on a.id = r.role_id and r.enum_id = #{leftId,jdbcType=BIGINT}
+    </if>
+    <if test="leftType == 5">
+      left join bus_apply_item_role r on a.id = r.role_id and r.item_id = #{leftId,jdbcType=BIGINT}
+    </if>
+    where 1 = 1
+    <if test="roleName != null">
+      and a.role_name  like  CONCAT(CONCAT('%',#{roleName,jdbcType=VARCHAR}), '%')
+    </if>
+    order by a.id asc
+  </select>
+</mapper>

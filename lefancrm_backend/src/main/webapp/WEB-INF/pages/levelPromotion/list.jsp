@@ -1,0 +1,103 @@
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/pages/common/taglibs.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>职级晋升指标列表</title>
+    <%@ include file="/WEB-INF/pages/common/mainCss.jsp" %>
+</head>
+<body>
+<div class="main administrator">
+    <div class="main-top">
+        <h3>职级晋升指标数据列表 <small>共<span>${apiRsp.count}</span>个</small></h3>
+    </div><!--main-top-->
+
+    <div class="panel panel-info">
+
+        <div class="panel-heading">
+            <div class="pin">
+                <form class="form-inline" role="form" action="${ctx}/levelPromotion/levelPromotionList" method="post">
+                   <div class="form-group">
+                       职级名称:<input name="levelCode" type="text" value="${levelCode}" class="form-control">
+                   </div>
+                    <div class="btn-group">
+                        &nbsp; &nbsp;<button id="batchOperateBtn" type="submit" class="btn btn-default">查询</button>&nbsp; &nbsp;
+                        &nbsp; &nbsp;<button onclick="positionInfoAdd()" type="button" class="btn btn-default">添加职位数据</button>&nbsp; &nbsp;
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th width="100">职级代码</th>
+                <th width="150">晋升该职级签单数指标</th>
+                <th width="150">晋升该职级服务费金额</th>
+                <th width="150">晋升该职级连续达标月数指标</th>
+                <th width="150">维持该职级签单数指标</th>
+                <th width="150">维持该职级服务费金额</th>
+                <th width="150">维持该职级连续达标月数指标</th>
+                <th width="150">操作</th>
+            </tr>
+            </thead>
+            <tbody class="class-list">
+            <c:forEach items="${apiRsp.results}" var="item">
+                <tr>
+                    <td>${item.levelCode}</td>
+                    <td>${item.promotionSignNum}</td>
+                    <td>${item.promotionMoney}</td>
+                    <td>${item.promotionMonthNum}</td>
+                    <td>${item.maintainSignNum}</td>
+                    <td>${item.maintainMoney}</td>
+                    <td>${item.maintainMonthNum}</td>
+                    <td><a href="javascript:levelPromotionEdit('${item.id}');">编辑</a>
+                        <a href="javascript:levelPromotionDelete('${item.id}');">删除</a>
+
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div><!--panel-info-->
+
+<div class="main-bottom">
+        <jsp:include page="/WEB-INF/pages/common/pagination.jsp" flush="true">
+            <jsp:param name="paginationObjectName" value="apiRsp" />
+            <jsp:param name="pageNoName" value="" />
+            <jsp:param name="requestUrl" value="${ctx}/levelPromotion/levelPromotionList?positionName=${positionName}" />
+            <jsp:param name="refreshDiv" value="" />
+        </jsp:include>
+    </div><!--main-bottom-->
+
+</div><!--main end-->
+
+<%@ include file="/WEB-INF/pages/common/mainFooter.jsp" %>
+<script>
+    var levelPromotionEdit = function(id){
+        openDialog({
+            frame:true,
+            title:"修改数据",
+            height:500,
+            width:800,
+            url:"${ctx}/levelPromotion/levelPromotionEdit?id="+id
+        });
+    }
+
+    var positionInfoAdd = function(){
+        openDialog({
+            frame:true,
+            title:"添加数据",
+            height:500,
+            width:800,
+            url:"${ctx}/levelPromotion/levelPromotionAdd"
+        });
+    }
+
+    function levelPromotionDelete(id){
+        ajaxSubmit("${ctx}/levelPromotion/levelPromotionDelete",{"id":id},reload,"删除成功！","确认删除吗？");
+    }
+</script>
+</body>
+</html>

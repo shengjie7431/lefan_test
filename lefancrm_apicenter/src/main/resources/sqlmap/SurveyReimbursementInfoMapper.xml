@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyReimbursementInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyReimbursementInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="survey_org_id" property="surveyOrgId" jdbcType="BIGINT" />
+    <result column="survey_org_name" property="surveyOrgName" jdbcType="VARCHAR" />
+    <result column="survey_user_id" property="surveyUserId" jdbcType="BIGINT" />
+    <result column="survey_user_name" property="surveyUserName" jdbcType="VARCHAR" />
+    <result column="survey_direction_id" property="surveyDirectionId" jdbcType="BIGINT" />
+    <result column="medical_history_money" property="medicalHistoryMoney" jdbcType="DOUBLE" />
+    <result column="investigator_case_id" property="investigatorCaseId" jdbcType="VARCHAR" />
+    <result column="troubleshooting_money" property="troubleshootingMoney" jdbcType="DOUBLE" />
+    <result column="printing_money" property="printingMoney" jdbcType="DOUBLE" />
+    <result column="accommodatio_money" property="accommodatioMoney" jdbcType="DOUBLE" />
+    <result column="train_money" property="trainMoney" jdbcType="DOUBLE" />
+    <result column="car_money" property="carMoney" jdbcType="DOUBLE" />
+    <result column="aircraft_money" property="aircraftMoney" jdbcType="DOUBLE" />
+    <result column="self_driving_money" property="selfDrivingMoney" jdbcType="DOUBLE" />
+    <result column="other_money" property="otherMoney" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="medical_history_desc" property="medicalHistoryDesc" jdbcType="VARCHAR" />
+    <result column="troubleshooting_desc" property="troubleshootingDesc" jdbcType="VARCHAR" />
+    <result column="printing_desc" property="printingDesc" jdbcType="VARCHAR" />
+    <result column="accommodatio_desc" property="accommodatioDesc" jdbcType="VARCHAR" />
+    <result column="train_desc" property="trainDesc" jdbcType="VARCHAR" />
+    <result column="car_desc" property="carDesc" jdbcType="VARCHAR" />
+    <result column="aircraft_desc" property="aircraftDesc" jdbcType="VARCHAR" />
+    <result column="self_driving_desc" property="selfDrivingDesc" jdbcType="VARCHAR" />
+    <result column="other_desc" property="otherDesc" jdbcType="VARCHAR" />
+    <result column="kilometres_num" property="kilometresNum" jdbcType="INTEGER" />
+    <result column="accommodatio_days" property="accommodatioDays" jdbcType="INTEGER" />
+    <result column="innercity_money" property="innerCityMoney" jdbcType="DOUBLE" />
+    <result column="innercity_desc" property="innerCityDesc" jdbcType="VARCHAR" />
+    <result column="toll_money" property="tollMoney" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_info_id, survey_org_id, survey_org_name, survey_user_id, survey_user_name, 
+    survey_direction_id, medical_history_money, investigator_case_id, troubleshooting_money, 
+    printing_money, accommodatio_money, train_money, car_money, aircraft_money, self_driving_money, 
+    other_money, create_time, create_by, update_time, update_by, medical_history_desc, 
+    troubleshooting_desc, printing_desc, accommodatio_desc, train_desc, car_desc, aircraft_desc, 
+    self_driving_desc, other_desc,kilometres_num,accommodatio_days,innercity_money,innercity_desc,toll_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_reimbursement_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_reimbursement_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteBySurveyDirectionId">
+     delete from survey_reimbursement_info
+    where survey_direction_id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyReimbursementInfo" useGeneratedKeys="true" keyProperty="id">
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_reimbursement_info (survey_info_id, survey_org_id, survey_org_name, 
+      survey_user_id, survey_user_name, survey_direction_id, 
+      medical_history_money, investigator_case_id, 
+      troubleshooting_money, printing_money, accommodatio_money, 
+      train_money, car_money, aircraft_money, 
+      self_driving_money, other_money, create_time, 
+      create_by, update_time, update_by, 
+      medical_history_desc, troubleshooting_desc, 
+      printing_desc, accommodatio_desc, train_desc, 
+      car_desc, aircraft_desc, self_driving_desc,kilometres_num,
+      other_desc,accommodatio_days,innercity_money,innercity_desc,toll_money)
+    values (#{surveyInfoId,jdbcType=BIGINT}, #{surveyOrgId,jdbcType=BIGINT}, #{surveyOrgName,jdbcType=VARCHAR}, 
+      #{surveyUserId,jdbcType=BIGINT}, #{surveyUserName,jdbcType=VARCHAR}, #{surveyDirectionId,jdbcType=BIGINT}, 
+      #{medicalHistoryMoney,jdbcType=DOUBLE}, #{investigatorCaseId,jdbcType=VARCHAR}, 
+      #{troubleshootingMoney,jdbcType=DOUBLE}, #{printingMoney,jdbcType=DOUBLE}, #{accommodatioMoney,jdbcType=DOUBLE}, 
+      #{trainMoney,jdbcType=DOUBLE}, #{carMoney,jdbcType=DOUBLE}, #{aircraftMoney,jdbcType=DOUBLE}, 
+      #{selfDrivingMoney,jdbcType=DOUBLE}, #{otherMoney,jdbcType=DOUBLE}, NOW(),
+      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{medicalHistoryDesc,jdbcType=VARCHAR}, #{troubleshootingDesc,jdbcType=VARCHAR}, 
+      #{printingDesc,jdbcType=VARCHAR}, #{accommodatioDesc,jdbcType=VARCHAR}, #{trainDesc,jdbcType=VARCHAR}, 
+      #{carDesc,jdbcType=VARCHAR}, #{aircraftDesc,jdbcType=VARCHAR}, #{selfDrivingDesc,jdbcType=VARCHAR}, #{kilometresNum},
+      #{otherDesc,jdbcType=VARCHAR},#{accommodatioDays,jdbcType=INTEGER},#{innerCityMoney,jdbcType=DOUBLE},#{innerCityDesc,jdbcType=VARCHAR},#{tollMoney,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyReimbursementInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_reimbursement_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id,
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name,
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id,
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name,
+      </if>
+      <if test="surveyDirectionId != null" >
+        survey_direction_id,
+      </if>
+      <if test="medicalHistoryMoney != null" >
+        medical_history_money,
+      </if>
+      <if test="investigatorCaseId != null" >
+        investigator_case_id,
+      </if>
+      <if test="troubleshootingMoney != null" >
+        troubleshooting_money,
+      </if>
+      <if test="printingMoney != null" >
+        printing_money,
+      </if>
+      <if test="accommodatioMoney != null" >
+        accommodatio_money,
+      </if>
+      <if test="trainMoney != null" >
+        train_money,
+      </if>
+      <if test="carMoney != null" >
+        car_money,
+      </if>
+      <if test="aircraftMoney != null" >
+        aircraft_money,
+      </if>
+      <if test="selfDrivingMoney != null" >
+        self_driving_money,
+      </if>
+      <if test="otherMoney != null" >
+        other_money,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="medicalHistoryDesc != null" >
+        medical_history_desc,
+      </if>
+      <if test="troubleshootingDesc != null" >
+        troubleshooting_desc,
+      </if>
+      <if test="printingDesc != null" >
+        printing_desc,
+      </if>
+      <if test="accommodatioDesc != null" >
+        accommodatio_desc,
+      </if>
+      <if test="trainDesc != null" >
+        train_desc,
+      </if>
+      <if test="carDesc != null" >
+        car_desc,
+      </if>
+      <if test="aircraftDesc != null" >
+        aircraft_desc,
+      </if>
+      <if test="selfDrivingDesc != null" >
+        self_driving_desc,
+      </if>
+      <if test="otherDesc != null" >
+        other_desc,
+      </if>
+      <if test="accommodatioDays != null" >
+        accommodatio_days,
+      </if>
+      <if test="innerCityMoney != null" >
+        innercity_money,
+      </if>
+      <if test="innerCityDesc != null" >
+        innercity_desc,
+      </if>
+      <if test="tollMoney != null" >
+        toll_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgId != null" >
+        #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyUserId != null" >
+        #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyDirectionId != null" >
+        #{surveyDirectionId,jdbcType=BIGINT},
+      </if>
+      <if test="medicalHistoryMoney != null" >
+        #{medicalHistoryMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="investigatorCaseId != null" >
+        #{investigatorCaseId,jdbcType=VARCHAR},
+      </if>
+      <if test="troubleshootingMoney != null" >
+        #{troubleshootingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="printingMoney != null" >
+        #{printingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="accommodatioMoney != null" >
+        #{accommodatioMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="trainMoney != null" >
+        #{trainMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="carMoney != null" >
+        #{carMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="aircraftMoney != null" >
+        #{aircraftMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="selfDrivingMoney != null" >
+        #{selfDrivingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="otherMoney != null" >
+        #{otherMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalHistoryDesc != null" >
+        #{medicalHistoryDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="troubleshootingDesc != null" >
+        #{troubleshootingDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="printingDesc != null" >
+        #{printingDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="accommodatioDesc != null" >
+        #{accommodatioDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="trainDesc != null" >
+        #{trainDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="carDesc != null" >
+        #{carDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="aircraftDesc != null" >
+        #{aircraftDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="selfDrivingDesc != null" >
+        #{selfDrivingDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="otherDesc != null" >
+        #{otherDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="accommodatioDays != null" >
+        #{accommodatioDays,jdbcType=INTEGER},
+      </if>
+      <if test="innerCityMoney != null" >
+        #{innerCityMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="innerCityDesc != null" >
+        #{innerCityDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tollMoney != null" >
+        #{tollMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyReimbursementInfo" >
+    update survey_reimbursement_info
+    <set >
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyDirectionId != null" >
+        survey_direction_id = #{surveyDirectionId,jdbcType=BIGINT},
+      </if>
+      <if test="investigatorCaseId != null">
+        investigator_case_id = #{investigatorCaseId,jdbcType=VARCHAR},
+      </if>
+        medical_history_money = #{medicalHistoryMoney,jdbcType=DOUBLE},
+        troubleshooting_money = #{troubleshootingMoney,jdbcType=DOUBLE},
+        printing_money = #{printingMoney,jdbcType=DOUBLE},
+        accommodatio_money = #{accommodatioMoney,jdbcType=DOUBLE},
+        train_money = #{trainMoney,jdbcType=DOUBLE},
+        car_money = #{carMoney,jdbcType=DOUBLE},
+        aircraft_money = #{aircraftMoney,jdbcType=DOUBLE},
+        self_driving_money = #{selfDrivingMoney,jdbcType=DOUBLE},
+        other_money = #{otherMoney,jdbcType=DOUBLE},
+        accommodatio_days = #{accommodatioDays,jdbcType=INTEGER},
+        innercity_money = #{innerCityMoney,jdbcType=DOUBLE},
+        toll_money =  #{tollMoney,jdbcType=DOUBLE},
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+        medical_history_desc = #{medicalHistoryDesc,jdbcType=VARCHAR},
+        troubleshooting_desc = #{troubleshootingDesc,jdbcType=VARCHAR},
+        printing_desc = #{printingDesc,jdbcType=VARCHAR},
+        accommodatio_desc = #{accommodatioDesc,jdbcType=VARCHAR},
+        train_desc = #{trainDesc,jdbcType=VARCHAR},
+        car_desc = #{carDesc,jdbcType=VARCHAR},
+        aircraft_desc = #{aircraftDesc,jdbcType=VARCHAR},
+        self_driving_desc = #{selfDrivingDesc,jdbcType=VARCHAR},
+        other_desc = #{otherDesc,jdbcType=VARCHAR},
+        kilometres_num = #{kilometresNum,jdbcType=VARCHAR},
+        innercity_desc = #{innerCityDesc,jdbcType=VARCHAR},
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyReimbursementInfo" >
+    update survey_reimbursement_info
+    set survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      survey_direction_id = #{surveyDirectionId,jdbcType=BIGINT},
+      medical_history_money = #{medicalHistoryMoney,jdbcType=DOUBLE},
+      investigator_case_id = #{investigatorCaseId,jdbcType=VARCHAR},
+      troubleshooting_money = #{troubleshootingMoney,jdbcType=DOUBLE},
+      printing_money = #{printingMoney,jdbcType=DOUBLE},
+      accommodatio_money = #{accommodatioMoney,jdbcType=DOUBLE},
+      train_money = #{trainMoney,jdbcType=DOUBLE},
+      car_money = #{carMoney,jdbcType=DOUBLE},
+      aircraft_money = #{aircraftMoney,jdbcType=DOUBLE},
+      self_driving_money = #{selfDrivingMoney,jdbcType=DOUBLE},
+      other_money = #{otherMoney,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      medical_history_desc = #{medicalHistoryDesc,jdbcType=VARCHAR},
+      troubleshooting_desc = #{troubleshootingDesc,jdbcType=VARCHAR},
+      printing_desc = #{printingDesc,jdbcType=VARCHAR},
+      accommodatio_desc = #{accommodatioDesc,jdbcType=VARCHAR},
+      train_desc = #{trainDesc,jdbcType=VARCHAR},
+      car_desc = #{carDesc,jdbcType=VARCHAR},
+      aircraft_desc = #{aircraftDesc,jdbcType=VARCHAR},
+      self_driving_desc = #{selfDrivingDesc,jdbcType=VARCHAR},
+      other_desc = #{otherDesc,jdbcType=VARCHAR},
+      accommodatio_days = #{accommodatioDays,jdbcType=INTEGER},
+      innercity_money = #{innerCityMoney,jdbcType=DOUBLE},
+      innercity_desc = #{innerCityDesc,jdbcType=VARCHAR},
+      toll_money =  #{tollMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateBySurveyDirectionId" parameterType="com.lefancrm.apicenter.model.SurveyReimbursementInfo" >
+    update survey_reimbursement_info
+    set survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      survey_direction_id = #{surveyDirectionId,jdbcType=BIGINT},
+      medical_history_money = #{medicalHistoryMoney,jdbcType=DOUBLE},
+      investigator_case_id = #{investigatorCaseId,jdbcType=VARCHAR},
+      troubleshooting_money = #{troubleshootingMoney,jdbcType=DOUBLE},
+      printing_money = #{printingMoney,jdbcType=DOUBLE},
+      accommodatio_money = #{accommodatioMoney,jdbcType=DOUBLE},
+      train_money = #{trainMoney,jdbcType=DOUBLE},
+      car_money = #{carMoney,jdbcType=DOUBLE},
+      aircraft_money = #{aircraftMoney,jdbcType=DOUBLE},
+      self_driving_money = #{selfDrivingMoney,jdbcType=DOUBLE},
+      other_money = #{otherMoney,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      medical_history_desc = #{medicalHistoryDesc,jdbcType=VARCHAR},
+      troubleshooting_desc = #{troubleshootingDesc,jdbcType=VARCHAR},
+      printing_desc = #{printingDesc,jdbcType=VARCHAR},
+      accommodatio_desc = #{accommodatioDesc,jdbcType=VARCHAR},
+      train_desc = #{trainDesc,jdbcType=VARCHAR},
+      car_desc = #{carDesc,jdbcType=VARCHAR},
+      aircraft_desc = #{aircraftDesc,jdbcType=VARCHAR},
+      self_driving_desc = #{selfDrivingDesc,jdbcType=VARCHAR},
+      other_desc = #{otherDesc,jdbcType=VARCHAR},
+      accommodatio_days = #{accommodatioDays,jdbcType=INTEGER},
+      innercity_money = #{innerCityMoney,jdbcType=DOUBLE},
+      innercity_desc = #{innerCityDesc,jdbcType=VARCHAR},
+      toll_money =  #{tollMoney,jdbcType=DOUBLE},
+    where survey_direction_id = #{surveyDirectionId,jdbcType=BIGINT}
+
+  </update>
+
+  <select id="selectSurveyReimbursementInfoBySurveyInfoId"
+          resultType="com.lefancrm.apicenter.model.SurveyReimbursementInfo">
+        	SELECT * FROM survey_reimbursement_info WHERE survey_info_id = #{surveyInfoId}
+    </select>
+
+  <select id="selectSurveyReimbursementInfoTotalMoneyBySurveyInfoId" resultType="java.lang.String">
+        	SELECT
+		ROUND(SUM( IFNULL(info.medical_history_money,0) + IFNULL(info.troubleshooting_money,0)
+	 + IFNULL(info.printing_money,0) + IFNULL(info.accommodatio_money,0) + IFNULL(info.train_money,0) + IFNULL(info.car_money,0) + IFNULL(info.aircraft_money,0) + IFNULL(info.self_driving_money,0) + IFNULL(info.other_money,0) + IFNULL(info.innercity_money,0)+ IFNULL(info.toll_money,0)),2) totalMoney
+			FROM survey_case_direction direction LEFT JOIN survey_reimbursement_info info ON direction.id = survey_direction_id
+				WHERE direction.survey_info_id = #{surveyInfoId} AND direction.delete_flag = 0 AND direction.survey_investigator_case_id =#{investigatorCaseId}
+				AND direction.have_reimbursement = 1 AND info.survey_user_id = #{currentUserId}
+    </select>
+
+  <select id="selectSurveyReimbursementInfoOneMoneyByDirectionId" resultType="java.lang.String">
+    SELECT ROUND(SUM( IFNULL(medical_history_money,0) + IFNULL(troubleshooting_money,0)
+	 + IFNULL(printing_money,0) + IFNULL(accommodatio_money,0) + IFNULL(train_money,0) + IFNULL(car_money,0) + IFNULL(aircraft_money,0) + IFNULL(self_driving_money,0) + IFNULL(other_money,0)+ IFNULL(innercity_money,0) + IFNULL(toll_money,0) ),2) totalMoney
+        FROM survey_reimbursement_info WHERE survey_direction_id = #{dicectionId}
+  </select>
+    <select id="selectBySurveyDirectionId" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from survey_reimbursement_info
+      where survey_direction_id = #{dicectionId,jdbcType=BIGINT}
+    </select>
+    <select id="selectAllMoneyByInfoIds" resultType="java.util.Map">
+       SELECT
+      SUM(
+      ifnull( c.medical_history_money, 0 )) medicalHistoryMoney,
+      SUM( ifnull( c.accommodatio_money, 0 ) ) accommodatioMoney,
+      sum( ifnull( c.troubleshooting_money, 0 ) ) troubleshootingMoney,
+      sum( ifnull( c.opc_troubleshooting_money, 0 ) ) opcTroubleshootingMoney,
+      SUM( ifnull( c.printing_money, 0 ) ) printingMoney,
+      sum(
+      IFNULL(c.cross_driving_money, 0 ) + ifnull(c.self_driving_money,0)+ ifnull(c.toll_money,0)
+      ) crossCityTransportationFees,
+      SUM(
+      ifnull( c.other_money, 0 )) otherFee,
+      sum(ifnull(c.cityin_driving_money,0)) cityTransportationSubsidies
+      FROM
+      survey_user_clock u
+      LEFT JOIN survey_clock_case c ON u.id = c.clock_id
+      LEFT JOIN survey_investigator i ON u.survey_user_id = i.user_id
+      WHERE
+      date_format(u.clock_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+      and date_format(u.clock_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+      AND u.survey_org_id = #{orgId}
+      <if test="level == 2 and groupId == null">
+        AND i.survey_area_id = #{areaId}
+      </if>
+      <if test="level == 2 and groupId != null">
+        AND i.survey_area_id is null
+      </if>
+      <if test="orgAttr == 1">
+        AND c.entrust_type = 2
+      </if>
+      <if test="orgAttr == 2">
+        AND c.entrust_type = 1
+      </if>
+    </select>
+</mapper>

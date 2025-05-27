@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyClockReInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyClockReInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="clock_id" property="clockId" jdbcType="BIGINT" />
+    <result column="cityin_driving_money" property="cityinDrivingMoney" jdbcType="DOUBLE" />
+    <result column="medical_history_money" property="medicalHistoryMoney" jdbcType="DOUBLE" />
+    <result column="troubleshooting_money" property="troubleshootingMoney" jdbcType="DOUBLE" />
+    <result column="printing_money" property="printingMoney" jdbcType="DOUBLE" />
+    <result column="accommodatio_money" property="accommodatioMoney" jdbcType="DOUBLE" />
+    <result column="cross_driving_money" property="crossDrivingMoney" jdbcType="DOUBLE" />
+    <result column="self_driving_money" property="selfDrivingMoney" jdbcType="DOUBLE" />
+    <result column="other_money" property="otherMoney" jdbcType="DOUBLE" />
+    <result column="clock_desc" property="clockDesc" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="TIMESTAMP" />
+    <result column="toll_money" property="tollMoney" jdbcType="DOUBLE" />
+    <result column="kilometres_num" property="kilometresNum" jdbcType="DOUBLE" />
+    <result column="reference_money" property="referenceMoney" jdbcType="DOUBLE" />
+  </resultMap>
+
+
+
+  <resultMap id="costApplyMap" type="com.lefancrm.apicenter.dto.SurveyCostApplyDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="cost_type" property="costType" jdbcType="INTEGER" />
+    <result column="cost_type_name" property="costTypeName" jdbcType="VARCHAR" />
+    <result column="apply_money" property="applyMoney" jdbcType="DOUBLE" />
+    <result column="produce_date" property="produceDate" jdbcType="DATE" />
+    <result column="cost_desc" property="costDesc" jdbcType="VARCHAR" />
+    <result column="start_address" property="startAddress" jdbcType="VARCHAR" />
+    <result column="end_address" property="endAddress" jdbcType="VARCHAR" />
+    <result column="start_lbs_x" property="startLbsX" jdbcType="DOUBLE" />
+    <result column="start_lbs_y" property="startLbsY" jdbcType="DOUBLE" />
+    <result column="end_lbs_x" property="endLbsX" jdbcType="DOUBLE" />
+    <result column="end_lbs_y" property="endLbsY" jdbcType="DOUBLE" />
+    <result column="km_num" property="kmNum" jdbcType="DOUBLE" />
+    <result column="km_num_money" property="kmNumMoney" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="reviewer_user_id" property="reviewerUserId" jdbcType="BIGINT" />
+    <result column="reviewer_user_name" property="reviewerUserName" jdbcType="VARCHAR" />
+    <result column="reviewer_time" property="reviewerTime" jdbcType="TIMESTAMP" />
+    <result column="reject_desc" property="rejectDesc" jdbcType="VARCHAR" />
+    <result column="survey_user_id" property="surveyUserId" jdbcType="BIGINT" />
+    <result column="survey_user_name" property="surveyUserName" jdbcType="VARCHAR" />
+    <result column="survey_org_id" property="surveyOrgId" jdbcType="BIGINT" />
+    <result column="survey_org_name" property="surveyOrgName" jdbcType="VARCHAR" />
+    <result column="two_reviewer_user_id" property="twoReviewerUserId" jdbcType="BIGINT" />
+    <result column="two_reviewer_user_name" property="twoReviewerUserName" jdbcType="VARCHAR" />
+    <result column="two_reviewer_time" property="twoReviewerTime" jdbcType="TIMESTAMP" />
+    <result column="two_reject_desc" property="twoRejectDesc" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, clock_id, cityin_driving_money, medical_history_money, troubleshooting_money, 
+    printing_money, accommodatio_money, cross_driving_money, self_driving_money, other_money, 
+    clock_desc, create_time, create_by,toll_money,kilometres_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_clock_re_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectByClockId" resultMap="BaseResultMap">
+      select
+     id, clock_id, ifnull(cityin_driving_money,0)cityin_driving_money, ifnull(medical_history_money,0)medical_history_money, ifnull(troubleshooting_money,0)troubleshooting_money,
+    ifnull(printing_money,0)printing_money, ifnull(accommodatio_money,0)accommodatio_money, ifnull(cross_driving_money,0)cross_driving_money, ifnull(self_driving_money,0)self_driving_money, ifnull(other_money,0)other_money,
+    clock_desc, create_time, create_by,ifnull(toll_money,0)toll_money,kilometres_num,reference_money
+      from survey_clock_re_info
+      where clock_id = #{id,jdbcType=BIGINT}
+    </select>
+  <select id="selectTotalMoneyById" resultType="java.lang.Double">
+    select SUM(IFNULL( i.cityin_driving_money, 0 )+ IFNULL( i.medical_history_money, 0 )+ IFNULL( i.troubleshooting_money, 0 )+ IFNULL( i.printing_money, 0 )+ IFNULL( i.accommodatio_money, 0 )+ IFNULL( i.cross_driving_money, 0 )+ IFNULL( i.self_driving_money, 0 )+ IFNULL( i.other_money, 0 )+ IFNULL( i.toll_money, 0 ) + IFNULL( i.opc_troubleshooting_money, 0 )) total_money
+    from survey_clock_re_info i where i.id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectCostApplyByClockId" resultMap="costApplyMap">
+      SELECT
+          a.*,GROUP_CONCAT(c.survey_person) surveyPersons
+      FROM
+          survey_cost_clock_mid m
+          LEFT JOIN survey_cost_apply a ON m.cost_apply_id = a.id
+          LEFT JOIN survey_cost_case c ON a.id = c.cost_apply_id
+      WHERE
+       m.clock_id = #{clockId}
+       GROUP BY a.id
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_clock_re_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyClockReInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_clock_re_info (clock_id, cityin_driving_money, medical_history_money, 
+      troubleshooting_money, printing_money, accommodatio_money, 
+      cross_driving_money, self_driving_money, other_money, 
+      clock_desc, create_time, create_by
+      )
+    values (#{clockId,jdbcType=BIGINT}, #{cityinDrivingMoney,jdbcType=DOUBLE}, #{medicalHistoryMoney,jdbcType=DOUBLE}, 
+      #{troubleshootingMoney,jdbcType=DOUBLE}, #{printingMoney,jdbcType=DOUBLE}, #{accommodatioMoney,jdbcType=DOUBLE}, 
+      #{crossDrivingMoney,jdbcType=DOUBLE}, #{selfDrivingMoney,jdbcType=DOUBLE}, #{otherMoney,jdbcType=DOUBLE}, 
+      #{clockDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyClockReInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_clock_re_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="clockId != null" >
+        clock_id,
+      </if>
+      <if test="cityinDrivingMoney != null" >
+        cityin_driving_money,
+      </if>
+      <if test="medicalHistoryMoney != null" >
+        medical_history_money,
+      </if>
+      <if test="troubleshootingMoney != null" >
+        troubleshooting_money,
+      </if>
+      <if test="printingMoney != null" >
+        printing_money,
+      </if>
+      <if test="accommodatioMoney != null" >
+        accommodatio_money,
+      </if>
+      <if test="crossDrivingMoney != null" >
+        cross_driving_money,
+      </if>
+      <if test="selfDrivingMoney != null" >
+        self_driving_money,
+      </if>
+      <if test="otherMoney != null" >
+        other_money,
+      </if>
+      <if test="clockDesc != null" >
+        clock_desc,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="clockId != null" >
+        #{clockId,jdbcType=BIGINT},
+      </if>
+      <if test="cityinDrivingMoney != null" >
+        #{cityinDrivingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="medicalHistoryMoney != null" >
+        #{medicalHistoryMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="troubleshootingMoney != null" >
+        #{troubleshootingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="printingMoney != null" >
+        #{printingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="accommodatioMoney != null" >
+        #{accommodatioMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="crossDrivingMoney != null" >
+        #{crossDrivingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="selfDrivingMoney != null" >
+        #{selfDrivingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="otherMoney != null" >
+        #{otherMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="clockDesc != null" >
+        #{clockDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyClockReInfo" >
+    update survey_clock_re_info
+    <set >
+      <if test="clockId != null" >
+        clock_id = #{clockId,jdbcType=BIGINT},
+      </if>
+      <if test="cityinDrivingMoney != null" >
+        cityin_driving_money = #{cityinDrivingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="medicalHistoryMoney != null" >
+        medical_history_money = #{medicalHistoryMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="troubleshootingMoney != null" >
+        troubleshooting_money = #{troubleshootingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="printingMoney != null" >
+        printing_money = #{printingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="accommodatioMoney != null" >
+        accommodatio_money = #{accommodatioMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="crossDrivingMoney != null" >
+        cross_driving_money = #{crossDrivingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="selfDrivingMoney != null" >
+        self_driving_money = #{selfDrivingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="otherMoney != null" >
+        other_money = #{otherMoney,jdbcType=DOUBLE},
+      </if>
+
+        clock_desc = #{clockDesc,jdbcType=VARCHAR},
+
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tollMoney != null" >
+        toll_money = #{tollMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="kilometresNum != null" >
+        kilometres_num = #{kilometresNum,jdbcType=DOUBLE},
+      </if>
+      <if test="opcTroubleshootingMoney != null" >
+        opc_troubleshooting_money = #{opcTroubleshootingMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyClockReInfo" >
+    update survey_clock_re_info
+    set clock_id = #{clockId,jdbcType=BIGINT},
+      cityin_driving_money = #{cityinDrivingMoney,jdbcType=DOUBLE},
+      medical_history_money = #{medicalHistoryMoney,jdbcType=DOUBLE},
+      troubleshooting_money = #{troubleshootingMoney,jdbcType=DOUBLE},
+      printing_money = #{printingMoney,jdbcType=DOUBLE},
+      accommodatio_money = #{accommodatioMoney,jdbcType=DOUBLE},
+      cross_driving_money = #{crossDrivingMoney,jdbcType=DOUBLE},
+      self_driving_money = #{selfDrivingMoney,jdbcType=DOUBLE},
+      other_money = #{otherMoney,jdbcType=DOUBLE},
+      clock_desc = #{clockDesc,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

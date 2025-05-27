@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyConsignerFileMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyConsignerFile" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="consign_id" property="consignId" jdbcType="BIGINT" />
+    <result column="consign_type" property="consignType" jdbcType="INTEGER" />
+    <result column="file_id" property="fileId" jdbcType="BIGINT" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, consign_id, consign_type, file_id, file_name, create_by, create_by_name, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_consigner_file
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_consigner_file
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyConsignerFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_consigner_file (consign_id, consign_type, file_id, 
+      file_name, create_by, create_by_name, 
+      create_time)
+    values (#{consignId,jdbcType=BIGINT}, #{consignType,jdbcType=INTEGER}, #{fileId,jdbcType=BIGINT}, 
+      #{fileName,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, #{createByName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignerFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_consigner_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="consignId != null" >
+        consign_id,
+      </if>
+      <if test="consignType != null" >
+        consign_type,
+      </if>
+      <if test="fileId != null" >
+        file_id,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createByName != null" >
+        create_by_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="consignId != null" >
+        #{consignId,jdbcType=BIGINT},
+      </if>
+      <if test="consignType != null" >
+        #{consignType,jdbcType=INTEGER},
+      </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=BIGINT},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createByName != null" >
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignerFile" >
+    update survey_consigner_file
+    <set >
+      <if test="consignId != null" >
+        consign_id = #{consignId,jdbcType=BIGINT},
+      </if>
+      <if test="consignType != null" >
+        consign_type = #{consignType,jdbcType=INTEGER},
+      </if>
+      <if test="fileId != null" >
+        file_id = #{fileId,jdbcType=BIGINT},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createByName != null" >
+        create_by_name = #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyConsignerFile" >
+    update survey_consigner_file
+    set consign_id = #{consignId,jdbcType=BIGINT},
+      consign_type = #{consignType,jdbcType=INTEGER},
+      file_id = #{fileId,jdbcType=BIGINT},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_by_name = #{createByName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByInfo" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_consigner_file
+        <where>
+            <if test="consignId != null" >
+                and consign_id = #{consignId,jdbcType=BIGINT}
+            </if>
+            <if test="consignType != null" >
+                and consign_type = #{consignType,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+</mapper>

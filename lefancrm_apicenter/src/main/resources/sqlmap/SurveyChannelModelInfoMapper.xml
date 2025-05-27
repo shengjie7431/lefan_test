@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyChannelModelInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyChannelModelInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="model_id" property="modelId" jdbcType="BIGINT" />
+    <result column="model_name" property="modelName" jdbcType="VARCHAR" />
+    <result column="area_categories_id" property="areaCategoriesId" jdbcType="BIGINT" />
+    <result column="area_categories_name" property="areaCategoriesName" jdbcType="VARCHAR" />
+    <result column="task_id" property="taskId" jdbcType="BIGINT" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="task_content_id" property="taskContentId" jdbcType="BIGINT" />
+    <result column="task_content_name" property="taskContentName" jdbcType="VARCHAR" />
+    <result column="task_content_result_id" property="taskContentResultId" jdbcType="BIGINT" />
+    <result column="task_content_result_name" property="taskContentResultName" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, model_id, model_name, area_categories_id, area_categories_name, task_id, task_name, 
+    task_content_id, task_content_name, task_content_result_id, task_content_result_name, 
+    price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_channel_model_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_channel_model_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyChannelModelInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_channel_model_info (model_id, model_name, area_categories_id, 
+      area_categories_name, task_id, task_name, 
+      task_content_id, task_content_name, task_content_result_id, 
+      task_content_result_name, price)
+    values (#{modelId,jdbcType=BIGINT}, #{modelName,jdbcType=VARCHAR}, #{areaCategoriesId,jdbcType=BIGINT}, 
+      #{areaCategoriesName,jdbcType=VARCHAR}, #{taskId,jdbcType=BIGINT}, #{taskName,jdbcType=VARCHAR}, 
+      #{taskContentId,jdbcType=BIGINT}, #{taskContentName,jdbcType=VARCHAR}, #{taskContentResultId,jdbcType=BIGINT},
+      #{taskContentResultName,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyChannelModelInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_channel_model_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="modelName != null" >
+        model_name,
+      </if>
+      <if test="areaCategoriesId != null" >
+        area_categories_id,
+      </if>
+      <if test="areaCategoriesName != null" >
+        area_categories_name,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="taskName != null" >
+        task_name,
+      </if>
+      <if test="taskContentId != null" >
+        task_content_id,
+      </if>
+      <if test="taskContentName != null" >
+        task_content_name,
+      </if>
+      <if test="taskContentResultId != null" >
+        task_content_result_id,
+      </if>
+      <if test="taskContentResultName != null" >
+        task_content_result_name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="modelName != null" >
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCategoriesId != null" >
+        #{areaCategoriesId,jdbcType=BIGINT},
+      </if>
+      <if test="areaCategoriesName != null" >
+        #{areaCategoriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskContentId != null" >
+        #{taskContentId,jdbcType=BIGINT},
+      </if>
+      <if test="taskContentName != null" >
+        #{taskContentName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskContentResultId != null" >
+        #{taskContentResultId,jdbcType=BIGINT},
+      </if>
+      <if test="taskContentResultName != null" >
+        #{taskContentResultName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyChannelModelInfo" >
+    update survey_channel_model_info
+    <set >
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="modelName != null" >
+        model_name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCategoriesId != null" >
+        area_categories_id = #{areaCategoriesId,jdbcType=BIGINT},
+      </if>
+      <if test="areaCategoriesName != null" >
+        area_categories_name = #{areaCategoriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskContentId != null" >
+        task_content_id = #{taskContentId,jdbcType=BIGINT},
+      </if>
+      <if test="taskContentName != null" >
+        task_content_name = #{taskContentName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskContentResultId != null" >
+        task_content_result_id = #{taskContentResultId,jdbcType=BIGINT},
+      </if>
+      <if test="taskContentResultName != null" >
+        task_content_result_name = #{taskContentResultName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyChannelModelInfo" >
+    update survey_channel_model_info
+    set model_id = #{modelId,jdbcType=BIGINT},
+      model_name = #{modelName,jdbcType=VARCHAR},
+      area_categories_id = #{areaCategoriesId,jdbcType=BIGINT},
+      area_categories_name = #{areaCategoriesName,jdbcType=VARCHAR},
+      task_id = #{taskId,jdbcType=BIGINT},
+      task_name = #{taskName,jdbcType=VARCHAR},
+      task_content_id = #{taskContentId,jdbcType=BIGINT},
+      task_content_name = #{taskContentName,jdbcType=VARCHAR},
+      task_content_result_id = #{taskContentResultId,jdbcType=BIGINT},
+      task_content_result_name = #{taskContentResultName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+
+  <sql id="joins">
+
+  </sql>
+  <sql id="wheres">
+    <if test="modelId != null" >
+      and model_id = #{modelId,jdbcType=BIGINT}
+    </if>
+    <if test="areaCategoriesId != null" >
+      and area_categories_id = #{areaCategoriesId,jdbcType=BIGINT}
+    </if>
+    <if test="taskId != null">
+      and task_id = #{taskId,jdbcType=BIGINT}
+    </if>
+    <if test="taskContentId != null">
+      and task_content_id = #{taskContentId,jdbcType=BIGINT}
+    </if>
+    <if test="taskContentResultId != null">
+      and task_content_result_id = #{taskContentResultId,jdbcType=BIGINT}
+    </if>
+
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_channel_model_info
+    <include refid="joins" />
+    where 1=1
+    <include refid="wheres" />
+    order by id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from survey_channel_model_info
+    <include refid="joins" />
+    where 1=1
+    <include refid="wheres" />
+  </select>
+
+
+
+
+  <delete id="deleteByParam" parameterType="java.util.Map">
+        delete from survey_channel_model_info
+            where model_id = #{modelId,jdbcType=BIGINT} and area_categories_id = #{areaCategoriesId,jdbcType=BIGINT}
+            <if test="taskId != null">
+              and task_id = #{taskId,jdbcType=BIGINT}
+            </if>
+            <if test="taskContentId != null">
+              and task_content_id = #{taskContentId,jdbcType=BIGINT}
+            </if>
+            <if test="taskContentResultId != null">
+              and task_content_result_id = #{taskContentResultId,jdbcType=BIGINT}
+            </if>
+  </delete>
+
+  <insert id="insertRecords" parameterType="java.util.Map">
+    insert into survey_channel_model_info(model_id,area_categories_id,task_id,task_name,task_content_id,task_content_name,task_content_result_id,task_content_result_name,price)
+    select #{modelId,jdbcType=BIGINT},#{areaCategoriesId,jdbcType=BIGINT},s.id,s.`name`,c.id,c.`name`,t.direction_result_type_id,t.direction_result_type_name,#{price,jdbcType=DOUBLE} from survey_task_direction_result t
+    left join survey_task_info_content c on t.task_info_content_id = c.id
+    left join survey_task_info s on c.task_info_id = s.id
+    where s.delete_flag = 0 and c.delete_flag = 0 and s.id = #{taskId,jdbcType=BIGINT}
+  </insert>
+
+  <select id="selectByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_channel_model_info m
+    where m.model_id = #{modelId,jdbcType=BIGINT} and m.task_id = #{taskId,jdbcType=BIGINT} and m.task_content_id = #{taskContentId,jdbcType=BIGINT} and m.task_content_result_id = #{taskContentResutlId,jdbcType=BIGINT}
+    and m.area_categories_id = (
+        select c.area_categories_id from survey_channel_model_area_city c where c.area_id = #{areaId,jdbcType=BIGINT} and c.model_id = #{modelId,jdbcType=BIGINT} limit 1
+    )
+  </select>
+
+  <insert id="copy" parameterType="java.util.Map">
+    insert into survey_channel_model_info(model_id,model_name,area_categories_id,area_categories_name,task_id,task_name,task_content_id,task_content_name,task_content_result_id,task_content_result_name,price)
+      select #{modelId,jdbcType=BIGINT},#{modelName,jdbcType=VARCHAR},t.id,t.`name`,a.task_id,a.task_name,a.task_content_id,a.task_content_name,a.task_content_result_id,a.task_content_result_name,a.price
+      from survey_channel_model_info a
+      left join survey_channel_model_area m on a.area_categories_id = m.id and a.model_id = m.model_id
+      left join survey_channel_model_area t on t.model_id = #{modelId,jdbcType=BIGINT} and m.`name` = t.`name`
+      where a.model_id = #{copyModelId,jdbcType=BIGINT}
+  </insert>
+</mapper>

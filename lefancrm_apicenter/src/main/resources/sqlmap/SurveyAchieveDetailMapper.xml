@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyAchieveDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyAchieveDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="ach_num" property="achNum" jdbcType="BIGINT" />
+    <result column="ach_remark" property="achRemark" jdbcType="VARCHAR" />
+    <result column="survey_user_id" property="surveyUserId" jdbcType="BIGINT" />
+    <result column="survey_user_name" property="surveyUserName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="opr_id" property="oprId" jdbcType="BIGINT" />
+    <result column="opr_type" property="oprType" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ach_num, ach_remark, survey_user_id, survey_user_name, create_time, opr_id, opr_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_achieve_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_achieve_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyAchieveDetail" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_achieve_detail (ach_num, ach_remark, survey_user_id, 
+      survey_user_name, create_time, opr_id, 
+      opr_type)
+    values (#{achNum,jdbcType=BIGINT}, #{achRemark,jdbcType=VARCHAR}, #{surveyUserId,jdbcType=BIGINT}, 
+      #{surveyUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{oprId,jdbcType=BIGINT}, 
+      #{oprType,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyAchieveDetail" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_achieve_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="achNum != null" >
+        ach_num,
+      </if>
+      <if test="achRemark != null" >
+        ach_remark,
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id,
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="oprId != null" >
+        opr_id,
+      </if>
+      <if test="oprType != null" >
+        opr_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="achNum != null" >
+        #{achNum,jdbcType=BIGINT},
+      </if>
+      <if test="achRemark != null" >
+        #{achRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyUserId != null" >
+        #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="oprId != null" >
+        #{oprId,jdbcType=BIGINT},
+      </if>
+      <if test="oprType != null" >
+        #{oprType,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyAchieveDetail" >
+    update survey_achieve_detail
+    <set >
+      <if test="achNum != null" >
+        ach_num = #{achNum,jdbcType=BIGINT},
+      </if>
+      <if test="achRemark != null" >
+        ach_remark = #{achRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="oprId != null" >
+        opr_id = #{oprId,jdbcType=BIGINT},
+      </if>
+      <if test="oprType != null" >
+        opr_type = #{oprType,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyAchieveDetail" >
+    update survey_achieve_detail
+    set ach_num = #{achNum,jdbcType=BIGINT},
+      ach_remark = #{achRemark,jdbcType=VARCHAR},
+      survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      opr_id = #{oprId,jdbcType=BIGINT},
+      opr_type = #{oprType,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

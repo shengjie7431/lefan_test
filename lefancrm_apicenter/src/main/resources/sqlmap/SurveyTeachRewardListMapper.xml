@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyTeachRewardListMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyTeachRewardList" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="list_name" property="listName" jdbcType="VARCHAR" />
+    <result column="teacher_num" property="teacherNum" jdbcType="INTEGER" />
+    <result column="student_num" property="studentNum" jdbcType="INTEGER" />
+    <result column="teacher_reward" property="teacherReward" jdbcType="DOUBLE" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="craete_by" property="craeteBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="return_desc" property="returnDesc" jdbcType="VARCHAR" />
+    <result column="approval_time" property="approvalTime" jdbcType="TIMESTAMP" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, list_name, teacher_num, student_num, teacher_reward, state, create_time, craete_by, 
+    update_time, update_by, return_desc, approval_time,delete_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_teach_reward_list
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_teach_reward_list
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyTeachRewardList" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_teach_reward_list (list_name, teacher_num, student_num, 
+      teacher_reward, state, create_time, 
+      craete_by, update_time, update_by, 
+      return_desc, approval_time)
+    values (#{listName,jdbcType=VARCHAR}, #{teacherNum,jdbcType=INTEGER}, #{studentNum,jdbcType=INTEGER}, 
+      #{teacherReward,jdbcType=DOUBLE}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{craeteBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+      #{returnDesc,jdbcType=VARCHAR}, #{approvalTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyTeachRewardList" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_teach_reward_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="listName != null" >
+        list_name,
+      </if>
+      <if test="teacherNum != null" >
+        teacher_num,
+      </if>
+      <if test="studentNum != null" >
+        student_num,
+      </if>
+      <if test="teacherReward != null" >
+        teacher_reward,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="craeteBy != null" >
+        craete_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="returnDesc != null" >
+        return_desc,
+      </if>
+      <if test="approvalTime != null" >
+        approval_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="listName != null" >
+        #{listName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherNum != null" >
+        #{teacherNum,jdbcType=INTEGER},
+      </if>
+      <if test="studentNum != null" >
+        #{studentNum,jdbcType=INTEGER},
+      </if>
+      <if test="teacherReward != null" >
+        #{teacherReward,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="craeteBy != null" >
+        #{craeteBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="returnDesc != null" >
+        #{returnDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalTime != null" >
+        #{approvalTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyTeachRewardList" >
+    update survey_teach_reward_list
+    <set >
+      <if test="listName != null" >
+        list_name = #{listName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherNum != null" >
+        teacher_num = #{teacherNum,jdbcType=INTEGER},
+      </if>
+      <if test="studentNum != null" >
+        student_num = #{studentNum,jdbcType=INTEGER},
+      </if>
+      <if test="teacherReward != null" >
+        teacher_reward = #{teacherReward,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="craeteBy != null" >
+        craete_by = #{craeteBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="returnDesc != null" >
+        return_desc = #{returnDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="approvalTime != null" >
+        approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyTeachRewardList" >
+    update survey_teach_reward_list
+    set list_name = #{listName,jdbcType=VARCHAR},
+      teacher_num = #{teacherNum,jdbcType=INTEGER},
+      student_num = #{studentNum,jdbcType=INTEGER},
+      teacher_reward = #{teacherReward,jdbcType=DOUBLE},
+      state = #{state,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      craete_by = #{craeteBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      return_desc = #{returnDesc,jdbcType=VARCHAR},
+      approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByMap" parameterType="map" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from survey_teach_reward_list
+      <where>
+        delete_flag=0
+        <if test="id != null ">
+          and id=#{id}
+        </if>
+        <if test="listName != null ">
+          and list_name like '%${listName}%'
+        </if>
+        <if test="teacherNum != null ">
+          and teacher_num=#{teacherNum}
+        </if>
+        <if test="studentNum != null ">
+          and student_num=#{studentNum}
+        </if>
+        <if test="teacherReward != null ">
+          and teacher_reward=#{teacherReward}
+        </if>
+        <if test="state != null ">
+          and state=#{state}
+        </if>
+        <if test="createTime != null ">
+          and create_time=#{createTime}
+        </if>
+        <if test="craeteBy != null ">
+          and craete_by=#{craeteBy}
+        </if>
+        <if test="updateTime != null ">
+          and update_time=#{updateTime}
+        </if>
+        <if test="updateBy != null ">
+          and update_by=#{updateBy}
+        </if>
+        <if test="returnDesc != null ">
+          and return_desc=#{returnDesc}
+        </if>
+        <if test="approvalTime != null ">
+          and approval_time=#{approvalTime}
+        </if>
+      </where>
+  </select>
+</mapper>

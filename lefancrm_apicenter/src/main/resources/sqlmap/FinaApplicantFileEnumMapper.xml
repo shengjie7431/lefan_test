@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaApplicantFileEnumMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaApplicantFileEnum" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="enum_code" property="enumCode" jdbcType="VARCHAR" />
+    <result column="enum_name" property="enumName" jdbcType="VARCHAR" />
+    <result column="enum_text" property="enumText" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, enum_code, enum_name, enum_text, parent_id, create_time, create_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_applicant_file_enum
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_applicant_file_enum
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantFileEnum" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_applicant_file_enum (enum_code, enum_name, enum_text, 
+      parent_id, create_time, create_by
+      )
+    values (#{enumCode,jdbcType=VARCHAR}, #{enumName,jdbcType=VARCHAR}, #{enumText,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantFileEnum" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_applicant_file_enum
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="enumCode != null" >
+        enum_code,
+      </if>
+      <if test="enumName != null" >
+        enum_name,
+      </if>
+      <if test="enumText != null" >
+        enum_text,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="enumCode != null" >
+        #{enumCode,jdbcType=VARCHAR},
+      </if>
+      <if test="enumName != null" >
+        #{enumName,jdbcType=VARCHAR},
+      </if>
+      <if test="enumText != null" >
+        #{enumText,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantFileEnum" >
+    update fina_applicant_file_enum
+    <set >
+      <if test="enumCode != null" >
+        enum_code = #{enumCode,jdbcType=VARCHAR},
+      </if>
+      <if test="enumName != null" >
+        enum_name = #{enumName,jdbcType=VARCHAR},
+      </if>
+      <if test="enumText != null" >
+        enum_text = #{enumText,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantFileEnum" >
+    update fina_applicant_file_enum
+    set enum_code = #{enumCode,jdbcType=VARCHAR},
+      enum_name = #{enumName,jdbcType=VARCHAR},
+      enum_text = #{enumText,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="enumCode != null" >
+            and enum_code = #{enumCode,jdbcType=VARCHAR}
+        </if>
+        <if test="parentId != null" >
+            and parent_id = #{parentId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        a.*
+        from fina_applicant_file_enum a
+        <include refid="joins" />
+        where 1= 1
+        <include refid="wheres" />
+        order by a.id desc
+    </select>
+
+    <select id="selectListByParentEnumCodePage" resultMap="BaseResultMap" parameterType="map">
+        SELECT b.id,b.enum_code,b.enum_name,b.enum_text,b.create_time,b.create_by,b.parent_id
+        from fina_applicant_file_enum b
+        where b.parent_id = (SELECT a.id from fina_applicant_file_enum a where a.enum_code = #{enumCode,jdbcType=VARCHAR})
+        <if test="noHaveEnumCode != null" >
+            and b.enum_code != #{noHaveEnumCode,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="selectListByParentEnumCodePageCount" parameterType="map" resultType="int">
+        SELECT
+        count(1)
+        from fina_applicant_file_enum b
+        where b.parent_id = (SELECT a.id from fina_applicant_file_enum a where a.enum_code = #{enumCode,jdbcType=VARCHAR})
+        <if test="noHaveEnumCode != null" >
+            and b.enum_code != #{noHaveEnumCode,jdbcType=VARCHAR}
+        </if>
+
+    </select>
+
+
+    <select id="selectListNoSomeCode" resultMap="BaseResultMap" parameterType="map">
+
+        select b.id,b.enum_code,b.enum_name,b.enum_text,b.create_time,b.create_by,b.parent_id
+        from fina_applicant_file_enum b
+        where b.parent_id in (
+            SELECT b.id
+            from fina_applicant_file_enum b
+            where b.parent_id = (SELECT a.id from fina_applicant_file_enum a where a.enum_code = #{enumCode,jdbcType=VARCHAR})
+            <if test="noHaveEnumCode != null">
+                and b.enum_code != #{noHaveEnumCode,jdbcType=VARCHAR}
+            </if>
+        )
+    </select>
+</mapper>

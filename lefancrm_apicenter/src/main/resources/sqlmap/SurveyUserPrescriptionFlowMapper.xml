@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyUserPrescriptionFlowMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyUserPrescriptionFlow" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="survey_assign_org_id" property="surveyAssignOrgId" jdbcType="BIGINT" />
+    <result column="survey_investigator_case_id" property="surveyInvestigatorCaseId" jdbcType="BIGINT" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="operate_type" property="operateType" jdbcType="INTEGER" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="days" property="days" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_info_id, survey_assign_org_id, survey_investigator_case_id, start_time, 
+    operate_type, end_time, days
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_user_prescription_flow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByInvCaseIdLimitOne" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_user_prescription_flow
+    where survey_investigator_case_id = #{invCaseId,jdbcType=BIGINT} and operate_type = 2 and end_time is null order by id desc limit 1
+  </select>
+    <select id="selectByInfoIdAndSurOrgIdInvId" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from survey_user_prescription_flow
+      where survey_info_id = #{surveyInfoId,jdbcType=BIGINT} and survey_assign_org_id = #{surveyAssignOrgId} and survey_investigator_case_id = #{surveyInvId}
+    </select>
+  <select id="selectInvAgingDayByInfoIdAndSurOrgIdInvId" resultType="java.lang.Double">
+    select IFNULL(sum(days),0)
+    from survey_user_prescription_flow
+      where survey_info_id = #{surveyInfoId,jdbcType=BIGINT} and survey_assign_org_id = #{surveyAssignOrgId} and survey_investigator_case_id = #{surveyInvId} and operate_type = 2 and end_time is not null
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_user_prescription_flow
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteBySurveyInvCaseId">
+       delete from survey_user_prescription_flow
+    where survey_investigator_case_id = #{caseId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyUserPrescriptionFlow" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_user_prescription_flow (survey_info_id, survey_assign_org_id, survey_investigator_case_id, 
+      start_time, operate_type, end_time, 
+      days)
+    values (#{surveyInfoId,jdbcType=BIGINT}, #{surveyAssignOrgId,jdbcType=BIGINT}, #{surveyInvestigatorCaseId,jdbcType=BIGINT}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{operateType,jdbcType=INTEGER}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{days,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyUserPrescriptionFlow" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_user_prescription_flow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="surveyAssignOrgId != null" >
+        survey_assign_org_id,
+      </if>
+      <if test="surveyInvestigatorCaseId != null" >
+        survey_investigator_case_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="operateType != null" >
+        operate_type,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="days != null" >
+        days,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyAssignOrgId != null" >
+        #{surveyAssignOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInvestigatorCaseId != null" >
+        #{surveyInvestigatorCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateType != null" >
+        #{operateType,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="days != null" >
+        #{days,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyUserPrescriptionFlow" >
+    update survey_user_prescription_flow
+    <set >
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyAssignOrgId != null" >
+        survey_assign_org_id = #{surveyAssignOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInvestigatorCaseId != null" >
+        survey_investigator_case_id = #{surveyInvestigatorCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateType != null" >
+        operate_type = #{operateType,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="days != null" >
+        days = #{days,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyUserPrescriptionFlow" >
+    update survey_user_prescription_flow
+    set survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      survey_assign_org_id = #{surveyAssignOrgId,jdbcType=BIGINT},
+      survey_investigator_case_id = #{surveyInvestigatorCaseId,jdbcType=BIGINT},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      operate_type = #{operateType,jdbcType=INTEGER},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      days = #{days,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectPrescription" parameterType="map" resultMap="BaseResultMap">
+    SELECT * FROM `survey_user_prescription_flow` WHERE survey_investigator_case_id = #{surveyInvestigatorCaseId,jdbcType=BIGINT}
+    ORDER BY id LIMIT  0,2
+  </select>
+  <delete id="deleteByInvCaseId">
+      delete from survey_user_prescription_flow
+    where survey_investigator_case_id = #{id,jdbcType=BIGINT}
+    </delete>
+</mapper>

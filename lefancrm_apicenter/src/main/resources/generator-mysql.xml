@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- classPathEntry:数据库的JDBC驱动的jar包地址,可以通过maven对应的插件里面的jar包作为驱动支持 -->
+    <!--<classPathEntry location="D:\dbjars\mysql\mysql-connector-java-5.1.17-bin.jar"/>-->
+
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+
+        <!-- 是否去除自动生成的注释 true:是,false:否 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <!-- MSSQL： driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+            connectionURL＝"jdbc:sqlserver://localhost:3306;DatabaseName=ibatis" -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://124.71.163.231:3306/lefan_es_test" userId="root"
+                        password="Huawei@2021">
+        </jdbcConnection>
+
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL 和
+            NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!---Java 实体的生成 -->
+        <!-- targetProject:自动生成代码的位置 -->
+        <javaModelGenerator targetPackage="com.lefancrm.apicenter.model"
+                            targetProject="..\doc\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="fasle"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="false"/>
+        </javaModelGenerator>
+
+
+        <!--sqlMapper XML文件的生成信息，包括生成路径等 -->
+        <sqlMapGenerator targetPackage="sqlmap\fina"
+                         targetProject="..\doc\resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!--应用接口的生成信息 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.lefancrm.apicenter.dao"    implementationPackage="com.lefancrm.apicenter.dao.impl"
+                             targetProject="..\doc\java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="methodNameCalculator" value="extended"/>
+        </javaClientGenerator>
+
+        <table schema="survey_investigator_case_type" tableName="survey_investigator_case_type" domainObjectName="SurveyInvestigatorCaseType"   enableInsert="true"
+               enableSelectByPrimaryKey="true"
+               enableSelectByExample="false"
+               enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true"
+               enableDeleteByExample="false"
+               enableCountByExample="false"
+               enableUpdateByExample="false"  modelType="flat" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+            </context>
+        </generatorConfiguration>
+

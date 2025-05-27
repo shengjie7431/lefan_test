@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyTaskDirectionResultMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyTaskDirectionResult" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="task_info_content_id" property="taskInfoContentId" jdbcType="BIGINT" />
+        <result column="task_info_content_name" property="taskInfoContentName" jdbcType="VARCHAR" />
+        <result column="direction_result_type_id" property="directionResultTypeId" jdbcType="BIGINT" />
+        <result column="direction_result_type_name" property="directionResultTypeName" jdbcType="VARCHAR" />
+        <result column="score" property="score" jdbcType="DOUBLE" />
+        <result column="point_score" property="pointScore" jdbcType="DOUBLE" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, task_info_content_id, task_info_content_name, direction_result_type_id, direction_result_type_name,
+    score, point_score
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_task_direction_result
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_task_direction_result
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyTaskDirectionResult" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_task_direction_result (task_info_content_id, task_info_content_name,
+        direction_result_type_id, direction_result_type_name,
+        score, point_score)
+        values (#{taskInfoContentId,jdbcType=BIGINT}, #{taskInfoContentName,jdbcType=VARCHAR},
+        #{directionResultTypeId,jdbcType=BIGINT}, #{directionResultTypeName,jdbcType=VARCHAR},
+        #{score,jdbcType=DOUBLE}, #{pointScore,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyTaskDirectionResult" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_task_direction_result
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="taskInfoContentId != null" >
+                task_info_content_id,
+            </if>
+            <if test="taskInfoContentName != null" >
+                task_info_content_name,
+            </if>
+            <if test="directionResultTypeId != null" >
+                direction_result_type_id,
+            </if>
+            <if test="directionResultTypeName != null" >
+                direction_result_type_name,
+            </if>
+            <if test="score != null" >
+                score,
+            </if>
+            <if test="pointScore != null" >
+                point_score,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="taskInfoContentId != null" >
+                #{taskInfoContentId,jdbcType=BIGINT},
+            </if>
+            <if test="taskInfoContentName != null" >
+                #{taskInfoContentName,jdbcType=VARCHAR},
+            </if>
+            <if test="directionResultTypeId != null" >
+                #{directionResultTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="directionResultTypeName != null" >
+                #{directionResultTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null" >
+                #{score,jdbcType=DOUBLE},
+            </if>
+            <if test="pointScore != null" >
+                #{pointScore,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyTaskDirectionResult" >
+        update survey_task_direction_result
+        <set >
+            <if test="taskInfoContentId != null" >
+                task_info_content_id = #{taskInfoContentId,jdbcType=BIGINT},
+            </if>
+            <if test="taskInfoContentName != null" >
+                task_info_content_name = #{taskInfoContentName,jdbcType=VARCHAR},
+            </if>
+            <if test="directionResultTypeId != null" >
+                direction_result_type_id = #{directionResultTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="directionResultTypeName != null" >
+                direction_result_type_name = #{directionResultTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null" >
+                score = #{score,jdbcType=DOUBLE},
+            </if>
+            <if test="pointScore != null" >
+                point_score = #{pointScore,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyTaskDirectionResult" >
+    update survey_task_direction_result
+    set task_info_content_id = #{taskInfoContentId,jdbcType=BIGINT},
+      task_info_content_name = #{taskInfoContentName,jdbcType=VARCHAR},
+      direction_result_type_id = #{directionResultTypeId,jdbcType=BIGINT},
+      direction_result_type_name = #{directionResultTypeName,jdbcType=VARCHAR},
+      score = #{score,jdbcType=DOUBLE},
+      point_score = #{pointScore,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="taskInfoContentId != null" >
+            and task_info_content_id = #{taskInfoContentId,jdbcType=BIGINT}
+        </if>
+        <if test="directionResultTypeId != null" >
+            and direction_result_type_id = #{directionResultTypeId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_task_direction_result
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_task_direction_result
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectOneByInfo" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_task_direction_result
+        where task_info_content_id = #{taskInfoContentId,jdbcType=BIGINT}
+        and direction_result_type_id = #{directionResultTypeId,jdbcType=BIGINT}
+        limit 1
+    </select>
+</mapper>

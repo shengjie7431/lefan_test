@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaModelEntrustMidMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaModelEntrustMid" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="model_id" property="modelId" jdbcType="BIGINT" />
+    <result column="entrust_org_Id" property="entrustOrgId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, model_id, entrust_org_Id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_model_entrust_mid
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectListByModelId" resultMap="BaseResultMap">
+    SELECT
+    d.*,m.model_name modelName,if(#{modelId} = d.model_id,TRUE,FALSE ) checked
+    from
+     fina_model_entrust_mid d
+     LEFT JOIN fina_sign_model  m ON d.model_id = m.id
+     where m.delete_flag = 0
+  </select>
+  <select id="selectByMtypeAndOrgId" resultMap="BaseResultMap">
+   SELECT
+	i.*
+FROM
+	fina_sign_model m
+	LEFT JOIN fina_model_entrust_mid i ON m.id = i.model_id
+WHERE
+	m.model_type = #{mType}
+	AND i.entrust_org_Id = #{orgId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_model_entrust_mid
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByModelId">
+     delete from fina_model_entrust_mid
+    where model_id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByEntrustOrgId">
+     delete from fina_model_entrust_mid
+    where entrust_org_Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaModelEntrustMid" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_model_entrust_mid (model_id, entrust_org_Id)
+    values (#{modelId,jdbcType=BIGINT}, #{entrustOrgId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaModelEntrustMid" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_model_entrust_mid
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="entrustOrgId != null" >
+        entrust_org_Id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="entrustOrgId != null" >
+        #{entrustOrgId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaModelEntrustMid" >
+    update fina_model_entrust_mid
+    <set >
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="entrustOrgId != null" >
+        entrust_org_Id = #{entrustOrgId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaModelEntrustMid" >
+    update fina_model_entrust_mid
+    set model_id = #{modelId,jdbcType=BIGINT},
+      entrust_org_Id = #{entrustOrgId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

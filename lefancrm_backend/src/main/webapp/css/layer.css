@@ -1,0 +1,120 @@
+p{
+	margin:0;
+	padding:0;
+}
+.layer {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+	z-index:1000;
+	
+}
+table {
+    width: 100%;
+}
+.body {
+    width: 780px;
+    background: #fff;
+}
+.head {
+    background: #3ba9ff;
+    height: 54px;
+    position: relative;
+    line-height: 54px;
+}
+.head p {
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+.head span {
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    transform: rotate(45deg);
+}
+.main {
+    padding: 20px 15px 20px 15px;
+}
+.title {
+    /*height: 50px;*/
+    border: 1px solid #ddd;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.butList {
+    height: 32px;
+    padding: 0 10px;
+    margin: 4px 8px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.active {
+    background: #3ba9ff;
+    color: #fff;
+    border: none;
+}
+.defuelt {
+    background: #fff;
+    color: #3ba9ff;
+    border: 1px solid #3ba9ff;
+}
+.main-boy {
+    margin-top: 20px;
+}
+.sspec-info {
+    width: 100%;
+}
+.spec-info tr {
+    height: 40px;
+}
+.spec-info tr td:nth-child(odd) {
+    background: #f2f2f2;
+    text-align: center;
+}
+.spec-info tr td:nth-child(even) {
+    padding-left: 15px;
+}
+.spec-info tr td {
+    border: 1px solid #ddd;
+}
+.spec-item {
+    margin-top: 20px;
+}
+.spec-item-list {
+    display: flex;
+}
+.spec-head {
+    border-left: 2px solid #3ba9ff;
+    position: relative;
+}
+.spec-head span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #3ba9ff;
+    color: #fff;
+    text-align: center;
+    margin-left: -10px;
+}
+.spec-info p span,
+.spec-info p b {
+    padding: 0 10px;
+}
+.spec-info div {
+    padding: 10px;
+    word-break: break-all;
+    word-wrap: break-word;
+}

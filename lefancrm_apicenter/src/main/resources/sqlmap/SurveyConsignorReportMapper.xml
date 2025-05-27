@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyConsignorReportMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyConsignorReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="report_date" property="reportDate" jdbcType="DATE" />
+    <result column="consignor_org_id" property="consignorOrgId" jdbcType="BIGINT" />
+    <result column="consignor_org_name" property="consignorOrgName" jdbcType="VARCHAR" />
+    <result column="new_survey_case_num" property="newSurveyCaseNum" jdbcType="INTEGER" />
+    <result column="new_check_num" property="newCheckNum" jdbcType="INTEGER" />
+    <result column="survey_money" property="surveyMoney" jdbcType="DOUBLE" />
+    <result column="survey_billing" property="surveyBilling" jdbcType="DOUBLE" />
+    <result column="survey_account" property="surveyAccount" jdbcType="DOUBLE" />
+    <result column="average" property="average" jdbcType="DOUBLE" />
+    <result column="positive_rate" property="positiveRate" jdbcType="DOUBLE" />
+    <result column="regional" property="regional" jdbcType="DOUBLE" />
+    <result column="efficiency" property="efficiency" jdbcType="DOUBLE" />
+    <result column="loss_efficiency_rate" property="lossEfficiencyRate" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, report_date, consignor_org_id, consignor_org_name, new_survey_case_num, new_check_num, 
+    survey_money, survey_billing, survey_account, average, positive_rate, regional, efficiency, 
+    loss_efficiency_rate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_consignor_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_consignor_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyConsignorReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_consignor_report (report_date, consignor_org_id, consignor_org_name, 
+      new_survey_case_num, new_check_num, survey_money, 
+      survey_billing, survey_account, average, 
+      positive_rate, regional, efficiency, 
+      loss_efficiency_rate)
+    values (#{reportDate,jdbcType=DATE}, #{consignorOrgId,jdbcType=BIGINT}, #{consignorOrgName,jdbcType=VARCHAR}, 
+      #{newSurveyCaseNum,jdbcType=INTEGER}, #{newCheckNum,jdbcType=INTEGER}, #{surveyMoney,jdbcType=DOUBLE}, 
+      #{surveyBilling,jdbcType=DOUBLE}, #{surveyAccount,jdbcType=DOUBLE}, #{average,jdbcType=DOUBLE}, 
+      #{positiveRate,jdbcType=DOUBLE}, #{regional,jdbcType=DOUBLE}, #{efficiency,jdbcType=DOUBLE}, 
+      #{lossEfficiencyRate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignorReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_consignor_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reportDate != null" >
+        report_date,
+      </if>
+      <if test="consignorOrgId != null" >
+        consignor_org_id,
+      </if>
+      <if test="consignorOrgName != null" >
+        consignor_org_name,
+      </if>
+      <if test="newSurveyCaseNum != null" >
+        new_survey_case_num,
+      </if>
+      <if test="newCheckNum != null" >
+        new_check_num,
+      </if>
+      <if test="surveyMoney != null" >
+        survey_money,
+      </if>
+      <if test="surveyBilling != null" >
+        survey_billing,
+      </if>
+      <if test="surveyAccount != null" >
+        survey_account,
+      </if>
+      <if test="average != null" >
+        average,
+      </if>
+      <if test="positiveRate != null" >
+        positive_rate,
+      </if>
+      <if test="regional != null" >
+        regional,
+      </if>
+      <if test="efficiency != null" >
+        efficiency,
+      </if>
+      <if test="lossEfficiencyRate != null" >
+        loss_efficiency_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reportDate != null" >
+        #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="consignorOrgId != null" >
+        #{consignorOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorOrgName != null" >
+        #{consignorOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="newSurveyCaseNum != null" >
+        #{newSurveyCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="newCheckNum != null" >
+        #{newCheckNum,jdbcType=INTEGER},
+      </if>
+      <if test="surveyMoney != null" >
+        #{surveyMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="surveyBilling != null" >
+        #{surveyBilling,jdbcType=DOUBLE},
+      </if>
+      <if test="surveyAccount != null" >
+        #{surveyAccount,jdbcType=DOUBLE},
+      </if>
+      <if test="average != null" >
+        #{average,jdbcType=DOUBLE},
+      </if>
+      <if test="positiveRate != null" >
+        #{positiveRate,jdbcType=DOUBLE},
+      </if>
+      <if test="regional != null" >
+        #{regional,jdbcType=DOUBLE},
+      </if>
+      <if test="efficiency != null" >
+        #{efficiency,jdbcType=DOUBLE},
+      </if>
+      <if test="lossEfficiencyRate != null" >
+        #{lossEfficiencyRate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignorReport" >
+    update survey_consignor_report
+    <set >
+      <if test="reportDate != null" >
+        report_date = #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="consignorOrgId != null" >
+        consignor_org_id = #{consignorOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorOrgName != null" >
+        consignor_org_name = #{consignorOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="newSurveyCaseNum != null" >
+        new_survey_case_num = #{newSurveyCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="newCheckNum != null" >
+        new_check_num = #{newCheckNum,jdbcType=INTEGER},
+      </if>
+      <if test="surveyMoney != null" >
+        survey_money = #{surveyMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="surveyBilling != null" >
+        survey_billing = #{surveyBilling,jdbcType=DOUBLE},
+      </if>
+      <if test="surveyAccount != null" >
+        survey_account = #{surveyAccount,jdbcType=DOUBLE},
+      </if>
+      <if test="average != null" >
+        average = #{average,jdbcType=DOUBLE},
+      </if>
+      <if test="positiveRate != null" >
+        positive_rate = #{positiveRate,jdbcType=DOUBLE},
+      </if>
+      <if test="regional != null" >
+        regional = #{regional,jdbcType=DOUBLE},
+      </if>
+      <if test="efficiency != null" >
+        efficiency = #{efficiency,jdbcType=DOUBLE},
+      </if>
+      <if test="lossEfficiencyRate != null" >
+        loss_efficiency_rate = #{lossEfficiencyRate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyConsignorReport" >
+    update survey_consignor_report
+    set report_date = #{reportDate,jdbcType=DATE},
+      consignor_org_id = #{consignorOrgId,jdbcType=BIGINT},
+      consignor_org_name = #{consignorOrgName,jdbcType=VARCHAR},
+      new_survey_case_num = #{newSurveyCaseNum,jdbcType=INTEGER},
+      new_check_num = #{newCheckNum,jdbcType=INTEGER},
+      survey_money = #{surveyMoney,jdbcType=DOUBLE},
+      survey_billing = #{surveyBilling,jdbcType=DOUBLE},
+      survey_account = #{surveyAccount,jdbcType=DOUBLE},
+      average = #{average,jdbcType=DOUBLE},
+      positive_rate = #{positiveRate,jdbcType=DOUBLE},
+      regional = #{regional,jdbcType=DOUBLE},
+      efficiency = #{efficiency,jdbcType=DOUBLE},
+      loss_efficiency_rate = #{lossEfficiencyRate,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <sql id="wheres">
+    <if test="startTime != null">
+      AND date_format(s.report_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="endTime != null">
+      AND date_format(s.report_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="entrustOrgId != null">
+        and s.consignor_org_id = #{entrustOrgId,jdbcType=BIGINT}
+    </if>
+  </sql>
+
+  <sql id="wheresEntrust">
+    <if test="startTime != null">
+      AND date_format(s.report_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="endTime != null">
+      AND date_format(s.report_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+  </sql>
+
+  <select id="selectAll" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyConsignorReport">
+    SELECT
+    s.consignor_org_id as consignorOrgId,
+    s.consignor_org_name as consignorOrgName,
+    ifnull(sum(s.new_survey_case_num),0) as newSurveyCaseNum,
+    ifnull(sum(s.new_check_num),0) as newCheckNum,
+    ifnull(sum(s.survey_money),0) as surveyMoney,
+    ifnull(sum(s.survey_billing),0) as surveyBilling,
+    ifnull(sum(s.survey_account),0) as surveyAccount,
+    ifnull(avg(s.average),0) as average,
+    ifnull(avg(s.positive_rate),0) as positiveRate,
+    ifnull(avg(s.regional),0) as regional,
+    ifnull(avg(s.efficiency),0) as efficiency,
+    ifnull(avg(s.loss_efficiency_rate),0) as lossEfficiencyRate,
+    ifnull(sum(s.direction_num),0) as directionNum
+    FROM
+    survey_consignor_report s
+    WHERE 1 = 1
+    <include refid="wheres"/>
+    GROUP BY
+    s.consignor_org_id
+    <if test="sortAttr == null">
+      order by sum(s.new_check_num) desc
+    </if>
+    <if test="sortAttr == 0">
+      <if test="sortType == 1">
+        order by sum(s.new_survey_case_num) asc
+      </if>
+      <if test="sortType == 2">
+        order by sum(s.new_survey_case_num) desc
+      </if>
+    </if>
+    <if test="sortAttr == 1">
+        <if test="sortType == 1">
+          order by sum(s.new_check_num) asc
+        </if>
+        <if test="sortType == 2">
+          order by sum(s.new_check_num) desc
+        </if>
+    </if>
+    <if test="sortAttr == 2">
+      <if test="sortType == 1">
+        order by sum(s.survey_money) asc
+      </if>
+      <if test="sortType == 2">
+        order by sum(s.survey_money) desc
+      </if>
+    </if>
+    <if test="sortAttr == 3">
+      <if test="sortType == 1">
+        order by sum(s.survey_money)/sum(s.new_check_num) asc
+      </if>
+      <if test="sortType == 2">
+        order by sum(s.survey_money)/sum(s.new_check_num) desc
+      </if>
+    </if>
+    <if test="sortAttr == 4">
+      <if test="sortType == 1">
+        order by avg(s.positive_rate) asc
+      </if>
+      <if test="sortType == 2">
+        order by avg(s.positive_rate) desc
+      </if>
+    </if>
+    <if test="sortAttr == 5">
+      <if test="sortType == 1">
+        order by avg(s.regional) asc
+      </if>
+      <if test="sortType == 2">
+        order by avg(s.regional) desc
+      </if>
+    </if>
+    <if test="sortAttr == 6">
+      <if test="sortType == 1">
+        order by avg(s.efficiency) asc
+      </if>
+      <if test="sortType == 2">
+        order by avg(s.efficiency) desc
+      </if>
+    </if>
+    <if test="sortAttr == 7">
+      <if test="sortType == 1">
+        order by avg(s.loss_efficiency_rate) asc
+      </if>
+      <if test="sortType == 2">
+        order by avg(s.loss_efficiency_rate) desc
+      </if>
+    </if>
+    <if test="sortAttr == 8">
+      <if test="sortType == 1">
+        order by (ifnull(sum(s.survey_money),0) / ifnull(sum(s.direction_num),1) )  asc
+      </if>
+      <if test="sortType == 2">
+        order by (ifnull(sum(s.survey_money),0) / ifnull(sum(s.direction_num),1) ) desc
+      </if>
+    </if>
+  </select>
+
+
+  <sql id="projectEntrustOrgIdsOne">
+    <if test="entrustOrgIds != null">
+      and find_in_set(r.entrust_org_id,#{entrustOrgIds,jdbcType=VARCHAR})
+    </if>
+  </sql>
+
+  <select id="selectAllNew" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyConsignorReport">
+        select n.id consignorOrgId,n.name consignorOrgName,ifnull(a.num,0) newSurveyCaseNum,ifnull(aa.num,0) as momNewSurveyCaseNum,ifnull(b.num,0) newCheckNum,ifnull(c.money,0) surveyMoney,
+            ifnull(d.num,0) directionNum,ifnull(e.num,0) sunNum,ifnull(f.num,0) regional,ifnull(g.num,0) efficiency,ifnull(h.num,0) lossNum,
+            ifnull(aa.num,0) hbNewSurveyCaseNum,ifnull(tb.num,0) tbNewSurveyCaseNum,k.num orgCommitNum
+            from survey_consignor n
+        left join (
+                select r.entrust_org_id,ifnull(count(1),0) num from survey_risk_case_info r
+                left join survey_risk_case c on r.survey_id = c.id
+                left join survey_consignor n on r.entrust_org_id = n.id
+                where r.delete_flag = 0
+                <if test="startTime != null">
+                  AND date_format(c.entrust_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="endTime != null">
+                  AND date_format(c.entrust_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <include refid="projectEntrustOrgIdsOne"/>
+                group by r.entrust_org_id
+        )a on a.entrust_org_id = n.id
+        left join (
+          select r.entrust_org_id,ifnull(count(1),0) num from survey_risk_case_info r
+          left join survey_risk_case c on r.survey_id = c.id
+          left join survey_consignor n on r.entrust_org_id = n.id
+          where r.delete_flag = 0
+          <if test="momTime != null">
+            AND date_format(c.entrust_time,'%Y-%m-%d') &gt;= date_format(#{momTime,jdbcType=DATE},'%Y-%m-%d')
+          </if>
+          <if test="startTime != null">
+            AND date_format(c.entrust_time,'%Y-%m-%d') &lt; date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+          </if>
+            <include refid="projectEntrustOrgIdsOne"/>
+          group by r.entrust_org_id
+        )aa on aa.entrust_org_id = n.id
+        left join (
+            select r.entrust_org_id,ifnull(count(1),0) num from survey_risk_case_info r
+            left join survey_risk_case c on r.survey_id = c.id
+            left join survey_consignor n on r.entrust_org_id = n.id
+            where r.delete_flag = 0
+            <if test="tbStartTime != null">
+              AND date_format(c.entrust_time,'%Y-%m-%d') &gt;= date_format(#{tbStartTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="tbEndTime != null">
+              AND date_format(c.entrust_time,'%Y-%m-%d') &lt;= date_format(#{tbEndTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <include refid="projectEntrustOrgIdsOne"/>
+            group by r.entrust_org_id
+        )tb on tb.entrust_org_id = n.id
+        left join (
+                select r.entrust_org_id,ifnull(count(1),0) num from survey_risk_case_info r
+                left join survey_risk_case c on r.survey_id = c.id
+                left join survey_consignor n on r.entrust_org_id = n.id
+                where r.delete_flag = 0
+                <include refid="newSqlWhere"/>
+                group by r.entrust_org_id
+        )b on b.entrust_org_id = n.id
+        left join (
+                select r.entrust_org_id,ifnull(SUM(r.entrust_ok_price_1 + r.entrust_ok_price_2),0) money from survey_risk_case_info r
+                left join survey_risk_case c on r.survey_id = c.id
+                left join survey_consignor n on r.entrust_org_id = n.id
+                where r.delete_flag = 0
+                <include refid="newSqlWhere"/>
+                group by r.entrust_org_id
+        )c on c.entrust_org_id = n.id
+        left join (
+                select r.entrust_org_id,ifnull(count(1),0) num
+                from survey_case_direction d
+                left join survey_risk_case_info r on d.survey_info_id = r.id
+                left join survey_risk_case c on r.survey_id = c.id
+                left join survey_consignor n on r.entrust_org_id = n.id
+                where r.delete_flag = 0
+                <include refid="newSqlWhere"/>
+                group by r.entrust_org_id
+        )d on d.entrust_org_id = n.id
+        left join (
+                select r.entrust_org_id,ifnull(count(1),0) num
+              from survey_risk_case_info r
+                left join survey_risk_case c on r.survey_id = c.id
+                left join survey_consignor n on r.entrust_org_id = n.id
+                where r.delete_flag = 0
+                <include refid="newSqlWhere"/>
+                and r.is_sun = 1
+                group by r.entrust_org_id
+        )e on e.entrust_org_id = n.id
+        left join (
+                select r.entrust_org_id,round(AVG(t.num),2) num from
+                (
+                    select d.survey_info_id,COUNT(DISTINCT d.province_id) num from survey_case_direction d
+                        left join survey_risk_case_info r on d.survey_info_id = r.id
+                        left join survey_consignor n on r.entrust_org_id = n.id
+                        where d.delete_flag = 0 and r.delete_flag = 0
+                        <include refid="newSqlWhere"/>
+                        GROUP BY d.survey_info_id
+                ) t
+                left join survey_risk_case_info r on t.survey_info_id = r.id
+                group by r.entrust_org_id
+        )f on f.entrust_org_id = n.id
+        left join (
+            select r.entrust_org_id,avg(r.aging_day) as num from survey_risk_case_info r
+            left join survey_consignor n on r.entrust_org_id = n.id
+            where r.delete_flag = 0
+            <include refid="newSqlWhere"/>
+            group by r.entrust_org_id
+        )g on g.entrust_org_id = n.id
+        left join (
+            select r.entrust_org_id,ifnull(count(1),0) num
+              from survey_risk_case_info r
+                left join survey_risk_case c on r.survey_id = c.id
+                left join survey_consignor n on r.entrust_org_id = n.id
+                where r.delete_flag = 0
+                <include refid="newSqlWhere"/>
+                and r.entrust_report_end_date > r.end_time
+                group by r.entrust_org_id
+        )h on h.entrust_org_id = n.id
+        left join (
+            select r.entrust_org_id,ifnull(count(1),0) num from survey_risk_case_info r
+            left join survey_risk_case c on r.survey_id = c.id
+            left join survey_consignor n on r.entrust_org_id = n.id
+            where r.delete_flag = 0
+            <if test="startTime != null">
+              AND date_format(r.lefan_report_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="endTime != null">
+              AND date_format(r.lefan_report_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <include refid="projectEntrustOrgIdsOne"/>
+            group by r.entrust_org_id
+        )k on k.entrust_org_id = n.id
+        where n.org_attr = #{orgAttr,jdbcType=INTEGER} and n.delete_flag = 0 and n.org_state = 0
+        <if test="entrustOrgId != null">
+          and n.id = #{entrustOrgId,jdbcType=BIGINT}
+        </if>
+        <if test="entrustOrgIds != null">
+          and find_in_set(n.id,#{entrustOrgIds,jdbcType=VARCHAR})
+        </if>
+    <if test="sortAttr == null">
+      order by b.num desc
+    </if>
+    <if test="sortAttr == 0">
+      <if test="sortType == 1">
+        order by a.num asc
+      </if>
+      <if test="sortType == 2">
+        order by a.num desc
+      </if>
+    </if>
+    <if test="sortAttr == 1">
+      <if test="sortType == 1">
+        order by b.num asc
+      </if>
+      <if test="sortType == 2">
+        order by b.num desc
+      </if>
+    </if>
+    <if test="sortAttr == 2">
+      <if test="sortType == 1">
+        order by c.money asc
+      </if>
+      <if test="sortType == 2">
+        order by c.money desc
+      </if>
+    </if>
+    <if test="sortAttr == 3">
+      <if test="sortType == 1">
+        order by c.money/b.num asc
+      </if>
+      <if test="sortType == 2">
+        order by c.money/b.num desc
+      </if>
+    </if>
+    <if test="sortAttr == 8">
+      <if test="sortType == 1">
+        order by c.money/d.num asc
+      </if>
+      <if test="sortType == 2">
+        order by c.money/d.num desc
+      </if>
+    </if>
+    <if test="sortAttr == 4">
+      <if test="sortType == 1">
+        order by e.num/b.num asc
+      </if>
+      <if test="sortType == 2">
+        order by e.num/b.num desc
+      </if>
+    </if>
+    <if test="sortAttr == 5">
+      <if test="sortType == 1">
+        order by f.num asc
+      </if>
+      <if test="sortType == 2">
+        order by f.num desc
+      </if>
+    </if>
+    <if test="sortAttr == 6">
+      <if test="sortType == 1">
+        order by g.num asc
+      </if>
+      <if test="sortType == 2">
+        order by g.num desc
+      </if>
+    </if>
+    <if test="sortAttr == 7">
+      <if test="sortType == 1">
+        order by h.num/b.num asc
+      </if>
+      <if test="sortType == 2">
+        order by h.num/b.num desc
+      </if>
+    </if>
+
+  </select>
+
+  <select id="selectEntrustBas" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.report.SurveyReportEntrustDTO">
+    select
+       0 as basBillNotAcc,
+       (select ifnull(sum(i.billing_money),0) from billing_apply a
+        left join billing_apply_imgs i on a.id = i.bill_id
+        where a.billing_source = 3 and a.billing_state = 3 and i.state = 1 and i.id is not null
+          <if test="entrustOrgId != null">
+            and a.survey_consignor_id = #{entrustOrgId,jdbcType=BIGINT}
+          </if>
+        ) as basTotalBillMoney,
+       (select ifnull(sum(b.money),0) from billing_apply a
+        left join billing_apply_accounts b on a.id = b.bill_id
+        where a.billing_source = 3 and a.billing_state = 3 and b.state = 1 and b.id is not null
+          <if test="entrustOrgId != null">
+            and a.survey_consignor_id = #{entrustOrgId,jdbcType=BIGINT}
+          </if>
+        ) as basTotalAccMoney,
+      (select count(1) from survey_risk_case_info s where s.delete_flag = 0 and s.survey_state = 2
+        <if test="entrustOrgId != null">
+          and s.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+        </if>
+      ) as basEntrustNotApv,
+      (select count(1) from survey_risk_case_info s where s.delete_flag = 0 and s.survey_state in (4,8,10,12,14,16) and s.org_assign = 0
+          <if test="entrustOrgId != null">
+            and s.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+          </if>
+      ) as basLefanNotAss,
+      (
+          select count(1) from (
+              select r.id from survey_risk_case_info r
+              left join survey_assign_org o on r.id = o.survey_info_id and o.org_survey_state in (1,2,5) and o.delete_flag = 0
+              where r.delete_flag = 0 and o.id is not null
+              <if test="entrustOrgId != null">
+                and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+              </if>
+              group by r.id
+          ) t
+      ) as basOrgSurveying,
+      (select count(1) from survey_risk_case_info s where s.delete_flag = 0 and s.survey_state in (22,30)
+        <if test="entrustOrgId != null">
+          and s.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+        </if>
+      ) as basLefanApv,
+      (select count(1) from survey_risk_case_info s where s.delete_flag = 0 and s.survey_state in (24)
+        <if test="entrustOrgId != null">
+          and s.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+        </if>
+      ) as basEntrustApv,
+      (select count(1) from survey_risk_case_info s where s.delete_flag = 0 and s.entrust_report_end_date is not null and s.survey_phase != 3
+        <if test="entrustOrgId != null">
+          and s.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+        </if>
+      ) as basNotClose
+   from dual
+  </select>
+
+
+  <select id="selectAllTrend" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyConsignorReport">
+      SELECT
+      s.report_date as reportDate,
+      sum(s.new_survey_case_num) as newSurveyCaseNum,
+      sum(s.new_check_num) as newCheckNum,
+      sum(s.survey_money) as surveyMoney,
+      sum(s.survey_billing) as surveyBilling,
+      sum(s.survey_account) as surveyAccount,
+      sum(s.average) as average,
+      avg(s.positive_rate) as positiveRate,
+      avg(s.regional) as regional,
+      avg(s.efficiency) as efficiency,
+      avg(s.loss_efficiency_rate) as lossEfficiencyRate
+      FROM
+      survey_consignor_report s
+      WHERE 1 = 1
+      <include refid="wheres"/>
+      GROUP BY
+      s.report_date
+  </select>
+
+
+  <select id="selectTrendYear" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.report.SurveyTrendDTO">
+    select r.entrust_org_id entrustOrgId,r.id surveyInfoId,r.is_sun isSun,(case when r.entrust_report_end_date &gt; r.end_time then 1 else 0 end) isOver,
+    DATE_FORMAT(r.entrust_report_end_date,'%Y-%m') reportDate
+    from survey_risk_case_info r
+    left join survey_consignor n on r.entrust_org_id = n.id
+    where r.delete_flag = 0
+    <include refid="newSqlWhere"/>
+  </select>
+
+  <select id="selectTrendOrgYear" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.report.SurveyTrendDTO">
+    select r.entrust_org_id entrustOrgId,o.survey_org_id surveyOrgId,(case when a.id is null then 0 else 1 end) isSun,(case when b.id is null then 0 else 1 end) isOver,
+    DATE_FORMAT(r.entrust_report_end_date,'%Y-%m') reportDate
+    from survey_assign_org o
+    left join survey_risk_case_info r on o.survey_info_id = r.id
+    left join survey_consignor n on r.entrust_org_id = n.id
+    left join (
+        select o.id from survey_assign_org o
+        left join survey_investigator_case c on o.id = c.survey_assorg_case_id and c.delete_flag = 0
+         where o.delete_flag = 0 and c.is_sun = 1
+    ) a on o.id = a.id
+    left join (
+        select o.id from survey_assign_org o
+        where o.delete_flag = 0 and o.aging_real > o.aging_check
+    ) b on o.id = b.id
+    where o.delete_flag = 0
+    <if test="surveyOrgIdTrend != null">
+      and o.survey_org_id = #{surveyOrgIdTrend,jdbcType=BIGINT}
+    </if>
+    <include refid="newSqlWhere"/>
+  </select>
+
+
+  <sql id="newSqlWhere">
+    <if test="orgAttr != null">
+      and n.org_attr = #{orgAttr,jdbcType=INTEGER}
+    </if>
+    <if test="entrustOrgId != null">
+      and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+    </if>
+    <if test="startTime != null">
+      AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="endTime != null">
+      AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <include refid="projectEntrustOrgIdsOne"/>
+  </sql>
+  <select id="selectAllTrendNew1" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyConsignorReport">
+      select DATE_FORMAT(c.entrust_time,'%Y-%m-%d') reportDateStr,ifnull(count(1),0) newSurveyCaseNum from survey_risk_case_info r
+      left join survey_risk_case c on r.survey_id = c.id
+      left join survey_consignor n on r.entrust_org_id = n.id
+      where r.delete_flag = 0
+      <if test="orgAttr != null">
+        and n.org_attr = #{orgAttr,jdbcType=INTEGER}
+      </if>
+      <if test="entrustOrgId != null">
+        and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+      </if>
+      <if test="startTime != null">
+        AND date_format(c.entrust_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+      <if test="endTime != null">
+        AND date_format(c.entrust_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+      <include refid="projectEntrustOrgIdsOne"/>
+      group by DATE_FORMAT(c.entrust_time,'%Y-%m-%d')
+  </select>
+
+  <select id="selectAllTrendNew1Year" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyConsignorReport">
+    select DATE_FORMAT(c.entrust_time,'%Y-%m') reportDateStr,ifnull(count(1),0) newSurveyCaseNum from survey_risk_case_info r
+    left join survey_risk_case c on r.survey_id = c.id
+    left join survey_consignor n on r.entrust_org_id = n.id
+    where r.delete_flag = 0
+    <if test="orgAttr != null">
+      and n.org_attr = #{orgAttr,jdbcType=INTEGER}
+    </if>
+    <if test="entrustOrgId != null">
+      and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+    </if>
+    <if test="startTime != null">
+      AND date_format(c.entrust_time,'%Y-%m') &gt;= date_format(#{momTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="endTime != null">
+      AND date_format(c.entrust_time,'%Y-%m') &lt; date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <include refid="projectEntrustOrgIdsOne"/>
+    group by DATE_FORMAT(c.entrust_time,'%Y-%m')
+  </select>
+
+  <select id="selectAllTrendNew2" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyConsignorReport">
+      select DATE_FORMAT(r.entrust_report_end_date,'%Y-%m-%d') reportDateStr,ifnull(count(1),0) newCheckNum from survey_risk_case_info r
+      left join survey_risk_case c on r.survey_id = c.id
+      left join survey_consignor n on r.entrust_org_id = n.id
+      where r.delete_flag = 0 and r.entrust_report_end_date is not null
+    <include refid="newSqlWhere"/>
+      group by DATE_FORMAT(r.entrust_report_end_date,'%Y-%m-%d')
+  </select>
+
+  <select id="selectAllTrendNew2Year" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyConsignorReport">
+    select DATE_FORMAT(r.entrust_report_end_date,'%Y-%m') reportDateStr,ifnull(count(1),0) newCheckNum from survey_risk_case_info r
+    left join survey_risk_case c on r.survey_id = c.id
+    left join survey_consignor n on r.entrust_org_id = n.id
+    where r.delete_flag = 0 and r.entrust_report_end_date is not null
+    <if test="orgAttr != null">
+      and n.org_attr = #{orgAttr,jdbcType=INTEGER}
+    </if>
+    <if test="entrustOrgId != null">
+      and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+    </if>
+    <if test="startTime != null">
+      AND date_format(r.entrust_report_end_date,'%Y-%m') &gt;= date_format(#{momTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="endTime != null">
+      AND date_format(r.entrust_report_end_date,'%Y-%m') &lt; date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <include refid="projectEntrustOrgIdsOne"/>
+    group by DATE_FORMAT(r.entrust_report_end_date,'%Y-%m')
+  </select>
+
+
+  <select id="selectEntrustKeyTar" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyConsignorReport">
+    select
+    -- 营收额 -调查费
+    ifnull((select sum(s.survey_money) from survey_consignor_report s where 1= 1 <include refid="wheres" />),0) as surveyMoney,
+    -- 新增委托
+    ifnull((select sum(s.new_survey_case_num) from survey_consignor_report s where 1= 1 <include refid="wheres" />),0) as newSurveyCaseNum,
+    -- 保司终审通过
+    ifnull((select sum(s.new_check_num) from survey_consignor_report s where 1= 1 <include refid="wheres" />),0) as newCheckNum,
+    -- 均价  总调查费/总案件数
+    ifnull((select sum(s.survey_money) from survey_consignor_report s where 1= 1 <include refid="wheres" />) /
+    (select sum(s.new_check_num) from survey_consignor_report s where 1= 1 <include refid="wheres" />),0) as average,
+    -- 超时效占比
+    ifnull((select avg(s.loss_efficiency_rate) from survey_consignor_report s where 1= 1 <include refid="wheres" />),0) as lossEfficiencyRate,
+    -- 阳性率
+    ifnull((select avg(s.positive_rate) from survey_consignor_report s where 1= 1 <include refid="wheres" />),0) as positiveRate,
+    -- 跨区域程度
+    ifnull((select avg(s.regional) from survey_consignor_report s where 1= 1 <include refid="wheres" />),0) as regional,
+    -- 调查时效
+    ifnull((select avg(s.efficiency) from survey_consignor_report s where 1= 1 <include refid="wheres" />),0) as efficiency,
+    1 as returnType
+     from dual
+    union all
+    select
+    -- 营收额 -调查费
+    ifnull((select sum(s.survey_money) from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" />),0) as surveyMoney,
+    -- 新增委托
+    ifnull((select sum(s.new_survey_case_num) from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" />),0) as newSurveyCaseNum,
+    -- 保司终审通过
+    ifnull((select sum(s.new_check_num) from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" />),0) as newCheckNum,
+    -- 均价  总调查费/总案件数
+    ifnull((select sum(s.survey_money) from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" />) /
+    (select sum(s.new_check_num) from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" />),0) as average,
+    -- 超时效占比
+    ifnull((select avg(s.loss_efficiency_rate) from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" />),0) as lossEfficiencyRate,
+    -- 阳性率
+    ifnull((select avg(s.positive_rate) from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" />),0) as positiveRate,
+    -- 跨区域程度
+    ifnull((select avg(s.regional) from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" />),0) as regional,
+    -- 调查时效
+    ifnull((select avg(s.efficiency) from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" />),0) as efficiency,
+    2 as returnType
+     from dual
+    union all
+    select
+    -- 最大值
+    -- 营收额 -调查费
+    ifnull((select max(a.survey_money) from (select sum(s.survey_money) survey_money from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" /> group by s.consignor_org_id) a),0) as surveyMoney,
+    -- 新增委托
+    ifnull((select max(a.new_survey_case_num) from (select sum(s.new_survey_case_num) new_survey_case_num from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" /> group by s.consignor_org_id) a),0) as newSurveyCaseNum,
+    -- 保司终审通过
+    ifnull((select max(a.new_check_num) from (select sum(s.new_check_num) new_check_num from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" /> group by s.consignor_org_id) a),0) as newCheckNum,
+    -- 均价  总调查非/总案件数
+    ifnull(((select max(a.survey_money) from (select sum(s.survey_money) survey_money from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" /> group by s.consignor_org_id) a) /
+    (select max(a.new_check_num) from (select sum(s.new_check_num) new_check_num from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" /> group by s.consignor_org_id) a)),0) as average,
+    -- 超时效占比
+    ifnull((select max(a.loss_efficiency_rate) from (select avg(s.loss_efficiency_rate) loss_efficiency_rate from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" /> group by s.consignor_org_id) a),0) as lossEfficiencyRate,
+    -- 阳性率
+    ifnull((select max(a.positive_rate) from (select avg(s.positive_rate) positive_rate from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" /> group by s.consignor_org_id) a),0) as positiveRate,
+    -- 跨区域程度
+    ifnull((select max(a.regional) from (select avg(s.regional) regional from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" /> group by s.consignor_org_id) a),0) as regional,
+    -- 调查时效
+    ifnull((select max(a.efficiency) from (select avg(s.efficiency) efficiency from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust" /> group by s.consignor_org_id) a),0) as efficiency,
+    3 as returnType
+    from dual
+  </select>
+  <select id="selectEntrustKeyTarEntrusts" parameterType="java.util.Map" resultType="int">
+    select count(1) from (select count(1),s.consignor_org_id from survey_consignor_report s where 1 = 1 <include refid="wheresEntrust"/> group by s.consignor_org_id) a
+  </select>
+
+
+
+  <select id="selectMinReportDate" parameterType="java.util.Map" resultType="java.util.Date">
+    select min(report_date) as minReportDate from survey_consignor_report
+  </select>
+  <select id="selectMaxReportDate" parameterType="java.util.Map" resultType="java.util.Date">
+    select max(report_date) as maxReportDate from survey_consignor_report
+  </select>
+</mapper>

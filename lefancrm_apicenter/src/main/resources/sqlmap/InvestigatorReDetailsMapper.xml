@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.InvestigatorReDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.InvestigatorReDetails" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="investigator_re_id" property="investigatorReId" jdbcType="BIGINT" />
+    <result column="investigator_case_id" property="investigatorCaseId" jdbcType="BIGINT" />
+    <result column="Investigator_re_money" property="investigatorReMoney" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_info_id, investigator_re_id, investigator_case_id, Investigator_re_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from investigator_re_details
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectCountByInvestigatorReId" resultType="java.lang.Integer">
+        SELECT count(*) FROM (
+SELECT * FROM investigator_re_details WHERE investigator_re_id =  #{investigatorReId,jdbcType=BIGINT} GROUP BY survey_info_id ) tab
+  </select>
+    <select id="selectTotalMoneyByInvestigatorReId" resultType="java.lang.Double" parameterType="java.lang.Long">
+        select ifnull(sum(Investigator_re_money),0) from investigator_re_details where investigator_re_id = #{investigatorReId,jdbcType=BIGINT}
+  </select>
+  <select id="selectInvestigatorCountByPayInfoId" resultType="java.lang.Integer">
+        SELECT COUNT(tab.id) FROM (SELECT
+        red.*
+    FROM
+        survey_pay_info pay
+        LEFT JOIN investigator_re_info reinfo ON pay.pay_key_id = reinfo.id
+        LEFT JOIN investigator_re_details red ON reinfo.id = red.investigator_re_id
+    WHERE
+        pay.id = #{payInfoId} GROUP BY red.survey_info_id) tab
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from investigator_re_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.InvestigatorReDetails" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into investigator_re_details (survey_info_id, investigator_re_id, investigator_case_id, 
+      Investigator_re_money)
+    values (#{surveyInfoId,jdbcType=BIGINT}, #{investigatorReId,jdbcType=BIGINT}, #{investigatorCaseId,jdbcType=BIGINT}, 
+      #{investigatorReMoney,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.InvestigatorReDetails" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into investigator_re_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="investigatorReId != null" >
+        investigator_re_id,
+      </if>
+      <if test="investigatorCaseId != null" >
+        investigator_case_id,
+      </if>
+      <if test="investigatorReMoney != null" >
+        Investigator_re_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="investigatorReId != null" >
+        #{investigatorReId,jdbcType=BIGINT},
+      </if>
+      <if test="investigatorCaseId != null" >
+        #{investigatorCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="investigatorReMoney != null" >
+        #{investigatorReMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.InvestigatorReDetails" >
+    update investigator_re_details
+    <set >
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="investigatorReId != null" >
+        investigator_re_id = #{investigatorReId,jdbcType=BIGINT},
+      </if>
+      <if test="investigatorCaseId != null" >
+        investigator_case_id = #{investigatorCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="investigatorReMoney != null" >
+        Investigator_re_money = #{investigatorReMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.InvestigatorReDetails" >
+    update investigator_re_details
+    set survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      investigator_re_id = #{investigatorReId,jdbcType=BIGINT},
+      investigator_case_id = #{investigatorCaseId,jdbcType=BIGINT},
+      Investigator_re_money = #{investigatorReMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="suedInsert" parameterType="java.util.Map">
+    insert into investigator_re_details (survey_info_id,investigator_re_id,investigator_case_id,Investigator_re_money)
+    select c.survey_info_id,r.id,c.id,ifnull(c.money,0) from investigator_re_info r
+    left join (
+        select t.id,t.survey_info_id,t.survey_user_id,sum(ifnull(r.medical_history_money,0) + ifnull(r.troubleshooting_money,0) +
+                 ifnull(r.printing_money,0) + ifnull(r.accommodatio_money,0) + ifnull(r.train_money,0)
+                 + ifnull(r.car_money,0) + ifnull(r.aircraft_money,0) + ifnull(r.self_driving_money,0) + ifnull(r.other_money,0)) money
+        from survey_investigator_case t
+        left join survey_case_direction d on t.id = d.survey_investigator_case_id and d.delete_flag = 0
+        left join survey_reimbursement_info r on d.id = r.survey_direction_id
+        where t.delete_flag = 0
+        group by t.id
+    ) c on r.survey_user_id = c.survey_user_id and find_in_set(c.survey_info_id,#{ids,jdbcType=VARCHAR})
+    where r.re_id = #{reId,jdbcType=BIGINT}
+  </insert>
+    
+    <select id="selectDetailByInvestigatorCaseId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from investigator_re_details
+        where investigator_case_id = #{investigatorCaseId,jdbcType=BIGINT}
+        order by id desc limit 1
+    </select>
+  <select id="selectReStateStrByInvCaseId" resultType="java.lang.Integer">
+    SELECT ifnull(r.re_state,0) re_state FROM
+	investigator_re_details d
+	LEFT JOIN investigator_re_info r ON d.investigator_re_id = r.id WHERE
+	d.investigator_case_id = #{invCaseId} LIMIT 1
+  </select>
+</mapper>

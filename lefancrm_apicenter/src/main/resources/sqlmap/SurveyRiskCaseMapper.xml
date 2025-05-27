@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyRiskCaseMapper">
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyRiskCase">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="survey_no" property="surveyNo" jdbcType="VARCHAR"/>
+        <result column="survey_person" property="surveyPerson" jdbcType="VARCHAR"/>
+        <result column="survery_person_tel" property="surveryPersonTel" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="cooperative_company" property="cooperativeCompany" jdbcType="VARCHAR"/>
+        <result column="subsidiary_company" property="subsidiaryCompany" jdbcType="VARCHAR"/>
+        <result column="health_insurance_company" property="healthInsuranceCompany" jdbcType="VARCHAR"/>
+        <result column="task_number" property="taskNumber" jdbcType="VARCHAR"/>
+        <result column="delegation_mode" property="delegationMode" jdbcType="INTEGER"/>
+        <result column="policy_no" property="policyNo" jdbcType="VARCHAR"/>
+        <result column="claims_no" property="claimsNo" jdbcType="VARCHAR"/>
+        <result column="claims_money" property="claimsMoney" jdbcType="DOUBLE"/>
+        <result column="id_type" property="idType" jdbcType="INTEGER"/>
+        <result column="id_number" property="idNumber" jdbcType="VARCHAR"/>
+        <result column="survey_total_money" property="surveyTotalMoney" jdbcType="DOUBLE"/>
+        <result column="entrust_total_money" property="entrustTotalMoney" jdbcType="DOUBLE"/>
+        <result column="entrust_user_id" property="entrustUserId" jdbcType="BIGINT"/>
+        <result column="entrust_user_name" property="entrustUserName" jdbcType="VARCHAR"/>
+        <result column="entrust_org_id" property="entrustOrgId" jdbcType="BIGINT"/>
+        <result column="entrust_org_name" property="entrustOrgName" jdbcType="VARCHAR"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="survey_case_no" property="surveyCaseNo" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="insure_type" property="insureType" jdbcType="INTEGER"/>
+        <result column="entrust_time" property="entrustTime" jdbcType="TIMESTAMP"/>
+        <result column="insure_time" property="insureTime" jdbcType="TIMESTAMP"/>
+        <result column="danger_time" property="dangerTime" jdbcType="TIMESTAMP"/>
+        <result column="danger_address" property="dangerAddress" jdbcType="VARCHAR"/>
+        <result column="insure_take_time" property="insureTakeTime" jdbcType="TIMESTAMP"/>
+        <result column="department_id" property="departmentId" jdbcType="BIGINT"/>
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR"/>
+        <result column="transfer_type" property="transferType" jdbcType="INTEGER"/>
+        <result column="transfer_type_name" property="transferTypeName" jdbcType="VARCHAR"/>
+        <result column="insure_name" property="insureName" jdbcType="VARCHAR"/>
+        <result column="hz_contact_name" property="hzContactName" jdbcType="VARCHAR"/>
+        <result column="hz_contact_tel" property="hzContactTel" jdbcType="VARCHAR"/>
+        <result column="hz_product" property="hzProduct" jdbcType="INTEGER"/>
+        <result column="hz_wait_end_time" property="hzWaitEndTime" jdbcType="TIMESTAMP"/>
+        <result column="hz_live_address" property="hzLiveAddress" jdbcType="VARCHAR"/>
+        <result column="hz_confirm_disease" property="hzConfirmDisease" jdbcType="VARCHAR"/>
+        <result column="hz_follow_info" property="hzFollowInfo" jdbcType="VARCHAR"/>
+        <result column="investigation_area" property="investigationArea" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , survey_no, survey_person, survery_person_tel, sex,
+        cooperative_company,subsidiary_company,health_insurance_company,task_number,policy_no, claims_no, claims_money,
+        delegation_mode,
+        id_type, id_number, survey_total_money, entrust_total_money, entrust_user_id, entrust_user_name,
+        entrust_org_id, entrust_org_name, create_by, create_time, update_by, update_time,
+        delete_flag, survey_case_no, age, insure_type, entrust_time, insure_time, danger_time,
+        danger_address, insure_take_time, department_id, department_name, transfer_type, transfer_type_name,
+        insure_name, hz_contact_name, hz_contact_tel, hz_product, hz_wait_end_time,
+        hz_live_address, hz_confirm_disease, hz_follow_info, investigation_area,repetition
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from survey_risk_case
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByIdNumber" resultMap="BaseResultMap">
+        select c.*,
+               i.id riskInfoId
+        from survey_risk_case c
+                 left join survey_risk_case_info i on c.id = i.survey_id
+        where c.id_number = #{idNumber}
+          and c.delete_flag = 0
+          and i.delete_flag = 0
+        group by c.id
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from survey_risk_case
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyRiskCase">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_risk_case (survey_no, survey_person, survery_person_tel,
+        sex,cooperative_company, subsidiary_company,health_insurance_company,task_number,delegation_mode,policy_no,
+        claims_no,
+        claims_money, id_type, id_number,
+        survey_total_money, entrust_total_money, entrust_user_id,
+        entrust_user_name, entrust_org_id, entrust_org_name,
+        create_by, create_time, update_by,
+        update_time, delete_flag, survey_case_no,
+        age, insure_type, entrust_time,
+        insure_time, danger_time, danger_address,
+        insure_take_time, department_id, department_name,transfer_type, transfer_type_name,insure_name,
+        hz_contact_name, hz_contact_tel, hz_product, hz_wait_end_time,
+        hz_live_address, hz_confirm_disease, hz_follow_info,investigation_area
+        )
+        values (#{surveyNo,jdbcType=VARCHAR}, #{surveyPerson,jdbcType=VARCHAR}, #{surveryPersonTel,jdbcType=VARCHAR},
+        #{sex,jdbcType=INTEGER},
+        #{cooperativeCompany,jdbcType=VARCHAR},
+        #{subsidiaryCompany,jdbcType=VARCHAR},
+        #{healthInsuranceCompany,jdbcType=VARCHAR},
+        #{taskNumber,jdbcType=VARCHAR},
+        #{delegationMode,jdbcType=INTEGER},
+        #{policyNo,jdbcType=VARCHAR},
+        #{claimsNo,jdbcType=VARCHAR},
+        #{claimsMoney,jdbcType=DOUBLE}, #{idType,jdbcType=INTEGER}, #{idNumber,jdbcType=VARCHAR},
+        #{surveyTotalMoney,jdbcType=DOUBLE}, #{entrustTotalMoney,jdbcType=DOUBLE}, #{entrustUserId,jdbcType=BIGINT},
+        #{entrustUserName,jdbcType=VARCHAR}, #{entrustOrgId,jdbcType=BIGINT}, #{entrustOrgName,jdbcType=VARCHAR},
+        #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+        #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, #{surveyCaseNo,jdbcType=VARCHAR},
+        #{age,jdbcType=INTEGER}, #{insureType,jdbcType=INTEGER}, #{entrustTime,jdbcType=TIMESTAMP},
+        #{insureTime,jdbcType=TIMESTAMP}, #{dangerTime,jdbcType=TIMESTAMP}, #{dangerAddress,jdbcType=VARCHAR},
+        #{insureTakeTime,jdbcType=TIMESTAMP}, #{departmentId,jdbcType=BIGINT}, #{departmentName,jdbcType=VARCHAR},
+        #{transferType,jdbcType=INTEGER}, #{transferTypeName,jdbcType=VARCHAR}, #{insureName,jdbcType=VARCHAR},
+        #{hzContactName,jdbcType=VARCHAR}, #{hzContactTel,jdbcType=VARCHAR}, #{hzProduct,jdbcType=INTEGER},
+        #{hzWaitEndTime,jdbcType=TIMESTAMP}, #{hzLiveAddress,jdbcType=VARCHAR}, #{hzConfirmDisease,jdbcType=VARCHAR},
+        #{hzFollowInfo,jdbcType=VARCHAR},#{investigationArea,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyRiskCase">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_risk_case
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="surveyNo != null">
+                survey_no,
+            </if>
+            <if test="surveyPerson != null">
+                survey_person,
+            </if>
+            <if test="surveryPersonTel != null">
+                survery_person_tel,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="cooperativeCompany != null">
+                cooperative_company,
+            </if>
+            <if test="subsidiaryCompany != null">
+                subsidiary_company,
+            </if>
+            <if test="healthInsuranceCompany != null">
+                health_insurance_company,
+            </if>
+            <if test="taskNumber != null">
+                task_number,
+            </if>
+            <if test="delegationMode != null">
+                delegation_mode,
+            </if>
+            <if test="policyNo != null">
+                policy_no,
+            </if>
+            <if test="claimsNo != null">
+                claims_no,
+            </if>
+            <if test="claimsMoney != null">
+                claims_money,
+            </if>
+            <if test="idType != null">
+                id_type,
+            </if>
+            <if test="idNumber != null">
+                id_number,
+            </if>
+            <if test="surveyTotalMoney != null">
+                survey_total_money,
+            </if>
+            <if test="entrustTotalMoney != null">
+                entrust_total_money,
+            </if>
+            <if test="entrustUserId != null">
+                entrust_user_id,
+            </if>
+            <if test="entrustUserName != null">
+                entrust_user_name,
+            </if>
+            <if test="entrustOrgId != null">
+                entrust_org_id,
+            </if>
+            <if test="entrustOrgName != null">
+                entrust_org_name,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="surveyCaseNo != null">
+                survey_case_no,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="insureType != null">
+                insure_type,
+            </if>
+            <if test="entrustTime != null">
+                entrust_time,
+            </if>
+            <if test="insureTime != null">
+                insure_time,
+            </if>
+            <if test="dangerTime != null">
+                danger_time,
+            </if>
+            <if test="dangerAddress != null">
+                danger_address,
+            </if>
+            <if test="insureTakeTime != null">
+                insure_take_time,
+            </if>
+            <if test="departmentId != null">
+                department_id,
+            </if>
+            <if test="departmentName != null">
+                department_name,
+            </if>
+            <if test="transferType != null">
+                transfer_type,
+            </if>
+            <if test="transferTypeName != null">
+                transfer_type_name,
+            </if>
+            <if test="insureName != null">
+                insure_name,
+            </if>
+            <if test="hzContactName != null">
+                hz_contact_name,
+            </if>
+            <if test="hzContactTel != null">
+                hz_contact_tel,
+            </if>
+            <if test="hzProduct != null">
+                hz_product,
+            </if>
+            <if test="hzWaitEndTime != null">
+                hz_wait_end_time,
+            </if>
+            <if test="hzLiveAddress != null">
+                hz_live_address,
+            </if>
+            <if test="hzConfirmDisease != null">
+                hz_confirm_disease,
+            </if>
+            <if test="hzFollowInfo != null">
+                hz_follow_info,
+            </if>
+            <if test="investigationArea != null">
+                investigation_area,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="surveyNo != null">
+                #{surveyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyPerson != null">
+                #{surveyPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="surveryPersonTel != null">
+                #{surveryPersonTel,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="cooperativeCompany != null">
+                #{cooperativeCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="subsidiaryCompany != null">
+                #{subsidiaryCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="healthInsuranceCompany != null">
+                #{healthInsuranceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="taskNumber != null">
+                #{taskNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="delegationMode != null">
+                #{delegationMode,jdbcType=INTEGER},
+            </if>
+            <if test="policyNo != null">
+                #{policyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="claimsNo != null">
+                #{claimsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="claimsMoney != null">
+                #{claimsMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="idType != null">
+                #{idType,jdbcType=INTEGER},
+            </if>
+            <if test="idNumber != null">
+                #{idNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyTotalMoney != null">
+                #{surveyTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="entrustTotalMoney != null">
+                #{entrustTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="entrustUserId != null">
+                #{entrustUserId,jdbcType=BIGINT},
+            </if>
+            <if test="entrustUserName != null">
+                #{entrustUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustOrgId != null">
+                #{entrustOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="entrustOrgName != null">
+                #{entrustOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="surveyCaseNo != null">
+                #{surveyCaseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="insureType != null">
+                #{insureType,jdbcType=INTEGER},
+            </if>
+            <if test="entrustTime != null">
+                #{entrustTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insureTime != null">
+                #{insureTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dangerTime != null">
+                #{dangerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dangerAddress != null">
+                #{dangerAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="insureTakeTime != null">
+                #{insureTakeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="departmentId != null">
+                #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="departmentName != null">
+                #{departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="transferType != null">
+                #{transferType,jdbcType=INTEGER},
+            </if>
+            <if test="transferTypeName != null">
+                #{transferTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="insureName != null">
+                #{insureName,jdbcType=VARCHAR},
+            </if>
+            <if test="hzContactName != null">
+                #{hzContactName,jdbcType=VARCHAR},
+            </if>
+            <if test="hzContactTel != null">
+                #{hzContactTel,jdbcType=VARCHAR},
+            </if>
+            <if test="hzProduct != null">
+                #{hzProduct,jdbcType=INTEGER},
+            </if>
+            <if test="hzWaitEndTime != null">
+                #{hzWaitEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="hzLiveAddress != null">
+                #{hzLiveAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="hzConfirmDisease != null">
+                #{hzConfirmDisease,jdbcType=VARCHAR},
+            </if>
+            <if test="hzFollowInfo != null">
+                #{hzFollowInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="investigationArea != null">
+                #{investigationArea,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyRiskCase">
+        update survey_risk_case
+        <set>
+            <if test="surveyNo != null">
+                survey_no = #{surveyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyPerson != null">
+                survey_person = #{surveyPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="surveryPersonTel != null">
+                survery_person_tel = #{surveryPersonTel,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="delegationMode != null">
+                delegation_mode = #{delegationMode,jdbcType=INTEGER},
+            </if>
+            <if test="cooperativeCompany != null">
+                cooperative_company = #{cooperativeCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="subsidiaryCompany != null">
+                subsidiary_company = #{subsidiaryCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="healthInsuranceCompany != null">
+                health_insurance_company = #{healthInsuranceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="taskNumber != null">
+                task_number = #{taskNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="policyNo != null">
+                policy_no = #{policyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="claimsNo != null">
+                claims_no = #{claimsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="claimsMoney != null">
+                claims_money = #{claimsMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="idType != null">
+                id_type = #{idType,jdbcType=INTEGER},
+            </if>
+            <if test="idNumber != null">
+                id_number = #{idNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyTotalMoney != null">
+                survey_total_money = #{surveyTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="entrustTotalMoney != null">
+                entrust_total_money = #{entrustTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="entrustUserId != null">
+                entrust_user_id = #{entrustUserId,jdbcType=BIGINT},
+            </if>
+            <if test="entrustUserName != null">
+                entrust_user_name = #{entrustUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustOrgId != null">
+                entrust_org_id = #{entrustOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="entrustOrgName != null">
+                entrust_org_name = #{entrustOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="surveyCaseNo != null">
+                survey_case_no = #{surveyCaseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="insureType != null">
+                insure_type = #{insureType,jdbcType=INTEGER},
+            </if>
+            <if test="entrustTime != null">
+                entrust_time = #{entrustTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insureTime != null">
+                insure_time = #{insureTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dangerTime != null">
+                danger_time = #{dangerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dangerAddress != null">
+                danger_address = #{dangerAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="insureTakeTime != null">
+                insure_take_time = #{insureTakeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="departmentId != null">
+                department_id = #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="departmentName != null">
+                department_name = #{departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="transferType != null">
+                transfer_type = #{transferType,jdbcType=INTEGER},
+            </if>
+            <if test="transferTypeName != null">
+                transfer_type_name = #{transferTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="insureName != null">
+                insure_name = #{insureName,jdbcType=VARCHAR},
+            </if>
+            <if test="hzContactName != null">
+                hz_contact_name = #{hzContactName,jdbcType=VARCHAR},
+            </if>
+            <if test="hzContactTel != null">
+                hz_contact_tel = #{hzContactTel,jdbcType=VARCHAR},
+            </if>
+            <if test="hzProduct != null">
+                hz_product = #{hzProduct,jdbcType=INTEGER},
+            </if>
+            <if test="hzWaitEndTime != null">
+                hz_wait_end_time = #{hzWaitEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="hzLiveAddress != null">
+                hz_live_address = #{hzLiveAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="hzConfirmDisease != null">
+                hz_confirm_disease = #{hzConfirmDisease,jdbcType=VARCHAR},
+            </if>
+            <if test="hzFollowInfo != null">
+                hz_follow_info = #{hzFollowInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="investigationArea != null">
+                investigation_area = #{investigationArea,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyRiskCase">
+        update survey_risk_case
+        set survey_no                = #{surveyNo,jdbcType=VARCHAR},
+            survey_person            = #{surveyPerson,jdbcType=VARCHAR},
+            survery_person_tel       = #{surveryPersonTel,jdbcType=VARCHAR},
+            sex                      = #{sex,jdbcType=INTEGER},
+            cooperative_company      = #{cooperativeCompany,jdbcType=VARCHAR},
+            subsidiary_company       = #{subsidiaryCompany,jdbcType=VARCHAR},
+            health_insurance_company = #{healthInsuranceCompany,jdbcType=VARCHAR},
+            task_number              = #{taskNumber,jdbcType=VARCHAR},
+            delegation_mode          = #{delegationMode,jdbcType=INTEGER},
+            policy_no                = #{policyNo,jdbcType=VARCHAR},
+            claims_no                = #{claimsNo,jdbcType=VARCHAR},
+            claims_money             = #{claimsMoney,jdbcType=DOUBLE},
+            id_type                  = #{idType,jdbcType=INTEGER},
+            id_number                = #{idNumber,jdbcType=VARCHAR},
+            survey_total_money       = #{surveyTotalMoney,jdbcType=DOUBLE},
+            entrust_total_money      = #{entrustTotalMoney,jdbcType=DOUBLE},
+            entrust_user_id          = #{entrustUserId,jdbcType=BIGINT},
+            entrust_user_name        = #{entrustUserName,jdbcType=VARCHAR},
+            entrust_org_id           = #{entrustOrgId,jdbcType=BIGINT},
+            entrust_org_name         = #{entrustOrgName,jdbcType=VARCHAR},
+            create_by                = #{createBy,jdbcType=VARCHAR},
+            create_time              = #{createTime,jdbcType=TIMESTAMP},
+            update_by                = #{updateBy,jdbcType=VARCHAR},
+            update_time              = #{updateTime,jdbcType=TIMESTAMP},
+            delete_flag              = #{deleteFlag,jdbcType=INTEGER},
+            survey_case_no           = #{surveyCaseNo,jdbcType=VARCHAR},
+            age                      = #{age,jdbcType=INTEGER},
+            insure_type              = #{insureType,jdbcType=INTEGER},
+            entrust_time             = #{entrustTime,jdbcType=TIMESTAMP},
+            insure_time              = #{insureTime,jdbcType=TIMESTAMP},
+            danger_time              = #{dangerTime,jdbcType=TIMESTAMP},
+            danger_address           = #{dangerAddress,jdbcType=VARCHAR},
+            insure_take_time         = #{insureTakeTime,jdbcType=TIMESTAMP},
+            department_id            = #{departmentId,jdbcType=BIGINT},
+            department_name          = #{departmentName,jdbcType=VARCHAR},
+            transfer_type            = #{transferType,jdbcType=INTEGER},
+            transfer_type_name       = #{transferTypeName,jdbcType=VARCHAR},
+            insure_name              = #{insureName,jdbcType=VARCHAR},
+            hz_contact_name          = #{hzContactName,jdbcType=VARCHAR},
+            hz_contact_tel           = #{hzContactTel,jdbcType=VARCHAR},
+            hz_product               = #{hzProduct,jdbcType=INTEGER},
+            hz_wait_end_time         = #{hzWaitEndTime,jdbcType=TIMESTAMP},
+            hz_live_address          = #{hzLiveAddress,jdbcType=VARCHAR},
+            hz_confirm_disease       = #{hzConfirmDisease,jdbcType=VARCHAR},
+            investigation_area       = #{investigationArea,jdbcType=INTEGER},
+            hz_follow_info           = #{hzFollowInfo,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="list" resultMap="BaseResultMap" parameterType="java.util.List">
+        select
+        <include refid="Base_Column_List"/>
+        from survey_risk_case
+        where 1 = 1
+        <if test="surveyIds != null">
+            and id IN
+            <foreach collection="surveyIds" item="surveyId" open="(" separator="," close=")">
+                #{surveyId}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="top3insures" resultType="java.lang.String">
+        SELECT r.insure_name
+        FROM survey_risk_case r
+        WHERE r.delete_flag = 0
+          AND r.entrust_org_id = #{entrustOrgId}
+          AND r.insure_name IS NOT NULL
+          and DATE_FORMAT(r.entrust_time, '%Y-%m') >= DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 YEAR), '%Y-%m')
+        GROUP BY r.insure_name
+        ORDER BY count(1) DESC limit 3
+    </select>
+</mapper>

@@ -1,0 +1,965 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyConsignorMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyConsignor" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="company" property="company" jdbcType="VARCHAR" />
+        <result column="area_type_id" property="areaTypeId" jdbcType="BIGINT" />
+        <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+        <result column="area_type" property="areaType" jdbcType="INTEGER" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="create_by" property="createBy" jdbcType="BIGINT" />
+        <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="district" property="district" jdbcType="VARCHAR" />
+        <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+        <result column="city_id" property="cityId" jdbcType="INTEGER" />
+        <result column="district_id" property="districtId" jdbcType="INTEGER" />
+        <result column="is_credit" property="isCredit" jdbcType="INTEGER" />
+        <result column="price_remark" property="priceRemark" jdbcType="VARCHAR" />
+        <result column="app_user" property="appUser" jdbcType="VARCHAR" />
+        <result column="apv_user" property="apvUser" jdbcType="VARCHAR" />
+        <result column="business_attr" property="businessAttr" jdbcType="INTEGER" />
+        <result column="medical_money" property="medicalMoney" jdbcType="DOUBLE" />
+        <result column="org_attr" property="orgAttr" jdbcType="INTEGER" />
+        <result column="efficiency_attr" property="efficiencyAttr" jdbcType="INTEGER" />
+        <result column="main_province_money" property="mainProvinceMoney" jdbcType="DOUBLE" />
+        <result column="vice_province_money" property="viceProvinceMoney" jdbcType="DOUBLE" />
+        <result column="org_state" property="orgState" jdbcType="INTEGER" />
+        <result column="auto_fill_state" property="autoFillState" jdbcType="INTEGER" />
+        <result column="attr_max_size" property="attrMaxSize" jdbcType="DOUBLE" />
+        <result column="advance_party" property="advanceParty" jdbcType="INTEGER" />
+        <result column="service_type" property="serviceType" jdbcType="INTEGER" />
+        <result column="receiver" property="receiver" jdbcType="VARCHAR" />
+        <result column="receiver_tel" property="receiverTel" jdbcType="VARCHAR" />
+        <result column="receiver_address" property="receiverAddress" jdbcType="VARCHAR" />
+        <result column="sharp" property="sharp" jdbcType="INTEGER" />
+        <result column="market_user_id" property="marketUserId" jdbcType="BIGINT" />
+        <result column="market_user_name" property="marketUserName" jdbcType="VARCHAR" />
+        <result column="market_rate" property="marketRate" jdbcType="DOUBLE" />
+        <result column="recommend_user_id" property="recommendUserId" jdbcType="BIGINT" />
+        <result column="recommend_user_name" property="recommendUserName" jdbcType="VARCHAR" />
+        <result column="recommend_rate" property="recommendRate" jdbcType="DOUBLE" />
+        <result column="bill_company_id" property="billCompanyId" jdbcType="BIGINT" />
+        <result column="bill_company_name" property="billCompanyName" jdbcType="VARCHAR" />
+        <result column="pdf_type" property="pdfType" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, code, name, remark, company, area_type_id, area_name, area_type, type, create_by,
+    create_by_name, create_time, update_by, update_time, delete_flag, province, city,
+    district, province_id, city_id, district_id, is_credit, price_remark, app_user, apv_user,
+    business_attr, medical_money, org_attr, efficiency_attr, main_province_money, vice_province_money,
+    org_state, auto_fill_state, attr_max_size, advance_party, service_type, receiver,
+    receiver_tel, receiver_address, sharp, market_user_id, market_user_name, market_rate,
+    recommend_user_id, recommend_user_name, recommend_rate, bill_company_id, bill_company_name,
+    pdf_type
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_consignor
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_consignor
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyConsignor" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_consignor (code, name, remark,
+        company, area_type_id, area_name,
+        area_type, type, create_by,
+        create_by_name, create_time, update_by,
+        update_time, delete_flag, province,
+        city, district, province_id,
+        city_id, district_id, is_credit,
+        price_remark, app_user, apv_user,
+        business_attr, medical_money, org_attr,
+        efficiency_attr, main_province_money, vice_province_money,
+        org_state, auto_fill_state, attr_max_size,
+        advance_party, service_type, receiver,
+        receiver_tel, receiver_address, sharp,
+        market_user_id, market_user_name, market_rate,
+        recommend_user_id, recommend_user_name, recommend_rate,
+        bill_company_id, bill_company_name, pdf_type
+        )
+        values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+        #{company,jdbcType=VARCHAR}, #{areaTypeId,jdbcType=BIGINT}, #{areaName,jdbcType=VARCHAR},
+        #{areaType,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{createBy,jdbcType=BIGINT},
+        #{createByName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT},
+        #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR},
+        #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER},
+        #{cityId,jdbcType=INTEGER}, #{districtId,jdbcType=INTEGER}, #{isCredit,jdbcType=INTEGER},
+        #{priceRemark,jdbcType=VARCHAR}, #{appUser,jdbcType=VARCHAR}, #{apvUser,jdbcType=VARCHAR},
+        #{businessAttr,jdbcType=INTEGER}, #{medicalMoney,jdbcType=DOUBLE}, #{orgAttr,jdbcType=INTEGER},
+        #{efficiencyAttr,jdbcType=INTEGER}, #{mainProvinceMoney,jdbcType=DOUBLE}, #{viceProvinceMoney,jdbcType=DOUBLE},
+        #{orgState,jdbcType=INTEGER}, #{autoFillState,jdbcType=INTEGER}, #{attrMaxSize,jdbcType=DOUBLE},
+        #{advanceParty,jdbcType=INTEGER}, #{serviceType,jdbcType=INTEGER}, #{receiver,jdbcType=VARCHAR},
+        #{receiverTel,jdbcType=VARCHAR}, #{receiverAddress,jdbcType=VARCHAR}, #{sharp,jdbcType=INTEGER},
+        #{marketUserId,jdbcType=BIGINT}, #{marketUserName,jdbcType=VARCHAR}, #{marketRate,jdbcType=DOUBLE},
+        #{recommendUserId,jdbcType=BIGINT}, #{recommendUserName,jdbcType=VARCHAR}, #{recommendRate,jdbcType=DOUBLE},
+        #{billCompanyId,jdbcType=BIGINT}, #{billCompanyName,jdbcType=VARCHAR}, #{pdfType,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignor" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_consignor
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="code != null" >
+                code,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="company != null" >
+                company,
+            </if>
+            <if test="areaTypeId != null" >
+                area_type_id,
+            </if>
+            <if test="areaName != null" >
+                area_name,
+            </if>
+            <if test="areaType != null" >
+                area_type,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createByName != null" >
+                create_by_name,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+            <if test="province != null" >
+                province,
+            </if>
+            <if test="city != null" >
+                city,
+            </if>
+            <if test="district != null" >
+                district,
+            </if>
+            <if test="provinceId != null" >
+                province_id,
+            </if>
+            <if test="cityId != null" >
+                city_id,
+            </if>
+            <if test="districtId != null" >
+                district_id,
+            </if>
+            <if test="isCredit != null" >
+                is_credit,
+            </if>
+            <if test="priceRemark != null" >
+                price_remark,
+            </if>
+            <if test="appUser != null" >
+                app_user,
+            </if>
+            <if test="apvUser != null" >
+                apv_user,
+            </if>
+            <if test="businessAttr != null" >
+                business_attr,
+            </if>
+            <if test="medicalMoney != null" >
+                medical_money,
+            </if>
+            <if test="orgAttr != null" >
+                org_attr,
+            </if>
+            <if test="efficiencyAttr != null" >
+                efficiency_attr,
+            </if>
+            <if test="mainProvinceMoney != null" >
+                main_province_money,
+            </if>
+            <if test="viceProvinceMoney != null" >
+                vice_province_money,
+            </if>
+            <if test="orgState != null" >
+                org_state,
+            </if>
+            <if test="autoFillState != null" >
+                auto_fill_state,
+            </if>
+            <if test="attrMaxSize != null" >
+                attr_max_size,
+            </if>
+            <if test="advanceParty != null" >
+                advance_party,
+            </if>
+            <if test="serviceType != null" >
+                service_type,
+            </if>
+            <if test="receiver != null" >
+                receiver,
+            </if>
+            <if test="receiverTel != null" >
+                receiver_tel,
+            </if>
+            <if test="receiverAddress != null" >
+                receiver_address,
+            </if>
+            <if test="sharp != null" >
+                sharp,
+            </if>
+            <if test="marketUserId != null" >
+                market_user_id,
+            </if>
+            <if test="marketUserName != null" >
+                market_user_name,
+            </if>
+            <if test="marketRate != null" >
+                market_rate,
+            </if>
+            <if test="recommendUserId != null" >
+                recommend_user_id,
+            </if>
+            <if test="recommendUserName != null" >
+                recommend_user_name,
+            </if>
+            <if test="recommendRate != null" >
+                recommend_rate,
+            </if>
+            <if test="billCompanyId != null" >
+                bill_company_id,
+            </if>
+            <if test="billCompanyName != null" >
+                bill_company_name,
+            </if>
+            <if test="pdfType != null" >
+                pdf_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="code != null" >
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null" >
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="areaTypeId != null" >
+                #{areaTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="areaName != null" >
+                #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaType != null" >
+                #{areaType,jdbcType=INTEGER},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createByName != null" >
+                #{createByName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="province != null" >
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null" >
+                #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="districtId != null" >
+                #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="isCredit != null" >
+                #{isCredit,jdbcType=INTEGER},
+            </if>
+            <if test="priceRemark != null" >
+                #{priceRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="appUser != null" >
+                #{appUser,jdbcType=VARCHAR},
+            </if>
+            <if test="apvUser != null" >
+                #{apvUser,jdbcType=VARCHAR},
+            </if>
+            <if test="businessAttr != null" >
+                #{businessAttr,jdbcType=INTEGER},
+            </if>
+            <if test="medicalMoney != null" >
+                #{medicalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="orgAttr != null" >
+                #{orgAttr,jdbcType=INTEGER},
+            </if>
+            <if test="efficiencyAttr != null" >
+                #{efficiencyAttr,jdbcType=INTEGER},
+            </if>
+            <if test="mainProvinceMoney != null" >
+                #{mainProvinceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="viceProvinceMoney != null" >
+                #{viceProvinceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="orgState != null" >
+                #{orgState,jdbcType=INTEGER},
+            </if>
+            <if test="autoFillState != null" >
+                #{autoFillState,jdbcType=INTEGER},
+            </if>
+            <if test="attrMaxSize != null" >
+                #{attrMaxSize,jdbcType=DOUBLE},
+            </if>
+            <if test="advanceParty != null" >
+                #{advanceParty,jdbcType=INTEGER},
+            </if>
+            <if test="serviceType != null" >
+                #{serviceType,jdbcType=INTEGER},
+            </if>
+            <if test="receiver != null" >
+                #{receiver,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverTel != null" >
+                #{receiverTel,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverAddress != null" >
+                #{receiverAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="sharp != null" >
+                #{sharp,jdbcType=INTEGER},
+            </if>
+            <if test="marketUserId != null" >
+                #{marketUserId,jdbcType=BIGINT},
+            </if>
+            <if test="marketUserName != null" >
+                #{marketUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="marketRate != null" >
+                #{marketRate,jdbcType=DOUBLE},
+            </if>
+            <if test="recommendUserId != null" >
+                #{recommendUserId,jdbcType=BIGINT},
+            </if>
+            <if test="recommendUserName != null" >
+                #{recommendUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="recommendRate != null" >
+                #{recommendRate,jdbcType=DOUBLE},
+            </if>
+            <if test="billCompanyId != null" >
+                #{billCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="billCompanyName != null" >
+                #{billCompanyName,jdbcType=VARCHAR},
+            </if>
+            <if test="pdfType != null" >
+                #{pdfType,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignor" >
+        update survey_consignor
+        <set >
+            <if test="code != null" >
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null" >
+                company = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="areaTypeId != null" >
+                area_type_id = #{areaTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="areaName != null" >
+                area_name = #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaType != null" >
+                area_type = #{areaType,jdbcType=INTEGER},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createByName != null" >
+                create_by_name = #{createByName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="province != null" >
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                district = #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                province_id = #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null" >
+                city_id = #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="districtId != null" >
+                district_id = #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="isCredit != null" >
+                is_credit = #{isCredit,jdbcType=INTEGER},
+            </if>
+            <if test="priceRemark != null" >
+                price_remark = #{priceRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="appUser != null" >
+                app_user = #{appUser,jdbcType=VARCHAR},
+            </if>
+            <if test="apvUser != null" >
+                apv_user = #{apvUser,jdbcType=VARCHAR},
+            </if>
+            <if test="businessAttr != null" >
+                business_attr = #{businessAttr,jdbcType=INTEGER},
+            </if>
+            <if test="medicalMoney != null" >
+                medical_money = #{medicalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="orgAttr != null" >
+                org_attr = #{orgAttr,jdbcType=INTEGER},
+            </if>
+            <if test="efficiencyAttr != null" >
+                efficiency_attr = #{efficiencyAttr,jdbcType=INTEGER},
+            </if>
+            <if test="mainProvinceMoney != null" >
+                main_province_money = #{mainProvinceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="viceProvinceMoney != null" >
+                vice_province_money = #{viceProvinceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="orgState != null" >
+                org_state = #{orgState,jdbcType=INTEGER},
+            </if>
+            <if test="autoFillState != null" >
+                auto_fill_state = #{autoFillState,jdbcType=INTEGER},
+            </if>
+            <if test="attrMaxSize != null" >
+                attr_max_size = #{attrMaxSize,jdbcType=DOUBLE},
+            </if>
+            <if test="advanceParty != null" >
+                advance_party = #{advanceParty,jdbcType=INTEGER},
+            </if>
+            <if test="serviceType != null" >
+                service_type = #{serviceType,jdbcType=INTEGER},
+            </if>
+            <if test="receiver != null" >
+                receiver = #{receiver,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverTel != null" >
+                receiver_tel = #{receiverTel,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverAddress != null" >
+                receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="sharp != null" >
+                sharp = #{sharp,jdbcType=INTEGER},
+            </if>
+            <if test="marketUserId != null" >
+                market_user_id = #{marketUserId,jdbcType=BIGINT},
+            </if>
+            <if test="marketUserName != null" >
+                market_user_name = #{marketUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="marketRate != null" >
+                market_rate = #{marketRate,jdbcType=DOUBLE},
+            </if>
+            <if test="recommendUserId != null" >
+                recommend_user_id = #{recommendUserId,jdbcType=BIGINT},
+            </if>
+            <if test="recommendUserName != null" >
+                recommend_user_name = #{recommendUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="recommendRate != null" >
+                recommend_rate = #{recommendRate,jdbcType=DOUBLE},
+            </if>
+            <if test="billCompanyId != null" >
+                bill_company_id = #{billCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="billCompanyName != null" >
+                bill_company_name = #{billCompanyName,jdbcType=VARCHAR},
+            </if>
+            <if test="pdfType != null" >
+                pdf_type = #{pdfType,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyConsignor" >
+    update survey_consignor
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      area_type_id = #{areaTypeId,jdbcType=BIGINT},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      area_type = #{areaType,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_by_name = #{createByName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      district_id = #{districtId,jdbcType=INTEGER},
+      is_credit = #{isCredit,jdbcType=INTEGER},
+      price_remark = #{priceRemark,jdbcType=VARCHAR},
+      app_user = #{appUser,jdbcType=VARCHAR},
+      apv_user = #{apvUser,jdbcType=VARCHAR},
+      business_attr = #{businessAttr,jdbcType=INTEGER},
+      medical_money = #{medicalMoney,jdbcType=DOUBLE},
+      org_attr = #{orgAttr,jdbcType=INTEGER},
+      efficiency_attr = #{efficiencyAttr,jdbcType=INTEGER},
+      main_province_money = #{mainProvinceMoney,jdbcType=DOUBLE},
+      vice_province_money = #{viceProvinceMoney,jdbcType=DOUBLE},
+      org_state = #{orgState,jdbcType=INTEGER},
+      auto_fill_state = #{autoFillState,jdbcType=INTEGER},
+      attr_max_size = #{attrMaxSize,jdbcType=DOUBLE},
+      advance_party = #{advanceParty,jdbcType=INTEGER},
+      service_type = #{serviceType,jdbcType=INTEGER},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      receiver_tel = #{receiverTel,jdbcType=VARCHAR},
+      receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      sharp = #{sharp,jdbcType=INTEGER},
+      market_user_id = #{marketUserId,jdbcType=BIGINT},
+      market_user_name = #{marketUserName,jdbcType=VARCHAR},
+      market_rate = #{marketRate,jdbcType=DOUBLE},
+      recommend_user_id = #{recommendUserId,jdbcType=BIGINT},
+      recommend_user_name = #{recommendUserName,jdbcType=VARCHAR},
+      recommend_rate = #{recommendRate,jdbcType=DOUBLE},
+      bill_company_id = #{billCompanyId,jdbcType=BIGINT},
+      bill_company_name = #{billCompanyName,jdbcType=VARCHAR},
+      pdf_type = #{pdfType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="company != null" >
+            and company like CONCAT(CONCAT('%',#{company,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="areaType != null" >
+            and area_type = #{areaType,jdbcType=INTEGER}
+        </if>
+        <if test="type != null" >
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="condition != null" >
+            <if test="condition == 1" >
+                and id = #{entrustOrgId,jdbcType=BIGINT}
+            </if>
+        </if>
+        <if test="businessAttr != null" >
+            and business_attr = #{businessAttr,jdbcType=INTEGER}
+        </if>
+        <if test="orgAttr != null" >
+            and org_attr = #{orgAttr,jdbcType=INTEGER}
+        </if>
+        <if test="efficiencyAttr != null" >
+            and efficiency_attr = #{efficiencyAttr,jdbcType=INTEGER}
+        </if>
+        <if test="orgState != null">
+            and org_state = #{orgState,jdbcType=INTEGER}
+        </if>
+        <if test="serviceType != null">
+            <if test="serviceType == 1">
+                and service_type in(1,3)
+            </if>
+        </if>
+        <if test="orgAttrTemp != null">
+            <if test="orgAttrTemp == 1">
+                and org_attr = 1 and (sharp = 0 or sharp is null)
+            </if>
+            <if test="orgAttrTemp == 2">
+                and org_attr = 2
+            </if>
+            <if test="orgAttrTemp == 3">
+                and org_attr = 1 and sharp = 1
+            </if>
+        </if>
+        <if test="busAttr144 == 144">
+            and business_attr != 5
+        </if>
+    </sql>
+    <select id="listPage" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_consignor
+        <include refid="joins" />
+        where delete_flag=0
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listPageSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_consignor
+        <include refid="joins" />
+        where delete_flag=0
+        <include refid="wheres" />
+    </select>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_consignor
+        <include refid="joins" />
+        where delete_flag=0 and org_state = 0
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_consignor
+        <include refid="joins" />
+        where delete_flag=0 and org_state = 0
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_consignor
+        where delete_flag=0 and name = #{name,jdbcType=VARCHAR} limit 1
+    </select>
+
+    <select id="selectConsignorListForFinalUser" parameterType="map" resultMap="BaseResultMap">
+        SELECT a.*,IFNULL(b.onum,0) surveyNum,IFNULL(c.onum2,0) checkNum FROM (
+        select
+        c.id,c.company
+        from survey_consignor c
+        left join survey_user_consignor uc on c.id = uc.consignor_id
+        where  c.delete_flag =0 and uc.delete_flag =0 and c.org_state=0
+        <if test="userId != null">
+            and uc.user_id = #{userId,jdbcType=BIGINT}
+        </if>
+        <if test="oprTypeValue eq  'safe' and oprTypeValue != null ">
+            and c.org_attr != 2
+        </if>
+        <if test="oprTypeValue == 'help' and oprTypeValue != null ">
+            and c.org_attr != 1
+        </if>
+        )a
+        LEFT JOIN (
+        SELECT c.entrust_org_id, COUNT(o.id) onum FROM survey_risk_case c
+        LEFT JOIN survey_assign_org o ON c.id = o.survey_id AND o.delete_flag = 0 AND o.org_survey_state = 1
+        <if test="surveyOrgIds != null and surveyOrgIds != ''">
+            AND FIND_IN_SET( o.survey_org_id,#{surveyOrgIds})
+        </if>
+        LEFT JOIN survey_risk_case_info i ON o.survey_info_id = i.id AND i.delete_flag = 0  AND  i.org_assign = 1
+        <if test="surveyStates != null and surveyStates != ''">
+            AND find_in_set( i.survey_state, #{surveyStates} )
+        </if>
+        LEFT JOIN survey_consignor n ON c.entrust_org_id = n.id
+        WHERE c.delete_flag = 0  AND n.org_attr = 1 and o.id is not null and i.id is not null
+        <if test="startDate != null">
+            <if test="dateItem != null">
+                <if test="dateItem == 1">
+                    and DATE_FORMAT(c.entrust_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="dateItem == 2">
+                    and DATE_FORMAT(o.report_date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="dateItem == 3">
+                    and DATE_FORMAT(o.org_end_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="dateItem == 4">
+                    and DATE_FORMAT(o.review_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+            </if>
+        </if>
+        <if test="endDate != null">
+            <if test="dateItem != null">
+                <if test="dateItem == 1">
+                    and DATE_FORMAT(c.entrust_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="dateItem == 2">
+                    and DATE_FORMAT(o.report_date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="dateItem == 3">
+                    and DATE_FORMAT(o.org_end_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="dateItem == 4">
+                    and DATE_FORMAT(o.review_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+            </if>
+        </if>
+        <if test="searchStr != nul and searchStr != ''">
+            and (
+            c.survey_case_no like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+            or c.survey_no like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+            or c.survey_person like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+            or c.survery_person_tel like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+            or c.id_number like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+            )
+        </if>
+        <if test="agingType != null and agingType != ''">
+            <if test="agingType == 0">
+
+            </if>
+            <if test="agingType == 1">
+                and o.aging_over = 0
+            </if>
+
+            <if test="agingType == 2">
+                and (o.aging_check - o.aging_real ) &lt;= 3 and o.aging_over = 0 and o.report_date is null
+            </if>
+            <if test="agingType == 3">
+                and o.aging_over &gt; 0
+            </if>
+            <if test="agingType == 4">
+                and o.aging_over &gt; 0 and o.aging_over &lt;5
+            </if>
+            <if test="agingType == 5">
+                and o.aging_over &gt; 5 and o.aging_over &lt;=10
+            </if>
+            <if test="agingType == 6">
+                and o.aging_over &gt; 10 and o.aging_over &lt;=20
+            </if>
+            <if test="agingType == 7">
+                and o.aging_over &gt;20
+            </if>
+        </if>
+        GROUP BY c.entrust_org_id
+        ) b ON a.id = b.entrust_org_id
+        LEFT JOIN (
+        SELECT c.entrust_org_id, COUNT(o.id) onum2 FROM survey_risk_case c
+        LEFT JOIN survey_assign_org o ON c.id = o.survey_id  AND o.delete_flag = 0 AND o.org_survey_state = 2
+        <if test="surveyOrgIds != null and surveyOrgIds != ''">
+            AND FIND_IN_SET( o.survey_org_id,#{surveyOrgIds})
+        </if>
+        LEFT JOIN survey_risk_case_info i ON o.survey_info_id = i.id AND i.delete_flag = 0  AND  i.org_assign = 1
+        <if test="surveyStates != null and surveyStates != ''">
+            AND find_in_set( i.survey_state, #{surveyStates} )
+        </if>
+        LEFT JOIN survey_consignor n ON c.entrust_org_id = n.id
+        WHERE c.delete_flag = 0 AND n.org_attr = 1 and o.id is not null and i.id is not null
+        <if test="startDate != null">
+            <if test="dateItem != null">
+                <if test="dateItem == 1">
+                    and DATE_FORMAT(c.entrust_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="dateItem == 2">
+                    and DATE_FORMAT(o.report_date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="dateItem == 3">
+                    and DATE_FORMAT(o.org_end_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="dateItem == 4">
+                    and DATE_FORMAT(o.review_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+            </if>
+        </if>
+        <if test="endDate != null">
+            <if test="dateItem != null">
+                <if test="dateItem == 1">
+                    and DATE_FORMAT(c.entrust_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="dateItem == 2">
+                    and DATE_FORMAT(o.report_date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="dateItem == 3">
+                    and DATE_FORMAT(o.org_end_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="dateItem == 4">
+                    and DATE_FORMAT(o.review_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+            </if>
+        </if>
+        <if test="searchStr != nul and searchStr != ''">
+            and (
+            c.survey_case_no like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+            or c.survey_no like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+            or c.survey_person like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+            or c.survery_person_tel like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+            or c.id_number like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+            )
+        </if>
+        <if test="agingType != null and agingType != ''">
+            <if test="agingType == 0">
+
+            </if>
+            <if test="agingType == 1">
+                and o.aging_over = 0
+            </if>
+
+            <if test="agingType == 2">
+                and (o.aging_check - o.aging_real ) &lt;= 3 and o.aging_over = 0 and o.report_date is null
+            </if>
+            <if test="agingType == 3">
+                and o.aging_over &gt; 0
+            </if>
+            <if test="agingType == 4">
+                and o.aging_over &gt; 0 and o.aging_over &lt;5
+            </if>
+            <if test="agingType == 5">
+                and o.aging_over &gt; 5 and o.aging_over &lt;=10
+            </if>
+            <if test="agingType == 6">
+                and o.aging_over &gt; 10 and o.aging_over &lt;=20
+            </if>
+            <if test="agingType == 7">
+                and o.aging_over &gt;20
+            </if>
+        </if>
+        GROUP BY c.entrust_org_id
+        ) c ON a.id = c.entrust_org_id
+    </select>
+
+    <select id="selectConsignorListForFinalUserNew" parameterType="map" resultMap="BaseResultMap">
+        SELECT a.* FROM (
+        select
+        c.id,c.company
+        from survey_consignor c
+        left join survey_user_consignor uc on c.id = uc.consignor_id
+        where  c.delete_flag =0 and uc.delete_flag =0 and c.org_state=0
+        <if test="userId != null">
+            and uc.user_id = #{userId,jdbcType=BIGINT}
+        </if>
+        <if test="oprTypeValue eq  'safe' and oprTypeValue != null ">
+            and c.org_attr != 2
+        </if>
+        <if test="oprTypeValue == 'help' and oprTypeValue != null ">
+            and c.org_attr != 1
+        </if>
+        )a
+    </select>
+
+    <select id="selectInfo" parameterType="map" resultMap="BaseResultMap">
+        select
+        c.id as id, c.name as name, c.company as company, c.org_attr as orgAttr,
+        m.model_id as modelType, c.auto_fill_state as autoFillState
+        from survey_consignor c
+        left join survey_consignor_model m  on c.id = m.consignor_id
+        where c.delete_flag=0 and c.org_state = 0
+        order by c.id desc
+
+    </select>
+
+    <select id="selectByMap" parameterType="map" resultMap="BaseResultMap">
+        select * from  survey_consignor
+        <where>
+            delete_flag = 0 and org_state = 0
+            <if test="orgAttr != null ">
+                and org_attr=#{orgAttr}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectConsignorDataByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select n.*,ifnull(a.num,0) surveyNum,ifnull(b.num,0) checkNum from survey_consignor n
+        left join (
+                select r.entrust_org_id,count(1) num from survey_risk_case_info r
+                left join survey_assign_org o on r.id = o.survey_info_id and o.org_survey_state = 1 and o.delete_flag = 0
+                where r.delete_flag = 0 and o.id is not null
+                <if test="surveyOrgId != null">
+                    AND o.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+                </if>
+                <if test="entrustOrgIds != null">
+                    and FIND_IN_SET(r.entrust_org_id,#{entrustOrgIds,jdbcType=VARCHAR})
+                </if>
+                group by r.entrust_org_id
+        ) a on n.id = a.entrust_org_id
+        left join (
+                select r.entrust_org_id,count(1) num from survey_risk_case_info r
+                left join survey_assign_org o on r.id = o.survey_info_id and o.org_survey_state in (2,5) and o.delete_flag = 0
+                where r.delete_flag = 0 and o.id is not null
+                <if test="surveyOrgId != null">
+                    AND o.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+                </if>
+                <if test="entrustOrgIds != null">
+                    and FIND_IN_SET(r.entrust_org_id,#{entrustOrgIds,jdbcType=VARCHAR})
+                </if>
+                group by r.entrust_org_id
+        ) b on n.id = b.entrust_org_id
+        where n.delete_flag = 0
+        order by ifnull(a.num,0) desc
+    </select>
+</mapper>

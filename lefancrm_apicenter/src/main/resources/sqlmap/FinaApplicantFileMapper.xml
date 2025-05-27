@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaApplicantFileMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaApplicantFile" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="fina_id" property="finaId" jdbcType="BIGINT" />
+    <result column="fina_info_id" property="finaInfoId" jdbcType="BIGINT" />
+    <result column="file_enum_id" property="fileEnumId" jdbcType="BIGINT" />
+    <result column="file_enum_name" property="fileEnumName" jdbcType="VARCHAR" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
+    <result column="upload_by" property="uploadBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fina_id, fina_info_id, file_enum_id, file_enum_name, file_name, file_path, upload_time, 
+    upload_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_applicant_file
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_applicant_file
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_applicant_file (fina_id, fina_info_id, file_enum_id, 
+      file_enum_name, file_name, file_path, 
+      upload_time, upload_by)
+    values (#{finaId,jdbcType=BIGINT}, #{finaInfoId,jdbcType=BIGINT}, #{fileEnumId,jdbcType=BIGINT}, 
+      #{fileEnumName,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, 
+      #{uploadTime,jdbcType=TIMESTAMP}, #{uploadBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_applicant_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        fina_id,
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id,
+      </if>
+      <if test="fileEnumId != null" >
+        file_enum_id,
+      </if>
+      <if test="fileEnumName != null" >
+        file_enum_name,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+      <if test="uploadTime != null" >
+        upload_time,
+      </if>
+      <if test="uploadBy != null" >
+        upload_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="fileEnumId != null" >
+        #{fileEnumId,jdbcType=BIGINT},
+      </if>
+      <if test="fileEnumName != null" >
+        #{fileEnumName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadBy != null" >
+        #{uploadBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantFile" >
+    update fina_applicant_file
+    <set >
+      <if test="finaId != null" >
+        fina_id = #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="fileEnumId != null" >
+        file_enum_id = #{fileEnumId,jdbcType=BIGINT},
+      </if>
+      <if test="fileEnumName != null" >
+        file_enum_name = #{fileEnumName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadBy != null" >
+        upload_by = #{uploadBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantFile" >
+    update fina_applicant_file
+    set fina_id = #{finaId,jdbcType=BIGINT},
+      fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      file_enum_id = #{fileEnumId,jdbcType=BIGINT},
+      file_enum_name = #{fileEnumName,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      upload_by = #{uploadBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="finaId != null" >
+            and a.fina_id = #{finaId,jdbcType=BIGINT}
+        </if>
+        <if test="finaInfoId != null" >
+            and a.fina_info_id = #{finaInfoId,jdbcType=BIGINT}
+        </if>
+        <if test="fileEnumId != null" >
+            and a.file_enum_id = #{fileEnumId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        a.*
+        from fina_applicant_file a
+        <include refid="joins" />
+        where 1= 1
+        <include refid="wheres" />
+        order by a.id desc
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from fina_applicant_file a
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+</mapper>

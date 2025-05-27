@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyClockCaseMapper">
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyClockCase">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="clock_id" jdbcType="BIGINT" property="clockId" />
+    <result column="survey_id" jdbcType="BIGINT" property="surveyId" />
+    <result column="survey_info_id" jdbcType="BIGINT" property="surveyInfoId" />
+    <result column="survey_person" jdbcType="VARCHAR" property="surveyPerson" />
+    <result column="re_total_money" jdbcType="DOUBLE" property="reTotalMoney" />
+    <result column="entrust_type" jdbcType="INTEGER" property="entrustType" />
+    <result column="cityin_driving_money" property="cityinDrivingMoney" jdbcType="DOUBLE" />
+    <result column="medical_history_money" property="medicalHistoryMoney" jdbcType="DOUBLE" />
+    <result column="troubleshooting_money" property="troubleshootingMoney" jdbcType="DOUBLE" />
+    <result column="printing_money" property="printingMoney" jdbcType="DOUBLE" />
+    <result column="accommodatio_money" property="accommodatioMoney" jdbcType="DOUBLE" />
+    <result column="cross_driving_money" property="crossDrivingMoney" jdbcType="DOUBLE" />
+    <result column="self_driving_money" property="selfDrivingMoney" jdbcType="DOUBLE" />
+    <result column="other_money" property="otherMoney" jdbcType="DOUBLE" />
+    <result column="toll_money" property="tollMoney" jdbcType="DOUBLE" />
+    <result column="opc_troubleshooting_money" property="opcTroubleshootingMoney" jdbcType="DOUBLE" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, clock_id, survey_id, survey_info_id, survey_person,re_total_money,entrust_type, cityin_driving_money, medical_history_money, troubleshooting_money,
+    printing_money, accommodatio_money, cross_driving_money, self_driving_money, other_money, toll_money,opc_troubleshooting_money
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from survey_clock_case
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectSurveyClockCase" resultMap="BaseResultMap">
+    SELECT
+    c.*,i.id invCaseId,o.id orgCaseId
+     FROM survey_clock_case c
+    LEFT JOIN survey_user_clock u ON c.clock_id = u.id
+    LEFT JOIN survey_investigator_case i ON c.survey_info_id = i.survey_info_id AND u.survey_user_id = i.survey_user_id AND i.delete_flag = 0
+    LEFT JOIN survey_assign_org o 	ON u.survey_org_id = o.survey_org_id AND c.survey_info_id = o.survey_info_id AND o.delete_flag = 0
+    WHERE  c.clock_id = #{id}
+    <if test="type != null and type != ''">
+      <if test="type == 'ins'">
+        AND c.entrust_type = 2
+      </if>
+      <if test="type == 'help'">
+        AND c.entrust_type = 1
+      </if>
+    </if>
+
+  </select>
+  <select id="selectByClocId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from survey_clock_case
+    where clock_id = #{clockId}
+  </select>
+  <select id="selectTotalMoneyByClocId" resultType="java.lang.Double">
+    select ifnull(sum(re_total_money),0) from survey_clock_case where clock_id = #{clockId}
+  </select>
+    <select id="surveyInvCaseAllMoney" resultType="java.lang.Double">
+     SELECT ifnull(SUM(c.re_total_money),0) FROM survey_clock_case c LEFT JOIN survey_user_clock u ON c.clock_id = u.id
+WHERE c.survey_info_id = #{surveyInfoId} AND u.survey_user_id = #{surveyUserId}
+    </select>
+    <select id="selectOrgAllCase" resultType="java.lang.String">
+      SELECT
+          GROUP_CONCAT(DISTINCT c.survey_info_id)
+      FROM
+          survey_user_clock u
+          LEFT JOIN survey_clock_case c ON u.id = c.clock_id
+          WHERE
+           date_format(u.clock_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+            and date_format(u.clock_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+         AND FIND_IN_SET(
+            u.survey_org_id,(
+            SELECT
+            GROUP_CONCAT( id )
+            FROM
+            survey_franchisee f
+            WHERE
+            id = #{orgId}
+            OR parent_id = #{orgId}
+            ))
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from survey_clock_case
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyClockCase">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_clock_case (clock_id, survey_id, survey_info_id, 
+      survey_person)
+    values (#{clockId,jdbcType=BIGINT}, #{surveyId,jdbcType=BIGINT}, #{surveyInfoId,jdbcType=BIGINT}, 
+      #{surveyPerson,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyClockCase">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_clock_case
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="clockId != null">
+        clock_id,
+      </if>
+      <if test="surveyId != null">
+        survey_id,
+      </if>
+      <if test="surveyInfoId != null">
+        survey_info_id,
+      </if>
+      <if test="surveyPerson != null">
+        survey_person,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="clockId != null">
+        #{clockId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyId != null">
+        #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null">
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyPerson != null">
+        #{surveyPerson,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyClockCase">
+    update survey_clock_case
+    <set>
+      <if test="clockId != null">
+        clock_id = #{clockId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyId != null">
+        survey_id = #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null">
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyPerson != null">
+        survey_person = #{surveyPerson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyClockCase">
+    update survey_clock_case
+    set clock_id = #{clockId,jdbcType=BIGINT},
+      survey_id = #{surveyId,jdbcType=BIGINT},
+      survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      survey_person = #{surveyPerson,jdbcType=VARCHAR},
+      re_total_money = #{reTotalMoney,jdbcType=DOUBLE},
+      entrust_type = #{entrustType,jdbcType=INTEGER},
+      cityin_driving_money = #{cityinDrivingMoney,jdbcType=DOUBLE},
+      medical_history_money = #{medicalHistoryMoney,jdbcType=DOUBLE},
+      troubleshooting_money = #{troubleshootingMoney,jdbcType=DOUBLE},
+      printing_money = #{printingMoney,jdbcType=DOUBLE},
+      accommodatio_money = #{accommodatioMoney,jdbcType=DOUBLE},
+      cross_driving_money = #{crossDrivingMoney,jdbcType=DOUBLE},
+      self_driving_money = #{selfDrivingMoney,jdbcType=DOUBLE},
+      toll_money = #{tollMoney,jdbcType=DOUBLE},
+      other_money = #{otherMoney,jdbcType=DOUBLE},
+      opc_troubleshooting_money = #{opcTroubleshootingMoney}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectPunchClockCount" parameterType="map" resultType="integer">
+        select IFNULL(COUNT(1),0) COUNT from survey_clock_case
+        <where>
+           <if test="surveyInfoId != null ">
+             and survey_info_id = #{surveyInfoId}
+           </if>
+        </where>
+    </select>
+</mapper>

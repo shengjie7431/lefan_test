@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyCaseAttributesReportMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyCaseAttributesReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="report_date" property="reportDate" jdbcType="BIGINT" />
+    <result column="business_attributes_id" property="businessAttributesId" jdbcType="BIGINT" />
+    <result column="business_attributes_name" property="businessAttributesName" jdbcType="VARCHAR" />
+    <result column="entrust_case_num" property="entrustCaseNum" jdbcType="INTEGER" />
+    <result column="check_case_num" property="checkCaseNum" jdbcType="INTEGER" />
+    <result column="consignor_org_id" property="consignorOrgId" jdbcType="BIGINT" />
+    <result column="consignor_org_name" property="consignorOrgName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, report_date, business_attributes_id, business_attributes_name, entrust_case_num, 
+    check_case_num, consignor_org_id, consignor_org_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_case_attributes_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_case_attributes_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyCaseAttributesReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_case_attributes_report (report_date, business_attributes_id, business_attributes_name, 
+      entrust_case_num, check_case_num, consignor_org_id, 
+      consignor_org_name)
+    values (#{reportDate,jdbcType=BIGINT}, #{businessAttributesId,jdbcType=BIGINT}, #{businessAttributesName,jdbcType=VARCHAR}, 
+      #{entrustCaseNum,jdbcType=INTEGER}, #{checkCaseNum,jdbcType=INTEGER}, #{consignorOrgId,jdbcType=BIGINT}, 
+      #{consignorOrgName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyCaseAttributesReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_case_attributes_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reportDate != null" >
+        report_date,
+      </if>
+      <if test="businessAttributesId != null" >
+        business_attributes_id,
+      </if>
+      <if test="businessAttributesName != null" >
+        business_attributes_name,
+      </if>
+      <if test="entrustCaseNum != null" >
+        entrust_case_num,
+      </if>
+      <if test="checkCaseNum != null" >
+        check_case_num,
+      </if>
+      <if test="consignorOrgId != null" >
+        consignor_org_id,
+      </if>
+      <if test="consignorOrgName != null" >
+        consignor_org_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reportDate != null" >
+        #{reportDate,jdbcType=BIGINT},
+      </if>
+      <if test="businessAttributesId != null" >
+        #{businessAttributesId,jdbcType=BIGINT},
+      </if>
+      <if test="businessAttributesName != null" >
+        #{businessAttributesName,jdbcType=VARCHAR},
+      </if>
+      <if test="entrustCaseNum != null" >
+        #{entrustCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="checkCaseNum != null" >
+        #{checkCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="consignorOrgId != null" >
+        #{consignorOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorOrgName != null" >
+        #{consignorOrgName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyCaseAttributesReport" >
+    update survey_case_attributes_report
+    <set >
+      <if test="reportDate != null" >
+        report_date = #{reportDate,jdbcType=BIGINT},
+      </if>
+      <if test="businessAttributesId != null" >
+        business_attributes_id = #{businessAttributesId,jdbcType=BIGINT},
+      </if>
+      <if test="businessAttributesName != null" >
+        business_attributes_name = #{businessAttributesName,jdbcType=VARCHAR},
+      </if>
+      <if test="entrustCaseNum != null" >
+        entrust_case_num = #{entrustCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="checkCaseNum != null" >
+        check_case_num = #{checkCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="consignorOrgId != null" >
+        consignor_org_id = #{consignorOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorOrgName != null" >
+        consignor_org_name = #{consignorOrgName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyCaseAttributesReport" >
+    update survey_case_attributes_report
+    set report_date = #{reportDate,jdbcType=BIGINT},
+      business_attributes_id = #{businessAttributesId,jdbcType=BIGINT},
+      business_attributes_name = #{businessAttributesName,jdbcType=VARCHAR},
+      entrust_case_num = #{entrustCaseNum,jdbcType=INTEGER},
+      check_case_num = #{checkCaseNum,jdbcType=INTEGER},
+      consignor_org_id = #{consignorOrgId,jdbcType=BIGINT},
+      consignor_org_name = #{consignorOrgName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <sql id="wheres">
+    <if test="startTime != null">
+      AND date_format(s.report_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="endTime != null">
+      AND date_format(s.report_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+  </sql>
+
+  <select id="selectAll" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyCaseAttributesReport">
+    SELECT
+    s.business_attributes_id as businessAttributesId,
+    s.business_attributes_name as businessAttributesName,
+    sum(s.entrust_case_num) as entrustCaseNum
+    FROM
+    survey_case_attributes_report s
+    WHERE 1 = 1
+    <include refid="wheres"/>
+    GROUP BY
+    s.business_attributes_id,
+    s.business_attributes_name
+  </select>
+
+
+  <sql id="newSqlWhere">
+    <if test="orgAttr != null">
+      and n.org_attr = #{orgAttr,jdbcType=INTEGER}
+    </if>
+    <if test="entrustOrgId != null">
+      and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+    </if>
+
+    <if test="startTime != null">
+      AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="endTime != null">
+      AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="entrustOrgIds != null">
+      and find_in_set(r.entrust_org_id,#{entrustOrgIds,jdbcType=VARCHAR})
+    </if>
+  </sql>
+
+  <select id="selectAllNew" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyCaseAttributesReport">
+    select r.source_support_type as businessAttributesId,(case r.source_support_type when 1 then '市场一部（郑哲）' when 2 then '市场二部（曹刘强）' when 3 then '互助' when 4 then '正言金融（郑哲）' when 5 then '市场三部（韩正栋）' end) as businessAttributesName,ifnull(count(1),0) as entrustCaseNum
+    from survey_risk_case_info r
+    left join survey_consignor n on r.entrust_org_id = n.id
+     where r.delete_flag = 0
+     <include refid="newSqlWhere"/>
+     group by  r.source_support_type
+  </select>
+
+  <select id="selectAllSourceNew" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.report.SurveyReportEntrustSourceDTO">
+    select s.department_name as sourceName,count(1) num
+    from survey_risk_case_info r
+    left join survey_risk_case s on r.survey_id = s.id
+    left join survey_consignor n on r.entrust_org_id = n.id
+    where r.delete_flag = 0
+    <if test="orgAttr != null">
+      and n.org_attr = #{orgAttr,jdbcType=INTEGER}
+    </if>
+    <if test="entrustOrgId != null">
+      and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+    </if>
+    <if test="startTime != null">
+      AND date_format(s.entrust_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="endTime != null">
+      AND date_format(s.entrust_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="entrustOrgIds != null">
+      and find_in_set(r.entrust_org_id,#{entrustOrgIds,jdbcType=VARCHAR})
+    </if>
+    group by s.department_id
+  </select>
+</mapper>

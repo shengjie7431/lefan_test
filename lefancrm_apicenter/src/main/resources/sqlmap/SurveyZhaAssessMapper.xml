@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyZhaAssessMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyZhaAssess" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="list_name" property="listName" jdbcType="VARCHAR" />
+    <result column="case_num" property="caseNum" jdbcType="INTEGER" />
+    <result column="derogation_money" property="derogationMoney" jdbcType="DOUBLE" />
+    <result column="sun_case_num" property="sunCaseNum" jdbcType="INTEGER" />
+    <result column="cae_total_eff" property="caeTotalEff" jdbcType="DOUBLE" />
+    <result column="cae_avg_eff" property="caeAvgEff" jdbcType="DOUBLE" />
+    <result column="operate_id" property="operateId" jdbcType="BIGINT" />
+    <result column="operate_name" property="operateName" jdbcType="VARCHAR" />
+    <result column="oparate_time" property="oparateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="entrust_submit_money" property="entrustSubmitMoney" jdbcType="DOUBLE" />
+    <result column="survey_submit_money" property="surveySubmitMoney" jdbcType="DOUBLE" />
+    <result column="tcb" property="tcb" jdbcType="DOUBLE" />
+    <result column="pf_amt" property="pfAmt" jdbcType="DOUBLE" />
+    <result column="js_amt" property="jsAmt" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, list_name, case_num, derogation_money, sun_case_num, cae_total_eff, cae_avg_eff,
+    operate_id, operate_name, oparate_time, delete_flag, entrust_submit_money, survey_submit_money,tcb,pf_amt,js_amt
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from survey_zha_assess
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_zha_assess
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyZhaAssess" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_zha_assess (list_name, case_num, derogation_money,
+    sun_case_num, cae_total_eff, cae_avg_eff,
+    operate_id, operate_name, oparate_time,
+    delete_flag, entrust_submit_money, survey_submit_money,tcb,pf_amt,js_amt
+    )
+    values (#{listName,jdbcType=VARCHAR}, #{caseNum,jdbcType=INTEGER}, #{derogationMoney,jdbcType=DOUBLE},
+    #{sunCaseNum,jdbcType=INTEGER}, #{caeTotalEff,jdbcType=DOUBLE}, #{caeAvgEff,jdbcType=DOUBLE},
+    #{operateId,jdbcType=BIGINT}, #{operateName,jdbcType=VARCHAR}, #{oparateTime,jdbcType=TIMESTAMP},
+    #{deleteFlag,jdbcType=INTEGER}, #{entrustSubmitMoney,jdbcType=DOUBLE}, #{surveySubmitMoney,jdbcType=DOUBLE}, #{tcb},
+        #{pfAmt,jdbcType=DOUBLE}, #{jsAmt,jdbcType=DOUBLE}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyZhaAssess" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_zha_assess
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="listName != null" >
+        list_name,
+      </if>
+      <if test="caseNum != null" >
+        case_num,
+      </if>
+      <if test="derogationMoney != null" >
+        derogation_money,
+      </if>
+      <if test="sunCaseNum != null" >
+        sun_case_num,
+      </if>
+      <if test="caeTotalEff != null" >
+        cae_total_eff,
+      </if>
+      <if test="caeAvgEff != null" >
+        cae_avg_eff,
+      </if>
+      <if test="operateId != null" >
+        operate_id,
+      </if>
+      <if test="operateName != null" >
+        operate_name,
+      </if>
+      <if test="oparateTime != null" >
+        oparate_time,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="entrustSubmitMoney != null" >
+        entrust_submit_money,
+      </if>
+      <if test="surveySubmitMoney != null" >
+        survey_submit_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="listName != null" >
+        #{listName,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null" >
+        #{caseNum,jdbcType=INTEGER},
+      </if>
+      <if test="derogationMoney != null" >
+        #{derogationMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="sunCaseNum != null" >
+        #{sunCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="caeTotalEff != null" >
+        #{caeTotalEff,jdbcType=DOUBLE},
+      </if>
+      <if test="caeAvgEff != null" >
+        #{caeAvgEff,jdbcType=DOUBLE},
+      </if>
+      <if test="operateId != null" >
+        #{operateId,jdbcType=BIGINT},
+      </if>
+      <if test="operateName != null" >
+        #{operateName,jdbcType=VARCHAR},
+      </if>
+      <if test="oparateTime != null" >
+        #{oparateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="entrustSubmitMoney != null" >
+        #{entrustSubmitMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="surveySubmitMoney != null" >
+        #{surveySubmitMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyZhaAssess" >
+    update survey_zha_assess
+    <set >
+      <if test="listName != null" >
+        list_name = #{listName,jdbcType=VARCHAR},
+      </if>
+      <if test="caseNum != null" >
+        case_num = #{caseNum,jdbcType=INTEGER},
+      </if>
+      <if test="derogationMoney != null" >
+        derogation_money = #{derogationMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="sunCaseNum != null" >
+        sun_case_num = #{sunCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="caeTotalEff != null" >
+        cae_total_eff = #{caeTotalEff,jdbcType=DOUBLE},
+      </if>
+      <if test="caeAvgEff != null" >
+        cae_avg_eff = #{caeAvgEff,jdbcType=DOUBLE},
+      </if>
+      <if test="operateId != null" >
+        operate_id = #{operateId,jdbcType=BIGINT},
+      </if>
+      <if test="operateName != null" >
+        operate_name = #{operateName,jdbcType=VARCHAR},
+      </if>
+      <if test="oparateTime != null" >
+        oparate_time = #{oparateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="entrustSubmitMoney != null" >
+        entrust_submit_money = #{entrustSubmitMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="surveySubmitMoney != null" >
+        survey_submit_money = #{surveySubmitMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyZhaAssess" >
+    update survey_zha_assess
+    set list_name = #{listName,jdbcType=VARCHAR},
+      case_num = #{caseNum,jdbcType=INTEGER},
+      derogation_money = #{derogationMoney,jdbcType=DOUBLE},
+      sun_case_num = #{sunCaseNum,jdbcType=INTEGER},
+      cae_total_eff = #{caeTotalEff,jdbcType=DOUBLE},
+      cae_avg_eff = #{caeAvgEff,jdbcType=DOUBLE},
+      operate_id = #{operateId,jdbcType=BIGINT},
+      operate_name = #{operateName,jdbcType=VARCHAR},
+      oparate_time = #{oparateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      entrust_submit_money = #{entrustSubmitMoney,jdbcType=DOUBLE},
+      survey_submit_money = #{surveySubmitMoney,jdbcType=DOUBLE},
+        pf_amt = #{pfAmt,jdbcType=DOUBLE},
+        js_amt = #{jsAmt,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <sql id="joins">
+
+  </sql>
+  <sql id="wheres">
+    <if test="listName != null">
+      and list_name like CONCAT(CONCAT('%',#{listName,jdbcType=VARCHAR}), '%')
+    </if>
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_zha_assess
+    <include refid="joins" />
+    where 1 = 1 and delete_flag = 0
+    <include refid="wheres" />
+    order by id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from survey_zha_assess
+    <include refid="joins" />
+    where 1 = 1 and delete_flag = 0
+    <include refid="wheres" />
+  </select>
+</mapper>

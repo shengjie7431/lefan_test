@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseKaitingInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseKaitingInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="case_center_id" property="caseCenterId" jdbcType="BIGINT" />
+        <result column="kaiting_time" property="kaitingTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="kaiting_place" property="kaitingPlace" jdbcType="VARCHAR" />
+        <result column="kaiting_content" property="kaitingContent" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, case_center_id, kaiting_time, create_by, create_time, delete_flag, kaiting_place,
+        kaiting_content
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from case_kaiting_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from case_kaiting_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseKaitingInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_kaiting_info (case_center_id, kaiting_time, create_by,
+        create_time, delete_flag, kaiting_place,
+        kaiting_content)
+        values (#{caseCenterId,jdbcType=BIGINT}, #{kaitingTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, #{kaitingPlace,jdbcType=VARCHAR},
+        #{kaitingContent,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseKaitingInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_kaiting_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="caseCenterId != null" >
+                case_center_id,
+            </if>
+            <if test="kaitingTime != null" >
+                kaiting_time,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+            <if test="kaitingPlace != null" >
+                kaiting_place,
+            </if>
+            <if test="kaitingContent != null" >
+                kaiting_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="caseCenterId != null" >
+                #{caseCenterId,jdbcType=BIGINT},
+            </if>
+            <if test="kaitingTime != null" >
+                #{kaitingTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="kaitingPlace != null" >
+                #{kaitingPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="kaitingContent != null" >
+                #{kaitingContent,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseKaitingInfo" >
+        update case_kaiting_info
+        <set >
+            <if test="caseCenterId != null" >
+                case_center_id = #{caseCenterId,jdbcType=BIGINT},
+            </if>
+            <if test="kaitingTime != null" >
+                kaiting_time = #{kaitingTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="kaitingPlace != null" >
+                kaiting_place = #{kaitingPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="kaitingContent != null" >
+                kaiting_content = #{kaitingContent,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseKaitingInfo" >
+        update case_kaiting_info
+        set case_center_id = #{caseCenterId,jdbcType=BIGINT},
+        kaiting_time = #{kaitingTime,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+        kaiting_place = #{kaitingPlace,jdbcType=VARCHAR},
+        kaiting_content = #{kaitingContent,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+  <select id="selectByCaseCenterId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from case_kaiting_info
+    where case_center_id = #{caseCenterId,jdbcType=BIGINT}
+    order by id desc
+  </select>
+</mapper>

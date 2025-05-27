@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CrmCaseInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CrmCaseInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="first_visit_time" property="firstVisitTime" jdbcType="TIMESTAMP" />
+    <result column="case_source" property="caseSource" jdbcType="INTEGER" />
+    <result column="is_intention" property="isIntention" jdbcType="INTEGER" />
+    <result column="case_type" property="caseType" jdbcType="INTEGER" />
+    <result column="case_progress" property="caseProgress" jdbcType="INTEGER" />
+    <result column="claim_fee" property="claimFee" jdbcType="DOUBLE" />
+    <result column="loan_fee" property="loanFee" jdbcType="DOUBLE" />
+    <result column="service_fee" property="serviceFee" jdbcType="DOUBLE" />
+    <result column="next_time" property="nextTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="data_rate" property="dataRate" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, customer_id, first_visit_time, case_source, is_intention, case_type, case_progress, 
+    claim_fee, loan_fee, service_fee, next_time, create_time, update_time, data_rate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_case_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from crm_case_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CrmCaseInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crm_case_info (customer_id, first_visit_time, case_source, 
+      is_intention, case_type, case_progress, 
+      claim_fee, loan_fee, service_fee,
+      next_time, create_time, update_time, 
+      data_rate)
+    values (#{customerId,jdbcType=BIGINT}, #{firstVisitTime,jdbcType=TIMESTAMP}, #{caseSource,jdbcType=INTEGER}, 
+      #{isIntention,jdbcType=INTEGER}, #{caseType,jdbcType=INTEGER}, #{caseProgress,jdbcType=INTEGER},
+      #{claimFee,jdbcType=DOUBLE}, #{loanFee,jdbcType=DOUBLE}, #{serviceFee,jdbcType=DOUBLE},
+      #{nextTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{dataRate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CrmCaseInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crm_case_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="firstVisitTime != null" >
+        first_visit_time,
+      </if>
+      <if test="caseSource != null" >
+        case_source,
+      </if>
+      <if test="isIntention != null" >
+        is_intention,
+      </if>
+      <if test="caseType != null" >
+        case_type,
+      </if>
+      <if test="caseProgress != null" >
+        case_progress,
+      </if>
+      <if test="claimFee != null" >
+        claim_fee,
+      </if>
+      <if test="loanFee != null" >
+          loan_fee,
+      </if>
+      <if test="serviceFee != null" >
+        service_fee,
+      </if>
+      <if test="nextTime != null" >
+        next_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="dataRate != null" >
+        data_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="firstVisitTime != null" >
+        #{firstVisitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="caseSource != null" >
+        #{caseSource,jdbcType=INTEGER},
+      </if>
+      <if test="isIntention != null" >
+        #{isIntention,jdbcType=INTEGER},
+      </if>
+      <if test="caseType != null" >
+        #{caseType,jdbcType=INTEGER},
+      </if>
+      <if test="caseProgress != null" >
+        #{caseProgress,jdbcType=INTEGER},
+      </if>
+      <if test="claimFee != null" >
+        #{claimFee,jdbcType=DOUBLE},
+      </if>
+      <if test="loanFee != null" >
+        #{loanFee,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceFee != null" >
+        #{serviceFee,jdbcType=DOUBLE},
+      </if>
+      <if test="nextTime != null" >
+        #{nextTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataRate != null" >
+        #{dataRate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CrmCaseInfo" >
+    update crm_case_info
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="firstVisitTime != null" >
+        first_visit_time = #{firstVisitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="caseSource != null" >
+        case_source = #{caseSource,jdbcType=INTEGER},
+      </if>
+      <if test="isIntention != null" >
+        is_intention = #{isIntention,jdbcType=INTEGER},
+      </if>
+      <if test="caseType != null" >
+        case_type = #{caseType,jdbcType=INTEGER},
+      </if>
+      <if test="caseProgress != null" >
+        case_progress = #{caseProgress,jdbcType=INTEGER},
+      </if>
+      <if test="claimFee != null" >
+        claim_fee = #{claimFee,jdbcType=DOUBLE},
+      </if>
+      <if test="loanFee != null" >
+          loan_fee = #{loanFee,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceFee != null" >
+        service_fee = #{serviceFee,jdbcType=DOUBLE},
+      </if>
+      <if test="nextTime != null" >
+        next_time = #{nextTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataRate != null" >
+        data_rate = #{dataRate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <update id="updateByPrimaryCustomerIdSelective" parameterType="com.lefancrm.apicenter.model.CrmCaseInfo" >
+        update crm_case_info
+        <set >
+            <if test="firstVisitTime != null" >
+                first_visit_time = #{firstVisitTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="caseSource != null" >
+                case_source = #{caseSource,jdbcType=INTEGER},
+            </if>
+            <if test="isIntention != null" >
+                is_intention = #{isIntention,jdbcType=INTEGER},
+            </if>
+            <if test="caseType != null" >
+                case_type = #{caseType,jdbcType=INTEGER},
+            </if>
+            <if test="caseProgress != null" >
+                case_progress = #{caseProgress,jdbcType=INTEGER},
+            </if>
+            <if test="claimFee != null" >
+                claim_fee = #{claimFee,jdbcType=DOUBLE},
+            </if>
+            <if test="loanFee != null" >
+                loan_fee = #{loanFee,jdbcType=DOUBLE},
+            </if>
+            <if test="serviceFee != null" >
+                service_fee = #{serviceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="nextTime != null" >
+                next_time = #{nextTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dataRate != null" >
+                data_rate = #{dataRate,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where customer_id = #{customerId,jdbcType=BIGINT}
+    </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CrmCaseInfo" >
+    update crm_case_info
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      first_visit_time = #{firstVisitTime,jdbcType=TIMESTAMP},
+      case_source = #{caseSource,jdbcType=INTEGER},
+      is_intention = #{isIntention,jdbcType=INTEGER},
+      case_type = #{caseType,jdbcType=INTEGER},
+      case_progress = #{caseProgress,jdbcType=INTEGER},
+      claim_fee = #{claimFee,jdbcType=DOUBLE},
+      loan_fee = #{loanFee,jdbcType=DOUBLE},
+      service_fee = #{serviceFee,jdbcType=DOUBLE},
+      next_time = #{nextTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      data_rate = #{dataRate,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectCaseByCustomerId" parameterType="long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from crm_case_info
+        where customer_id = #{customerId,jdbcType=BIGINT}
+    </select>
+</mapper>

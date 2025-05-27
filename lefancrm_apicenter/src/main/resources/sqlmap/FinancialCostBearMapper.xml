@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.FinancialCostBearMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.FinancialCostBear" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="financial_re_apply_id" property="financialReApplyId" jdbcType="BIGINT" />
+        <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+        <result column="share_rate" property="shareRate" jdbcType="DOUBLE" />
+        <result column="share_cost" property="shareCost" jdbcType="DOUBLE" />
+        <result column="cost_desc" property="costDesc" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="organ_manager_user_id" property="organManagerUserId" jdbcType="BIGINT" />
+        <result column="superior_manager_user_id" property="superiorManagerUserId" jdbcType="BIGINT" />
+        <result column="organ_manager_state" property="organManagerState" jdbcType="INTEGER" />
+        <result column="superior_manager_state" property="superiorManagerState" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, financial_re_apply_id, department_id, department_name, share_rate, share_cost,
+        cost_desc, create_time, create_by, update_time, update_by, delete_flag, organ_manager_user_id,
+        superior_manager_user_id, organ_manager_state, superior_manager_state
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from financial_cost_bear
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from financial_cost_bear
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.FinancialCostBear" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into financial_cost_bear (financial_re_apply_id, department_id, department_name,
+        share_rate, share_cost, cost_desc,
+        create_time, create_by, update_time,
+        update_by, delete_flag, organ_manager_user_id,
+        superior_manager_user_id, organ_manager_state,
+        superior_manager_state)
+        values (#{financialReApplyId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{departmentName,jdbcType=VARCHAR},
+        #{shareRate,jdbcType=DOUBLE}, #{shareCost,jdbcType=DOUBLE}, #{costDesc,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+        #{updateBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, #{organManagerUserId,jdbcType=BIGINT},
+        #{superiorManagerUserId,jdbcType=BIGINT}, #{organManagerState,jdbcType=INTEGER},
+        #{superiorManagerState,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.FinancialCostBear" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into financial_cost_bear
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="financialReApplyId != null" >
+                financial_re_apply_id,
+            </if>
+            <if test="departmentId != null" >
+                department_id,
+            </if>
+            <if test="departmentName != null" >
+                department_name,
+            </if>
+            <if test="shareRate != null" >
+                share_rate,
+            </if>
+            <if test="shareCost != null" >
+                share_cost,
+            </if>
+            <if test="costDesc != null" >
+                cost_desc,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+            <if test="organManagerUserId != null" >
+                organ_manager_user_id,
+            </if>
+            <if test="superiorManagerUserId != null" >
+                superior_manager_user_id,
+            </if>
+            <if test="organManagerState != null" >
+                organ_manager_state,
+            </if>
+            <if test="superiorManagerState != null" >
+                superior_manager_state,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="financialReApplyId != null" >
+                #{financialReApplyId,jdbcType=BIGINT},
+            </if>
+            <if test="departmentId != null" >
+                #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="departmentName != null" >
+                #{departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="shareRate != null" >
+                #{shareRate,jdbcType=DOUBLE},
+            </if>
+            <if test="shareCost != null" >
+                #{shareCost,jdbcType=DOUBLE},
+            </if>
+            <if test="costDesc != null" >
+                #{costDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="organManagerUserId != null" >
+                #{organManagerUserId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorManagerUserId != null" >
+                #{superiorManagerUserId,jdbcType=BIGINT},
+            </if>
+            <if test="organManagerState != null" >
+                #{organManagerState,jdbcType=INTEGER},
+            </if>
+            <if test="superiorManagerState != null" >
+                #{superiorManagerState,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.FinancialCostBear" >
+        update financial_cost_bear
+        <set >
+            <if test="financialReApplyId != null" >
+                financial_re_apply_id = #{financialReApplyId,jdbcType=BIGINT},
+            </if>
+            <if test="departmentId != null" >
+                department_id = #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="departmentName != null" >
+                department_name = #{departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="shareRate != null" >
+                share_rate = #{shareRate,jdbcType=DOUBLE},
+            </if>
+            <if test="shareCost != null" >
+                share_cost = #{shareCost,jdbcType=DOUBLE},
+            </if>
+            <if test="costDesc != null" >
+                cost_desc = #{costDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="organManagerUserId != null" >
+                organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorManagerUserId != null" >
+                superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT},
+            </if>
+            <if test="organManagerState != null" >
+                organ_manager_state = #{organManagerState,jdbcType=INTEGER},
+            </if>
+            <if test="superiorManagerState != null" >
+                superior_manager_state = #{superiorManagerState,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.FinancialCostBear" >
+    update financial_cost_bear
+    set financial_re_apply_id = #{financialReApplyId,jdbcType=BIGINT},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      share_rate = #{shareRate,jdbcType=DOUBLE},
+      share_cost = #{shareCost,jdbcType=DOUBLE},
+      cost_desc = #{costDesc,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT},
+      superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT},
+      organ_manager_state = #{organManagerState,jdbcType=INTEGER},
+      superior_manager_state = #{superiorManagerState,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="financialReApplyId != null" >
+            and financial_re_apply_id = #{financialReApplyId,jdbcType=BIGINT}
+        </if>
+        <if test="departmentId != null" >
+            and department_id = #{departmentId,jdbcType=BIGINT}
+        </if>
+        <if test="organManagerUserId != null" >
+            and organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT}
+        </if>
+        <if test="superiorManagerUserId != null" >
+            and superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT}
+        </if>
+        <if test="organManagerState != null" >
+            and organ_manager_state = #{organManagerState,jdbcType=INTEGER}
+        </if>
+        <if test="superiorManagerState != null" >
+            and superior_manager_state = #{superiorManagerState,jdbcType=INTEGER}
+        </if>
+        <if test="bearsOrg == 1">
+            and (organ_manager_user_id = #{curUserId} or superior_manager_user_id = #{curUserId})
+        </if>
+
+        <if test="finanReIds != null">
+            and FIND_IN_SET(financial_re_apply_id,#{finanReIds})
+        </if>
+    </sql>
+
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from financial_cost_bear
+        <include refid="joins" />
+        where delete_flag = 0
+        <include refid="wheres" />
+        order by id asc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select count(1)
+        from financial_cost_bear
+        <include refid="joins" />
+        where delete_flag = 0
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectOne" resultMap="BaseResultMap" parameterType="map" >
+        select
+        <include refid="Base_Column_List" />
+        from financial_cost_bear
+        where financial_re_apply_id = #{financialReApplyId,jdbcType=BIGINT}
+        <if test="departmentId != null" >
+            and department_id = #{departmentId,jdbcType=BIGINT}
+        </if>
+        limit 1;
+    </select>
+
+    <delete id="updateState" parameterType="java.lang.Long" >
+        update financial_cost_bear set
+        organ_manager_state = 0,
+        superior_manager_state = 0
+        where financial_re_apply_id = #{financialReApplyId,jdbcType=BIGINT}
+    </delete>
+</mapper>

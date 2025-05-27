@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.ClaimsShuttleInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.ClaimsShuttleInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="link_name" property="linkName" jdbcType="VARCHAR" />
+    <result column="link_tel" property="linkTel" jdbcType="VARCHAR" />
+    <result column="start_address" property="startAddress" jdbcType="VARCHAR" />
+    <result column="end_address" property="endAddress" jdbcType="VARCHAR" />
+    <result column="start_x_lbs" property="startXLbs" jdbcType="DOUBLE" />
+    <result column="start_y_lbs" property="startYLbs" jdbcType="DOUBLE" />
+    <result column="end_x_lbs" property="endXLbs" jdbcType="DOUBLE" />
+    <result column="end_y_lbs" property="endYLbs" jdbcType="DOUBLE" />
+    <result column="shuttle_time" property="shuttleTime" jdbcType="TIMESTAMP" />
+    <result column="handle_state" property="handleState" jdbcType="INTEGER" />
+    <result column="handle_user" property="handleUser" jdbcType="VARCHAR" />
+    <result column="handle_time" property="handleTime" jdbcType="TIMESTAMP" />
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, link_name, link_tel, start_address, end_address, start_x_lbs, start_y_lbs, end_x_lbs, 
+    end_y_lbs, shuttle_time, handle_state, handle_user, handle_time, create_time, create_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from claims_shuttle_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from claims_shuttle_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.ClaimsShuttleInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into claims_shuttle_info (link_name, link_tel, start_address, 
+      end_address, start_x_lbs, start_y_lbs, 
+      end_x_lbs, end_y_lbs, shuttle_time, 
+      handle_state, handle_user, handle_time, create_time, create_by
+      )
+    values (#{linkName,jdbcType=VARCHAR}, #{linkTel,jdbcType=VARCHAR}, #{startAddress,jdbcType=VARCHAR}, 
+      #{endAddress,jdbcType=VARCHAR}, #{startXLbs,jdbcType=DOUBLE}, #{startYLbs,jdbcType=DOUBLE}, 
+      #{endXLbs,jdbcType=DOUBLE}, #{endYLbs,jdbcType=DOUBLE}, #{shuttleTime,jdbcType=TIMESTAMP}, 
+      #{handleState,jdbcType=INTEGER}, #{handleUser,jdbcType=VARCHAR}, #{handleTime,jdbcType=TIMESTAMP},
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.ClaimsShuttleInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into claims_shuttle_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="linkName != null" >
+        link_name,
+      </if>
+      <if test="linkTel != null" >
+        link_tel,
+      </if>
+      <if test="startAddress != null" >
+        start_address,
+      </if>
+      <if test="endAddress != null" >
+        end_address,
+      </if>
+      <if test="startXLbs != null" >
+        start_x_lbs,
+      </if>
+      <if test="startYLbs != null" >
+        start_y_lbs,
+      </if>
+      <if test="endXLbs != null" >
+        end_x_lbs,
+      </if>
+      <if test="endYLbs != null" >
+        end_y_lbs,
+      </if>
+      <if test="shuttleTime != null" >
+        shuttle_time,
+      </if>
+      <if test="handleState != null" >
+        handle_state,
+      </if>
+      <if test="handleUser != null" >
+        handle_user,
+      </if>
+      <if test="handleTime != null" >
+        handle_time,
+      </if>
+        <if test="createTime != null" >
+            create_time,
+        </if>
+        <if test="createBy != null" >
+            create_by,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="linkName != null" >
+        #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTel != null" >
+        #{linkTel,jdbcType=VARCHAR},
+      </if>
+      <if test="startAddress != null" >
+        #{startAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="endAddress != null" >
+        #{endAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="startXLbs != null" >
+        #{startXLbs,jdbcType=DOUBLE},
+      </if>
+      <if test="startYLbs != null" >
+        #{startYLbs,jdbcType=DOUBLE},
+      </if>
+      <if test="endXLbs != null" >
+        #{endXLbs,jdbcType=DOUBLE},
+      </if>
+      <if test="endYLbs != null" >
+        #{endYLbs,jdbcType=DOUBLE},
+      </if>
+      <if test="shuttleTime != null" >
+        #{shuttleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handleState != null" >
+        #{handleState,jdbcType=INTEGER},
+      </if>
+      <if test="handleUser != null" >
+        #{handleUser,jdbcType=VARCHAR},
+      </if>
+      <if test="handleTime != null" >
+        #{handleTime,jdbcType=TIMESTAMP},
+      </if>
+        <if test="createTime != null" >
+            #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="createBy != null" >
+            #{createBy,jdbcType=VARCHAR},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.ClaimsShuttleInfo" >
+    update claims_shuttle_info
+    <set >
+      <if test="linkName != null" >
+        link_name = #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTel != null" >
+        link_tel = #{linkTel,jdbcType=VARCHAR},
+      </if>
+      <if test="startAddress != null" >
+        start_address = #{startAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="endAddress != null" >
+        end_address = #{endAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="startXLbs != null" >
+        start_x_lbs = #{startXLbs,jdbcType=DOUBLE},
+      </if>
+      <if test="startYLbs != null" >
+        start_y_lbs = #{startYLbs,jdbcType=DOUBLE},
+      </if>
+      <if test="endXLbs != null" >
+        end_x_lbs = #{endXLbs,jdbcType=DOUBLE},
+      </if>
+      <if test="endYLbs != null" >
+        end_y_lbs = #{endYLbs,jdbcType=DOUBLE},
+      </if>
+      <if test="shuttleTime != null" >
+        shuttle_time = #{shuttleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="handleState != null" >
+        handle_state = #{handleState,jdbcType=INTEGER},
+      </if>
+      <if test="handleUser != null" >
+        handle_user = #{handleUser,jdbcType=VARCHAR},
+      </if>
+      <if test="handleTime != null" >
+        handle_time = #{handleTime,jdbcType=TIMESTAMP},
+      </if>
+        <if test="createTime != null" >
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="createBy != null" >
+            create_by = #{createBy,jdbcType=VARCHAR},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.ClaimsShuttleInfo" >
+    update claims_shuttle_info
+    set link_name = #{linkName,jdbcType=VARCHAR},
+      link_tel = #{linkTel,jdbcType=VARCHAR},
+      start_address = #{startAddress,jdbcType=VARCHAR},
+      end_address = #{endAddress,jdbcType=VARCHAR},
+      start_x_lbs = #{startXLbs,jdbcType=DOUBLE},
+      start_y_lbs = #{startYLbs,jdbcType=DOUBLE},
+      end_x_lbs = #{endXLbs,jdbcType=DOUBLE},
+      end_y_lbs = #{endYLbs,jdbcType=DOUBLE},
+      shuttle_time = #{shuttleTime,jdbcType=TIMESTAMP},
+      handle_state = #{handleState,jdbcType=INTEGER},
+      handle_user = #{handleUser,jdbcType=VARCHAR},
+      handle_time = #{handleTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="linkName != null" >
+            and link_name like CONCAT(CONCAT('%',replace(#{linkName,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="linkTel != null" >
+            and link_tel like CONCAT(CONCAT('%',replace(#{linkTel,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="handleState != null" >
+            and handle_state = #{handleState,jdbcType=INTEGER}
+        </if>
+        <if test="handleUser != null" >
+            and handle_user like CONCAT(CONCAT('%',replace(#{handleUser,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="startTime != null" >
+            and DATE_FORMAT(handle_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="endTime != null" >
+            and DATE_FORMAT(handle_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="createStartTime != null" >
+            and DATE_FORMAT(create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{createStartTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="createEndTime != null" >
+            and DATE_FORMAT(create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{createEndTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from claims_shuttle_info
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from claims_shuttle_info
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+</mapper>

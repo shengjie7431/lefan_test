@@ -1,0 +1,1437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.StaffPersonnelInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.StaffPersonnelInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="real_name" property="realName" jdbcType="VARCHAR" />
+        <result column="user_tel" property="userTel" jdbcType="VARCHAR" />
+        <result column="job_no" property="jobNo" jdbcType="VARCHAR" />
+        <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+        <result column="business_unit_id" property="businessUnitId" jdbcType="BIGINT" />
+        <result column="business_unit" property="businessUnit" jdbcType="VARCHAR" />
+        <result column="company_id" property="companyId" jdbcType="BIGINT" />
+        <result column="company" property="company" jdbcType="VARCHAR" />
+        <result column="organ_id" property="organId" jdbcType="BIGINT" />
+        <result column="organ" property="organ" jdbcType="VARCHAR" />
+        <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+        <result column="department" property="department" jdbcType="VARCHAR" />
+        <result column="job_post_id" property="jobPostId" jdbcType="BIGINT" />
+        <result column="job_post" property="jobPost" jdbcType="VARCHAR" />
+        <result column="base_pay" property="basePay" jdbcType="DOUBLE" />
+        <result column="fixed_perf_pay" property="fixedPerfPay" jdbcType="DOUBLE" />
+        <result column="asses_perf_pay" property="assesPerfPay" jdbcType="DOUBLE" />
+        <result column="manage_perf_pay" property="managePerfPay" jdbcType="DOUBLE" />
+        <result column="travel_allowance_pay" property="travelAllowancePay" jdbcType="DOUBLE" />
+        <result column="social_security_pay" property="socialSecurityPay" jdbcType="DOUBLE" />
+        <result column="fund_pay" property="fundPay" jdbcType="DOUBLE" />
+        <result column="pay_address" property="payAddress" jdbcType="VARCHAR" />
+        <result column="staff_state" property="staffState" jdbcType="INTEGER" />
+        <result column="relation" property="relation" jdbcType="INTEGER" />
+        <result column="quit_time" property="quitTime" jdbcType="TIMESTAMP" />
+        <result column="entry_time" property="entryTime" jdbcType="TIMESTAMP" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="pension_base" property="pensionBase" jdbcType="DOUBLE" />
+        <result column="pension_company_rate" property="pensionCompanyRate" jdbcType="DOUBLE" />
+        <result column="pension_personal_rate" property="pensionPersonalRate" jdbcType="DOUBLE" />
+        <result column="medical_base" property="medicalBase" jdbcType="DOUBLE" />
+        <result column="medical_company_rate" property="medicalCompanyRate" jdbcType="DOUBLE" />
+        <result column="medical_personal_rate" property="medicalPersonalRate" jdbcType="DOUBLE" />
+        <result column="upm_base" property="upmBase" jdbcType="DOUBLE" />
+        <result column="upm_company_rate" property="upmCompanyRate" jdbcType="DOUBLE" />
+        <result column="upm_personal_rate" property="upmPersonalRate" jdbcType="DOUBLE" />
+        <result column="isa_base" property="isaBase" jdbcType="DOUBLE" />
+        <result column="isa_company_rate" property="isaCompanyRate" jdbcType="DOUBLE" />
+        <result column="birth_base" property="birthBase" jdbcType="DOUBLE" />
+        <result column="birth_company_rate" property="birthCompanyRate" jdbcType="DOUBLE" />
+        <result column="fund_pay_company_rate" property="fundPayCompanyRate" jdbcType="DOUBLE" />
+        <result column="fund_pay_personal_rate" property="fundPayPersonalRate" jdbcType="DOUBLE" />
+        <result column="team" property="team" jdbcType="VARCHAR" />
+        <result column="team_id" property="teamId" jdbcType="BIGINT" />
+        <result column="social_security_company_id" property="socialSecurityCompanyId" jdbcType="BIGINT" />
+        <result column="social_security_company" property="socialSecurityCompany" jdbcType="VARCHAR" />
+        <result column="manage_perf_pay_size" property="managePerfPaySize" jdbcType="DOUBLE" />
+        <result column="quit_cost" property="quitCost" jdbcType="DOUBLE" />
+        <result column="manage_perf_pay_size_hz" property="managePerfPaySizeHz" jdbcType="DOUBLE" />
+        <result column="survey_level_id" property="surveyLevelId" jdbcType="BIGINT" />
+        <result column="survey_level_name" property="surveyLevelName" jdbcType="VARCHAR" />
+        <result column="regular_time" property="regularTime" jdbcType="TIMESTAMP" />
+        <result column="ext_tel" property="extTel" jdbcType="VARCHAR" />
+        <result column="office_place" property="officePlace" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="trial_time" property="trialTime" jdbcType="VARCHAR" />
+        <result column="job_level" property="jobLevel" jdbcType="VARCHAR" />
+        <result column="education" property="education" jdbcType="VARCHAR" />
+        <result column="graduation_school" property="graduationSchool" jdbcType="VARCHAR" />
+        <result column="graduation_time" property="graduationTime" jdbcType="DATE" />
+        <result column="major" property="major" jdbcType="VARCHAR" />
+        <result column="bank_no" property="bankNo" jdbcType="VARCHAR" />
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+        <result column="contract_company" property="contractCompany" jdbcType="VARCHAR" />
+        <result column="contract_type" property="contractType" jdbcType="VARCHAR" />
+        <result column="first_contract_begin_time" property="firstContractBeginTime" jdbcType="DATE" />
+        <result column="first_contract_end_time" property="firstContractEndTime" jdbcType="DATE" />
+        <result column="now_contract_begin_time" property="nowContractBeginTime" jdbcType="DATE" />
+        <result column="now_contract_end_time" property="nowContractEndTime" jdbcType="DATE" />
+        <result column="contract_term" property="contractTerm" jdbcType="VARCHAR" />
+        <result column="renew_num" property="renewNum" jdbcType="VARCHAR" />
+        <result column="emergency_contact_name" property="emergencyContactName" jdbcType="VARCHAR" />
+        <result column="emergency_contact_relation" property="emergencyContactRelation" jdbcType="VARCHAR" />
+        <result column="emergency_contact_tel" property="emergencyContactTel" jdbcType="VARCHAR" />
+        <result column="family_name" property="familyName" jdbcType="VARCHAR" />
+        <result column="family_relation" property="familyRelation" jdbcType="VARCHAR" />
+        <result column="family_sex" property="familySex" jdbcType="VARCHAR" />
+        <result column="family_birthday" property="familyBirthday" jdbcType="DATE" />
+        <result column="family_tel" property="familyTel" jdbcType="VARCHAR" />
+        <result column="family_idcard_name" property="familyIdcardName" jdbcType="VARCHAR" />
+        <result column="budget_company_id" property="budgetCompanyId" jdbcType="BIGINT" />
+        <result column="budget_company_name" property="budgetCompanyName" jdbcType="VARCHAR" />
+        <result column="post_rank_id" property="postRankId" jdbcType="BIGINT" />
+        <result column="post_rank_name" property="postRankName" jdbcType="VARCHAR" />
+        <result column="post_appellation_id" property="postAppellationId" jdbcType="BIGINT" />
+        <result column="post_appellation_name" property="postAppellationName" jdbcType="VARCHAR" />
+        <result column="home_lbs_x" property="homeLbsX" jdbcType="DOUBLE" />
+        <result column="home_lbs_y" property="homeLbsY" jdbcType="DOUBLE" />
+        <result column="home_address" property="homeAddress" jdbcType="VARCHAR" />
+        <result column="home_address_name" property="homeAddressName" jdbcType="VARCHAR" />
+        <result column="performance" property="performance" jdbcType="BIGINT" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, user_id, real_name, user_tel, job_no, id_card, business_unit_id, business_unit,
+    company_id, company, organ_id, organ, department_id, department, job_post_id, job_post,
+    base_pay, fixed_perf_pay, asses_perf_pay, manage_perf_pay, travel_allowance_pay,
+    social_security_pay, fund_pay, pay_address, staff_state, relation, quit_time, entry_time,
+    delete_flag, create_time, create_by, update_time, update_by, pension_base, pension_company_rate,
+    pension_personal_rate, medical_base, medical_company_rate, medical_personal_rate,
+    upm_base, upm_company_rate, upm_personal_rate, isa_base, isa_company_rate, birth_base,
+    birth_company_rate, fund_pay_company_rate, fund_pay_personal_rate, team, team_id,
+    social_security_company_id, social_security_company, manage_perf_pay_size, quit_cost,
+    manage_perf_pay_size_hz, survey_level_id, survey_level_name, regular_time, ext_tel,
+    office_place, remark, trial_time, job_level, education, graduation_school, graduation_time,
+    major, bank_no, bank_name, contract_company, contract_type, first_contract_begin_time,
+    first_contract_end_time, now_contract_begin_time, now_contract_end_time, contract_term,
+    renew_num, emergency_contact_name, emergency_contact_relation, emergency_contact_tel,
+    family_name, family_relation, family_sex, family_birthday, family_tel, family_idcard_name,
+    budget_company_id, budget_company_name, post_rank_id, post_rank_name, post_appellation_id,
+    post_appellation_name, home_lbs_x, home_lbs_y, home_address, home_address_name,performance
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from staff_personnel_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from staff_personnel_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.StaffPersonnelInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into staff_personnel_info (user_id, real_name, user_tel,
+        job_no, id_card, business_unit_id,
+        business_unit, company_id, company,
+        organ_id, organ, department_id,
+        department, job_post_id, job_post,
+        base_pay, fixed_perf_pay, asses_perf_pay,
+        manage_perf_pay, travel_allowance_pay, social_security_pay,
+        fund_pay, pay_address, staff_state,
+        relation, quit_time, entry_time,
+        delete_flag, create_time, create_by,
+        update_time, update_by, pension_base,
+        pension_company_rate, pension_personal_rate,
+        medical_base, medical_company_rate, medical_personal_rate,
+        upm_base, upm_company_rate, upm_personal_rate,
+        isa_base, isa_company_rate, birth_base,
+        birth_company_rate, fund_pay_company_rate, fund_pay_personal_rate,
+        team, team_id, social_security_company_id,
+        social_security_company, manage_perf_pay_size,
+        quit_cost, manage_perf_pay_size_hz, survey_level_id,
+        survey_level_name, regular_time, ext_tel,
+        office_place, remark, trial_time,
+        job_level, education, graduation_school,
+        graduation_time, major, bank_no,
+        bank_name, contract_company, contract_type,
+        first_contract_begin_time, first_contract_end_time,
+        now_contract_begin_time, now_contract_end_time, contract_term,
+        renew_num, emergency_contact_name, emergency_contact_relation,
+        emergency_contact_tel, family_name, family_relation,
+        family_sex, family_birthday, family_tel,
+        family_idcard_name, budget_company_id, budget_company_name,
+        post_rank_id, post_rank_name, post_appellation_id,
+        post_appellation_name, home_lbs_x, home_lbs_y,
+        home_address, home_address_name)
+        values (#{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR},
+        #{jobNo,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{businessUnitId,jdbcType=BIGINT},
+        #{businessUnit,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT}, #{company,jdbcType=VARCHAR},
+        #{organId,jdbcType=BIGINT}, #{organ,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT},
+        #{department,jdbcType=VARCHAR}, #{jobPostId,jdbcType=BIGINT}, #{jobPost,jdbcType=VARCHAR},
+        #{basePay,jdbcType=DOUBLE}, #{fixedPerfPay,jdbcType=DOUBLE}, #{assesPerfPay,jdbcType=DOUBLE},
+        #{managePerfPay,jdbcType=DOUBLE}, #{travelAllowancePay,jdbcType=DOUBLE}, #{socialSecurityPay,jdbcType=DOUBLE},
+        #{fundPay,jdbcType=DOUBLE}, #{payAddress,jdbcType=VARCHAR}, #{staffState,jdbcType=INTEGER},
+        #{relation,jdbcType=INTEGER}, #{quitTime,jdbcType=TIMESTAMP}, #{entryTime,jdbcType=TIMESTAMP},
+        #{deleteFlag,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},
+        #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{pensionBase,jdbcType=DOUBLE},
+        #{pensionCompanyRate,jdbcType=DOUBLE}, #{pensionPersonalRate,jdbcType=DOUBLE},
+        #{medicalBase,jdbcType=DOUBLE}, #{medicalCompanyRate,jdbcType=DOUBLE}, #{medicalPersonalRate,jdbcType=DOUBLE},
+        #{upmBase,jdbcType=DOUBLE}, #{upmCompanyRate,jdbcType=DOUBLE}, #{upmPersonalRate,jdbcType=DOUBLE},
+        #{isaBase,jdbcType=DOUBLE}, #{isaCompanyRate,jdbcType=DOUBLE}, #{birthBase,jdbcType=DOUBLE},
+        #{birthCompanyRate,jdbcType=DOUBLE}, #{fundPayCompanyRate,jdbcType=DOUBLE}, #{fundPayPersonalRate,jdbcType=DOUBLE},
+        #{team,jdbcType=VARCHAR}, #{teamId,jdbcType=BIGINT}, #{socialSecurityCompanyId,jdbcType=BIGINT},
+        #{socialSecurityCompany,jdbcType=VARCHAR}, #{managePerfPaySize,jdbcType=DOUBLE},
+        #{quitCost,jdbcType=DOUBLE}, #{managePerfPaySizeHz,jdbcType=DOUBLE}, #{surveyLevelId,jdbcType=BIGINT},
+        #{surveyLevelName,jdbcType=VARCHAR}, #{regularTime,jdbcType=TIMESTAMP}, #{extTel,jdbcType=VARCHAR},
+        #{officePlace,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{trialTime,jdbcType=VARCHAR},
+        #{jobLevel,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{graduationSchool,jdbcType=VARCHAR},
+        #{graduationTime,jdbcType=DATE}, #{major,jdbcType=VARCHAR}, #{bankNo,jdbcType=VARCHAR},
+        #{bankName,jdbcType=VARCHAR}, #{contractCompany,jdbcType=VARCHAR}, #{contractType,jdbcType=VARCHAR},
+        #{firstContractBeginTime,jdbcType=DATE}, #{firstContractEndTime,jdbcType=DATE},
+        #{nowContractBeginTime,jdbcType=DATE}, #{nowContractEndTime,jdbcType=DATE}, #{contractTerm,jdbcType=VARCHAR},
+        #{renewNum,jdbcType=VARCHAR}, #{emergencyContactName,jdbcType=VARCHAR}, #{emergencyContactRelation,jdbcType=VARCHAR},
+        #{emergencyContactTel,jdbcType=VARCHAR}, #{familyName,jdbcType=VARCHAR}, #{familyRelation,jdbcType=VARCHAR},
+        #{familySex,jdbcType=VARCHAR}, #{familyBirthday,jdbcType=DATE}, #{familyTel,jdbcType=VARCHAR},
+        #{familyIdcardName,jdbcType=VARCHAR}, #{budgetCompanyId,jdbcType=BIGINT}, #{budgetCompanyName,jdbcType=VARCHAR},
+        #{postRankId,jdbcType=BIGINT}, #{postRankName,jdbcType=VARCHAR}, #{postAppellationId,jdbcType=BIGINT},
+        #{postAppellationName,jdbcType=VARCHAR}, #{homeLbsX,jdbcType=DOUBLE}, #{homeLbsY,jdbcType=DOUBLE},
+        #{homeAddress,jdbcType=VARCHAR}, #{homeAddressName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.StaffPersonnelInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into staff_personnel_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="realName != null" >
+                real_name,
+            </if>
+            <if test="userTel != null" >
+                user_tel,
+            </if>
+            <if test="jobNo != null" >
+                job_no,
+            </if>
+            <if test="idCard != null" >
+                id_card,
+            </if>
+            <if test="businessUnitId != null" >
+                business_unit_id,
+            </if>
+            <if test="businessUnit != null" >
+                business_unit,
+            </if>
+            <if test="companyId != null" >
+                company_id,
+            </if>
+            <if test="company != null" >
+                company,
+            </if>
+            <if test="organId != null" >
+                organ_id,
+            </if>
+            <if test="organ != null" >
+                organ,
+            </if>
+            <if test="departmentId != null" >
+                department_id,
+            </if>
+            <if test="department != null" >
+                department,
+            </if>
+            <if test="jobPostId != null" >
+                job_post_id,
+            </if>
+            <if test="jobPost != null" >
+                job_post,
+            </if>
+            <if test="basePay != null" >
+                base_pay,
+            </if>
+            <if test="fixedPerfPay != null" >
+                fixed_perf_pay,
+            </if>
+            <if test="assesPerfPay != null" >
+                asses_perf_pay,
+            </if>
+            <if test="managePerfPay != null" >
+                manage_perf_pay,
+            </if>
+            <if test="travelAllowancePay != null" >
+                travel_allowance_pay,
+            </if>
+            <if test="socialSecurityPay != null" >
+                social_security_pay,
+            </if>
+            <if test="fundPay != null" >
+                fund_pay,
+            </if>
+            <if test="payAddress != null" >
+                pay_address,
+            </if>
+            <if test="staffState != null" >
+                staff_state,
+            </if>
+            <if test="relation != null" >
+                relation,
+            </if>
+            <if test="quitTime != null" >
+                quit_time,
+            </if>
+            <if test="entryTime != null" >
+                entry_time,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="pensionBase != null" >
+                pension_base,
+            </if>
+            <if test="pensionCompanyRate != null" >
+                pension_company_rate,
+            </if>
+            <if test="pensionPersonalRate != null" >
+                pension_personal_rate,
+            </if>
+            <if test="medicalBase != null" >
+                medical_base,
+            </if>
+            <if test="medicalCompanyRate != null" >
+                medical_company_rate,
+            </if>
+            <if test="medicalPersonalRate != null" >
+                medical_personal_rate,
+            </if>
+            <if test="upmBase != null" >
+                upm_base,
+            </if>
+            <if test="upmCompanyRate != null" >
+                upm_company_rate,
+            </if>
+            <if test="upmPersonalRate != null" >
+                upm_personal_rate,
+            </if>
+            <if test="isaBase != null" >
+                isa_base,
+            </if>
+            <if test="isaCompanyRate != null" >
+                isa_company_rate,
+            </if>
+            <if test="birthBase != null" >
+                birth_base,
+            </if>
+            <if test="birthCompanyRate != null" >
+                birth_company_rate,
+            </if>
+            <if test="fundPayCompanyRate != null" >
+                fund_pay_company_rate,
+            </if>
+            <if test="fundPayPersonalRate != null" >
+                fund_pay_personal_rate,
+            </if>
+            <if test="team != null" >
+                team,
+            </if>
+            <if test="teamId != null" >
+                team_id,
+            </if>
+            <if test="socialSecurityCompanyId != null" >
+                social_security_company_id,
+            </if>
+            <if test="socialSecurityCompany != null" >
+                social_security_company,
+            </if>
+            <if test="managePerfPaySize != null" >
+                manage_perf_pay_size,
+            </if>
+            <if test="quitCost != null" >
+                quit_cost,
+            </if>
+            <if test="managePerfPaySizeHz != null" >
+                manage_perf_pay_size_hz,
+            </if>
+            <if test="surveyLevelId != null" >
+                survey_level_id,
+            </if>
+            <if test="surveyLevelName != null" >
+                survey_level_name,
+            </if>
+            <if test="regularTime != null" >
+                regular_time,
+            </if>
+            <if test="extTel != null" >
+                ext_tel,
+            </if>
+            <if test="officePlace != null" >
+                office_place,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="trialTime != null" >
+                trial_time,
+            </if>
+            <if test="jobLevel != null" >
+                job_level,
+            </if>
+            <if test="education != null" >
+                education,
+            </if>
+            <if test="graduationSchool != null" >
+                graduation_school,
+            </if>
+            <if test="graduationTime != null" >
+                graduation_time,
+            </if>
+            <if test="major != null" >
+                major,
+            </if>
+            <if test="bankNo != null" >
+                bank_no,
+            </if>
+            <if test="bankName != null" >
+                bank_name,
+            </if>
+            <if test="contractCompany != null" >
+                contract_company,
+            </if>
+            <if test="contractType != null" >
+                contract_type,
+            </if>
+            <if test="firstContractBeginTime != null" >
+                first_contract_begin_time,
+            </if>
+            <if test="firstContractEndTime != null" >
+                first_contract_end_time,
+            </if>
+            <if test="nowContractBeginTime != null" >
+                now_contract_begin_time,
+            </if>
+            <if test="nowContractEndTime != null" >
+                now_contract_end_time,
+            </if>
+            <if test="contractTerm != null" >
+                contract_term,
+            </if>
+            <if test="renewNum != null" >
+                renew_num,
+            </if>
+            <if test="emergencyContactName != null" >
+                emergency_contact_name,
+            </if>
+            <if test="emergencyContactRelation != null" >
+                emergency_contact_relation,
+            </if>
+            <if test="emergencyContactTel != null" >
+                emergency_contact_tel,
+            </if>
+            <if test="familyName != null" >
+                family_name,
+            </if>
+            <if test="familyRelation != null" >
+                family_relation,
+            </if>
+            <if test="familySex != null" >
+                family_sex,
+            </if>
+            <if test="familyBirthday != null" >
+                family_birthday,
+            </if>
+            <if test="familyTel != null" >
+                family_tel,
+            </if>
+            <if test="familyIdcardName != null" >
+                family_idcard_name,
+            </if>
+            <if test="budgetCompanyId != null" >
+                budget_company_id,
+            </if>
+            <if test="budgetCompanyName != null" >
+                budget_company_name,
+            </if>
+            <if test="postRankId != null" >
+                post_rank_id,
+            </if>
+            <if test="postRankName != null" >
+                post_rank_name,
+            </if>
+            <if test="postAppellationId != null" >
+                post_appellation_id,
+            </if>
+            <if test="postAppellationName != null" >
+                post_appellation_name,
+            </if>
+            <if test="homeLbsX != null" >
+                home_lbs_x,
+            </if>
+            <if test="homeLbsY != null" >
+                home_lbs_y,
+            </if>
+            <if test="homeAddress != null" >
+                home_address,
+            </if>
+            <if test="homeAddressName != null" >
+                home_address_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="realName != null" >
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="userTel != null" >
+                #{userTel,jdbcType=VARCHAR},
+            </if>
+            <if test="jobNo != null" >
+                #{jobNo,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null" >
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="businessUnitId != null" >
+                #{businessUnitId,jdbcType=BIGINT},
+            </if>
+            <if test="businessUnit != null" >
+                #{businessUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                #{companyId,jdbcType=BIGINT},
+            </if>
+            <if test="company != null" >
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="organId != null" >
+                #{organId,jdbcType=BIGINT},
+            </if>
+            <if test="organ != null" >
+                #{organ,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null" >
+                #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="department != null" >
+                #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="jobPostId != null" >
+                #{jobPostId,jdbcType=BIGINT},
+            </if>
+            <if test="jobPost != null" >
+                #{jobPost,jdbcType=VARCHAR},
+            </if>
+            <if test="basePay != null" >
+                #{basePay,jdbcType=DOUBLE},
+            </if>
+            <if test="fixedPerfPay != null" >
+                #{fixedPerfPay,jdbcType=DOUBLE},
+            </if>
+            <if test="assesPerfPay != null" >
+                #{assesPerfPay,jdbcType=DOUBLE},
+            </if>
+            <if test="managePerfPay != null" >
+                #{managePerfPay,jdbcType=DOUBLE},
+            </if>
+            <if test="travelAllowancePay != null" >
+                #{travelAllowancePay,jdbcType=DOUBLE},
+            </if>
+            <if test="socialSecurityPay != null" >
+                #{socialSecurityPay,jdbcType=DOUBLE},
+            </if>
+            <if test="fundPay != null" >
+                #{fundPay,jdbcType=DOUBLE},
+            </if>
+            <if test="payAddress != null" >
+                #{payAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="staffState != null" >
+                #{staffState,jdbcType=INTEGER},
+            </if>
+            <if test="relation != null" >
+                #{relation,jdbcType=INTEGER},
+            </if>
+            <if test="quitTime != null" >
+                #{quitTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="entryTime != null" >
+                #{entryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="pensionBase != null" >
+                #{pensionBase,jdbcType=DOUBLE},
+            </if>
+            <if test="pensionCompanyRate != null" >
+                #{pensionCompanyRate,jdbcType=DOUBLE},
+            </if>
+            <if test="pensionPersonalRate != null" >
+                #{pensionPersonalRate,jdbcType=DOUBLE},
+            </if>
+            <if test="medicalBase != null" >
+                #{medicalBase,jdbcType=DOUBLE},
+            </if>
+            <if test="medicalCompanyRate != null" >
+                #{medicalCompanyRate,jdbcType=DOUBLE},
+            </if>
+            <if test="medicalPersonalRate != null" >
+                #{medicalPersonalRate,jdbcType=DOUBLE},
+            </if>
+            <if test="upmBase != null" >
+                #{upmBase,jdbcType=DOUBLE},
+            </if>
+            <if test="upmCompanyRate != null" >
+                #{upmCompanyRate,jdbcType=DOUBLE},
+            </if>
+            <if test="upmPersonalRate != null" >
+                #{upmPersonalRate,jdbcType=DOUBLE},
+            </if>
+            <if test="isaBase != null" >
+                #{isaBase,jdbcType=DOUBLE},
+            </if>
+            <if test="isaCompanyRate != null" >
+                #{isaCompanyRate,jdbcType=DOUBLE},
+            </if>
+            <if test="birthBase != null" >
+                #{birthBase,jdbcType=DOUBLE},
+            </if>
+            <if test="birthCompanyRate != null" >
+                #{birthCompanyRate,jdbcType=DOUBLE},
+            </if>
+            <if test="fundPayCompanyRate != null" >
+                #{fundPayCompanyRate,jdbcType=DOUBLE},
+            </if>
+            <if test="fundPayPersonalRate != null" >
+                #{fundPayPersonalRate,jdbcType=DOUBLE},
+            </if>
+            <if test="team != null" >
+                #{team,jdbcType=VARCHAR},
+            </if>
+            <if test="teamId != null" >
+                #{teamId,jdbcType=BIGINT},
+            </if>
+            <if test="socialSecurityCompanyId != null" >
+                #{socialSecurityCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="socialSecurityCompany != null" >
+                #{socialSecurityCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="managePerfPaySize != null" >
+                #{managePerfPaySize,jdbcType=DOUBLE},
+            </if>
+            <if test="quitCost != null" >
+                #{quitCost,jdbcType=DOUBLE},
+            </if>
+            <if test="managePerfPaySizeHz != null" >
+                #{managePerfPaySizeHz,jdbcType=DOUBLE},
+            </if>
+            <if test="surveyLevelId != null" >
+                #{surveyLevelId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyLevelName != null" >
+                #{surveyLevelName,jdbcType=VARCHAR},
+            </if>
+            <if test="regularTime != null" >
+                #{regularTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="extTel != null" >
+                #{extTel,jdbcType=VARCHAR},
+            </if>
+            <if test="officePlace != null" >
+                #{officePlace,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="trialTime != null" >
+                #{trialTime,jdbcType=VARCHAR},
+            </if>
+            <if test="jobLevel != null" >
+                #{jobLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null" >
+                #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="graduationSchool != null" >
+                #{graduationSchool,jdbcType=VARCHAR},
+            </if>
+            <if test="graduationTime != null" >
+                #{graduationTime,jdbcType=DATE},
+            </if>
+            <if test="major != null" >
+                #{major,jdbcType=VARCHAR},
+            </if>
+            <if test="bankNo != null" >
+                #{bankNo,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null" >
+                #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="contractCompany != null" >
+                #{contractCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="contractType != null" >
+                #{contractType,jdbcType=VARCHAR},
+            </if>
+            <if test="firstContractBeginTime != null" >
+                #{firstContractBeginTime,jdbcType=DATE},
+            </if>
+            <if test="firstContractEndTime != null" >
+                #{firstContractEndTime,jdbcType=DATE},
+            </if>
+            <if test="nowContractBeginTime != null" >
+                #{nowContractBeginTime,jdbcType=DATE},
+            </if>
+            <if test="nowContractEndTime != null" >
+                #{nowContractEndTime,jdbcType=DATE},
+            </if>
+            <if test="contractTerm != null" >
+                #{contractTerm,jdbcType=VARCHAR},
+            </if>
+            <if test="renewNum != null" >
+                #{renewNum,jdbcType=VARCHAR},
+            </if>
+            <if test="emergencyContactName != null" >
+                #{emergencyContactName,jdbcType=VARCHAR},
+            </if>
+            <if test="emergencyContactRelation != null" >
+                #{emergencyContactRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="emergencyContactTel != null" >
+                #{emergencyContactTel,jdbcType=VARCHAR},
+            </if>
+            <if test="familyName != null" >
+                #{familyName,jdbcType=VARCHAR},
+            </if>
+            <if test="familyRelation != null" >
+                #{familyRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="familySex != null" >
+                #{familySex,jdbcType=VARCHAR},
+            </if>
+            <if test="familyBirthday != null" >
+                #{familyBirthday,jdbcType=DATE},
+            </if>
+            <if test="familyTel != null" >
+                #{familyTel,jdbcType=VARCHAR},
+            </if>
+            <if test="familyIdcardName != null" >
+                #{familyIdcardName,jdbcType=VARCHAR},
+            </if>
+            <if test="budgetCompanyId != null" >
+                #{budgetCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="budgetCompanyName != null" >
+                #{budgetCompanyName,jdbcType=VARCHAR},
+            </if>
+            <if test="postRankId != null" >
+                #{postRankId,jdbcType=BIGINT},
+            </if>
+            <if test="postRankName != null" >
+                #{postRankName,jdbcType=VARCHAR},
+            </if>
+            <if test="postAppellationId != null" >
+                #{postAppellationId,jdbcType=BIGINT},
+            </if>
+            <if test="postAppellationName != null" >
+                #{postAppellationName,jdbcType=VARCHAR},
+            </if>
+            <if test="homeLbsX != null" >
+                #{homeLbsX,jdbcType=DOUBLE},
+            </if>
+            <if test="homeLbsY != null" >
+                #{homeLbsY,jdbcType=DOUBLE},
+            </if>
+            <if test="homeAddress != null" >
+                #{homeAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="homeAddressName != null" >
+                #{homeAddressName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.StaffPersonnelInfo" >
+        update staff_personnel_info
+        <set >
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="realName != null" >
+                real_name = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="userTel != null" >
+                user_tel = #{userTel,jdbcType=VARCHAR},
+            </if>
+            <if test="jobNo != null" >
+                job_no = #{jobNo,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null" >
+                id_card = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="businessUnitId != null" >
+                business_unit_id = #{businessUnitId,jdbcType=BIGINT},
+            </if>
+            <if test="businessUnit != null" >
+                business_unit = #{businessUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                company_id = #{companyId,jdbcType=BIGINT},
+            </if>
+            <if test="company != null" >
+                company = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="organId != null" >
+                organ_id = #{organId,jdbcType=BIGINT},
+            </if>
+            <if test="organ != null" >
+                organ = #{organ,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null" >
+                department_id = #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="department != null" >
+                department = #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="jobPostId != null" >
+                job_post_id = #{jobPostId,jdbcType=BIGINT},
+            </if>
+            <if test="jobPost != null" >
+                job_post = #{jobPost,jdbcType=VARCHAR},
+            </if>
+            <if test="basePay != null" >
+                base_pay = #{basePay,jdbcType=DOUBLE},
+            </if>
+            <if test="fixedPerfPay != null" >
+                fixed_perf_pay = #{fixedPerfPay,jdbcType=DOUBLE},
+            </if>
+            <if test="assesPerfPay != null" >
+                asses_perf_pay = #{assesPerfPay,jdbcType=DOUBLE},
+            </if>
+            <if test="managePerfPay != null" >
+                manage_perf_pay = #{managePerfPay,jdbcType=DOUBLE},
+            </if>
+            <if test="travelAllowancePay != null" >
+                travel_allowance_pay = #{travelAllowancePay,jdbcType=DOUBLE},
+            </if>
+            <if test="socialSecurityPay != null" >
+                social_security_pay = #{socialSecurityPay,jdbcType=DOUBLE},
+            </if>
+            <if test="fundPay != null" >
+                fund_pay = #{fundPay,jdbcType=DOUBLE},
+            </if>
+            <if test="payAddress != null" >
+                pay_address = #{payAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="staffState != null" >
+                staff_state = #{staffState,jdbcType=INTEGER},
+            </if>
+            <if test="relation != null" >
+                relation = #{relation,jdbcType=INTEGER},
+            </if>
+            <if test="quitTime != null" >
+                quit_time = #{quitTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="entryTime != null" >
+                entry_time = #{entryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="pensionBase != null" >
+                pension_base = #{pensionBase,jdbcType=DOUBLE},
+            </if>
+            <if test="pensionCompanyRate != null" >
+                pension_company_rate = #{pensionCompanyRate,jdbcType=DOUBLE},
+            </if>
+            <if test="pensionPersonalRate != null" >
+                pension_personal_rate = #{pensionPersonalRate,jdbcType=DOUBLE},
+            </if>
+            <if test="medicalBase != null" >
+                medical_base = #{medicalBase,jdbcType=DOUBLE},
+            </if>
+            <if test="medicalCompanyRate != null" >
+                medical_company_rate = #{medicalCompanyRate,jdbcType=DOUBLE},
+            </if>
+            <if test="medicalPersonalRate != null" >
+                medical_personal_rate = #{medicalPersonalRate,jdbcType=DOUBLE},
+            </if>
+            <if test="upmBase != null" >
+                upm_base = #{upmBase,jdbcType=DOUBLE},
+            </if>
+            <if test="upmCompanyRate != null" >
+                upm_company_rate = #{upmCompanyRate,jdbcType=DOUBLE},
+            </if>
+            <if test="upmPersonalRate != null" >
+                upm_personal_rate = #{upmPersonalRate,jdbcType=DOUBLE},
+            </if>
+            <if test="isaBase != null" >
+                isa_base = #{isaBase,jdbcType=DOUBLE},
+            </if>
+            <if test="isaCompanyRate != null" >
+                isa_company_rate = #{isaCompanyRate,jdbcType=DOUBLE},
+            </if>
+            <if test="birthBase != null" >
+                birth_base = #{birthBase,jdbcType=DOUBLE},
+            </if>
+            <if test="birthCompanyRate != null" >
+                birth_company_rate = #{birthCompanyRate,jdbcType=DOUBLE},
+            </if>
+            <if test="fundPayCompanyRate != null" >
+                fund_pay_company_rate = #{fundPayCompanyRate,jdbcType=DOUBLE},
+            </if>
+            <if test="fundPayPersonalRate != null" >
+                fund_pay_personal_rate = #{fundPayPersonalRate,jdbcType=DOUBLE},
+            </if>
+            <if test="team != null" >
+                team = #{team,jdbcType=VARCHAR},
+            </if>
+            <if test="teamId != null" >
+                team_id = #{teamId,jdbcType=BIGINT},
+            </if>
+            <if test="socialSecurityCompanyId != null" >
+                social_security_company_id = #{socialSecurityCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="socialSecurityCompany != null" >
+                social_security_company = #{socialSecurityCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="managePerfPaySize != null" >
+                manage_perf_pay_size = #{managePerfPaySize,jdbcType=DOUBLE},
+            </if>
+            <if test="quitCost != null" >
+                quit_cost = #{quitCost,jdbcType=DOUBLE},
+            </if>
+            <if test="managePerfPaySizeHz != null" >
+                manage_perf_pay_size_hz = #{managePerfPaySizeHz,jdbcType=DOUBLE},
+            </if>
+            <if test="surveyLevelId != null" >
+                survey_level_id = #{surveyLevelId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyLevelName != null" >
+                survey_level_name = #{surveyLevelName,jdbcType=VARCHAR},
+            </if>
+            <if test="regularTime != null" >
+                regular_time = #{regularTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="extTel != null" >
+                ext_tel = #{extTel,jdbcType=VARCHAR},
+            </if>
+            <if test="officePlace != null" >
+                office_place = #{officePlace,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="trialTime != null" >
+                trial_time = #{trialTime,jdbcType=VARCHAR},
+            </if>
+            <if test="jobLevel != null" >
+                job_level = #{jobLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null" >
+                education = #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="graduationSchool != null" >
+                graduation_school = #{graduationSchool,jdbcType=VARCHAR},
+            </if>
+            <if test="graduationTime != null" >
+                graduation_time = #{graduationTime,jdbcType=DATE},
+            </if>
+            <if test="major != null" >
+                major = #{major,jdbcType=VARCHAR},
+            </if>
+            <if test="bankNo != null" >
+                bank_no = #{bankNo,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null" >
+                bank_name = #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="contractCompany != null" >
+                contract_company = #{contractCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="contractType != null" >
+                contract_type = #{contractType,jdbcType=VARCHAR},
+            </if>
+            <if test="firstContractBeginTime != null" >
+                first_contract_begin_time = #{firstContractBeginTime,jdbcType=DATE},
+            </if>
+            <if test="firstContractEndTime != null" >
+                first_contract_end_time = #{firstContractEndTime,jdbcType=DATE},
+            </if>
+            <if test="nowContractBeginTime != null" >
+                now_contract_begin_time = #{nowContractBeginTime,jdbcType=DATE},
+            </if>
+            <if test="nowContractEndTime != null" >
+                now_contract_end_time = #{nowContractEndTime,jdbcType=DATE},
+            </if>
+            <if test="contractTerm != null" >
+                contract_term = #{contractTerm,jdbcType=VARCHAR},
+            </if>
+            <if test="renewNum != null" >
+                renew_num = #{renewNum,jdbcType=VARCHAR},
+            </if>
+            <if test="emergencyContactName != null" >
+                emergency_contact_name = #{emergencyContactName,jdbcType=VARCHAR},
+            </if>
+            <if test="emergencyContactRelation != null" >
+                emergency_contact_relation = #{emergencyContactRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="emergencyContactTel != null" >
+                emergency_contact_tel = #{emergencyContactTel,jdbcType=VARCHAR},
+            </if>
+            <if test="familyName != null" >
+                family_name = #{familyName,jdbcType=VARCHAR},
+            </if>
+            <if test="familyRelation != null" >
+                family_relation = #{familyRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="familySex != null" >
+                family_sex = #{familySex,jdbcType=VARCHAR},
+            </if>
+            <if test="familyBirthday != null" >
+                family_birthday = #{familyBirthday,jdbcType=DATE},
+            </if>
+            <if test="familyTel != null" >
+                family_tel = #{familyTel,jdbcType=VARCHAR},
+            </if>
+            <if test="familyIdcardName != null" >
+                family_idcard_name = #{familyIdcardName,jdbcType=VARCHAR},
+            </if>
+            <if test="budgetCompanyId != null" >
+                budget_company_id = #{budgetCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="budgetCompanyName != null" >
+                budget_company_name = #{budgetCompanyName,jdbcType=VARCHAR},
+            </if>
+            <if test="postRankId != null" >
+                post_rank_id = #{postRankId,jdbcType=BIGINT},
+            </if>
+            <if test="postRankName != null" >
+                post_rank_name = #{postRankName,jdbcType=VARCHAR},
+            </if>
+            <if test="postAppellationId != null" >
+                post_appellation_id = #{postAppellationId,jdbcType=BIGINT},
+            </if>
+            <if test="postAppellationName != null" >
+                post_appellation_name = #{postAppellationName,jdbcType=VARCHAR},
+            </if>
+            <if test="homeLbsX != null" >
+                home_lbs_x = #{homeLbsX,jdbcType=DOUBLE},
+            </if>
+            <if test="homeLbsY != null" >
+                home_lbs_y = #{homeLbsY,jdbcType=DOUBLE},
+            </if>
+            <if test="homeAddress != null" >
+                home_address = #{homeAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="homeAddressName != null" >
+                home_address_name = #{homeAddressName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.StaffPersonnelInfo" >
+    update staff_personnel_info
+    set user_id = #{userId,jdbcType=BIGINT},
+      real_name = #{realName,jdbcType=VARCHAR},
+      user_tel = #{userTel,jdbcType=VARCHAR},
+      job_no = #{jobNo,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      business_unit_id = #{businessUnitId,jdbcType=BIGINT},
+      business_unit = #{businessUnit,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=BIGINT},
+      company = #{company,jdbcType=VARCHAR},
+      organ_id = #{organId,jdbcType=BIGINT},
+      organ = #{organ,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      department = #{department,jdbcType=VARCHAR},
+      job_post_id = #{jobPostId,jdbcType=BIGINT},
+      job_post = #{jobPost,jdbcType=VARCHAR},
+      base_pay = #{basePay,jdbcType=DOUBLE},
+      fixed_perf_pay = #{fixedPerfPay,jdbcType=DOUBLE},
+      asses_perf_pay = #{assesPerfPay,jdbcType=DOUBLE},
+      manage_perf_pay = #{managePerfPay,jdbcType=DOUBLE},
+      travel_allowance_pay = #{travelAllowancePay,jdbcType=DOUBLE},
+      social_security_pay = #{socialSecurityPay,jdbcType=DOUBLE},
+      fund_pay = #{fundPay,jdbcType=DOUBLE},
+      pay_address = #{payAddress,jdbcType=VARCHAR},
+      staff_state = #{staffState,jdbcType=INTEGER},
+      relation = #{relation,jdbcType=INTEGER},
+      quit_time = #{quitTime,jdbcType=TIMESTAMP},
+      entry_time = #{entryTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      pension_base = #{pensionBase,jdbcType=DOUBLE},
+      pension_company_rate = #{pensionCompanyRate,jdbcType=DOUBLE},
+      pension_personal_rate = #{pensionPersonalRate,jdbcType=DOUBLE},
+      medical_base = #{medicalBase,jdbcType=DOUBLE},
+      medical_company_rate = #{medicalCompanyRate,jdbcType=DOUBLE},
+      medical_personal_rate = #{medicalPersonalRate,jdbcType=DOUBLE},
+      upm_base = #{upmBase,jdbcType=DOUBLE},
+      upm_company_rate = #{upmCompanyRate,jdbcType=DOUBLE},
+      upm_personal_rate = #{upmPersonalRate,jdbcType=DOUBLE},
+      isa_base = #{isaBase,jdbcType=DOUBLE},
+      isa_company_rate = #{isaCompanyRate,jdbcType=DOUBLE},
+      birth_base = #{birthBase,jdbcType=DOUBLE},
+      birth_company_rate = #{birthCompanyRate,jdbcType=DOUBLE},
+      fund_pay_company_rate = #{fundPayCompanyRate,jdbcType=DOUBLE},
+      fund_pay_personal_rate = #{fundPayPersonalRate,jdbcType=DOUBLE},
+      team = #{team,jdbcType=VARCHAR},
+      team_id = #{teamId,jdbcType=BIGINT},
+      social_security_company_id = #{socialSecurityCompanyId,jdbcType=BIGINT},
+      social_security_company = #{socialSecurityCompany,jdbcType=VARCHAR},
+      manage_perf_pay_size = #{managePerfPaySize,jdbcType=DOUBLE},
+      quit_cost = #{quitCost,jdbcType=DOUBLE},
+      manage_perf_pay_size_hz = #{managePerfPaySizeHz,jdbcType=DOUBLE},
+      survey_level_id = #{surveyLevelId,jdbcType=BIGINT},
+      survey_level_name = #{surveyLevelName,jdbcType=VARCHAR},
+      regular_time = #{regularTime,jdbcType=TIMESTAMP},
+      ext_tel = #{extTel,jdbcType=VARCHAR},
+      office_place = #{officePlace,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      trial_time = #{trialTime,jdbcType=VARCHAR},
+      job_level = #{jobLevel,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      graduation_school = #{graduationSchool,jdbcType=VARCHAR},
+      graduation_time = #{graduationTime,jdbcType=DATE},
+      major = #{major,jdbcType=VARCHAR},
+      bank_no = #{bankNo,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      contract_company = #{contractCompany,jdbcType=VARCHAR},
+      contract_type = #{contractType,jdbcType=VARCHAR},
+      first_contract_begin_time = #{firstContractBeginTime,jdbcType=DATE},
+      first_contract_end_time = #{firstContractEndTime,jdbcType=DATE},
+      now_contract_begin_time = #{nowContractBeginTime,jdbcType=DATE},
+      now_contract_end_time = #{nowContractEndTime,jdbcType=DATE},
+      contract_term = #{contractTerm,jdbcType=VARCHAR},
+      renew_num = #{renewNum,jdbcType=VARCHAR},
+      emergency_contact_name = #{emergencyContactName,jdbcType=VARCHAR},
+      emergency_contact_relation = #{emergencyContactRelation,jdbcType=VARCHAR},
+      emergency_contact_tel = #{emergencyContactTel,jdbcType=VARCHAR},
+      family_name = #{familyName,jdbcType=VARCHAR},
+      family_relation = #{familyRelation,jdbcType=VARCHAR},
+      family_sex = #{familySex,jdbcType=VARCHAR},
+      family_birthday = #{familyBirthday,jdbcType=DATE},
+      family_tel = #{familyTel,jdbcType=VARCHAR},
+      family_idcard_name = #{familyIdcardName,jdbcType=VARCHAR},
+      budget_company_id = #{budgetCompanyId,jdbcType=BIGINT},
+      budget_company_name = #{budgetCompanyName,jdbcType=VARCHAR},
+      post_rank_id = #{postRankId,jdbcType=BIGINT},
+      post_rank_name = #{postRankName,jdbcType=VARCHAR},
+      post_appellation_id = #{postAppellationId,jdbcType=BIGINT},
+      post_appellation_name = #{postAppellationName,jdbcType=VARCHAR},
+      home_lbs_x = #{homeLbsX,jdbcType=DOUBLE},
+      home_lbs_y = #{homeLbsY,jdbcType=DOUBLE},
+      home_address = #{homeAddress,jdbcType=VARCHAR},
+      home_address_name = #{homeAddressName,jdbcType=VARCHAR},
+        performance = #{performance,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="userId != null" >
+            and user_id = #{userId,jdbcType=BIGINT}
+        </if>
+        <if test="realName != null" >
+            and real_name like CONCAT(CONCAT('%',replace(#{realName,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="userTel != null" >
+            and user_tel like CONCAT(CONCAT('%',replace(#{userTel,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="jobNo != null" >
+            and job_no like CONCAT(CONCAT('%',replace(#{jobNo,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="idCard != null" >
+            and id_card like CONCAT(CONCAT('%',replace(#{idCard,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="businessUnit != null" >
+            and business_unit = #{businessUnit,jdbcType=VARCHAR}
+        </if>
+        <if test="company != null" >
+            and company = #{company,jdbcType=VARCHAR}
+        </if>
+        <if test="department != null" >
+            and department = #{department,jdbcType=VARCHAR}
+        </if>
+        <if test="team != null" >
+            and team = #{team,jdbcType=VARCHAR}
+        </if>
+        <if test="jobPost != null" >
+            and job_post = #{jobPost,jdbcType=VARCHAR}
+        </if>
+        <if test="staffState != null" >
+            and staff_state = #{staffState,jdbcType=INTEGER}
+        </if>
+        <if test="search != null" >
+            <if test="search == 1" >
+                and staff_state != 6
+                and DATE_FORMAT(entry_time,'%Y-%m') &lt; DATE_FORMAT(#{entryTime,jdbcType=DATE},'%Y-%m')
+            </if>
+            <if test="search == 2" >
+                and staff_state != 6 and staff_state != 3
+            </if>
+        </if>
+        <if test="businessUnitId != null" >
+           and business_unit_id = #{businessUnitId,jdbcType=BIGINT}
+        </if>
+        <if test="companyId != null" >
+           and company_id = #{companyId,jdbcType=BIGINT}
+        </if>
+        <if test="organId != null" >
+            and organ_id = #{organId,jdbcType=BIGINT}
+        </if>
+        <if test="departmentId != null" >
+            and department_id = #{departmentId,jdbcType=BIGINT}
+        </if>
+        <if test="teamId != null" >
+            and team_id = #{teamId,jdbcType=BIGINT}
+        </if>
+        <if test="jobPostId != null" >
+            and job_post_id = #{jobPostId,jdbcType=BIGINT}
+        </if>
+        <if test="businessUnitIds != null" >
+            and find_in_set(business_unit_id,#{businessUnitIds,jdbcType=VARCHAR})
+        </if>
+        <if test="companyIds != null" >
+            and find_in_set(company_id,#{companyIds,jdbcType=VARCHAR})
+        </if>
+        <if test="organIds != null ">
+            and organ_id in (${organIds})
+        </if>
+        <if test="departmentIds != null ">
+            and department_id in (${departmentIds})
+        </if>
+        <if test="jobPostIds != null ">
+            and job_post_id in (${jobPostIds})
+        </if>
+        <if test="staffStates != null ">
+            and staff_state in (${staffStates})
+        </if>
+        <if test="teamIds != null ">
+            and team_id in (${teamIds})
+        </if>
+        <if test="relation != null ">
+            and relation = #{relation}
+        </if>
+        <if test="entryTimeStart != null ">
+            AND DATE_FORMAT(entry_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{entryTimeStart,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="entryTimeEnd != null ">
+            AND DATE_FORMAT(entry_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{entryTimeEnd,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="quitTimeStart != null ">
+            AND DATE_FORMAT(quit_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{quitTimeStart,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="quitTimeEnd != null ">
+            AND DATE_FORMAT(quit_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{quitTimeEnd,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="searchStr != null">
+            and
+            (
+                real_name like CONCAT(CONCAT('%',replace(#{searchStr,jdbcType=VARCHAR},' ','')), '%')
+                or user_tel like CONCAT(CONCAT('%',replace(#{searchStr,jdbcType=VARCHAR},' ','')), '%')
+                or job_no like CONCAT(CONCAT('%',replace(#{searchStr,jdbcType=VARCHAR},' ','')), '%')
+                or id_card like CONCAT(CONCAT('%',replace(#{searchStr,jdbcType=VARCHAR},' ','')), '%')
+            )
+        </if>
+        <if test="socialSecurityCompanyId != null" >
+            and social_security_company_id = #{socialSecurityCompanyId,jdbcType=BIGINT}
+        </if>
+        <if test="socialSecurityCompany != null" >
+            and social_security_company = #{socialSecurityCompany,jdbcType=VARCHAR}
+        </if>
+        <if test="socialSecurityCompanyIds != null" >
+            and find_in_set(social_security_company_id,#{socialSecurityCompanyIds,jdbcType=VARCHAR})
+        </if>
+
+        <if test="names144 == 144">
+            and (budget_company_name like '%公估%' or social_security_company like '%公估%')
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from staff_personnel_info
+        <include refid="joins" />
+        where delete_flag =0
+        <include refid="wheres" />
+        order by
+        <if test="order != null">
+            <if test="order == 1">
+                <if test="colSortType == 1">
+                    entry_time asc,
+                </if>
+                <if test="colSortType == 2">
+                    entry_time desc,
+                </if>
+            </if>
+            <if test="order == 2">
+                <if test="colSortType == 1">
+                    quit_time asc,
+                </if>
+                <if test="colSortType == 2">
+                    quit_time desc,
+                </if>
+            </if>
+            <if test="order == 3">
+                <if test="colSortType == 1">
+                    create_time asc,
+                </if>
+                <if test="colSortType == 2">
+                    create_time desc,
+                </if>
+            </if>
+        </if>
+        id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from staff_personnel_info
+        <include refid="joins" />
+        where delete_flag =0
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectStaffPersonelInfoByJobNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from staff_personnel_info
+        where delete_flag =0 and job_no = #{jobNo,jdbcType=VARCHAR}
+        limit 1
+    </select>
+
+    <select id="selectStaffPersonelInfoByIdCard" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from staff_personnel_info
+        where delete_flag =0 and id_card = #{idCard,jdbcType=VARCHAR}
+        limit 1
+    </select>
+
+
+
+
+    <select id="selectByInfo" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from staff_personnel_info
+        where 1 = 1
+        <if test="userTel != null" >
+            and user_tel = #{userTel,jdbcType=VARCHAR}
+        </if>
+        <if test="jobNo != null" >
+            and job_no = #{jobNo,jdbcType=VARCHAR}
+        </if>
+        <if test="idCard != null" >
+            and id_card = #{idCard,jdbcType=VARCHAR}
+        </if>
+        limit 1;
+    </select>
+
+    <update id="updateStaffState" parameterType="java.lang.Long" >
+        update staff_personnel_info s
+        left JOIN (select staff_personnel_id from staff_performance_personnel where staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT}) a on s.id = a.staff_personnel_id
+        set staff_state = 6
+        where s.staff_state =3 and a.staff_personnel_id is not null;
+    </update>
+
+    <select id="selectStaffPersonelInfoByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from staff_personnel_info
+        where delete_flag =0 and user_id = #{userId,jdbcType=BIGINT}
+        limit 1
+    </select>
+
+    <select id="myPersonelInfosSize" parameterType="map" resultType="int">
+        select count(1)
+        from staff_personnel_info
+        where delete_flag =0 and staff_state != 6
+        and organ_id in (
+            select id from staff_organ where 1=1
+            <if test="organManagerStaffId != null" >
+                and organ_manager_staff_id = #{organManagerStaffId,jdbcType=BIGINT}
+            </if>
+            <if test="superiorManagerStaffId != null" >
+                and superior_manager_staff_id = #{superiorManagerStaffId,jdbcType=BIGINT}
+            </if>
+        )
+    </select>
+
+    <select id="selectStr" resultType="com.lefancrm.apicenter.model.StaffPersonnelInfo">
+        select  A.id as id, A.real_name as realName,A.user_id as userId, A.social_security_company_id as socialSecurityCompanyId,A.staff_state as staffState,
+          A.organ_id as organId, A.department_id as departmentId, A.team_id as teamId, A.entry_time as entryTime, A.quit_time as quitTime,
+          GROUP_CONCAT(ifnull(A.social_security_company_id,''),'_',ifnull(A.organ_id,''),'_',ifnull(A.department_id,''),'_',ifnull(A.team_id,'')) as contidion
+        from
+        (
+            SELECT a.id,a.real_name,a.user_id,a.social_security_company_id,a.organ_id,a.department_id,a.team_id,a.entry_time,a.quit_time,a.staff_state from staff_personnel_info a
+        ) A group by A.id
+    </select>
+    <select id="selectListByOrgId" resultMap="BaseResultMap">
+        SELECT * FROM staff_personnel_info WHERE delete_flag = 0 AND organ_id = #{id}
+    </select>
+
+    <update id="updateStaffStateByPaySlip" parameterType="java.lang.Long" >
+        update staff_personnel_info s
+        left JOIN (select staff_personnel_id from staff_pay_personnel_slip where staff_pay_slip_id = #{staffPaySlipId,jdbcType=BIGINT}) a on s.id = a.staff_personnel_id
+        set staff_state = 6
+        where s.staff_state =3 and a.staff_personnel_id is not null and s.relation = 5;
+    </update>
+    <update id="updateByOrganKey">
+        UPDATE staff_personnel_info
+        SET performance = #{performance}
+        WHERE organ_id = #{id}
+    </update>
+
+</mapper>

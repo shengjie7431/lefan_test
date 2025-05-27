@@ -1,0 +1,1819 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.StaffPerformancePersonnelMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.StaffPerformancePersonnel" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="staff_performance_id" property="staffPerformanceId" jdbcType="BIGINT" />
+        <result column="staff_personnel_id" property="staffPersonnelId" jdbcType="BIGINT" />
+        <result column="job_no" property="jobNo" jdbcType="VARCHAR" />
+        <result column="assess_kpi" property="assessKpi" jdbcType="DOUBLE" />
+        <result column="integral" property="integral" jdbcType="DOUBLE" />
+        <result column="integral_pay" property="integralPay" jdbcType="DOUBLE" />
+        <result column="late_early_num" property="lateEarlyNum" jdbcType="INTEGER" />
+        <result column="late_early_money" property="lateEarlyMoney" jdbcType="DOUBLE" />
+        <result column="absenteeism_num" property="absenteeismNum" jdbcType="INTEGER" />
+        <result column="absenteeism_money" property="absenteeismMoney" jdbcType="DOUBLE" />
+        <result column="leave_num" property="leaveNum" jdbcType="DOUBLE" />
+        <result column="leave_money" property="leaveMoney" jdbcType="DOUBLE" />
+        <result column="sick_leave_time" property="sickLeaveTime" jdbcType="DOUBLE" />
+        <result column="sick_leave_money" property="sickLeaveMoney" jdbcType="DOUBLE" />
+        <result column="other_pay" property="otherPay" jdbcType="DOUBLE" />
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="rate" property="rate" jdbcType="DOUBLE" />
+        <result column="real_pay" property="realPay" jdbcType="DOUBLE" />
+        <result column="bs_score" property="bsScoreHz" jdbcType="DOUBLE" />
+        <result column="other_score" property="otherScoreHz" jdbcType="DOUBLE" />
+        <result column="sun_score" property="sunScoreHz" jdbcType="DOUBLE" />
+        <result column="traffic_subsidy" property="trafficSubsidy" jdbcType="DOUBLE" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="real_name" property="realName" jdbcType="VARCHAR" />
+        <result column="user_tel" property="userTel" jdbcType="VARCHAR" />
+        <result column="business_unit" property="businessUnit" jdbcType="VARCHAR" />
+        <result column="company" property="company" jdbcType="VARCHAR" />
+        <result column="organ" property="organ" jdbcType="VARCHAR" />
+        <result column="department" property="department" jdbcType="VARCHAR" />
+        <result column="job_post" property="jobPost" jdbcType="VARCHAR" />
+        <result column="business_unit_id" property="businessUnitId" jdbcType="BIGINT" />
+        <result column="company_id" property="companyId" jdbcType="BIGINT" />
+        <result column="organ_id" property="organId" jdbcType="BIGINT" />
+        <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+        <result column="job_post_id" property="jobPostId" jdbcType="BIGINT" />
+        <result column="team" property="team" jdbcType="VARCHAR" />
+        <result column="team_id" property="teamId" jdbcType="BIGINT" />
+        <result column="entry_time" property="entryTime" jdbcType="TIMESTAMP" />
+        <result column="fixed_perf_pay" property="fixedPerfPay" jdbcType="DOUBLE" />
+        <result column="travel_allowance_pay" property="travelAllowancePay" jdbcType="DOUBLE" />
+        <result column="manage_perf_pay" property="managePerfPay" jdbcType="DOUBLE" />
+        <result column="real_working_days" property="realWorkingDays" jdbcType="DOUBLE" />
+        <result column="working_days" property="workingDays" jdbcType="DOUBLE" />
+        <result column="asses_perf_pay" property="assesPerfPay" jdbcType="DOUBLE" />
+        <result column="real_assess_kpi" property="realAssessKpi" jdbcType="DOUBLE" />
+        <result column="assess_bs_score" property="assessBsScore" jdbcType="DOUBLE" />
+        <result column="assess_other_score" property="assessOtherScore" jdbcType="DOUBLE" />
+        <result column="organ_opinion" property="organOpinion" jdbcType="VARCHAR" />
+        <result column="superior_opinion" property="superiorOpinion" jdbcType="VARCHAR" />
+        <result column="boss_opinion" property="bossOpinion" jdbcType="VARCHAR" />
+        <result column="organ_manager_user_id" property="organManagerUserId" jdbcType="BIGINT" />
+        <result column="superior_manager_user_id" property="superiorManagerUserId" jdbcType="BIGINT" />
+        <result column="back_state" property="backState" jdbcType="INTEGER" />
+        <result column="back_reason" property="backReason" jdbcType="VARCHAR" />
+        <result column="show_state" property="showState" jdbcType="INTEGER" />
+        <result column="basic_integral" property="basicIntegral" jdbcType="DOUBLE" />
+        <result column="fixed_perf_pay_base" property="fixedPerfPayBase" jdbcType="DOUBLE" />
+        <result column="travel_allowance_pay_base" property="travelAllowancePayBase" jdbcType="DOUBLE" />
+        <result column="manage_perf_pay_base" property="managePerfPayBase" jdbcType="DOUBLE" />
+        <result column="is_new_people" property="isNewPeople" jdbcType="INTEGER" />
+        <result column="bs_score_bs" property="bsScoreBs" jdbcType="DOUBLE" />
+        <result column="other_score_bs" property="otherScoreBs" jdbcType="DOUBLE" />
+        <result column="sun_score_bs" property="sunScoreBs" jdbcType="DOUBLE" />
+        <result column="month_basic_integral" property="monthBasicIntegral" jdbcType="DOUBLE" />
+        <result column="score_hz" property="scoreHz" jdbcType="DOUBLE" />
+        <result column="score_bs" property="scoreBs" jdbcType="DOUBLE" />
+        <result column="social_security_company_id" property="socialSecurityCompanyId" jdbcType="BIGINT" />
+        <result column="social_security_company" property="socialSecurityCompany" jdbcType="VARCHAR" />
+        <result column="sun_money_bs" property="sunMoneyBs" jdbcType="DOUBLE" />
+        <result column="manage_perf_pay_size" property="managePerfPaySize" jdbcType="DOUBLE" />
+        <result column="manage_case_num" property="manageCaseNum" jdbcType="INTEGER" />
+        <result column="welfare_pay" property="welfarePay" jdbcType="DOUBLE" />
+        <result column="welfare_remark" property="welfareRemark" jdbcType="VARCHAR" />
+        <result column="work_time" property="workTime" jdbcType="VARCHAR" />
+        <result column="quit_cost" property="quitCost" jdbcType="DOUBLE" />
+        <result column="manage_perf_pay_size_hz" property="managePerfPaySizeHz" jdbcType="DOUBLE" />
+        <result column="manage_case_num_hz" property="manageCaseNumHz" jdbcType="INTEGER" />
+        <result column="examine_score" property="examineScore" jdbcType="DOUBLE" />
+        <result column="examine_pay" property="examinePay" jdbcType="DOUBLE" />
+        <result column="other_cut_pay" property="otherCutPay" jdbcType="DOUBLE" />
+        <result column="other_cut_remarks" property="otherCutRemarks" jdbcType="VARCHAR" />
+        <result column="asses_perf_base_pay" property="assesPerfBasePay" jdbcType="DOUBLE" />
+        <result column="examine_rate" property="examineRate" jdbcType="DOUBLE" />
+        <result column="case_sub_money" property="caseSubMoney" jdbcType="DOUBLE" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, staff_performance_id, staff_personnel_id, job_no, assess_kpi, integral, integral_pay,
+        late_early_num, late_early_money, absenteeism_num, absenteeism_money, leave_num,
+        leave_money, sick_leave_time, sick_leave_money, other_pay, remarks, create_time,
+        create_by, update_time, update_by, delete_flag, rate, real_pay, bs_score, other_score,
+        sun_score, traffic_subsidy, user_id, real_name, user_tel, business_unit, company,
+        organ, department, job_post, business_unit_id, company_id, organ_id, department_id,
+        job_post_id, team, team_id,entry_time, fixed_perf_pay, travel_allowance_pay, manage_perf_pay, real_working_days,
+        working_days, asses_perf_pay, real_assess_kpi, assess_bs_score, assess_other_score, organ_opinion,
+        superior_opinion, boss_opinion, organ_manager_user_id, superior_manager_user_id, back_state, back_reason,
+        show_state, basic_integral, fixed_perf_pay_base, travel_allowance_pay_base,
+        manage_perf_pay_base, is_new_people, bs_score_bs, other_score_bs, sun_score_bs, month_basic_integral,score_hz,score_bs,
+        social_security_company_id, social_security_company, sun_money_bs, manage_perf_pay_size, manage_case_num, welfare_pay,
+        welfare_remark, work_time, quit_cost, manage_perf_pay_size_hz, manage_case_num_hz, examine_score,
+    examine_pay, other_cut_pay, other_cut_remarks, asses_perf_base_pay, examine_rate,case_sub_money
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from staff_performance_personnel
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from staff_performance_personnel
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.StaffPerformancePersonnel" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into staff_performance_personnel (staff_performance_id, staff_personnel_id,
+        job_no, assess_kpi, integral,
+        integral_pay, late_early_num, late_early_money,
+        absenteeism_num, absenteeism_money, leave_num,
+        leave_money, sick_leave_time, sick_leave_money,
+        other_pay, remarks, create_time,
+        create_by, update_time, update_by,
+        delete_flag, rate, real_pay,
+        bs_score, other_score, sun_score,
+        traffic_subsidy, user_id, real_name,
+        user_tel, business_unit, company,
+        organ, department, job_post,
+        business_unit_id, company_id, organ_id,
+        department_id, job_post_id, team, team_id,entry_time,
+        fixed_perf_pay, travel_allowance_pay, manage_perf_pay,
+        real_working_days, working_days, asses_perf_pay,
+        real_assess_kpi,assess_bs_score, assess_other_score, organ_opinion,
+        superior_opinion, boss_opinion, organ_manager_user_id, superior_manager_user_id,
+        back_state, back_reason, show_state, basic_integral, fixed_perf_pay_base, travel_allowance_pay_base,
+        manage_perf_pay_base, is_new_people, bs_score_bs, other_score_bs, sun_score_bs, month_basic_integral,
+        score_hz,score_bs,social_security_company_id, social_security_company, sun_money_bs,
+        manage_perf_pay_size, manage_case_num, welfare_pay, welfare_remark,work_time, quit_cost,
+        manage_perf_pay_size_hz, manage_case_num_hz, examine_score,
+        examine_pay, other_cut_pay, other_cut_remarks, asses_perf_base_pay, examine_rate,case_sub_money)
+        values (#{staffPerformanceId,jdbcType=BIGINT}, #{staffPersonnelId,jdbcType=BIGINT},
+        #{jobNo,jdbcType=VARCHAR}, #{assessKpi,jdbcType=DOUBLE}, #{integral,jdbcType=DOUBLE},
+        #{integralPay,jdbcType=DOUBLE}, #{lateEarlyNum,jdbcType=INTEGER}, #{lateEarlyMoney,jdbcType=DOUBLE},
+        #{absenteeismNum,jdbcType=INTEGER}, #{absenteeismMoney,jdbcType=DOUBLE}, #{leaveNum,jdbcType=DOUBLE},
+        #{leaveMoney,jdbcType=DOUBLE}, #{sickLeaveTime,jdbcType=DOUBLE}, #{sickLeaveMoney,jdbcType=DOUBLE},
+        #{otherPay,jdbcType=DOUBLE}, #{remarks,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+        #{deleteFlag,jdbcType=INTEGER}, #{rate,jdbcType=DOUBLE}, #{realPay,jdbcType=DOUBLE},
+        #{bsScoreHz,jdbcType=DOUBLE}, #{otherScoreHz,jdbcType=DOUBLE}, #{sunScoreHz,jdbcType=DOUBLE},
+        #{trafficSubsidy,jdbcType=DOUBLE}, #{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR},
+        #{userTel,jdbcType=VARCHAR}, #{businessUnit,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR},
+        #{organ,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{jobPost,jdbcType=VARCHAR},
+        #{businessUnitId,jdbcType=BIGINT}, #{companyId,jdbcType=BIGINT}, #{organId,jdbcType=BIGINT},
+        #{departmentId,jdbcType=BIGINT}, #{jobPostId,jdbcType=BIGINT}, #{team,jdbcType=VARCHAR},
+        #{teamId,jdbcType=BIGINT}, #{entryTime,jdbcType=TIMESTAMP},
+        #{fixedPerfPay,jdbcType=DOUBLE}, #{travelAllowancePay,jdbcType=DOUBLE}, #{managePerfPay,jdbcType=DOUBLE},
+        #{realWorkingDays,jdbcType=DOUBLE}, #{workingDays,jdbcType=DOUBLE}, #{assesPerfPay,jdbcType=DOUBLE},
+        #{realAssessKpi,jdbcType=DOUBLE}, #{assessBsScore,jdbcType=DOUBLE}, #{assessOtherScore,jdbcType=DOUBLE},
+        #{organOpinion,jdbcType=VARCHAR}, #{superiorOpinion,jdbcType=VARCHAR}, #{bossOpinion,jdbcType=VARCHAR},
+        #{organManagerUserId,jdbcType=BIGINT}, #{superiorManagerUserId,jdbcType=BIGINT},
+        #{backState,jdbcType=INTEGER}, #{backReason,jdbcType=VARCHAR},#{showState,jdbcType=INTEGER},
+        #{basicIntegral,jdbcType=DOUBLE}, #{fixedPerfPayBase,jdbcType=DOUBLE}, #{travelAllowancePayBase,jdbcType=DOUBLE},
+        #{managePerfPayBase,jdbcType=DOUBLE}, #{isNewPeople,jdbcType=INTEGER}, #{bsScoreBs,jdbcType=DOUBLE},
+        #{otherScoreBs,jdbcType=DOUBLE}, #{sunScoreBs,jdbcType=DOUBLE}, #{monthBasicIntegral,jdbcType=DOUBLE},
+        #{scoreHz,jdbcType=DOUBLE}, #{scoreBs,jdbcType=DOUBLE},
+        #{socialSecurityCompanyId,jdbcType=BIGINT}, #{socialSecurityCompany,jdbcType=VARCHAR}, #{sunMoneyBs,jdbcType=DOUBLE},
+        #{managePerfPaySize,jdbcType=DOUBLE}, #{manageCaseNum,jdbcType=INTEGER},
+        #{welfarePay,jdbcType=DOUBLE}, #{welfareRemark,jdbcType=VARCHAR},#{workTime,jdbcType=VARCHAR}, #{quitCost,jdbcType=DOUBLE},
+        #{managePerfPaySizeHz,jdbcType=DOUBLE}, #{manageCaseNumHz,jdbcType=INTEGER},
+        #{examineScore,jdbcType=DOUBLE}, #{examinePay,jdbcType=DOUBLE}, #{otherCutPay,jdbcType=DOUBLE},
+        #{otherCutRemarks,jdbcType=VARCHAR}, #{assesPerfBasePay,jdbcType=DOUBLE}, #{examineRate,jdbcType=DOUBLE}, #{caseSubMoney,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.StaffPerformancePersonnel" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into staff_performance_personnel
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="staffPerformanceId != null" >
+                staff_performance_id,
+            </if>
+            <if test="staffPersonnelId != null" >
+                staff_personnel_id,
+            </if>
+            <if test="jobNo != null" >
+                job_no,
+            </if>
+            <if test="assessKpi != null" >
+                assess_kpi,
+            </if>
+            <if test="integral != null" >
+                integral,
+            </if>
+            <if test="integralPay != null" >
+                integral_pay,
+            </if>
+            <if test="lateEarlyNum != null" >
+                late_early_num,
+            </if>
+            <if test="lateEarlyMoney != null" >
+                late_early_money,
+            </if>
+            <if test="absenteeismNum != null" >
+                absenteeism_num,
+            </if>
+            <if test="absenteeismMoney != null" >
+                absenteeism_money,
+            </if>
+            <if test="leaveNum != null" >
+                leave_num,
+            </if>
+            <if test="leaveMoney != null" >
+                leave_money,
+            </if>
+            <if test="sickLeaveTime != null" >
+                sick_leave_time,
+            </if>
+            <if test="sickLeaveMoney != null" >
+                sick_leave_money,
+            </if>
+            <if test="otherPay != null" >
+                other_pay,
+            </if>
+            <if test="remarks != null" >
+                remarks,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+            <if test="rate != null" >
+                rate,
+            </if>
+            <if test="realPay != null" >
+                real_pay,
+            </if>
+            <if test="bsScoreHz != null" >
+                bs_score,
+            </if>
+            <if test="otherScoreHz != null" >
+                other_score,
+            </if>
+            <if test="sunScoreHz != null" >
+                sun_score,
+            </if>
+            <if test="trafficSubsidy != null" >
+                traffic_subsidy,
+            </if>
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="realName != null" >
+                real_name,
+            </if>
+            <if test="userTel != null" >
+                user_tel,
+            </if>
+            <if test="businessUnit != null" >
+                business_unit,
+            </if>
+            <if test="company != null" >
+                company,
+            </if>
+            <if test="organ != null" >
+                organ,
+            </if>
+            <if test="department != null" >
+                department,
+            </if>
+            <if test="jobPost != null" >
+                job_post,
+            </if>
+            <if test="businessUnitId != null" >
+                business_unit_id,
+            </if>
+            <if test="companyId != null" >
+                company_id,
+            </if>
+            <if test="organId != null" >
+                organ_id,
+            </if>
+            <if test="departmentId != null" >
+                department_id,
+            </if>
+            <if test="jobPostId != null" >
+                job_post_id,
+            </if>
+            <if test="team != null" >
+                team,
+            </if>
+            <if test="teamId != null" >
+                team_id,
+            </if>
+            <if test="entryTime != null" >
+                entry_time,
+            </if>
+            <if test="fixedPerfPay != null" >
+                fixed_perf_pay,
+            </if>
+            <if test="travelAllowancePay != null" >
+                travel_allowance_pay,
+            </if>
+            <if test="managePerfPay != null" >
+                manage_perf_pay,
+            </if>
+            <if test="realWorkingDays != null" >
+                real_working_days,
+            </if>
+            <if test="workingDays != null" >
+                working_days,
+            </if>
+            <if test="assesPerfPay != null" >
+                asses_perf_pay,
+            </if>
+            <if test="realAssessKpi != null" >
+                real_assess_kpi,
+            </if>
+            <if test="assessBsScore != null" >
+                assess_bs_score,
+            </if>
+            <if test="assessOtherScore != null" >
+                assess_other_score,
+            </if>
+            <if test="organOpinion != null" >
+                organ_opinion,
+            </if>
+            <if test="superiorOpinion != null" >
+                superior_opinion,
+            </if>
+            <if test="bossOpinion != null" >
+                boss_opinion,
+            </if>
+            <if test="organManagerUserId != null" >
+                organ_manager_user_id,
+            </if>
+            <if test="superiorManagerUserId != null" >
+                superior_manager_user_id,
+            </if>
+            <if test="backState != null" >
+                back_state,
+            </if>
+            <if test="backReason != null" >
+                back_reason,
+            </if>
+            <if test="showState != null" >
+                show_state,
+            </if>
+            <if test="basicIntegral != null" >
+                basic_integral,
+            </if>
+            <if test="fixedPerfPayBase != null" >
+                fixed_perf_pay_base,
+            </if>
+            <if test="travelAllowancePayBase != null" >
+                travel_allowance_pay_base,
+            </if>
+            <if test="managePerfPayBase != null" >
+                manage_perf_pay_base,
+            </if>
+            <if test="isNewPeople != null" >
+                is_new_people,
+            </if>
+            <if test="bsScoreBs != null" >
+                bs_score_bs,
+            </if>
+            <if test="otherScoreBs != null" >
+                other_score_bs,
+            </if>
+            <if test="sunScoreBs != null" >
+                sun_score_bs,
+            </if>
+            <if test="monthBasicIntegral != null" >
+                month_basic_integral,
+            </if>
+            <if test="scoreHz != null" >
+                score_hz,
+            </if>
+            <if test="scoreBs != null" >
+                score_bs,
+            </if>
+            <if test="socialSecurityCompanyId != null" >
+                social_security_company_id,
+            </if>
+            <if test="socialSecurityCompany != null" >
+                social_security_company,
+            </if>
+            <if test="sunMoneyBs != null" >
+                sun_money_bs,
+            </if>
+            <if test="managePerfPaySize != null" >
+                manage_perf_pay_size,
+            </if>
+            <if test="manageCaseNum != null" >
+                manage_case_num,
+            </if>
+            <if test="welfarePay != null" >
+                welfare_pay,
+            </if>
+            <if test="welfareRemark != null" >
+                welfare_remark,
+            </if>
+            <if test="workTime != null" >
+                work_time,
+            </if>
+            <if test="quitCost != null" >
+                quit_cost,
+            </if>
+            <if test="managePerfPaySizeHz != null" >
+                manage_perf_pay_size_hz,
+            </if>
+            <if test="manageCaseNumHz != null" >
+                manage_case_num_hz,
+            </if>
+            <if test="examineScore != null" >
+                examine_score,
+            </if>
+            <if test="examinePay != null" >
+                examine_pay,
+            </if>
+            <if test="otherCutPay != null" >
+                other_cut_pay,
+            </if>
+            <if test="otherCutRemarks != null" >
+                other_cut_remarks,
+            </if>
+            <if test="assesPerfBasePay != null" >
+                asses_perf_base_pay,
+            </if>
+            <if test="examineRate != null" >
+                examine_rate,
+            </if>
+            <if test="caseSubMoney != null" >
+                case_sub_money,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="staffPerformanceId != null" >
+                #{staffPerformanceId,jdbcType=BIGINT},
+            </if>
+            <if test="staffPersonnelId != null" >
+                #{staffPersonnelId,jdbcType=BIGINT},
+            </if>
+            <if test="jobNo != null" >
+                #{jobNo,jdbcType=VARCHAR},
+            </if>
+            <if test="assessKpi != null" >
+                #{assessKpi,jdbcType=DOUBLE},
+            </if>
+            <if test="integral != null" >
+                #{integral,jdbcType=DOUBLE},
+            </if>
+            <if test="integralPay != null" >
+                #{integralPay,jdbcType=DOUBLE},
+            </if>
+            <if test="lateEarlyNum != null" >
+                #{lateEarlyNum,jdbcType=INTEGER},
+            </if>
+            <if test="lateEarlyMoney != null" >
+                #{lateEarlyMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="absenteeismNum != null" >
+                #{absenteeismNum,jdbcType=INTEGER},
+            </if>
+            <if test="absenteeismMoney != null" >
+                #{absenteeismMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="leaveNum != null" >
+                #{leaveNum,jdbcType=DOUBLE},
+            </if>
+            <if test="leaveMoney != null" >
+                #{leaveMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="sickLeaveTime != null" >
+                #{sickLeaveTime,jdbcType=DOUBLE},
+            </if>
+            <if test="sickLeaveMoney != null" >
+                #{sickLeaveMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherPay != null" >
+                #{otherPay,jdbcType=DOUBLE},
+            </if>
+            <if test="remarks != null" >
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="rate != null" >
+                #{rate,jdbcType=DOUBLE},
+            </if>
+            <if test="realPay != null" >
+                #{realPay,jdbcType=DOUBLE},
+            </if>
+            <if test="bsScoreHz != null" >
+                #{bsScoreHz,jdbcType=DOUBLE},
+            </if>
+            <if test="otherScoreHz != null" >
+                #{otherScoreHz,jdbcType=DOUBLE},
+            </if>
+            <if test="sunScoreHz != null" >
+                #{sunScore,jdbcType=DOUBLE},
+            </if>
+            <if test="trafficSubsidy != null" >
+                #{trafficSubsidy,jdbcType=DOUBLE},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="realName != null" >
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="userTel != null" >
+                #{userTel,jdbcType=VARCHAR},
+            </if>
+            <if test="businessUnit != null" >
+                #{businessUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null" >
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="organ != null" >
+                #{organ,jdbcType=VARCHAR},
+            </if>
+            <if test="department != null" >
+                #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="jobPost != null" >
+                #{jobPost,jdbcType=VARCHAR},
+            </if>
+            <if test="businessUnitId != null" >
+                #{businessUnitId,jdbcType=BIGINT},
+            </if>
+            <if test="companyId != null" >
+                #{companyId,jdbcType=BIGINT},
+            </if>
+            <if test="organId != null" >
+                #{organId,jdbcType=BIGINT},
+            </if>
+            <if test="departmentId != null" >
+                #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="jobPostId != null" >
+                #{jobPostId,jdbcType=BIGINT},
+            </if>
+            <if test="team != null" >
+                #{team,jdbcType=VARCHAR},
+            </if>
+            <if test="teamId != null" >
+                #{teamId,jdbcType=BIGINT},
+            </if>
+            <if test="entryTime != null" >
+                #{entryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fixedPerfPay != null" >
+                #{fixedPerfPay,jdbcType=DOUBLE},
+            </if>
+            <if test="travelAllowancePay != null" >
+                #{travelAllowancePay,jdbcType=DOUBLE},
+            </if>
+            <if test="managePerfPay != null" >
+                #{managePerfPay,jdbcType=DOUBLE},
+            </if>
+            <if test="realWorkingDays != null" >
+                #{realWorkingDays,jdbcType=DOUBLE},
+            </if>
+            <if test="workingDays != null" >
+                #{workingDays,jdbcType=DOUBLE},
+            </if>
+            <if test="assesPerfPay != null" >
+                #{assesPerfPay,jdbcType=DOUBLE},
+            </if>
+            <if test="realAssessKpi != null" >
+                #{realAssessKpi,jdbcType=DOUBLE},
+            </if>
+            <if test="assessBsScore != null" >
+                #{assessBsScore,jdbcType=DOUBLE},
+            </if>
+            <if test="assessOtherScore != null" >
+                #{assessOtherScore,jdbcType=DOUBLE},
+            </if>
+            <if test="organOpinion != null" >
+                #{organOpinion,jdbcType=VARCHAR},
+            </if>
+            <if test="superiorOpinion != null" >
+                #{superiorOpinion,jdbcType=VARCHAR},
+            </if>
+            <if test="bossOpinion != null" >
+                #{bossOpinion,jdbcType=VARCHAR},
+            </if>
+            <if test="organManagerUserId != null" >
+                #{organManagerUserId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorManagerUserId != null" >
+                #{superiorManagerUserId,jdbcType=BIGINT},
+            </if>
+            <if test="backState != null" >
+                #{backState,jdbcType=INTEGER},
+            </if>
+            <if test="backReason != null" >
+                #{backReason,jdbcType=VARCHAR},
+            </if>
+            <if test="showState != null" >
+                #{showState,jdbcType=INTEGER},
+            </if>
+            <if test="basicIntegral != null" >
+                #{basicIntegral,jdbcType=DOUBLE},
+            </if>
+            <if test="fixedPerfPayBase != null" >
+                #{fixedPerfPayBase,jdbcType=DOUBLE},
+            </if>
+            <if test="travelAllowancePayBase != null" >
+                #{travelAllowancePayBase,jdbcType=DOUBLE},
+            </if>
+            <if test="managePerfPayBase != null" >
+                #{managePerfPayBase,jdbcType=DOUBLE},
+            </if>
+            <if test="isNewPeople != null" >
+                #{isNewPeople,jdbcType=INTEGER},
+            </if>
+            <if test="bsScoreBs != null" >
+                #{bsScoreBs,jdbcType=DOUBLE},
+            </if>
+            <if test="otherScoreBs != null" >
+                #{otherScoreBs,jdbcType=DOUBLE},
+            </if>
+            <if test="sunScoreBs != null" >
+                #{sunScoreBs,jdbcType=DOUBLE},
+            </if>
+            <if test="monthBasicIntegral != null" >
+                #{monthBasicIntegral,jdbcType=DOUBLE},
+            </if>
+            <if test="scoreHz != null" >
+                #{scoreHz,jdbcType=DOUBLE},
+            </if>
+            <if test="scoreBs != null" >
+                #{scoreBs,jdbcType=DOUBLE},
+            </if>
+            <if test="socialSecurityCompanyId != null" >
+                #{socialSecurityCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="socialSecurityCompany != null" >
+                #{socialSecurityCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="sunMoneyBs != null" >
+                #{sunMoneyBs,jdbcType=DOUBLE},
+            </if>
+            <if test="managePerfPaySize != null" >
+                #{managePerfPaySize,jdbcType=DOUBLE},
+            </if>
+            <if test="manageCaseNum != null" >
+                #{manageCaseNum,jdbcType=INTEGER},
+            </if>
+            <if test="welfarePay != null" >
+                #{welfarePay,jdbcType=DOUBLE},
+            </if>
+            <if test="welfareRemark != null" >
+                #{welfareRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="workTime != null" >
+                #{workTime,jdbcType=VARCHAR},
+            </if>
+            <if test="quitCost != null" >
+                #{quitCost,jdbcType=DOUBLE},
+            </if>
+            <if test="managePerfPaySizeHz != null" >
+                #{managePerfPaySizeHz,jdbcType=DOUBLE},
+            </if>
+            <if test="manageCaseNumHz != null" >
+                #{manageCaseNumHz,jdbcType=INTEGER},
+            </if>
+            <if test="examineScore != null" >
+                #{examineScore,jdbcType=DOUBLE},
+            </if>
+            <if test="examinePay != null" >
+                #{examinePay,jdbcType=DOUBLE},
+            </if>
+            <if test="otherCutPay != null" >
+                #{otherCutPay,jdbcType=DOUBLE},
+            </if>
+            <if test="otherCutRemarks != null" >
+                #{otherCutRemarks,jdbcType=VARCHAR},
+            </if>
+            <if test="assesPerfBasePay != null" >
+                #{assesPerfBasePay,jdbcType=DOUBLE},
+            </if>
+            <if test="examineRate != null" >
+                #{examineRate,jdbcType=DOUBLE},
+            </if>
+            <if test="caseSubMoney != null" >
+                #{caseSubMoney,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.StaffPerformancePersonnel" >
+        update staff_performance_personnel
+        <set >
+            <if test="staffPerformanceId != null" >
+                staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT},
+            </if>
+            <if test="staffPersonnelId != null" >
+                staff_personnel_id = #{staffPersonnelId,jdbcType=BIGINT},
+            </if>
+            <if test="jobNo != null" >
+                job_no = #{jobNo,jdbcType=VARCHAR},
+            </if>
+            <if test="assessKpi != null" >
+                assess_kpi = #{assessKpi,jdbcType=DOUBLE},
+            </if>
+            <if test="integral != null" >
+                integral = #{integral,jdbcType=DOUBLE},
+            </if>
+            <if test="integralPay != null" >
+                integral_pay = #{integralPay,jdbcType=DOUBLE},
+            </if>
+            <if test="lateEarlyNum != null" >
+                late_early_num = #{lateEarlyNum,jdbcType=INTEGER},
+            </if>
+            <if test="lateEarlyMoney != null" >
+                late_early_money = #{lateEarlyMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="absenteeismNum != null" >
+                absenteeism_num = #{absenteeismNum,jdbcType=INTEGER},
+            </if>
+            <if test="absenteeismMoney != null" >
+                absenteeism_money = #{absenteeismMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="leaveNum != null" >
+                leave_num = #{leaveNum,jdbcType=DOUBLE},
+            </if>
+            <if test="leaveMoney != null" >
+                leave_money = #{leaveMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="sickLeaveTime != null" >
+                sick_leave_time = #{sickLeaveTime,jdbcType=DOUBLE},
+            </if>
+            <if test="sickLeaveMoney != null" >
+                sick_leave_money = #{sickLeaveMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherPay != null" >
+                other_pay = #{otherPay,jdbcType=DOUBLE},
+            </if>
+            <if test="remarks != null" >
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="rate != null" >
+                rate = #{rate,jdbcType=DOUBLE},
+            </if>
+            <if test="realPay != null" >
+                real_pay = #{realPay,jdbcType=DOUBLE},
+            </if>
+            <if test="bsScoreHz != null" >
+                bs_score = #{bsScoreHz,jdbcType=DOUBLE},
+            </if>
+            <if test="otherScore != null" >
+                other_score = #{otherScore,jdbcType=DOUBLE},
+            </if>
+            <if test="sunScore != null" >
+                sun_score = #{sunScore,jdbcType=DOUBLE},
+            </if>
+            <if test="trafficSubsidy != null" >
+                traffic_subsidy = #{trafficSubsidy,jdbcType=DOUBLE},
+            </if>
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="realName != null" >
+                real_name = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="userTel != null" >
+                user_tel = #{userTel,jdbcType=VARCHAR},
+            </if>
+            <if test="businessUnit != null" >
+                business_unit = #{businessUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null" >
+                company = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="organ != null" >
+                organ = #{organ,jdbcType=VARCHAR},
+            </if>
+            <if test="department != null" >
+                department = #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="jobPost != null" >
+                job_post = #{jobPost,jdbcType=VARCHAR},
+            </if>
+            <if test="businessUnitId != null" >
+                business_unit_id = #{businessUnitId,jdbcType=BIGINT},
+            </if>
+            <if test="companyId != null" >
+                company_id = #{companyId,jdbcType=BIGINT},
+            </if>
+            <if test="organId != null" >
+                organ_id = #{organId,jdbcType=BIGINT},
+            </if>
+            <if test="departmentId != null" >
+                department_id = #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="jobPostId != null" >
+                job_post_id = #{jobPostId,jdbcType=BIGINT},
+            </if>
+            <if test="team != null" >
+                team = #{team,jdbcType=VARCHAR},
+            </if>
+            <if test="teamId != null" >
+                team_id = #{teamId,jdbcType=BIGINT},
+            </if>
+            <if test="entryTime != null" >
+                entry_time = #{entryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fixedPerfPay != null" >
+                fixed_perf_pay = #{fixedPerfPay,jdbcType=DOUBLE},
+            </if>
+            <if test="travelAllowancePay != null" >
+                travel_allowance_pay = #{travelAllowancePay,jdbcType=DOUBLE},
+            </if>
+            <if test="managePerfPay != null" >
+                manage_perf_pay = #{managePerfPay,jdbcType=DOUBLE},
+            </if>
+            <if test="realWorkingDays != null" >
+                real_working_days = #{realWorkingDays,jdbcType=DOUBLE},
+            </if>
+            <if test="workingDays != null" >
+                working_days = #{workingDays,jdbcType=DOUBLE},
+            </if>
+            <if test="assesPerfPay != null" >
+                asses_perf_pay = #{assesPerfPay,jdbcType=DOUBLE},
+            </if>
+            <if test="realAssessKpi != null" >
+                real_assess_kpi = #{realAssessKpi,jdbcType=DOUBLE},
+            </if>
+            <if test="assessBsScore != null" >
+                assess_bs_score = #{assessBsScore,jdbcType=DOUBLE},
+            </if>
+            <if test="assessOtherScore != null" >
+                assess_other_score = #{assessOtherScore,jdbcType=DOUBLE},
+            </if>
+            <if test="organOpinion != null" >
+                organ_opinion = #{organOpinion,jdbcType=VARCHAR},
+            </if>
+            <if test="superiorOpinion != null" >
+                superior_opinion = #{superiorOpinion,jdbcType=VARCHAR},
+            </if>
+            <if test="bossOpinion != null" >
+                boss_opinion = #{bossOpinion,jdbcType=VARCHAR},
+            </if>
+            <if test="bossOpinion != null" >
+                boss_opinion = #{bossOpinion,jdbcType=VARCHAR},
+            </if>
+            <if test="organManagerUserId != null" >
+                organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorManagerUserId != null" >
+                superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT},
+            </if>
+            <if test="backState != null" >
+                back_state = #{backState,jdbcType=INTEGER},
+            </if>
+            <if test="backReason != null" >
+                back_reason = #{backReason,jdbcType=VARCHAR},
+            </if>
+            <if test="showState != null" >
+                show_state = #{showState,jdbcType=INTEGER},
+            </if>
+            <if test="basicIntegral != null" >
+                basic_integral = #{basicIntegral,jdbcType=DOUBLE},
+            </if>
+            <if test="fixedPerfPayBase != null" >
+                fixed_perf_pay_base = #{fixedPerfPayBase,jdbcType=DOUBLE},
+            </if>
+            <if test="travelAllowancePayBase != null" >
+                travel_allowance_pay_base = #{travelAllowancePayBase,jdbcType=DOUBLE},
+            </if>
+            <if test="managePerfPayBase != null" >
+                manage_perf_pay_base = #{managePerfPayBase,jdbcType=DOUBLE},
+            </if>
+            <if test="isNewPeople != null" >
+                is_new_people = #{isNewPeople,jdbcType=INTEGER},
+            </if>
+            <if test="bsScoreBs != null" >
+                bs_score_bs = #{bsScoreBs,jdbcType=DOUBLE},
+            </if>
+            <if test="otherScoreBs != null" >
+                other_score_bs = #{otherScoreBs,jdbcType=DOUBLE},
+            </if>
+            <if test="sunScoreBs != null" >
+                sun_score_bs = #{sunScoreBs,jdbcType=DOUBLE},
+            </if>
+            <if test="monthBasicIntegral != null" >
+                month_basic_integral = #{monthBasicIntegral,jdbcType=DOUBLE},
+            </if>
+            <if test="scoreHz != null" >
+                score_hz = #{scoreHz,jdbcType=DOUBLE},
+            </if>
+            <if test="scoreBs != null" >
+                score_bs = #{scoreBs,jdbcType=DOUBLE},
+            </if>
+            <if test="socialSecurityCompanyId != null" >
+                social_security_company_id = #{socialSecurityCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="socialSecurityCompany != null" >
+                social_security_company = #{socialSecurityCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="sunMoneyBs != null" >
+                sun_money_bs = #{sunMoneyBs,jdbcType=DOUBLE},
+            </if>
+            <if test="managePerfPaySize != null" >
+                manage_perf_pay_size = #{managePerfPaySize,jdbcType=DOUBLE},
+            </if>
+            <if test="manageCaseNum != null" >
+                manage_case_num = #{manageCaseNum,jdbcType=INTEGER},
+            </if>
+            <if test="welfarePay != null" >
+                welfare_pay = #{welfarePay,jdbcType=DOUBLE},
+            </if>
+            <if test="welfareRemark != null" >
+                welfare_remark = #{welfareRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="workTime != null" >
+                work_time = #{workTime,jdbcType=VARCHAR},
+            </if>
+            <if test="quitCost != null" >
+                quit_cost = #{quitCost,jdbcType=DOUBLE},
+            </if>
+            <if test="managePerfPaySizeHz != null" >
+                manage_perf_pay_size_hz = #{managePerfPaySizeHz,jdbcType=DOUBLE},
+            </if>
+            <if test="manageCaseNumHz != null" >
+                manage_case_num_hz = #{manageCaseNumHz,jdbcType=INTEGER},
+            </if>
+            <if test="examineScore != null" >
+                examine_score = #{examineScore,jdbcType=DOUBLE},
+            </if>
+            <if test="examinePay != null" >
+                examine_pay = #{examinePay,jdbcType=DOUBLE},
+            </if>
+            <if test="otherCutPay != null" >
+                other_cut_pay = #{otherCutPay,jdbcType=DOUBLE},
+            </if>
+            <if test="otherCutRemarks != null" >
+                other_cut_remarks = #{otherCutRemarks,jdbcType=VARCHAR},
+            </if>
+            <if test="assesPerfBasePay != null" >
+                asses_perf_base_pay = #{assesPerfBasePay,jdbcType=DOUBLE},
+            </if>
+            <if test="examineRate != null" >
+                examine_rate = #{examineRate,jdbcType=DOUBLE},
+            </if>
+            <if test="caseSubMoney != null" >
+                case_sub_money = #{caseSubMoney,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.StaffPerformancePersonnel" >
+    update staff_performance_personnel
+    set staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT},
+      staff_personnel_id = #{staffPersonnelId,jdbcType=BIGINT},
+      job_no = #{jobNo,jdbcType=VARCHAR},
+      assess_kpi = #{assessKpi,jdbcType=DOUBLE},
+      integral = #{integral,jdbcType=DOUBLE},
+      integral_pay = #{integralPay,jdbcType=DOUBLE},
+      late_early_num = #{lateEarlyNum,jdbcType=INTEGER},
+      late_early_money = #{lateEarlyMoney,jdbcType=DOUBLE},
+      absenteeism_num = #{absenteeismNum,jdbcType=INTEGER},
+      absenteeism_money = #{absenteeismMoney,jdbcType=DOUBLE},
+      leave_num = #{leaveNum,jdbcType=DOUBLE},
+      leave_money = #{leaveMoney,jdbcType=DOUBLE},
+      sick_leave_time = #{sickLeaveTime,jdbcType=DOUBLE},
+      sick_leave_money = #{sickLeaveMoney,jdbcType=DOUBLE},
+      other_pay = #{otherPay,jdbcType=DOUBLE},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      rate = #{rate,jdbcType=DOUBLE},
+      real_pay = #{realPay,jdbcType=DOUBLE},
+      bs_score = #{bsScoreHz,jdbcType=DOUBLE},
+      other_score = #{otherScoreHz,jdbcType=DOUBLE},
+      sun_score = #{sunScoreHz,jdbcType=DOUBLE},
+      traffic_subsidy = #{trafficSubsidy,jdbcType=DOUBLE},
+      user_id = #{userId,jdbcType=BIGINT},
+      real_name = #{realName,jdbcType=VARCHAR},
+      user_tel = #{userTel,jdbcType=VARCHAR},
+      business_unit = #{businessUnit,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      organ = #{organ,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      job_post = #{jobPost,jdbcType=VARCHAR},
+      business_unit_id = #{businessUnitId,jdbcType=BIGINT},
+      company_id = #{companyId,jdbcType=BIGINT},
+      organ_id = #{organId,jdbcType=BIGINT},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      job_post_id = #{jobPostId,jdbcType=BIGINT},
+      team = #{team,jdbcType=VARCHAR},
+      team_id = #{teamId,jdbcType=BIGINT},
+      entry_time = #{entryTime,jdbcType=TIMESTAMP},
+      fixed_perf_pay = #{fixedPerfPay,jdbcType=DOUBLE},
+      travel_allowance_pay = #{travelAllowancePay,jdbcType=DOUBLE},
+      manage_perf_pay = #{managePerfPay,jdbcType=DOUBLE},
+      real_working_days = #{realWorkingDays,jdbcType=DOUBLE},
+      working_days = #{workingDays,jdbcType=DOUBLE},
+      asses_perf_pay = #{assesPerfPay,jdbcType=DOUBLE},
+      real_assess_kpi = #{realAssessKpi,jdbcType=DOUBLE},
+      assess_bs_score = #{assessBsScore,jdbcType=DOUBLE},
+      assess_other_score = #{assessOtherScore,jdbcType=DOUBLE},
+      organ_opinion = #{organOpinion,jdbcType=VARCHAR},
+      superior_opinion = #{superiorOpinion,jdbcType=VARCHAR},
+      boss_opinion = #{bossOpinion,jdbcType=VARCHAR},
+      organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT},
+      superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT},
+      back_state = #{backState,jdbcType=INTEGER},
+      back_reason = #{backReason,jdbcType=VARCHAR},
+      show_state = #{showState,jdbcType=INTEGER},
+      basic_integral = #{basicIntegral,jdbcType=DOUBLE},
+      fixed_perf_pay_base = #{fixedPerfPayBase,jdbcType=DOUBLE},
+      travel_allowance_pay_base = #{travelAllowancePayBase,jdbcType=DOUBLE},
+      manage_perf_pay_base = #{managePerfPayBase,jdbcType=DOUBLE},
+      is_new_people = #{isNewPeople,jdbcType=INTEGER},
+      bs_score_bs = #{bsScoreBs,jdbcType=DOUBLE},
+      other_score_bs = #{otherScoreBs,jdbcType=DOUBLE},
+      sun_score_bs = #{sunScoreBs,jdbcType=DOUBLE},
+      score_hz = #{scoreHz,jdbcType=DOUBLE},
+      score_bs = #{scoreBs,jdbcType=DOUBLE},
+      month_basic_integral = #{monthBasicIntegral,jdbcType=DOUBLE},
+      social_security_company_id = #{socialSecurityCompanyId,jdbcType=BIGINT},
+      social_security_company = #{socialSecurityCompany,jdbcType=VARCHAR},
+      sun_money_bs = #{sunMoneyBs,jdbcType=DOUBLE},
+      manage_perf_pay_size = #{managePerfPaySize,jdbcType=DOUBLE},
+      manage_case_num = #{manageCaseNum,jdbcType=INTEGER},
+      welfare_pay = #{welfarePay,jdbcType=DOUBLE},
+      work_time = #{workTime,jdbcType=VARCHAR},
+      quit_cost = #{quitCost,jdbcType=DOUBLE},
+      welfare_remark = #{welfareRemark,jdbcType=VARCHAR},
+      manage_perf_pay_size_hz = #{managePerfPaySizeHz,jdbcType=DOUBLE},
+      manage_case_num_hz = #{manageCaseNumHz,jdbcType=INTEGER},
+      examine_score = #{examineScore,jdbcType=DOUBLE},
+      examine_pay = #{examinePay,jdbcType=DOUBLE},
+      other_cut_pay = #{otherCutPay,jdbcType=DOUBLE},
+      other_cut_remarks = #{otherCutRemarks,jdbcType=VARCHAR},
+      asses_perf_base_pay = #{assesPerfBasePay,jdbcType=DOUBLE},
+      examine_rate = #{examineRate,jdbcType=DOUBLE},
+      case_sub_money = #{caseSubMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <insert id="generate" parameterType="java.util.Map">
+    insert into staff_performance_personnel
+	(staff_performance_id,staff_personnel_id,job_no,assess_kpi,integral,late_early_num,absenteeism_num,
+	leave_num,sick_leave_time,create_time,create_by,update_time,update_by,delete_flag,
+	rate, user_id, real_name, user_tel, business_unit, company, organ, department, job_post, business_unit_id,
+    company_id, organ_id, department_id, job_post_id, team, team_id, entry_time,
+    fixed_perf_pay, travel_allowance_pay, manage_perf_pay,fixed_perf_pay_base, travel_allowance_pay_base,
+    manage_perf_pay_base, real_working_days, working_days,
+    asses_perf_base_pay, assess_bs_score, assess_other_score, organ_manager_user_id, superior_manager_user_id,
+    score_hz, sun_score, score_bs, sun_score_bs, sun_money_bs, is_new_people, social_security_company_id, social_security_company,
+    manage_perf_pay_size, manage_perf_pay_size_hz,work_time, quit_cost, examine_rate,case_sub_money,performance
+	)
+    select * from (
+	  select #{staffPerformanceId,jdbcType=BIGINT} as pid,p.id,p.job_no,1 as kip,
+	  ifnull(sum(b.score),0) as score,
+	  ifnull(s.late_early_num,0),ifnull(s.absenteeism_num,0),ifnull(s.leave_num,0),s.sick_leave_time,
+        SYSDATE(),#{userName,jdbcType=VARCHAR},null as updateTime,null as updateBy,0 as delete_flag,
+        ifnull(s.rate, 1) as rate, p.user_id as userId, p.real_name as realName, p.user_tel as userTel,
+        p.business_unit as businessUnit, p.company as company, p.organ as organ, p.department as department, p.job_post as jobPost,
+        p.business_unit_id as businessUnitId, p.company_id as companyId, p.organ_id as organId, p.department_id as departmentId,
+        p.job_post_id as jobPostId,p.team as team, p.team_id as teamId,p.entry_time as entryTime,
+        p.fixed_perf_pay * ifnull(s.rate, 1)  as fixedPerfPay,
+        p.travel_allowance_pay * ifnull(s.rate, 1) as travelAllowancePay,
+        p.manage_perf_pay * ifnull(s.rate, 1) as managePerfPay,
+        p.fixed_perf_pay  as fixedPerfPayBase, p.travel_allowance_pay as travelAllowancePayBase, p.manage_perf_pay as managePerfPayBase,
+        ifnull(s.real_working_days,#{workingDays,jdbcType=DOUBLE}) as realWorkingDays,
+        ifnull(s.working_days,#{workingDays,jdbcType=DOUBLE}) as workingDays, p.asses_perf_pay as assesPerfPay,
+        ifnull(sum(b.assessBsScore),0) as assessBsScore,ifnull(sum(b.assessOtherScore),0) as assessOtherScore,
+        o.organ_manager_user_id as organManagerUserId, o.superior_manager_user_id as superiorManagerUserId,
+        ifnull(hz.bsScore,0) + ifnull(hz.otherScore,0) as scoreHz,
+        ifnull(hz.sunScore,0) as sunScoreHz,
+        ifnull(bs.bsScore,0) + ifnull(bs.otherScore,0) as scoreBs,
+        ifnull(bs.sunScore,0) as sunScoreBs,
+        ifnull(bs.sunMoney,0) as sunMoneyBs,
+        i.is_new_people as isNewPeople,
+        p.social_security_company_id as socialSecurityCompanyId, p.social_security_company as socialSecurityCompany,
+        p.manage_perf_pay_size as managePerfPaySize, p.manage_perf_pay_size_hz as managePerfPaySizeHz,
+        #{workTime,jdbcType=VARCHAR} as workTime, p.quit_cost as quitCost, 1 as examineRate,0 as caseSubMoney,#{performance,jdbcType=BIGINT} as performance
+      from staff_personnel_info p
+      left join staff_pay_personnel_slip s on p.job_no = s.job_no and s.staff_pay_slip_id = #{staffPaySlipId,jdbcType=BIGINT}
+      LEFT JOIN (
+				SELECT pi.id as piId, sum(ifnull(c.score,0)) AS score, sum(ifnull(c.assess_bs_score,0)) AS assessBsScore,
+				    sum(ifnull(c.assess_other_score,0)) AS assessOtherScore
+				  FROM staff_personnel_info pi
+					LEFT JOIN survey_investigator_case c ON pi.user_id = c.survey_user_id AND c.delete_flag = 0
+					LEFT JOIN survey_risk_case_info i ON c.survey_info_id = i.id
+					    AND date_format(i.entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR} and i.performance_state = 0
+					where i.id IS NOT NULL and pi.delete_flag = 0
+					GROUP BY pi.user_id
+			)  b on b.piId = p.id
+	  LEFT JOIN
+	    (
+            SELECT pi.id as piId, sum(ifnull(c.bs_score,0)) AS bsScore, sum(ifnull(c.other_score,0)) AS otherScore, sum(ifnull(c.score_sun,0)) AS sunScore
+              FROM staff_personnel_info pi
+                LEFT JOIN survey_investigator_case c ON pi.user_id = c.survey_user_id AND c.delete_flag = 0
+                LEFT JOIN survey_risk_case_info i ON c.survey_info_id = i.id
+                    AND date_format(i.entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR} and i.performance_state = 0
+                left join survey_consignor sc on i.entrust_org_id = sc.id
+                where i.id IS NOT NULL and pi.delete_flag = 0 and sc.org_attr = 2
+                GROUP BY pi.user_id
+        )  hz on hz.piId = p.id
+      LEFT JOIN
+	    (
+            SELECT pi.id as piId, sum(ifnull(c.bs_score,0)) AS bsScore, sum(ifnull(c.other_score,0)) AS otherScore, sum(ifnull(c.score_sun,0)) AS sunScore,
+              sum(ifnull(c.sun_money,0)) AS sunMoney
+              FROM staff_personnel_info pi
+                LEFT JOIN survey_investigator_case c ON pi.user_id = c.survey_user_id AND c.delete_flag = 0
+                LEFT JOIN survey_risk_case_info i ON c.survey_info_id = i.id
+                  AND date_format(i.entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR} and i.performance_state = 0
+                left join survey_consignor sc on i.entrust_org_id = sc.id
+                where i.id IS NOT NULL and pi.delete_flag = 0 and sc.org_attr = 1
+                GROUP BY pi.user_id
+        )  bs on bs.piId = p.id
+      left join staff_organ o on p.organ_id = o.id
+      left join survey_investigator i on p.user_id = i.user_id
+      where
+      DATE_FORMAT(p.entry_time,'%Y-%m') &lt; DATE_FORMAT(#{entryTime,jdbcType=DATE},'%Y-%m')
+      and p.staff_state != 6 and p.delete_flag = 0 and p.relation != 5 and p.relation != 6
+      and p.performance=0
+      group by p.id
+    ) a
+  </insert>
+    <insert id="generateOne" parameterType="java.util.Map"  useGeneratedKeys="true" keyProperty="id">
+        insert into staff_performance_personnel
+        (staff_performance_id,staff_personnel_id,job_no,assess_kpi,integral,late_early_num,absenteeism_num,
+         leave_num,sick_leave_time,create_time,create_by,update_time,update_by,delete_flag,
+         rate, user_id, real_name, user_tel, business_unit, company, organ, department, job_post, business_unit_id,
+         company_id, organ_id, department_id, job_post_id, team, team_id, entry_time,
+         fixed_perf_pay, travel_allowance_pay, manage_perf_pay,fixed_perf_pay_base, travel_allowance_pay_base,
+         manage_perf_pay_base, real_working_days, working_days,
+         asses_perf_base_pay, assess_bs_score, assess_other_score, organ_manager_user_id, superior_manager_user_id,
+         score_hz, sun_score, score_bs, sun_score_bs, sun_money_bs, is_new_people, social_security_company_id, social_security_company,
+         manage_perf_pay_size, manage_perf_pay_size_hz,work_time, quit_cost, examine_rate,case_sub_money,performance
+        )
+        select * from (
+                          select #{staffPerformanceId,jdbcType=BIGINT} as pid,p.id,p.job_no,1 as kip,
+                                 ifnull(sum(b.score),0) as score,
+                                 ifnull(s.late_early_num,0),ifnull(s.absenteeism_num,0),ifnull(s.leave_num,0),s.sick_leave_time,
+                                 SYSDATE(),#{userName,jdbcType=VARCHAR},null as updateTime,null as updateBy,0 as delete_flag,
+                                 ifnull(s.rate, 1) as rate, p.user_id as userId, p.real_name as realName, p.user_tel as userTel,
+                                 p.business_unit as businessUnit, p.company as company, p.organ as organ, p.department as department, p.job_post as jobPost,
+                                 p.business_unit_id as businessUnitId, p.company_id as companyId, p.organ_id as organId, p.department_id as departmentId,
+                                 p.job_post_id as jobPostId,p.team as team, p.team_id as teamId,p.entry_time as entryTime,
+                                 p.fixed_perf_pay * ifnull(s.rate, 1)  as fixedPerfPay,
+                                 p.travel_allowance_pay * ifnull(s.rate, 1) as travelAllowancePay,
+                                 p.manage_perf_pay * ifnull(s.rate, 1) as managePerfPay,
+                                 p.fixed_perf_pay  as fixedPerfPayBase, p.travel_allowance_pay as travelAllowancePayBase, p.manage_perf_pay as managePerfPayBase,
+                                 ifnull(s.real_working_days,#{workingDays,jdbcType=DOUBLE}) as realWorkingDays,
+                                 ifnull(s.working_days,#{workingDays,jdbcType=DOUBLE}) as workingDays, p.asses_perf_pay as assesPerfPay,
+                                 ifnull(sum(b.assessBsScore),0) as assessBsScore,ifnull(sum(b.assessOtherScore),0) as assessOtherScore,
+                                 o.organ_manager_user_id as organManagerUserId, o.superior_manager_user_id as superiorManagerUserId,
+                                 ifnull(hz.bsScore,0) + ifnull(hz.otherScore,0) as scoreHz,
+                                 ifnull(hz.sunScore,0) as sunScoreHz,
+                                 ifnull(bs.bsScore,0) + ifnull(bs.otherScore,0) as scoreBs,
+                                 ifnull(bs.sunScore,0) as sunScoreBs,
+                                 ifnull(bs.sunMoney,0) as sunMoneyBs,
+                                 i.is_new_people as isNewPeople,
+                                 p.social_security_company_id as socialSecurityCompanyId, p.social_security_company as socialSecurityCompany,
+                                 p.manage_perf_pay_size as managePerfPaySize, p.manage_perf_pay_size_hz as managePerfPaySizeHz,
+                                 #{workTime,jdbcType=VARCHAR} as workTime, p.quit_cost as quitCost, 1 as examineRate,0 as caseSubMoney,#{performance,jdbcType=BIGINT} as performance
+                          from staff_personnel_info p
+                                   left join staff_pay_personnel_slip s on p.job_no = s.job_no and s.staff_pay_slip_id = #{staffPaySlipId,jdbcType=BIGINT}
+                                   LEFT JOIN (
+                              SELECT pi.id as piId, sum(ifnull(c.score,0)) AS score, sum(ifnull(c.assess_bs_score,0)) AS assessBsScore,
+                                     sum(ifnull(c.assess_other_score,0)) AS assessOtherScore
+                              FROM staff_personnel_info pi
+                                       LEFT JOIN survey_investigator_case c ON pi.user_id = c.survey_user_id AND c.delete_flag = 0
+                                       LEFT JOIN survey_risk_case_info i ON c.survey_info_id = i.id
+                                  AND date_format(i.entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR} and i.performance_state = 0
+                              where i.id IS NOT NULL and pi.delete_flag = 0
+                              GROUP BY pi.user_id
+                          )  b on b.piId = p.id
+                                   LEFT JOIN
+                               (
+                                   SELECT pi.id as piId, sum(ifnull(c.bs_score,0)) AS bsScore, sum(ifnull(c.other_score,0)) AS otherScore, sum(ifnull(c.score_sun,0)) AS sunScore
+                                   FROM staff_personnel_info pi
+                                            LEFT JOIN survey_investigator_case c ON pi.user_id = c.survey_user_id AND c.delete_flag = 0
+                                            LEFT JOIN survey_risk_case_info i ON c.survey_info_id = i.id
+                                       AND date_format(i.entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR} and i.performance_state = 0
+                                            left join survey_consignor sc on i.entrust_org_id = sc.id
+                                   where i.id IS NOT NULL and pi.delete_flag = 0 and sc.org_attr = 2
+                                   GROUP BY pi.user_id
+                               )  hz on hz.piId = p.id
+                                   LEFT JOIN
+                               (
+                                   SELECT pi.id as piId, sum(ifnull(c.bs_score,0)) AS bsScore, sum(ifnull(c.other_score,0)) AS otherScore, sum(ifnull(c.score_sun,0)) AS sunScore,
+                                          sum(ifnull(c.sun_money,0)) AS sunMoney
+                                   FROM staff_personnel_info pi
+                                            LEFT JOIN survey_investigator_case c ON pi.user_id = c.survey_user_id AND c.delete_flag = 0
+                                            LEFT JOIN survey_risk_case_info i ON c.survey_info_id = i.id
+                                       AND date_format(i.entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR} and i.performance_state = 0
+                                            left join survey_consignor sc on i.entrust_org_id = sc.id
+                                   where i.id IS NOT NULL and pi.delete_flag = 0 and sc.org_attr = 1
+                                   GROUP BY pi.user_id
+                               )  bs on bs.piId = p.id
+                                   left join staff_organ o on p.organ_id = o.id
+                                   left join survey_investigator i on p.user_id = i.user_id
+                          where
+                              DATE_FORMAT(p.entry_time,'%Y-%m') &lt; DATE_FORMAT(#{entryTime,jdbcType=DATE},'%Y-%m')
+                            and p.staff_state != 6 and p.delete_flag = 0 and p.relation != 5 and p.relation != 6
+                            and p.id=#{staffPersonnelId,jdbcType=BIGINT}
+                      ) a
+    </insert>
+  <sql id="joins">
+
+  </sql>
+  <sql id="wheres">
+    <if test="staffPerformanceId != null" >
+      and staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT}
+    </if>
+    <if test="staffPersonnelId != null" >
+      and staff_personnel_id = #{staffPersonnelId,jdbcType=BIGINT}
+    </if>
+      <if test="jobNo != null">
+          and job_no like concat('%',#{jobNo,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="realName != null">
+          and real_name like concat('%',#{realName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="companyId != null" >
+          and company_id = #{companyId,jdbcType=BIGINT}
+      </if>
+      <if test="organId != null" >
+          and organ_id = #{organId,jdbcType=BIGINT}
+      </if>
+      <if test="departmentId != null" >
+          and department_id = #{departmentId,jdbcType=BIGINT}
+      </if>
+      <if test="jobPostId != null" >
+          and job_post_id = #{jobPostId,jdbcType=BIGINT}
+      </if>
+      <if test="teamId != null" >
+          and team_id = #{teamId,jdbcType=BIGINT}
+      </if>
+      <if test="entryTime != null" >
+          and DATE_FORMAT(entry_time,'%Y-%m-%d') = DATE_FORMAT(#{entryTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+      <if test="backState != null" >
+          and back_state = #{backState,jdbcType=INTEGER}
+      </if>
+      <if test="showState != null" >
+          and show_state = #{showState,jdbcType=INTEGER}
+      </if>
+      <if test="socialSecurityCompanyId != null">
+          and social_security_company_id = #{socialSecurityCompanyId,jdbcType=BIGINT}
+      </if>
+      <if test="companyIds != null" >
+          and find_in_set(company_id,#{companyIds,jdbcType=VARCHAR})
+      </if>
+      <if test="organIds != null ">
+          and find_in_set(organ_id,#{organIds,jdbcType=VARCHAR})
+      </if>
+      <if test="departmentIds != null ">
+          and find_in_set(department_id,#{departmentIds,jdbcType=VARCHAR})
+      </if>
+      <if test="jobPostIds != null ">
+          and find_in_set(job_post_id,#{jobPostIds,jdbcType=VARCHAR})
+      </if>
+      <if test="teamIds != null ">
+          and find_in_set(team_id,#{teamIds,jdbcType=VARCHAR})
+      </if>
+      <if test="socialSecurityCompanyIds != null" >
+          and find_in_set(social_security_company_id,#{socialSecurityCompanyIds,jdbcType=VARCHAR})
+      </if>
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from staff_performance_personnel
+    <include refid="joins" />
+    where delete_flag =0
+    <include refid="wheres" />
+    order by id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from staff_performance_personnel
+    <include refid="joins" />
+    where delete_flag =0
+    <include refid="wheres" />
+  </select>
+
+  <select id="selectPerformances" parameterType="map" resultType="com.lefancrm.apicenter.dto.staff.StaffPerformanceInfoDTO">
+    select
+          p.id as id,
+          #{workTime,jdbcType=VARCHAR} as workTime,
+          p.user_id as userId,
+          p.business_unit as businessUnit,
+          p.company as company,
+          p.organ as organ,
+          p.department as department,
+          p.job_no as jobNo,
+          p.real_name as realName,
+          p.user_tel as userTel,
+          p.job_post as jobPost,
+          p.entry_time as entryTime,
+          DATE_FORMAT(p.entry_time,'%Y-%m-%d') as entryTimeStr,
+        p.fixed_perf_pay as fixedPerfPay,
+        p.manage_perf_pay as managePerfPay,
+        p.travel_allowance_pay as travelAllowancePay,
+          p.business_unit_id as businessUnitId,
+          p.company_id as companyId,
+          p.organ_id as organId,
+          p.department_id as departmentId,
+          p.job_post_id as jobPostId,
+          p.team as team,
+          p.team_id as teamId,
+        p.id as itemId,
+        p.staff_performance_id as staffPerformanceId,
+        p.staff_personnel_id as staffPersonnelId,
+        p.assess_kpi as assessKpi,
+        p.integral as integral,
+        p.integral_pay as integralPay,
+        p.late_early_num as lateEarlyNum,
+        p.late_early_money as lateEarlyMoney,
+        p.absenteeism_num as absenteeismNum,
+        p.absenteeism_money as absenteeismMoney,
+        p.leave_num as leaveNum,
+        p.leave_money as leaveMoney,
+        p.sick_leave_time as sickLeaveTime,
+        p.sick_leave_money as sickLeaveMoney,
+        p.other_pay as otherPay,
+        ifnull(p.rate,1) as rate,
+        p.real_pay as realPay,
+        p.remarks as remarks,
+        p.traffic_subsidy as trafficSubsidy,
+        p.real_working_days as realWorkingDays,
+        p.working_days as workingDays,
+        p.asses_perf_pay as assesPerfPay,
+        p.real_assess_kpi as realAssessKpi,
+      p.fixed_perf_pay_base as fixedPerfPayBase,
+      p.travel_allowance_pay_base as travelAllowancePayBase,
+      p.manage_perf_pay_base as managePerfPayBase,
+      p.organ_opinion as organOpinion,
+      p.superior_opinion as superiorOpinion,
+      p.boss_opinion as bossOpinion,
+      p.back_state as backState,
+      p.show_state as showState,
+      p.basic_integral as basicIntegral,
+      p.is_new_people as isNewPeople,
+      p.month_basic_integral as monthBasicIntegral,
+      si.id as investigatorId,
+      p.social_security_company as socialSecurityCompany,
+      p.social_security_company_id as socialSecurityCompanyId,
+      i.relation as relation,
+      p.manage_perf_pay_size as managePerfPaySize,
+      p.manage_case_num as manageCaseNum,
+      p.manage_perf_pay_size_hz as managePerfPaySizeHz,
+      si.org_id as investigatorOrgId,
+      p.asses_perf_base_pay as assesPerfBasePay,
+      p.examine_score as examineScore,
+      p.examine_pay as examinePay,
+      p.examine_rate as examineRate,
+      p.other_cut_pay as otherCutPay,
+      p.manage_case_num_hz as manageCaseNumHz,
+      <if test="state == 'ongoing'">
+          ifnull(subHz.bsScore,0) + ifnull(subHz.otherScore,0) as scoreHz,
+          ifnull(subHz.sunScore,0) as sunScoreHz,
+          ifnull(subBs.sunMoney,0) as sunMoneyBs,
+          ifnull(subBs.bsScore,0) + ifnull(subBs.otherScore,0) as scoreBs,
+          ifnull(subBs.sunScore,0) as sunScoreBs,
+      </if>
+      <if test="state == 'end'">
+          p.score_hz as scoreHz,
+          p.sun_score as sunScoreHz,
+          p.sun_money_bs as sunMoneyBs,
+          p.score_bs as scoreBs,
+          p.sun_score_bs as sunScoreBs,
+      </if>
+      p.other_cut_remarks as otherCutRemarks,
+      subHz.staffOpinionState as hzStaffOpinionState,
+      subBs.staffOpinionState as bsStaffOpinionState,
+      p.case_sub_money caseSubMoney
+      from  staff_performance_personnel p
+      left join staff_personnel_info i on p.staff_personnel_id = i.id
+      LEFT JOIN
+      (
+        SELECT pi.id as piId, sum(ifnull(c.bs_score,0)) AS bsScore, sum(ifnull(c.other_score,0)) AS otherScore,
+          sum(ifnull(c.score_sun,0)) AS sunScore, ifnull(min(sub.staff_opinion_state),9) as staffOpinionState
+          FROM staff_personnel_info pi
+          LEFT JOIN survey_investigator_case c ON pi.user_id = c.survey_user_id AND c.delete_flag = 0
+          left join survey_investigator_case_sub sub on c.id = sub.survey_investigator_case_id
+          LEFT JOIN survey_risk_case_info i ON c.survey_info_id = i.id
+              AND date_format(i.entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR}
+              and i.performance_state = #{performanceState,jdbcType=INTEGER} and i.performance_id = #{staffPerformanceId,jdbcType=BIGINT}
+          left join survey_consignor sc on i.entrust_org_id = sc.id
+          where i.id IS NOT NULL and pi.delete_flag = 0 and sc.org_attr = 2
+          GROUP BY pi.user_id
+      )  subHz on subHz.piId = p.staff_personnel_id
+
+      LEFT JOIN
+      (
+          SELECT pi.id as piId, sum(ifnull(c.bs_score,0)) AS bsScore, sum(ifnull(c.other_score,0)) AS otherScore, sum(ifnull(c.score_sun,0)) AS sunScore,
+            sum(ifnull(c.sun_money,0)) AS sunMoney,ifnull(min(sub.staff_opinion_state),9) as staffOpinionState
+          FROM staff_personnel_info pi
+          LEFT JOIN survey_investigator_case c ON pi.user_id = c.survey_user_id AND c.delete_flag = 0
+          left join survey_investigator_case_sub sub on c.id = sub.survey_investigator_case_id
+          LEFT JOIN survey_risk_case_info i ON c.survey_info_id = i.id
+            AND date_format(i.entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR}
+            and i.performance_state = #{performanceState,jdbcType=INTEGER} and i.performance_id = #{staffPerformanceId,jdbcType=BIGINT}
+          left join survey_consignor sc on i.entrust_org_id = sc.id
+          where i.id IS NOT NULL and pi.delete_flag = 0 and sc.org_attr = 1
+          GROUP BY pi.user_id
+      )  subBs on subBs.piId = p.staff_personnel_id
+
+      left join survey_investigator si on p.user_id = si.user_id
+      where p.delete_flag = 0 and p.staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT} and p.performance=0
+      <if test="infoState != null">
+          <if test="infoState == 1">
+              and (p.back_state = 1 or p.show_state = 0)
+          </if>
+      </if>
+      <if test="companyId != null">
+        and p.company_id = #{companyId,jdbcType=BIGINT}
+    </if>
+    <if test="organId != null">
+        and p.organ_id = #{organId,jdbcType=BIGINT}
+    </if>
+    <if test="departmentId != null">
+        and p.department_id = #{departmentId,jdbcType=BIGINT}
+    </if>
+    <if test="jobPostId != null">
+        and p.job_post_id = #{jobPostId,jdbcType=BIGINT}
+    </if>
+      <if test="teamId != null">
+          and p.team_id = #{teamId,jdbcType=BIGINT}
+      </if>
+    <if test="jobNo != null">
+      and p.job_no like concat('%',#{jobNo,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="realName != null">
+      and p.real_name like concat('%',#{realName,jdbcType=VARCHAR},'%')
+    </if>
+      <if test="infoState != null" >
+          <if test="infoState == 2" >
+              <if test="organManagerUserId != null" >
+                  and p.organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT}
+              </if>
+              <if test="superiorManagerUserId != null" >
+                  and p.superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT}
+              </if>
+          </if>
+          <if test="infoState == 3" >
+              and (p.organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT} or p.superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT})
+          </if>
+      </if>
+      <if test="userId != null" >
+          and p.user_id = #{userId,jdbcType=BIGINT}
+      </if>
+      <if test="companyIds != null" >
+          and find_in_set(p.company_id,#{companyIds,jdbcType=VARCHAR})
+      </if>
+      <if test="organIds != null ">
+          and find_in_set(p.organ_id,#{organIds,jdbcType=VARCHAR})
+      </if>
+      <if test="departmentIds != null ">
+          and find_in_set(p.department_id,#{departmentIds,jdbcType=VARCHAR})
+      </if>
+      <if test="jobPostIds != null ">
+          and find_in_set(p.job_post_id,#{jobPostIds,jdbcType=VARCHAR})
+      </if>
+      <if test="teamIds != null ">
+          and find_in_set(p.team_id,#{teamIds,jdbcType=VARCHAR})
+      </if>
+      <if test="socialSecurityCompanyIds != null" >
+          and find_in_set(p.social_security_company_id,#{socialSecurityCompanyIds,jdbcType=VARCHAR})
+      </if>
+      <if test="entryTime != null" >
+          and DATE_FORMAT(p.entry_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{entryTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+      <if test="entryTimeEnd != null" >
+          and DATE_FORMAT(p.entry_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{entryTimeEnd,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+      <if test="authData != null ">
+          and find_in_set(p.organ_id,#{authData,jdbcType=VARCHAR})
+      </if>
+
+    order by p.organ_opinion desc, p.superior_opinion desc, p.boss_opinion desc, p.organ_id desc
+  </select>
+
+  <select id="personnelItem" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from staff_performance_personnel
+    where job_no = #{jobNo,jdbcType=VARCHAR} and staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT} limit 1
+  </select>
+
+    <update id="updateStateByInfo" parameterType="java.util.Map" >
+        update staff_performance_personnel set
+        show_state = #{showState,jdbcType=INTEGER},back_state = #{backState,jdbcType=INTEGER}
+        where staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT}
+        <if test="oldBackState != null" >
+            and back_state = #{oldBackState,jdbcType=INTEGER}
+        </if>
+        <if test="oldShowState != null" >
+            and show_state = #{oldShowState,jdbcType=INTEGER}
+        </if>
+        ;
+    </update>
+
+    <update id="updateOption" parameterType="java.lang.Long" >
+        update staff_performance_personnel set
+        boss_opinion = null
+        where staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT};
+    </update>
+
+
+    <select id="selectScore" parameterType="map" resultType="com.lefancrm.apicenter.dto.staff.StaffPerformanceInfoDTO">
+        select
+        ifnull(hz.bsScore,0) + ifnull(hz.otherScore,0) as scoreHz,
+        ifnull(hz.sunScore,0) as sunScoreHz,
+        ifnull(bs.bsScore,0) + ifnull(bs.otherScore,0) as scoreBs,
+        ifnull(bs.sunScore,0) as sunScoreBs,
+        ifnull(bs.sunMoney,0) as sunMoneyBs,
+        ifnull(examine.examineScore,0) as examineScore,
+        hz.staffOpinionState as hzStaffOpinionState,
+        bs.staffOpinionState as bsStaffOpinionState,
+        p.case_sub_money as caseSubMoney
+        from  staff_performance_personnel p
+        LEFT JOIN
+        (
+            SELECT pi.id as piId, ifnull(min(sub.staff_opinion_state),9) as staffOpinionState,sum(ifnull(c.bs_score,0)) AS bsScore,
+            sum(ifnull(c.other_score,0)) AS otherScore, sum(ifnull(c.score_sun,0)) AS sunScore
+            FROM staff_personnel_info pi
+            LEFT JOIN survey_investigator_case c ON pi.user_id = c.survey_user_id AND c.delete_flag = 0
+            left join survey_investigator_case_sub sub on c.id = sub.survey_investigator_case_id
+            LEFT JOIN survey_risk_case_info i ON c.survey_info_id = i.id
+              AND date_format(i.entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR}
+              and i.performance_state = 1 and i.performance_id = #{staffPerformanceId,jdbcType=BIGINT}
+            left join survey_consignor sc on i.entrust_org_id = sc.id
+            where i.id IS NOT NULL and pi.delete_flag = 0 and sc.org_attr = 2
+            GROUP BY pi.user_id
+        )  hz on hz.piId = p.staff_personnel_id
+        LEFT JOIN
+        (
+            SELECT pi.id as piId, ifnull(min(sub.staff_opinion_state),9) as staffOpinionState,sum(ifnull(c.bs_score,0)) AS bsScore,
+            sum(ifnull(c.other_score,0)) AS otherScore, sum(ifnull(c.score_sun,0)) AS sunScore, sum(ifnull(c.sun_money,0)) AS sunMoney
+            FROM staff_personnel_info pi
+            LEFT JOIN survey_investigator_case c ON pi.user_id = c.survey_user_id AND c.delete_flag = 0
+            left join survey_investigator_case_sub sub on c.id = sub.survey_investigator_case_id
+            LEFT JOIN survey_risk_case_info i ON c.survey_info_id = i.id
+              AND date_format(i.entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR}
+              and i.performance_state = 1 and i.performance_id = #{staffPerformanceId,jdbcType=BIGINT}
+            left join survey_consignor sc on i.entrust_org_id = sc.id
+            where i.id IS NOT NULL and pi.delete_flag = 0 and sc.org_attr = 1
+            GROUP BY pi.user_id
+        )  bs on bs.piId = p.staff_personnel_id
+
+        LEFT JOIN
+        (
+            SELECT pi.id as piId, sum(ifnull(c.assess_sun_score,0)) + sum(ifnull(c.assess_bs_score,0)) + sum(ifnull(c.assess_other_score,0)) AS examineScore
+            FROM staff_personnel_info pi
+            LEFT JOIN survey_assign_org o ON pi.user_id = o.review_user_id AND o.delete_flag = 0
+            LEFT JOIN survey_investigator_case c ON c.delete_flag = 0 and c.survey_assorg_case_id = o.id
+            LEFT JOIN survey_risk_case_info i ON c.survey_info_id = i.id
+              AND date_format(i.entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR}
+              and i.performance_state = 1 and i.performance_id = #{staffPerformanceId,jdbcType=BIGINT}
+            left join survey_consignor sc on i.entrust_org_id = sc.id
+            left join staff_performance_personnel pp on pi.id = pp.staff_personnel_id
+            where i.id IS NOT NULL and pi.delete_flag = 0 and sc.org_attr = 2
+            and pp.job_post_id = 50
+            GROUP BY pi.user_id
+        )  examine on examine.piId = p.staff_personnel_id
+        where p.delete_flag = 0 and p.id = #{id,jdbcType=BIGINT};
+    </select>
+
+
+    <select id="selectSurveyInvestigator" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select a.*
+        from staff_performance_personnel a
+        left join bus_user_role b on a.user_id = b.user_id
+        where staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT}
+        and b.role_id= 50 and a.delete_flag = 0
+        ;
+    </select>
+
+    <update id="deleteByStaffPerformanceId" parameterType="java.lang.Long" >
+        update staff_performance_personnel set delete_flag = 1
+        where staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT}
+    </update>
+
+    <insert id="generateSurveyPayInfo" parameterType="java.util.Map">
+        insert into survey_pay_info (pay_no, app_pay_money, app_start_date, app_end_date,
+            pay_state, create_user_id, create_time, create_by,
+            delete_flag, pay_type, user_id, real_name, staff_personnel_id, social_security_company_id, social_security_company,
+            organ_id, organ, department_id, department, team_id, team, pay_key_id, job_post_id,job_post)
+        select * from (
+            select CONCAT('JX',(NOW() + (@a :=@a + 1))), p.real_pay,  now() as startDate, now() as endDate, 1 as payState,
+                #{currUserId,jdbcType=BIGINT} as createUserId, now() as createTime, #{currUserName,jdbcType=VARCHAR} as createBy, 0 as deleteFlag, 5 as payType,
+                p.user_id as userId, p.real_name as realName, p.staff_personnel_id, p.social_security_company_id, p.social_security_company,
+                p.organ_id, p.organ, p.department_id, p.department, p.team_id, p.team, p.id, p.job_post_id, p.job_post
+            from staff_performance_personnel p,(SELECT @a := 0) a
+            where p.staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT} and p.delete_flag = 0
+        ) a
+    </insert>
+
+    <select id="selectExamineScore" parameterType="java.util.Map" resultType="java.lang.Double">
+        select ifnull((A.assessSunScore + A.assessBsScore + A.assessOtherScore),0) as examineScore
+        from
+        (
+            SELECT sum(ifnull(c.assess_sun_score,0)) as assessSunScore,
+              sum(ifnull(c.assess_bs_score,0)) as assessBsScore,
+              sum(ifnull(c.assess_other_score,0)) AS assessOtherScore
+            FROM survey_assign_org o
+            LEFT JOIN survey_investigator_case c ON c.delete_flag = 0 and c.survey_assorg_case_id = o.id
+            LEFT JOIN survey_risk_case_info i ON c.survey_info_id = i.id
+            left join survey_consignor sc on i.entrust_org_id = sc.id
+            where i.id IS NOT NULL and  sc.org_attr = 2
+            and o.review_user_id = #{reviewUserId,jdbcType=BIGINT}
+            AND date_format(i.entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR}
+            and i.performance_state = 1 and i.performance_id = #{staffPerformanceId,jdbcType=BIGINT}
+        ) A
+    </select>
+
+
+    <resultMap id="collection1" type="com.lefancrm.apicenter.model.StaffPerformancePersonnel" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="staff_performance_id" property="staffPerformanceId" jdbcType="BIGINT" />
+        <result column="staff_personnel_id" property="staffPersonnelId" jdbcType="BIGINT" />
+        <result column="job_no" property="jobNo" jdbcType="VARCHAR" />
+        <result column="assess_kpi" property="assessKpi" jdbcType="DOUBLE" />
+        <result column="integral" property="integral" jdbcType="DOUBLE" />
+        <result column="integral_pay" property="integralPay" jdbcType="DOUBLE" />
+        <result column="late_early_num" property="lateEarlyNum" jdbcType="INTEGER" />
+        <result column="late_early_money" property="lateEarlyMoney" jdbcType="DOUBLE" />
+        <result column="absenteeism_num" property="absenteeismNum" jdbcType="INTEGER" />
+        <result column="absenteeism_money" property="absenteeismMoney" jdbcType="DOUBLE" />
+        <result column="leave_num" property="leaveNum" jdbcType="DOUBLE" />
+        <result column="leave_money" property="leaveMoney" jdbcType="DOUBLE" />
+        <result column="sick_leave_time" property="sickLeaveTime" jdbcType="DOUBLE" />
+        <result column="sick_leave_money" property="sickLeaveMoney" jdbcType="DOUBLE" />
+        <result column="other_pay" property="otherPay" jdbcType="DOUBLE" />
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="rate" property="rate" jdbcType="DOUBLE" />
+        <result column="real_pay" property="realPay" jdbcType="DOUBLE" />
+        <result column="bs_score" property="bsScoreHz" jdbcType="DOUBLE" />
+        <result column="other_score" property="otherScoreHz" jdbcType="DOUBLE" />
+        <result column="sun_score" property="sunScoreHz" jdbcType="DOUBLE" />
+        <result column="traffic_subsidy" property="trafficSubsidy" jdbcType="DOUBLE" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="real_name" property="realName" jdbcType="VARCHAR" />
+        <result column="user_tel" property="userTel" jdbcType="VARCHAR" />
+        <result column="business_unit" property="businessUnit" jdbcType="VARCHAR" />
+        <result column="company" property="company" jdbcType="VARCHAR" />
+        <result column="organ" property="organ" jdbcType="VARCHAR" />
+        <result column="department" property="department" jdbcType="VARCHAR" />
+        <result column="job_post" property="jobPost" jdbcType="VARCHAR" />
+        <result column="business_unit_id" property="businessUnitId" jdbcType="BIGINT" />
+        <result column="company_id" property="companyId" jdbcType="BIGINT" />
+        <result column="organ_id" property="organId" jdbcType="BIGINT" />
+        <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+        <result column="job_post_id" property="jobPostId" jdbcType="BIGINT" />
+        <result column="team" property="team" jdbcType="VARCHAR" />
+        <result column="team_id" property="teamId" jdbcType="BIGINT" />
+        <result column="entry_time" property="entryTime" jdbcType="TIMESTAMP" />
+        <result column="fixed_perf_pay" property="fixedPerfPay" jdbcType="DOUBLE" />
+        <result column="travel_allowance_pay" property="travelAllowancePay" jdbcType="DOUBLE" />
+        <result column="manage_perf_pay" property="managePerfPay" jdbcType="DOUBLE" />
+        <result column="real_working_days" property="realWorkingDays" jdbcType="DOUBLE" />
+        <result column="working_days" property="workingDays" jdbcType="DOUBLE" />
+        <result column="asses_perf_pay" property="assesPerfPay" jdbcType="DOUBLE" />
+        <result column="real_assess_kpi" property="realAssessKpi" jdbcType="DOUBLE" />
+        <result column="assess_bs_score" property="assessBsScore" jdbcType="DOUBLE" />
+        <result column="assess_other_score" property="assessOtherScore" jdbcType="DOUBLE" />
+        <result column="organ_opinion" property="organOpinion" jdbcType="VARCHAR" />
+        <result column="superior_opinion" property="superiorOpinion" jdbcType="VARCHAR" />
+        <result column="boss_opinion" property="bossOpinion" jdbcType="VARCHAR" />
+        <result column="organ_manager_user_id" property="organManagerUserId" jdbcType="BIGINT" />
+        <result column="superior_manager_user_id" property="superiorManagerUserId" jdbcType="BIGINT" />
+        <result column="back_state" property="backState" jdbcType="INTEGER" />
+        <result column="back_reason" property="backReason" jdbcType="VARCHAR" />
+        <result column="show_state" property="showState" jdbcType="INTEGER" />
+        <result column="basic_integral" property="basicIntegral" jdbcType="DOUBLE" />
+        <result column="fixed_perf_pay_base" property="fixedPerfPayBase" jdbcType="DOUBLE" />
+        <result column="travel_allowance_pay_base" property="travelAllowancePayBase" jdbcType="DOUBLE" />
+        <result column="manage_perf_pay_base" property="managePerfPayBase" jdbcType="DOUBLE" />
+        <result column="is_new_people" property="isNewPeople" jdbcType="INTEGER" />
+        <result column="bs_score_bs" property="bsScoreBs" jdbcType="DOUBLE" />
+        <result column="other_score_bs" property="otherScoreBs" jdbcType="DOUBLE" />
+        <result column="sun_score_bs" property="sunScoreBs" jdbcType="DOUBLE" />
+        <result column="month_basic_integral" property="monthBasicIntegral" jdbcType="DOUBLE" />
+        <result column="score_hz" property="scoreHz" jdbcType="DOUBLE" />
+        <result column="score_bs" property="scoreBs" jdbcType="DOUBLE" />
+        <result column="social_security_company_id" property="socialSecurityCompanyId" jdbcType="BIGINT" />
+        <result column="social_security_company" property="socialSecurityCompany" jdbcType="VARCHAR" />
+        <result column="sun_money_bs" property="sunMoneyBs" jdbcType="DOUBLE" />
+        <result column="manage_perf_pay_size" property="managePerfPaySize" jdbcType="DOUBLE" />
+        <result column="manage_case_num" property="manageCaseNum" jdbcType="INTEGER" />
+        <result column="welfare_pay" property="welfarePay" jdbcType="DOUBLE" />
+        <result column="welfare_remark" property="welfareRemark" jdbcType="VARCHAR" />
+        <result column="work_time" property="workTime" jdbcType="VARCHAR" />
+        <result column="quit_cost" property="quitCost" jdbcType="DOUBLE" />
+        <result column="manage_perf_pay_size_hz" property="managePerfPaySizeHz" jdbcType="DOUBLE" />
+        <result column="manage_case_num_hz" property="manageCaseNumHz" jdbcType="INTEGER" />
+        <result column="examine_score" property="examineScore" jdbcType="DOUBLE" />
+        <result column="examine_pay" property="examinePay" jdbcType="DOUBLE" />
+        <result column="other_cut_pay" property="otherCutPay" jdbcType="DOUBLE" />
+        <result column="other_cut_remarks" property="otherCutRemarks" jdbcType="VARCHAR" />
+        <result column="asses_perf_base_pay" property="assesPerfBasePay" jdbcType="DOUBLE" />
+        <result column="examine_rate" property="examineRate" jdbcType="DOUBLE" />
+
+        <collection property="staffPersonnelInfo" column="{jobNo=job_no}" javaType="com.lefancrm.apicenter.model.StaffPersonnelInfo" ofType="com.lefancrm.apicenter.model.StaffPersonnelInfo" select="selectStaffPersonnelInfo"></collection>
+        <collection property="surveyInvestigator" column="{userId=user_id}" javaType="com.lefancrm.apicenter.model.SurveyInvestigator" ofType="com.lefancrm.apicenter.model.SurveyInvestigator" select="selectInvestigator"></collection>
+
+    </resultMap>
+
+    <select id="listTwo" parameterType="map" resultMap="collection1">
+        select
+        <include refid="Base_Column_List" />
+        from staff_performance_personnel
+        <include refid="joins" />
+        where delete_flag =0
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listOne" resultMap="collection1" parameterType="java.lang.Long">
+        select *
+        from staff_performance_personnel
+       where id = #{newId,jdbcType=BIGINT}
+    </select>
+
+
+    <select id="selectStaffPersonnelInfo" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.StaffPersonnelInfo">
+        select
+        id as id, fixed_perf_pay as fixedPerfPay, manage_perf_pay as managePerfPay, travel_allowance_pay as travelAllowancePay,
+        entry_time as entryTime, staff_state as staffState, quit_cost as quitCost, relation as relation, user_id as userId,
+        manage_perf_pay_size as managePerfPaySize, manage_perf_pay_size_hz as managePerfPaySizeHz
+        from staff_personnel_info
+        where delete_flag =0 and job_no = #{jobNo,jdbcType=VARCHAR}
+        limit 1
+    </select>
+
+    <select id="selectInvestigator" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyInvestigator" >
+        select
+        basic_integral as basicIntegral, org_id as orgId
+        from survey_investigator
+        where user_id = #{userId,jdbcType=BIGINT} and delete_flag=0 limit 1;
+    </select>
+
+
+
+    <insert id="generateSurveyPayInfoDetailNew" parameterType="java.util.Map">
+        insert into survey_pay_info_detail_new (pay_id, opr_id, opr_code)
+        select * from (
+        select i.id as payId, p.id as oprId,"performance" as oprCode
+        from staff_performance_personnel p
+        left join survey_pay_info i on p.id = i.pay_key_id
+        where p.staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT} and i.pay_type = 5
+        ) a
+    </insert>
+</mapper>

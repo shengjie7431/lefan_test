@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseCenterInfoAllotMapper" >
+
+    <select id="selectAgencyCaseCenterInfoByPatch" resultType="com.lefancrm.apicenter.dto.CaseCenterInfoAllotDto" parameterType="java.util.Map" >
+      select
+        IF(HOUR(TIMEDIFF(NOW(),distribution_time))>=24,'超时',NULL)is_over_time,
+        a.id as id,a.type as type,a.case_id as caseId,a.case_no as caseNo,a.case_title as caseTitle,a.create_time as createTime,
+        a.create_by as createBy,a.salesman_id as salesmanId,a.salesman_name as salesmanName,a.case_state as caseState,
+        a.case_state_str as caseStateStr,a.case_name as caseName,a.gradation_state as gradationState,a.case_tel as caseTel,
+        a.org_name as orgName, a.org_id as orgId, a.org_user_id as orgUserId, a.org_user_name as orgUserName,
+        a.ins_officer_id as insOfficerId, a.ins_officer_name as insOfficerName, a.operator_id as operatorId, a.operator_name as operatorName,
+        a.assess_id as assessId, a.assess_name as assessName, a.claimant_id as claimantId,
+        a.claimant_name as claimantName, a.insurance_company_id as insuranceCompanyId, a.insurance_company as insuranceCompany,
+        a.danger_time as dangerTime, a.insured as insured, a.car_no as carNo,
+        a.is_read as isRead, a.ins_is_read as insIsRead, a.card_id as cardId,
+        a.bank_card_no as bankCardNo, a.release_state as releaseState, release_reason as releaseReason,
+        a.issuance_state as issuanceState, a.issuance_reason as issuanceReason, a.claim_state as claimState,
+        a.claim_reason as claimReason, a.is_feedback as isFeedback, a.closed_state as closedState,
+        a.closed_reason as closedReason, a.distribution_time as distributionTime, a.update_time as updateTime,
+        a.negotiate_state as negotiateState, a.negotiate_reason as negotiateReason,a.hand_out_time as handOutTime,
+        a.hand_out_flag as handOutFlag,a.hand_in_time as handInTime,a.hand_in_flag as handInFlag,
+        a.close_report_state as closeReportState,a.agree_sign_time as agreeSignTime,a.list_state as listState,
+        a.list_state_name as listStateName,a.oper_reason as operReason,a.insured_amount as insuredAmount,
+        a.legal_user_name as legalUserName , a.legal_user_id as legalUserId, a.is_test_case as isTestcase
+        from
+        case_center_info a
+        where
+        a.case_state in (1,30)
+        <if test="orgIds != null">
+            and a.org_id IN
+            <foreach collection="orgIds" item="orgId" open="(" separator="," close=")">
+                #{orgId}
+            </foreach>
+        </if>
+
+        <if test="gradationState != null" >
+            and a.gradation_state = #{gradationState,jdbcType=BIGINT}
+        </if>
+        <if test="gradationState == null" >
+            and a.gradation_state in(1,2,3,6)
+        </if>
+        <if test="caseName != null" >
+            and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseNo != null" >
+            and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseTel != null" >
+            and a.case_tel like concat('%',#{caseTel,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="type != null" >
+            and a.type = #{type,jdbcType=BIGINT}
+        </if>
+        <if test="isTestcase != null" >
+            <if test="isTestcase != -1">
+                and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+            </if>
+        </if>
+        <if test="isTestcase == null" >
+            <if test="isTest == 0">
+                and a.is_test_case = 0
+            </if>
+            <if test="isTest == 1">
+                and a.is_test_case = 1
+            </if>
+        </if>
+        and a.delete_flag !=1
+        order by update_time desc limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="selectCountAgencyCaseCenterInfoByPatch" resultType="int" parameterType="java.util.Map" >
+        select count(1) from case_center_info a
+        where a.case_state in (1,30)
+        <if test="orgIds != null">
+            and a.org_id IN
+            <foreach collection="orgIds" item="orgId" open="(" separator="," close=")">
+                #{orgId}
+            </foreach>
+        </if>
+
+        <if test="gradationState != null" >
+            and a.gradation_state = #{gradationState,jdbcType=BIGINT}
+        </if>
+        <if test="gradationState == null" >
+            and a.gradation_state in(1,2,3,6)
+        </if>
+        <if test="caseName != null" >
+            and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseNo != null" >
+            and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseTel != null" >
+            and a.case_tel like concat('%',#{caseTel,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="type != null" >
+            and a.type = #{type,jdbcType=BIGINT}
+        </if>
+        <if test="isTestcase != null" >
+            <if test="isTestcase != -1">
+                and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+            </if>
+        </if>
+        <if test="isTestcase == null" >
+            <if test="isTest == 0">
+                and a.is_test_case = 0
+            </if>
+            <if test="isTest == 1">
+                and a.is_test_case = 1
+            </if>
+        </if>
+        and a.delete_flag !=1
+    </select>
+
+    <select id="searchCaseCenterInfoForAllotById" resultType="com.lefancrm.apicenter.dto.CaseCenterInfoAllotDto" parameterType="java.util.Map" >
+        select
+        a.id as id,a.type as type,a.case_id as caseId,a.case_no as caseNo,a.case_title as caseTitle,a.create_time as createTime,
+        a.create_by as createBy,a.salesman_id as salesmanId,a.salesman_name as salesmanName,a.case_state as caseState,
+        a.case_state_str as caseStateStr,a.case_name as caseName,a.gradation_state as gradationState,a.case_tel as caseTel,
+        a.org_name as orgName, a.org_id as orgId, a.org_user_id as orgUserId, a.org_user_name as orgUserName,
+        a.ins_officer_id as insOfficerId, a.ins_officer_name as insOfficerName, a.operator_id as operatorId, a.operator_name as operatorName,
+        a.assess_id as assessId, a.assess_name as assessName, a.claimant_id as claimantId,
+        a.claimant_name as claimantName, a.insurance_company_id as insuranceCompanyId, a.insurance_company as insuranceCompany,
+        a.danger_time as dangerTime, a.insured as insured, a.car_no as carNo,
+        a.is_read as isRead, a.ins_is_read as insIsRead, a.card_id as cardId,
+        a.bank_card_no as bankCardNo, a.release_state as releaseState, release_reason as releaseReason,
+        a.issuance_state as issuanceState, a.issuance_reason as issuanceReason, a.claim_state as claimState,
+        a.claim_reason as claimReason, a.is_feedback as isFeedback, a.closed_state as closedState,
+        a.closed_reason as closedReason, a.distribution_time as distributionTime, a.update_time as updateTime,
+        a.negotiate_state as negotiateState, a.negotiate_reason as negotiateReason,a.hand_out_time as handOutTime,
+        a.hand_out_flag as handOutFlag,a.hand_in_time as handInTime,a.hand_in_flag as handInFlag,
+        a.close_report_state as closeReportState,a.agree_sign_time as agreeSignTime,a.list_state as listState,
+        a.list_state_name as listStateName,a.oper_reason as operReason,a.insured_amount as insuredAmount,
+        a.legal_user_name as legalUserName , a.legal_user_id as legalUserId, a.is_test_case as isTestcase
+        from
+        case_center_info a
+        where
+        a.id = #{id,jdbcType=BIGINT}
+
+    </select>
+
+</mapper>

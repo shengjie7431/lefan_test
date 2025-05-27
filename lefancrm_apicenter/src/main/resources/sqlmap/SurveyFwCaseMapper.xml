@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyFwCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyFwCase" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="khmc" property="khmc" jdbcType="VARCHAR" />
+    <result column="kpmc" property="kpmc" jdbcType="VARCHAR" />
+    <result column="zfrq" property="zfrq" jdbcType="TIMESTAMP" />
+    <result column="xm" property="xm" jdbcType="VARCHAR" />
+    <result column="sjhm" property="sjhm" jdbcType="VARCHAR" />
+    <result column="sfzhm" property="sfzhm" jdbcType="VARCHAR" />
+    <result column="skzh" property="skzh" jdbcType="VARCHAR" />
+    <result column="khyh" property="khyh" jdbcType="VARCHAR" />
+    <result column="srje" property="srje" jdbcType="DOUBLE" />
+    <result column="je" property="je" jdbcType="DOUBLE" />
+    <result column="kpje" property="kpje" jdbcType="DOUBLE" />
+    <result column="gys" property="gys" jdbcType="VARCHAR" />
+    <result column="fwgs" property="fwgs" jdbcType="VARCHAR" />
+    <result column="kpzt" property="kpzt" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, khmc, kpmc, zfrq, xm, sjhm, sfzhm, skzh, khyh, srje, je, kpje, gys, fwgs, kpzt
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_fw_case
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_fw_case
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyFwCase" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_fw_case (khmc, kpmc, zfrq, 
+      xm, sjhm, sfzhm, skzh, 
+      khyh, srje, je, kpje, 
+      gys, fwgs, kpzt)
+    values (#{khmc,jdbcType=VARCHAR}, #{kpmc,jdbcType=VARCHAR}, #{zfrq,jdbcType=TIMESTAMP}, 
+      #{xm,jdbcType=VARCHAR}, #{sjhm,jdbcType=VARCHAR}, #{sfzhm,jdbcType=VARCHAR}, #{skzh,jdbcType=VARCHAR}, 
+      #{khyh,jdbcType=VARCHAR}, #{srje,jdbcType=DOUBLE}, #{je,jdbcType=DOUBLE}, #{kpje,jdbcType=DOUBLE}, 
+      #{gys,jdbcType=VARCHAR}, #{fwgs,jdbcType=VARCHAR}, #{kpzt,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyFwCase" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_fw_case
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="khmc != null" >
+        khmc,
+      </if>
+      <if test="kpmc != null" >
+        kpmc,
+      </if>
+      <if test="zfrq != null" >
+        zfrq,
+      </if>
+      <if test="xm != null" >
+        xm,
+      </if>
+      <if test="sjhm != null" >
+        sjhm,
+      </if>
+      <if test="sfzhm != null" >
+        sfzhm,
+      </if>
+      <if test="skzh != null" >
+        skzh,
+      </if>
+      <if test="khyh != null" >
+        khyh,
+      </if>
+      <if test="srje != null" >
+        srje,
+      </if>
+      <if test="je != null" >
+        je,
+      </if>
+      <if test="kpje != null" >
+        kpje,
+      </if>
+      <if test="gys != null" >
+        gys,
+      </if>
+      <if test="fwgs != null" >
+        fwgs,
+      </if>
+      <if test="kpzt != null" >
+        kpzt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="khmc != null" >
+        #{khmc,jdbcType=VARCHAR},
+      </if>
+      <if test="kpmc != null" >
+        #{kpmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zfrq != null" >
+        #{zfrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="sjhm != null" >
+        #{sjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzhm != null" >
+        #{sfzhm,jdbcType=VARCHAR},
+      </if>
+      <if test="skzh != null" >
+        #{skzh,jdbcType=VARCHAR},
+      </if>
+      <if test="khyh != null" >
+        #{khyh,jdbcType=VARCHAR},
+      </if>
+      <if test="srje != null" >
+        #{srje,jdbcType=DOUBLE},
+      </if>
+      <if test="je != null" >
+        #{je,jdbcType=DOUBLE},
+      </if>
+      <if test="kpje != null" >
+        #{kpje,jdbcType=DOUBLE},
+      </if>
+      <if test="gys != null" >
+        #{gys,jdbcType=VARCHAR},
+      </if>
+      <if test="fwgs != null" >
+        #{fwgs,jdbcType=VARCHAR},
+      </if>
+      <if test="kpzt != null" >
+        #{kpzt,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyFwCase" >
+    update survey_fw_case
+    <set >
+      <if test="khmc != null" >
+        khmc = #{khmc,jdbcType=VARCHAR},
+      </if>
+      <if test="kpmc != null" >
+        kpmc = #{kpmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zfrq != null" >
+        zfrq = #{zfrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xm != null" >
+        xm = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="sjhm != null" >
+        sjhm = #{sjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzhm != null" >
+        sfzhm = #{sfzhm,jdbcType=VARCHAR},
+      </if>
+      <if test="skzh != null" >
+        skzh = #{skzh,jdbcType=VARCHAR},
+      </if>
+      <if test="khyh != null" >
+        khyh = #{khyh,jdbcType=VARCHAR},
+      </if>
+      <if test="srje != null" >
+        srje = #{srje,jdbcType=DOUBLE},
+      </if>
+      <if test="je != null" >
+        je = #{je,jdbcType=DOUBLE},
+      </if>
+      <if test="kpje != null" >
+        kpje = #{kpje,jdbcType=DOUBLE},
+      </if>
+      <if test="gys != null" >
+        gys = #{gys,jdbcType=VARCHAR},
+      </if>
+      <if test="fwgs != null" >
+        fwgs = #{fwgs,jdbcType=VARCHAR},
+      </if>
+      <if test="kpzt != null" >
+        kpzt = #{kpzt,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyFwCase" >
+    update survey_fw_case
+    set khmc = #{khmc,jdbcType=VARCHAR},
+      kpmc = #{kpmc,jdbcType=VARCHAR},
+      zfrq = #{zfrq,jdbcType=TIMESTAMP},
+      xm = #{xm,jdbcType=VARCHAR},
+      sjhm = #{sjhm,jdbcType=VARCHAR},
+      sfzhm = #{sfzhm,jdbcType=VARCHAR},
+      skzh = #{skzh,jdbcType=VARCHAR},
+      khyh = #{khyh,jdbcType=VARCHAR},
+      srje = #{srje,jdbcType=DOUBLE},
+      je = #{je,jdbcType=DOUBLE},
+      kpje = #{kpje,jdbcType=DOUBLE},
+      gys = #{gys,jdbcType=VARCHAR},
+      fwgs = #{fwgs,jdbcType=VARCHAR},
+      kpzt = #{kpzt,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+
+  <sql id="joins">
+
+  </sql>
+  <sql id="wheres">
+    <if test="searchStr != null">
+      and
+      (
+      xm like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      or sfzhm like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      or sjhm like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      or khmc like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      )
+    </if>
+    <if test="kpmc != null" >
+      and kpmc like CONCAT(CONCAT('%',#{kpmc,jdbcType=VARCHAR}), '%')
+    </if>
+    <if test="zfrqStart != null">
+      and DATE_FORMAT(zfrq,'%Y-%m-%d') &gt;= DATE_FORMAT(#{zfrqStart,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="zfrqEnd != null">
+      and DATE_FORMAT(zfrq,'%Y-%m-%d') &lt;= DATE_FORMAT(#{zfrqEnd,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="fwgs != null" >
+      and find_in_set(fwgs,#{fwgs,jdbcType=VARCHAR})
+    </if>
+    <if test="kpzt != null" >
+      and find_in_set(kpzt,#{kpzt,jdbcType=VARCHAR})
+    </if>
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_fw_case
+    <include refid="joins" />
+    where 1 = 1
+    <include refid="wheres" />
+    order by id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from survey_fw_case
+    <include refid="joins" />
+    where 1 = 1
+    <include refid="wheres" />
+  </select>
+</mapper>

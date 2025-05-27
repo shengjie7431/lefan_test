@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseClaimReportMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseClaimReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="INTEGER" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="total_num" property="totalNum" jdbcType="INTEGER" />
+    <result column="unclosed_agent_num" property="unclosedAgentNum" jdbcType="INTEGER" />
+    <result column="unclosed_loan_num" property="unclosedLoanNum" jdbcType="INTEGER" />
+    <result column="closed_agent_num" property="closedAgentNum" jdbcType="INTEGER" />
+    <result column="closed_loan_num" property="closedLoanNum" jdbcType="INTEGER" />
+    <result column="mediate_closed_num" property="mediateClosedNum" jdbcType="INTEGER" />
+    <result column="litigation_closed_num" property="litigationClosedNum" jdbcType="INTEGER" />
+    <result column="mediate_closed_day_num" property="mediateClosedDayNum" jdbcType="INTEGER" />
+    <result column="litigation_closed_day_num" property="litigationClosedDayNum" jdbcType="INTEGER" />
+    <result column="mediate_closed_month_num" property="mediateClosedMonthNum" jdbcType="INTEGER" />
+    <result column="litigation_closed_month_num" property="litigationClosedMonthNum" jdbcType="INTEGER" />
+    <result column="return_service_day_money" property="returnServiceDayMoney" jdbcType="DOUBLE" />
+    <result column="return_principal_day_money" property="returnPrincipalDayMoney" jdbcType="DOUBLE" />
+    <result column="return_interest_day_money" property="returnInterestDayMoney" jdbcType="DOUBLE" />
+    <result column="return_service_month_money" property="returnServiceMonthMoney" jdbcType="DOUBLE" />
+    <result column="return_principal_month_money" property="returnPrincipalMonthMoney" jdbcType="DOUBLE" />
+    <result column="return_interest_month_money" property="returnInterestMonthMoney" jdbcType="DOUBLE" />
+    <result column="release_agent_num" property="releaseAgentNum" jdbcType="INTEGER" />
+    <result column="release_loan_num" property="releaseLoanNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, org_id, org_name, date, total_num, unclosed_agent_num, unclosed_loan_num, closed_agent_num,
+    closed_loan_num, mediate_closed_num, litigation_closed_num, mediate_closed_day_num,
+    litigation_closed_day_num, mediate_closed_month_num, litigation_closed_month_num,
+    return_service_day_money, return_principal_day_money, return_interest_day_money,
+    return_service_month_money, return_principal_month_money, return_interest_month_money,
+    release_agent_num, release_loan_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_claim_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from case_claim_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseClaimReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_claim_report (org_id, org_name, date, 
+      total_num, unclosed_agent_num, unclosed_loan_num, 
+      closed_agent_num, closed_loan_num, mediate_closed_num, 
+      litigation_closed_num, mediate_closed_day_num, 
+      litigation_closed_day_num, mediate_closed_month_num, 
+      litigation_closed_month_num, return_service_day_money, 
+      return_principal_day_money, return_interest_day_money, 
+      return_service_month_money, return_principal_month_money, 
+      return_interest_month_money, release_agent_num, 
+      release_loan_num)
+    values (#{orgId,jdbcType=INTEGER}, #{orgName,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, 
+      #{totalNum,jdbcType=INTEGER}, #{unclosedAgentNum,jdbcType=INTEGER}, #{unclosedLoanNum,jdbcType=INTEGER}, 
+      #{closedAgentNum,jdbcType=INTEGER}, #{closedLoanNum,jdbcType=INTEGER}, #{mediateClosedNum,jdbcType=INTEGER}, 
+      #{litigationClosedNum,jdbcType=INTEGER}, #{mediateClosedDayNum,jdbcType=INTEGER}, 
+      #{litigationClosedDayNum,jdbcType=INTEGER}, #{mediateClosedMonthNum,jdbcType=INTEGER}, 
+      #{litigationClosedMonthNum,jdbcType=INTEGER}, #{returnServiceDayMoney,jdbcType=DOUBLE}, 
+      #{returnPrincipalDayMoney,jdbcType=DOUBLE}, #{returnInterestDayMoney,jdbcType=DOUBLE}, 
+      #{returnServiceMonthMoney,jdbcType=DOUBLE}, #{returnPrincipalMonthMoney,jdbcType=DOUBLE}, 
+      #{returnInterestMonthMoney,jdbcType=DOUBLE}, #{releaseAgentNum,jdbcType=INTEGER}, 
+      #{releaseLoanNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseClaimReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_claim_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="totalNum != null" >
+        total_num,
+      </if>
+      <if test="unclosedAgentNum != null" >
+        unclosed_agent_num,
+      </if>
+      <if test="unclosedLoanNum != null" >
+        unclosed_loan_num,
+      </if>
+      <if test="closedAgentNum != null" >
+        closed_agent_num,
+      </if>
+      <if test="closedLoanNum != null" >
+        closed_loan_num,
+      </if>
+      <if test="mediateClosedNum != null" >
+        mediate_closed_num,
+      </if>
+      <if test="litigationClosedNum != null" >
+        litigation_closed_num,
+      </if>
+      <if test="mediateClosedDayNum != null" >
+        mediate_closed_day_num,
+      </if>
+      <if test="litigationClosedDayNum != null" >
+        litigation_closed_day_num,
+      </if>
+      <if test="mediateClosedMonthNum != null" >
+        mediate_closed_month_num,
+      </if>
+      <if test="litigationClosedMonthNum != null" >
+        litigation_closed_month_num,
+      </if>
+      <if test="returnServiceDayMoney != null" >
+        return_service_day_money,
+      </if>
+      <if test="returnPrincipalDayMoney != null" >
+        return_principal_day_money,
+      </if>
+      <if test="returnInterestDayMoney != null" >
+        return_interest_day_money,
+      </if>
+      <if test="returnServiceMonthMoney != null" >
+        return_service_month_money,
+      </if>
+      <if test="returnPrincipalMonthMoney != null" >
+        return_principal_month_money,
+      </if>
+      <if test="returnInterestMonthMoney != null" >
+        return_interest_month_money,
+      </if>
+      <if test="releaseAgentNum != null" >
+        release_agent_num,
+      </if>
+      <if test="releaseLoanNum != null" >
+        release_loan_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="totalNum != null" >
+        #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="unclosedAgentNum != null" >
+        #{unclosedAgentNum,jdbcType=INTEGER},
+      </if>
+      <if test="unclosedLoanNum != null" >
+        #{unclosedLoanNum,jdbcType=INTEGER},
+      </if>
+      <if test="closedAgentNum != null" >
+        #{closedAgentNum,jdbcType=INTEGER},
+      </if>
+      <if test="closedLoanNum != null" >
+        #{closedLoanNum,jdbcType=INTEGER},
+      </if>
+      <if test="mediateClosedNum != null" >
+        #{mediateClosedNum,jdbcType=INTEGER},
+      </if>
+      <if test="litigationClosedNum != null" >
+        #{litigationClosedNum,jdbcType=INTEGER},
+      </if>
+      <if test="mediateClosedDayNum != null" >
+        #{mediateClosedDayNum,jdbcType=INTEGER},
+      </if>
+      <if test="litigationClosedDayNum != null" >
+        #{litigationClosedDayNum,jdbcType=INTEGER},
+      </if>
+      <if test="mediateClosedMonthNum != null" >
+        #{mediateClosedMonthNum,jdbcType=INTEGER},
+      </if>
+      <if test="litigationClosedMonthNum != null" >
+        #{litigationClosedMonthNum,jdbcType=INTEGER},
+      </if>
+      <if test="returnServiceDayMoney != null" >
+        #{returnServiceDayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="returnPrincipalDayMoney != null" >
+        #{returnPrincipalDayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="returnInterestDayMoney != null" >
+        #{returnInterestDayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="returnServiceMonthMoney != null" >
+        #{returnServiceMonthMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="returnPrincipalMonthMoney != null" >
+        #{returnPrincipalMonthMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="returnInterestMonthMoney != null" >
+        #{returnInterestMonthMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="releaseAgentNum != null" >
+        #{releaseAgentNum,jdbcType=INTEGER},
+      </if>
+      <if test="releaseLoanNum != null" >
+        #{releaseLoanNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseClaimReport" >
+    update case_claim_report
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="totalNum != null" >
+        total_num = #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="unclosedAgentNum != null" >
+        unclosed_agent_num = #{unclosedAgentNum,jdbcType=INTEGER},
+      </if>
+      <if test="unclosedLoanNum != null" >
+        unclosed_loan_num = #{unclosedLoanNum,jdbcType=INTEGER},
+      </if>
+      <if test="closedAgentNum != null" >
+        closed_agent_num = #{closedAgentNum,jdbcType=INTEGER},
+      </if>
+      <if test="closedLoanNum != null" >
+        closed_loan_num = #{closedLoanNum,jdbcType=INTEGER},
+      </if>
+      <if test="mediateClosedNum != null" >
+        mediate_closed_num = #{mediateClosedNum,jdbcType=INTEGER},
+      </if>
+      <if test="litigationClosedNum != null" >
+        litigation_closed_num = #{litigationClosedNum,jdbcType=INTEGER},
+      </if>
+      <if test="mediateClosedDayNum != null" >
+        mediate_closed_day_num = #{mediateClosedDayNum,jdbcType=INTEGER},
+      </if>
+      <if test="litigationClosedDayNum != null" >
+        litigation_closed_day_num = #{litigationClosedDayNum,jdbcType=INTEGER},
+      </if>
+      <if test="mediateClosedMonthNum != null" >
+        mediate_closed_month_num = #{mediateClosedMonthNum,jdbcType=INTEGER},
+      </if>
+      <if test="litigationClosedMonthNum != null" >
+        litigation_closed_month_num = #{litigationClosedMonthNum,jdbcType=INTEGER},
+      </if>
+      <if test="returnServiceDayMoney != null" >
+        return_service_day_money = #{returnServiceDayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="returnPrincipalDayMoney != null" >
+        return_principal_day_money = #{returnPrincipalDayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="returnInterestDayMoney != null" >
+        return_interest_day_money = #{returnInterestDayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="returnServiceMonthMoney != null" >
+        return_service_month_money = #{returnServiceMonthMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="returnPrincipalMonthMoney != null" >
+        return_principal_month_money = #{returnPrincipalMonthMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="returnInterestMonthMoney != null" >
+        return_interest_month_money = #{returnInterestMonthMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="releaseAgentNum != null" >
+        release_agent_num = #{releaseAgentNum,jdbcType=INTEGER},
+      </if>
+      <if test="releaseLoanNum != null" >
+        release_loan_num = #{releaseLoanNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseClaimReport" >
+    update case_claim_report
+    set org_id = #{orgId,jdbcType=INTEGER},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      total_num = #{totalNum,jdbcType=INTEGER},
+      unclosed_agent_num = #{unclosedAgentNum,jdbcType=INTEGER},
+      unclosed_loan_num = #{unclosedLoanNum,jdbcType=INTEGER},
+      closed_agent_num = #{closedAgentNum,jdbcType=INTEGER},
+      closed_loan_num = #{closedLoanNum,jdbcType=INTEGER},
+      mediate_closed_num = #{mediateClosedNum,jdbcType=INTEGER},
+      litigation_closed_num = #{litigationClosedNum,jdbcType=INTEGER},
+      mediate_closed_day_num = #{mediateClosedDayNum,jdbcType=INTEGER},
+      litigation_closed_day_num = #{litigationClosedDayNum,jdbcType=INTEGER},
+      mediate_closed_month_num = #{mediateClosedMonthNum,jdbcType=INTEGER},
+      litigation_closed_month_num = #{litigationClosedMonthNum,jdbcType=INTEGER},
+      return_service_day_money = #{returnServiceDayMoney,jdbcType=DOUBLE},
+      return_principal_day_money = #{returnPrincipalDayMoney,jdbcType=DOUBLE},
+      return_interest_day_money = #{returnInterestDayMoney,jdbcType=DOUBLE},
+      return_service_month_money = #{returnServiceMonthMoney,jdbcType=DOUBLE},
+      return_principal_month_money = #{returnPrincipalMonthMoney,jdbcType=DOUBLE},
+      return_interest_month_money = #{returnInterestMonthMoney,jdbcType=DOUBLE},
+      release_agent_num = #{releaseAgentNum,jdbcType=INTEGER},
+      release_loan_num = #{releaseLoanNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from case_claim_report b
+        <where>
+            <if test="orgId != null" >
+                and org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="today == 1" >
+                and date_format(date,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
+            </if>
+            <if test="today != 1" >
+                <if test="startDate != null" >
+                    and DATE_FORMAT(date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="endDate != null" >
+                    and DATE_FORMAT(date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+            </if>
+        </where>
+        <if test="export != 1">
+          order by date desc,org_id asc limit #{pageIndex} , #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectCountList" resultType="int" parameterType="java.util.Map" >
+        select count(1) from case_claim_report b
+        <where>
+            <if test="orgId != null" >
+                and org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="today == 1" >
+                and date_format(date,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
+            </if>
+            <if test="today != 1" >
+                <if test="startDate != null" >
+                    and DATE_FORMAT(date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="endDate != null" >
+                    and DATE_FORMAT(date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+            </if>
+        </where>
+    </select>
+</mapper>

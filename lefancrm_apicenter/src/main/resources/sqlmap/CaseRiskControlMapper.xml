@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseRiskControlMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseRiskControl" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="user_tel" property="userTel" jdbcType="VARCHAR" />
+    <result column="id_address" property="idAddress" jdbcType="VARCHAR" />
+    <result column="residential_address" property="residentialAddress" jdbcType="VARCHAR" />
+    <result column="employe_name" property="employeName" jdbcType="VARCHAR" />
+    <result column="employe_address" property="employeAddress" jdbcType="VARCHAR" />
+    <result column="employe_position" property="employePosition" jdbcType="VARCHAR" />
+    <result column="work_year" property="workYear" jdbcType="VARCHAR" />
+    <result column="wages" property="wages" jdbcType="DOUBLE" />
+    <result column="marital_status" property="maritalStatus" jdbcType="INTEGER" />
+    <result column="other_loan" property="otherLoan" jdbcType="VARCHAR" />
+    <result column="spouse_name" property="spouseName" jdbcType="VARCHAR" />
+    <result column="spouse_tel" property="spouseTel" jdbcType="VARCHAR" />
+    <result column="egy_linkman" property="egyLinkman" jdbcType="VARCHAR" />
+    <result column="egy_linkman_tel" property="egyLinkmanTel" jdbcType="VARCHAR" />
+    <result column="loan_purpose" property="loanPurpose" jdbcType="INTEGER" />
+    <result column="loan_money" property="loanMoney" jdbcType="DOUBLE" />
+    <result column="lending_cycle" property="lendingCycle" jdbcType="INTEGER" />
+    <result column="repayment_method" property="repaymentMethod" jdbcType="VARCHAR" />
+    <result column="is_real" property="isReal" jdbcType="INTEGER" />
+    <result column="is_insurance" property="isInsurance" jdbcType="INTEGER" />
+    <result column="is_exclusions" property="isExclusions" jdbcType="INTEGER" />
+    <result column="exclusions_desc" property="exclusionsDesc" jdbcType="VARCHAR" />
+    <result column="assessment_amount" property="assessmentAmount" jdbcType="DOUBLE" />
+    <result column="assessment_cycle" property="assessmentCycle" jdbcType="INTEGER" />
+    <result column="is_real_man" property="isRealMan" jdbcType="INTEGER" />
+    <result column="is_real_reason" property="isRealReason" jdbcType="INTEGER" />
+    <result column="is_satisfy" property="isSatisfy" jdbcType="INTEGER" />
+    <result column="settlement_money" property="settlementMoney" jdbcType="DOUBLE" />
+    <result column="matching_product" property="matchingProduct" jdbcType="INTEGER" />
+    <result column="lefan_proposal_money" property="lefanProposalMoney" jdbcType="DOUBLE" />
+    <result column="lefan_proposal_cycle" property="lefanProposalCycle" jdbcType="INTEGER" />
+    <result column="advance_name" property="advanceName" jdbcType="VARCHAR" />
+    <result column="advance_bank" property="advanceBank" jdbcType="VARCHAR" />
+    <result column="advance_account" property="advanceAccount" jdbcType="VARCHAR" />
+    <result column="risk_opinion" property="riskOpinion" jdbcType="VARCHAR" />
+    <result column="risk_commissioner" property="riskCommissioner" jdbcType="VARCHAR" />
+    <result column="risk_commissioner_tel" property="riskCommissionerTel" jdbcType="VARCHAR" />
+    <result column="risk_head" property="riskHead" jdbcType="VARCHAR" />
+    <result column="risk_head_tel" property="riskHeadTel" jdbcType="VARCHAR" />
+    <result column="check_time" property="checkTime" jdbcType="TIMESTAMP" />
+    <result column="issue_time" property="issueTime" jdbcType="TIMESTAMP" />
+      <result column="case_id" property="caseId" jdbcType="BIGINT" />
+      <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+      <result column="advance_remarks" property="advanceRemarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_name, id_card, sex, user_tel, id_address, residential_address, employe_name,
+    employe_address, employe_position, work_year, wages, marital_status, other_loan,
+    spouse_name, spouse_tel, egy_linkman, egy_linkman_tel, loan_purpose, loan_money,
+    lending_cycle, repayment_method, is_real, is_insurance, is_exclusions, exclusions_desc,
+    assessment_amount, assessment_cycle, is_real_man, is_real_reason, is_satisfy, settlement_money,
+    matching_product, lefan_proposal_money, lefan_proposal_cycle, advance_name, advance_bank,
+    advance_account, risk_opinion, risk_commissioner, risk_commissioner_tel, risk_head,
+    risk_head_tel, check_time, issue_time, case_id, case_no, advance_remarks
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from case_risk_control
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByCaseId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from case_risk_control
+    where case_id = #{caseId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from case_risk_control
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseRiskControl" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_risk_control (user_name, id_card, sex,
+      user_tel, id_address, residential_address,
+      employe_name, employe_address, employe_position,
+      work_year, wages, marital_status,
+      other_loan, spouse_name, spouse_tel,
+      egy_linkman, egy_linkman_tel, loan_purpose,
+      loan_money, lending_cycle, repayment_method,
+      is_real, is_insurance, is_exclusions,
+      exclusions_desc, assessment_amount, assessment_cycle,
+      is_real_man, is_real_reason, is_satisfy,
+      settlement_money, matching_product, lefan_proposal_money,
+      lefan_proposal_cycle, advance_name, advance_bank,
+      advance_account, risk_opinion, risk_commissioner,
+      risk_commissioner_tel, risk_head, risk_head_tel,
+      check_time, issue_time,
+      case_id, case_no, advance_remarks)
+    values (#{userName,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER},
+      #{userTel,jdbcType=VARCHAR}, #{idAddress,jdbcType=VARCHAR}, #{residentialAddress,jdbcType=VARCHAR},
+      #{employeName,jdbcType=VARCHAR}, #{employeAddress,jdbcType=VARCHAR}, #{employePosition,jdbcType=VARCHAR},
+      #{workYear,jdbcType=VARCHAR}, #{wages,jdbcType=DOUBLE}, #{maritalStatus,jdbcType=INTEGER},
+      #{otherLoan,jdbcType=VARCHAR}, #{spouseName,jdbcType=VARCHAR}, #{spouseTel,jdbcType=VARCHAR},
+      #{egyLinkman,jdbcType=VARCHAR}, #{egyLinkmanTel,jdbcType=VARCHAR}, #{loanPurpose,jdbcType=INTEGER},
+      #{loanMoney,jdbcType=DOUBLE}, #{lendingCycle,jdbcType=INTEGER}, #{repaymentMethod,jdbcType=VARCHAR},
+      #{isReal,jdbcType=INTEGER}, #{isInsurance,jdbcType=INTEGER}, #{isExclusions,jdbcType=INTEGER},
+      #{exclusionsDesc,jdbcType=VARCHAR}, #{assessmentAmount,jdbcType=DOUBLE}, #{assessmentCycle,jdbcType=INTEGER},
+      #{isRealMan,jdbcType=INTEGER}, #{isRealReason,jdbcType=INTEGER}, #{isSatisfy,jdbcType=INTEGER},
+      #{settlementMoney,jdbcType=DOUBLE}, #{matchingProduct,jdbcType=INTEGER}, #{lefanProposalMoney,jdbcType=DOUBLE},
+      #{lefanProposalCycle,jdbcType=INTEGER}, #{advanceName,jdbcType=VARCHAR}, #{advanceBank,jdbcType=VARCHAR},
+      #{advanceAccount,jdbcType=VARCHAR}, #{riskOpinion,jdbcType=VARCHAR}, #{riskCommissioner,jdbcType=VARCHAR},
+      #{riskCommissionerTel,jdbcType=VARCHAR}, #{riskHead,jdbcType=VARCHAR}, #{riskHeadTel,jdbcType=VARCHAR},
+      #{checkTime,jdbcType=TIMESTAMP}, #{issueTime,jdbcType=TIMESTAMP},
+      #{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{advanceRemarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseRiskControl" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_risk_control
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="userTel != null" >
+        user_tel,
+      </if>
+      <if test="idAddress != null" >
+        id_address,
+      </if>
+      <if test="residentialAddress != null" >
+        residential_address,
+      </if>
+      <if test="employeName != null" >
+        employe_name,
+      </if>
+      <if test="employeAddress != null" >
+        employe_address,
+      </if>
+      <if test="employePosition != null" >
+        employe_position,
+      </if>
+      <if test="workYear != null" >
+        work_year,
+      </if>
+      <if test="wages != null" >
+        wages,
+      </if>
+      <if test="maritalStatus != null" >
+        marital_status,
+      </if>
+      <if test="otherLoan != null" >
+        other_loan,
+      </if>
+      <if test="spouseName != null" >
+        spouse_name,
+      </if>
+      <if test="spouseTel != null" >
+        spouse_tel,
+      </if>
+      <if test="egyLinkman != null" >
+        egy_linkman,
+      </if>
+      <if test="egyLinkmanTel != null" >
+        egy_linkman_tel,
+      </if>
+      <if test="loanPurpose != null" >
+        loan_purpose,
+      </if>
+      <if test="loanMoney != null" >
+        loan_money,
+      </if>
+      <if test="lendingCycle != null" >
+        lending_cycle,
+      </if>
+      <if test="repaymentMethod != null" >
+        repayment_method,
+      </if>
+      <if test="isReal != null" >
+        is_real,
+      </if>
+      <if test="isInsurance != null" >
+        is_insurance,
+      </if>
+      <if test="isExclusions != null" >
+        is_exclusions,
+      </if>
+      <if test="exclusionsDesc != null" >
+        exclusions_desc,
+      </if>
+      <if test="assessmentAmount != null" >
+        assessment_amount,
+      </if>
+      <if test="assessmentCycle != null" >
+        assessment_cycle,
+      </if>
+      <if test="isRealMan != null" >
+        is_real_man,
+      </if>
+      <if test="isRealReason != null" >
+        is_real_reason,
+      </if>
+      <if test="isSatisfy != null" >
+        is_satisfy,
+      </if>
+      <if test="settlementMoney != null" >
+        settlement_money,
+      </if>
+      <if test="matchingProduct != null" >
+        matching_product,
+      </if>
+      <if test="lefanProposalMoney != null" >
+        lefan_proposal_money,
+      </if>
+      <if test="lefanProposalCycle != null" >
+        lefan_proposal_cycle,
+      </if>
+      <if test="advanceName != null" >
+        advance_name,
+      </if>
+      <if test="advanceBank != null" >
+        advance_bank,
+      </if>
+      <if test="advanceAccount != null" >
+        advance_account,
+      </if>
+      <if test="riskOpinion != null" >
+        risk_opinion,
+      </if>
+      <if test="riskCommissioner != null" >
+        risk_commissioner,
+      </if>
+      <if test="riskCommissionerTel != null" >
+        risk_commissioner_tel,
+      </if>
+      <if test="riskHead != null" >
+        risk_head,
+      </if>
+      <if test="riskHeadTel != null" >
+        risk_head_tel,
+      </if>
+      <if test="checkTime != null" >
+        check_time,
+      </if>
+      <if test="issueTime != null" >
+        issue_time,
+      </if>
+        <if test="caseId != null" >
+            case_id,
+        </if>
+        <if test="caseNo != null" >
+            case_no,
+        </if>
+        <if test="advanceRemarks != null" >
+            advance_remarks,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="userTel != null" >
+        #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="idAddress != null" >
+        #{idAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="residentialAddress != null" >
+        #{residentialAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="employeName != null" >
+        #{employeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeAddress != null" >
+        #{employeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="employePosition != null" >
+        #{employePosition,jdbcType=VARCHAR},
+      </if>
+      <if test="workYear != null" >
+        #{workYear,jdbcType=VARCHAR},
+      </if>
+      <if test="wages != null" >
+        #{wages,jdbcType=DOUBLE},
+      </if>
+      <if test="maritalStatus != null" >
+        #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="otherLoan != null" >
+        #{otherLoan,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseName != null" >
+        #{spouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseTel != null" >
+        #{spouseTel,jdbcType=VARCHAR},
+      </if>
+      <if test="egyLinkman != null" >
+        #{egyLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="egyLinkmanTel != null" >
+        #{egyLinkmanTel,jdbcType=VARCHAR},
+      </if>
+      <if test="loanPurpose != null" >
+        #{loanPurpose,jdbcType=INTEGER},
+      </if>
+      <if test="loanMoney != null" >
+        #{loanMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="lendingCycle != null" >
+        #{lendingCycle,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentMethod != null" >
+        #{repaymentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="isReal != null" >
+        #{isReal,jdbcType=INTEGER},
+      </if>
+      <if test="isInsurance != null" >
+        #{isInsurance,jdbcType=INTEGER},
+      </if>
+      <if test="isExclusions != null" >
+        #{isExclusions,jdbcType=INTEGER},
+      </if>
+      <if test="exclusionsDesc != null" >
+        #{exclusionsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="assessmentAmount != null" >
+        #{assessmentAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="assessmentCycle != null" >
+        #{assessmentCycle,jdbcType=INTEGER},
+      </if>
+      <if test="isRealMan != null" >
+        #{isRealMan,jdbcType=INTEGER},
+      </if>
+      <if test="isRealReason != null" >
+        #{isRealReason,jdbcType=INTEGER},
+      </if>
+      <if test="isSatisfy != null" >
+        #{isSatisfy,jdbcType=INTEGER},
+      </if>
+      <if test="settlementMoney != null" >
+        #{settlementMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="matchingProduct != null" >
+        #{matchingProduct,jdbcType=INTEGER},
+      </if>
+      <if test="lefanProposalMoney != null" >
+        #{lefanProposalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="lefanProposalCycle != null" >
+        #{lefanProposalCycle,jdbcType=INTEGER},
+      </if>
+      <if test="advanceName != null" >
+        #{advanceName,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceBank != null" >
+        #{advanceBank,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceAccount != null" >
+        #{advanceAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="riskOpinion != null" >
+        #{riskOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="riskCommissioner != null" >
+        #{riskCommissioner,jdbcType=VARCHAR},
+      </if>
+      <if test="riskCommissionerTel != null" >
+        #{riskCommissionerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="riskHead != null" >
+        #{riskHead,jdbcType=VARCHAR},
+      </if>
+      <if test="riskHeadTel != null" >
+        #{riskHeadTel,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null" >
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issueTime != null" >
+        #{issueTime,jdbcType=TIMESTAMP},
+      </if>
+        <if test="caseId != null" >
+            #{caseId,jdbcType=BIGINT},
+        </if>
+        <if test="caseNo != null" >
+            #{caseNo,jdbcType=VARCHAR},
+        </if>
+        <if test="advanceRemarks != null" >
+            #{advanceRemarks,jdbcType=VARCHAR},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseRiskControl" >
+    update case_risk_control
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="userTel != null" >
+        user_tel = #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="idAddress != null" >
+        id_address = #{idAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="residentialAddress != null" >
+        residential_address = #{residentialAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="employeName != null" >
+        employe_name = #{employeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeAddress != null" >
+        employe_address = #{employeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="employePosition != null" >
+        employe_position = #{employePosition,jdbcType=VARCHAR},
+      </if>
+      <if test="workYear != null" >
+        work_year = #{workYear,jdbcType=VARCHAR},
+      </if>
+      <if test="wages != null" >
+        wages = #{wages,jdbcType=DOUBLE},
+      </if>
+      <if test="maritalStatus != null" >
+        marital_status = #{maritalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="otherLoan != null" >
+        other_loan = #{otherLoan,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseName != null" >
+        spouse_name = #{spouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseTel != null" >
+        spouse_tel = #{spouseTel,jdbcType=VARCHAR},
+      </if>
+      <if test="egyLinkman != null" >
+        egy_linkman = #{egyLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="egyLinkmanTel != null" >
+        egy_linkman_tel = #{egyLinkmanTel,jdbcType=VARCHAR},
+      </if>
+      <if test="loanPurpose != null" >
+        loan_purpose = #{loanPurpose,jdbcType=INTEGER},
+      </if>
+      <if test="loanMoney != null" >
+        loan_money = #{loanMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="lendingCycle != null" >
+        lending_cycle = #{lendingCycle,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentMethod != null" >
+        repayment_method = #{repaymentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="isReal != null" >
+        is_real = #{isReal,jdbcType=INTEGER},
+      </if>
+      <if test="isInsurance != null" >
+        is_insurance = #{isInsurance,jdbcType=INTEGER},
+      </if>
+      <if test="isExclusions != null" >
+        is_exclusions = #{isExclusions,jdbcType=INTEGER},
+      </if>
+      <if test="exclusionsDesc != null" >
+        exclusions_desc = #{exclusionsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="assessmentAmount != null" >
+        assessment_amount = #{assessmentAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="assessmentCycle != null" >
+        assessment_cycle = #{assessmentCycle,jdbcType=INTEGER},
+      </if>
+      <if test="isRealMan != null" >
+        is_real_man = #{isRealMan,jdbcType=INTEGER},
+      </if>
+      <if test="isRealReason != null" >
+        is_real_reason = #{isRealReason,jdbcType=INTEGER},
+      </if>
+      <if test="isSatisfy != null" >
+        is_satisfy = #{isSatisfy,jdbcType=INTEGER},
+      </if>
+      <if test="settlementMoney != null" >
+        settlement_money = #{settlementMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="matchingProduct != null" >
+        matching_product = #{matchingProduct,jdbcType=INTEGER},
+      </if>
+      <if test="lefanProposalMoney != null" >
+        lefan_proposal_money = #{lefanProposalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="lefanProposalCycle != null" >
+        lefan_proposal_cycle = #{lefanProposalCycle,jdbcType=INTEGER},
+      </if>
+      <if test="advanceName != null" >
+        advance_name = #{advanceName,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceBank != null" >
+        advance_bank = #{advanceBank,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceAccount != null" >
+        advance_account = #{advanceAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="riskOpinion != null" >
+        risk_opinion = #{riskOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="riskCommissioner != null" >
+        risk_commissioner = #{riskCommissioner,jdbcType=VARCHAR},
+      </if>
+      <if test="riskCommissionerTel != null" >
+        risk_commissioner_tel = #{riskCommissionerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="riskHead != null" >
+        risk_head = #{riskHead,jdbcType=VARCHAR},
+      </if>
+      <if test="riskHeadTel != null" >
+        risk_head_tel = #{riskHeadTel,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null" >
+        check_time = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issueTime != null" >
+        issue_time = #{issueTime,jdbcType=TIMESTAMP},
+      </if>
+        <if test="caseId != null" >
+            case_id = #{caseId,jdbcType=BIGINT},
+        </if>
+        <if test="caseNo != null" >
+            case_no = #{caseNo,jdbcType=VARCHAR},
+        </if>
+        <if test="advanceRemarks != null" >
+            advance_remarks = #{advanceRemarks,jdbcType=VARCHAR},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseRiskControl" >
+    update case_risk_control
+    set user_name = #{userName,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      user_tel = #{userTel,jdbcType=VARCHAR},
+      id_address = #{idAddress,jdbcType=VARCHAR},
+      residential_address = #{residentialAddress,jdbcType=VARCHAR},
+      employe_name = #{employeName,jdbcType=VARCHAR},
+      employe_address = #{employeAddress,jdbcType=VARCHAR},
+      employe_position = #{employePosition,jdbcType=VARCHAR},
+      work_year = #{workYear,jdbcType=VARCHAR},
+      wages = #{wages,jdbcType=DOUBLE},
+      marital_status = #{maritalStatus,jdbcType=INTEGER},
+      other_loan = #{otherLoan,jdbcType=VARCHAR},
+      spouse_name = #{spouseName,jdbcType=VARCHAR},
+      spouse_tel = #{spouseTel,jdbcType=VARCHAR},
+      egy_linkman = #{egyLinkman,jdbcType=VARCHAR},
+      egy_linkman_tel = #{egyLinkmanTel,jdbcType=VARCHAR},
+      loan_purpose = #{loanPurpose,jdbcType=INTEGER},
+      loan_money = #{loanMoney,jdbcType=DOUBLE},
+      lending_cycle = #{lendingCycle,jdbcType=INTEGER},
+      repayment_method = #{repaymentMethod,jdbcType=VARCHAR},
+      is_real = #{isReal,jdbcType=INTEGER},
+      is_insurance = #{isInsurance,jdbcType=INTEGER},
+      is_exclusions = #{isExclusions,jdbcType=INTEGER},
+      exclusions_desc = #{exclusionsDesc,jdbcType=VARCHAR},
+      assessment_amount = #{assessmentAmount,jdbcType=DOUBLE},
+      assessment_cycle = #{assessmentCycle,jdbcType=INTEGER},
+      is_real_man = #{isRealMan,jdbcType=INTEGER},
+      is_real_reason = #{isRealReason,jdbcType=INTEGER},
+      is_satisfy = #{isSatisfy,jdbcType=INTEGER},
+      settlement_money = #{settlementMoney,jdbcType=DOUBLE},
+      matching_product = #{matchingProduct,jdbcType=INTEGER},
+      lefan_proposal_money = #{lefanProposalMoney,jdbcType=DOUBLE},
+      lefan_proposal_cycle = #{lefanProposalCycle,jdbcType=INTEGER},
+      advance_name = #{advanceName,jdbcType=VARCHAR},
+      advance_bank = #{advanceBank,jdbcType=VARCHAR},
+      advance_account = #{advanceAccount,jdbcType=VARCHAR},
+      risk_opinion = #{riskOpinion,jdbcType=VARCHAR},
+      risk_commissioner = #{riskCommissioner,jdbcType=VARCHAR},
+      risk_commissioner_tel = #{riskCommissionerTel,jdbcType=VARCHAR},
+      risk_head = #{riskHead,jdbcType=VARCHAR},
+      risk_head_tel = #{riskHeadTel,jdbcType=VARCHAR},
+      check_time = #{checkTime,jdbcType=TIMESTAMP},
+      issue_time = #{issueTime,jdbcType=TIMESTAMP},
+      case_id = #{caseId,jdbcType=BIGINT},
+      case_no = #{caseNo,jdbcType=VARCHAR},
+      advance_remarks = #{advanceRemarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

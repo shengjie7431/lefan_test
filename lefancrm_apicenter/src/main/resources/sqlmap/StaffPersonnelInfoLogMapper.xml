@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.StaffPersonnelInfoLogMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.StaffPersonnelInfoLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="staff_personnel_info_id" property="staffPersonnelInfoId" jdbcType="BIGINT" />
+    <result column="field_name" property="fieldName" jdbcType="VARCHAR" />
+    <result column="old_name" property="oldName" jdbcType="VARCHAR" />
+    <result column="new_name" property="newName" jdbcType="VARCHAR" />
+    <result column="update_type" property="updateType" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, staff_personnel_info_id, field_name, old_name, new_name, update_type, create_by, 
+    create_by_name, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from staff_personnel_info_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from staff_personnel_info_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.StaffPersonnelInfoLog" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_personnel_info_log (staff_personnel_info_id, field_name, old_name, 
+      new_name, update_type, create_by, 
+      create_by_name, create_time)
+    values (#{staffPersonnelInfoId,jdbcType=BIGINT}, #{fieldName,jdbcType=VARCHAR}, #{oldName,jdbcType=VARCHAR}, 
+      #{newName,jdbcType=VARCHAR}, #{updateType,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, 
+      #{createByName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.StaffPersonnelInfoLog" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_personnel_info_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="staffPersonnelInfoId != null" >
+        staff_personnel_info_id,
+      </if>
+      <if test="fieldName != null" >
+        field_name,
+      </if>
+      <if test="oldName != null" >
+        old_name,
+      </if>
+      <if test="newName != null" >
+        new_name,
+      </if>
+      <if test="updateType != null" >
+        update_type,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createByName != null" >
+        create_by_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="staffPersonnelInfoId != null" >
+        #{staffPersonnelInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="fieldName != null" >
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldName != null" >
+        #{oldName,jdbcType=VARCHAR},
+      </if>
+      <if test="newName != null" >
+        #{newName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateType != null" >
+        #{updateType,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createByName != null" >
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.StaffPersonnelInfoLog" >
+    update staff_personnel_info_log
+    <set >
+      <if test="staffPersonnelInfoId != null" >
+        staff_personnel_info_id = #{staffPersonnelInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="fieldName != null" >
+        field_name = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="oldName != null" >
+        old_name = #{oldName,jdbcType=VARCHAR},
+      </if>
+      <if test="newName != null" >
+        new_name = #{newName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateType != null" >
+        update_type = #{updateType,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createByName != null" >
+        create_by_name = #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.StaffPersonnelInfoLog" >
+    update staff_personnel_info_log
+    set staff_personnel_info_id = #{staffPersonnelInfoId,jdbcType=BIGINT},
+      field_name = #{fieldName,jdbcType=VARCHAR},
+      old_name = #{oldName,jdbcType=VARCHAR},
+      new_name = #{newName,jdbcType=VARCHAR},
+      update_type = #{updateType,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_by_name = #{createByName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="staffPersonnelInfoId != null" >
+            and staff_personnel_info_id = #{staffPersonnelInfoId,jdbcType=BIGINT}
+        </if>
+        <if test="createBy != null" >
+            and create_by = #{createBy,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from staff_personnel_info_log
+        <include refid="joins" />
+        where 1 = 1
+        <include refid="wheres" />
+        order by create_time desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from staff_personnel_info_log
+        <include refid="joins" />
+        where 1 = 1
+        <include refid="wheres" />
+    </select>
+</mapper>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyServiceSubTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyServiceSubType" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="service_id" property="serviceId" jdbcType="BIGINT" />
+    <result column="service_name" property="serviceName" jdbcType="VARCHAR" />
+    <result column="service_sub_name" property="serviceSubName" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, service_id, service_name, service_sub_name, create_by, create_time, update_by, 
+    update_time, delete_flag, sort
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_service_sub_type
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByServiceId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from survey_service_sub_type
+    where service_id = #{id,jdbcType=BIGINT} and delete_flag = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_service_sub_type
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyServiceSubType" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_service_sub_type (service_id, service_name, service_sub_name, 
+      create_by, create_time, update_by, 
+      update_time, delete_flag, sort
+      )
+    values (#{serviceId,jdbcType=BIGINT}, #{serviceName,jdbcType=VARCHAR}, #{serviceSubName,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyServiceSubType" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_service_sub_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceId != null" >
+        service_id,
+      </if>
+      <if test="serviceName != null" >
+        service_name,
+      </if>
+      <if test="serviceSubName != null" >
+        service_sub_name,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceId != null" >
+        #{serviceId,jdbcType=BIGINT},
+      </if>
+      <if test="serviceName != null" >
+        #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceSubName != null" >
+        #{serviceSubName,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyServiceSubType" >
+    update survey_service_sub_type
+    <set >
+      <if test="serviceId != null" >
+        service_id = #{serviceId,jdbcType=BIGINT},
+      </if>
+      <if test="serviceName != null" >
+        service_name = #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceSubName != null" >
+        service_sub_name = #{serviceSubName,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyServiceSubType" >
+    update survey_service_sub_type
+    set service_id = #{serviceId,jdbcType=BIGINT},
+      service_name = #{serviceName,jdbcType=VARCHAR},
+      service_sub_name = #{serviceSubName,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

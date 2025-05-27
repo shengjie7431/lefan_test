@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaProgressMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaProgress">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="fina_id" jdbcType="BIGINT" property="finaId" />
+        <result column="fina_info_id" jdbcType="BIGINT" property="finaInfoId" />
+        <result column="key_code" jdbcType="VARCHAR" property="keyCode" />
+        <result column="key_name" jdbcType="VARCHAR" property="keyName" />
+        <result column="progress_user_id" jdbcType="BIGINT" property="progressUserId" />
+        <result column="progress_user_name" jdbcType="VARCHAR" property="progressUserName" />
+        <result column="progress_name" jdbcType="VARCHAR" property="progressName" />
+        <result column="progress_desc" jdbcType="VARCHAR" property="progressDesc" />
+        <result column="progress_time" jdbcType="TIMESTAMP" property="progressTime" />
+        <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="delete_flag" jdbcType="INTEGER" property="deleteFlag" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, fina_id, fina_info_id, key_code, key_name, progress_user_id, progress_user_name,
+        progress_name, progress_desc, progress_time, create_by, create_time, update_by, update_time,
+        delete_flag
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from fina_progress
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from fina_progress
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaProgress">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into fina_progress (fina_id, fina_info_id, key_code,
+        key_name, progress_user_id, progress_user_name,
+        progress_name, progress_desc, progress_time,
+        create_by, create_time, update_by,
+        update_time, delete_flag)
+        values (#{finaId,jdbcType=BIGINT}, #{finaInfoId,jdbcType=BIGINT}, #{keyCode,jdbcType=VARCHAR},
+        #{keyName,jdbcType=VARCHAR}, #{progressUserId,jdbcType=BIGINT}, #{progressUserName,jdbcType=VARCHAR},
+        #{progressName,jdbcType=VARCHAR}, #{progressDesc,jdbcType=VARCHAR}, #{progressTime,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+        #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaProgress">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into fina_progress
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="finaId != null">
+                fina_id,
+            </if>
+            <if test="finaInfoId != null">
+                fina_info_id,
+            </if>
+            <if test="keyCode != null">
+                key_code,
+            </if>
+            <if test="keyName != null">
+                key_name,
+            </if>
+            <if test="progressUserId != null">
+                progress_user_id,
+            </if>
+            <if test="progressUserName != null">
+                progress_user_name,
+            </if>
+            <if test="progressName != null">
+                progress_name,
+            </if>
+            <if test="progressDesc != null">
+                progress_desc,
+            </if>
+            <if test="progressTime != null">
+                progress_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="finaId != null">
+                #{finaId,jdbcType=BIGINT},
+            </if>
+            <if test="finaInfoId != null">
+                #{finaInfoId,jdbcType=BIGINT},
+            </if>
+            <if test="keyCode != null">
+                #{keyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="keyName != null">
+                #{keyName,jdbcType=VARCHAR},
+            </if>
+            <if test="progressUserId != null">
+                #{progressUserId,jdbcType=BIGINT},
+            </if>
+            <if test="progressUserName != null">
+                #{progressUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="progressName != null">
+                #{progressName,jdbcType=VARCHAR},
+            </if>
+            <if test="progressDesc != null">
+                #{progressDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="progressTime != null">
+                #{progressTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaProgress">
+        update fina_progress
+        <set>
+            <if test="finaId != null">
+                fina_id = #{finaId,jdbcType=BIGINT},
+            </if>
+            <if test="finaInfoId != null">
+                fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+            </if>
+            <if test="keyCode != null">
+                key_code = #{keyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="keyName != null">
+                key_name = #{keyName,jdbcType=VARCHAR},
+            </if>
+            <if test="progressUserId != null">
+                progress_user_id = #{progressUserId,jdbcType=BIGINT},
+            </if>
+            <if test="progressUserName != null">
+                progress_user_name = #{progressUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="progressName != null">
+                progress_name = #{progressName,jdbcType=VARCHAR},
+            </if>
+            <if test="progressDesc != null">
+                progress_desc = #{progressDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="progressTime != null">
+                progress_time = #{progressTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaProgress">
+    update fina_progress
+    set fina_id = #{finaId,jdbcType=BIGINT},
+      fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      key_code = #{keyCode,jdbcType=VARCHAR},
+      key_name = #{keyName,jdbcType=VARCHAR},
+      progress_user_id = #{progressUserId,jdbcType=BIGINT},
+      progress_user_name = #{progressUserName,jdbcType=VARCHAR},
+      progress_name = #{progressName,jdbcType=VARCHAR},
+      progress_desc = #{progressDesc,jdbcType=VARCHAR},
+      progress_time = #{progressTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="finaId != null" >
+            and fina_id = #{finaId,jdbcType=BIGINT}
+        </if>
+        <if test="finaInfoId != null" >
+            and fina_info_id = #{finaInfoId,jdbcType=BIGINT}
+        </if>
+        <if test="keyCode != null">
+            and key_code = #{keyCode,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from fina_progress
+        <include refid="joins" />
+        where delete_flag = 0
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from fina_progress
+        <include refid="joins" />
+        where delete_flag = 0
+        <include refid="wheres" />
+    </select>
+</mapper>

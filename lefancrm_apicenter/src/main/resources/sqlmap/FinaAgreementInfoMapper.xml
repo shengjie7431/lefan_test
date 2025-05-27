@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaAgreementInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaAgreementInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="fina_id" property="finaId" jdbcType="BIGINT" />
+    <result column="fina_info_id" property="finaInfoId" jdbcType="BIGINT" />
+    <result column="agreement_name" property="agreementName" jdbcType="VARCHAR" />
+    <result column="sign_state" property="signState" jdbcType="INTEGER" />
+    <result column="agreement_path" property="agreementPath" jdbcType="VARCHAR" />
+    <result column="sign_agreement_path" property="signAgreementPath" jdbcType="VARCHAR" />
+      <result column="sign_agreement_path_local" property="signAgreementPathLocal" jdbcType="VARCHAR" />
+    <result column="sign_time" property="signTime" jdbcType="TIMESTAMP" />
+    <result column="sign_user_name" property="signUserName" jdbcType="VARCHAR" />
+    <result column="sign_user_idcard" property="signUserIdcard" jdbcType="VARCHAR" />
+    <result column="survey_user_id" property="surveyUserId" jdbcType="BIGINT" />
+    <result column="survey_user_name" property="surveyUserName" jdbcType="VARCHAR" />
+    <result column="file_type" property="fileType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fina_id, fina_info_id, agreement_name, sign_state, agreement_path, sign_agreement_path, sign_agreement_path_local,
+    sign_time, sign_user_name, sign_user_idcard, survey_user_id, survey_user_name, file_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_agreement_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_agreement_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaAgreementInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_agreement_info (fina_id, fina_info_id, agreement_name, 
+      sign_state, agreement_path, sign_agreement_path, sign_agreement_path_local,
+      sign_time, sign_user_name, sign_user_idcard, 
+      survey_user_id, survey_user_name, file_type
+      )
+    values (#{finaId,jdbcType=BIGINT}, #{finaInfoId,jdbcType=BIGINT}, #{agreementName,jdbcType=VARCHAR}, 
+      #{signState,jdbcType=INTEGER}, #{agreementPath,jdbcType=VARCHAR}, #{signAgreementPath,jdbcType=VARCHAR}, #{signAgreementPathLocal,jdbcType=VARCHAR},
+      #{signTime,jdbcType=TIMESTAMP}, #{signUserName,jdbcType=VARCHAR}, #{signUserIdcard,jdbcType=VARCHAR}, 
+      #{surveyUserId,jdbcType=BIGINT}, #{surveyUserName,jdbcType=VARCHAR}, #{fileType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaAgreementInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_agreement_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        fina_id,
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id,
+      </if>
+      <if test="agreementName != null" >
+        agreement_name,
+      </if>
+      <if test="signState != null" >
+        sign_state,
+      </if>
+      <if test="agreementPath != null" >
+        agreement_path,
+      </if>
+      <if test="signAgreementPath != null" >
+        sign_agreement_path,
+      </if>
+        <if test="signAgreementPathLocal != null" >
+            sign_agreement_path_local,
+        </if>
+      <if test="signTime != null" >
+        sign_time,
+      </if>
+      <if test="signUserName != null" >
+        sign_user_name,
+      </if>
+      <if test="signUserIdcard != null" >
+        sign_user_idcard,
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id,
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name,
+      </if>
+      <if test="fileType != null" >
+        file_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="agreementName != null" >
+        #{agreementName,jdbcType=VARCHAR},
+      </if>
+      <if test="signState != null" >
+        #{signState,jdbcType=INTEGER},
+      </if>
+      <if test="agreementPath != null" >
+        #{agreementPath,jdbcType=VARCHAR},
+      </if>
+      <if test="signAgreementPath != null" >
+        #{signAgreementPath,jdbcType=VARCHAR},
+      </if>
+        <if test="signAgreementPathLocal != null" >
+            #{signAgreementPathLocal,jdbcType=VARCHAR},
+        </if>
+      <if test="signTime != null" >
+        #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signUserName != null" >
+        #{signUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="signUserIdcard != null" >
+        #{signUserIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyUserId != null" >
+        #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        #{fileType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaAgreementInfo" >
+    update fina_agreement_info
+    <set >
+      <if test="finaId != null" >
+        fina_id = #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="agreementName != null" >
+        agreement_name = #{agreementName,jdbcType=VARCHAR},
+      </if>
+      <if test="signState != null" >
+        sign_state = #{signState,jdbcType=INTEGER},
+      </if>
+      <if test="agreementPath != null" >
+        agreement_path = #{agreementPath,jdbcType=VARCHAR},
+      </if>
+      <if test="signAgreementPath != null" >
+        sign_agreement_path = #{signAgreementPath,jdbcType=VARCHAR},
+      </if>
+        <if test="signAgreementPathLocal != null" >
+            sign_agreement_path_local = #{signAgreementPathLocal,jdbcType=VARCHAR},
+        </if>
+      <if test="signTime != null" >
+        sign_time = #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signUserName != null" >
+        sign_user_name = #{signUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="signUserIdcard != null" >
+        sign_user_idcard = #{signUserIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        file_type = #{fileType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaAgreementInfo" >
+    update fina_agreement_info
+    set fina_id = #{finaId,jdbcType=BIGINT},
+      fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      agreement_name = #{agreementName,jdbcType=VARCHAR},
+      sign_state = #{signState,jdbcType=INTEGER},
+      agreement_path = #{agreementPath,jdbcType=VARCHAR},
+      sign_agreement_path = #{signAgreementPath,jdbcType=VARCHAR},
+      sign_agreement_path_local = #{signAgreementPathLocal,jdbcType=VARCHAR},
+      sign_time = #{signTime,jdbcType=TIMESTAMP},
+      sign_user_name = #{signUserName,jdbcType=VARCHAR},
+      sign_user_idcard = #{signUserIdcard,jdbcType=VARCHAR},
+      survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="finaId != null" >
+            and a.fina_id = #{finaId,jdbcType=BIGINT}
+        </if>
+        <if test="finaInfoId != null" >
+            and a.fina_info_id = #{finaInfoId,jdbcType=BIGINT}
+        </if>
+        <if test="agreementName != null" >
+            and a.agreement_name = #{agreementName,jdbcType=VARCHAR}
+        </if>
+        <if test="signState != null" >
+            and a.sign_state = #{signState,jdbcType=INTEGER}
+        </if>
+        <if test="fileType != null" >
+            and a.file_type = #{fileType,jdbcType=INTEGER}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select a.*
+        from fina_agreement_info a
+        <include refid="joins" />
+        where 1 = 1
+        <include refid="wheres" />
+        order by a.id desc
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select count(1)
+        from fina_agreement_info a
+        <include refid="joins" />
+        where 1 = 1
+        <include refid="wheres" />
+    </select>
+</mapper>

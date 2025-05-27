@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyProductMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.dto.SurveyProductDto" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="DOUBLE" />
+        <result column="lefan_coin" property="lefanCoin" jdbcType="BIGINT" />
+        <result column="is_up" property="isUp" jdbcType="INTEGER" />
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+        <result column="file_id" property="fileId" jdbcType="BIGINT" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="up_time" property="upTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="pro_file" property="proFile" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.lefancrm.apicenter.dto.SurveyProductDto" extends="BaseResultMap" >
+        <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, name, price, lefan_coin, is_up, is_delete, file_id, create_time, up_time, create_by,
+        code, pro_file
+    </sql>
+    <sql id="Blob_Column_List" >
+        remark
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from survey_product
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from survey_product
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyProduct" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_product (name, price, lefan_coin,
+        is_up, is_delete, file_id,
+        create_time, up_time, create_by,
+        code, pro_file, remark
+        )
+        values (#{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{lefanCoin,jdbcType=BIGINT},
+        #{isUp,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{fileId,jdbcType=BIGINT},
+        #{createTime,jdbcType=TIMESTAMP}, #{upTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},
+        #{code,jdbcType=VARCHAR}, #{proFile,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyProduct" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_product
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="price != null" >
+                price,
+            </if>
+            <if test="lefanCoin != null" >
+                lefan_coin,
+            </if>
+            <if test="isUp != null" >
+                is_up,
+            </if>
+            <if test="isDelete != null" >
+                is_delete,
+            </if>
+            <if test="fileId != null" >
+                file_id,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="upTime != null" >
+                up_time,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="code != null" >
+                code,
+            </if>
+            <if test="proFile != null" >
+                pro_file,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null" >
+                #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="lefanCoin != null" >
+                #{lefanCoin,jdbcType=BIGINT},
+            </if>
+            <if test="isUp != null" >
+                #{isUp,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="fileId != null" >
+                #{fileId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="upTime != null" >
+                #{upTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null" >
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="proFile != null" >
+                #{proFile,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyProduct" >
+        update survey_product
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null" >
+                price = #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="lefanCoin != null" >
+                lefan_coin = #{lefanCoin,jdbcType=BIGINT},
+            </if>
+            <if test="isUp != null" >
+                is_up = #{isUp,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                is_delete = #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="fileId != null" >
+                file_id = #{fileId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="upTime != null" >
+                up_time = #{upTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null" >
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="proFile != null" >
+                pro_file = #{proFile,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lefancrm.apicenter.model.SurveyProduct" >
+        update survey_product
+        set name = #{name,jdbcType=VARCHAR},
+        price = #{price,jdbcType=DOUBLE},
+        lefan_coin = #{lefanCoin,jdbcType=BIGINT},
+        is_up = #{isUp,jdbcType=INTEGER},
+        is_delete = #{isDelete,jdbcType=INTEGER},
+        file_id = #{fileId,jdbcType=BIGINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        up_time = #{upTime,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        code = #{code,jdbcType=VARCHAR},
+        pro_file = #{proFile,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyProduct" >
+        update survey_product
+        set name = #{name,jdbcType=VARCHAR},
+        price = #{price,jdbcType=DOUBLE},
+        lefan_coin = #{lefanCoin,jdbcType=BIGINT},
+        is_up = #{isUp,jdbcType=INTEGER},
+        is_delete = #{isDelete,jdbcType=INTEGER},
+        file_id = #{fileId,jdbcType=BIGINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        up_time = #{upTime,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        code = #{code,jdbcType=VARCHAR},
+        pro_file = #{proFile,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="name!=null">
+            and a.name like CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}), '%')
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_product a
+        <include refid="joins" />
+        where a.is_delete=0
+        <include refid="wheres" />
+        order by a.id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_product a
+        <include refid="joins" />
+        where a.is_delete=0
+        <include refid="wheres" />
+    </select>
+</mapper>

@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.PaymentEstimateInquiryMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.PaymentEstimateInquiry" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="payable_fee" property="payableFee" jdbcType="DOUBLE" />
+        <result column="free_pre_pay_fee" property="freePrePayFee" jdbcType="DOUBLE" />
+        <result column="medical_fee" property="medicalFee" jdbcType="DOUBLE" />
+        <result column="service_rate" property="serviceRate" jdbcType="DOUBLE" />
+        <result column="agent_service_fee" property="agentServiceFee" jdbcType="DOUBLE" />
+        <result column="reduction_service_fee" property="reductionServiceFee" jdbcType="DOUBLE" />
+        <result column="payment_estimate_id" property="paymentEstimateId" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="advance_fee" property="advanceFee" jdbcType="DOUBLE" />
+        <result column="service_fee" property="serviceFee" jdbcType="DOUBLE" />
+        <result column="service_pay_rate" property="servicePayRate" jdbcType="DOUBLE" />
+        <result column="final_fee" property="finalFee" jdbcType="DOUBLE" />
+        <result column="is_update" property="isUpdate" jdbcType="INTEGER" />
+        <result column="discount_loan_fee" property="discountLoanFee" jdbcType="DOUBLE" />
+        <result column="apply_discount_loan_fee" property="applyDiscountLoanFee" jdbcType="DOUBLE" />
+        <result column="should_de_fee" property="shouldDeFee" jdbcType="DOUBLE" />
+        <result column="real_de_fee" property="realDeFee" jdbcType="DOUBLE" />
+        <result column="is_need_loan" property="isNeedLoan" jdbcType="INTEGER" />
+        <result column="still_need_fee" property="stillNeedFee" jdbcType="DOUBLE" />
+        <result column="loan_rate" property="loanRate" jdbcType="DOUBLE" />
+        <result column="loan_fee" property="loanFee" jdbcType="DOUBLE" />
+        <result column="insurance_fee" property="insuranceFee" jdbcType="DOUBLE" />
+        <result column="interest_rate" property="interestRate" jdbcType="DOUBLE" />
+        <result column="total_loan_fee" property="totalLoanFee" jdbcType="DOUBLE" />
+        <result column="total_de_fee" property="totalDeFee" jdbcType="DOUBLE" />
+        <result column="charge_type" property="chargeType" jdbcType="INTEGER" />
+        <result column="case_id" property="caseId" jdbcType="BIGINT" />
+        <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+        <result column="advcance_type" property="advcanceType" jdbcType="INTEGER" />
+        <result column="case_type" property="caseType" jdbcType="INTEGER" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="inquiry_desc" property="inquiryDesc" jdbcType="VARCHAR" />
+        <result column="calculation_type" property="calculationType" jdbcType="INTEGER" />
+        <result column="rate_base_type" property="rateBaseType" jdbcType="INTEGER" />
+        <result column="invalidism_indemnify_fee" property="invalidismIndemnifyFee" jdbcType="DOUBLE" />
+        <result column="spirit_comfort_fee" property="spiritComfortFee" jdbcType="DOUBLE" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, payable_fee, free_pre_pay_fee, medical_fee, service_rate, agent_service_fee,
+        reduction_service_fee, payment_estimate_id, user_id, advance_fee, service_fee, service_pay_rate,
+        final_fee, is_update, discount_loan_fee, apply_discount_loan_fee, should_de_fee,
+        real_de_fee, is_need_loan, still_need_fee, loan_rate, loan_fee, insurance_fee, interest_rate,
+        total_loan_fee, total_de_fee,charge_type,case_id, case_no,advcance_type,case_type,state,inquiry_desc,
+        calculation_type,rate_base_type,invalidism_indemnify_fee,spirit_comfort_fee
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from payment_estimate_inquiry
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from payment_estimate_inquiry
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.PaymentEstimateInquiry" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into payment_estimate_inquiry (payable_fee, free_pre_pay_fee, medical_fee,
+        service_rate, agent_service_fee, reduction_service_fee,
+        payment_estimate_id, user_id, advance_fee,
+        service_fee, service_pay_rate, final_fee,
+        is_update, discount_loan_fee, apply_discount_loan_fee,
+        should_de_fee, real_de_fee, is_need_loan,
+        still_need_fee, loan_rate, loan_fee,
+        insurance_fee, interest_rate, total_loan_fee,
+        total_de_fee,charge_type,case_id, case_no,advcance_type,case_type,state,inquiry_desc,
+        calculation_type,rate_base_type,invalidism_indemnify_fee,spirit_comfort_fee)
+        values (#{payableFee,jdbcType=DOUBLE}, #{freePrePayFee,jdbcType=DOUBLE}, #{medicalFee,jdbcType=DOUBLE},
+        #{serviceRate,jdbcType=DOUBLE}, #{agentServiceFee,jdbcType=DOUBLE}, #{reductionServiceFee,jdbcType=DOUBLE},
+        #{paymentEstimateId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{advanceFee,jdbcType=DOUBLE},
+        #{serviceFee,jdbcType=DOUBLE}, #{servicePayRate,jdbcType=DOUBLE}, #{finalFee,jdbcType=DOUBLE},
+        #{isUpdate,jdbcType=INTEGER}, #{discountLoanFee,jdbcType=DOUBLE}, #{applyDiscountLoanFee,jdbcType=DOUBLE},
+        #{shouldDeFee,jdbcType=DOUBLE}, #{realDeFee,jdbcType=DOUBLE}, #{isNeedLoan,jdbcType=INTEGER},
+        #{stillNeedFee,jdbcType=DOUBLE}, #{loanRate,jdbcType=DOUBLE}, #{loanFee,jdbcType=DOUBLE},
+        #{insuranceFee,jdbcType=DOUBLE}, #{interestRate,jdbcType=DOUBLE}, #{totalLoanFee,jdbcType=DOUBLE},
+        #{totalDeFee,jdbcType=DOUBLE},#{chargeType,jdbcType=INTEGER},#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR},#{advcanceType,jdbcType=INTEGER},
+        #{caseType,jdbcType=INTEGER},#{state,jdbcType=INTEGER},#{inquiryDesc,jdbcType=INTEGER},
+        #{calculationType,jdbcType=INTEGER},#{rateBaseType,jdbcType=INTEGER},#{invalidismIndemnifyFee,jdbcType=DOUBLE},#{spiritComfortFee,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.PaymentEstimateInquiry" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into payment_estimate_inquiry
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="payableFee != null" >
+                payable_fee,
+            </if>
+            <if test="freePrePayFee != null" >
+                free_pre_pay_fee,
+            </if>
+            <if test="medicalFee != null" >
+                medical_fee,
+            </if>
+            <if test="serviceRate != null" >
+                service_rate,
+            </if>
+            <if test="agentServiceFee != null" >
+                agent_service_fee,
+            </if>
+            <if test="reductionServiceFee != null" >
+                reduction_service_fee,
+            </if>
+            <if test="paymentEstimateId != null" >
+                payment_estimate_id,
+            </if>
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="advanceFee != null" >
+                advance_fee,
+            </if>
+            <if test="serviceFee != null" >
+                service_fee,
+            </if>
+            <if test="servicePayRate != null" >
+                service_pay_rate,
+            </if>
+            <if test="finalFee != null" >
+                final_fee,
+            </if>
+            <if test="isUpdate != null" >
+                is_update,
+            </if>
+            <if test="discountLoanFee != null" >
+                discount_loan_fee,
+            </if>
+            <if test="applyDiscountLoanFee != null" >
+                apply_discount_loan_fee,
+            </if>
+            <if test="shouldDeFee != null" >
+                should_de_fee,
+            </if>
+            <if test="realDeFee != null" >
+                real_de_fee,
+            </if>
+            <if test="isNeedLoan != null" >
+                is_need_loan,
+            </if>
+            <if test="stillNeedFee != null" >
+                still_need_fee,
+            </if>
+            <if test="loanRate != null" >
+                loan_rate,
+            </if>
+            <if test="loanFee != null" >
+                loan_fee,
+            </if>
+            <if test="insuranceFee != null" >
+                insurance_fee,
+            </if>
+            <if test="interestRate != null" >
+                interest_rate,
+            </if>
+            <if test="totalLoanFee != null" >
+                total_loan_fee,
+            </if>
+            <if test="totalDeFee != null" >
+                total_de_fee,
+            </if>
+            <if test="chargeType != null" >
+                charge_type,
+            </if>
+            <if test="caseId != null" >
+                case_id,
+            </if>
+            <if test="caseNo != null" >
+                case_no,
+            </if>
+            <if test="advcanceType != null" >
+                advcance_type,
+            </if>
+            <if test="caseType != null" >
+                case_type,
+            </if>
+            <if test="state != null" >
+                state,
+            </if>
+            <if test="inquiryDesc != null" >
+                inquiry_desc,
+            </if>
+            <if test="calculationType != null" >
+                calculation_type,
+            </if>
+            <if test="rateBaseType != null" >
+                rate_base_type,
+            </if>
+            <if test="invalidismIndemnifyFee != null" >
+                invalidism_indemnify_fee,
+            </if>
+            <if test="spiritComfortFee != null" >
+                spirit_comfort_fee,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="payableFee != null" >
+                #{payableFee,jdbcType=DOUBLE},
+            </if>
+            <if test="freePrePayFee != null" >
+                #{freePrePayFee,jdbcType=DOUBLE},
+            </if>
+            <if test="medicalFee != null" >
+                #{medicalFee,jdbcType=DOUBLE},
+            </if>
+            <if test="serviceRate != null" >
+                #{serviceRate,jdbcType=DOUBLE},
+            </if>
+            <if test="agentServiceFee != null" >
+                #{agentServiceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="reductionServiceFee != null" >
+                #{reductionServiceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="paymentEstimateId != null" >
+                #{paymentEstimateId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="advanceFee != null" >
+                #{advanceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="serviceFee != null" >
+                #{serviceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="servicePayRate != null" >
+                #{servicePayRate,jdbcType=DOUBLE},
+            </if>
+            <if test="finalFee != null" >
+                #{finalFee,jdbcType=DOUBLE},
+            </if>
+            <if test="isUpdate != null" >
+                #{isUpdate,jdbcType=INTEGER},
+            </if>
+            <if test="discountLoanFee != null" >
+                #{discountLoanFee,jdbcType=DOUBLE},
+            </if>
+            <if test="applyDiscountLoanFee != null" >
+                #{applyDiscountLoanFee,jdbcType=DOUBLE},
+            </if>
+            <if test="shouldDeFee != null" >
+                #{shouldDeFee,jdbcType=DOUBLE},
+            </if>
+            <if test="realDeFee != null" >
+                #{realDeFee,jdbcType=DOUBLE},
+            </if>
+            <if test="isNeedLoan != null" >
+                #{isNeedLoan,jdbcType=INTEGER},
+            </if>
+            <if test="stillNeedFee != null" >
+                #{stillNeedFee,jdbcType=DOUBLE},
+            </if>
+            <if test="loanRate != null" >
+                #{loanRate,jdbcType=DOUBLE},
+            </if>
+            <if test="loanFee != null" >
+                #{loanFee,jdbcType=DOUBLE},
+            </if>
+            <if test="insuranceFee != null" >
+                #{insuranceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="interestRate != null" >
+                #{interestRate,jdbcType=DOUBLE},
+            </if>
+            <if test="totalLoanFee != null" >
+                #{totalLoanFee,jdbcType=DOUBLE},
+            </if>
+            <if test="totalDeFee != null" >
+                #{totalDeFee,jdbcType=DOUBLE},
+            </if>
+            <if test="chargeType != null" >
+                #{chargeType,jdbcType=INTEGER},
+            </if>
+            <if test="caseId != null" >
+                #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="advcanceType != null" >
+                #{advcanceType,jdbcType=INTEGER},
+            </if>
+            <if test="caseType != null" >
+                #{caseType,jdbcType=INTEGER},
+            </if>
+            <if test="state != null" >
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="inquiryDesc != null" >
+                #{inquiryDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="calculationType != null" >
+                #{calculationType,jdbcType=INTEGER},
+            </if>
+            <if test="rateBaseType != null" >
+                #{rateBaseType,jdbcType=INTEGER},
+            </if>
+            <if test="invalidismIndemnifyFee != null" >
+                #{invalidismIndemnifyFee,jdbcType=DOUBLE},
+            </if>
+            <if test="spiritComfortFee != null" >
+                #{spiritComfortFee,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.PaymentEstimateInquiry" >
+        update payment_estimate_inquiry
+        <set >
+            <if test="payableFee != null" >
+                payable_fee = #{payableFee,jdbcType=DOUBLE},
+            </if>
+            <if test="freePrePayFee != null" >
+                free_pre_pay_fee = #{freePrePayFee,jdbcType=DOUBLE},
+            </if>
+            <if test="medicalFee != null" >
+                medical_fee = #{medicalFee,jdbcType=DOUBLE},
+            </if>
+            <if test="serviceRate != null" >
+                service_rate = #{serviceRate,jdbcType=DOUBLE},
+            </if>
+            <if test="agentServiceFee != null" >
+                agent_service_fee = #{agentServiceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="reductionServiceFee != null" >
+                reduction_service_fee = #{reductionServiceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="paymentEstimateId != null" >
+                payment_estimate_id = #{paymentEstimateId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="advanceFee != null" >
+                advance_fee = #{advanceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="serviceFee != null" >
+                service_fee = #{serviceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="servicePayRate != null" >
+                service_pay_rate = #{servicePayRate,jdbcType=DOUBLE},
+            </if>
+            <if test="finalFee != null" >
+                final_fee = #{finalFee,jdbcType=DOUBLE},
+            </if>
+            <if test="isUpdate != null" >
+                is_update = #{isUpdate,jdbcType=INTEGER},
+            </if>
+            <if test="discountLoanFee != null" >
+                discount_loan_fee = #{discountLoanFee,jdbcType=DOUBLE},
+            </if>
+            <if test="applyDiscountLoanFee != null" >
+                apply_discount_loan_fee = #{applyDiscountLoanFee,jdbcType=DOUBLE},
+            </if>
+            <if test="shouldDeFee != null" >
+                should_de_fee = #{shouldDeFee,jdbcType=DOUBLE},
+            </if>
+            <if test="realDeFee != null" >
+                real_de_fee = #{realDeFee,jdbcType=DOUBLE},
+            </if>
+            <if test="isNeedLoan != null" >
+                is_need_loan = #{isNeedLoan,jdbcType=INTEGER},
+            </if>
+            <if test="stillNeedFee != null" >
+                still_need_fee = #{stillNeedFee,jdbcType=DOUBLE},
+            </if>
+            <if test="loanRate != null" >
+                loan_rate = #{loanRate,jdbcType=DOUBLE},
+            </if>
+            <if test="loanFee != null" >
+                loan_fee = #{loanFee,jdbcType=DOUBLE},
+            </if>
+            <if test="insuranceFee != null" >
+                insurance_fee = #{insuranceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="interestRate != null" >
+                interest_rate = #{interestRate,jdbcType=DOUBLE},
+            </if>
+            <if test="totalLoanFee != null" >
+                total_loan_fee = #{totalLoanFee,jdbcType=DOUBLE},
+            </if>
+            <if test="totalDeFee != null" >
+                total_de_fee = #{totalDeFee,jdbcType=DOUBLE},
+            </if>
+            <if test="chargeType != null" >
+                charge_type = #{chargeType,jdbcType=INTEGER},
+            </if>
+            <if test="caseId != null" >
+                case_id = #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                case_no = #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="advcanceType != null" >
+                advcance_type = #{advcanceType,jdbcType=INTEGER},
+            </if>
+            <if test="caseType != null" >
+                case_type = #{caseType,jdbcType=INTEGER},
+            </if>
+            <if test="state != null" >
+                state =  #{state,jdbcType=INTEGER},
+            </if>
+            <if test="inquiryDesc != null" >
+                inquiry_desc = #{inquiryDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="calculationType != null" >
+                calculation_type = #{calculationType,jdbcType=INTEGER},
+            </if>
+            <if test="rateBaseType != null" >
+                rate_base_type = #{rateBaseType,jdbcType=INTEGER},
+            </if>
+            <if test="invalidismIndemnifyFee != null" >
+                invalidism_indemnify_fee =#{invalidismIndemnifyFee,jdbcType=DOUBLE},
+            </if>
+            <if test="spiritComfortFee != null" >
+                spirit_comfort_fee =  #{spiritComfortFee,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.PaymentEstimateInquiry" >
+        update payment_estimate_inquiry
+        set payable_fee = #{payableFee,jdbcType=DOUBLE},
+        free_pre_pay_fee = #{freePrePayFee,jdbcType=DOUBLE},
+        medical_fee = #{medicalFee,jdbcType=DOUBLE},
+        service_rate = #{serviceRate,jdbcType=DOUBLE},
+        agent_service_fee = #{agentServiceFee,jdbcType=DOUBLE},
+        reduction_service_fee = #{reductionServiceFee,jdbcType=DOUBLE},
+        payment_estimate_id = #{paymentEstimateId,jdbcType=BIGINT},
+        user_id = #{userId,jdbcType=BIGINT},
+        advance_fee = #{advanceFee,jdbcType=DOUBLE},
+        service_fee = #{serviceFee,jdbcType=DOUBLE},
+        service_pay_rate = #{servicePayRate,jdbcType=DOUBLE},
+        final_fee = #{finalFee,jdbcType=DOUBLE},
+        is_update = #{isUpdate,jdbcType=INTEGER},
+        discount_loan_fee = #{discountLoanFee,jdbcType=DOUBLE},
+        apply_discount_loan_fee = #{applyDiscountLoanFee,jdbcType=DOUBLE},
+        should_de_fee = #{shouldDeFee,jdbcType=DOUBLE},
+        real_de_fee = #{realDeFee,jdbcType=DOUBLE},
+        is_need_loan = #{isNeedLoan,jdbcType=INTEGER},
+        still_need_fee = #{stillNeedFee,jdbcType=DOUBLE},
+        loan_rate = #{loanRate,jdbcType=DOUBLE},
+        loan_fee = #{loanFee,jdbcType=DOUBLE},
+        insurance_fee = #{insuranceFee,jdbcType=DOUBLE},
+        interest_rate = #{interestRate,jdbcType=DOUBLE},
+        total_loan_fee = #{totalLoanFee,jdbcType=DOUBLE},
+        total_de_fee = #{totalDeFee,jdbcType=DOUBLE},
+        charge_type = #{chargeType,jdbcType=INTEGER},
+        case_id = #{caseId,jdbcType=BIGINT},
+        case_no = #{caseNo,jdbcType=VARCHAR},
+        advcance_type = #{advcanceType,jdbcType=INTEGER},
+        case_type = #{caseType,jdbcType=INTEGER},
+        state =  #{state,jdbcType=INTEGER},
+        inquiry_desc = #{inquiryDesc,jdbcType=VARCHAR},
+        calculation_type = #{calculationType,jdbcType=INTEGER},
+        rate_base_type = #{rateBaseType,jdbcType=INTEGER},
+        invalidism_indemnify_fee =#{invalidismIndemnifyFee,jdbcType=DOUBLE},
+        spirit_comfort_fee =  #{spiritComfortFee,jdbcType=DOUBLE}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectPaymentEstimateInquiryByPeId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from payment_estimate_inquiry
+        where payment_estimate_id = #{paymentEstimateId,jdbcType=BIGINT}
+    </select>
+
+</mapper>

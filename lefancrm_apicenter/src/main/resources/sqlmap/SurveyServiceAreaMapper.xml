@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyServiceAreaMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyServiceArea" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="reamrk" property="reamrk" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="area_type_id" property="areaTypeId" jdbcType="BIGINT" />
+    <result column="area_map" property="areaMap" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="update_time" property="updateTime" jdbcType="DATE" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="INTEGER" />
+    <result column="district_id" property="districtId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, reamrk, type, area_name, area_type_id, area_map, create_by, update_by, 
+    create_time, update_time, delete_flag, province, city, district, province_id, city_id, 
+    district_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_service_area
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_service_area
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyServiceArea" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_service_area (name, reamrk, type, 
+      area_name, area_type_id, area_map, 
+      create_by, update_by, create_time, 
+      update_time, delete_flag, province, 
+      city, district, province_id, 
+      city_id, district_id)
+    values (#{name,jdbcType=VARCHAR}, #{reamrk,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{areaName,jdbcType=VARCHAR}, #{areaTypeId,jdbcType=BIGINT}, #{areaMap,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, #{createTime,jdbcType=DATE}, 
+      #{updateTime,jdbcType=DATE}, #{deleteFlag,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, 
+      #{cityId,jdbcType=INTEGER}, #{districtId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyServiceArea" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_service_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="reamrk != null" >
+        reamrk,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="areaTypeId != null" >
+        area_type_id,
+      </if>
+      <if test="areaMap != null" >
+        area_map,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="districtId != null" >
+        district_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="reamrk != null" >
+        #{reamrk,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaTypeId != null" >
+        #{areaTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="areaMap != null" >
+        #{areaMap,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="districtId != null" >
+        #{districtId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyServiceArea" >
+    update survey_service_area
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="reamrk != null" >
+        reamrk = #{reamrk,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaTypeId != null" >
+        area_type_id = #{areaTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="areaMap != null" >
+        area_map = #{areaMap,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="districtId != null" >
+        district_id = #{districtId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyServiceArea" >
+    update survey_service_area
+    set name = #{name,jdbcType=VARCHAR},
+      reamrk = #{reamrk,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      area_type_id = #{areaTypeId,jdbcType=BIGINT},
+      area_map = #{areaMap,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=DATE},
+      update_time = #{updateTime,jdbcType=DATE},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      district_id = #{districtId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="name!=null">
+            and name like CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}), '%')
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_service_area
+        <include refid="joins" />
+        where delete_flag =0
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_service_area
+        <include refid="joins" />
+        where delete_flag =0
+        <include refid="wheres" />
+    </select>
+</mapper>

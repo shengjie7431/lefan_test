@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseCenterInfoFinedMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseCenterInfoFined" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+    <result column="case_type" property="caseType" jdbcType="INTEGER" />
+    <result column="gradation_state" property="gradationState" jdbcType="INTEGER" />
+    <result column="case_state" property="caseState" jdbcType="INTEGER" />
+    <result column="case_title" property="caseTitle" jdbcType="VARCHAR" />
+    <result column="case_name" property="caseName" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="is_fined" property="isFined" jdbcType="INTEGER" />
+    <result column="fined_type" property="finedType" jdbcType="INTEGER" />
+    <result column="fined_money" property="finedMoney" jdbcType="DOUBLE" />
+    <result column="fined_by_id" property="finedById" jdbcType="BIGINT" />
+    <result column="fined_by" property="finedBy" jdbcType="VARCHAR" />
+    <result column="fined_time" property="finedTime" jdbcType="TIMESTAMP" />
+    <result column="fined_type_name" property="finedTypeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_id, case_no, case_type, gradation_state, case_state, case_title, case_name, 
+    org_name, org_id, is_fined, fined_type, fined_money, fined_by_id, fined_by, fined_time,fined_type_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_center_info_fined
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from case_center_info_fined
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseCenterInfoFined" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_center_info_fined (case_id, case_no, case_type, 
+      gradation_state, case_state, case_title, 
+      case_name, org_name, org_id, 
+      is_fined, fined_type, fined_money, 
+      fined_by_id, fined_by, fined_time,fined_type_name
+      )
+    values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{caseType,jdbcType=INTEGER}, 
+      #{gradationState,jdbcType=INTEGER}, #{caseState,jdbcType=INTEGER}, #{caseTitle,jdbcType=VARCHAR}, 
+      #{caseName,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, 
+      #{isFined,jdbcType=INTEGER}, #{finedType,jdbcType=INTEGER}, #{finedMoney,jdbcType=DOUBLE}, 
+      #{finedById,jdbcType=BIGINT}, #{finedBy,jdbcType=VARCHAR}, #{finedTime,jdbcType=TIMESTAMP},
+      #{finedTypeName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseCenterInfoFined" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_center_info_fined
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseNo != null" >
+        case_no,
+      </if>
+      <if test="caseType != null" >
+        case_type,
+      </if>
+      <if test="gradationState != null" >
+        gradation_state,
+      </if>
+      <if test="caseState != null" >
+        case_state,
+      </if>
+      <if test="caseTitle != null" >
+        case_title,
+      </if>
+      <if test="caseName != null" >
+        case_name,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="isFined != null" >
+        is_fined,
+      </if>
+      <if test="finedType != null" >
+        fined_type,
+      </if>
+      <if test="finedMoney != null" >
+        fined_money,
+      </if>
+      <if test="finedById != null" >
+        fined_by_id,
+      </if>
+      <if test="finedBy != null" >
+        fined_by,
+      </if>
+      <if test="finedTime != null" >
+        fined_time,
+      </if>
+      <if test="finedTypeName != null" >
+        fined_type_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseType != null" >
+        #{caseType,jdbcType=INTEGER},
+      </if>
+      <if test="gradationState != null" >
+        #{gradationState,jdbcType=INTEGER},
+      </if>
+      <if test="caseState != null" >
+        #{caseState,jdbcType=INTEGER},
+      </if>
+      <if test="caseTitle != null" >
+        #{caseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="caseName != null" >
+        #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="isFined != null" >
+        #{isFined,jdbcType=INTEGER},
+      </if>
+      <if test="finedType != null" >
+        #{finedType,jdbcType=INTEGER},
+      </if>
+      <if test="finedMoney != null" >
+        #{finedMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="finedById != null" >
+        #{finedById,jdbcType=BIGINT},
+      </if>
+      <if test="finedBy != null" >
+        #{finedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="finedTime != null" >
+        #{finedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finedTypeName != null" >
+        #{finedTypeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseCenterInfoFined" >
+    update case_center_info_fined
+    <set >
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseType != null" >
+        case_type = #{caseType,jdbcType=INTEGER},
+      </if>
+      <if test="gradationState != null" >
+        gradation_state = #{gradationState,jdbcType=INTEGER},
+      </if>
+      <if test="caseState != null" >
+        case_state = #{caseState,jdbcType=INTEGER},
+      </if>
+      <if test="caseTitle != null" >
+        case_title = #{caseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="caseName != null" >
+        case_name = #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="isFined != null" >
+        is_fined = #{isFined,jdbcType=INTEGER},
+      </if>
+      <if test="finedType != null" >
+        fined_type = #{finedType,jdbcType=INTEGER},
+      </if>
+      <if test="finedMoney != null" >
+        fined_money = #{finedMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="finedById != null" >
+        fined_by_id = #{finedById,jdbcType=BIGINT},
+      </if>
+      <if test="finedBy != null" >
+        fined_by = #{finedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="finedTime != null" >
+        fined_time = #{finedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finedTypeName != null" >
+          fined_type_name = #{finedTypeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseCenterInfoFined" >
+    update case_center_info_fined
+    set case_id = #{caseId,jdbcType=BIGINT},
+      case_no = #{caseNo,jdbcType=VARCHAR},
+      case_type = #{caseType,jdbcType=INTEGER},
+      gradation_state = #{gradationState,jdbcType=INTEGER},
+      case_state = #{caseState,jdbcType=INTEGER},
+      case_title = #{caseTitle,jdbcType=VARCHAR},
+      case_name = #{caseName,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      is_fined = #{isFined,jdbcType=INTEGER},
+      fined_type = #{finedType,jdbcType=INTEGER},
+      fined_money = #{finedMoney,jdbcType=DOUBLE},
+      fined_by_id = #{finedById,jdbcType=BIGINT},
+      fined_by = #{finedBy,jdbcType=VARCHAR},
+      fined_time = #{finedTime,jdbcType=TIMESTAMP},
+      fined_type_name = #{finedTypeName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <select id="selectCaseCenterInfoFinedList" parameterType="map" resultMap="BaseResultMap">
+        select
+        fined.id as id, fined.case_id as caseId, fined.case_no as caseNo, fined.case_type as caseType,
+        fined.gradation_state as gradationState, fined.case_state as caseState, fined.case_title as caseTitle,
+        fined.case_name as caseName, fined.org_name as orgName, fined.org_id as orgId , fined.is_fined as isFined,
+        fined.fined_type as finedType, fined.fined_money as finedMoney, fined.fined_by_id as finedById,
+        fined.fined_by as finedBy, fined.fined_time as finedTime ,fined.fined_type_name as finedTypeName
+        from case_center_info_fined fined
+        left join case_center_info cci on fined.case_id = cci.case_id
+        where fined.is_fined =0
+        <if test="caseName !=null">
+            and fined.case_name like CONCAT('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseNo !=null">
+            and fined.case_no like CONCAT('%',#{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseTitle !=null">
+            and fined.case_title like CONCAT('%',#{caseTitle,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="finedType !=null">
+            and fined.fined_type = #{finedType,jdbcType=INTEGER}
+        </if>
+        <if test="caseType !=null">
+            and fined.case_type = #{caseType,jdbcType=INTEGER}
+        </if>
+        <if test="isTestcase != null" >
+            <if test="isTestcase != -1">
+                and cci.is_test_case = #{isTestcase,jdbcType=INTEGER}
+            </if>
+        </if>
+        <if test="isTestcase == null" >
+            <if test="isTest == 0">
+                and cci.is_test_case = 0
+            </if>
+            <if test="isTest == 1">
+                and cci.is_test_case = 1
+            </if>
+        </if>
+        and cci.delete_flag !=1
+        order by fined.fined_time desc limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="selectCaseCenterInfoFinedListSize" resultType="int" parameterType="java.util.Map">
+        select count(1)
+        from case_center_info_fined fined
+        left join case_center_info cci on fined.case_id = cci.case_id
+        where fined.is_fined =0
+        <if test="caseName !=null">
+            and fined.case_name like CONCAT('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseNo !=null">
+            and fined.case_no like CONCAT('%',#{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseTitle !=null">
+            and fined.case_title like CONCAT('%',#{caseTitle,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="finedType !=null">
+            and fined.fined_type = #{finedType,jdbcType=INTEGER}
+        </if>
+        <if test="caseType !=null">
+            and fined.case_type = #{caseType,jdbcType=INTEGER}
+        </if>
+        <if test="isTestcase != null" >
+            <if test="isTestcase != -1">
+                and cci.is_test_case = #{isTestcase,jdbcType=INTEGER}
+            </if>
+        </if>
+        <if test="isTestcase == null" >
+            <if test="isTest == 0">
+                and cci.is_test_case = 0
+            </if>
+            <if test="isTest == 1">
+                and cci.is_test_case = 1
+            </if>
+        </if>
+        and cci.delete_flag !=1
+    </select>
+
+    <select id="selectCaseCenterInfoFinedByCaseNo" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from case_center_info_fined
+        where case_no = #{caseNo,jdbcType=VARCHAR}
+
+
+    </select>
+</mapper>

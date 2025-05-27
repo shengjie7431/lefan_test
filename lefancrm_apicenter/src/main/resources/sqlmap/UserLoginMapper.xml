@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lefancrm.apicenter.dao.UserLoginMapper">
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.UserLogin" >
+        <id column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="user_telphone" property="userTelphone" jdbcType="VARCHAR" />
+        <result column="wechat_id" property="wechatId" jdbcType="VARCHAR" />
+        <result column="weibo_id" property="weiboId" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+        <result column="lfpc_openid" property="lfpcOpenid" jdbcType="VARCHAR" />
+        <result column="gxlp_openid" property="gxlpOpenid" jdbcType="VARCHAR" />
+        <result column="lfpc_unionid" property="lfpcUnionid" jdbcType="VARCHAR" />
+        <result column="gxlp_unionid" property="gxlpUnionid" jdbcType="VARCHAR" />
+        <result column="ddr_openid" property="ddrOpenid" jdbcType="VARCHAR" />
+        <result column="ddr_unionid" property="ddrUnionid" jdbcType="VARCHAR" />
+        <result column="lfpc2_openid" property="lfpc2Openid" jdbcType="VARCHAR" />
+        <result column="lfpc2_unionid" property="lfpc2Unionid" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    user_id, password, user_telphone, wechat_id, weibo_id, create_time, modify_time,
+    lfpc_openid, gxlp_openid, lfpc_unionid, gxlp_unionid, ddr_openid, ddr_unionid, lfpc2_openid,
+    lfpc2_unionid
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from user_login
+        where user_id = #{userId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_login
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.UserLogin" >
+    insert into user_login (user_id, password, user_telphone,
+      wechat_id, weibo_id, create_time,
+      modify_time, lfpc_openid, gxlp_openid,
+      lfpc_unionid, gxlp_unionid, ddr_openid,
+      ddr_unionid, lfpc2_openid, lfpc2_unionid
+      )
+    values (#{userId,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, #{userTelphone,jdbcType=VARCHAR},
+      #{wechatId,jdbcType=VARCHAR}, #{weiboId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{modifyTime,jdbcType=TIMESTAMP}, #{lfpcOpenid,jdbcType=VARCHAR}, #{gxlpOpenid,jdbcType=VARCHAR},
+      #{lfpcUnionid,jdbcType=VARCHAR}, #{gxlpUnionid,jdbcType=VARCHAR}, #{ddrOpenid,jdbcType=VARCHAR},
+      #{ddrUnionid,jdbcType=VARCHAR}, #{lfpc2Openid,jdbcType=VARCHAR}, #{lfpc2Unionid,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.UserLogin" >
+        insert into user_login
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="password != null" >
+                password,
+            </if>
+            <if test="userTelphone != null" >
+                user_telphone,
+            </if>
+            <if test="wechatId != null" >
+                wechat_id,
+            </if>
+            <if test="weiboId != null" >
+                weibo_id,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="modifyTime != null" >
+                modify_time,
+            </if>
+            <if test="lfpcOpenid != null" >
+                lfpc_openid,
+            </if>
+            <if test="gxlpOpenid != null" >
+                gxlp_openid,
+            </if>
+            <if test="lfpcUnionid != null" >
+                lfpc_unionid,
+            </if>
+            <if test="gxlpUnionid != null" >
+                gxlp_unionid,
+            </if>
+            <if test="ddrOpenid != null" >
+                ddr_openid,
+            </if>
+            <if test="ddrUnionid != null" >
+                ddr_unionid,
+            </if>
+            <if test="lfpc2Openid != null" >
+                lfpc2_openid,
+            </if>
+            <if test="lfpc2Unionid != null" >
+                lfpc2_unionid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="userTelphone != null" >
+                #{userTelphone,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatId != null" >
+                #{wechatId,jdbcType=VARCHAR},
+            </if>
+            <if test="weiboId != null" >
+                #{weiboId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null" >
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lfpcOpenid != null" >
+                #{lfpcOpenid,jdbcType=VARCHAR},
+            </if>
+            <if test="gxlpOpenid != null" >
+                #{gxlpOpenid,jdbcType=VARCHAR},
+            </if>
+            <if test="lfpcUnionid != null" >
+                #{lfpcUnionid,jdbcType=VARCHAR},
+            </if>
+            <if test="gxlpUnionid != null" >
+                #{gxlpUnionid,jdbcType=VARCHAR},
+            </if>
+            <if test="ddrOpenid != null" >
+                #{ddrOpenid,jdbcType=VARCHAR},
+            </if>
+            <if test="ddrUnionid != null" >
+                #{ddrUnionid,jdbcType=VARCHAR},
+            </if>
+            <if test="lfpc2Openid != null" >
+                #{lfpc2Openid,jdbcType=VARCHAR},
+            </if>
+            <if test="lfpc2Unionid != null" >
+                #{lfpc2Unionid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.UserLogin" >
+        update user_login
+        <set >
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="userTelphone != null" >
+                user_telphone = #{userTelphone,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatId != null" >
+                wechat_id = #{wechatId,jdbcType=VARCHAR},
+            </if>
+            <if test="weiboId != null" >
+                weibo_id = #{weiboId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null" >
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lfpcOpenid != null" >
+                lfpc_openid = #{lfpcOpenid,jdbcType=VARCHAR},
+            </if>
+            <if test="gxlpOpenid != null" >
+                gxlp_openid = #{gxlpOpenid,jdbcType=VARCHAR},
+            </if>
+            <if test="lfpcUnionid != null" >
+                lfpc_unionid = #{lfpcUnionid,jdbcType=VARCHAR},
+            </if>
+            <if test="gxlpUnionid != null" >
+                gxlp_unionid = #{gxlpUnionid,jdbcType=VARCHAR},
+            </if>
+            <if test="ddrOpenid != null" >
+                ddr_openid = #{ddrOpenid,jdbcType=VARCHAR},
+            </if>
+            <if test="ddrUnionid != null" >
+                ddr_unionid = #{ddrUnionid,jdbcType=VARCHAR},
+            </if>
+            <if test="lfpc2Openid != null" >
+                lfpc2_openid = #{lfpc2Openid,jdbcType=VARCHAR},
+            </if>
+            <if test="lfpc2Unionid != null" >
+                lfpc2_unionid = #{lfpc2Unionid,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.UserLogin" >
+    update user_login
+    set password = #{password,jdbcType=VARCHAR},
+      user_telphone = #{userTelphone,jdbcType=VARCHAR},
+      wechat_id = #{wechatId,jdbcType=VARCHAR},
+      weibo_id = #{weiboId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      lfpc_openid = #{lfpcOpenid,jdbcType=VARCHAR},
+      gxlp_openid = #{gxlpOpenid,jdbcType=VARCHAR},
+      lfpc_unionid = #{lfpcUnionid,jdbcType=VARCHAR},
+      gxlp_unionid = #{gxlpUnionid,jdbcType=VARCHAR},
+      ddr_openid = #{ddrOpenid,jdbcType=VARCHAR},
+      ddr_unionid = #{ddrUnionid,jdbcType=VARCHAR},
+      lfpc2_openid = #{lfpc2Openid,jdbcType=VARCHAR},
+      lfpc2_unionid = #{lfpc2Unionid,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+
+    <select id="selectByPhone" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from user_login
+        where user_telphone = #{userTelphone,jdbcType=VARCHAR} limit 1
+    </select>
+    <select id="selectByWechatId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from user_login
+        where wechat_id = #{wechat_id,jdbcType=VARCHAR} limit 1
+    </select>
+    <select id="selectByWeiboId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from user_login
+        where weibo_id = #{weibo_id,jdbcType=VARCHAR} limit 1
+    </select>
+    <select id="selectByPhoneAndPassword" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List" />
+        from user_login
+        where user_telphone = #{userTelphone,jdbcType=VARCHAR}
+        and password = #{password,jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.HbRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.HbRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="hb_org_id" property="hbOrgId" jdbcType="BIGINT" />
+    <result column="hb_org_name" property="hbOrgName" jdbcType="VARCHAR" />
+    <result column="hb_user_id" property="hbUserId" jdbcType="BIGINT" />
+    <result column="hb_user_name" property="hbUserName" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, hb_org_id, hb_org_name, hb_user_id, hb_user_name, product_name, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hb_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hb_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.HbRecord" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hb_record (hb_org_id, hb_org_name, hb_user_id, 
+      hb_user_name, product_name, create_time
+      )
+    values (#{hbOrgId,jdbcType=BIGINT}, #{hbOrgName,jdbcType=VARCHAR}, #{hbUserId,jdbcType=BIGINT}, 
+      #{hbUserName,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.HbRecord" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hb_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hbOrgId != null" >
+        hb_org_id,
+      </if>
+      <if test="hbOrgName != null" >
+        hb_org_name,
+      </if>
+      <if test="hbUserId != null" >
+        hb_user_id,
+      </if>
+      <if test="hbUserName != null" >
+        hb_user_name,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hbOrgId != null" >
+        #{hbOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="hbOrgName != null" >
+        #{hbOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="hbUserId != null" >
+        #{hbUserId,jdbcType=BIGINT},
+      </if>
+      <if test="hbUserName != null" >
+        #{hbUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.HbRecord" >
+    update hb_record
+    <set >
+      <if test="hbOrgId != null" >
+        hb_org_id = #{hbOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="hbOrgName != null" >
+        hb_org_name = #{hbOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="hbUserId != null" >
+        hb_user_id = #{hbUserId,jdbcType=BIGINT},
+      </if>
+      <if test="hbUserName != null" >
+        hb_user_name = #{hbUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.HbRecord" >
+    update hb_record
+    set hb_org_id = #{hbOrgId,jdbcType=BIGINT},
+      hb_org_name = #{hbOrgName,jdbcType=VARCHAR},
+      hb_user_id = #{hbUserId,jdbcType=BIGINT},
+      hb_user_name = #{hbUserName,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from hb_record
+    <where>
+      <if test="hbOrgId != null" >
+        and hb_org_id = #{hbOrgId,jdbcType=BIGINT}
+      </if>
+      <if test="hbUserName != null" >
+        and hb_user_name like CONCAT(CONCAT('%',replace(#{hbUserName,jdbcType=VARCHAR},' ','')), '%')
+      </if>
+      <if test="productName != null" >
+        and product_name = #{productName,jdbcType=VARCHAR}
+      </if>
+      <if test="startDate != null">
+        and date_format(create_time,'%Y-%m-%d') &gt;= date_format(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+      <if test="endDate != null">
+        and date_format(create_time,'%Y-%m-%d') &lt;= date_format(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+    </where>
+    order by id desc
+    limit #{page}, #{pageSize}
+  </select>
+  <select id="selectListSize" resultType="int" parameterType="java.util.Map" >
+    select count(1)
+    from hb_record
+    <where>
+      <if test="hbOrgId != null" >
+        and hb_org_id = #{hbOrgId,jdbcType=BIGINT}
+      </if>
+      <if test="hbUserName != null" >
+        and hb_user_name like CONCAT(CONCAT('%',replace(#{hbUserName,jdbcType=VARCHAR},' ','')), '%')
+      </if>
+      <if test="productName != null" >
+        and product_name = #{productName,jdbcType=VARCHAR}
+      </if>
+      <if test="startDate != null">
+        and date_format(create_time,'%Y-%m-%d') &gt;= date_format(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+      <if test="endDate != null">
+        and date_format(create_time,'%Y-%m-%d') &lt;= date_format(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+    </where>
+  </select>
+</mapper>

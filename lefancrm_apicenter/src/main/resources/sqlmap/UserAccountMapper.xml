@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.UserAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.UserAccount" >
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_recharge" property="userRecharge" jdbcType="DOUBLE" />
+    <result column="withdraw_deposit" property="withdrawDeposit" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_recharge, withdraw_deposit
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_account
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_account
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.UserAccount" >
+    insert into user_account (user_id, user_recharge, withdraw_deposit
+      )
+    values (#{userId,jdbcType=BIGINT}, #{userRecharge,jdbcType=DOUBLE}, #{withdrawDeposit,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.UserAccount" >
+    insert into user_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userRecharge != null" >
+        user_recharge,
+      </if>
+      <if test="withdrawDeposit != null" >
+        withdraw_deposit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userRecharge != null" >
+        #{userRecharge,jdbcType=DOUBLE},
+      </if>
+      <if test="withdrawDeposit != null" >
+        #{withdrawDeposit,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.UserAccount" >
+    update user_account
+    <set >
+      <if test="userRecharge != null" >
+        user_recharge = #{userRecharge,jdbcType=DOUBLE},
+      </if>
+      <if test="withdrawDeposit != null" >
+        withdraw_deposit = #{withdrawDeposit,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.UserAccount" >
+    update user_account
+    set user_recharge = #{userRecharge,jdbcType=DOUBLE},
+      withdraw_deposit = #{withdrawDeposit,jdbcType=DOUBLE}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>

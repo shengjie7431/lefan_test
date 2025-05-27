@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaSettlementInvestigatorMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaSettlementInvestigator" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="settlement_org_id" property="settlementOrgId" jdbcType="BIGINT" />
+    <result column="settlement_info_id" property="settlementInfoId" jdbcType="BIGINT" />
+    <result column="survey_org_id" property="surveyOrgId" jdbcType="BIGINT" />
+    <result column="survey_org_name" property="surveyOrgName" jdbcType="VARCHAR" />
+    <result column="survey_user_id" property="surveyUserId" jdbcType="BIGINT" />
+    <result column="survey_user_name" property="surveyUserName" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="user_assign_time" property="userAssignTime" jdbcType="TIMESTAMP" />
+    <result column="user_submit_time" property="userSubmitTime" jdbcType="TIMESTAMP" />
+    <result column="user_end_time" property="userEndTime" jdbcType="TIMESTAMP" />
+    <result column="user_aging" property="userAging" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="user_task_type" property="userTaskType" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="DOUBLE" />
+    <result column="service_money" property="serviceMoney" jdbcType="DOUBLE" />
+    <result column="over_aging" property="overAging" jdbcType="DOUBLE" />
+    <result column="finsh_aging" property="finshAging" jdbcType="DOUBLE" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="urge_id" property="urgeId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, settlement_org_id, settlement_info_id, survey_org_id, survey_org_name, survey_user_id,
+    survey_user_name, state, user_assign_time, user_submit_time, user_end_time, user_aging,
+    create_time, create_by, user_task_type, score, service_money, over_aging, finsh_aging,
+    update_time, update_by, delete_flag, urge_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from fina_settlement_investigator
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_settlement_investigator
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaSettlementInvestigator" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_settlement_investigator (settlement_org_id, settlement_info_id,
+    survey_org_id, survey_org_name, survey_user_id,
+    survey_user_name, state, user_assign_time,
+    user_submit_time, user_end_time, user_aging,
+    create_time, create_by, user_task_type,
+    score, service_money, over_aging,
+    finsh_aging, update_time, update_by,
+    delete_flag, urge_id)
+    values (#{settlementOrgId,jdbcType=BIGINT}, #{settlementInfoId,jdbcType=BIGINT},
+    #{surveyOrgId,jdbcType=BIGINT}, #{surveyOrgName,jdbcType=VARCHAR}, #{surveyUserId,jdbcType=BIGINT},
+    #{surveyUserName,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{userAssignTime,jdbcType=TIMESTAMP},
+    #{userSubmitTime,jdbcType=TIMESTAMP}, #{userEndTime,jdbcType=TIMESTAMP}, #{userAging,jdbcType=DOUBLE},
+    #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{userTaskType,jdbcType=INTEGER},
+    #{score,jdbcType=DOUBLE}, #{serviceMoney,jdbcType=DOUBLE}, #{overAging,jdbcType=DOUBLE},
+    #{finshAging,jdbcType=DOUBLE}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+    #{deleteFlag,jdbcType=INTEGER}, #{urgeId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSettlementInvestigator" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_settlement_investigator
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="settlementOrgId != null" >
+        settlement_org_id,
+      </if>
+      <if test="settlementInfoId != null" >
+        settlement_info_id,
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id,
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name,
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id,
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="userAssignTime != null" >
+        user_assign_time,
+      </if>
+      <if test="userSubmitTime != null" >
+        user_submit_time,
+      </if>
+      <if test="userEndTime != null" >
+        user_end_time,
+      </if>
+      <if test="userAging != null" >
+        user_aging,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="userTaskType != null" >
+        user_task_type,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="serviceMoney != null" >
+        service_money,
+      </if>
+      <if test="overAging != null" >
+        over_aging,
+      </if>
+      <if test="finshAging != null" >
+        finsh_aging,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="urgeId != null" >
+        urge_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="settlementOrgId != null" >
+        #{settlementOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="settlementInfoId != null" >
+        #{settlementInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgId != null" >
+        #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyUserId != null" >
+        #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="userAssignTime != null" >
+        #{userAssignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userSubmitTime != null" >
+        #{userSubmitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userEndTime != null" >
+        #{userEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAging != null" >
+        #{userAging,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="userTaskType != null" >
+        #{userTaskType,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceMoney != null" >
+        #{serviceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="overAging != null" >
+        #{overAging,jdbcType=DOUBLE},
+      </if>
+      <if test="finshAging != null" >
+        #{finshAging,jdbcType=DOUBLE},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="urgeId != null" >
+        #{urgeId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSettlementInvestigator" >
+    update fina_settlement_investigator
+    <set >
+      <if test="settlementOrgId != null" >
+        settlement_org_id = #{settlementOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="settlementInfoId != null" >
+        settlement_info_id = #{settlementInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="userAssignTime != null" >
+        user_assign_time = #{userAssignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userSubmitTime != null" >
+        user_submit_time = #{userSubmitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userEndTime != null" >
+        user_end_time = #{userEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAging != null" >
+        user_aging = #{userAging,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="userTaskType != null" >
+        user_task_type = #{userTaskType,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceMoney != null" >
+        service_money = #{serviceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="overAging != null" >
+        over_aging = #{overAging,jdbcType=DOUBLE},
+      </if>
+      <if test="finshAging != null" >
+        finsh_aging = #{finshAging,jdbcType=DOUBLE},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="urgeId != null" >
+        urge_id = #{urgeId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaSettlementInvestigator" >
+    update fina_settlement_investigator
+    set settlement_org_id = #{settlementOrgId,jdbcType=BIGINT},
+      settlement_info_id = #{settlementInfoId,jdbcType=BIGINT},
+      survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      user_assign_time = #{userAssignTime,jdbcType=TIMESTAMP},
+      user_submit_time = #{userSubmitTime,jdbcType=TIMESTAMP},
+      user_end_time = #{userEndTime,jdbcType=TIMESTAMP},
+      user_aging = #{userAging,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      user_task_type = #{userTaskType,jdbcType=INTEGER},
+      score = #{score,jdbcType=DOUBLE},
+      service_money = #{serviceMoney,jdbcType=DOUBLE},
+      over_aging = #{overAging,jdbcType=DOUBLE},
+      finsh_aging = #{finshAging,jdbcType=DOUBLE},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      urge_id = #{urgeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <sql id="wheres">
+    <if test="settlementOrgId != null" >
+      and a.settlement_org_id = #{settlementOrgId,jdbcType=BIGINT}
+    </if>
+    <if test="settlementInfoId != null" >
+      and a.settlement_info_id = #{settlementInfoId,jdbcType=BIGINT}
+    </if>
+    <if test="surveyOrgId != null" >
+      and a.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+    </if>
+    <if test="surveyUserId != null" >
+      and a.survey_user_id = #{surveyUserId,jdbcType=BIGINT}
+    </if>
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    a.*
+    from fina_settlement_investigator a
+    where a.delete_flag =0
+    <include refid="wheres" />
+    order by a.id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+</mapper>

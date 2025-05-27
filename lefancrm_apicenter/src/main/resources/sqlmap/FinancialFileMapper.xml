@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.FinancialFileMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.FinancialFile" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="key_id" property="keyId" jdbcType="BIGINT" />
+    <result column="key_code" property="keyCode" jdbcType="VARCHAR" />
+    <result column="key_name" property="keyName" jdbcType="VARCHAR" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
+    <result column="upload_by" property="uploadBy" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, key_id, key_code, key_name, file_name, file_path, upload_time, upload_by, delete_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from financial_file
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from financial_file
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.FinancialFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into financial_file (key_id, key_code, key_name, 
+      file_name, file_path, upload_time, 
+      upload_by, delete_flag)
+    values (#{keyId,jdbcType=BIGINT}, #{keyCode,jdbcType=VARCHAR}, #{keyName,jdbcType=VARCHAR}, 
+      #{fileName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, 
+      #{uploadBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.FinancialFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into financial_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="keyId != null" >
+        key_id,
+      </if>
+      <if test="keyCode != null" >
+        key_code,
+      </if>
+      <if test="keyName != null" >
+        key_name,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+      <if test="uploadTime != null" >
+        upload_time,
+      </if>
+      <if test="uploadBy != null" >
+        upload_by,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="keyId != null" >
+        #{keyId,jdbcType=BIGINT},
+      </if>
+      <if test="keyCode != null" >
+        #{keyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyName != null" >
+        #{keyName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadBy != null" >
+        #{uploadBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.FinancialFile" >
+    update financial_file
+    <set >
+      <if test="keyId != null" >
+        key_id = #{keyId,jdbcType=BIGINT},
+      </if>
+      <if test="keyCode != null" >
+        key_code = #{keyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyName != null" >
+        key_name = #{keyName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadBy != null" >
+        upload_by = #{uploadBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.FinancialFile" >
+    update financial_file
+    set key_id = #{keyId,jdbcType=BIGINT},
+      key_code = #{keyCode,jdbcType=VARCHAR},
+      key_name = #{keyName,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      upload_by = #{uploadBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        a.*
+        from financial_file a
+        where delete_flag = 0
+        <if test="keyId != null" >
+            and a.key_id = #{keyId,jdbcType=BIGINT}
+        </if>
+        <if test="keyIds != null" >
+            and find_in_set(a.key_id,#{keyIds,jdbcType=VARCHAR})
+        </if>
+        <if test="keyCode != null" >
+            and a.key_code = #{keyCode,jdbcType=VARCHAR}
+        </if>
+        order by a.id desc
+    </select>
+</mapper>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SaleMoneyReportMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SaleMoneyReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="sign_num" property="signNum" jdbcType="INTEGER" />
+    <result column="sign_money" property="signMoney" jdbcType="DOUBLE" />
+    <result column="target_money" property="targetMoney" jdbcType="DOUBLE" />
+    <result column="completion_rate" property="completionRate" jdbcType="DOUBLE" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, user_name, org_id, org_name, sign_num, sign_money, target_money, completion_rate, 
+    year, month
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sale_money_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sale_money_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SaleMoneyReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sale_money_report (user_id, user_name, org_id, 
+      org_name, sign_num, sign_money, 
+      target_money, completion_rate, year, 
+      month)
+    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, 
+      #{orgName,jdbcType=VARCHAR}, #{signNum,jdbcType=INTEGER}, #{signMoney,jdbcType=DOUBLE}, 
+      #{targetMoney,jdbcType=DOUBLE}, #{completionRate,jdbcType=DOUBLE}, #{year,jdbcType=INTEGER}, 
+      #{month,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SaleMoneyReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sale_money_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="signNum != null" >
+        sign_num,
+      </if>
+      <if test="signMoney != null" >
+        sign_money,
+      </if>
+      <if test="targetMoney != null" >
+        target_money,
+      </if>
+      <if test="completionRate != null" >
+        completion_rate,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="signNum != null" >
+        #{signNum,jdbcType=INTEGER},
+      </if>
+      <if test="signMoney != null" >
+        #{signMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="targetMoney != null" >
+        #{targetMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="completionRate != null" >
+        #{completionRate,jdbcType=DOUBLE},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SaleMoneyReport" >
+    update sale_money_report
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="signNum != null" >
+        sign_num = #{signNum,jdbcType=INTEGER},
+      </if>
+      <if test="signMoney != null" >
+        sign_money = #{signMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="targetMoney != null" >
+        target_money = #{targetMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="completionRate != null" >
+        completion_rate = #{completionRate,jdbcType=DOUBLE},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SaleMoneyReport" >
+    update sale_money_report
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      sign_num = #{signNum,jdbcType=INTEGER},
+      sign_money = #{signMoney,jdbcType=DOUBLE},
+      target_money = #{targetMoney,jdbcType=DOUBLE},
+      completion_rate = #{completionRate,jdbcType=DOUBLE},
+      year = #{year,jdbcType=INTEGER},
+      month = #{month,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="querySaleAmount" parameterType="java.util.Map" resultType="java.lang.Integer">
+  SELECT
+  IFNULL(sum(sale_money_report.sign_money),0)
+FROM
+	`sale_money_report`
+WHERE
+	sale_money_report.user_id = #{objectId,jdbcType=BIGINT} AND
+	sale_money_report.`year`  = #{year,jdbcType=VARCHAR} AND
+	sale_money_report.`month` = #{month,jdbcType=VARCHAR}
+    </select>
+    <select id="queryOutNumberByUserId" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT
+        count(0)
+        FROM
+        sale_money_report
+        WHERE
+        sale_money_report.org_id = (
+        SELECT
+        user_info.org_id
+        FROM
+        `user_info`
+        WHERE
+        user_info.user_id = #{objectId,jdbcType=BIGINT}
+        )
+        AND sale_money_report.`year` = #{year,jdbcType=VARCHAR}
+        AND sale_money_report.`month` = #{month,jdbcType=VARCHAR}
+        AND sale_money_report.sign_money &lt;(
+        SELECT
+        sale_money_report.sign_money
+        FROM
+        `sale_money_report`
+        WHERE
+        sale_money_report.user_id = #{objectId,jdbcType=BIGINT}
+        AND sale_money_report.`year` = #{year,jdbcType=VARCHAR}
+        AND sale_money_report.`month` = #{month,jdbcType=VARCHAR}
+        )
+    </select>
+    <select id="queryOrgNameByUserId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sale_money_report
+        where user_id = #{userId,jdbcType=BIGINT}
+    </select>
+</mapper>

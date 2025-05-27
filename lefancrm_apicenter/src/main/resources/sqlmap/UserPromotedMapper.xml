@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.UserPromotedMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.UserPromoted" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="occupation" property="occupation" jdbcType="INTEGER" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="promoted_qrcode" property="promotedQrcode" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="wechat_id" property="wechatId" jdbcType="VARCHAR" />
+    <result column="promoted_type" property="promotedType" jdbcType="INTEGER" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="legal_person" property="legalPerson" jdbcType="VARCHAR" />
+    <result column="legal_person_tel" property="legalPersonTel" jdbcType="VARCHAR" />
+    <result column="company_tel" property="companyTel" jdbcType="VARCHAR" />
+    <result column="company_promoted_qrcode" property="companyPromotedQrcode" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="depth" property="depth" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="province_id" property="provinceId" jdbcType="BIGINT" />
+    <result column="city_id" property="cityId" jdbcType="BIGINT" />
+    <result column="district_id" property="districtId" jdbcType="BIGINT" />
+    <result column="salesman_id" property="salesmanId" jdbcType="BIGINT" />
+    <result column="salesman_name" property="salesmanName" jdbcType="VARCHAR" />
+    <result column="user_img" property="userImg" jdbcType="VARCHAR" />
+    <result column="is_open" property="isOpen" jdbcType="TINYINT" />
+    <result column="company_id" property="companyId" jdbcType="BIGINT" />
+  </resultMap>
+
+    <resultMap id="BaseResultWork" type="com.lefancrm.apicenter.model.WorkInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="real_name" property="realName" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="occupation" property="occupation" jdbcType="INTEGER" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="district" property="district" jdbcType="VARCHAR" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="promoted_qrcode" property="promotedQrcode" jdbcType="VARCHAR" />
+        <result column="reason" property="reason" jdbcType="VARCHAR" />
+        <result column="wechat_id" property="wechatId" jdbcType="VARCHAR" />
+        <result column="promoted_type" property="promotedType" jdbcType="INTEGER" />
+        <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+        <result column="legal_person" property="legalPerson" jdbcType="VARCHAR" />
+        <result column="legal_person_tel" property="legalPersonTel" jdbcType="VARCHAR" />
+        <result column="company_tel" property="companyTel" jdbcType="VARCHAR" />
+        <result column="company_promoted_qrcode" property="companyPromotedQrcode" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+        <result column="depth" property="depth" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="province_id" property="provinceId" jdbcType="BIGINT" />
+        <result column="city_id" property="cityId" jdbcType="BIGINT" />
+        <result column="district_id" property="districtId" jdbcType="BIGINT" />
+        <result column="salesman_id" property="salesmanId" jdbcType="BIGINT" />
+        <result column="salesman_name" property="salesmanName" jdbcType="VARCHAR" />
+        <result column="user_img" property="userImg" jdbcType="VARCHAR" />
+        <result column="is_open" property="isOpen" jdbcType="TINYINT" />
+        <result column="company_id" property="companyId" jdbcType="BIGINT" />
+    </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, real_name, phone, occupation, province, city, district, state, promoted_qrcode, 
+    reason, wechat_id, promoted_type, company_name, legal_person, legal_person_tel, company_tel, 
+    company_promoted_qrcode, parent_id, depth, create_time, create_by, update_time, update_by, 
+    delete_flag, province_id, city_id, district_id, salesman_id, salesman_name, user_img, 
+    is_open, company_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_promoted
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_promoted
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.UserPromoted" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_promoted (user_id, real_name, phone, 
+      occupation, province, city, 
+      district, state, promoted_qrcode, 
+      reason, wechat_id, promoted_type, 
+      company_name, legal_person, legal_person_tel, 
+      company_tel, company_promoted_qrcode, parent_id, 
+      depth, create_time, create_by, 
+      update_time, update_by, delete_flag, 
+      province_id, city_id, district_id, 
+      salesman_id, salesman_name, user_img, 
+      is_open, company_id)
+    values (#{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{occupation,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{district,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{promotedQrcode,jdbcType=VARCHAR}, 
+      #{reason,jdbcType=VARCHAR}, #{wechatId,jdbcType=VARCHAR}, #{promotedType,jdbcType=INTEGER}, 
+      #{companyName,jdbcType=VARCHAR}, #{legalPerson,jdbcType=VARCHAR}, #{legalPersonTel,jdbcType=VARCHAR}, 
+      #{companyTel,jdbcType=VARCHAR}, #{companyPromotedQrcode,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
+      #{depth,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, 
+      #{provinceId,jdbcType=BIGINT}, #{cityId,jdbcType=BIGINT}, #{districtId,jdbcType=BIGINT}, 
+      #{salesmanId,jdbcType=BIGINT}, #{salesmanName,jdbcType=VARCHAR}, #{userImg,jdbcType=VARCHAR}, 
+      #{isOpen,jdbcType=TINYINT}, #{companyId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.UserPromoted" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_promoted
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="occupation != null" >
+        occupation,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="promotedQrcode != null" >
+        promoted_qrcode,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="wechatId != null" >
+        wechat_id,
+      </if>
+      <if test="promotedType != null" >
+        promoted_type,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="legalPerson != null" >
+        legal_person,
+      </if>
+      <if test="legalPersonTel != null" >
+        legal_person_tel,
+      </if>
+      <if test="companyTel != null" >
+        company_tel,
+      </if>
+      <if test="companyPromotedQrcode != null" >
+        company_promoted_qrcode,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="depth != null" >
+        depth,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="districtId != null" >
+        district_id,
+      </if>
+      <if test="salesmanId != null" >
+        salesman_id,
+      </if>
+      <if test="salesmanName != null" >
+        salesman_name,
+      </if>
+      <if test="userImg != null" >
+        user_img,
+      </if>
+      <if test="isOpen != null" >
+        is_open,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null" >
+        #{occupation,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="promotedQrcode != null" >
+        #{promotedQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatId != null" >
+        #{wechatId,jdbcType=VARCHAR},
+      </if>
+      <if test="promotedType != null" >
+        #{promotedType,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null" >
+        #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonTel != null" >
+        #{legalPersonTel,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTel != null" >
+        #{companyTel,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPromotedQrcode != null" >
+        #{companyPromotedQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="depth != null" >
+        #{depth,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="districtId != null" >
+        #{districtId,jdbcType=BIGINT},
+      </if>
+      <if test="salesmanId != null" >
+        #{salesmanId,jdbcType=BIGINT},
+      </if>
+      <if test="salesmanName != null" >
+        #{salesmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="userImg != null" >
+        #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="isOpen != null" >
+        #{isOpen,jdbcType=TINYINT},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.UserPromoted" >
+    update user_promoted
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null" >
+        occupation = #{occupation,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="promotedQrcode != null" >
+        promoted_qrcode = #{promotedQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatId != null" >
+        wechat_id = #{wechatId,jdbcType=VARCHAR},
+      </if>
+      <if test="promotedType != null" >
+        promoted_type = #{promotedType,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPerson != null" >
+        legal_person = #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="legalPersonTel != null" >
+        legal_person_tel = #{legalPersonTel,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTel != null" >
+        company_tel = #{companyTel,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPromotedQrcode != null" >
+        company_promoted_qrcode = #{companyPromotedQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="depth != null" >
+        depth = #{depth,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="districtId != null" >
+        district_id = #{districtId,jdbcType=BIGINT},
+      </if>
+      <if test="salesmanId != null" >
+        salesman_id = #{salesmanId,jdbcType=BIGINT},
+      </if>
+      <if test="salesmanName != null" >
+        salesman_name = #{salesmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="userImg != null" >
+        user_img = #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="isOpen != null" >
+        is_open = #{isOpen,jdbcType=TINYINT},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.UserPromoted" >
+    update user_promoted
+    set user_id = #{userId,jdbcType=BIGINT},
+      real_name = #{realName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      occupation = #{occupation,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      promoted_qrcode = #{promotedQrcode,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      wechat_id = #{wechatId,jdbcType=VARCHAR},
+      promoted_type = #{promotedType,jdbcType=INTEGER},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      legal_person = #{legalPerson,jdbcType=VARCHAR},
+      legal_person_tel = #{legalPersonTel,jdbcType=VARCHAR},
+      company_tel = #{companyTel,jdbcType=VARCHAR},
+      company_promoted_qrcode = #{companyPromotedQrcode,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      depth = #{depth,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      province_id = #{provinceId,jdbcType=BIGINT},
+      city_id = #{cityId,jdbcType=BIGINT},
+      district_id = #{districtId,jdbcType=BIGINT},
+      salesman_id = #{salesmanId,jdbcType=BIGINT},
+      salesman_name = #{salesmanName,jdbcType=VARCHAR},
+      user_img = #{userImg,jdbcType=VARCHAR},
+      is_open = #{isOpen,jdbcType=TINYINT},
+      company_id = #{companyId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectUserPromotedByUserId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from user_promoted
+        where user_id = #{userId,jdbcType=BIGINT} limit 1
+    </select>
+    <select id="selectUserPromotedByPhone" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from user_promoted
+        where phone = #{phone,jdbcType=VARCHAR} limit 1
+    </select>
+    <select id="selectUserPromotedByParam" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from user_promoted where 1=1
+        <if test="realName !=null">
+            and real_name  like  CONCAT(CONCAT('%',#{realName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="phone !=null">
+            and phone  like  CONCAT(CONCAT('%',#{phone,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="state !=null">
+            and state  = #{state,jdbcType=INTEGER}
+        </if>
+        ORDER by id desc limit #{pageIndex} , #{pageSize}
+    </select>
+    <select id="selectUserPromotedByParamCount" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select count(1) from user_promoted where 1 = 1
+        <if test="realName !=null">
+            and real_name  like  CONCAT(CONCAT('%',#{realName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="phone !=null">
+            and phone  like  CONCAT(CONCAT('%',#{phone,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="state !=null">
+            and state  = #{state,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="selectMyPromotedTeam" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select id,real_name,phone,user_id,user_img from user_promoted where 1= 1 and parent_id = #{id,jdbcType=BIGINT}
+        ORDER by id desc limit #{pageIndex} , #{pageSize}
+    </select>
+    <select id="selectMyPromotedTeamCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) from user_promoted where 1= 1 and parent_id = #{id,jdbcType=BIGINT}
+    </select>
+    <update id="updateUserPromotedRegion" parameterType="map">
+        update user_promoted set
+        province=#{userProvince,jdbcType=VARCHAR},
+        city=#{userCity,jdbcType=VARCHAR},
+        district=#{userDistrict,jdbcType=VARCHAR},
+        province_id=#{userProvinceId,jdbcType=BIGINT},
+        city_id=#{userCityId,jdbcType=BIGINT},
+        district_id=#{userDistrictId,jdbcType=BIGINT}
+        where
+        user_id = #{userId,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectUserPromotedByState" resultMap="BaseResultWork" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from user_promoted where 1=1
+        <if test="state !=null">
+            and state  = #{state,jdbcType=INTEGER}
+        </if>
+        ORDER by id desc limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="selectPromotedWorkCount" resultType="int"  parameterType="java.util.Map" >
+        select count(1) from user_promoted where create_time >= #{createTime,jdbcType=TIMESTAMP} and state = 1
+    </select>
+</mapper>

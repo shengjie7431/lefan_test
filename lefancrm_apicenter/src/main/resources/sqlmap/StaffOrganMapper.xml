@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.StaffOrganMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.StaffOrgan" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="company_id" property="companyId" jdbcType="BIGINT" />
+        <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="organ_manager_name" property="organManagerName" jdbcType="VARCHAR" />
+        <result column="organ_manager_user_id" property="organManagerUserId" jdbcType="BIGINT" />
+        <result column="organ_manager_staff_id" property="organManagerStaffId" jdbcType="BIGINT" />
+        <result column="superior_manager_user_id" property="superiorManagerUserId" jdbcType="BIGINT" />
+        <result column="superior_manager_staff_id" property="superiorManagerStaffId" jdbcType="BIGINT" />
+        <result column="superior_manager_name" property="superiorManagerName" jdbcType="VARCHAR" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="organ_attribute" property="organAttribute" jdbcType="INTEGER" />
+        <result column="organ_product" property="organProduct" jdbcType="VARCHAR" />
+        <result column="organ_type" property="organType" jdbcType="INTEGER" />
+        <result column="is_can_modify" property="isCanModify" jdbcType="INTEGER" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="performance" property="performance" jdbcType="INTEGER" />
+        <result column="acc_out_equal" property="accOutEqual" jdbcType="INTEGER" />
+        <result column="warn_money" property="warnMoney" jdbcType="DOUBLE" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, name, company_id, company_name, type, create_by, create_time, update_by, update_time,
+    delete_flag, organ_manager_name, organ_manager_user_id, organ_manager_staff_id, superior_manager_user_id,
+    superior_manager_staff_id, superior_manager_name, code, organ_attribute, organ_product,
+    organ_type, is_can_modify, state, acc_out_equal, warn_money,performance
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from staff_organ
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from staff_organ
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.StaffOrgan" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into staff_organ (name, company_id, company_name,
+        type, create_by, create_time,
+        update_by, update_time, delete_flag,
+        organ_manager_name, organ_manager_user_id, organ_manager_staff_id,
+        superior_manager_user_id, superior_manager_staff_id,
+        superior_manager_name, code, organ_attribute,
+        organ_product, organ_type, is_can_modify,
+        state, acc_out_equal, warn_money,performance
+        )
+        values (#{name,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT}, #{companyName,jdbcType=VARCHAR},
+        #{type,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER},
+        #{organManagerName,jdbcType=VARCHAR}, #{organManagerUserId,jdbcType=BIGINT}, #{organManagerStaffId,jdbcType=BIGINT},
+        #{superiorManagerUserId,jdbcType=BIGINT}, #{superiorManagerStaffId,jdbcType=BIGINT},
+        #{superiorManagerName,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{organAttribute,jdbcType=INTEGER},
+        #{organProduct,jdbcType=VARCHAR}, #{organType,jdbcType=INTEGER}, #{isCanModify,jdbcType=INTEGER},
+        #{state,jdbcType=INTEGER}, #{accOutEqual,jdbcType=INTEGER}, #{warnMoney,jdbcType=DOUBLE},#{performance,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.StaffOrgan" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into staff_organ
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="companyId != null" >
+                company_id,
+            </if>
+            <if test="companyName != null" >
+                company_name,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+            <if test="organManagerName != null" >
+                organ_manager_name,
+            </if>
+            <if test="organManagerUserId != null" >
+                organ_manager_user_id,
+            </if>
+            <if test="organManagerStaffId != null" >
+                organ_manager_staff_id,
+            </if>
+            <if test="superiorManagerUserId != null" >
+                superior_manager_user_id,
+            </if>
+            <if test="superiorManagerStaffId != null" >
+                superior_manager_staff_id,
+            </if>
+            <if test="superiorManagerName != null" >
+                superior_manager_name,
+            </if>
+            <if test="code != null" >
+                code,
+            </if>
+            <if test="organAttribute != null" >
+                organ_attribute,
+            </if>
+            <if test="organProduct != null" >
+                organ_product,
+            </if>
+            <if test="organType != null" >
+                organ_type,
+            </if>
+            <if test="isCanModify != null" >
+                is_can_modify,
+            </if>
+            <if test="state != null" >
+                state,
+            </if>
+            <if test="accOutEqual != null" >
+                acc_out_equal,
+            </if>
+            <if test="warnMoney != null" >
+                warn_money,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                #{companyId,jdbcType=BIGINT},
+            </if>
+            <if test="companyName != null" >
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="organManagerName != null" >
+                #{organManagerName,jdbcType=VARCHAR},
+            </if>
+            <if test="organManagerUserId != null" >
+                #{organManagerUserId,jdbcType=BIGINT},
+            </if>
+            <if test="organManagerStaffId != null" >
+                #{organManagerStaffId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorManagerUserId != null" >
+                #{superiorManagerUserId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorManagerStaffId != null" >
+                #{superiorManagerStaffId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorManagerName != null" >
+                #{superiorManagerName,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null" >
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="organAttribute != null" >
+                #{organAttribute,jdbcType=INTEGER},
+            </if>
+            <if test="organProduct != null" >
+                #{organProduct,jdbcType=VARCHAR},
+            </if>
+            <if test="organType != null" >
+                #{organType,jdbcType=INTEGER},
+            </if>
+            <if test="isCanModify != null" >
+                #{isCanModify,jdbcType=INTEGER},
+            </if>
+            <if test="state != null" >
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="accOutEqual != null" >
+                #{accOutEqual,jdbcType=INTEGER},
+            </if>
+            <if test="warnMoney != null" >
+                #{warnMoney,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.StaffOrgan" >
+        update staff_organ
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                company_id = #{companyId,jdbcType=BIGINT},
+            </if>
+            <if test="companyName != null" >
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="organManagerName != null" >
+                organ_manager_name = #{organManagerName,jdbcType=VARCHAR},
+            </if>
+            <if test="organManagerUserId != null" >
+                organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT},
+            </if>
+            <if test="organManagerStaffId != null" >
+                organ_manager_staff_id = #{organManagerStaffId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorManagerUserId != null" >
+                superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorManagerStaffId != null" >
+                superior_manager_staff_id = #{superiorManagerStaffId,jdbcType=BIGINT},
+            </if>
+            <if test="superiorManagerName != null" >
+                superior_manager_name = #{superiorManagerName,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null" >
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="organAttribute != null" >
+                organ_attribute = #{organAttribute,jdbcType=INTEGER},
+            </if>
+            <if test="organProduct != null" >
+                organ_product = #{organProduct,jdbcType=VARCHAR},
+            </if>
+            <if test="organType != null" >
+                organ_type = #{organType,jdbcType=INTEGER},
+            </if>
+            <if test="isCanModify != null" >
+                is_can_modify = #{isCanModify,jdbcType=INTEGER},
+            </if>
+            <if test="state != null" >
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="accOutEqual != null" >
+                acc_out_equal = #{accOutEqual,jdbcType=INTEGER},
+            </if>
+            <if test="warnMoney != null" >
+                warn_money = #{warnMoney,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.StaffOrgan" >
+        update staff_organ
+        set name = #{name,jdbcType=VARCHAR},
+            company_id = #{companyId,jdbcType=BIGINT},
+            company_name = #{companyName,jdbcType=VARCHAR},
+            type = #{type,jdbcType=INTEGER},
+            create_by = #{createBy,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_by = #{updateBy,jdbcType=VARCHAR},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            organ_manager_name = #{organManagerName,jdbcType=VARCHAR},
+            organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT},
+            organ_manager_staff_id = #{organManagerStaffId,jdbcType=BIGINT},
+            superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT},
+            superior_manager_staff_id = #{superiorManagerStaffId,jdbcType=BIGINT},
+            superior_manager_name = #{superiorManagerName,jdbcType=VARCHAR},
+            code = #{code,jdbcType=VARCHAR},
+            organ_attribute = #{organAttribute,jdbcType=INTEGER},
+            organ_product = #{organProduct,jdbcType=VARCHAR},
+            organ_type = #{organType,jdbcType=INTEGER},
+            is_can_modify = #{isCanModify,jdbcType=INTEGER},
+            state = #{state,jdbcType=INTEGER},
+            performance = #{performance,jdbcType=INTEGER},
+            acc_out_equal = #{accOutEqual,jdbcType=INTEGER},
+            warn_money = #{warnMoney,jdbcType=DOUBLE}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="name != null" >
+            and name like CONCAT(CONCAT('%',replace(#{name,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="companyId != null" >
+            and company_id = #{companyId,jdbcType=BIGINT}
+        </if>
+        <if test="type != null" >
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="organManagerUserId != null" >
+            and organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT}
+        </if>
+        <if test="organManagerStaffId != null" >
+            and organ_manager_staff_id = #{organManagerStaffId,jdbcType=BIGINT}
+        </if>
+        <if test="superiorManagerUserId != null" >
+            and superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT}
+        </if>
+        <if test="superiorManagerStaffId != null" >
+            and superior_manager_staff_id = #{superiorManagerStaffId,jdbcType=BIGINT}
+        </if>
+        <if test="code != null" >
+            and code like CONCAT(CONCAT('%',replace(#{code,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="searchFrom != null" >
+            <if test="searchFrom == financial">
+                and
+                (
+                id = #{organId,jdbcType=BIGINT}
+                <if test="organManagerUserId != null" >
+                    or organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT}
+                </if>
+                <if test="superiorManagerUserId != null" >
+                    or superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT}
+                </if>
+                )
+            </if>
+            <if test="searchFrom == 'financialA'">
+                and
+                (
+                1 != 1
+                <if test="organManagerUserIdA != null" >
+                    or organ_manager_user_id = #{organManagerUserIdA,jdbcType=BIGINT}
+                </if>
+                <if test="superiorManagerUserIdA != null" >
+                    or superior_manager_user_id = #{superiorManagerUserIdA,jdbcType=BIGINT}
+                </if>
+                )
+            </if>
+        </if>
+        <if test="organAttribute !=  null">
+            and organ_attribute = #{organAttribute,jdbcType=INTEGER}
+        </if>
+        <if test="orgIds != null">
+            and find_in_set(id, #{orgIds,jdbcType=VARCHAR})
+        </if>
+        <if test="proIds != null">
+            and find_in_set(organ_product, #{proIds,jdbcType=VARCHAR})
+        </if>
+        <if test="state != null" >
+            and state = #{state,jdbcType=INTEGER}
+        </if>
+        <if test="staffOrgId != null">
+            and id = #{staffOrgId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from staff_organ
+        <include refid="joins" />
+        where delete_flag =0
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from staff_organ
+        <include refid="joins" />
+        where delete_flag =0
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectByOne" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from staff_organ
+        where name = #{name,jdbcType=VARCHAR} limit 1;
+    </select>
+    <select id="listHq" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from staff_organ
+        where delete_flag =0
+        and id in(92,89,81,76,80,59,57,96)
+        order by id desc
+    </select>
+</mapper>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.StaffBudgetCompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.StaffBudgetCompany" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="business_unit_id" property="businessUnitId" jdbcType="BIGINT" />
+    <result column="business_unit_name" property="businessUnitName" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="tax_rate" property="taxRate" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, business_unit_id, business_unit_name, create_by, create_time, update_by,
+    update_time, delete_flag, state, tax_rate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from staff_budget_company
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from staff_budget_company
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.StaffBudgetCompany" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_budget_company (name, business_unit_id, business_unit_name,
+    create_by, create_time, update_by,
+    update_time, delete_flag, state,
+    tax_rate)
+    values (#{name,jdbcType=VARCHAR}, #{businessUnitId,jdbcType=BIGINT}, #{businessUnitName,jdbcType=VARCHAR},
+    #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, #{state,jdbcType=INTEGER},
+    #{taxRate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.StaffBudgetCompany" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_budget_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="businessUnitId != null" >
+        business_unit_id,
+      </if>
+      <if test="businessUnitName != null" >
+        business_unit_name,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="taxRate != null" >
+        tax_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="businessUnitId != null" >
+        #{businessUnitId,jdbcType=BIGINT},
+      </if>
+      <if test="businessUnitName != null" >
+        #{businessUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="taxRate != null" >
+        #{taxRate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.StaffBudgetCompany" >
+    update staff_budget_company
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="businessUnitId != null" >
+        business_unit_id = #{businessUnitId,jdbcType=BIGINT},
+      </if>
+      <if test="businessUnitName != null" >
+        business_unit_name = #{businessUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="taxRate != null" >
+        tax_rate = #{taxRate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.StaffBudgetCompany" >
+    update staff_budget_company
+    set name = #{name,jdbcType=VARCHAR},
+      business_unit_id = #{businessUnitId,jdbcType=BIGINT},
+      business_unit_name = #{businessUnitName,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      tax_rate = #{taxRate,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="joins">
+
+  </sql>
+  <sql id="wheres">
+    <if test="name != null" >
+      and name like CONCAT(CONCAT('%',replace(#{name,jdbcType=VARCHAR},' ','')), '%')
+    </if>
+    <if test="businessUnitId != null" >
+      and business_unit_id = #{businessUnitId,jdbcType=BIGINT}
+    </if>
+    <if test="state != null" >
+      and state = #{state,jdbcType=INTEGER}
+    </if>
+
+    <if test="names144 == 144">
+      and name like '%公估%'
+    </if>
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from staff_budget_company
+    <include refid="joins" />
+    where delete_flag =0
+    <include refid="wheres" />
+    order by id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from staff_budget_company
+    <include refid="joins" />
+    where delete_flag =0
+    <include refid="wheres" />
+  </select>
+
+  <select id="selectByOne" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from staff_budget_company
+    where name = #{name,jdbcType=VARCHAR} limit 1;
+  </select>
+</mapper>

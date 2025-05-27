@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaMedicalInsuranceMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaMedicalInsurance" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="fina_id" property="finaId" jdbcType="BIGINT" />
+    <result column="fina_info_id" property="finaInfoId" jdbcType="BIGINT" />
+    <result column="medical_insurance_type" property="medicalInsuranceType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fina_id, fina_info_id, medical_insurance_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_medical_insurance
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_medical_insurance
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaMedicalInsurance" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_medical_insurance (fina_id, fina_info_id, medical_insurance_type
+      )
+    values (#{finaId,jdbcType=BIGINT}, #{finaInfoId,jdbcType=BIGINT}, #{medicalInsuranceType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaMedicalInsurance" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_medical_insurance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        fina_id,
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id,
+      </if>
+      <if test="medicalInsuranceType != null" >
+        medical_insurance_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="medicalInsuranceType != null" >
+        #{medicalInsuranceType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaMedicalInsurance" >
+    update fina_medical_insurance
+    <set >
+      <if test="finaId != null" >
+        fina_id = #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="medicalInsuranceType != null" >
+        medical_insurance_type = #{medicalInsuranceType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaMedicalInsurance" >
+    update fina_medical_insurance
+    set fina_id = #{finaId,jdbcType=BIGINT},
+      fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      medical_insurance_type = #{medicalInsuranceType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="finaId != null" >
+            and a.fina_id = #{finaId,jdbcType=BIGINT}
+        </if>
+        <if test="finaInfoId != null" >
+            and a.fina_info_id = #{finaInfoId,jdbcType=BIGINT}
+        </if>
+        <if test="medicalInsuranceType != null" >
+            and a.medical_insurance_type = #{medicalInsuranceType,jdbcType=INTEGER}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select a.*
+        from fina_medical_insurance a
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by a.id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select count(1)
+        from fina_medical_insurance a
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectOne" parameterType="map" resultMap="BaseResultMap">
+        select a.*
+        from fina_medical_insurance a
+        where 1=1
+        <if test="finaId != null" >
+            and a.fina_id = #{finaId,jdbcType=BIGINT}
+        </if>
+        <if test="finaInfoId != null" >
+            and a.fina_info_id = #{finaInfoId,jdbcType=BIGINT}
+        </if>
+        order by a.id desc limit 1;
+    </select>
+</mapper>

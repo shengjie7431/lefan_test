@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyCaseFileMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.dto.SurveyCaseFileDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_id" property="surveyId" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="catalog_id" property="catalogId" jdbcType="BIGINT" />
+    <result column="catalog_name" property="catalogName" jdbcType="VARCHAR" />
+    <result column="catalog_text" property="catalogText" jdbcType="VARCHAR" />
+    <result column="common_file_id" property="commonFileId" jdbcType="BIGINT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+      <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    a.id, a.survey_id, a.survey_info_id, a.catalog_id, a.catalog_name, a.catalog_text, a.common_file_id,
+    a.create_by, a.update_by, a.create_time, a.update_time, a.delete_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_case_file a
+    where a.id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_case_file
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyCaseFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_case_file (survey_id, survey_info_id, catalog_id, 
+      catalog_name, catalog_text, common_file_id, 
+      create_by, update_by, create_time, 
+      update_time, delete_flag)
+    values (#{surveyId,jdbcType=BIGINT}, #{surveyInfoId,jdbcType=BIGINT}, #{catalogId,jdbcType=BIGINT}, 
+      #{catalogName,jdbcType=VARCHAR}, #{catalogText,jdbcType=VARCHAR}, #{commonFileId,jdbcType=BIGINT}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyCaseFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_case_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        survey_id,
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="catalogId != null" >
+        catalog_id,
+      </if>
+      <if test="catalogName != null" >
+        catalog_name,
+      </if>
+      <if test="catalogText != null" >
+        catalog_text,
+      </if>
+      <if test="commonFileId != null" >
+        common_file_id,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="catalogId != null" >
+        #{catalogId,jdbcType=BIGINT},
+      </if>
+      <if test="catalogName != null" >
+        #{catalogName,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogText != null" >
+        #{catalogText,jdbcType=VARCHAR},
+      </if>
+      <if test="commonFileId != null" >
+        #{commonFileId,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyCaseFile" >
+    update survey_case_file
+    <set >
+      <if test="surveyId != null" >
+        survey_id = #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="catalogId != null" >
+        catalog_id = #{catalogId,jdbcType=BIGINT},
+      </if>
+      <if test="catalogName != null" >
+        catalog_name = #{catalogName,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogText != null" >
+        catalog_text = #{catalogText,jdbcType=VARCHAR},
+      </if>
+      <if test="commonFileId != null" >
+        common_file_id = #{commonFileId,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyCaseFile" >
+    update survey_case_file
+    set survey_id = #{surveyId,jdbcType=BIGINT},
+      survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      catalog_id = #{catalogId,jdbcType=BIGINT},
+      catalog_name = #{catalogName,jdbcType=VARCHAR},
+      catalog_text = #{catalogText,jdbcType=VARCHAR},
+      common_file_id = #{commonFileId,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <sql id="joins">
+        left join common_file f on a.common_file_id = f.id
+    </sql>
+    <sql id="wheres">
+        <if test="surveyId != null" >
+            and a.survey_id = #{surveyId,jdbcType=BIGINT}
+        </if>
+        <if test="surveyInfoId != null" >
+            and a.survey_info_id = #{surveyInfoId,jdbcType=BIGINT}
+        </if>
+        <if test="catalogId != null" >
+            and a.catalog_id = #{catalogId,jdbcType=BIGINT}
+        </if>
+        <if test="catalogName != null" >
+            and a.catalog_name = #{catalogName,jdbcType=VARCHAR}
+        </if>
+        <if test="catalogText != null" >
+            and a.catalog_text = #{catalogText,jdbcType=VARCHAR}
+        </if>
+        <if test="commonFileId != null" >
+            and a.common_file_id = #{commonFileId,jdbcType=BIGINT}
+        </if>
+        <if test="createBy != null" >
+            and a.create_by = #{createBy,jdbcType=VARCHAR}
+        </if>
+        <if test="updateBy != null" >
+            and a.update_by = #{updateBy,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null" >
+            and a.create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null" >
+            and a.update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="deleteFlag != null" >
+            and a.delete_flag = #{deleteFlag,jdbcType=INTEGER}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        ,f.file_path
+        from survey_case_file a
+        <include refid="joins" />
+        where 1 = 1 and a.delete_flag = 0
+        <include refid="wheres" />
+        order by a.id desc
+    </select>
+
+    <select id="getSurveyFileInfo" parameterType="java.lang.Long" resultType="com.lefancrm.apicenter.dto.SurveyFileInfoDTO">
+      SELECT
+          s.catalog_id as catalogId,
+          s.catalog_name as catalogName,
+          count(1) as num
+      FROM
+          survey_case_file s
+      WHERE
+          s.survey_info_id = #{surveyInfoId,jdbcType=BIGINT} and delete_flag = 0
+      GROUP BY
+          s.catalog_id,
+          s.catalog_name
+    </select>
+</mapper>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.PaymentEstimateReportMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.PaymentEstimateReport" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="payment_estimate_id" property="paymentEstimateId" jdbcType="BIGINT" />
+        <result column="payment_project" property="paymentProject" jdbcType="VARCHAR" />
+        <result column="medical_fee" property="medicalFee" jdbcType="DOUBLE" />
+        <result column="compulsory_insurance_fee" property="compulsoryInsuranceFee" jdbcType="DOUBLE" />
+        <result column="commercial_insurance_fee" property="commercialInsuranceFee" jdbcType="DOUBLE" />
+        <result column="cause_trouble_fee" property="causeTroubleFee" jdbcType="DOUBLE" />
+        <result column="check_medical_fee" property="checkMedicalFee" jdbcType="DOUBLE" />
+        <result column="check_compulsory_insurance_fee" property="checkCompulsoryInsuranceFee" jdbcType="VARCHAR" />
+        <result column="check_commercial_insurance_fee" property="checkCommercialInsuranceFee" jdbcType="VARCHAR" />
+        <result column="check_cause_trouble_fee" property="checkCauseTroubleFee" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, payment_estimate_id, payment_project, medical_fee, compulsory_insurance_fee,
+        commercial_insurance_fee, cause_trouble_fee, check_medical_fee, check_compulsory_insurance_fee,
+        check_commercial_insurance_fee, check_cause_trouble_fee
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from payment_estimate_report
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from payment_estimate_report
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.PaymentEstimateReport" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into payment_estimate_report (payment_estimate_id, payment_project,
+        medical_fee, compulsory_insurance_fee, commercial_insurance_fee,
+        cause_trouble_fee, check_medical_fee, check_compulsory_insurance_fee,
+        check_commercial_insurance_fee, check_cause_trouble_fee
+        )
+        values (#{paymentEstimateId,jdbcType=BIGINT}, #{paymentProject,jdbcType=VARCHAR},
+        #{medicalFee,jdbcType=DOUBLE}, #{compulsoryInsuranceFee,jdbcType=DOUBLE}, #{commercialInsuranceFee,jdbcType=DOUBLE},
+        #{causeTroubleFee,jdbcType=DOUBLE}, #{checkMedicalFee,jdbcType=DOUBLE}, #{checkCompulsoryInsuranceFee,jdbcType=VARCHAR},
+        #{checkCommercialInsuranceFee,jdbcType=VARCHAR}, #{checkCauseTroubleFee,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.PaymentEstimateReport" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into payment_estimate_report
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="paymentEstimateId != null" >
+                payment_estimate_id,
+            </if>
+            <if test="paymentProject != null" >
+                payment_project,
+            </if>
+            <if test="medicalFee != null" >
+                medical_fee,
+            </if>
+            <if test="compulsoryInsuranceFee != null" >
+                compulsory_insurance_fee,
+            </if>
+            <if test="commercialInsuranceFee != null" >
+                commercial_insurance_fee,
+            </if>
+            <if test="causeTroubleFee != null" >
+                cause_trouble_fee,
+            </if>
+            <if test="checkMedicalFee != null" >
+                check_medical_fee,
+            </if>
+            <if test="checkCompulsoryInsuranceFee != null" >
+                check_compulsory_insurance_fee,
+            </if>
+            <if test="checkCommercialInsuranceFee != null" >
+                check_commercial_insurance_fee,
+            </if>
+            <if test="checkCauseTroubleFee != null" >
+                check_cause_trouble_fee,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="paymentEstimateId != null" >
+                #{paymentEstimateId,jdbcType=BIGINT},
+            </if>
+            <if test="paymentProject != null" >
+                #{paymentProject,jdbcType=VARCHAR},
+            </if>
+            <if test="medicalFee != null" >
+                #{medicalFee,jdbcType=DOUBLE},
+            </if>
+            <if test="compulsoryInsuranceFee != null" >
+                #{compulsoryInsuranceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="commercialInsuranceFee != null" >
+                #{commercialInsuranceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="causeTroubleFee != null" >
+                #{causeTroubleFee,jdbcType=DOUBLE},
+            </if>
+            <if test="checkMedicalFee != null" >
+                #{checkMedicalFee,jdbcType=DOUBLE},
+            </if>
+            <if test="checkCompulsoryInsuranceFee != null" >
+                #{checkCompulsoryInsuranceFee,jdbcType=VARCHAR},
+            </if>
+            <if test="checkCommercialInsuranceFee != null" >
+                #{checkCommercialInsuranceFee,jdbcType=VARCHAR},
+            </if>
+            <if test="checkCauseTroubleFee != null" >
+                #{checkCauseTroubleFee,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.PaymentEstimateReport" >
+        update payment_estimate_report
+        <set >
+            <if test="paymentEstimateId != null" >
+                payment_estimate_id = #{paymentEstimateId,jdbcType=BIGINT},
+            </if>
+            <if test="paymentProject != null" >
+                payment_project = #{paymentProject,jdbcType=VARCHAR},
+            </if>
+            <if test="medicalFee != null" >
+                medical_fee = #{medicalFee,jdbcType=DOUBLE},
+            </if>
+            <if test="compulsoryInsuranceFee != null" >
+                compulsory_insurance_fee = #{compulsoryInsuranceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="commercialInsuranceFee != null" >
+                commercial_insurance_fee = #{commercialInsuranceFee,jdbcType=DOUBLE},
+            </if>
+            <if test="causeTroubleFee != null" >
+                cause_trouble_fee = #{causeTroubleFee,jdbcType=DOUBLE},
+            </if>
+            <if test="checkMedicalFee != null" >
+                check_medical_fee = #{checkMedicalFee,jdbcType=DOUBLE},
+            </if>
+            <if test="checkCompulsoryInsuranceFee != null" >
+                check_compulsory_insurance_fee = #{checkCompulsoryInsuranceFee,jdbcType=VARCHAR},
+            </if>
+            <if test="checkCommercialInsuranceFee != null" >
+                check_commercial_insurance_fee = #{checkCommercialInsuranceFee,jdbcType=VARCHAR},
+            </if>
+            <if test="checkCauseTroubleFee != null" >
+                check_cause_trouble_fee = #{checkCauseTroubleFee,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.PaymentEstimateReport" >
+        update payment_estimate_report
+        set payment_estimate_id = #{paymentEstimateId,jdbcType=BIGINT},
+        payment_project = #{paymentProject,jdbcType=VARCHAR},
+        medical_fee = #{medicalFee,jdbcType=DOUBLE},
+        compulsory_insurance_fee = #{compulsoryInsuranceFee,jdbcType=DOUBLE},
+        commercial_insurance_fee = #{commercialInsuranceFee,jdbcType=DOUBLE},
+        cause_trouble_fee = #{causeTroubleFee,jdbcType=DOUBLE},
+        check_medical_fee = #{checkMedicalFee,jdbcType=DOUBLE},
+        check_compulsory_insurance_fee = #{checkCompulsoryInsuranceFee,jdbcType=VARCHAR},
+        check_commercial_insurance_fee = #{checkCommercialInsuranceFee,jdbcType=VARCHAR},
+        check_cause_trouble_fee = #{checkCauseTroubleFee,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectPaymentEstimateReportByPeId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from payment_estimate_report
+        where payment_estimate_id = #{paymentEstimateId,jdbcType=BIGINT}
+    </select>
+
+    <update id="updatePaymentEstimateReport" parameterType="map">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update payment_estimate_report
+            <set>
+                <if test="item.value != null and item.value !=''">
+                    check_medical_fee = #{item.value,jdbcType=DOUBLE}
+                </if>
+            </set>
+            where id = #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+</mapper>

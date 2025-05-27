@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyReimbursementFileMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.dto.SurveyReimbursementFileDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="reimbursement_id" property="reimbursementId" jdbcType="BIGINT" />
+    <result column="file_code" property="fileCode" jdbcType="VARCHAR" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_info_id, reimbursement_id, file_code, file_url, create_time, create_by, 
+    update_time, update_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_reimbursement_file
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByReimbursementId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_reimbursement_file
+    where reimbursement_id = #{reimbursementId,jdbcType=BIGINT}
+  </select>
+  <select id="selectBillNewByReimbursementId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_reimbursement_file
+    where reimbursement_id = #{reimbursementId,jdbcType=BIGINT}  and  (file_code ='traffic' or file_code = 'consult' or file_code = 'accnew')
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_reimbursement_file
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByReimId">
+      delete from survey_reimbursement_file
+    where reimbursement_id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyReimbursementFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_reimbursement_file (survey_info_id, reimbursement_id, file_code, 
+      file_url, create_time, create_by, 
+      update_time, update_by)
+    values (#{surveyInfoId,jdbcType=BIGINT}, #{reimbursementId,jdbcType=BIGINT}, #{fileCode,jdbcType=VARCHAR}, 
+      #{fileUrl,jdbcType=VARCHAR}, now(), #{createBy,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyReimbursementFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_reimbursement_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="reimbursementId != null" >
+        reimbursement_id,
+      </if>
+      <if test="fileCode != null" >
+        file_code,
+      </if>
+      <if test="fileUrl != null" >
+        file_url,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="reimbursementId != null" >
+        #{reimbursementId,jdbcType=BIGINT},
+      </if>
+      <if test="fileCode != null" >
+        #{fileCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyReimbursementFile" >
+    update survey_reimbursement_file
+    <set >
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="reimbursementId != null" >
+        reimbursement_id = #{reimbursementId,jdbcType=BIGINT},
+      </if>
+      <if test="fileCode != null" >
+        file_code = #{fileCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyReimbursementFile" >
+    update survey_reimbursement_file
+    set survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      reimbursement_id = #{reimbursementId,jdbcType=BIGINT},
+      file_code = #{fileCode,jdbcType=VARCHAR},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

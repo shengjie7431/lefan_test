@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyPayInfoDetailNewMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyPayInfoDetailNew" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pay_id" property="payId" jdbcType="BIGINT" />
+    <result column="opr_id" property="oprId" jdbcType="BIGINT" />
+    <result column="opr_code" property="oprCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, pay_id, opr_id, opr_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_pay_info_detail_new
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_pay_info_detail_new
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyPayInfoDetailNew" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_pay_info_detail_new (pay_id, opr_id, opr_code
+      )
+    values (#{payId,jdbcType=BIGINT}, #{oprId,jdbcType=BIGINT}, #{oprCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyPayInfoDetailNew" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_pay_info_detail_new
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payId != null" >
+        pay_id,
+      </if>
+      <if test="oprId != null" >
+        opr_id,
+      </if>
+      <if test="oprCode != null" >
+        opr_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payId != null" >
+        #{payId,jdbcType=BIGINT},
+      </if>
+      <if test="oprId != null" >
+        #{oprId,jdbcType=BIGINT},
+      </if>
+      <if test="oprCode != null" >
+        #{oprCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyPayInfoDetailNew" >
+    update survey_pay_info_detail_new
+    <set >
+      <if test="payId != null" >
+        pay_id = #{payId,jdbcType=BIGINT},
+      </if>
+      <if test="oprId != null" >
+        opr_id = #{oprId,jdbcType=BIGINT},
+      </if>
+      <if test="oprCode != null" >
+        opr_code = #{oprCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyPayInfoDetailNew" >
+    update survey_pay_info_detail_new
+    set pay_id = #{payId,jdbcType=BIGINT},
+      opr_id = #{oprId,jdbcType=BIGINT},
+      opr_code = #{oprCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="insertItems" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+    insert into survey_pay_info_detail_new(pay_id,opr_id,opr_code)
+    values
+    <foreach collection="ids" item="id" separator=",">
+      (
+      #{payId,jdbcType=BIGINT},
+      #{id,jdbcType=BIGINT},
+      #{oprCode,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
+  <update id="updateChannelItems" parameterType="java.lang.String">
+      update survey_channel_cost_new set is_pro_pay = 2 where id in (
+          select p.opr_id from survey_pay_info_detail_new p
+           left join survey_pay_info s on p.pay_id = s.id
+           where s.pay_type = 3 and find_in_set(p.pay_id,#{payIds,jdbcType=VARCHAR}) and p.opr_code = 'channel'
+      )
+  </update>
+
+  <update id="updateSettlementItems" parameterType="java.util.Map">
+        update fina_settlement_info a
+        left join survey_pay_info_detail_new d on a.id = d.opr_id and d.opr_code = 'settlement'
+        set a.finsh_account_time = now(),finsh_close_time = now(),settlement_state = #{settlementState}
+        where d.id is not null and d.pay_id = #{billId,jdbcType=BIGINT}
+  </update>
+
+  <select id="getSettlementItems" parameterType="java.util.Map" resultType="java.lang.Long">
+    select a.id from fina_settlement_info a
+    left join survey_pay_info_detail_new d on a.id = d.opr_id and d.opr_code = 'settlement'
+    where d.id is not null and d.pay_id = #{billId,jdbcType=BIGINT}
+  </select>
+</mapper>

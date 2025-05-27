@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaFileSettlementMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaFileSettlement" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="settlement_info_id" property="settlementInfoId" jdbcType="BIGINT" />
+    <result column="file_enum_id" property="fileEnumId" jdbcType="BIGINT" />
+    <result column="file_enum_name" property="fileEnumName" jdbcType="VARCHAR" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
+    <result column="upload_by" property="uploadBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, settlement_info_id, file_enum_id, file_enum_name, file_name, file_path, upload_time, 
+    upload_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_file_settlement
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_file_settlement
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaFileSettlement" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_file_settlement (settlement_info_id, file_enum_id, file_enum_name, 
+      file_name, file_path, upload_time, 
+      upload_by)
+    values (#{settlementInfoId,jdbcType=BIGINT}, #{fileEnumId,jdbcType=BIGINT}, #{fileEnumName,jdbcType=VARCHAR}, 
+      #{fileName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, 
+      #{uploadBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaFileSettlement" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_file_settlement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="settlementInfoId != null" >
+        settlement_info_id,
+      </if>
+      <if test="fileEnumId != null" >
+        file_enum_id,
+      </if>
+      <if test="fileEnumName != null" >
+        file_enum_name,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+      <if test="uploadTime != null" >
+        upload_time,
+      </if>
+      <if test="uploadBy != null" >
+        upload_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="settlementInfoId != null" >
+        #{settlementInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="fileEnumId != null" >
+        #{fileEnumId,jdbcType=BIGINT},
+      </if>
+      <if test="fileEnumName != null" >
+        #{fileEnumName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadBy != null" >
+        #{uploadBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaFileSettlement" >
+    update fina_file_settlement
+    <set >
+      <if test="settlementInfoId != null" >
+        settlement_info_id = #{settlementInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="fileEnumId != null" >
+        file_enum_id = #{fileEnumId,jdbcType=BIGINT},
+      </if>
+      <if test="fileEnumName != null" >
+        file_enum_name = #{fileEnumName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadBy != null" >
+        upload_by = #{uploadBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaFileSettlement" >
+    update fina_file_settlement
+    set settlement_info_id = #{settlementInfoId,jdbcType=BIGINT},
+      file_enum_id = #{fileEnumId,jdbcType=BIGINT},
+      file_enum_name = #{fileEnumName,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      upload_by = #{uploadBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    a.*
+    from fina_file_settlement a
+    where 1 = 1
+    <if test="settlementInfoId != null" >
+      and a.settlement_info_id = #{settlementInfoId,jdbcType=BIGINT}
+    </if>
+    <if test="fileEnumId != null">
+      and a.file_enum_id = #{fileEnumId,jdbcType=BIGINT}
+    </if>
+    order by a.id desc
+  </select>
+</mapper>

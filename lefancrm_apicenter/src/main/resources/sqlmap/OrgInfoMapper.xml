@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.OrgInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.OrgInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="org_tel" property="orgTel" jdbcType="VARCHAR" />
+    <result column="link_name" property="linkName" jdbcType="VARCHAR" />
+    <result column="link_tel" property="linkTel" jdbcType="VARCHAR" />
+    <result column="org_province" property="orgProvince" jdbcType="VARCHAR" />
+    <result column="org_city" property="orgCity" jdbcType="VARCHAR" />
+    <result column="org_district" property="orgDistrict" jdbcType="VARCHAR" />
+    <result column="org_province_id" property="orgProvinceId" jdbcType="BIGINT" />
+    <result column="org_city_id" property="orgCityId" jdbcType="BIGINT" />
+    <result column="org_district_id" property="orgDistrictId" jdbcType="BIGINT" />
+    <result column="org_address" property="orgAddress" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="org_account" property="orgAccount" jdbcType="INTEGER" />
+    <result column="org_type" property="orgType" jdbcType="INTEGER" />
+    <result column="org_parentid" property="orgParentid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, org_name, org_tel, link_name, link_tel, org_province, org_city, org_district, 
+    org_province_id, org_city_id, org_district_id, org_address, state, delete_flag, org_account, 
+    org_type, org_parentid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from org_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from org_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.OrgInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into org_info (org_name, org_tel, link_name, 
+      link_tel, org_province, org_city, 
+      org_district, org_province_id, org_city_id, 
+      org_district_id, org_address, state, 
+      delete_flag, org_account, org_type, 
+      org_parentid)
+    values (#{orgName,jdbcType=VARCHAR}, #{orgTel,jdbcType=VARCHAR}, #{linkName,jdbcType=VARCHAR}, 
+      #{linkTel,jdbcType=VARCHAR}, #{orgProvince,jdbcType=VARCHAR}, #{orgCity,jdbcType=VARCHAR}, 
+      #{orgDistrict,jdbcType=VARCHAR}, #{orgProvinceId,jdbcType=BIGINT}, #{orgCityId,jdbcType=BIGINT}, 
+      #{orgDistrictId,jdbcType=BIGINT}, #{orgAddress,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=INTEGER}, #{orgAccount,jdbcType=INTEGER}, #{orgType,jdbcType=INTEGER}, 
+      #{orgParentid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.OrgInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into org_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="orgTel != null" >
+        org_tel,
+      </if>
+      <if test="linkName != null" >
+        link_name,
+      </if>
+      <if test="linkTel != null" >
+        link_tel,
+      </if>
+      <if test="orgProvince != null" >
+        org_province,
+      </if>
+      <if test="orgCity != null" >
+        org_city,
+      </if>
+      <if test="orgDistrict != null" >
+        org_district,
+      </if>
+      <if test="orgProvinceId != null" >
+        org_province_id,
+      </if>
+      <if test="orgCityId != null" >
+        org_city_id,
+      </if>
+      <if test="orgDistrictId != null" >
+        org_district_id,
+      </if>
+      <if test="orgAddress != null" >
+        org_address,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="orgAccount != null" >
+        org_account,
+      </if>
+      <if test="orgType != null" >
+        org_type,
+      </if>
+      <if test="orgParentid != null" >
+        org_parentid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgTel != null" >
+        #{orgTel,jdbcType=VARCHAR},
+      </if>
+      <if test="linkName != null" >
+        #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTel != null" >
+        #{linkTel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgProvince != null" >
+        #{orgProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCity != null" >
+        #{orgCity,jdbcType=VARCHAR},
+      </if>
+      <if test="orgDistrict != null" >
+        #{orgDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="orgProvinceId != null" >
+        #{orgProvinceId,jdbcType=BIGINT},
+      </if>
+      <if test="orgCityId != null" >
+        #{orgCityId,jdbcType=BIGINT},
+      </if>
+      <if test="orgDistrictId != null" >
+        #{orgDistrictId,jdbcType=BIGINT},
+      </if>
+      <if test="orgAddress != null" >
+        #{orgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="orgAccount != null" >
+        #{orgAccount,jdbcType=INTEGER},
+      </if>
+      <if test="orgType != null" >
+        #{orgType,jdbcType=INTEGER},
+      </if>
+      <if test="orgParentid != null" >
+        #{orgParentid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.OrgInfo" >
+    update org_info
+    <set >
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgTel != null" >
+        org_tel = #{orgTel,jdbcType=VARCHAR},
+      </if>
+      <if test="linkName != null" >
+        link_name = #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTel != null" >
+        link_tel = #{linkTel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgProvince != null" >
+        org_province = #{orgProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCity != null" >
+        org_city = #{orgCity,jdbcType=VARCHAR},
+      </if>
+      <if test="orgDistrict != null" >
+        org_district = #{orgDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="orgProvinceId != null" >
+        org_province_id = #{orgProvinceId,jdbcType=BIGINT},
+      </if>
+      <if test="orgCityId != null" >
+        org_city_id = #{orgCityId,jdbcType=BIGINT},
+      </if>
+      <if test="orgDistrictId != null" >
+        org_district_id = #{orgDistrictId,jdbcType=BIGINT},
+      </if>
+      <if test="orgAddress != null" >
+        org_address = #{orgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="orgAccount != null" >
+        org_account = #{orgAccount,jdbcType=INTEGER},
+      </if>
+      <if test="orgType != null" >
+        org_type = #{orgType,jdbcType=INTEGER},
+      </if>
+      <if test="orgParentid != null" >
+        org_parentid = #{orgParentid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.OrgInfo" >
+    update org_info
+    set org_name = #{orgName,jdbcType=VARCHAR},
+      org_tel = #{orgTel,jdbcType=VARCHAR},
+      link_name = #{linkName,jdbcType=VARCHAR},
+      link_tel = #{linkTel,jdbcType=VARCHAR},
+      org_province = #{orgProvince,jdbcType=VARCHAR},
+      org_city = #{orgCity,jdbcType=VARCHAR},
+      org_district = #{orgDistrict,jdbcType=VARCHAR},
+      org_province_id = #{orgProvinceId,jdbcType=BIGINT},
+      org_city_id = #{orgCityId,jdbcType=BIGINT},
+      org_district_id = #{orgDistrictId,jdbcType=BIGINT},
+      org_address = #{orgAddress,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      org_account = #{orgAccount,jdbcType=INTEGER},
+      org_type = #{orgType,jdbcType=INTEGER},
+      org_parentid = #{orgParentid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="queryOrgList" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * from org_info where 1 = 1
+        <if test="state != null and state != 0">
+            and state = #{state,jdbcType=INTEGER}
+        </if>
+        <if test="orgName != null">
+            and org_name  like  CONCAT(CONCAT('%',   #{orgName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="linkName != null and agentType != 0">
+            and link_name  like  CONCAT(CONCAT('%',   #{linkName,jdbcType=VARCHAR}),
+            '%')
+        </if>
+        <if test="orgParentid != null and orgParentid != 0">
+            and org_parentid = #{orgParentid,jdbcType=BIGINT}
+        </if>
+        <if test="orgType != null and orgType != 0">
+            and org_type = #{orgType,jdbcType=INTEGER}
+        </if>
+        <if test="orgId != null">
+            and id = #{orgId,jdbcType=BIGINT}
+        </if>
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex},#{pageSize}
+        </if>
+    </select>
+
+    <select id="selectOrgInfoByRiskOrg" parameterType="java.util.Map" resultMap="BaseResultMap">
+      select oi.* from org_info oi
+      left join user_risk_org uro on uro.org_id = oi.id
+      where oi.org_parentid =1 and uro.user_id =#{userId,jdbcType=BIGINT};
+    </select>
+
+    <select id="searchOrgListByOrgParentId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * from org_info where org_parentid = 1
+        <if test="orgName != null">
+            and org_name like  CONCAT(CONCAT('%',#{orgName,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="orgTel != null">
+            and org_tel like  CONCAT(CONCAT('%',#{orgTel,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex},#{pageSize}
+        </if>
+    </select>
+
+    <select id="queryOrgListBackend" parameterType="java.util.Map"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from org_info where 1 = 1
+        and state = 2
+        and delete_flag = 0
+        <if test="orgName != null">
+            and org_name = #{orgName,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTel != null">
+            and org_tel = #{orgTel,jdbcType=VARCHAR}
+        </if>
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="queryCountOrgListBackend" parameterType="java.util.Map"
+            resultType="int">
+        select
+        count(1)
+        from org_info where 1 = 1
+        and state = 2
+        and delete_flag = 0
+        <if test="orgName != null">
+            and org_name = #{orgName,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTel != null">
+            and org_tel = #{orgTel,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="selectOrgInfoByCityId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from org_info
+        where org_city_id = #{cityId,jdbcType=BIGINT} and org_type = 1 limit 1
+    </select>
+
+  <!--<select id="getDtos" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.OrgInfoDto">-->
+    <!--select a.id as id,a.org_name as orgName,(case when r.id is null then 0 else 1 end) as selected-->
+    <!--from org_info a-->
+    <!--left join bus_apply_org_role r on a.id = r.org_id and r.role_id = #{roleId,jdbcType=BIGINT}-->
+    <!--where 1 = 1-->
+    <!--<if test="orgParentid != null and orgParentid != 0">-->
+      <!--and org_parentid = #{orgParentid,jdbcType=BIGINT}-->
+    <!--</if>-->
+      <!--order by a.id-->
+  <!--</select>-->
+
+    <select id="getDtos" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.OrgInfoDto">
+        select b.id as id,b.org_name as orgName,(case when r.id is null then 0 else 1 end) as selected
+        FROM org_info b
+        LEFT JOIN bus_apply_org_role r ON b.id = r.org_id
+        AND r.role_id = #{roleId,jdbcType=BIGINT}
+        WHERE
+        b.id IN (
+            select org_id from billing_apply_product_org
+              where product_id in(
+                select product_id from bus_apply_product_role where role_id = #{roleId,jdbcType=BIGINT}
+              )
+        )
+        order by b.id
+    </select>
+    <select id="selectOrgInfoListByIds" resultMap="BaseResultMap">
+        select * from org_info where org_parentid in (106,1)
+        <if test="orgId != null and orgId != ''">
+            AND FIND_IN_SET(id,#{orgId});
+        </if>
+    </select>
+    <select id="selectCurrentYearAllMonth" resultType="java.util.Map">
+        SELECT
+	CASE
+WHEN length(mon) = 1 THEN
+	concat(
+		LEFT (CURRENT_DATE, 5),
+		'0',
+		mon
+	)
+ELSE
+	concat(LEFT(CURRENT_DATE, 5), mon)
+END months
+FROM
+	(
+		SELECT
+			@m :=@m + 1 mon
+		FROM
+			org_info,
+			(SELECT @m := 0) a
+	) aa
+LIMIT #{endTime}
+    </select>
+
+    <select id="test" resultMap="BaseResultMap">
+        select * from org_info where org_parentid in (106,1)
+        <if test="orgId != null and orgId != ''">
+            AND FIND_IN_SET(id,#{orgId});
+        </if>
+    </select>
+</mapper>

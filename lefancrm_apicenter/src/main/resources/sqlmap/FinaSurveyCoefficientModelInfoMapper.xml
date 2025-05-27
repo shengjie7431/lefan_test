@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaSurveyCoefficientModelInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaSurveyCoefficientModelInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="model_id" property="modelId" jdbcType="BIGINT" />
+    <result column="model_name" property="modelName" jdbcType="VARCHAR" />
+    <result column="city_type" property="cityType" jdbcType="INTEGER" />
+    <result column="coeff" property="coeff" jdbcType="DOUBLE" />
+    <result column="area_categories_id" property="areaCategoriesId" jdbcType="BIGINT" />
+    <result column="area_categories_name" property="areaCategoriesName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, model_id, model_name, city_type, coeff, area_categories_id, area_categories_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_survey_coefficient_model_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fina_survey_coefficient_model_info
+    <include refid="joins" />
+    where 1=1
+    <include refid="wheres" />
+    order by id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="selectByModelIdAndAreaId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fina_survey_coefficient_model_info
+    where model_id = #{modelId} and area_categories_id = #{areaId}
+  </select>
+  <sql id="joins">
+
+  </sql>
+  <sql id="wheres">
+    <if test="efficiencyModelId != null" >
+      and efficiency_model_id = #{efficiencyModelId,jdbcType=BIGINT}
+    </if>
+    <if test="serviceId != null" >
+      and service_id = #{serviceId,jdbcType=BIGINT}
+    </if>
+    <if test="areaCategoriesId != null" >
+      and area_categories_id = #{areaCategoriesId,jdbcType=BIGINT}
+    </if>
+  </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_survey_coefficient_model_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyCoefficientModelInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_survey_coefficient_model_info (model_id, model_name, city_type, 
+      coeff, area_categories_id, area_categories_name
+      )
+    values (#{modelId,jdbcType=BIGINT}, #{modelName,jdbcType=VARCHAR}, #{cityType,jdbcType=INTEGER}, 
+      #{coeff,jdbcType=DOUBLE}, #{areaCategoriesId,jdbcType=BIGINT}, #{areaCategoriesName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyCoefficientModelInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_survey_coefficient_model_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="modelName != null" >
+        model_name,
+      </if>
+      <if test="cityType != null" >
+        city_type,
+      </if>
+      <if test="coeff != null" >
+        coeff,
+      </if>
+      <if test="areaCategoriesId != null" >
+        area_categories_id,
+      </if>
+      <if test="areaCategoriesName != null" >
+        area_categories_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="modelName != null" >
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityType != null" >
+        #{cityType,jdbcType=INTEGER},
+      </if>
+      <if test="coeff != null" >
+        #{coeff,jdbcType=DOUBLE},
+      </if>
+      <if test="areaCategoriesId != null" >
+        #{areaCategoriesId,jdbcType=BIGINT},
+      </if>
+      <if test="areaCategoriesName != null" >
+        #{areaCategoriesName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyCoefficientModelInfo" >
+    update fina_survey_coefficient_model_info
+    <set >
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="modelName != null" >
+        model_name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityType != null" >
+        city_type = #{cityType,jdbcType=INTEGER},
+      </if>
+      <if test="coeff != null" >
+        coeff = #{coeff,jdbcType=DOUBLE},
+      </if>
+      <if test="areaCategoriesId != null" >
+        area_categories_id = #{areaCategoriesId,jdbcType=BIGINT},
+      </if>
+      <if test="areaCategoriesName != null" >
+        area_categories_name = #{areaCategoriesName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyCoefficientModelInfo" >
+    update fina_survey_coefficient_model_info
+    set model_id = #{modelId,jdbcType=BIGINT},
+      model_name = #{modelName,jdbcType=VARCHAR},
+      city_type = #{cityType,jdbcType=INTEGER},
+      coeff = #{coeff,jdbcType=DOUBLE},
+      area_categories_id = #{areaCategoriesId,jdbcType=BIGINT},
+      area_categories_name = #{areaCategoriesName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.UserCommissionInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.UserCommissionInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month_new_sign" property="monthNewSign" jdbcType="INTEGER" />
+    <result column="month_service_money" property="monthServiceMoney" jdbcType="DOUBLE" />
+    <result column="arrival_money" property="arrivalMoney" jdbcType="DOUBLE" />
+    <result column="commission_money" property="commissionMoney" jdbcType="DOUBLE" />
+    <result column="wages" property="wages" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, user_name, month, year, month_new_sign, month_service_money, arrival_money, 
+    commission_money, wages
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_commission_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_commission_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.UserCommissionInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_commission_info (user_id, user_name, month, 
+      year, month_new_sign, month_service_money, 
+      arrival_money, commission_money, wages
+      )
+    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{month,jdbcType=INTEGER}, 
+      #{year,jdbcType=INTEGER}, #{monthNewSign,jdbcType=INTEGER}, #{monthServiceMoney,jdbcType=DOUBLE}, 
+      #{arrivalMoney,jdbcType=DOUBLE}, #{commissionMoney,jdbcType=DOUBLE}, #{wages,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.UserCommissionInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_commission_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="monthNewSign != null" >
+        month_new_sign,
+      </if>
+      <if test="monthServiceMoney != null" >
+        month_service_money,
+      </if>
+      <if test="arrivalMoney != null" >
+        arrival_money,
+      </if>
+      <if test="commissionMoney != null" >
+        commission_money,
+      </if>
+      <if test="wages != null" >
+        wages,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="monthNewSign != null" >
+        #{monthNewSign,jdbcType=INTEGER},
+      </if>
+      <if test="monthServiceMoney != null" >
+        #{monthServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="arrivalMoney != null" >
+        #{arrivalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="commissionMoney != null" >
+        #{commissionMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="wages != null" >
+        #{wages,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.UserCommissionInfo" >
+    update user_commission_info
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="monthNewSign != null" >
+        month_new_sign = #{monthNewSign,jdbcType=INTEGER},
+      </if>
+      <if test="monthServiceMoney != null" >
+        month_service_money = #{monthServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="arrivalMoney != null" >
+        arrival_money = #{arrivalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="commissionMoney != null" >
+        commission_money = #{commissionMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="wages != null" >
+        wages = #{wages,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.UserCommissionInfo" >
+    update user_commission_info
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      month = #{month,jdbcType=INTEGER},
+      year = #{year,jdbcType=INTEGER},
+      month_new_sign = #{monthNewSign,jdbcType=INTEGER},
+      month_service_money = #{monthServiceMoney,jdbcType=DOUBLE},
+      arrival_money = #{arrivalMoney,jdbcType=DOUBLE},
+      commission_money = #{commissionMoney,jdbcType=DOUBLE},
+      wages = #{wages,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="queryByUserIdAndTime" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from user_commission_info
+        where user_id = #{userId,jdbcType=BIGINT} and  year = #{year,jdbcType=INTEGER} and   month = #{month,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectCountUserCommissionInfo" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select
+        count(1)
+        from user_commission_info
+        where 1=1
+        <if test="userName !=null">
+            and user_name  like  CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="month !=null">
+            and month = #{month,jdbcType=INTEGER}
+        </if>
+        <if test="year !=null">
+            and year = #{year,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="selectUserCommissionInfoList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.* from user_commission_info a
+        where 1= 1
+        <if test="userName !=null">
+            and user_name  like  CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="month !=null">
+            and month = #{month,jdbcType=INTEGER}
+        </if>
+        <if test="year !=null">
+            and year = #{year,jdbcType=INTEGER}
+        </if>
+        limit #{pageIndex}, #{pageSize}
+
+    </select>
+</mapper>

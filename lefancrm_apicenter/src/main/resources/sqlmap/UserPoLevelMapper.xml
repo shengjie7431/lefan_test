@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.UserPoLevelMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.UserPoLevel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="position_id" property="positionId" jdbcType="BIGINT" />
+    <result column="level_id" property="levelId" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="state_name" property="stateName" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, user_id, position_id, level_id, state, state_name,user_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_po_level
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_po_level
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.UserPoLevel" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_po_level (user_id, position_id, level_id, 
+      state, state_name,user_name)
+    values (#{userId,jdbcType=BIGINT}, #{positionId,jdbcType=BIGINT}, #{levelId,jdbcType=BIGINT}, 
+      #{state,jdbcType=INTEGER}, #{stateName,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.UserPoLevel" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_po_level
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="positionId != null" >
+        position_id,
+      </if>
+      <if test="levelId != null" >
+        level_id,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="stateName != null" >
+        state_name,
+      </if>
+        <if test="userName != null" >
+            user_name,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="positionId != null" >
+        #{positionId,jdbcType=BIGINT},
+      </if>
+      <if test="levelId != null" >
+        #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="stateName != null" >
+        #{stateName,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.UserPoLevel" >
+    update user_po_level
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="positionId != null" >
+        position_id = #{positionId,jdbcType=BIGINT},
+      </if>
+      <if test="levelId != null" >
+        level_id = #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="stateName != null" >
+        state_name = #{stateName,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.UserPoLevel" >
+    update user_po_level
+    set user_id = #{userId,jdbcType=BIGINT},
+      position_id = #{positionId,jdbcType=BIGINT},
+      level_id = #{levelId,jdbcType=BIGINT},
+      state = #{state,jdbcType=INTEGER},
+      state_name = #{stateName,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="queryByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from user_po_level
+        where user_id = #{userId,jdbcType=BIGINT}
+        order by id desc limit 1
+    </select>
+
+    <select id="queryByOrgAndLevelId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select * from(select b.* FROM (select * from user_info where find_in_set(org_id,SUBSTR((select getOrgList(#{orgId,jdbcType=BIGINT})) FROM 3 FOR 10000))) a
+    LEFT JOIN
+    (select * from user_po_level where level_id = #{levelId,jdbcType=BIGINT}) b on a.user_id = b.user_id) c where c.level_id is not null and  c.level_id != 0
+    </select>
+
+    <select id="queryCommissionMoneyNum" resultType="java.lang.Double" parameterType="java.util.Map" >
+       select SUM(arrival_money) from(select b.* FROM (select * from user_info where find_in_set(org_id,SUBSTR((select getOrgList(#{orgId,jdbcType=BIGINT})) FROM 3 FOR 10000))) a
+    LEFT JOIN (select * from user_commission_info WHERE year = #{year,jdbcType=INTEGER} and month = #{month,jdbcType=INTEGER}) b on a.user_id = b.user_id)c where user_id != #{userId,jdbcType=BIGINT}
+
+    </select>
+
+    <select id="queryCommissionMoneyCount" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select count(1) from(select b.* FROM (select * from user_info where find_in_set(org_id,SUBSTR((select getOrgList(#{orgId,jdbcType=BIGINT})) FROM 3 FOR 10000))) a
+        LEFT JOIN (select * from user_po_level WHERE state_name != 5 and level_id != 9) b on a.user_id = b.user_id)c where user_id is not null
+    </select>
+
+
+    <select id="queryManagerComrateLevel" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select b.* from (select * from user_info where org_id = #{orgId,jdbcType=BIGINT}) a LEFT JOIN
+        user_po_level b on a.user_id = b.user_id  where b.level_id = 3 or  b.level_id = 4 and b.state_name != 5
+    </select>
+
+
+    <select id="selectCountUserPoLevel" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select
+        count(1)
+        from user_po_level
+        where 1=1
+        <if test="userName !=null">
+            and user_name  like  CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+        </if>
+    </select>
+
+    <select id="selectUserPoLevelList" resultType="com.lefancrm.apicenter.dto.UserPoLevelDto" parameterType="java.util.Map" >
+        select
+        a.id AS id,
+        a.user_id AS userId,
+        a.position_id AS positionId,
+        a.level_id AS levelId,
+        a.state AS state,
+        a.state_name AS stateName,
+        a.user_name AS userName,
+        pi.position_name AS positionName,
+        pl.level_code AS positionLevelName
+        from user_po_level a
+        left join position_info AS pi on a.position_id = pi.id
+        left join position_level AS pl on a.level_id = pl.id
+        left join user_info AS ui on a.user_id = ui.user_id
+        where 1= 1
+        <if test="userName !=null">
+            and a.user_name  like  CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+        </if>
+
+        limit #{pageIndex}, #{pageSize}
+
+    </select>
+
+    <select id="selectDtoByPrimaryKey" resultType="com.lefancrm.apicenter.dto.UserPoLevelDto" parameterType="java.lang.Long" >
+        select
+        a.id AS id,
+        a.user_id AS userId,
+        a.position_id AS positionId,
+        a.level_id AS levelId,
+        a.state AS state,
+        a.state_name AS stateName,
+        a.user_name AS userName,
+        pi.position_name AS positionName,
+        pl.level_code AS positionLevelName
+        from user_po_level a
+        left join position_info AS pi on a.position_id = pi.id
+        left join position_level AS pl on a.level_id = pl.id
+        left join user_info AS ui on a.user_id = ui.user_id
+        where a.id = #{id,jdbcType=BIGINT}
+
+    </select>
+
+    <select id="searchUserPoLevelByLevelId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.* from user_po_level a
+        where
+        a.level_id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="searchUserPoLevelByPositionId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.* from user_po_level a
+        where
+        a.position_id = #{id,jdbcType=BIGINT}
+    </select>
+</mapper>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.WithdrawalsInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.WithdrawalsInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="money" property="money" jdbcType="DOUBLE" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="trade_type" property="tradeType" jdbcType="INTEGER" />
+    <result column="trade_desc" property="tradeDesc" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="accounts_state" property="accountsState" jdbcType="INTEGER" />
+    <result column="accounts_id" property="accountsId" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="widra_code" property="widraCode" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="wechat_id" property="wechatId" jdbcType="VARCHAR" />
+    <result column="unline_img" property="unlineImg" jdbcType="VARCHAR" />
+    <result column="user_tel" property="userTel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, money, user_id, user_name, state, trade_type, trade_desc, create_time, create_by, 
+    accounts_state, accounts_id, org_id, org_name, widra_code, open_id, wechat_id, unline_img, 
+    user_tel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from withdrawals_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from withdrawals_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.WithdrawalsInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into withdrawals_info (money, user_id, user_name, 
+      state, trade_type, trade_desc, 
+      create_time, create_by, accounts_state, 
+      accounts_id, org_id, org_name, 
+      widra_code, open_id, wechat_id, 
+      unline_img, user_tel)
+    values (#{money,jdbcType=DOUBLE}, #{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{tradeType,jdbcType=INTEGER}, #{tradeDesc,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{accountsState,jdbcType=INTEGER}, 
+      #{accountsId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, 
+      #{widraCode,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{wechatId,jdbcType=VARCHAR}, 
+      #{unlineImg,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.WithdrawalsInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into withdrawals_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="tradeType != null" >
+        trade_type,
+      </if>
+      <if test="tradeDesc != null" >
+        trade_desc,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="accountsState != null" >
+        accounts_state,
+      </if>
+      <if test="accountsId != null" >
+        accounts_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="widraCode != null" >
+        widra_code,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="wechatId != null" >
+        wechat_id,
+      </if>
+      <if test="unlineImg != null" >
+        unline_img,
+      </if>
+      <if test="userTel != null" >
+        user_tel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="money != null" >
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="tradeDesc != null" >
+        #{tradeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="accountsState != null" >
+        #{accountsState,jdbcType=INTEGER},
+      </if>
+      <if test="accountsId != null" >
+        #{accountsId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="widraCode != null" >
+        #{widraCode,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatId != null" >
+        #{wechatId,jdbcType=VARCHAR},
+      </if>
+      <if test="unlineImg != null" >
+        #{unlineImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null" >
+        #{userTel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.WithdrawalsInfo" >
+    update withdrawals_info
+    <set >
+      <if test="money != null" >
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="tradeType != null" >
+        trade_type = #{tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="tradeDesc != null" >
+        trade_desc = #{tradeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="accountsState != null" >
+        accounts_state = #{accountsState,jdbcType=INTEGER},
+      </if>
+      <if test="accountsId != null" >
+        accounts_id = #{accountsId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="widraCode != null" >
+        widra_code = #{widraCode,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatId != null" >
+        wechat_id = #{wechatId,jdbcType=VARCHAR},
+      </if>
+      <if test="unlineImg != null" >
+        unline_img = #{unlineImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null" >
+        user_tel = #{userTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.WithdrawalsInfo" >
+    update withdrawals_info
+    set money = #{money,jdbcType=DOUBLE},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      trade_type = #{tradeType,jdbcType=INTEGER},
+      trade_desc = #{tradeDesc,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      accounts_state = #{accountsState,jdbcType=INTEGER},
+      accounts_id = #{accountsId,jdbcType=BIGINT},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      widra_code = #{widraCode,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      wechat_id = #{wechatId,jdbcType=VARCHAR},
+      unline_img = #{unlineImg,jdbcType=VARCHAR},
+      user_tel = #{userTel,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectWithdrawalsInfoList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List" />
+        from withdrawals_info
+        where 1=1
+        <if test="userId != null" >
+            and user_id = #{userId,jdbcType=BIGINT}
+        </if>
+        <if test="orgId != null" >
+            and org_id = #{orgId,jdbcType=BIGINT}
+        </if>
+        <if test="widraCode != null" >
+            and widra_code like CONCAT('%',#{widraCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="mtype == 1" >
+            and state = 1
+        </if>
+        <if test="mtype == 2" >
+          <if test="state != null" >
+              and state = #{state,jdbcType=BIGINT}
+          </if>
+          <if test="state == null" >
+              and state in (2,3)
+          </if>
+        </if>
+        <if test="mtype == 11" >
+            and state =2
+        </if>
+        ORDER by id desc limit #{pageIndex} , #{pageSize}
+    </select>
+    <select id="selectWithdrawalsInfoListSize"  resultType="int" parameterType="java.util.Map">
+        select
+        count(1)
+        from withdrawals_info
+        where 1=1
+        <if test="userId != null" >
+            and user_id = #{userId,jdbcType=BIGINT}
+        </if>
+        <if test="orgId != null" >
+            and org_id = #{orgId,jdbcType=BIGINT}
+        </if>
+        <if test="widraCode != null" >
+            and widra_code like CONCAT('%',#{widraCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="mtype == 1" >
+            and state = 1
+        </if>
+        <if test="mtype == 2" >
+            <if test="state != null" >
+                and state = #{state,jdbcType=BIGINT}
+            </if>
+            <if test="state == null" >
+                and state in (2,3)
+            </if>
+        </if>
+        <if test="mtype == 11" >
+            and state =2
+        </if>
+        ORDER by id desc
+    </select>
+
+    <select id="selectWithdrawalsInfoMoneyByUserId" resultType="java.lang.Double" parameterType="java.util.Map" >
+        select
+        IFNULL(sum(money),0)
+        from withdrawals_info
+        where  user_id = #{userId,jdbcType=BIGINT} and state=3
+    </select>
+
+    <select id="selectWithdrawalsInfoByUserIdAndState" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List" />
+        from withdrawals_info
+        where state in(1,2) and user_id = #{userId,jdbcType=BIGINT}
+
+        ORDER by create_time desc
+    </select>
+</mapper>

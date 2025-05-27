@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BillingApplyMaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BillingApplyMaterial" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bill_id" property="billId" jdbcType="BIGINT" />
+    <result column="material_imgs" property="materialImgs" jdbcType="VARCHAR" />
+    <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bill_id, material_imgs, create_by_id, create_by, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from billing_apply_material
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from billing_apply_material
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.BillingApplyMaterial" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into billing_apply_material (bill_id, material_imgs, create_by_id, 
+      create_by, create_time)
+    values (#{billId,jdbcType=BIGINT}, #{materialImgs,jdbcType=VARCHAR}, #{createById,jdbcType=BIGINT}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.BillingApplyMaterial" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into billing_apply_material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="billId != null" >
+        bill_id,
+      </if>
+      <if test="materialImgs != null" >
+        material_imgs,
+      </if>
+      <if test="createById != null" >
+        create_by_id,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="billId != null" >
+        #{billId,jdbcType=BIGINT},
+      </if>
+      <if test="materialImgs != null" >
+        #{materialImgs,jdbcType=VARCHAR},
+      </if>
+      <if test="createById != null" >
+        #{createById,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.BillingApplyMaterial" >
+    update billing_apply_material
+    <set >
+      <if test="billId != null" >
+        bill_id = #{billId,jdbcType=BIGINT},
+      </if>
+      <if test="materialImgs != null" >
+        material_imgs = #{materialImgs,jdbcType=VARCHAR},
+      </if>
+      <if test="createById != null" >
+        create_by_id = #{createById,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.BillingApplyMaterial" >
+    update billing_apply_material
+    set bill_id = #{billId,jdbcType=BIGINT},
+      material_imgs = #{materialImgs,jdbcType=VARCHAR},
+      create_by_id = #{createById,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectListByBillId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply_material
+        where bill_id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByBillId" resultType="com.lefancrm.apicenter.dto.BillingApplyMaterialDto" parameterType="java.lang.Long" >
+        select
+        b.id as id , b.bill_id as billId, b.material_imgs as materialImgs,
+        b.create_by_id as createById, b.create_by as createBy, b.create_time as createTime
+        from billing_apply_material b
+        where b.bill_id = #{id,jdbcType=BIGINT}
+    </select>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.LawCaseInfoFollowMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.LawCaseInfoFollow" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+    <result column="follow_desc" property="followDesc" jdbcType="VARCHAR" />
+    <result column="follow_by_id" property="followById" jdbcType="BIGINT" />
+    <result column="follow_by" property="followBy" jdbcType="VARCHAR" />
+    <result column="follow_time" property="followTime" jdbcType="TIMESTAMP" />
+    <result column="next_follow_time" property="nextFollowTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_id, case_no, follow_desc, follow_by_id, follow_by, follow_time, next_follow_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from law_case_info_follow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from law_case_info_follow
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.LawCaseInfoFollow" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into law_case_info_follow (case_id, case_no, follow_desc, 
+      follow_by_id, follow_by, follow_time, 
+      next_follow_time)
+    values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{followDesc,jdbcType=VARCHAR}, 
+      #{followById,jdbcType=BIGINT}, #{followBy,jdbcType=VARCHAR}, #{followTime,jdbcType=TIMESTAMP}, 
+      #{nextFollowTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.LawCaseInfoFollow" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into law_case_info_follow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseNo != null" >
+        case_no,
+      </if>
+      <if test="followDesc != null" >
+        follow_desc,
+      </if>
+      <if test="followById != null" >
+        follow_by_id,
+      </if>
+      <if test="followBy != null" >
+        follow_by,
+      </if>
+      <if test="followTime != null" >
+        follow_time,
+      </if>
+      <if test="nextFollowTime != null" >
+        next_follow_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="followDesc != null" >
+        #{followDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="followById != null" >
+        #{followById,jdbcType=BIGINT},
+      </if>
+      <if test="followBy != null" >
+        #{followBy,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null" >
+        #{followTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextFollowTime != null" >
+        #{nextFollowTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.LawCaseInfoFollow" >
+    update law_case_info_follow
+    <set >
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="followDesc != null" >
+        follow_desc = #{followDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="followById != null" >
+        follow_by_id = #{followById,jdbcType=BIGINT},
+      </if>
+      <if test="followBy != null" >
+        follow_by = #{followBy,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null" >
+        follow_time = #{followTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextFollowTime != null" >
+        next_follow_time = #{nextFollowTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.LawCaseInfoFollow" >
+    update law_case_info_follow
+    set case_id = #{caseId,jdbcType=BIGINT},
+      case_no = #{caseNo,jdbcType=VARCHAR},
+      follow_desc = #{followDesc,jdbcType=VARCHAR},
+      follow_by_id = #{followById,jdbcType=BIGINT},
+      follow_by = #{followBy,jdbcType=VARCHAR},
+      follow_time = #{followTime,jdbcType=TIMESTAMP},
+      next_follow_time = #{nextFollowTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="searchFollowByCaseId" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from
+        law_case_info_follow
+        where
+        case_id = #{caseId,jdbcType=BIGINT}
+        order by follow_time desc
+    </select>
+</mapper>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SignInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SignInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="sign_type" property="signType" jdbcType="INTEGER" />
+      <result column="sign_type_name" property="signTypeName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="sign_time" property="signTime" jdbcType="TIMESTAMP" />
+    <result column="sign_desc" property="signDesc" jdbcType="VARCHAR" />
+    <result column="customer_num" property="customerNum" jdbcType="INTEGER" />
+    <result column="landmark" property="landmark" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="DOUBLE" />
+    <result column="longitude" property="longitude" jdbcType="DOUBLE" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sign_type, sign_type_name,user_id, user_name, sign_time, sign_desc, customer_num, landmark,
+    address, latitude, longitude, org_id, org_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sign_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sign_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SignInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sign_info (sign_type,sign_type_name, user_id, user_name,
+      sign_time, sign_desc, customer_num, 
+      landmark, address, latitude, 
+      longitude, org_id, org_name
+      )
+    values (#{signType,jdbcType=INTEGER}, #{signTypeName,jdbcType=VARCHAR},#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR},
+      #{signTime,jdbcType=TIMESTAMP}, #{signDesc,jdbcType=VARCHAR}, #{customerNum,jdbcType=INTEGER}, 
+      #{landmark,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{latitude,jdbcType=DOUBLE}, 
+      #{longitude,jdbcType=DOUBLE}, #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SignInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sign_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="signType != null" >
+        sign_type,
+      </if>
+      <if test="signTypeName != null" >
+        sign_type_name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="signTime != null" >
+        sign_time,
+      </if>
+      <if test="signDesc != null" >
+        sign_desc,
+      </if>
+      <if test="customerNum != null" >
+        customer_num,
+      </if>
+      <if test="landmark != null" >
+        landmark,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="signType != null" >
+        #{signType,jdbcType=INTEGER},
+      </if>
+      <if test="signTypeName != null" >
+        #{signTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null" >
+        #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signDesc != null" >
+        #{signDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNum != null" >
+        #{customerNum,jdbcType=INTEGER},
+      </if>
+      <if test="landmark != null" >
+        #{landmark,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SignInfo" >
+    update sign_info
+    <set >
+      <if test="signType != null" >
+        sign_type = #{signType,jdbcType=INTEGER},
+      </if>
+      <if test="signTypeName != null" >
+         sign_type_name = #{signTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null" >
+        sign_time = #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signDesc != null" >
+        sign_desc = #{signDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNum != null" >
+        customer_num = #{customerNum,jdbcType=INTEGER},
+      </if>
+      <if test="landmark != null" >
+        landmark = #{landmark,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SignInfo" >
+    update sign_info
+    set sign_type = #{signType,jdbcType=INTEGER},
+      sign_type_name = #{signTypeName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      sign_time = #{signTime,jdbcType=TIMESTAMP},
+      sign_desc = #{signDesc,jdbcType=VARCHAR},
+      customer_num = #{customerNum,jdbcType=INTEGER},
+      landmark = #{landmark,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectSignInfoByOrgId" resultType="com.lefancrm.apicenter.model.SignInfo" parameterType="java.util.Map">
+      select si.id id,si.sign_type signType,si.org_id orgId,si.org_name orgName,si.user_id userId,si.user_name userName,si.sign_time signTime,si.customer_num customerNum,
+      si.sign_desc signDesc,si.landmark landmark,si.address address,si.latitude latitude,si.longitude longitude,
+      count(si.user_id) signNum,ui.img img from  sign_info si LEFT JOIN user_info ui on si.user_id=ui.user_id
+      where DATE(si.sign_time)=DATE(#{signTime,jdbcType=DATE}) and
+      si.org_id = #{orgId,jdbcType=BIGINT}
+      group BY si.user_id ORDER BY si.sign_time DESC;
+  </select>
+  <select id="selectSignInfoByUserId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+      select si.id id,si.sign_type signType,si.org_id orgId,si.org_name orgName,si.user_id userId,si.user_name userName,si.sign_time signTime,si.customer_num customerNum,
+      si.sign_desc signDesc,si.landmark landmark,si.address address,si.latitude latitude,si.longitude longitude,
+      ui.img img from  sign_info si LEFT JOIN user_info ui on si.user_id=ui.user_id
+        where DATE(si.sign_time)=DATE(#{signTime,jdbcType=DATE}) and
+        si.user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <select id="selectNoSignByOrgId" resultType="com.lefancrm.apicenter.dto.NoSignUserDto" parameterType="java.util.Map" >
+      select ui.user_id userId,ui.user_name userName,ui.img img from user_info ui LEFT JOIN bus_user_role bur on ui.user_id=bur.user_id
+      where bur.role_id in(2,17) and ui.user_id not in(select user_id from sign_info where org_id= #{orgId,jdbcType=BIGINT}
+      and DATE(#{signTime,jdbcType=DATE})=DATE(sign_time))  and ui.org_id= #{orgId,jdbcType=BIGINT} GROUP BY ui.user_id
+  </select>
+</mapper>

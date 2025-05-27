@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyConsignerMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyConsigner" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="company" property="company" jdbcType="VARCHAR" />
+        <result column="tel" property="tel" jdbcType="VARCHAR" />
+        <result column="material" property="material" jdbcType="CHAR" />
+        <result column="auth_state" property="authState" jdbcType="INTEGER" />
+        <result column="acc_state" property="accState" jdbcType="INTEGER" />
+        <result column="ramark" property="ramark" jdbcType="VARCHAR" />
+        <result column="entrust_org_id" property="entrustOrgId" jdbcType="BIGINT" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="entrust_org_name" property="entrustOrgName" jdbcType="VARCHAR" />
+        <result column="create_by" property="createBy" jdbcType="BIGINT" />
+        <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="is_credit" property="isCredit" jdbcType="INTEGER" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+        <result column="make_emails" property="makeEmails" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, user_id, user_name, company, tel, material, auth_state, acc_state, ramark, entrust_org_id,
+        code, entrust_org_name, create_by, create_by_name, create_time, update_by, update_time,
+        delete_flag, is_credit, email, department_id, department_name, make_emails
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_consigner
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from survey_consigner
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyConsigner" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_consigner (user_id, user_name, company,
+        tel, material, auth_state,
+        acc_state, ramark, entrust_org_id,
+        code, entrust_org_name, create_by,
+        create_by_name, create_time, update_by,
+        update_time, delete_flag, is_credit,
+        email, department_id, department_name, make_emails
+        )
+        values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR},
+        #{tel,jdbcType=VARCHAR}, #{material,jdbcType=CHAR}, #{authState,jdbcType=INTEGER},
+        #{accState,jdbcType=INTEGER}, #{ramark,jdbcType=VARCHAR}, #{entrustOrgId,jdbcType=BIGINT},
+        #{code,jdbcType=VARCHAR}, #{entrustOrgName,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT},
+        #{createByName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT},
+        #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, #{isCredit,jdbcType=INTEGER},
+        #{email,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT}, #{departmentName,jdbcType=VARCHAR},
+        #{makeEmails,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyConsigner" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_consigner
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="userName != null" >
+                user_name,
+            </if>
+            <if test="company != null" >
+                company,
+            </if>
+            <if test="tel != null" >
+                tel,
+            </if>
+            <if test="material != null" >
+                material,
+            </if>
+            <if test="authState != null" >
+                auth_state,
+            </if>
+            <if test="accState != null" >
+                acc_state,
+            </if>
+            <if test="ramark != null" >
+                ramark,
+            </if>
+            <if test="entrustOrgId != null" >
+                entrust_org_id,
+            </if>
+            <if test="code != null" >
+                code,
+            </if>
+            <if test="entrustOrgName != null" >
+                entrust_org_name,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createByName != null" >
+                create_by_name,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+            <if test="isCredit != null" >
+                is_credit,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="departmentId != null" >
+                department_id,
+            </if>
+            <if test="departmentName != null" >
+                department_name,
+            </if>
+            <if test="makeEmails != null" >
+                make_emails,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null" >
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null" >
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null" >
+                #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="material != null" >
+                #{material,jdbcType=CHAR},
+            </if>
+            <if test="authState != null" >
+                #{authState,jdbcType=INTEGER},
+            </if>
+            <if test="accState != null" >
+                #{accState,jdbcType=INTEGER},
+            </if>
+            <if test="ramark != null" >
+                #{ramark,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustOrgId != null" >
+                #{entrustOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="code != null" >
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustOrgName != null" >
+                #{entrustOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createByName != null" >
+                #{createByName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="isCredit != null" >
+                #{isCredit,jdbcType=INTEGER},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null" >
+                #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="departmentName != null" >
+                #{departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="makeEmails != null" >
+                #{makeEmails,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyConsigner" >
+        update survey_consigner
+        <set >
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null" >
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null" >
+                company = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null" >
+                tel = #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="material != null" >
+                material = #{material,jdbcType=CHAR},
+            </if>
+            <if test="authState != null" >
+                auth_state = #{authState,jdbcType=INTEGER},
+            </if>
+            <if test="accState != null" >
+                acc_state = #{accState,jdbcType=INTEGER},
+            </if>
+            <if test="ramark != null" >
+                ramark = #{ramark,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustOrgId != null" >
+                entrust_org_id = #{entrustOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="code != null" >
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustOrgName != null" >
+                entrust_org_name = #{entrustOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createByName != null" >
+                create_by_name = #{createByName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="isCredit != null" >
+                is_credit = #{isCredit,jdbcType=INTEGER},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null" >
+                department_id = #{departmentId,jdbcType=BIGINT},
+            </if>
+            <if test="departmentName != null" >
+                department_name = #{departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="makeEmails != null" >
+                make_emails = #{makeEmails,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyConsigner" >
+        update survey_consigner
+        set user_id = #{userId,jdbcType=BIGINT},
+        user_name = #{userName,jdbcType=VARCHAR},
+        company = #{company,jdbcType=VARCHAR},
+        tel = #{tel,jdbcType=VARCHAR},
+        material = #{material,jdbcType=CHAR},
+        auth_state = #{authState,jdbcType=INTEGER},
+        acc_state = #{accState,jdbcType=INTEGER},
+        ramark = #{ramark,jdbcType=VARCHAR},
+        entrust_org_id = #{entrustOrgId,jdbcType=BIGINT},
+        code = #{code,jdbcType=VARCHAR},
+        entrust_org_name = #{entrustOrgName,jdbcType=VARCHAR},
+        create_by = #{createBy,jdbcType=BIGINT},
+        create_by_name = #{createByName,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_by = #{updateBy,jdbcType=BIGINT},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+        is_credit = #{isCredit,jdbcType=INTEGER},
+        email = #{email,jdbcType=VARCHAR},
+        department_id = #{departmentId,jdbcType=BIGINT},
+        department_name = #{departmentName,jdbcType=VARCHAR},
+        make_emails = #{makeEmails,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="userName != null" >
+            and user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="entrustOrgId != null" >
+            and entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+        </if>
+        <if test="authState != null" >
+            and auth_state = #{authState,jdbcType=INTEGER}
+        </if>
+        <if test="accState != null" >
+            and acc_state = #{accState,jdbcType=INTEGER}
+        </if>
+        <if test="company != null" >
+            and company like CONCAT(CONCAT('%',#{company,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="tel != null" >
+            and tel like CONCAT(CONCAT('%',#{tel,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="departmentId != null" >
+            and department_id = #{departmentId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_consigner
+        <include refid="joins" />
+        where delete_flag=0
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_consigner
+        <include refid="joins" />
+        where delete_flag=0
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long"  >
+        select
+        <include refid="Base_Column_List" />
+        from survey_consigner
+        where  user_id = #{userId,jdbcType=BIGINT} limit 1;
+    </select>
+    
+    
+    <select id="selectSurveyConsignerByDepartmentId" resultMap="BaseResultMap">
+        select c.* from survey_consigner c
+        left join survey_consigner_department d on c.id = d.consigner_user_id
+        where d.consignor_department_id = #{departmentId,jdbcType=BIGINT}
+    </select>
+</mapper>

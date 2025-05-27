@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyOrderMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyOrder" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="pro_id" property="proId" jdbcType="BIGINT" />
+        <result column="pro_code" property="proCode" jdbcType="VARCHAR" />
+        <result column="pro_image" property="proImage" jdbcType="VARCHAR" />
+        <result column="pro_reamrk" property="proReamrk" jdbcType="VARCHAR" />
+        <result column="pro_price" property="proPrice" jdbcType="DOUBLE" />
+        <result column="lefan_coin" property="lefanCoin" jdbcType="BIGINT" />
+        <result column="real_buy_price" property="realBuyPrice" jdbcType="DOUBLE" />
+        <result column="real_buy_coin" property="realBuyCoin" jdbcType="BIGINT" />
+        <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
+        <result column="order_state" property="orderState" jdbcType="INTEGER" />
+        <result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+        <result column="allow_user_id" property="allowUserId" jdbcType="BIGINT" />
+        <result column="allow_user_name" property="allowUserName" jdbcType="VARCHAR" />
+        <result column="allow_user_tel" property="allowUserTel" jdbcType="VARCHAR" />
+        <result column="allow_user_address" property="allowUserAddress" jdbcType="VARCHAR" />
+        <result column="is_pay" property="isPay" jdbcType="INTEGER" />
+        <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+        <result column="logistics_code" property="logisticsCode" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, pro_id, pro_code, pro_image, pro_reamrk, pro_price, lefan_coin, real_buy_price,
+        real_buy_coin, order_time, order_state, order_code, allow_user_id, allow_user_name,
+        allow_user_tel, allow_user_address, is_pay, pay_time, logistics_code
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_order
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from survey_order
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyOrder" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_order (pro_id, pro_code, pro_image,
+        pro_reamrk, pro_price, lefan_coin,
+        real_buy_price, real_buy_coin, order_time,
+        order_state, order_code, allow_user_id,
+        allow_user_name, allow_user_tel, allow_user_address,
+        is_pay, pay_time, logistics_code
+        )
+        values (#{proId,jdbcType=BIGINT}, #{proCode,jdbcType=VARCHAR}, #{proImage,jdbcType=VARCHAR},
+        #{proReamrk,jdbcType=VARCHAR}, #{proPrice,jdbcType=DOUBLE}, #{lefanCoin,jdbcType=BIGINT},
+        #{realBuyPrice,jdbcType=DOUBLE}, #{realBuyCoin,jdbcType=BIGINT}, #{orderTime,jdbcType=TIMESTAMP},
+        #{orderState,jdbcType=INTEGER}, #{orderCode,jdbcType=VARCHAR}, #{allowUserId,jdbcType=BIGINT},
+        #{allowUserName,jdbcType=VARCHAR}, #{allowUserTel,jdbcType=VARCHAR}, #{allowUserAddress,jdbcType=VARCHAR},
+        #{isPay,jdbcType=INTEGER}, #{payTime,jdbcType=TIMESTAMP}, #{logisticsCode,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyOrder" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_order
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="proId != null" >
+                pro_id,
+            </if>
+            <if test="proCode != null" >
+                pro_code,
+            </if>
+            <if test="proImage != null" >
+                pro_image,
+            </if>
+            <if test="proReamrk != null" >
+                pro_reamrk,
+            </if>
+            <if test="proPrice != null" >
+                pro_price,
+            </if>
+            <if test="lefanCoin != null" >
+                lefan_coin,
+            </if>
+            <if test="realBuyPrice != null" >
+                real_buy_price,
+            </if>
+            <if test="realBuyCoin != null" >
+                real_buy_coin,
+            </if>
+            <if test="orderTime != null" >
+                order_time,
+            </if>
+            <if test="orderState != null" >
+                order_state,
+            </if>
+            <if test="orderCode != null" >
+                order_code,
+            </if>
+            <if test="allowUserId != null" >
+                allow_user_id,
+            </if>
+            <if test="allowUserName != null" >
+                allow_user_name,
+            </if>
+            <if test="allowUserTel != null" >
+                allow_user_tel,
+            </if>
+            <if test="allowUserAddress != null" >
+                allow_user_address,
+            </if>
+            <if test="isPay != null" >
+                is_pay,
+            </if>
+            <if test="payTime != null" >
+                pay_time,
+            </if>
+            <if test="logisticsCode != null" >
+                logistics_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="proId != null" >
+                #{proId,jdbcType=BIGINT},
+            </if>
+            <if test="proCode != null" >
+                #{proCode,jdbcType=VARCHAR},
+            </if>
+            <if test="proImage != null" >
+                #{proImage,jdbcType=VARCHAR},
+            </if>
+            <if test="proReamrk != null" >
+                #{proReamrk,jdbcType=VARCHAR},
+            </if>
+            <if test="proPrice != null" >
+                #{proPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="lefanCoin != null" >
+                #{lefanCoin,jdbcType=BIGINT},
+            </if>
+            <if test="realBuyPrice != null" >
+                #{realBuyPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="realBuyCoin != null" >
+                #{realBuyCoin,jdbcType=BIGINT},
+            </if>
+            <if test="orderTime != null" >
+                #{orderTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderState != null" >
+                #{orderState,jdbcType=INTEGER},
+            </if>
+            <if test="orderCode != null" >
+                #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="allowUserId != null" >
+                #{allowUserId,jdbcType=BIGINT},
+            </if>
+            <if test="allowUserName != null" >
+                #{allowUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="allowUserTel != null" >
+                #{allowUserTel,jdbcType=VARCHAR},
+            </if>
+            <if test="allowUserAddress != null" >
+                #{allowUserAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="isPay != null" >
+                #{isPay,jdbcType=INTEGER},
+            </if>
+            <if test="payTime != null" >
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="logisticsCode != null" >
+                #{logisticsCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyOrder" >
+        update survey_order
+        <set >
+            <if test="proId != null" >
+                pro_id = #{proId,jdbcType=BIGINT},
+            </if>
+            <if test="proCode != null" >
+                pro_code = #{proCode,jdbcType=VARCHAR},
+            </if>
+            <if test="proImage != null" >
+                pro_image = #{proImage,jdbcType=VARCHAR},
+            </if>
+            <if test="proReamrk != null" >
+                pro_reamrk = #{proReamrk,jdbcType=VARCHAR},
+            </if>
+            <if test="proPrice != null" >
+                pro_price = #{proPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="lefanCoin != null" >
+                lefan_coin = #{lefanCoin,jdbcType=BIGINT},
+            </if>
+            <if test="realBuyPrice != null" >
+                real_buy_price = #{realBuyPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="realBuyCoin != null" >
+                real_buy_coin = #{realBuyCoin,jdbcType=BIGINT},
+            </if>
+            <if test="orderTime != null" >
+                order_time = #{orderTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderState != null" >
+                order_state = #{orderState,jdbcType=INTEGER},
+            </if>
+            <if test="orderCode != null" >
+                order_code = #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="allowUserId != null" >
+                allow_user_id = #{allowUserId,jdbcType=BIGINT},
+            </if>
+            <if test="allowUserName != null" >
+                allow_user_name = #{allowUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="allowUserTel != null" >
+                allow_user_tel = #{allowUserTel,jdbcType=VARCHAR},
+            </if>
+            <if test="allowUserAddress != null" >
+                allow_user_address = #{allowUserAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="isPay != null" >
+                is_pay = #{isPay,jdbcType=INTEGER},
+            </if>
+            <if test="payTime != null" >
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="logisticsCode != null" >
+                logistics_code = #{logisticsCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyOrder" >
+    update survey_order
+    set pro_id = #{proId,jdbcType=BIGINT},
+      pro_code = #{proCode,jdbcType=VARCHAR},
+      pro_image = #{proImage,jdbcType=VARCHAR},
+      pro_reamrk = #{proReamrk,jdbcType=VARCHAR},
+      pro_price = #{proPrice,jdbcType=DOUBLE},
+      lefan_coin = #{lefanCoin,jdbcType=BIGINT},
+      real_buy_price = #{realBuyPrice,jdbcType=DOUBLE},
+      real_buy_coin = #{realBuyCoin,jdbcType=BIGINT},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      order_state = #{orderState,jdbcType=INTEGER},
+      order_code = #{orderCode,jdbcType=VARCHAR},
+      allow_user_id = #{allowUserId,jdbcType=BIGINT},
+      allow_user_name = #{allowUserName,jdbcType=VARCHAR},
+      allow_user_tel = #{allowUserTel,jdbcType=VARCHAR},
+      allow_user_address = #{allowUserAddress,jdbcType=VARCHAR},
+      is_pay = #{isPay,jdbcType=INTEGER},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      logistics_code = #{logisticsCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectSurveyOrderListByParam"  resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_order
+        where allow_user_id = #{allowUserId,jdbcType=BIGINT}
+        order by order_time desc limit #{pageIndex} , #{pageSize}
+    </select>
+    <select id="selectSurveyOrderDetailsByOrderCode"  resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_order
+        where order_code = #{orderCode,jdbcType=VARCHAR}
+        order by order_time desc limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="orderCode!=null">
+            and order_code like CONCAT(CONCAT('%',#{orderCode,jdbcType=VARCHAR}), '%')
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_order
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_order
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+</mapper>

@@ -1,0 +1,1636 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.FinancialBudgetMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.FinancialBudget" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="year_money" property="yearMoney" jdbcType="DOUBLE" />
+    <result column="january" property="january" jdbcType="DOUBLE" />
+    <result column="february" property="february" jdbcType="DOUBLE" />
+    <result column="march" property="march" jdbcType="DOUBLE" />
+    <result column="april" property="april" jdbcType="DOUBLE" />
+    <result column="may" property="may" jdbcType="DOUBLE" />
+    <result column="june" property="june" jdbcType="DOUBLE" />
+    <result column="july" property="july" jdbcType="DOUBLE" />
+    <result column="august" property="august" jdbcType="DOUBLE" />
+    <result column="september" property="september" jdbcType="DOUBLE" />
+    <result column="october" property="october" jdbcType="DOUBLE" />
+    <result column="november" property="november" jdbcType="DOUBLE" />
+    <result column="december" property="december" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, year, year_money, january, february, march, april, may, june, july, august, september, 
+    october, november, december, create_time, create_by, update_time, update_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from financial_budget
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from financial_budget
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.FinancialBudget" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into financial_budget (year, year_money, january, 
+      february, march, april, 
+      may, june, july, august, 
+      september, october, november, 
+      december, create_time, create_by, 
+      update_time, update_by)
+    values (#{year,jdbcType=VARCHAR}, #{yearMoney,jdbcType=DOUBLE}, #{january,jdbcType=DOUBLE}, 
+      #{february,jdbcType=DOUBLE}, #{march,jdbcType=DOUBLE}, #{april,jdbcType=DOUBLE}, 
+      #{may,jdbcType=DOUBLE}, #{june,jdbcType=DOUBLE}, #{july,jdbcType=DOUBLE}, #{august,jdbcType=DOUBLE}, 
+      #{september,jdbcType=DOUBLE}, #{october,jdbcType=DOUBLE}, #{november,jdbcType=DOUBLE}, 
+      #{december,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.FinancialBudget" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into financial_budget
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="yearMoney != null" >
+        year_money,
+      </if>
+      <if test="january != null" >
+        january,
+      </if>
+      <if test="february != null" >
+        february,
+      </if>
+      <if test="march != null" >
+        march,
+      </if>
+      <if test="april != null" >
+        april,
+      </if>
+      <if test="may != null" >
+        may,
+      </if>
+      <if test="june != null" >
+        june,
+      </if>
+      <if test="july != null" >
+        july,
+      </if>
+      <if test="august != null" >
+        august,
+      </if>
+      <if test="september != null" >
+        september,
+      </if>
+      <if test="october != null" >
+        october,
+      </if>
+      <if test="november != null" >
+        november,
+      </if>
+      <if test="december != null" >
+        december,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="yearMoney != null" >
+        #{yearMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="january != null" >
+        #{january,jdbcType=DOUBLE},
+      </if>
+      <if test="february != null" >
+        #{february,jdbcType=DOUBLE},
+      </if>
+      <if test="march != null" >
+        #{march,jdbcType=DOUBLE},
+      </if>
+      <if test="april != null" >
+        #{april,jdbcType=DOUBLE},
+      </if>
+      <if test="may != null" >
+        #{may,jdbcType=DOUBLE},
+      </if>
+      <if test="june != null" >
+        #{june,jdbcType=DOUBLE},
+      </if>
+      <if test="july != null" >
+        #{july,jdbcType=DOUBLE},
+      </if>
+      <if test="august != null" >
+        #{august,jdbcType=DOUBLE},
+      </if>
+      <if test="september != null" >
+        #{september,jdbcType=DOUBLE},
+      </if>
+      <if test="october != null" >
+        #{october,jdbcType=DOUBLE},
+      </if>
+      <if test="november != null" >
+        #{november,jdbcType=DOUBLE},
+      </if>
+      <if test="december != null" >
+        #{december,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.FinancialBudget" >
+    update financial_budget
+    <set >
+      <if test="year != null" >
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="yearMoney != null" >
+        year_money = #{yearMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="january != null" >
+        january = #{january,jdbcType=DOUBLE},
+      </if>
+      <if test="february != null" >
+        february = #{february,jdbcType=DOUBLE},
+      </if>
+      <if test="march != null" >
+        march = #{march,jdbcType=DOUBLE},
+      </if>
+      <if test="april != null" >
+        april = #{april,jdbcType=DOUBLE},
+      </if>
+      <if test="may != null" >
+        may = #{may,jdbcType=DOUBLE},
+      </if>
+      <if test="june != null" >
+        june = #{june,jdbcType=DOUBLE},
+      </if>
+      <if test="july != null" >
+        july = #{july,jdbcType=DOUBLE},
+      </if>
+      <if test="august != null" >
+        august = #{august,jdbcType=DOUBLE},
+      </if>
+      <if test="september != null" >
+        september = #{september,jdbcType=DOUBLE},
+      </if>
+      <if test="october != null" >
+        october = #{october,jdbcType=DOUBLE},
+      </if>
+      <if test="november != null" >
+        november = #{november,jdbcType=DOUBLE},
+      </if>
+      <if test="december != null" >
+        december = #{december,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.FinancialBudget" >
+    update financial_budget
+    set year = #{year,jdbcType=VARCHAR},
+      year_money = #{yearMoney,jdbcType=DOUBLE},
+      january = #{january,jdbcType=DOUBLE},
+      february = #{february,jdbcType=DOUBLE},
+      march = #{march,jdbcType=DOUBLE},
+      april = #{april,jdbcType=DOUBLE},
+      may = #{may,jdbcType=DOUBLE},
+      june = #{june,jdbcType=DOUBLE},
+      july = #{july,jdbcType=DOUBLE},
+      august = #{august,jdbcType=DOUBLE},
+      september = #{september,jdbcType=DOUBLE},
+      october = #{october,jdbcType=DOUBLE},
+      november = #{november,jdbcType=DOUBLE},
+      december = #{december,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="budgetList" resultMap="BaseResultMap">
+    select  * from   financial_budget
+    <where>
+      <if test="year != null and year != ''">
+        year like concat('%',#{year},'%')
+      </if>
+    </where>
+  </select>
+
+  <select id="budgetListSize" resultType="Integer">
+    select  count(1) from   financial_budget
+    <where>
+      <if test="year != null and year != ''">
+        year like concat('%',#{year},'%')
+      </if>
+    </where>
+  </select>
+    <select id="selectEveryUseMoney" resultType="java.util.Map">
+            select a.money1,b.money2,c.money3,d.money4,e.money5,f.money6,g.money7,h.money8,i.money9,j.money10,k.money11,l.money12 from (SELECT SUM(IFNULL(money1,0)) money1,1 type FROM (
+      
+      SELECT
+      SUM(
+      IFNULL( r.medical_history_money, 0 )+ IFNULL( r.other_money, 0 )+ IFNULL( r.troubleshooting_money, 0 )+ IFNULL(r.opc_troubleshooting_money,0) + IFNULL(r.printing_money,0) + IFNULL(r.cross_driving_money,0) + IFNULL(r.self_driving_money,0) + IFNULL(r.cityin_driving_money,0) + IFNULL(r.accommodatio_money,0)
+      )  money1
+      FROM
+      survey_clock_re_info r
+      LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+      LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+      WHERE
+      DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date1}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+      UNION ALL
+      
+      SELECT SUM(IFNULL(real_wages,0)+IFNULL(company_money_sub,0)) money1 FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date1}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+      /**绩效*/
+      SELECT SUM(IFNULL(fixed_perf_pay,0)+IFNULL(travel_allowance_pay,0)+IFNULL(manage_perf_pay,0)+IFNULL(real_assess_kpi,0)+IFNULL(integral_pay,0)+IFNULL(examine_pay,0)+IFNULL( late_early_money,0)+IFNULL(absenteeism_money,0)+IFNULL(leave_money,0)+IFNULL(sick_leave_money,0)+IFNULL(other_pay,0)+IFNULL( other_cut_pay,0)) money1 FROM staff_performance_personnel  WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date1}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT SUM(IFNULL(c.chnannel_money,0)) money1 FROM survey_channel_cost_new c
+      LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+      WHERE c.delete_flag = 0 AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date1}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT
+      SUM(
+      IFNULL( d.cost_money, 0 )) money1
+      FROM
+      financial_re_apply a
+      LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+      WHERE
+      a.re_type != 3
+      AND a.state = 4
+      AND a.delete_flag = 0
+      AND d.delete_flag = 0
+      AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date1}
+      <if test="orgId != null">
+        AND a.department_id = #{orgId}
+      </if>
+      )a ) a
+
+
+      left join
+
+
+
+      (SELECT SUM(IFNULL(money1,0)) money2,1 type FROM (
+      
+      SELECT
+      SUM(
+      IFNULL( r.medical_history_money, 0 )+ IFNULL( r.other_money, 0 )+ IFNULL( r.troubleshooting_money, 0 )+ IFNULL(r.opc_troubleshooting_money,0) + IFNULL(r.printing_money,0) + IFNULL(r.cross_driving_money,0) + IFNULL(r.self_driving_money,0) + IFNULL(r.cityin_driving_money,0) + IFNULL(r.accommodatio_money,0)
+      )  money1
+      FROM
+      survey_clock_re_info r
+      LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+      LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+      WHERE
+      DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date2}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+      UNION ALL
+      
+      SELECT SUM(IFNULL(real_wages,0)+IFNULL(company_money_sub,0)) money1 FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date2}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+      /**绩效*/
+      SELECT SUM(IFNULL(fixed_perf_pay,0)+IFNULL(travel_allowance_pay,0)+IFNULL(manage_perf_pay,0)+IFNULL(real_assess_kpi,0)+IFNULL(integral_pay,0)+IFNULL(examine_pay,0)+IFNULL( late_early_money,0)+IFNULL(absenteeism_money,0)+IFNULL(leave_money,0)+IFNULL(sick_leave_money,0)+IFNULL(other_pay,0)+IFNULL( other_cut_pay,0)) money1 FROM staff_performance_personnel  WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date2}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT SUM(IFNULL(c.chnannel_money,0)) money1 FROM survey_channel_cost_new c
+      LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+      WHERE c.delete_flag = 0 AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date2}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT
+      SUM(
+      IFNULL( d.cost_money, 0 )) money1
+      FROM
+      financial_re_apply a
+      LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+      WHERE
+      a.re_type != 3
+      AND a.state = 4
+      AND a.delete_flag = 0
+      AND d.delete_flag = 0
+      AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date2}
+      <if test="orgId != null">
+        AND a.department_id = #{orgId}
+      </if>
+      )a ) b on  a.type = b.type
+
+      left join
+
+
+      (SELECT SUM(IFNULL(money1,0)) money3,1 type FROM (
+      
+      SELECT
+      SUM(
+      IFNULL( r.medical_history_money, 0 )+ IFNULL( r.other_money, 0 )+ IFNULL( r.troubleshooting_money, 0 )+ IFNULL(r.opc_troubleshooting_money,0) + IFNULL(r.printing_money,0) + IFNULL(r.cross_driving_money,0) + IFNULL(r.self_driving_money,0) + IFNULL(r.cityin_driving_money,0) + IFNULL(r.accommodatio_money,0)
+      )  money1
+      FROM
+      survey_clock_re_info r
+      LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+      LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+      WHERE
+      DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date3}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+      UNION ALL
+      
+      SELECT SUM(IFNULL(real_wages,0)+IFNULL(company_money_sub,0)) money1 FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date3}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+      /**绩效*/
+      SELECT SUM(IFNULL(fixed_perf_pay,0)+IFNULL(travel_allowance_pay,0)+IFNULL(manage_perf_pay,0)+IFNULL(real_assess_kpi,0)+IFNULL(integral_pay,0)+IFNULL(examine_pay,0)+IFNULL( late_early_money,0)+IFNULL(absenteeism_money,0)+IFNULL(leave_money,0)+IFNULL(sick_leave_money,0)+IFNULL(other_pay,0)+IFNULL( other_cut_pay,0)) money1 FROM staff_performance_personnel  WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date3}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT SUM(IFNULL(c.chnannel_money,0)) money1 FROM survey_channel_cost_new c
+      LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+      WHERE c.delete_flag = 0 AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date3}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT
+      SUM(
+      IFNULL( d.cost_money, 0 )) money1
+      FROM
+      financial_re_apply a
+      LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+      WHERE
+      a.re_type != 3
+      AND a.state = 4
+      AND a.delete_flag = 0
+      AND d.delete_flag = 0
+      AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date3}
+      <if test="orgId != null">
+        AND a.department_id = #{orgId}
+      </if>
+      )a ) c on  a.type = c.type
+
+      left join
+
+
+      (SELECT SUM(IFNULL(money1,0)) money4,1 type FROM (
+      
+      SELECT
+      SUM(
+      IFNULL( r.medical_history_money, 0 )+ IFNULL( r.other_money, 0 )+ IFNULL( r.troubleshooting_money, 0 )+ IFNULL(r.opc_troubleshooting_money,0) + IFNULL(r.printing_money,0) + IFNULL(r.cross_driving_money,0) + IFNULL(r.self_driving_money,0) + IFNULL(r.cityin_driving_money,0) + IFNULL(r.accommodatio_money,0)
+      )  money1
+      FROM
+      survey_clock_re_info r
+      LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+      LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+      WHERE
+      DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date4}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+      UNION ALL
+      
+      SELECT SUM(IFNULL(real_wages,0)+IFNULL(company_money_sub,0)) money1 FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date4}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+      /**绩效*/
+      SELECT SUM(IFNULL(fixed_perf_pay,0)+IFNULL(travel_allowance_pay,0)+IFNULL(manage_perf_pay,0)+IFNULL(real_assess_kpi,0)+IFNULL(integral_pay,0)+IFNULL(examine_pay,0)+IFNULL( late_early_money,0)+IFNULL(absenteeism_money,0)+IFNULL(leave_money,0)+IFNULL(sick_leave_money,0)+IFNULL(other_pay,0)+IFNULL( other_cut_pay,0)) money1 FROM staff_performance_personnel  WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date4}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT SUM(IFNULL(c.chnannel_money,0)) money1 FROM survey_channel_cost_new c
+      LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+      WHERE c.delete_flag = 0 AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date4}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT
+      SUM(
+      IFNULL( d.cost_money, 0 )) money1
+      FROM
+      financial_re_apply a
+      LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+      WHERE
+      a.re_type != 3
+      AND a.state = 4
+      AND a.delete_flag = 0
+      AND d.delete_flag = 0
+      AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date4}
+      <if test="orgId != null">
+        AND a.department_id = #{orgId}
+      </if>
+      )a ) d on  a.type = d.type
+
+
+      left join
+
+      (SELECT SUM(IFNULL(money1,0)) money5,1 type FROM (
+      
+      SELECT
+      SUM(
+      IFNULL( r.medical_history_money, 0 )+ IFNULL( r.other_money, 0 )+ IFNULL( r.troubleshooting_money, 0 )+ IFNULL(r.opc_troubleshooting_money,0) + IFNULL(r.printing_money,0) + IFNULL(r.cross_driving_money,0) + IFNULL(r.self_driving_money,0) + IFNULL(r.cityin_driving_money,0) + IFNULL(r.accommodatio_money,0)
+      )  money1
+      FROM
+      survey_clock_re_info r
+      LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+      LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+      WHERE
+      DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date5}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+      UNION ALL
+      
+      SELECT SUM(IFNULL(real_wages,0)+IFNULL(company_money_sub,0)) money1 FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date5}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+      /**绩效*/
+      SELECT SUM(IFNULL(fixed_perf_pay,0)+IFNULL(travel_allowance_pay,0)+IFNULL(manage_perf_pay,0)+IFNULL(real_assess_kpi,0)+IFNULL(integral_pay,0)+IFNULL(examine_pay,0)+IFNULL( late_early_money,0)+IFNULL(absenteeism_money,0)+IFNULL(leave_money,0)+IFNULL(sick_leave_money,0)+IFNULL(other_pay,0)+IFNULL( other_cut_pay,0)) money1 FROM staff_performance_personnel  WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date5}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT SUM(IFNULL(c.chnannel_money,0)) money1 FROM survey_channel_cost_new c
+      LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+      WHERE c.delete_flag = 0 AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date5}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT
+      SUM(
+      IFNULL( d.cost_money, 0 )) money1
+      FROM
+      financial_re_apply a
+      LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+      WHERE
+      a.re_type != 3
+      AND a.state = 4
+      AND a.delete_flag = 0
+      AND d.delete_flag = 0
+      AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date5}
+      <if test="orgId != null">
+        AND a.department_id = #{orgId}
+      </if>
+      )a ) e on  a.type = e.type
+
+
+      left join
+
+      (SELECT SUM(IFNULL(money1,0)) money6,1 type FROM (
+      
+      SELECT
+      SUM(
+      IFNULL( r.medical_history_money, 0 )+ IFNULL( r.other_money, 0 )+ IFNULL( r.troubleshooting_money, 0 )+ IFNULL(r.opc_troubleshooting_money,0) + IFNULL(r.printing_money,0) + IFNULL(r.cross_driving_money,0) + IFNULL(r.self_driving_money,0) + IFNULL(r.cityin_driving_money,0) + IFNULL(r.accommodatio_money,0)
+      )  money1
+      FROM
+      survey_clock_re_info r
+      LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+      LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+      WHERE
+      DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date6}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+      UNION ALL
+      
+      SELECT SUM(IFNULL(real_wages,0)+IFNULL(company_money_sub,0)) money1 FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date6}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+      /**绩效*/
+      SELECT SUM(IFNULL(fixed_perf_pay,0)+IFNULL(travel_allowance_pay,0)+IFNULL(manage_perf_pay,0)+IFNULL(real_assess_kpi,0)+IFNULL(integral_pay,0)+IFNULL(examine_pay,0)+IFNULL( late_early_money,0)+IFNULL(absenteeism_money,0)+IFNULL(leave_money,0)+IFNULL(sick_leave_money,0)+IFNULL(other_pay,0)+IFNULL( other_cut_pay,0)) money1 FROM staff_performance_personnel  WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date6}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT SUM(IFNULL(c.chnannel_money,0)) money1 FROM survey_channel_cost_new c
+      LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+      WHERE c.delete_flag = 0 AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date6}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT
+      SUM(
+      IFNULL( d.cost_money, 0 )) money1
+      FROM
+      financial_re_apply a
+      LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+      WHERE
+      a.re_type != 3
+      AND a.state = 4
+      AND a.delete_flag = 0
+      AND d.delete_flag = 0
+      AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date6}
+      <if test="orgId != null">
+        AND a.department_id = #{orgId}
+      </if>
+      )a ) f on  a.type = f.type
+
+
+      left join
+
+      (SELECT SUM(IFNULL(money1,0)) money7,1 type FROM (
+      
+      SELECT
+      SUM(
+      IFNULL( r.medical_history_money, 0 )+ IFNULL( r.other_money, 0 )+ IFNULL( r.troubleshooting_money, 0 )+ IFNULL(r.opc_troubleshooting_money,0) + IFNULL(r.printing_money,0) + IFNULL(r.cross_driving_money,0) + IFNULL(r.self_driving_money,0) + IFNULL(r.cityin_driving_money,0) + IFNULL(r.accommodatio_money,0)
+      )  money1
+      FROM
+      survey_clock_re_info r
+      LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+      LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+      WHERE
+      DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date7}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+      UNION ALL
+      
+      SELECT SUM(IFNULL(real_wages,0)+IFNULL(company_money_sub,0)) money1 FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date7}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+      /**绩效*/
+      SELECT SUM(IFNULL(fixed_perf_pay,0)+IFNULL(travel_allowance_pay,0)+IFNULL(manage_perf_pay,0)+IFNULL(real_assess_kpi,0)+IFNULL(integral_pay,0)+IFNULL(examine_pay,0)+IFNULL( late_early_money,0)+IFNULL(absenteeism_money,0)+IFNULL(leave_money,0)+IFNULL(sick_leave_money,0)+IFNULL(other_pay,0)+IFNULL( other_cut_pay,0)) money1 FROM staff_performance_personnel  WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date7}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT SUM(IFNULL(c.chnannel_money,0)) money1 FROM survey_channel_cost_new c
+      LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+      WHERE c.delete_flag = 0 AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date7}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT
+      SUM(
+      IFNULL( d.cost_money, 0 )) money1
+      FROM
+      financial_re_apply a
+      LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+      WHERE
+      a.re_type != 3
+      AND a.state = 4
+      AND a.delete_flag = 0
+      AND d.delete_flag = 0
+      AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date7}
+      <if test="orgId != null">
+        AND a.department_id = #{orgId}
+      </if>
+      )a ) g on  a.type = g.type
+
+
+      left join
+
+      (SELECT SUM(IFNULL(money1,0)) money8,1 type FROM (
+      
+      SELECT
+      SUM(
+      IFNULL( r.medical_history_money, 0 )+ IFNULL( r.other_money, 0 )+ IFNULL( r.troubleshooting_money, 0 )+ IFNULL(r.opc_troubleshooting_money,0) + IFNULL(r.printing_money,0) + IFNULL(r.cross_driving_money,0) + IFNULL(r.self_driving_money,0) + IFNULL(r.cityin_driving_money,0) + IFNULL(r.accommodatio_money,0)
+      )  money1
+      FROM
+      survey_clock_re_info r
+      LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+      LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+      WHERE
+      DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date8}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+      UNION ALL
+      
+      SELECT SUM(IFNULL(real_wages,0)+IFNULL(company_money_sub,0)) money1 FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date8}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+      /**绩效*/
+      SELECT SUM(IFNULL(fixed_perf_pay,0)+IFNULL(travel_allowance_pay,0)+IFNULL(manage_perf_pay,0)+IFNULL(real_assess_kpi,0)+IFNULL(integral_pay,0)+IFNULL(examine_pay,0)+IFNULL( late_early_money,0)+IFNULL(absenteeism_money,0)+IFNULL(leave_money,0)+IFNULL(sick_leave_money,0)+IFNULL(other_pay,0)+IFNULL( other_cut_pay,0)) money1 FROM staff_performance_personnel  WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date8}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT SUM(IFNULL(c.chnannel_money,0)) money1 FROM survey_channel_cost_new c
+      LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+      WHERE c.delete_flag = 0 AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date8}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT
+      SUM(
+      IFNULL( d.cost_money, 0 )) money1
+      FROM
+      financial_re_apply a
+      LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+      WHERE
+      a.re_type != 3
+      AND a.state = 4
+      AND a.delete_flag = 0
+      AND d.delete_flag = 0
+      AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date8}
+      <if test="orgId != null">
+        AND a.department_id = #{orgId}
+      </if>
+      )a ) h on  a.type = h.type
+
+
+      left join
+
+      (SELECT SUM(IFNULL(money1,0)) money9,1 type FROM (
+      
+      SELECT
+      SUM(
+      IFNULL( r.medical_history_money, 0 )+ IFNULL( r.other_money, 0 )+ IFNULL( r.troubleshooting_money, 0 )+ IFNULL(r.opc_troubleshooting_money,0) + IFNULL(r.printing_money,0) + IFNULL(r.cross_driving_money,0) + IFNULL(r.self_driving_money,0) + IFNULL(r.cityin_driving_money,0) + IFNULL(r.accommodatio_money,0)
+      )  money1
+      FROM
+      survey_clock_re_info r
+      LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+      LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+      WHERE
+      DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date9}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+      UNION ALL
+      
+      SELECT SUM(IFNULL(real_wages,0)+IFNULL(company_money_sub,0)) money1 FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date9}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+      /**绩效*/
+      SELECT SUM(IFNULL(fixed_perf_pay,0)+IFNULL(travel_allowance_pay,0)+IFNULL(manage_perf_pay,0)+IFNULL(real_assess_kpi,0)+IFNULL(integral_pay,0)+IFNULL(examine_pay,0)+IFNULL( late_early_money,0)+IFNULL(absenteeism_money,0)+IFNULL(leave_money,0)+IFNULL(sick_leave_money,0)+IFNULL(other_pay,0)+IFNULL( other_cut_pay,0)) money1 FROM staff_performance_personnel  WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date9}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT SUM(IFNULL(c.chnannel_money,0)) money1 FROM survey_channel_cost_new c
+      LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+      WHERE c.delete_flag = 0 AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date9}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT
+      SUM(
+      IFNULL( d.cost_money, 0 )) money1
+      FROM
+      financial_re_apply a
+      LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+      WHERE
+      a.re_type != 3
+      AND a.state = 4
+      AND a.delete_flag = 0
+      AND d.delete_flag = 0
+      AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date9}
+      <if test="orgId != null">
+        AND a.department_id = #{orgId}
+      </if>
+      )a ) i on  a.type = i.type
+
+
+      left join
+
+
+      (SELECT SUM(IFNULL(money1,0)) money10,1 type FROM (
+      
+      SELECT
+      SUM(
+      IFNULL( r.medical_history_money, 0 )+ IFNULL( r.other_money, 0 )+ IFNULL( r.troubleshooting_money, 0 )+ IFNULL(r.opc_troubleshooting_money,0) + IFNULL(r.printing_money,0) + IFNULL(r.cross_driving_money,0) + IFNULL(r.self_driving_money,0) + IFNULL(r.cityin_driving_money,0) + IFNULL(r.accommodatio_money,0)
+      )  money1
+      FROM
+      survey_clock_re_info r
+      LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+      LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+      WHERE
+      DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date10}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+      UNION ALL
+      
+      SELECT SUM(IFNULL(real_wages,0)+IFNULL(company_money_sub,0)) money1 FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date10}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+      /**绩效*/
+      SELECT SUM(IFNULL(fixed_perf_pay,0)+IFNULL(travel_allowance_pay,0)+IFNULL(manage_perf_pay,0)+IFNULL(real_assess_kpi,0)+IFNULL(integral_pay,0)+IFNULL(examine_pay,0)+IFNULL( late_early_money,0)+IFNULL(absenteeism_money,0)+IFNULL(leave_money,0)+IFNULL(sick_leave_money,0)+IFNULL(other_pay,0)+IFNULL( other_cut_pay,0)) money1 FROM staff_performance_personnel  WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date10}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT SUM(IFNULL(c.chnannel_money,0)) money1 FROM survey_channel_cost_new c
+      LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+      WHERE c.delete_flag = 0 AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date10}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT
+      SUM(
+      IFNULL( d.cost_money, 0 )) money1
+      FROM
+      financial_re_apply a
+      LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+      WHERE
+      a.re_type != 3
+      AND a.state = 4
+      AND a.delete_flag = 0
+      AND d.delete_flag = 0
+      AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date10}
+      <if test="orgId != null">
+        AND a.department_id = #{orgId}
+      </if>
+      )a ) j on  a.type = j.type
+
+
+      left join
+
+      (SELECT SUM(IFNULL(money1,0)) money11,1 type FROM (
+      
+      SELECT
+      SUM(
+      IFNULL( r.medical_history_money, 0 )+ IFNULL( r.other_money, 0 )+ IFNULL( r.troubleshooting_money, 0 )+ IFNULL(r.opc_troubleshooting_money,0) + IFNULL(r.printing_money,0) + IFNULL(r.cross_driving_money,0) + IFNULL(r.self_driving_money,0) + IFNULL(r.cityin_driving_money,0) + IFNULL(r.accommodatio_money,0)
+      )  money1
+      FROM
+      survey_clock_re_info r
+      LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+      LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+      WHERE
+      DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date11}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+      UNION ALL
+      
+      SELECT SUM(IFNULL(real_wages,0)+IFNULL(company_money_sub,0)) money1 FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date11}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+      /**绩效*/
+      SELECT SUM(IFNULL(fixed_perf_pay,0)+IFNULL(travel_allowance_pay,0)+IFNULL(manage_perf_pay,0)+IFNULL(real_assess_kpi,0)+IFNULL(integral_pay,0)+IFNULL(examine_pay,0)+IFNULL( late_early_money,0)+IFNULL(absenteeism_money,0)+IFNULL(leave_money,0)+IFNULL(sick_leave_money,0)+IFNULL(other_pay,0)+IFNULL( other_cut_pay,0)) money1 FROM staff_performance_personnel  WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date11}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT SUM(IFNULL(c.chnannel_money,0)) money1 FROM survey_channel_cost_new c
+      LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+      WHERE c.delete_flag = 0 AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date11}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT
+      SUM(
+      IFNULL( d.cost_money, 0 )) money1
+      FROM
+      financial_re_apply a
+      LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+      WHERE
+      a.re_type != 3
+      AND a.state = 4
+      AND a.delete_flag = 0
+      AND d.delete_flag = 0
+      AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date11}
+      <if test="orgId != null">
+        AND a.department_id = #{orgId}
+      </if>
+      )a ) k on  a.type = k.type
+
+
+      left join
+
+      (SELECT SUM(IFNULL(money1,0)) money12,1 type FROM (
+      
+      SELECT
+      SUM(
+      IFNULL( r.medical_history_money, 0 )+ IFNULL( r.other_money, 0 )+ IFNULL( r.troubleshooting_money, 0 )+ IFNULL(r.opc_troubleshooting_money,0) + IFNULL(r.printing_money,0) + IFNULL(r.cross_driving_money,0) + IFNULL(r.self_driving_money,0) + IFNULL(r.cityin_driving_money,0) + IFNULL(r.accommodatio_money,0)
+      )  money1
+      FROM
+      survey_clock_re_info r
+      LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+      LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+      WHERE
+      DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date12}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+      UNION ALL
+      
+      SELECT SUM(IFNULL(real_wages,0)+IFNULL(company_money_sub,0)) money1 FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date12}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+      /**绩效*/
+      SELECT SUM(IFNULL(fixed_perf_pay,0)+IFNULL(travel_allowance_pay,0)+IFNULL(manage_perf_pay,0)+IFNULL(real_assess_kpi,0)+IFNULL(integral_pay,0)+IFNULL(examine_pay,0)+IFNULL( late_early_money,0)+IFNULL(absenteeism_money,0)+IFNULL(leave_money,0)+IFNULL(sick_leave_money,0)+IFNULL(other_pay,0)+IFNULL( other_cut_pay,0)) money1 FROM staff_performance_personnel  WHERE delete_flag = 0 AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date12}
+      <if test="orgId != null">
+        AND organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT SUM(IFNULL(c.chnannel_money,0)) money1 FROM survey_channel_cost_new c
+      LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+      WHERE c.delete_flag = 0 AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date12}
+      <if test="orgId != null">
+        AND i.organ_id = #{orgId}
+      </if>
+
+      UNION ALL
+
+      
+      SELECT
+      SUM(
+      IFNULL( d.cost_money, 0 )) money1
+      FROM
+      financial_re_apply a
+      LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+      WHERE
+      a.re_type != 3
+      AND a.state = 4
+      AND a.delete_flag = 0
+      AND d.delete_flag = 0
+      AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date12}
+      <if test="orgId != null">
+        AND a.department_id = #{orgId}
+      </if>
+      )a ) l on  a.type = l.type
+    </select>
+  <select id="selectEveryCostTypeUseMoney" resultType="java.util.Map">
+
+        <if test="source == 1">
+          SELECT a.money1,b.money2,c.money3,d.money4,e.money5,f.money6,g.money7,h.money8,i.money9,j.money10,k.money11,l.money12 FROM
+          (
+          SELECT
+          <if test="costTypeId == 1">SUM(IFNULL(real_wages,0)) money1,</if>
+          <if test="costTypeId == 2">SUM(IFNULL(company_money_sub,0)) money1,</if>
+           1 type FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND organ_id = #{orgId}  AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date1}
+           ) a left join
+          (
+          SELECT
+          <if test="costTypeId == 1">SUM(IFNULL(real_wages,0)) money2,</if>
+          <if test="costTypeId == 2">SUM(IFNULL(company_money_sub,0)) money2,</if>
+          1 type FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND organ_id = #{orgId}  AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date2}
+          ) b on  a.type = b.type
+          left join
+          (
+          SELECT
+          <if test="costTypeId == 1">SUM(IFNULL(real_wages,0)) money3,</if>
+          <if test="costTypeId == 2">SUM(IFNULL(company_money_sub,0)) money3,</if>
+          1 type FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND organ_id = #{orgId}  AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date3}
+          ) c on  a.type = c.type
+          left join
+          (
+          SELECT
+          <if test="costTypeId == 1">SUM(IFNULL(real_wages,0)) money4,</if>
+          <if test="costTypeId == 2">SUM(IFNULL(company_money_sub,0)) money4,</if>
+          1 type FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND organ_id = #{orgId}  AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date4}
+          ) d on  a.type = d.type
+          left join
+          (
+          SELECT
+          <if test="costTypeId == 1">SUM(IFNULL(real_wages,0)) money5,</if>
+          <if test="costTypeId == 2">SUM(IFNULL(company_money_sub,0)) money5,</if>
+          1 type FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND organ_id = #{orgId}  AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date5}
+          ) e on  a.type = e.type
+          left join
+          (
+          SELECT
+          <if test="costTypeId == 1">SUM(IFNULL(real_wages,0)) money6,</if>
+          <if test="costTypeId == 2">SUM(IFNULL(company_money_sub,0)) money6,</if>
+          1 type FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND organ_id = #{orgId}  AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date6}
+          ) f on  a.type = f.type
+          left join
+          (
+          SELECT
+          <if test="costTypeId == 1">SUM(IFNULL(real_wages,0)) money7,</if>
+          <if test="costTypeId == 2">SUM(IFNULL(company_money_sub,0)) money7,</if>
+          1 type FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND organ_id = #{orgId}  AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date7}
+          ) g on  a.type = g.type
+          left join
+          (
+          SELECT
+          <if test="costTypeId == 1">SUM(IFNULL(real_wages,0)) money8,</if>
+          <if test="costTypeId == 2">SUM(IFNULL(company_money_sub,0)) money8,</if>
+          1 type FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND organ_id = #{orgId}  AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date8}
+          ) h on  a.type = h.type
+          left join
+          (
+          SELECT
+          <if test="costTypeId == 1">SUM(IFNULL(real_wages,0)) money9,</if>
+          <if test="costTypeId == 2">SUM(IFNULL(company_money_sub,0)) money9,</if>
+          1 type FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND organ_id = #{orgId}  AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date9}
+          ) i on  a.type = i.type
+          left join
+          (
+          SELECT
+          <if test="costTypeId == 1">SUM(IFNULL(real_wages,0)) money10,</if>
+          <if test="costTypeId == 2">SUM(IFNULL(company_money_sub,0)) money10,</if>
+          1 type FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND organ_id = #{orgId}  AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date10}
+          ) j on  a.type = j.type
+          left join
+          (
+          SELECT
+          <if test="costTypeId == 1">SUM(IFNULL(real_wages,0)) money11,</if>
+          <if test="costTypeId == 2">SUM(IFNULL(company_money_sub,0)) money11,</if>
+          1 type FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND organ_id = #{orgId}  AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date11}
+          ) k on  a.type = k.type
+          left join
+          (
+          SELECT
+          <if test="costTypeId == 1">SUM(IFNULL(real_wages,0)) money12,</if>
+          <if test="costTypeId == 2">SUM(IFNULL(company_money_sub,0)) money12,</if>
+          1 type FROM staff_pay_personnel_slip WHERE delete_flag = 0 AND organ_id = #{orgId}  AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date12}
+          ) l on  a.type = l.type
+        </if>
+
+        <if test="source == 2">
+        select a.money1,b.money2,c.money3,d.money4,e.money5,f.money6,g.money7,h.money8,i.money9,j.money10,k.money11,l.money12 from
+        (SELECT
+          <if test="costTypeId == 3"> SUM(IFNULL( fixed_perf_pay, 0 )) money1,</if>
+          <if test="costTypeId == 4">SUM(IFNULL( travel_allowance_pay, 0 )) money1,</if>
+          <if test="costTypeId == 5">SUM(IFNULL( manage_perf_pay, 0 )) money1,</if>
+          <if test="costTypeId == 6">SUM(IFNULL( real_assess_kpi, 0 ))money1,</if>
+          <if test="costTypeId == 7">SUM( IFNULL( integral_pay, 0 )) money1,</if>
+          <if test="costTypeId == 8">SUM(IFNULL( examine_pay, 0 )) money1,</if>
+          <if test="costTypeId == 9">SUM(IFNULL( late_early_money, 0 )+ IFNULL( absenteeism_money, 0 )+ IFNULL( leave_money, 0 )+ IFNULL( sick_leave_money, 0 ) ) money1,</if>
+          <if test="costTypeId == 10">SUM(IFNULL( other_pay, 0 )+ IFNULL( other_cut_pay, 0 )) money1,</if> 1 type
+          FROM staff_performance_personnel WHERE delete_flag = 0 AND organ_id  = #{orgId}
+          AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date1}) a
+          left join
+          (SELECT
+          <if test="costTypeId == 3"> SUM(IFNULL( fixed_perf_pay, 0 )) money2,</if>
+          <if test="costTypeId == 4">SUM(IFNULL( travel_allowance_pay, 0 )) money2,</if>
+          <if test="costTypeId == 5">SUM(IFNULL( manage_perf_pay, 0 )) money2,</if>
+          <if test="costTypeId == 6">SUM(IFNULL( real_assess_kpi, 0 ))money2,</if>
+          <if test="costTypeId == 7">SUM( IFNULL( integral_pay, 0 )) money2,</if>
+          <if test="costTypeId == 8">SUM(IFNULL( examine_pay, 0 )) money2,</if>
+          <if test="costTypeId == 9">SUM(IFNULL( late_early_money, 0 )+ IFNULL( absenteeism_money, 0 )+ IFNULL( leave_money, 0 )+ IFNULL( sick_leave_money, 0 ) ) money2,</if>
+          <if test="costTypeId == 10">SUM(IFNULL( other_pay, 0 )+ IFNULL( other_cut_pay, 0 )) money2,</if> 1 type
+          FROM staff_performance_personnel WHERE delete_flag = 0 AND organ_id  = #{orgId}
+          AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date2}) b on a.type = b.type
+          left join
+          (SELECT
+          <if test="costTypeId == 3"> SUM(IFNULL( fixed_perf_pay, 0 )) money3,</if>
+          <if test="costTypeId == 4">SUM(IFNULL( travel_allowance_pay, 0 )) money3,</if>
+          <if test="costTypeId == 5">SUM(IFNULL( manage_perf_pay, 0 )) money3,</if>
+          <if test="costTypeId == 6">SUM(IFNULL( real_assess_kpi, 0 ))money3,</if>
+          <if test="costTypeId == 7">SUM( IFNULL( integral_pay, 0 )) money3,</if>
+          <if test="costTypeId == 8">SUM(IFNULL( examine_pay, 0 )) money3,</if>
+          <if test="costTypeId == 9">SUM(IFNULL( late_early_money, 0 )+ IFNULL( absenteeism_money, 0 )+ IFNULL( leave_money, 0 )+ IFNULL( sick_leave_money, 0 ) ) money3,</if>
+          <if test="costTypeId == 10">SUM(IFNULL( other_pay, 0 )+ IFNULL( other_cut_pay, 0 )) money3,</if> 1 type
+          FROM staff_performance_personnel WHERE delete_flag = 0 AND organ_id  = #{orgId}
+          AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date3}) c on a.type = c.type
+          left join
+          (SELECT
+          <if test="costTypeId == 3"> SUM(IFNULL( fixed_perf_pay, 0 )) money4,</if>
+          <if test="costTypeId == 4">SUM(IFNULL( travel_allowance_pay, 0 )) money4,</if>
+          <if test="costTypeId == 5">SUM(IFNULL( manage_perf_pay, 0 )) money4,</if>
+          <if test="costTypeId == 6">SUM(IFNULL( real_assess_kpi, 0 ))money4,</if>
+          <if test="costTypeId == 7">SUM( IFNULL( integral_pay, 0 )) money4,</if>
+          <if test="costTypeId == 8">SUM(IFNULL( examine_pay, 0 )) money4,</if>
+          <if test="costTypeId == 9">SUM(IFNULL( late_early_money, 0 )+ IFNULL( absenteeism_money, 0 )+ IFNULL( leave_money, 0 )+ IFNULL( sick_leave_money, 0 ) ) money4,</if>
+          <if test="costTypeId == 10">SUM(IFNULL( other_pay, 0 )+ IFNULL( other_cut_pay, 0 )) money4,</if> 1 type
+          FROM staff_performance_personnel WHERE delete_flag = 0 AND organ_id  = #{orgId}
+          AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date4}) d on a.type = d.type
+          left join
+          (SELECT
+          <if test="costTypeId == 3"> SUM(IFNULL( fixed_perf_pay, 0 )) money5,</if>
+          <if test="costTypeId == 4">SUM(IFNULL( travel_allowance_pay, 0 )) money5,</if>
+          <if test="costTypeId == 5">SUM(IFNULL( manage_perf_pay, 0 )) money5,</if>
+          <if test="costTypeId == 6">SUM(IFNULL( real_assess_kpi, 0 ))money5,</if>
+          <if test="costTypeId == 7">SUM( IFNULL( integral_pay, 0 )) money5,</if>
+          <if test="costTypeId == 8">SUM(IFNULL( examine_pay, 0 )) money5,</if>
+          <if test="costTypeId == 9">SUM(IFNULL( late_early_money, 0 )+ IFNULL( absenteeism_money, 0 )+ IFNULL( leave_money, 0 )+ IFNULL( sick_leave_money, 0 ) ) money5,</if>
+          <if test="costTypeId == 10">SUM(IFNULL( other_pay, 0 )+ IFNULL( other_cut_pay, 0 )) money5,</if> 1 type
+          FROM staff_performance_personnel WHERE delete_flag = 0 AND organ_id  = #{orgId}
+          AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date5}) e on a.type = e.type
+          left join
+          (SELECT
+          <if test="costTypeId == 3"> SUM(IFNULL( fixed_perf_pay, 0 )) money6,</if>
+          <if test="costTypeId == 4">SUM(IFNULL( travel_allowance_pay, 0 )) money6,</if>
+          <if test="costTypeId == 5">SUM(IFNULL( manage_perf_pay, 0 )) money6,</if>
+          <if test="costTypeId == 6">SUM(IFNULL( real_assess_kpi, 0 ))money6,</if>
+          <if test="costTypeId == 7">SUM( IFNULL( integral_pay, 0 )) money6,</if>
+          <if test="costTypeId == 8">SUM(IFNULL( examine_pay, 0 )) money6,</if>
+          <if test="costTypeId == 9">SUM(IFNULL( late_early_money, 0 )+ IFNULL( absenteeism_money, 0 )+ IFNULL( leave_money, 0 )+ IFNULL( sick_leave_money, 0 ) ) money6,</if>
+          <if test="costTypeId == 10">SUM(IFNULL( other_pay, 0 )+ IFNULL( other_cut_pay, 0 )) money6,</if> 1 type
+          FROM staff_performance_personnel WHERE delete_flag = 0 AND organ_id  = #{orgId}
+          AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date6}) f on a.type = f.type
+          left join
+          (SELECT
+          <if test="costTypeId == 3"> SUM(IFNULL( fixed_perf_pay, 0 )) money7,</if>
+          <if test="costTypeId == 4">SUM(IFNULL( travel_allowance_pay, 0 )) money7,</if>
+          <if test="costTypeId == 5">SUM(IFNULL( manage_perf_pay, 0 )) money7,</if>
+          <if test="costTypeId == 6">SUM(IFNULL( real_assess_kpi, 0 ))money7,</if>
+          <if test="costTypeId == 7">SUM( IFNULL( integral_pay, 0 )) money7,</if>
+          <if test="costTypeId == 8">SUM(IFNULL( examine_pay, 0 )) money7,</if>
+          <if test="costTypeId == 9">SUM(IFNULL( late_early_money, 0 )+ IFNULL( absenteeism_money, 0 )+ IFNULL( leave_money, 0 )+ IFNULL( sick_leave_money, 0 ) ) money7,</if>
+          <if test="costTypeId == 10">SUM(IFNULL( other_pay, 0 )+ IFNULL( other_cut_pay, 0 )) money7,</if> 1 type
+          FROM staff_performance_personnel WHERE delete_flag = 0 AND organ_id  = #{orgId}
+          AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date7}) g on a.type = g.type
+          left join
+          (SELECT
+          <if test="costTypeId == 3"> SUM(IFNULL( fixed_perf_pay, 0 )) money8,</if>
+          <if test="costTypeId == 4">SUM(IFNULL( travel_allowance_pay, 0 )) money8,</if>
+          <if test="costTypeId == 5">SUM(IFNULL( manage_perf_pay, 0 )) money8,</if>
+          <if test="costTypeId == 6">SUM(IFNULL( real_assess_kpi, 0 ))money8,</if>
+          <if test="costTypeId == 7">SUM( IFNULL( integral_pay, 0 )) money8,</if>
+          <if test="costTypeId == 8">SUM(IFNULL( examine_pay, 0 )) money8,</if>
+          <if test="costTypeId == 9">SUM(IFNULL( late_early_money, 0 )+ IFNULL( absenteeism_money, 0 )+ IFNULL( leave_money, 0 )+ IFNULL( sick_leave_money, 0 ) ) money8,</if>
+          <if test="costTypeId == 10">SUM(IFNULL( other_pay, 0 )+ IFNULL( other_cut_pay, 0 )) money8,</if> 1 type
+          FROM staff_performance_personnel WHERE delete_flag = 0 AND organ_id  = #{orgId}
+          AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date8}) h on a.type = h.type
+          left join
+          (SELECT
+          <if test="costTypeId == 3"> SUM(IFNULL( fixed_perf_pay, 0 )) money9,</if>
+          <if test="costTypeId == 4">SUM(IFNULL( travel_allowance_pay, 0 )) money9,</if>
+          <if test="costTypeId == 5">SUM(IFNULL( manage_perf_pay, 0 )) money9,</if>
+          <if test="costTypeId == 6">SUM(IFNULL( real_assess_kpi, 0 ))money9,</if>
+          <if test="costTypeId == 7">SUM( IFNULL( integral_pay, 0 )) money9,</if>
+          <if test="costTypeId == 8">SUM(IFNULL( examine_pay, 0 )) money9,</if>
+          <if test="costTypeId == 9">SUM(IFNULL( late_early_money, 0 )+ IFNULL( absenteeism_money, 0 )+ IFNULL( leave_money, 0 )+ IFNULL( sick_leave_money, 0 ) ) money9,</if>
+          <if test="costTypeId == 10">SUM(IFNULL( other_pay, 0 )+ IFNULL( other_cut_pay, 0 )) money9,</if> 1 type
+          FROM staff_performance_personnel WHERE delete_flag = 0 AND organ_id  = #{orgId}
+          AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date9}) i on a.type = i.type
+          left join
+          (SELECT
+          <if test="costTypeId == 3"> SUM(IFNULL( fixed_perf_pay, 0 )) money10,</if>
+          <if test="costTypeId == 4">SUM(IFNULL( travel_allowance_pay, 0 )) money10,</if>
+          <if test="costTypeId == 5">SUM(IFNULL( manage_perf_pay, 0 )) money10,</if>
+          <if test="costTypeId == 6">SUM(IFNULL( real_assess_kpi, 0 ))money10,</if>
+          <if test="costTypeId == 7">SUM( IFNULL( integral_pay, 0 )) money10,</if>
+          <if test="costTypeId == 8">SUM(IFNULL( examine_pay, 0 )) money10,</if>
+          <if test="costTypeId == 9">SUM(IFNULL( late_early_money, 0 )+ IFNULL( absenteeism_money, 0 )+ IFNULL( leave_money, 0 )+ IFNULL( sick_leave_money, 0 ) ) money10,</if>
+          <if test="costTypeId == 10">SUM(IFNULL( other_pay, 0 )+ IFNULL( other_cut_pay, 0 )) money10,</if> 1 type
+          FROM staff_performance_personnel WHERE delete_flag = 0 AND organ_id  = #{orgId}
+          AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date10}) j on a.type = j.type
+          left join
+          (SELECT
+          <if test="costTypeId == 3"> SUM(IFNULL( fixed_perf_pay, 0 )) money11,</if>
+          <if test="costTypeId == 4">SUM(IFNULL( travel_allowance_pay, 0 )) money11,</if>
+          <if test="costTypeId == 5">SUM(IFNULL( manage_perf_pay, 0 )) money11,</if>
+          <if test="costTypeId == 6">SUM(IFNULL( real_assess_kpi, 0 ))money11,</if>
+          <if test="costTypeId == 7">SUM( IFNULL( integral_pay, 0 )) money11,</if>
+          <if test="costTypeId == 8">SUM(IFNULL( examine_pay, 0 )) money11,</if>
+          <if test="costTypeId == 9">SUM(IFNULL( late_early_money, 0 )+ IFNULL( absenteeism_money, 0 )+ IFNULL( leave_money, 0 )+ IFNULL( sick_leave_money, 0 ) ) money11,</if>
+          <if test="costTypeId == 10">SUM(IFNULL( other_pay, 0 )+ IFNULL( other_cut_pay, 0 )) money11,</if> 1 type
+          FROM staff_performance_personnel WHERE delete_flag = 0 AND organ_id  = #{orgId}
+          AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date11}) k on a.type = k.type
+          left join
+          (SELECT
+          <if test="costTypeId == 3"> SUM(IFNULL( fixed_perf_pay, 0 )) money12,</if>
+          <if test="costTypeId == 4">SUM(IFNULL( travel_allowance_pay, 0 )) money12,</if>
+          <if test="costTypeId == 5">SUM(IFNULL( manage_perf_pay, 0 )) money12,</if>
+          <if test="costTypeId == 6">SUM(IFNULL( real_assess_kpi, 0 ))money12,</if>
+          <if test="costTypeId == 7">SUM( IFNULL( integral_pay, 0 )) money12,</if>
+          <if test="costTypeId == 8">SUM(IFNULL( examine_pay, 0 )) money12,</if>
+          <if test="costTypeId == 9">SUM(IFNULL( late_early_money, 0 )+ IFNULL( absenteeism_money, 0 )+ IFNULL( leave_money, 0 )+ IFNULL( sick_leave_money, 0 ) ) money12,</if>
+          <if test="costTypeId == 10">SUM(IFNULL( other_pay, 0 )+ IFNULL( other_cut_pay, 0 )) money12,</if> 1 type
+          FROM staff_performance_personnel WHERE delete_flag = 0 AND organ_id  = #{orgId}
+          AND DATE_FORMAT( create_time, '%Y-%m' ) = #{date12}) l on a.type = l.type
+        </if>
+
+        <if test="source == 3">
+        select a.money1,b.money2,c.money3,d.money4,e.money5,f.money6,g.money7,h.money8,i.money9,j.money10,k.money11,l.money12 from
+            (SELECT
+          <if test="costTypeId == 11">SUM(IFNULL( r.medical_history_money, 0 ) + IFNULL( r.other_money, 0 ))money1,</if>
+          <if test="costTypeId == 12">SUM(IFNULL( r.troubleshooting_money, 0 ))money1,</if>
+          <if test="costTypeId == 13">SUM(IFNULL( r.opc_troubleshooting_money, 0 ))money1,</if>
+          <if test="costTypeId == 14">SUM(IFNULL( r.printing_money, 0 ))money1,</if>
+          <if test="costTypeId == 15">SUM(IFNULL( r.cross_driving_money, 0 ))money1,</if>
+          <if test="costTypeId == 17">SUM(IFNULL( r.self_driving_money, 0 ))money1,</if>
+          <if test="costTypeId == 19">SUM(IFNULL( r.cityin_driving_money, 0 ))money1,</if>
+          <if test="costTypeId == 21">SUM(IFNULL( r.accommodatio_money, 0 ) )money1,</if>
+          1 type  FROM survey_clock_re_info r
+          LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+          LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+          WHERE  DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date1} AND i.organ_id = #{orgId}) a
+          left join
+          (SELECT
+          <if test="costTypeId == 11">SUM(IFNULL( r.medical_history_money, 0 ) + IFNULL( r.other_money, 0 ))money2,</if>
+          <if test="costTypeId == 12">SUM(IFNULL( r.troubleshooting_money, 0 ))money2,</if>
+          <if test="costTypeId == 13">SUM(IFNULL( r.opc_troubleshooting_money, 0 ))money2,</if>
+          <if test="costTypeId == 14">SUM(IFNULL( r.printing_money, 0 ))money2,</if>
+          <if test="costTypeId == 15">SUM(IFNULL( r.cross_driving_money, 0 ))money2,</if>
+          <if test="costTypeId == 17">SUM(IFNULL( r.self_driving_money, 0 ))money2,</if>
+          <if test="costTypeId == 19">SUM(IFNULL( r.cityin_driving_money, 0 ))money2,</if>
+          <if test="costTypeId == 21">SUM(IFNULL( r.accommodatio_money, 0 ) )money2,</if>
+          1 type  FROM survey_clock_re_info r
+          LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+          LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+          WHERE  DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date2} AND i.organ_id = #{orgId}) b on a.type = b.type
+          left join
+          (SELECT
+          <if test="costTypeId == 11">SUM(IFNULL( r.medical_history_money, 0 ) + IFNULL( r.other_money, 0 ))money3,</if>
+          <if test="costTypeId == 12">SUM(IFNULL( r.troubleshooting_money, 0 ))money3,</if>
+          <if test="costTypeId == 13">SUM(IFNULL( r.opc_troubleshooting_money, 0 ))money3,</if>
+          <if test="costTypeId == 14">SUM(IFNULL( r.printing_money, 0 ))money3,</if>
+          <if test="costTypeId == 15">SUM(IFNULL( r.cross_driving_money, 0 ))money3,</if>
+          <if test="costTypeId == 17">SUM(IFNULL( r.self_driving_money, 0 ))money3,</if>
+          <if test="costTypeId == 19">SUM(IFNULL( r.cityin_driving_money, 0 ))money3,</if>
+          <if test="costTypeId == 21">SUM(IFNULL( r.accommodatio_money, 0 ) )money3,</if>
+          1 type  FROM survey_clock_re_info r
+          LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+          LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+          WHERE  DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date3} AND i.organ_id = #{orgId}) c on a.type = c.type
+          left join
+          (SELECT
+          <if test="costTypeId == 11">SUM(IFNULL( r.medical_history_money, 0 ) + IFNULL( r.other_money, 0 ))money4,</if>
+          <if test="costTypeId == 12">SUM(IFNULL( r.troubleshooting_money, 0 ))money4,</if>
+          <if test="costTypeId == 13">SUM(IFNULL( r.opc_troubleshooting_money, 0 ))money4,</if>
+          <if test="costTypeId == 14">SUM(IFNULL( r.printing_money, 0 ))money4,</if>
+          <if test="costTypeId == 15">SUM(IFNULL( r.cross_driving_money, 0 ))money4,</if>
+          <if test="costTypeId == 17">SUM(IFNULL( r.self_driving_money, 0 ))money4,</if>
+          <if test="costTypeId == 19">SUM(IFNULL( r.cityin_driving_money, 0 ))money4,</if>
+          <if test="costTypeId == 21">SUM(IFNULL( r.accommodatio_money, 0 ) )money4,</if>
+          1 type  FROM survey_clock_re_info r
+          LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+          LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+          WHERE  DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date4} AND i.organ_id = #{orgId}) d on a.type = d.type
+          left join
+          (SELECT
+          <if test="costTypeId == 11">SUM(IFNULL( r.medical_history_money, 0 ) + IFNULL( r.other_money, 0 ))money5,</if>
+          <if test="costTypeId == 12">SUM(IFNULL( r.troubleshooting_money, 0 ))money5,</if>
+          <if test="costTypeId == 13">SUM(IFNULL( r.opc_troubleshooting_money, 0 ))money5,</if>
+          <if test="costTypeId == 14">SUM(IFNULL( r.printing_money, 0 ))money5,</if>
+          <if test="costTypeId == 15">SUM(IFNULL( r.cross_driving_money, 0 ))money5,</if>
+          <if test="costTypeId == 17">SUM(IFNULL( r.self_driving_money, 0 ))money5,</if>
+          <if test="costTypeId == 19">SUM(IFNULL( r.cityin_driving_money, 0 ))money5,</if>
+          <if test="costTypeId == 21">SUM(IFNULL( r.accommodatio_money, 0 ) )money5,</if>
+          1 type  FROM survey_clock_re_info r
+          LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+          LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+          WHERE  DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date5} AND i.organ_id = #{orgId}) e on a.type = e.type
+          left join
+          (SELECT
+          <if test="costTypeId == 11">SUM(IFNULL( r.medical_history_money, 0 ) + IFNULL( r.other_money, 0 ))money6,</if>
+          <if test="costTypeId == 12">SUM(IFNULL( r.troubleshooting_money, 0 ))money6,</if>
+          <if test="costTypeId == 13">SUM(IFNULL( r.opc_troubleshooting_money, 0 ))money6,</if>
+          <if test="costTypeId == 14">SUM(IFNULL( r.printing_money, 0 ))money6,</if>
+          <if test="costTypeId == 15">SUM(IFNULL( r.cross_driving_money, 0 ))money6,</if>
+          <if test="costTypeId == 17">SUM(IFNULL( r.self_driving_money, 0 ))money6,</if>
+          <if test="costTypeId == 19">SUM(IFNULL( r.cityin_driving_money, 0 ))money6,</if>
+          <if test="costTypeId == 21">SUM(IFNULL( r.accommodatio_money, 0 ) )money6,</if>
+          1 type  FROM survey_clock_re_info r
+          LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+          LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+          WHERE  DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date6} AND i.organ_id = #{orgId}) f on a.type = f.type
+          left join
+          (SELECT
+          <if test="costTypeId == 11">SUM(IFNULL( r.medical_history_money, 0 ) + IFNULL( r.other_money, 0 ))money7,</if>
+          <if test="costTypeId == 12">SUM(IFNULL( r.troubleshooting_money, 0 ))money7,</if>
+          <if test="costTypeId == 13">SUM(IFNULL( r.opc_troubleshooting_money, 0 ))money7,</if>
+          <if test="costTypeId == 14">SUM(IFNULL( r.printing_money, 0 ))money7,</if>
+          <if test="costTypeId == 15">SUM(IFNULL( r.cross_driving_money, 0 ))money7,</if>
+          <if test="costTypeId == 17">SUM(IFNULL( r.self_driving_money, 0 ))money7,</if>
+          <if test="costTypeId == 19">SUM(IFNULL( r.cityin_driving_money, 0 ))money7,</if>
+          <if test="costTypeId == 21">SUM(IFNULL( r.accommodatio_money, 0 ) )money7,</if>
+          1 type  FROM survey_clock_re_info r
+          LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+          LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+          WHERE  DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date7} AND i.organ_id = #{orgId}) g on a.type = g.type
+          left join
+          (SELECT
+          <if test="costTypeId == 11">SUM(IFNULL( r.medical_history_money, 0 ) + IFNULL( r.other_money, 0 ))money8,</if>
+          <if test="costTypeId == 12">SUM(IFNULL( r.troubleshooting_money, 0 ))money8,</if>
+          <if test="costTypeId == 13">SUM(IFNULL( r.opc_troubleshooting_money, 0 ))money8,</if>
+          <if test="costTypeId == 14">SUM(IFNULL( r.printing_money, 0 ))money8,</if>
+          <if test="costTypeId == 15">SUM(IFNULL( r.cross_driving_money, 0 ))money8,</if>
+          <if test="costTypeId == 17">SUM(IFNULL( r.self_driving_money, 0 ))money8,</if>
+          <if test="costTypeId == 19">SUM(IFNULL( r.cityin_driving_money, 0 ))money8,</if>
+          <if test="costTypeId == 21">SUM(IFNULL( r.accommodatio_money, 0 ) )money8,</if>
+          1 type  FROM survey_clock_re_info r
+          LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+          LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+          WHERE  DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date8} AND i.organ_id = #{orgId}) h on a.type = h.type
+          left join
+          (SELECT
+          <if test="costTypeId == 11">SUM(IFNULL( r.medical_history_money, 0 ) + IFNULL( r.other_money, 0 ))money9,</if>
+          <if test="costTypeId == 12">SUM(IFNULL( r.troubleshooting_money, 0 ))money9,</if>
+          <if test="costTypeId == 13">SUM(IFNULL( r.opc_troubleshooting_money, 0 ))money9,</if>
+          <if test="costTypeId == 14">SUM(IFNULL( r.printing_money, 0 ))money9,</if>
+          <if test="costTypeId == 15">SUM(IFNULL( r.cross_driving_money, 0 ))money9,</if>
+          <if test="costTypeId == 17">SUM(IFNULL( r.self_driving_money, 0 ))money9,</if>
+          <if test="costTypeId == 19">SUM(IFNULL( r.cityin_driving_money, 0 ))money9,</if>
+          <if test="costTypeId == 21">SUM(IFNULL( r.accommodatio_money, 0 ) )money9,</if>
+          1 type  FROM survey_clock_re_info r
+          LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+          LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+          WHERE  DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date9} AND i.organ_id = #{orgId}) i on a.type = i.type
+          left join
+          (SELECT
+          <if test="costTypeId == 11">SUM(IFNULL( r.medical_history_money, 0 ) + IFNULL( r.other_money, 0 ))money10,</if>
+          <if test="costTypeId == 12">SUM(IFNULL( r.troubleshooting_money, 0 ))money10,</if>
+          <if test="costTypeId == 13">SUM(IFNULL( r.opc_troubleshooting_money, 0 ))money10,</if>
+          <if test="costTypeId == 14">SUM(IFNULL( r.printing_money, 0 ))money10,</if>
+          <if test="costTypeId == 15">SUM(IFNULL( r.cross_driving_money, 0 ))money10,</if>
+          <if test="costTypeId == 17">SUM(IFNULL( r.self_driving_money, 0 ))money10,</if>
+          <if test="costTypeId == 19">SUM(IFNULL( r.cityin_driving_money, 0 ))money10,</if>
+          <if test="costTypeId == 21">SUM(IFNULL( r.accommodatio_money, 0 ) )money10,</if>
+          1 type  FROM survey_clock_re_info r
+          LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+          LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+          WHERE  DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date10} AND i.organ_id = #{orgId}) j on a.type = j.type
+          left join
+          (SELECT
+          <if test="costTypeId == 11">SUM(IFNULL( r.medical_history_money, 0 ) + IFNULL( r.other_money, 0 ))money11,</if>
+          <if test="costTypeId == 12">SUM(IFNULL( r.troubleshooting_money, 0 ))money11,</if>
+          <if test="costTypeId == 13">SUM(IFNULL( r.opc_troubleshooting_money, 0 ))money11,</if>
+          <if test="costTypeId == 14">SUM(IFNULL( r.printing_money, 0 ))money11,</if>
+          <if test="costTypeId == 15">SUM(IFNULL( r.cross_driving_money, 0 ))money11,</if>
+          <if test="costTypeId == 17">SUM(IFNULL( r.self_driving_money, 0 ))money11,</if>
+          <if test="costTypeId == 19">SUM(IFNULL( r.cityin_driving_money, 0 ))money11,</if>
+          <if test="costTypeId == 21">SUM(IFNULL( r.accommodatio_money, 0 ) )money11,</if>
+          1 type  FROM survey_clock_re_info r
+          LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+          LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+          WHERE  DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date11} AND i.organ_id = #{orgId}) k on a.type = k.type
+          left join
+          (SELECT
+          <if test="costTypeId == 11">SUM(IFNULL( r.medical_history_money, 0 ) + IFNULL( r.other_money, 0 ))money12,</if>
+          <if test="costTypeId == 12">SUM(IFNULL( r.troubleshooting_money, 0 ))money12,</if>
+          <if test="costTypeId == 13">SUM(IFNULL( r.opc_troubleshooting_money, 0 ))money12,</if>
+          <if test="costTypeId == 14">SUM(IFNULL( r.printing_money, 0 ))money12,</if>
+          <if test="costTypeId == 15">SUM(IFNULL( r.cross_driving_money, 0 ))money12,</if>
+          <if test="costTypeId == 17">SUM(IFNULL( r.self_driving_money, 0 ))money12,</if>
+          <if test="costTypeId == 19">SUM(IFNULL( r.cityin_driving_money, 0 ))money12,</if>
+          <if test="costTypeId == 21">SUM(IFNULL( r.accommodatio_money, 0 ) )money12,</if>
+          1 type  FROM survey_clock_re_info r
+          LEFT JOIN survey_user_clock u ON r.clock_id = u.id
+          LEFT JOIN staff_personnel_info i ON u.survey_user_id = i.user_id
+          WHERE  DATE_FORMAT( r.create_time, '%Y-%m' ) = #{date12} AND i.organ_id = #{orgId}) l on a.type = l.type
+        </if>
+
+        <if test="source == 4">
+          select a.money1,b.money2,c.money3,d.money4,e.money5,f.money6,g.money7,h.money8,i.money9,j.money10,k.money11,l.money12 from
+        (SELECT
+          SUM(IFNULL( c.chnannel_money, 0 )) money1 ,1 type
+          FROM
+          survey_channel_cost_new c
+          LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+          WHERE
+          c.delete_flag = 0 AND i.organ_id = #{orgId}
+          AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date1}) a
+          left join
+          (SELECT
+          SUM(IFNULL( c.chnannel_money, 0 )) money2 ,1 type
+          FROM
+          survey_channel_cost_new c
+          LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+          WHERE
+          c.delete_flag = 0 AND i.organ_id = #{orgId}
+          AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date2}) b on a.type = b.type
+          left join
+          (SELECT
+          SUM(IFNULL( c.chnannel_money, 0 )) money3 ,1 type
+          FROM
+          survey_channel_cost_new c
+          LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+          WHERE
+          c.delete_flag = 0 AND i.organ_id = #{orgId}
+          AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date3}) c on a.type = c.type
+          left join
+          (SELECT
+          SUM(IFNULL( c.chnannel_money, 0 )) money4 ,1 type
+          FROM
+          survey_channel_cost_new c
+          LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+          WHERE
+          c.delete_flag = 0 AND i.organ_id = #{orgId}
+          AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date4}) d on a.type = d.type
+          left join
+          (SELECT
+          SUM(IFNULL( c.chnannel_money, 0 )) money5 ,1 type
+          FROM
+          survey_channel_cost_new c
+          LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+          WHERE
+          c.delete_flag = 0 AND i.organ_id = #{orgId}
+          AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date5}) e on a.type = e.type
+          left join
+          (SELECT
+          SUM(IFNULL( c.chnannel_money, 0 )) money6 ,1 type
+          FROM
+          survey_channel_cost_new c
+          LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+          WHERE
+          c.delete_flag = 0 AND i.organ_id = #{orgId}
+          AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date6}) f on a.type = f.type
+          left join
+          (SELECT
+          SUM(IFNULL( c.chnannel_money, 0 )) money7 ,1 type
+          FROM
+          survey_channel_cost_new c
+          LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+          WHERE
+          c.delete_flag = 0 AND i.organ_id = #{orgId}
+          AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date7}) g on a.type = g.type
+          left join
+          (SELECT
+          SUM(IFNULL( c.chnannel_money, 0 )) money8 ,1 type
+          FROM
+          survey_channel_cost_new c
+          LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+          WHERE
+          c.delete_flag = 0 AND i.organ_id = #{orgId}
+          AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date8}) h on a.type = h.type
+          left join
+          (SELECT
+          SUM(IFNULL( c.chnannel_money, 0 )) money9 ,1 type
+          FROM
+          survey_channel_cost_new c
+          LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+          WHERE
+          c.delete_flag = 0 AND i.organ_id = #{orgId}
+          AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date9}) i on a.type = i.type
+          left join
+          (SELECT
+          SUM(IFNULL( c.chnannel_money, 0 )) money10 ,1 type
+          FROM
+          survey_channel_cost_new c
+          LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+          WHERE
+          c.delete_flag = 0 AND i.organ_id = #{orgId}
+          AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date10}) j on a.type = j.type
+          left join
+          (SELECT
+          SUM(IFNULL( c.chnannel_money, 0 )) money11 ,1 type
+          FROM
+          survey_channel_cost_new c
+          LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+          WHERE
+          c.delete_flag = 0 AND i.organ_id = #{orgId}
+          AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date11}) k on a.type = k.type
+          left join
+          (SELECT
+          SUM(IFNULL( c.chnannel_money, 0 )) money12 ,1 type
+          FROM
+          survey_channel_cost_new c
+          LEFT JOIN staff_personnel_info i ON c.survey_user_id = i.user_id
+          WHERE
+          c.delete_flag = 0 AND i.organ_id = #{orgId}
+          AND DATE_FORMAT( c.operation_time, '%Y-%m' ) = #{date12}) l on a.type = l.type
+        </if>
+
+        <if test="source == 5">
+          select a.money1,b.money2,c.money3,d.money4,e.money5,f.money6,g.money7,h.money8,i.money9,j.money10,k.money11,l.money12 from
+          (SELECT SUM(IFNULL( d.cost_money, 0 )) money1,1 type
+            FROM financial_re_apply a
+            LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+            WHERE a.re_type != 3 AND a.state = 4 AND a.delete_flag = 0 AND d.delete_flag = 0
+            AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date1}
+            AND a.department_id = #{orgId}
+            AND d.cost_type_id = #{costTypeId}) a
+            left join
+            (SELECT SUM(IFNULL( d.cost_money, 0 )) money2,1 type
+            FROM financial_re_apply a
+            LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+            WHERE a.re_type != 3 AND a.state = 4 AND a.delete_flag = 0 AND d.delete_flag = 0
+            AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date2}
+            AND a.department_id = #{orgId}
+            AND d.cost_type_id = #{costTypeId}) b on a.type = b.type
+            left join
+            (SELECT SUM(IFNULL( d.cost_money, 0 )) money3,1 type
+            FROM financial_re_apply a
+            LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+            WHERE a.re_type != 3 AND a.state = 4 AND a.delete_flag = 0 AND d.delete_flag = 0
+            AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date3}
+            AND a.department_id = #{orgId}
+            AND d.cost_type_id = #{costTypeId}) c on a.type = c.type
+            left join
+            (SELECT SUM(IFNULL( d.cost_money, 0 )) money4,1 type
+            FROM financial_re_apply a
+            LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+            WHERE a.re_type != 3 AND a.state = 4 AND a.delete_flag = 0 AND d.delete_flag = 0
+            AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date4}
+            AND a.department_id = #{orgId}
+            AND d.cost_type_id = #{costTypeId}) d on a.type = d.type
+            left join
+            (SELECT SUM(IFNULL( d.cost_money, 0 )) money5,1 type
+            FROM financial_re_apply a
+            LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+            WHERE a.re_type != 3 AND a.state = 4 AND a.delete_flag = 0 AND d.delete_flag = 0
+            AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date5}
+            AND a.department_id = #{orgId}
+            AND d.cost_type_id = #{costTypeId}) e on a.type = e.type
+            left join
+            (SELECT SUM(IFNULL( d.cost_money, 0 )) money6,1 type
+            FROM financial_re_apply a
+            LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+            WHERE a.re_type != 3 AND a.state = 4 AND a.delete_flag = 0 AND d.delete_flag = 0
+            AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date6}
+            AND a.department_id = #{orgId}
+            AND d.cost_type_id = #{costTypeId}) f on a.type = f.type
+            left join
+            (SELECT SUM(IFNULL( d.cost_money, 0 )) money7,1 type
+            FROM financial_re_apply a
+            LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+            WHERE a.re_type != 3 AND a.state = 4 AND a.delete_flag = 0 AND d.delete_flag = 0
+            AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date7}
+            AND a.department_id = #{orgId}
+            AND d.cost_type_id = #{costTypeId}) g on a.type = g.type
+            left join
+            (SELECT SUM(IFNULL( d.cost_money, 0 )) money8,1 type
+            FROM financial_re_apply a
+            LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+            WHERE a.re_type != 3 AND a.state = 4 AND a.delete_flag = 0 AND d.delete_flag = 0
+            AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date8}
+            AND a.department_id = #{orgId}
+            AND d.cost_type_id = #{costTypeId}) h on a.type = h.type
+            left join
+            (SELECT SUM(IFNULL( d.cost_money, 0 )) money9,1 type
+            FROM financial_re_apply a
+            LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+            WHERE a.re_type != 3 AND a.state = 4 AND a.delete_flag = 0 AND d.delete_flag = 0
+            AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date9}
+            AND a.department_id = #{orgId}
+            AND d.cost_type_id = #{costTypeId}) i on a.type = i.type
+            left join
+            (SELECT SUM(IFNULL( d.cost_money, 0 )) money10,1 type
+            FROM financial_re_apply a
+            LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+            WHERE a.re_type != 3 AND a.state = 4 AND a.delete_flag = 0 AND d.delete_flag = 0
+            AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date10}
+            AND a.department_id = #{orgId}
+            AND d.cost_type_id = #{costTypeId}) j on a.type = j.type
+            left join
+            (SELECT SUM(IFNULL( d.cost_money, 0 )) money11,1 type
+            FROM financial_re_apply a
+            LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+            WHERE a.re_type != 3 AND a.state = 4 AND a.delete_flag = 0 AND d.delete_flag = 0
+            AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date11}
+            AND a.department_id = #{orgId}
+            AND d.cost_type_id = #{costTypeId}) k on a.type = k.type
+            left join
+            (SELECT SUM(IFNULL( d.cost_money, 0 )) money12,1 type
+            FROM financial_re_apply a
+            LEFT JOIN financial_cost_details d ON a.id = d.financial_re_apply_id
+            WHERE a.re_type != 3 AND a.state = 4 AND a.delete_flag = 0 AND d.delete_flag = 0
+            AND DATE_FORMAT( d.create_time, '%Y-%m' ) = #{date12}
+            AND a.department_id = #{orgId}
+            AND d.cost_type_id = #{costTypeId}) l on a.type = l.type
+        </if>
+
+  </select>
+</mapper>

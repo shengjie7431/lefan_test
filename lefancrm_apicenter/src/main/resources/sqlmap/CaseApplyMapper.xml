@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseApply" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="danger_name" property="dangerName" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="car_number" property="carNumber" jdbcType="VARCHAR" />
+    <result column="cure_hospital" property="cureHospital" jdbcType="VARCHAR" />
+    <result column="injury_type" property="injuryType" jdbcType="INTEGER" />
+    <result column="other_type" property="otherType" jdbcType="INTEGER" />
+    <result column="we_type" property="weType" jdbcType="INTEGER" />
+    <result column="case_province" property="caseProvince" jdbcType="VARCHAR" />
+    <result column="case_province_id" property="caseProvinceId" jdbcType="BIGINT" />
+    <result column="case_city" property="caseCity" jdbcType="VARCHAR" />
+    <result column="case_city_id" property="caseCityId" jdbcType="BIGINT" />
+    <result column="case_district" property="caseDistrict" jdbcType="VARCHAR" />
+    <result column="case_district_id" property="caseDistrictId" jdbcType="BIGINT" />
+    <result column="case_address" property="caseAddress" jdbcType="VARCHAR" />
+    <result column="danger_time" property="dangerTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+    <result column="case_sources" property="caseSources" jdbcType="VARCHAR" />
+    <result column="is_need_advance" property="isNeedAdvance" jdbcType="INTEGER" />
+    <result column="is_vip" property="isVip" jdbcType="INTEGER" />
+    <result column="cat_type" property="catType" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="case_desc" property="caseDesc" jdbcType="VARCHAR" />
+    <result column="case_type" property="caseType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_name, danger_name, phone, state, car_number, cure_hospital, injury_type, 
+    other_type, we_type, case_province, case_province_id, case_city, case_city_id, case_district, 
+    case_district_id, case_address, danger_time, create_time, case_no, case_sources, 
+    is_need_advance, is_vip, cat_type, id_card, case_desc, case_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_apply
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from case_apply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseApply" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_apply (user_name, danger_name, phone, 
+      state, car_number, cure_hospital, 
+      injury_type, other_type, we_type, 
+      case_province, case_province_id, case_city, 
+      case_city_id, case_district, case_district_id, 
+      case_address, danger_time, create_time, 
+      case_no, case_sources, is_need_advance, 
+      is_vip, cat_type, id_card, 
+      case_desc, case_type)
+    values (#{userName,jdbcType=VARCHAR}, #{dangerName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{carNumber,jdbcType=VARCHAR}, #{cureHospital,jdbcType=VARCHAR}, 
+      #{injuryType,jdbcType=INTEGER}, #{otherType,jdbcType=INTEGER}, #{weType,jdbcType=INTEGER}, 
+      #{caseProvince,jdbcType=VARCHAR}, #{caseProvinceId,jdbcType=BIGINT}, #{caseCity,jdbcType=VARCHAR}, 
+      #{caseCityId,jdbcType=BIGINT}, #{caseDistrict,jdbcType=VARCHAR}, #{caseDistrictId,jdbcType=BIGINT}, 
+      #{caseAddress,jdbcType=VARCHAR}, #{dangerTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{caseNo,jdbcType=VARCHAR}, #{caseSources,jdbcType=VARCHAR}, #{isNeedAdvance,jdbcType=INTEGER}, 
+      #{isVip,jdbcType=INTEGER}, #{catType,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{caseDesc,jdbcType=VARCHAR}, #{caseType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseApply" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="dangerName != null" >
+        danger_name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="carNumber != null" >
+        car_number,
+      </if>
+      <if test="cureHospital != null" >
+        cure_hospital,
+      </if>
+      <if test="injuryType != null" >
+        injury_type,
+      </if>
+      <if test="otherType != null" >
+        other_type,
+      </if>
+      <if test="weType != null" >
+        we_type,
+      </if>
+      <if test="caseProvince != null" >
+        case_province,
+      </if>
+      <if test="caseProvinceId != null" >
+        case_province_id,
+      </if>
+      <if test="caseCity != null" >
+        case_city,
+      </if>
+      <if test="caseCityId != null" >
+        case_city_id,
+      </if>
+      <if test="caseDistrict != null" >
+        case_district,
+      </if>
+      <if test="caseDistrictId != null" >
+        case_district_id,
+      </if>
+      <if test="caseAddress != null" >
+        case_address,
+      </if>
+      <if test="dangerTime != null" >
+        danger_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="caseNo != null" >
+        case_no,
+      </if>
+      <if test="caseSources != null" >
+        case_sources,
+      </if>
+      <if test="isNeedAdvance != null" >
+        is_need_advance,
+      </if>
+      <if test="isVip != null" >
+        is_vip,
+      </if>
+      <if test="catType != null" >
+        cat_type,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="caseDesc != null" >
+        case_desc,
+      </if>
+      <if test="caseType != null" >
+        case_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerName != null" >
+        #{dangerName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="carNumber != null" >
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cureHospital != null" >
+        #{cureHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="injuryType != null" >
+        #{injuryType,jdbcType=INTEGER},
+      </if>
+      <if test="otherType != null" >
+        #{otherType,jdbcType=INTEGER},
+      </if>
+      <if test="weType != null" >
+        #{weType,jdbcType=INTEGER},
+      </if>
+      <if test="caseProvince != null" >
+        #{caseProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="caseProvinceId != null" >
+        #{caseProvinceId,jdbcType=BIGINT},
+      </if>
+      <if test="caseCity != null" >
+        #{caseCity,jdbcType=VARCHAR},
+      </if>
+      <if test="caseCityId != null" >
+        #{caseCityId,jdbcType=BIGINT},
+      </if>
+      <if test="caseDistrict != null" >
+        #{caseDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDistrictId != null" >
+        #{caseDistrictId,jdbcType=BIGINT},
+      </if>
+      <if test="caseAddress != null" >
+        #{caseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerTime != null" >
+        #{dangerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseSources != null" >
+        #{caseSources,jdbcType=VARCHAR},
+      </if>
+      <if test="isNeedAdvance != null" >
+        #{isNeedAdvance,jdbcType=INTEGER},
+      </if>
+      <if test="isVip != null" >
+        #{isVip,jdbcType=INTEGER},
+      </if>
+      <if test="catType != null" >
+        #{catType,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDesc != null" >
+        #{caseDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="caseType != null" >
+        #{caseType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseApply" >
+    update case_apply
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerName != null" >
+        danger_name = #{dangerName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="carNumber != null" >
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cureHospital != null" >
+        cure_hospital = #{cureHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="injuryType != null" >
+        injury_type = #{injuryType,jdbcType=INTEGER},
+      </if>
+      <if test="otherType != null" >
+        other_type = #{otherType,jdbcType=INTEGER},
+      </if>
+      <if test="weType != null" >
+        we_type = #{weType,jdbcType=INTEGER},
+      </if>
+      <if test="caseProvince != null" >
+        case_province = #{caseProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="caseProvinceId != null" >
+        case_province_id = #{caseProvinceId,jdbcType=BIGINT},
+      </if>
+      <if test="caseCity != null" >
+        case_city = #{caseCity,jdbcType=VARCHAR},
+      </if>
+      <if test="caseCityId != null" >
+        case_city_id = #{caseCityId,jdbcType=BIGINT},
+      </if>
+      <if test="caseDistrict != null" >
+        case_district = #{caseDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDistrictId != null" >
+        case_district_id = #{caseDistrictId,jdbcType=BIGINT},
+      </if>
+      <if test="caseAddress != null" >
+        case_address = #{caseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerTime != null" >
+        danger_time = #{dangerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="caseNo != null" >
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseSources != null" >
+        case_sources = #{caseSources,jdbcType=VARCHAR},
+      </if>
+      <if test="isNeedAdvance != null" >
+        is_need_advance = #{isNeedAdvance,jdbcType=INTEGER},
+      </if>
+      <if test="isVip != null" >
+        is_vip = #{isVip,jdbcType=INTEGER},
+      </if>
+      <if test="catType != null" >
+        cat_type = #{catType,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDesc != null" >
+        case_desc = #{caseDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="caseType != null" >
+        case_type = #{caseType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseApply" >
+    update case_apply
+    set user_name = #{userName,jdbcType=VARCHAR},
+      danger_name = #{dangerName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      car_number = #{carNumber,jdbcType=VARCHAR},
+      cure_hospital = #{cureHospital,jdbcType=VARCHAR},
+      injury_type = #{injuryType,jdbcType=INTEGER},
+      other_type = #{otherType,jdbcType=INTEGER},
+      we_type = #{weType,jdbcType=INTEGER},
+      case_province = #{caseProvince,jdbcType=VARCHAR},
+      case_province_id = #{caseProvinceId,jdbcType=BIGINT},
+      case_city = #{caseCity,jdbcType=VARCHAR},
+      case_city_id = #{caseCityId,jdbcType=BIGINT},
+      case_district = #{caseDistrict,jdbcType=VARCHAR},
+      case_district_id = #{caseDistrictId,jdbcType=BIGINT},
+      case_address = #{caseAddress,jdbcType=VARCHAR},
+      danger_time = #{dangerTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      case_no = #{caseNo,jdbcType=VARCHAR},
+      case_sources = #{caseSources,jdbcType=VARCHAR},
+      is_need_advance = #{isNeedAdvance,jdbcType=INTEGER},
+      is_vip = #{isVip,jdbcType=INTEGER},
+      cat_type = #{catType,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      case_desc = #{caseDesc,jdbcType=VARCHAR},
+      case_type = #{caseType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectCaseApplyList" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from case_apply where 1=1
+        <if test="userName !=null">
+            and user_name like CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="phone !=null">
+            and phone like CONCAT('%',#{phone,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="state !=null">
+            and state = #{state,jdbcType=INTEGER}
+        </if>
+        <if test="state ==null">
+            and state in(0,1,2,3)
+        </if>
+        <if test="caseNo !=null">
+            and case_no like CONCAT('%', #{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+        order by create_time desc limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="selectCaseApplyListSize" resultType="int" parameterType="java.util.Map">
+        select count(1) from case_apply  where  1=1
+        <if test="userName !=null">
+            and user_name like CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="phone !=null">
+            and phone like CONCAT('%',#{phone,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="state !=null">
+            and state = #{state,jdbcType=INTEGER}
+        </if>
+        <if test="state ==null">
+            and state in(0,1,2,3)
+        </if>
+        <if test="caseNo !=null">
+            and case_no like CONCAT('%', #{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+    </select>
+
+    <update id="updateCaseNoAndStateById" parameterType="map">
+        update case_apply set state=2,case_no=#{caseNo,jdbcType=VARCHAR} where id=#{id,jdbcType=BIGINT}
+    </update>
+</mapper>

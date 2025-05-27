@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.ThinkDataDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.ThinkDataDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="think_data_id" property="thinkDataId" jdbcType="BIGINT" />
+    <result column="data_type" property="dataType" jdbcType="INTEGER" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="dep_acc_mony" property="depAccMony" jdbcType="DOUBLE" />
+    <result column="lefan_in_mony" property="lefanInMony" jdbcType="DOUBLE" />
+    <result column="lefan_out_mony" property="lefanOutMony" jdbcType="DOUBLE" />
+    <result column="lefan_tax_mony" property="lefanTaxMony" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, think_data_id, data_type, org_id, org_name, state, dep_acc_mony, lefan_in_mony, 
+    lefan_out_mony, lefan_tax_mony
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from think_data_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from think_data_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.ThinkDataDetail" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into think_data_detail (think_data_id, data_type, org_id, 
+      org_name, state, dep_acc_mony, 
+      lefan_in_mony, lefan_out_mony, lefan_tax_mony
+      )
+    values (#{thinkDataId,jdbcType=BIGINT}, #{dataType,jdbcType=INTEGER}, #{orgId,jdbcType=BIGINT}, 
+      #{orgName,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{depAccMony,jdbcType=DOUBLE}, 
+      #{lefanInMony,jdbcType=DOUBLE}, #{lefanOutMony,jdbcType=DOUBLE}, #{lefanTaxMony,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.ThinkDataDetail" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into think_data_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="thinkDataId != null" >
+        think_data_id,
+      </if>
+      <if test="dataType != null" >
+        data_type,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="depAccMony != null" >
+        dep_acc_mony,
+      </if>
+      <if test="lefanInMony != null" >
+        lefan_in_mony,
+      </if>
+      <if test="lefanOutMony != null" >
+        lefan_out_mony,
+      </if>
+      <if test="lefanTaxMony != null" >
+        lefan_tax_mony,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="thinkDataId != null" >
+        #{thinkDataId,jdbcType=BIGINT},
+      </if>
+      <if test="dataType != null" >
+        #{dataType,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="depAccMony != null" >
+        #{depAccMony,jdbcType=DOUBLE},
+      </if>
+      <if test="lefanInMony != null" >
+        #{lefanInMony,jdbcType=DOUBLE},
+      </if>
+      <if test="lefanOutMony != null" >
+        #{lefanOutMony,jdbcType=DOUBLE},
+      </if>
+      <if test="lefanTaxMony != null" >
+        #{lefanTaxMony,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.ThinkDataDetail" >
+    update think_data_detail
+    <set >
+      <if test="thinkDataId != null" >
+        think_data_id = #{thinkDataId,jdbcType=BIGINT},
+      </if>
+      <if test="dataType != null" >
+        data_type = #{dataType,jdbcType=INTEGER},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="depAccMony != null" >
+        dep_acc_mony = #{depAccMony,jdbcType=DOUBLE},
+      </if>
+      <if test="lefanInMony != null" >
+        lefan_in_mony = #{lefanInMony,jdbcType=DOUBLE},
+      </if>
+      <if test="lefanOutMony != null" >
+        lefan_out_mony = #{lefanOutMony,jdbcType=DOUBLE},
+      </if>
+      <if test="lefanTaxMony != null" >
+        lefan_tax_mony = #{lefanTaxMony,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.ThinkDataDetail" >
+    update think_data_detail
+    set think_data_id = #{thinkDataId,jdbcType=BIGINT},
+      data_type = #{dataType,jdbcType=INTEGER},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      dep_acc_mony = #{depAccMony,jdbcType=DOUBLE},
+      lefan_in_mony = #{lefanInMony,jdbcType=DOUBLE},
+      lefan_out_mony = #{lefanOutMony,jdbcType=DOUBLE},
+      lefan_tax_mony = #{lefanTaxMony,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="insertStaffOrg" parameterType="java.util.Map">
+    insert into think_data_detail(think_data_id,data_type,org_id,org_name,state)
+    select
+    #{thinkDataId,jdbcType=BIGINT},
+    (case o.organ_attribute when 1 then 1 when 3 then 2 when 2 then 3 end),
+    o.id,o.name,1
+     from staff_organ o
+     where o.delete_flag = 0 and o.organ_attribute in (1,2,3) and o.acc_out_equal = 0
+  </insert>
+
+  <insert id="insertBillcorporation" parameterType="java.util.Map">
+    insert into think_data_detail(think_data_id,data_type,org_id,org_name,state)
+    select
+    #{thinkDataId,jdbcType=BIGINT},
+    4,o.id,o.name,3
+     from billing_apply_corporation o
+     where o.delete_flag = 0
+  </insert>
+
+  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    d.*
+    from think_data_detail d
+    left join staff_organ o on d.org_id = o.id
+    where 1 = 1
+    <if test="thinkDataId != null">
+      and d.think_data_id = #{thinkDataId,jdbcType=BIGINT}
+    </if>
+    <if test="orgId != null">
+      and d.org_id = #{orgId,jdbcType=BIGINT}
+    </if>
+    <if test="dataType != null">
+      and d.data_type = #{dataType,jdbcType=BIGINT}
+    </if>
+
+    <if test="oneRole ==1 or twoRole == 1 or threeRole == 1 or fourRole == 1">
+      and (
+        1 = 2
+          <if test="oneRole == 1">
+            or o.organ_manager_user_id = #{curUserId,jdbcType=BIGINT}
+          </if>
+          <if test="twoRole == 1">
+            or o.superior_manager_user_id = #{curUserId,jdbcType=BIGINT}
+          </if>
+          <if test="threeRole == 1">
+            or data_type = 4
+          </if>
+          <if test="fourRole == 1">
+            or 1 = 1
+          </if>
+        )
+    </if>
+
+  </select>
+</mapper>

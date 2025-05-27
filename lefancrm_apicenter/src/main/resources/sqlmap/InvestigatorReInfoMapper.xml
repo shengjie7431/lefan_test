@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.InvestigatorReInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.InvestigatorReInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="re_name" property="reName" jdbcType="VARCHAR" />
+    <result column="total_money" property="totalMoney" jdbcType="DOUBLE" />
+    <result column="re_state" property="reState" jdbcType="INTEGER" />
+    <result column="down_time" property="downTime" jdbcType="TIMESTAMP" />
+    <result column="org_check_time" property="orgCheckTime" jdbcType="TIMESTAMP" />
+    <result column="finance_check_time" property="financeCheckTime" jdbcType="TIMESTAMP" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="finsh_time" property="finshTime" jdbcType="TIMESTAMP" />
+    <result column="survey_org_id" property="surveyOrgId" jdbcType="BIGINT" />
+    <result column="survey_org_name" property="surveyOrgName" jdbcType="VARCHAR" />
+    <result column="survey_user_id" property="surveyUserId" jdbcType="BIGINT" />
+    <result column="survey_user_name" property="surveyUserName" jdbcType="VARCHAR" />
+    <result column="re_id" property="reId" jdbcType="BIGINT" />
+    <result column="re_state_str" property="reStateStr" jdbcType="VARCHAR" />
+    <result column="reject_desc" property="rejectDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, re_name, total_money, re_state, down_time, org_check_time, finance_check_time, 
+    pay_time, finsh_time, survey_org_id, survey_org_name, survey_user_id, survey_user_name, 
+    re_id, re_state_str, reject_desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from investigator_re_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from investigator_re_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.InvestigatorReInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into investigator_re_info (re_name, total_money, re_state, 
+      down_time, org_check_time, finance_check_time, 
+      pay_time, finsh_time, survey_org_id, 
+      survey_org_name, survey_user_id, survey_user_name, 
+      re_id, re_state_str, reject_desc
+      )
+    values (#{reName,jdbcType=VARCHAR}, #{totalMoney,jdbcType=DOUBLE}, #{reState,jdbcType=INTEGER}, 
+      #{downTime,jdbcType=TIMESTAMP}, #{orgCheckTime,jdbcType=TIMESTAMP}, #{financeCheckTime,jdbcType=TIMESTAMP}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{finshTime,jdbcType=TIMESTAMP}, #{surveyOrgId,jdbcType=BIGINT}, 
+      #{surveyOrgName,jdbcType=VARCHAR}, #{surveyUserId,jdbcType=BIGINT}, #{surveyUserName,jdbcType=VARCHAR}, 
+      #{reId,jdbcType=BIGINT}, #{reStateStr,jdbcType=VARCHAR}, #{rejectDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.InvestigatorReInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into investigator_re_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reName != null" >
+        re_name,
+      </if>
+      <if test="totalMoney != null" >
+        total_money,
+      </if>
+      <if test="reState != null" >
+        re_state,
+      </if>
+      <if test="downTime != null" >
+        down_time,
+      </if>
+      <if test="orgCheckTime != null" >
+        org_check_time,
+      </if>
+      <if test="financeCheckTime != null" >
+        finance_check_time,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="finshTime != null" >
+        finsh_time,
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id,
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name,
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id,
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name,
+      </if>
+      <if test="reId != null" >
+        re_id,
+      </if>
+      <if test="reStateStr != null" >
+        re_state_str,
+      </if>
+      <if test="rejectDesc != null" >
+        reject_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reName != null" >
+        #{reName,jdbcType=VARCHAR},
+      </if>
+      <if test="totalMoney != null" >
+        #{totalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="reState != null" >
+        #{reState,jdbcType=INTEGER},
+      </if>
+      <if test="downTime != null" >
+        #{downTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgCheckTime != null" >
+        #{orgCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="financeCheckTime != null" >
+        #{financeCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshTime != null" >
+        #{finshTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="surveyOrgId != null" >
+        #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyUserId != null" >
+        #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="reId != null" >
+        #{reId,jdbcType=BIGINT},
+      </if>
+      <if test="reStateStr != null" >
+        #{reStateStr,jdbcType=VARCHAR},
+      </if>
+      <if test="rejectDesc != null" >
+        #{rejectDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.InvestigatorReInfo" >
+    update investigator_re_info
+    <set >
+      <if test="reName != null" >
+        re_name = #{reName,jdbcType=VARCHAR},
+      </if>
+      <if test="totalMoney != null" >
+        total_money = #{totalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="reState != null" >
+        re_state = #{reState,jdbcType=INTEGER},
+      </if>
+      <if test="downTime != null" >
+        down_time = #{downTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgCheckTime != null" >
+        org_check_time = #{orgCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="financeCheckTime != null" >
+        finance_check_time = #{financeCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshTime != null" >
+        finsh_time = #{finshTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="reId != null" >
+        re_id = #{reId,jdbcType=BIGINT},
+      </if>
+      <if test="reStateStr != null" >
+        re_state_str = #{reStateStr,jdbcType=VARCHAR},
+      </if>
+      <if test="rejectDesc != null" >
+        reject_desc = #{rejectDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.InvestigatorReInfo" >
+    update investigator_re_info
+    set re_name = #{reName,jdbcType=VARCHAR},
+      total_money = #{totalMoney,jdbcType=DOUBLE},
+      re_state = #{reState,jdbcType=INTEGER},
+      down_time = #{downTime,jdbcType=TIMESTAMP},
+      org_check_time = #{orgCheckTime,jdbcType=TIMESTAMP},
+      finance_check_time = #{financeCheckTime,jdbcType=TIMESTAMP},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      finsh_time = #{finshTime,jdbcType=TIMESTAMP},
+      survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      re_id = #{reId,jdbcType=BIGINT},
+      re_state_str = #{reStateStr,jdbcType=VARCHAR},
+      reject_desc = #{rejectDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="suedInsert" parameterType="java.util.Map">
+    insert into investigator_re_info (re_name,total_money,re_state,down_time,org_check_time,finance_check_time,pay_time,finsh_time,survey_org_id,survey_org_name,survey_user_id,survey_user_name,re_id,re_state_str,reject_desc)
+    select #{reName,jdbcType=VARCHAR},0,1,SYSDATE(),null,null,null,null,t.org_id,t.org_name,c.survey_user_id,c.survey_user_name,#{reId,jdbcType=BIGINT},'待提交发票',null
+    from survey_investigator_case c
+    left join survey_investigator t on c.survey_user_id = t.user_id
+    where c.delete_flag = 0 and find_in_set(c.survey_info_id,#{ids,jdbcType=VARCHAR})
+    group by c.survey_user_id
+  </insert>
+
+
+
+  <sql id="wheres">
+    <if test="reId != null">
+      and r.re_id = #{reId,jdbcType=BIGINT}
+    </if>
+    <if test="reState != null" >
+      and r.re_state = #{reState,jdbcType=INTEGER}
+    </if>
+    <if test="feeReName != null">
+      and r.re_name like CONCAT(CONCAT('%',#{feeReName,jdbcType=VARCHAR}), '%')
+    </if>
+    <if test="surveyOrgId != null" >
+      and r.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+    </if>
+    <if test="surveyOrgName != null" >
+      and r.survey_org_name = #{surveyOrgName,jdbcType=VARCHAR}
+    </if>
+    <if test="surveyUserId != null" >
+      and r.survey_user_id = #{surveyUserId,jdbcType=BIGINT}
+    </if>
+    <if test="surveyUserName != null" >
+      and r.survey_user_name = #{surveyUserName,jdbcType=VARCHAR}
+    </if>
+    <if test="investigators != null" >
+      and find_in_set(r.survey_user_id,#{investigators,jdbcType=VARCHAR})
+    </if>
+    <if test="surveyOrgIds != null" >
+      and find_in_set(r.survey_org_id,#{surveyOrgIds,jdbcType=VARCHAR})
+    </if>
+    <if test="parentOrgIds != null" >
+      and find_in_set(r.survey_org_id,#{parentOrgIds,jdbcType=VARCHAR})
+    </if>
+
+  </sql>
+
+  <select id="selectInvestigatorReInfos" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.InvestigatorReInfoDTO">
+    select r.id id,r.re_id reId,r.re_name feeReName,r.survey_org_id surveyOrgId,r.survey_org_name surveyOrgName,
+        r.survey_user_id surveyUserId,r.survey_user_name surveyUserName,r.re_state reState,r.re_state_str reStateName,r.reject_desc rejectDesc,
+        GROUP_CONCAT(CONCAT(c.id,',',s.survey_case_no,',',s.survey_person,',',s.entrust_org_id,',',s.entrust_org_name,',',DATE_FORMAT(c.entrust_report_end_date,'%Y-%m-%d %H:%i'),',',d.Investigator_re_money) separator '_') lineStr,
+    CASE
+    pr.state
+    WHEN 1 THEN
+    '待提交财务审核'
+    WHEN 2 THEN
+    '待财务审核'
+    WHEN 3 THEN
+    '报销完成'
+    WHEN 4 THEN
+    '财务审核驳回' ELSE ''
+    END preStateName
+    from investigator_re_info r
+    left join investigator_re_details d on r.id = d.investigator_re_id
+    left join survey_risk_case_info c on d.survey_info_id = c.id
+    left join survey_risk_case s on c.survey_id = s.id
+    LEFT JOIN investigator_pre_details p ON p.investigator_case_id = d.investigator_case_id
+    LEFT JOIN survey_pre_reimbursement pr ON p.investigator_re_id = pr.id
+    where 1 = 1
+    <include refid="wheres" />
+    group by r.re_id,r.survey_user_id
+    order by
+    <if test="sortField !=null and sortField =='entrustEndDate'">
+      c.entrust_report_end_date
+      <if test="sortType =='down'">
+        desc,
+      </if>
+      <if test="sortType =='up'">
+        asc,
+      </if>
+    </if>
+    r.id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+
+  <select id="selectInvestigatorReInfosSize" parameterType="java.util.Map" resultType="int">
+        select count(1) from (
+          select r.id id,r.re_id reId,r.re_name feeReName,r.survey_org_id surveyOrgId,r.survey_org_name surveyOrgName,
+          r.survey_user_id surveyUserId,r.survey_user_name surveyUserName,r.re_state reState,r.re_state_str reStateName,r.reject_desc rejectDesc,
+          GROUP_CONCAT(CONCAT(c.id,',',s.survey_case_no,',',s.survey_person,',',s.entrust_org_id,',',s.entrust_org_name,',',DATE_FORMAT(c.entrust_report_end_date,'%Y-%m-%d %H:%i'),',',d.Investigator_re_money) separator '_') lineStr
+          from investigator_re_info r
+          left join investigator_re_details d on r.id = d.investigator_re_id
+          left join survey_risk_case_info c on d.survey_info_id = c.id
+          left join survey_risk_case s on c.survey_id = s.id
+          where 1 = 1
+          <include refid="wheres" />
+          group by r.re_id,r.survey_user_id
+          order by r.id
+        ) b
+  </select>
+  <select id="selectReStateBySurveyUserId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM investigator_re_info WHERE survey_user_id = #{surveyUserId,jdbcType=BIGINT} AND re_state = 1 order by id desc
+  </select>
+  <select id="selectByInvestigatorCaseId" resultMap="BaseResultMap">
+    SELECT info.* FROM investigator_re_details de LEFT JOIN investigator_re_info info
+ON de.investigator_re_id = info.id WHERE de.investigator_case_id = #{investigatorCaseId}
+  </select>
+
+  <select id="selectAllSuccessByReId" parameterType="java.lang.Long" resultType="int">
+        select count(1) from investigator_re_info r where r.re_id = #{reId,jdbcType=BIGINT} and r.re_state != 6
+  </select>
+  <select id="selectGroupMoney" resultType="java.util.Map">
+    SELECT r.id id,
+	IFNULL(SUM(IFNULL( i.medical_history_money, 0 )+ IFNULL( i.troubleshooting_money, 0 )+ IFNULL( i.printing_money, 0 )+ IFNULL( i.other_money, 0 )),0) dataFee,
+	IFNULL(SUM(IFNULL( i.accommodatio_money, 0 )),0) hzAccommodationFee,
+	IFNULL(SUM(IFNULL( i.car_money, 0 )+ IFNULL( i.train_money, 0 )+ IFNULL( i.aircraft_money, 0 )),0) hzTransportationFee,
+	IFNULL(SUM(IFNULL( i.self_driving_money, 0 )),0) mileageSubsidy
+	FROM investigator_re_info r
+	LEFT JOIN investigator_re_details d ON r.id = d.investigator_re_id
+	LEFT JOIN survey_reimbursement_info i ON d.survey_info_id = i.survey_info_id
+	LEFT JOIN survey_case_direction dir ON dir.id = i.survey_direction_id
+	WHERE dir.delete_flag = 0 AND dir.have_reimbursement = 1
+    AND dir.survey_investigator_case_id = d.investigator_case_id
+	AND r.id = #{id};
+  </select>
+
+  <update id="updateSurveyRiskInfoReimSate" parameterType="java.lang.Long">
+    update survey_risk_case_info s
+    left join
+    (			select a.survey_info_id from (
+                    select d.survey_info_id,d.investigator_re_id from investigator_re_details d
+                ) a left join investigator_re_details d on a.survey_info_id = d.survey_info_id
+                left join investigator_re_info r on a.investigator_re_id = r.id
+                where r.re_id = #{reId,jdbcType=BIGINT}
+                group by a.survey_info_id having max(r.re_state) = min(r.re_state) and max(r.re_state) = 6
+    ) t on s.id = t.survey_info_id
+    set s.reim_state = 2 where t.survey_info_id is not null
+  </update>
+</mapper>

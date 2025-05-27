@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.HoboProCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.HoboProCase" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="insure_name" property="insureName" jdbcType="VARCHAR" />
+    <result column="insure_dept_name" property="insureDeptName" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="car_no" property="carNo" jdbcType="VARCHAR" />
+    <result column="pro_id" property="proId" jdbcType="BIGINT" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+    <result column="pro_price" property="proPrice" jdbcType="DECIMAL" />
+    <result column="pro_text" property="proText" jdbcType="VARCHAR" />
+    <result column="entrust_time" property="entrustTime" jdbcType="TIMESTAMP" />
+    <result column="dept_id" property="deptId" jdbcType="BIGINT" />
+    <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, insure_name, insure_dept_name, name, id_card, tel, car_no, pro_id, pro_name, 
+    pro_price, pro_text, entrust_time, dept_id, dept_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hobo_pro_case
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hobo_pro_case
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.HoboProCase" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hobo_pro_case (insure_name, insure_dept_name, name, 
+      id_card, tel, car_no, 
+      pro_id, pro_name, pro_price, 
+      pro_text, entrust_time, dept_id, 
+      dept_name)
+    values (#{insureName,jdbcType=VARCHAR}, #{insureDeptName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{carNo,jdbcType=VARCHAR}, 
+      #{proId,jdbcType=BIGINT}, #{proName,jdbcType=VARCHAR}, #{proPrice,jdbcType=DECIMAL}, 
+      #{proText,jdbcType=VARCHAR}, #{entrustTime,jdbcType=TIMESTAMP}, #{deptId,jdbcType=BIGINT}, 
+      #{deptName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.HoboProCase" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hobo_pro_case
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="insureName != null" >
+        insure_name,
+      </if>
+      <if test="insureDeptName != null" >
+        insure_dept_name,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="carNo != null" >
+        car_no,
+      </if>
+      <if test="proId != null" >
+        pro_id,
+      </if>
+      <if test="proName != null" >
+        pro_name,
+      </if>
+      <if test="proPrice != null" >
+        pro_price,
+      </if>
+      <if test="proText != null" >
+        pro_text,
+      </if>
+      <if test="entrustTime != null" >
+        entrust_time,
+      </if>
+      <if test="deptId != null" >
+        dept_id,
+      </if>
+      <if test="deptName != null" >
+        dept_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="insureName != null" >
+        #{insureName,jdbcType=VARCHAR},
+      </if>
+      <if test="insureDeptName != null" >
+        #{insureDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="carNo != null" >
+        #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="proId != null" >
+        #{proId,jdbcType=BIGINT},
+      </if>
+      <if test="proName != null" >
+        #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="proPrice != null" >
+        #{proPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="proText != null" >
+        #{proText,jdbcType=VARCHAR},
+      </if>
+      <if test="entrustTime != null" >
+        #{entrustTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="deptName != null" >
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.HoboProCase" >
+    update hobo_pro_case
+    <set >
+      <if test="insureName != null" >
+        insure_name = #{insureName,jdbcType=VARCHAR},
+      </if>
+      <if test="insureDeptName != null" >
+        insure_dept_name = #{insureDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="carNo != null" >
+        car_no = #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="proId != null" >
+        pro_id = #{proId,jdbcType=BIGINT},
+      </if>
+      <if test="proName != null" >
+        pro_name = #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="proPrice != null" >
+        pro_price = #{proPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="proText != null" >
+        pro_text = #{proText,jdbcType=VARCHAR},
+      </if>
+      <if test="entrustTime != null" >
+        entrust_time = #{entrustTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="deptName != null" >
+        dept_name = #{deptName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.HoboProCase" >
+    update hobo_pro_case
+    set insure_name = #{insureName,jdbcType=VARCHAR},
+      insure_dept_name = #{insureDeptName,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      car_no = #{carNo,jdbcType=VARCHAR},
+      pro_id = #{proId,jdbcType=BIGINT},
+      pro_name = #{proName,jdbcType=VARCHAR},
+      pro_price = #{proPrice,jdbcType=DECIMAL},
+      pro_text = #{proText,jdbcType=VARCHAR},
+      entrust_time = #{entrustTime,jdbcType=TIMESTAMP},
+      dept_id = #{deptId,jdbcType=BIGINT},
+      dept_name = #{deptName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <sql id="joins">
+
+  </sql>
+  <sql id="wheres">
+    <if test="searchStr != null">
+      and
+      (
+      insure_name like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      or insure_dept_name like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      or name like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      or id_card like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      or tel like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      )
+    </if>
+    <if test="carNo != null" >
+      and car_no like CONCAT(CONCAT('%',#{carNo,jdbcType=VARCHAR}), '%')
+    </if>
+    <if test="entrustTimeStart != null">
+      and DATE_FORMAT(entrust_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{entrustTimeStart,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="entrustTimeEnd != null">
+      and DATE_FORMAT(entrust_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{entrustTimeEnd,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="proIds != null" >
+      and find_in_set(pro_id,#{proIds,jdbcType=VARCHAR})
+    </if>
+    <if test="deptId != null" >
+      and find_in_set(dept_id,#{deptId,jdbcType=VARCHAR})
+    </if>
+    <if test="proName != null" >
+      and pro_name like CONCAT(CONCAT('%',#{proName,jdbcType=VARCHAR}), '%')
+    </if>
+  </sql>
+
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hobo_pro_case
+    <include refid="joins" />
+    where 1 = 1
+    <include refid="wheres" />
+    order by id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from hobo_pro_case
+    <include refid="joins" />
+    where 1 = 1
+    <include refid="wheres" />
+  </select>
+
+
+  <update id="saveByData" parameterType="java.util.List">
+    insert into hobo_pro_case(insure_name, insure_dept_name, name, id_card, tel, car_no, pro_id, pro_name, pro_price, pro_text, entrust_time, dept_id, dept_name   )
+    values
+    <foreach collection="data" item="item" separator=",">
+      (
+      #{item.insureName},#{item.insureDeptName},#{item.name},#{item.idCard},#{item.tel},#{item.carNo},#{item.proId},#{item.proName},#{item.proPrice},#{item.proText},#{item.entrustTime},#{item.deptId},#{item.deptName}
+      )
+    </foreach>
+  </update>
+
+
+  <resultMap id="HoboReportDataResult" type="com.lefancrm.apicenter.dto.HoboReportData">
+    <result property="proId" column="proId"/>
+    <result property="proName" column="proName"/>
+    <result property="entrustTime" column="entrustTime"/>
+    <result property="num" column="num"/>
+    <result property="price" column="price"/>
+  </resultMap>
+
+  <select id="selectReportData" parameterType="java.util.Map" resultMap="HoboReportDataResult">
+    select
+    a.pro_id proId,a.pro_name proName,count(1) num,p.pro_price price
+    from hobo_pro_case a
+    left join hobo_pro_info p on a.pro_id = p.id
+    where 1 = 1
+    <if test="entrustTimeStart != null and entrustTimeStart != ''"><!-- 开始时间检索 -->
+      AND date_format(a.entrust_time,'%y%m%d') &gt;= date_format(#{entrustTimeStart},'%y%m%d')
+    </if>
+    <if test="entrustTimeEnd != null and entrustTimeEnd != ''"><!-- 结束时间检索 -->
+      AND date_format(a.entrust_time,'%y%m%d') &lt;= date_format(#{entrustTimeEnd},'%y%m%d')
+    </if>
+    <if test="deptId != null">
+      and a.dept_id = #{deptId}
+    </if>
+    group by a.pro_id
+  </select>
+
+</mapper>

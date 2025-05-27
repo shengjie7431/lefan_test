@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyMessage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="from_user_id" property="fromUserId" jdbcType="BIGINT" />
+    <result column="from_user_name" property="fromUserName" jdbcType="VARCHAR" />
+    <result column="to_user_id" property="toUserId" jdbcType="BIGINT" />
+    <result column="to_user_name" property="toUserName" jdbcType="VARCHAR" />
+    <result column="msg_type" property="msgType" jdbcType="INTEGER" />
+    <result column="from_time" property="fromTime" jdbcType="TIMESTAMP" />
+    <result column="to_time" property="toTime" jdbcType="TIMESTAMP" />
+    <result column="is_read" property="isRead" jdbcType="INTEGER" />
+    <result column="msg_title" property="msgTitle" jdbcType="VARCHAR" />
+    <result column="msg_content" property="msgContent" jdbcType="VARCHAR" />
+    <result column="msg_url" property="msgUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, from_user_id, from_user_name, to_user_id, to_user_name, msg_type, from_time, 
+    to_time, is_read, msg_title, msg_content,msg_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_message
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_message
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyMessage" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_message (from_user_id, from_user_name, to_user_id, 
+      to_user_name, msg_type, from_time, 
+      to_time, is_read, msg_title, 
+      msg_content,msg_url)
+    values (#{fromUserId,jdbcType=BIGINT}, #{fromUserName,jdbcType=VARCHAR}, #{toUserId,jdbcType=BIGINT}, 
+      #{toUserName,jdbcType=VARCHAR}, #{msgType,jdbcType=INTEGER}, #{fromTime,jdbcType=TIMESTAMP},
+      #{toTime,jdbcType=TIMESTAMP}, #{isRead,jdbcType=INTEGER}, #{msgTitle,jdbcType=VARCHAR},
+      #{msgContent,jdbcType=VARCHAR},#{msgUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyMessage" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fromUserId != null" >
+        from_user_id,
+      </if>
+      <if test="fromUserName != null" >
+        from_user_name,
+      </if>
+      <if test="toUserId != null" >
+        to_user_id,
+      </if>
+      <if test="toUserName != null" >
+        to_user_name,
+      </if>
+      <if test="msgType != null" >
+        msg_type,
+      </if>
+      <if test="fromTime != null" >
+        from_time,
+      </if>
+      <if test="toTime != null" >
+        to_time,
+      </if>
+      <if test="isRead != null" >
+        is_read,
+      </if>
+      <if test="msgTitle != null" >
+        msg_title,
+      </if>
+      <if test="msgContent != null" >
+        msg_content,
+      </if>
+      <if test="msgUrl != null" >
+        msg_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fromUserId != null" >
+        #{fromUserId,jdbcType=BIGINT},
+      </if>
+      <if test="fromUserName != null" >
+        #{fromUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="toUserId != null" >
+        #{toUserId,jdbcType=BIGINT},
+      </if>
+      <if test="toUserName != null" >
+        #{toUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="msgType != null" >
+        #{msgType,jdbcType=INTEGER},
+      </if>
+      <if test="fromTime != null" >
+        #{fromTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toTime != null" >
+        #{toTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isRead != null" >
+        #{isRead,jdbcType=INTEGER},
+      </if>
+      <if test="msgTitle != null" >
+        #{msgTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="msgContent != null" >
+        #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgUrl != null" >
+        #{msgUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyMessage" >
+    update survey_message
+    <set >
+      <if test="fromUserId != null" >
+        from_user_id = #{fromUserId,jdbcType=BIGINT},
+      </if>
+      <if test="fromUserName != null" >
+        from_user_name = #{fromUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="toUserId != null" >
+        to_user_id = #{toUserId,jdbcType=BIGINT},
+      </if>
+      <if test="toUserName != null" >
+        to_user_name = #{toUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="msgType != null" >
+        msg_type = #{msgType,jdbcType=INTEGER},
+      </if>
+      <if test="fromTime != null" >
+        from_time = #{fromTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="toTime != null" >
+        to_time = #{toTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isRead != null" >
+        is_read = #{isRead,jdbcType=INTEGER},
+      </if>
+      <if test="msgTitle != null" >
+        msg_title = #{msgTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="msgContent != null" >
+        msg_content = #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgUrl != null" >
+        msg_url = #{msgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyMessage" >
+    update survey_message
+    set from_user_id = #{fromUserId,jdbcType=BIGINT},
+      from_user_name = #{fromUserName,jdbcType=VARCHAR},
+      to_user_id = #{toUserId,jdbcType=BIGINT},
+      to_user_name = #{toUserName,jdbcType=VARCHAR},
+      msg_type = #{msgType,jdbcType=INTEGER},
+      from_time = #{fromTime,jdbcType=TIMESTAMP},
+      to_time = #{toTime,jdbcType=TIMESTAMP},
+      is_read = #{isRead,jdbcType=INTEGER},
+      msg_title = #{msgTitle,jdbcType=VARCHAR},
+      msg_content = #{msgContent,jdbcType=VARCHAR},
+      msg_url = #{msgUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="toUserId!=null">
+            and to_user_id = #{toUserId,jdbcType=BIGINT}
+        </if>
+        <if test="msgType != null" >
+            and msg_type = #{msgType,jdbcType=INTEGER}
+        </if>
+        <if test="isRead != null" >
+            and is_read = #{isRead,jdbcType=INTEGER}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_message
+        <include refid="joins" />
+        where 1 = 1
+        <include refid="wheres" />
+        order by is_read asc, id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_message
+        <include refid="joins" />
+        where  1 = 1
+        <include refid="wheres" />
+    </select>
+
+    <update id="updateByToUserIdAndType" parameterType="map" >
+        update survey_message
+        set to_time = now(), is_read = 1
+        where to_user_id = #{toUserId,jdbcType=BIGINT} and msg_type = #{msgType,jdbcType=INTEGER}
+    </update>
+</mapper>

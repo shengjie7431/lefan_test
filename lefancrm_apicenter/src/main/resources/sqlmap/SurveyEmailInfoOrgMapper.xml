@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyEmailInfoOrgMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyEmailInfoOrg" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="email_info_id" property="emailInfoId" jdbcType="BIGINT" />
+    <result column="email_info_name" property="emailInfoName" jdbcType="VARCHAR" />
+    <result column="entrust_org_id" property="entrustOrgId" jdbcType="BIGINT" />
+    <result column="entrust_org_name" property="entrustOrgName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, email_info_id, email_info_name, entrust_org_id, entrust_org_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_email_info_org
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_email_info_org
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyEmailInfoOrg" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_email_info_org (email_info_id, email_info_name, entrust_org_id, 
+      entrust_org_name)
+    values (#{emailInfoId,jdbcType=BIGINT}, #{emailInfoName,jdbcType=VARCHAR}, #{entrustOrgId,jdbcType=BIGINT}, 
+      #{entrustOrgName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyEmailInfoOrg" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_email_info_org
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="emailInfoId != null" >
+        email_info_id,
+      </if>
+      <if test="emailInfoName != null" >
+        email_info_name,
+      </if>
+      <if test="entrustOrgId != null" >
+        entrust_org_id,
+      </if>
+      <if test="entrustOrgName != null" >
+        entrust_org_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="emailInfoId != null" >
+        #{emailInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="emailInfoName != null" >
+        #{emailInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="entrustOrgId != null" >
+        #{entrustOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="entrustOrgName != null" >
+        #{entrustOrgName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyEmailInfoOrg" >
+    update survey_email_info_org
+    <set >
+      <if test="emailInfoId != null" >
+        email_info_id = #{emailInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="emailInfoName != null" >
+        email_info_name = #{emailInfoName,jdbcType=VARCHAR},
+      </if>
+      <if test="entrustOrgId != null" >
+        entrust_org_id = #{entrustOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="entrustOrgName != null" >
+        entrust_org_name = #{entrustOrgName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyEmailInfoOrg" >
+    update survey_email_info_org
+    set email_info_id = #{emailInfoId,jdbcType=BIGINT},
+      email_info_name = #{emailInfoName,jdbcType=VARCHAR},
+      entrust_org_id = #{entrustOrgId,jdbcType=BIGINT},
+      entrust_org_name = #{entrustOrgName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="emailInfoId != null" >
+            and email_info_id = #{emailInfoId,jdbcType=BIGINT}
+        </if>
+        <if test="entrustOrgId != null" >
+            and entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_email_info_org
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id asc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_email_info_org
+        <include refid="joins" />
+        where  1=1
+        <include refid="wheres" />
+    </select>
+
+    <delete id="deleteByInfo" parameterType="map" >
+        delete from survey_email_info_org
+        where email_info_id = #{emailInfoId,jdbcType=BIGINT}
+    </delete>
+
+    <select id="selectByEntrustOrgId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_email_info_org
+        where entrust_org_id = #{entrustOrgId,jdbcType=BIGINT} limit 1
+    </select>
+</mapper>

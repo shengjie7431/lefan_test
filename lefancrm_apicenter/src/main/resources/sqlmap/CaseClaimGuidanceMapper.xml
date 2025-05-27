@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseClaimGuidanceMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseClaimGuidance" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+        <result column="case_id" property="caseId" jdbcType="BIGINT" />
+        <result column="disability" property="disability" jdbcType="VARCHAR" />
+        <result column="domicile" property="domicile" jdbcType="VARCHAR" />
+        <result column="delay_work" property="delayWork" jdbcType="VARCHAR" />
+        <result column="accident_property" property="accidentProperty" jdbcType="VARCHAR" />
+        <result column="insurance_liability" property="insuranceLiability" jdbcType="VARCHAR" />
+        <result column="other" property="other" jdbcType="VARCHAR" />
+        <result column="guidance_person_id" property="guidancePersonId" jdbcType="BIGINT" />
+        <result column="guidance_person_name" property="guidancePersonName" jdbcType="VARCHAR" />
+        <result column="guidance_state" property="guidanceState" jdbcType="INTEGER" />
+        <result column="guidance_reject" property="guidanceReject" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="case_center_id" property="caseCenterId" jdbcType="BIGINT" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, case_no, case_id, disability, domicile, delay_work, accident_property, insurance_liability,
+        other, guidance_person_id, guidance_person_name, guidance_state, guidance_reject,
+        create_time, case_center_id
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from case_claim_guidance
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from case_claim_guidance
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseClaimGuidance" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_claim_guidance (case_no, case_id, disability,
+        domicile, delay_work, accident_property,
+        insurance_liability, other, guidance_person_id,
+        guidance_person_name, guidance_state, guidance_reject,
+        create_time, case_center_id)
+        values (#{caseNo,jdbcType=VARCHAR}, #{caseId,jdbcType=BIGINT}, #{disability,jdbcType=VARCHAR},
+        #{domicile,jdbcType=VARCHAR}, #{delayWork,jdbcType=VARCHAR}, #{accidentProperty,jdbcType=VARCHAR},
+        #{insuranceLiability,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, #{guidancePersonId,jdbcType=BIGINT},
+        #{guidancePersonName,jdbcType=VARCHAR}, #{guidanceState,jdbcType=INTEGER}, #{guidanceReject,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{caseCenterId,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseClaimGuidance" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_claim_guidance
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="caseNo != null" >
+                case_no,
+            </if>
+            <if test="caseId != null" >
+                case_id,
+            </if>
+            <if test="disability != null" >
+                disability,
+            </if>
+            <if test="domicile != null" >
+                domicile,
+            </if>
+            <if test="delayWork != null" >
+                delay_work,
+            </if>
+            <if test="accidentProperty != null" >
+                accident_property,
+            </if>
+            <if test="insuranceLiability != null" >
+                insurance_liability,
+            </if>
+            <if test="other != null" >
+                other,
+            </if>
+            <if test="guidancePersonId != null" >
+                guidance_person_id,
+            </if>
+            <if test="guidancePersonName != null" >
+                guidance_person_name,
+            </if>
+            <if test="guidanceState != null" >
+                guidance_state,
+            </if>
+            <if test="guidanceReject != null" >
+                guidance_reject,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="caseCenterId != null" >
+                case_center_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="caseNo != null" >
+                #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="caseId != null" >
+                #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="disability != null" >
+                #{disability,jdbcType=VARCHAR},
+            </if>
+            <if test="domicile != null" >
+                #{domicile,jdbcType=VARCHAR},
+            </if>
+            <if test="delayWork != null" >
+                #{delayWork,jdbcType=VARCHAR},
+            </if>
+            <if test="accidentProperty != null" >
+                #{accidentProperty,jdbcType=VARCHAR},
+            </if>
+            <if test="insuranceLiability != null" >
+                #{insuranceLiability,jdbcType=VARCHAR},
+            </if>
+            <if test="other != null" >
+                #{other,jdbcType=VARCHAR},
+            </if>
+            <if test="guidancePersonId != null" >
+                #{guidancePersonId,jdbcType=BIGINT},
+            </if>
+            <if test="guidancePersonName != null" >
+                #{guidancePersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="guidanceState != null" >
+                #{guidanceState,jdbcType=INTEGER},
+            </if>
+            <if test="guidanceReject != null" >
+                #{guidanceReject,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="caseCenterId != null" >
+                #{caseCenterId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseClaimGuidance" >
+        update case_claim_guidance
+        <set >
+            <if test="caseNo != null" >
+                case_no = #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="caseId != null" >
+                case_id = #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="disability != null" >
+                disability = #{disability,jdbcType=VARCHAR},
+            </if>
+            <if test="domicile != null" >
+                domicile = #{domicile,jdbcType=VARCHAR},
+            </if>
+            <if test="delayWork != null" >
+                delay_work = #{delayWork,jdbcType=VARCHAR},
+            </if>
+            <if test="accidentProperty != null" >
+                accident_property = #{accidentProperty,jdbcType=VARCHAR},
+            </if>
+            <if test="insuranceLiability != null" >
+                insurance_liability = #{insuranceLiability,jdbcType=VARCHAR},
+            </if>
+            <if test="other != null" >
+                other = #{other,jdbcType=VARCHAR},
+            </if>
+            <if test="guidancePersonId != null" >
+                guidance_person_id = #{guidancePersonId,jdbcType=BIGINT},
+            </if>
+            <if test="guidancePersonName != null" >
+                guidance_person_name = #{guidancePersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="guidanceState != null" >
+                guidance_state = #{guidanceState,jdbcType=INTEGER},
+            </if>
+            <if test="guidanceReject != null" >
+                guidance_reject = #{guidanceReject,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="caseCenterId != null" >
+                case_center_id = #{caseCenterId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseClaimGuidance" >
+        update case_claim_guidance
+        set case_no = #{caseNo,jdbcType=VARCHAR},
+        case_id = #{caseId,jdbcType=BIGINT},
+        disability = #{disability,jdbcType=VARCHAR},
+        domicile = #{domicile,jdbcType=VARCHAR},
+        delay_work = #{delayWork,jdbcType=VARCHAR},
+        accident_property = #{accidentProperty,jdbcType=VARCHAR},
+        insurance_liability = #{insuranceLiability,jdbcType=VARCHAR},
+        other = #{other,jdbcType=VARCHAR},
+        guidance_person_id = #{guidancePersonId,jdbcType=BIGINT},
+        guidance_person_name = #{guidancePersonName,jdbcType=VARCHAR},
+        guidance_state = #{guidanceState,jdbcType=INTEGER},
+        guidance_reject = #{guidanceReject,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        case_center_id = #{caseCenterId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByCaseCenterId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from case_claim_guidance
+        where case_center_id = #{caseCenterId,jdbcType=BIGINT}
+        order by id desc limit 1
+    </select>
+</mapper>

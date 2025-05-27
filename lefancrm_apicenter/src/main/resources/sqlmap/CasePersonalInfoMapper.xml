@@ -1,0 +1,1053 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CasePersonalInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CasePersonalInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="case_type" property="caseType" jdbcType="INTEGER" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="user_tel" property="userTel" jdbcType="VARCHAR" />
+    <result column="visit_hospital" property="visitHospital" jdbcType="VARCHAR" />
+    <result column="bed_number" property="bedNumber" jdbcType="VARCHAR" />
+    <result column="injury_desc" property="injuryDesc" jdbcType="VARCHAR" />
+    <result column="danger_address" property="dangerAddress" jdbcType="VARCHAR" />
+    <result column="danger_time" property="dangerTime" jdbcType="TIMESTAMP" />
+    <result column="salesman_id" property="salesmanId" jdbcType="BIGINT" />
+    <result column="salesman_name" property="salesmanName" jdbcType="VARCHAR" />
+    <result column="into_time" property="intoTime" jdbcType="TIMESTAMP" />
+    <result column="is_target" property="isTarget" jdbcType="INTEGER" />
+    <result column="is_contact" property="isContact" jdbcType="INTEGER" />
+    <result column="is_keep_tel" property="isKeepTel" jdbcType="INTEGER" />
+    <result column="disability_grade" property="disabilityGrade" jdbcType="VARCHAR" />
+    <result column="is_potential" property="isPotential" jdbcType="INTEGER" />
+    <result column="is_intention" property="isIntention" jdbcType="INTEGER" />
+    <result column="is_sign" property="isSign" jdbcType="INTEGER" />
+    <result column="is_overtime" property="isOvertime" jdbcType="INTEGER" />
+    <result column="timeout_day" property="timeoutDay" jdbcType="INTEGER" />
+    <result column="service_agreement" property="serviceAgreement" jdbcType="INTEGER" />
+    <result column="agent_agreement" property="agentAgreement" jdbcType="INTEGER" />
+    <result column="entrust_agreement" property="entrustAgreement" jdbcType="INTEGER" />
+    <result column="is_registration" property="isRegistration" jdbcType="INTEGER" />
+    <result column="is_passed" property="isPassed" jdbcType="INTEGER" />
+    <result column="estimate_service_money" property="estimateServiceMoney" jdbcType="DOUBLE" />
+    <result column="advance_basic_money" property="advanceBasicMoney" jdbcType="DOUBLE" />
+    <result column="charging_type" property="chargingType" jdbcType="INTEGER" />
+    <result column="audit_service_money" property="auditServiceMoney" jdbcType="DOUBLE" />
+    <result column="audit_desc" property="auditDesc" jdbcType="VARCHAR" />
+    <result column="receivable_service_money" property="receivableServiceMoney" jdbcType="DOUBLE" />
+    <result column="difference_cause" property="differenceCause" jdbcType="VARCHAR" />
+    <result column="received_money" property="receivedMoney" jdbcType="DOUBLE" />
+    <result column="received_time" property="receivedTime" jdbcType="TIMESTAMP" />
+    <result column="is_settlement_commission" property="isSettlementCommission" jdbcType="INTEGER" />
+    <result column="is_call_invitation" property="isCallInvitation" jdbcType="INTEGER" />
+    <result column="is_site_invitation" property="isSiteInvitation" jdbcType="INTEGER" />
+    <result column="is_information_submit" property="isInformationSubmit" jdbcType="INTEGER" />
+    <result column="is_send_invitation_code" property="isSendInvitationCode" jdbcType="INTEGER" />
+    <result column="bespoke_meeting_time" property="bespokeMeetingTime" jdbcType="TIMESTAMP" />
+    <result column="follow_cc" property="followCc" jdbcType="VARCHAR" />
+    <result column="is_meeting" property="isMeeting" jdbcType="INTEGER" />
+    <result column="is_sale_sign" property="isSaleSign" jdbcType="INTEGER" />
+    <result column="meeting_service_agreement" property="meetingServiceAgreement" jdbcType="INTEGER" />
+    <result column="meeting_agent_agreement" property="meetingAgentAgreement" jdbcType="INTEGER" />
+    <result column="meeting_entrust_agreement" property="meetingEntrustAgreement" jdbcType="INTEGER" />
+    <result column="assistance_apply_agreement" property="assistanceApplyAgreement" jdbcType="INTEGER" />
+    <result column="meeting_secrecy_agreement" property="meetingSecrecyAgreement" jdbcType="INTEGER" />
+    <result column="is_meeting_service_money" property="isMeetingServiceMoney" jdbcType="INTEGER" />
+    <result column="is_meeting_sign" property="isMeetingSign" jdbcType="INTEGER" />
+    <result column="is_meeting_received" property="isMeetingReceived" jdbcType="INTEGER" />
+    <result column="is_meeting_sett_commission" property="isMeetingSettCommission" jdbcType="INTEGER" />
+    <result column="is_apply_finance" property="isApplyFinance" jdbcType="INTEGER" />
+    <result column="apply_loan_money" property="applyLoanMoney" jdbcType="DOUBLE" />
+    <result column="apply_loan_time" property="applyLoanTime" jdbcType="TIMESTAMP" />
+    <result column="is_suc_loan_file" property="isSucLoanFile" jdbcType="INTEGER" />
+    <result column="check_loan_money" property="checkLoanMoney" jdbcType="DOUBLE" />
+    <result column="loan_money" property="loanMoney" jdbcType="DOUBLE" />
+    <result column="loan_time" property="loanTime" jdbcType="TIMESTAMP" />
+    <result column="loan_capital_name" property="loanCapitalName" jdbcType="VARCHAR" />
+    <result column="advance_channel_money" property="advanceChannelMoney" jdbcType="DOUBLE" />
+    <result column="advance_interest_money" property="advanceInterestMoney" jdbcType="DOUBLE" />
+    <result column="is_free_loan" property="isFreeLoan" jdbcType="INTEGER" />
+    <result column="is_transfer_loan" property="isTransferLoan" jdbcType="INTEGER" />
+    <result column="is_third_loan" property="isThirdLoan" jdbcType="INTEGER" />
+    <result column="capital_money" property="capitalMoney" jdbcType="DOUBLE" />
+    <result column="interest_money" property="interestMoney" jdbcType="DOUBLE" />
+    <result column="channel_money" property="channelMoney" jdbcType="DOUBLE" />
+    <result column="loan_return_money" property="loanReturnMoney" jdbcType="DOUBLE" />
+    <result column="loan_return_time" property="loanReturnTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_id, case_type, case_no, org_id, org_name, user_name, id_card, user_tel, 
+    visit_hospital, bed_number, injury_desc, danger_address, danger_time, salesman_id, 
+    salesman_name, into_time, is_target, is_contact, is_keep_tel, disability_grade, is_potential, 
+    is_intention, is_sign, is_overtime, timeout_day, service_agreement, agent_agreement, 
+    entrust_agreement, is_registration, is_passed, estimate_service_money, advance_basic_money, 
+    charging_type, audit_service_money, audit_desc, receivable_service_money, difference_cause, 
+    received_money, received_time, is_settlement_commission, is_call_invitation, is_site_invitation, 
+    is_information_submit, is_send_invitation_code, bespoke_meeting_time, follow_cc, 
+    is_meeting, is_sale_sign, meeting_service_agreement, meeting_agent_agreement, meeting_entrust_agreement, 
+    assistance_apply_agreement, meeting_secrecy_agreement, is_meeting_service_money, 
+    is_meeting_sign, is_meeting_received, is_meeting_sett_commission, is_apply_finance, 
+    apply_loan_money, apply_loan_time, is_suc_loan_file, check_loan_money, loan_money, 
+    loan_time, loan_capital_name, advance_channel_money, advance_interest_money, is_free_loan, 
+    is_transfer_loan, is_third_loan, capital_money, interest_money, channel_money, loan_return_money, 
+    loan_return_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_personal_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from case_personal_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CasePersonalInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_personal_info (case_id, case_type, case_no, 
+      org_id, org_name, user_name, 
+      id_card, user_tel, visit_hospital, 
+      bed_number, injury_desc, danger_address, 
+      danger_time, salesman_id, salesman_name, 
+      into_time, is_target, is_contact, 
+      is_keep_tel, disability_grade, is_potential, 
+      is_intention, is_sign, is_overtime, 
+      timeout_day, service_agreement, agent_agreement, 
+      entrust_agreement, is_registration, is_passed, 
+      estimate_service_money, advance_basic_money, 
+      charging_type, audit_service_money, audit_desc, 
+      receivable_service_money, difference_cause, 
+      received_money, received_time, is_settlement_commission, 
+      is_call_invitation, is_site_invitation, is_information_submit, 
+      is_send_invitation_code, bespoke_meeting_time, 
+      follow_cc, is_meeting, is_sale_sign, 
+      meeting_service_agreement, meeting_agent_agreement, 
+      meeting_entrust_agreement, assistance_apply_agreement, 
+      meeting_secrecy_agreement, is_meeting_service_money, 
+      is_meeting_sign, is_meeting_received, is_meeting_sett_commission, 
+      is_apply_finance, apply_loan_money, apply_loan_time, 
+      is_suc_loan_file, check_loan_money, loan_money, 
+      loan_time, loan_capital_name, advance_channel_money, 
+      advance_interest_money, is_free_loan, is_transfer_loan, 
+      is_third_loan, capital_money, interest_money, 
+      channel_money, loan_return_money, loan_return_time
+      )
+    values (#{caseId,jdbcType=BIGINT}, #{caseType,jdbcType=INTEGER}, #{caseNo,jdbcType=VARCHAR}, 
+      #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}, #{visitHospital,jdbcType=VARCHAR}, 
+      #{bedNumber,jdbcType=VARCHAR}, #{injuryDesc,jdbcType=VARCHAR}, #{dangerAddress,jdbcType=VARCHAR}, 
+      #{dangerTime,jdbcType=TIMESTAMP}, #{salesmanId,jdbcType=BIGINT}, #{salesmanName,jdbcType=VARCHAR}, 
+      #{intoTime,jdbcType=TIMESTAMP}, #{isTarget,jdbcType=INTEGER}, #{isContact,jdbcType=INTEGER}, 
+      #{isKeepTel,jdbcType=INTEGER}, #{disabilityGrade,jdbcType=VARCHAR}, #{isPotential,jdbcType=INTEGER}, 
+      #{isIntention,jdbcType=INTEGER}, #{isSign,jdbcType=INTEGER}, #{isOvertime,jdbcType=INTEGER}, 
+      #{timeoutDay,jdbcType=INTEGER}, #{serviceAgreement,jdbcType=INTEGER}, #{agentAgreement,jdbcType=INTEGER}, 
+      #{entrustAgreement,jdbcType=INTEGER}, #{isRegistration,jdbcType=INTEGER}, #{isPassed,jdbcType=INTEGER}, 
+      #{estimateServiceMoney,jdbcType=DOUBLE}, #{advanceBasicMoney,jdbcType=DOUBLE}, 
+      #{chargingType,jdbcType=INTEGER}, #{auditServiceMoney,jdbcType=DOUBLE}, #{auditDesc,jdbcType=VARCHAR}, 
+      #{receivableServiceMoney,jdbcType=DOUBLE}, #{differenceCause,jdbcType=VARCHAR}, 
+      #{receivedMoney,jdbcType=DOUBLE}, #{receivedTime,jdbcType=TIMESTAMP}, #{isSettlementCommission,jdbcType=INTEGER}, 
+      #{isCallInvitation,jdbcType=INTEGER}, #{isSiteInvitation,jdbcType=INTEGER}, #{isInformationSubmit,jdbcType=INTEGER}, 
+      #{isSendInvitationCode,jdbcType=INTEGER}, #{bespokeMeetingTime,jdbcType=TIMESTAMP}, 
+      #{followCc,jdbcType=VARCHAR}, #{isMeeting,jdbcType=INTEGER}, #{isSaleSign,jdbcType=INTEGER}, 
+      #{meetingServiceAgreement,jdbcType=INTEGER}, #{meetingAgentAgreement,jdbcType=INTEGER}, 
+      #{meetingEntrustAgreement,jdbcType=INTEGER}, #{assistanceApplyAgreement,jdbcType=INTEGER}, 
+      #{meetingSecrecyAgreement,jdbcType=INTEGER}, #{isMeetingServiceMoney,jdbcType=INTEGER}, 
+      #{isMeetingSign,jdbcType=INTEGER}, #{isMeetingReceived,jdbcType=INTEGER}, #{isMeetingSettCommission,jdbcType=INTEGER}, 
+      #{isApplyFinance,jdbcType=INTEGER}, #{applyLoanMoney,jdbcType=DOUBLE}, #{applyLoanTime,jdbcType=TIMESTAMP}, 
+      #{isSucLoanFile,jdbcType=INTEGER}, #{checkLoanMoney,jdbcType=DOUBLE}, #{loanMoney,jdbcType=DOUBLE}, 
+      #{loanTime,jdbcType=TIMESTAMP}, #{loanCapitalName,jdbcType=VARCHAR}, #{advanceChannelMoney,jdbcType=DOUBLE}, 
+      #{advanceInterestMoney,jdbcType=DOUBLE}, #{isFreeLoan,jdbcType=INTEGER}, #{isTransferLoan,jdbcType=INTEGER}, 
+      #{isThirdLoan,jdbcType=INTEGER}, #{capitalMoney,jdbcType=DOUBLE}, #{interestMoney,jdbcType=DOUBLE}, 
+      #{channelMoney,jdbcType=DOUBLE}, #{loanReturnMoney,jdbcType=DOUBLE}, #{loanReturnTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CasePersonalInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_personal_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseType != null" >
+        case_type,
+      </if>
+      <if test="caseNo != null" >
+        case_no,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="userTel != null" >
+        user_tel,
+      </if>
+      <if test="visitHospital != null" >
+        visit_hospital,
+      </if>
+      <if test="bedNumber != null" >
+        bed_number,
+      </if>
+      <if test="injuryDesc != null" >
+        injury_desc,
+      </if>
+      <if test="dangerAddress != null" >
+        danger_address,
+      </if>
+      <if test="dangerTime != null" >
+        danger_time,
+      </if>
+      <if test="salesmanId != null" >
+        salesman_id,
+      </if>
+      <if test="salesmanName != null" >
+        salesman_name,
+      </if>
+      <if test="intoTime != null" >
+        into_time,
+      </if>
+      <if test="isTarget != null" >
+        is_target,
+      </if>
+      <if test="isContact != null" >
+        is_contact,
+      </if>
+      <if test="isKeepTel != null" >
+        is_keep_tel,
+      </if>
+      <if test="disabilityGrade != null" >
+        disability_grade,
+      </if>
+      <if test="isPotential != null" >
+        is_potential,
+      </if>
+      <if test="isIntention != null" >
+        is_intention,
+      </if>
+      <if test="isSign != null" >
+        is_sign,
+      </if>
+      <if test="isOvertime != null" >
+        is_overtime,
+      </if>
+      <if test="timeoutDay != null" >
+        timeout_day,
+      </if>
+      <if test="serviceAgreement != null" >
+        service_agreement,
+      </if>
+      <if test="agentAgreement != null" >
+        agent_agreement,
+      </if>
+      <if test="entrustAgreement != null" >
+        entrust_agreement,
+      </if>
+      <if test="isRegistration != null" >
+        is_registration,
+      </if>
+      <if test="isPassed != null" >
+        is_passed,
+      </if>
+      <if test="estimateServiceMoney != null" >
+        estimate_service_money,
+      </if>
+      <if test="advanceBasicMoney != null" >
+        advance_basic_money,
+      </if>
+      <if test="chargingType != null" >
+        charging_type,
+      </if>
+      <if test="auditServiceMoney != null" >
+        audit_service_money,
+      </if>
+      <if test="auditDesc != null" >
+        audit_desc,
+      </if>
+      <if test="receivableServiceMoney != null" >
+        receivable_service_money,
+      </if>
+      <if test="differenceCause != null" >
+        difference_cause,
+      </if>
+      <if test="receivedMoney != null" >
+        received_money,
+      </if>
+      <if test="receivedTime != null" >
+        received_time,
+      </if>
+      <if test="isSettlementCommission != null" >
+        is_settlement_commission,
+      </if>
+      <if test="isCallInvitation != null" >
+        is_call_invitation,
+      </if>
+      <if test="isSiteInvitation != null" >
+        is_site_invitation,
+      </if>
+      <if test="isInformationSubmit != null" >
+        is_information_submit,
+      </if>
+      <if test="isSendInvitationCode != null" >
+        is_send_invitation_code,
+      </if>
+      <if test="bespokeMeetingTime != null" >
+        bespoke_meeting_time,
+      </if>
+      <if test="followCc != null" >
+        follow_cc,
+      </if>
+      <if test="isMeeting != null" >
+        is_meeting,
+      </if>
+      <if test="isSaleSign != null" >
+        is_sale_sign,
+      </if>
+      <if test="meetingServiceAgreement != null" >
+        meeting_service_agreement,
+      </if>
+      <if test="meetingAgentAgreement != null" >
+        meeting_agent_agreement,
+      </if>
+      <if test="meetingEntrustAgreement != null" >
+        meeting_entrust_agreement,
+      </if>
+      <if test="assistanceApplyAgreement != null" >
+        assistance_apply_agreement,
+      </if>
+      <if test="meetingSecrecyAgreement != null" >
+        meeting_secrecy_agreement,
+      </if>
+      <if test="isMeetingServiceMoney != null" >
+        is_meeting_service_money,
+      </if>
+      <if test="isMeetingSign != null" >
+        is_meeting_sign,
+      </if>
+      <if test="isMeetingReceived != null" >
+        is_meeting_received,
+      </if>
+      <if test="isMeetingSettCommission != null" >
+        is_meeting_sett_commission,
+      </if>
+      <if test="isApplyFinance != null" >
+        is_apply_finance,
+      </if>
+      <if test="applyLoanMoney != null" >
+        apply_loan_money,
+      </if>
+      <if test="applyLoanTime != null" >
+        apply_loan_time,
+      </if>
+      <if test="isSucLoanFile != null" >
+        is_suc_loan_file,
+      </if>
+      <if test="checkLoanMoney != null" >
+        check_loan_money,
+      </if>
+      <if test="loanMoney != null" >
+        loan_money,
+      </if>
+      <if test="loanTime != null" >
+        loan_time,
+      </if>
+      <if test="loanCapitalName != null" >
+        loan_capital_name,
+      </if>
+      <if test="advanceChannelMoney != null" >
+        advance_channel_money,
+      </if>
+      <if test="advanceInterestMoney != null" >
+        advance_interest_money,
+      </if>
+      <if test="isFreeLoan != null" >
+        is_free_loan,
+      </if>
+      <if test="isTransferLoan != null" >
+        is_transfer_loan,
+      </if>
+      <if test="isThirdLoan != null" >
+        is_third_loan,
+      </if>
+      <if test="capitalMoney != null" >
+        capital_money,
+      </if>
+      <if test="interestMoney != null" >
+        interest_money,
+      </if>
+      <if test="channelMoney != null" >
+        channel_money,
+      </if>
+      <if test="loanReturnMoney != null" >
+        loan_return_money,
+      </if>
+      <if test="loanReturnTime != null" >
+        loan_return_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseType != null" >
+        #{caseType,jdbcType=INTEGER},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null" >
+        #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="visitHospital != null" >
+        #{visitHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="bedNumber != null" >
+        #{bedNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="injuryDesc != null" >
+        #{injuryDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerAddress != null" >
+        #{dangerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerTime != null" >
+        #{dangerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesmanId != null" >
+        #{salesmanId,jdbcType=BIGINT},
+      </if>
+      <if test="salesmanName != null" >
+        #{salesmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="intoTime != null" >
+        #{intoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isTarget != null" >
+        #{isTarget,jdbcType=INTEGER},
+      </if>
+      <if test="isContact != null" >
+        #{isContact,jdbcType=INTEGER},
+      </if>
+      <if test="isKeepTel != null" >
+        #{isKeepTel,jdbcType=INTEGER},
+      </if>
+      <if test="disabilityGrade != null" >
+        #{disabilityGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="isPotential != null" >
+        #{isPotential,jdbcType=INTEGER},
+      </if>
+      <if test="isIntention != null" >
+        #{isIntention,jdbcType=INTEGER},
+      </if>
+      <if test="isSign != null" >
+        #{isSign,jdbcType=INTEGER},
+      </if>
+      <if test="isOvertime != null" >
+        #{isOvertime,jdbcType=INTEGER},
+      </if>
+      <if test="timeoutDay != null" >
+        #{timeoutDay,jdbcType=INTEGER},
+      </if>
+      <if test="serviceAgreement != null" >
+        #{serviceAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="agentAgreement != null" >
+        #{agentAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="entrustAgreement != null" >
+        #{entrustAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="isRegistration != null" >
+        #{isRegistration,jdbcType=INTEGER},
+      </if>
+      <if test="isPassed != null" >
+        #{isPassed,jdbcType=INTEGER},
+      </if>
+      <if test="estimateServiceMoney != null" >
+        #{estimateServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="advanceBasicMoney != null" >
+        #{advanceBasicMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="chargingType != null" >
+        #{chargingType,jdbcType=INTEGER},
+      </if>
+      <if test="auditServiceMoney != null" >
+        #{auditServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="auditDesc != null" >
+        #{auditDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="receivableServiceMoney != null" >
+        #{receivableServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="differenceCause != null" >
+        #{differenceCause,jdbcType=VARCHAR},
+      </if>
+      <if test="receivedMoney != null" >
+        #{receivedMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="receivedTime != null" >
+        #{receivedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSettlementCommission != null" >
+        #{isSettlementCommission,jdbcType=INTEGER},
+      </if>
+      <if test="isCallInvitation != null" >
+        #{isCallInvitation,jdbcType=INTEGER},
+      </if>
+      <if test="isSiteInvitation != null" >
+        #{isSiteInvitation,jdbcType=INTEGER},
+      </if>
+      <if test="isInformationSubmit != null" >
+        #{isInformationSubmit,jdbcType=INTEGER},
+      </if>
+      <if test="isSendInvitationCode != null" >
+        #{isSendInvitationCode,jdbcType=INTEGER},
+      </if>
+      <if test="bespokeMeetingTime != null" >
+        #{bespokeMeetingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followCc != null" >
+        #{followCc,jdbcType=VARCHAR},
+      </if>
+      <if test="isMeeting != null" >
+        #{isMeeting,jdbcType=INTEGER},
+      </if>
+      <if test="isSaleSign != null" >
+        #{isSaleSign,jdbcType=INTEGER},
+      </if>
+      <if test="meetingServiceAgreement != null" >
+        #{meetingServiceAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="meetingAgentAgreement != null" >
+        #{meetingAgentAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="meetingEntrustAgreement != null" >
+        #{meetingEntrustAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="assistanceApplyAgreement != null" >
+        #{assistanceApplyAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="meetingSecrecyAgreement != null" >
+        #{meetingSecrecyAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="isMeetingServiceMoney != null" >
+        #{isMeetingServiceMoney,jdbcType=INTEGER},
+      </if>
+      <if test="isMeetingSign != null" >
+        #{isMeetingSign,jdbcType=INTEGER},
+      </if>
+      <if test="isMeetingReceived != null" >
+        #{isMeetingReceived,jdbcType=INTEGER},
+      </if>
+      <if test="isMeetingSettCommission != null" >
+        #{isMeetingSettCommission,jdbcType=INTEGER},
+      </if>
+      <if test="isApplyFinance != null" >
+        #{isApplyFinance,jdbcType=INTEGER},
+      </if>
+      <if test="applyLoanMoney != null" >
+        #{applyLoanMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="applyLoanTime != null" >
+        #{applyLoanTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSucLoanFile != null" >
+        #{isSucLoanFile,jdbcType=INTEGER},
+      </if>
+      <if test="checkLoanMoney != null" >
+        #{checkLoanMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="loanMoney != null" >
+        #{loanMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="loanTime != null" >
+        #{loanTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanCapitalName != null" >
+        #{loanCapitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceChannelMoney != null" >
+        #{advanceChannelMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="advanceInterestMoney != null" >
+        #{advanceInterestMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="isFreeLoan != null" >
+        #{isFreeLoan,jdbcType=INTEGER},
+      </if>
+      <if test="isTransferLoan != null" >
+        #{isTransferLoan,jdbcType=INTEGER},
+      </if>
+      <if test="isThirdLoan != null" >
+        #{isThirdLoan,jdbcType=INTEGER},
+      </if>
+      <if test="capitalMoney != null" >
+        #{capitalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="interestMoney != null" >
+        #{interestMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="channelMoney != null" >
+        #{channelMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="loanReturnMoney != null" >
+        #{loanReturnMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="loanReturnTime != null" >
+        #{loanReturnTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CasePersonalInfo" >
+    update case_personal_info
+    <set >
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseType != null" >
+        case_type = #{caseType,jdbcType=INTEGER},
+      </if>
+      <if test="caseNo != null" >
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null" >
+        user_tel = #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="visitHospital != null" >
+        visit_hospital = #{visitHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="bedNumber != null" >
+        bed_number = #{bedNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="injuryDesc != null" >
+        injury_desc = #{injuryDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerAddress != null" >
+        danger_address = #{dangerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerTime != null" >
+        danger_time = #{dangerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salesmanId != null" >
+        salesman_id = #{salesmanId,jdbcType=BIGINT},
+      </if>
+      <if test="salesmanName != null" >
+        salesman_name = #{salesmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="intoTime != null" >
+        into_time = #{intoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isTarget != null" >
+        is_target = #{isTarget,jdbcType=INTEGER},
+      </if>
+      <if test="isContact != null" >
+        is_contact = #{isContact,jdbcType=INTEGER},
+      </if>
+      <if test="isKeepTel != null" >
+        is_keep_tel = #{isKeepTel,jdbcType=INTEGER},
+      </if>
+      <if test="disabilityGrade != null" >
+        disability_grade = #{disabilityGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="isPotential != null" >
+        is_potential = #{isPotential,jdbcType=INTEGER},
+      </if>
+      <if test="isIntention != null" >
+        is_intention = #{isIntention,jdbcType=INTEGER},
+      </if>
+      <if test="isSign != null" >
+        is_sign = #{isSign,jdbcType=INTEGER},
+      </if>
+      <if test="isOvertime != null" >
+        is_overtime = #{isOvertime,jdbcType=INTEGER},
+      </if>
+      <if test="timeoutDay != null" >
+        timeout_day = #{timeoutDay,jdbcType=INTEGER},
+      </if>
+      <if test="serviceAgreement != null" >
+        service_agreement = #{serviceAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="agentAgreement != null" >
+        agent_agreement = #{agentAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="entrustAgreement != null" >
+        entrust_agreement = #{entrustAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="isRegistration != null" >
+        is_registration = #{isRegistration,jdbcType=INTEGER},
+      </if>
+      <if test="isPassed != null" >
+        is_passed = #{isPassed,jdbcType=INTEGER},
+      </if>
+      <if test="estimateServiceMoney != null" >
+        estimate_service_money = #{estimateServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="advanceBasicMoney != null" >
+        advance_basic_money = #{advanceBasicMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="chargingType != null" >
+        charging_type = #{chargingType,jdbcType=INTEGER},
+      </if>
+      <if test="auditServiceMoney != null" >
+        audit_service_money = #{auditServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="auditDesc != null" >
+        audit_desc = #{auditDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="receivableServiceMoney != null" >
+        receivable_service_money = #{receivableServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="differenceCause != null" >
+        difference_cause = #{differenceCause,jdbcType=VARCHAR},
+      </if>
+      <if test="receivedMoney != null" >
+        received_money = #{receivedMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="receivedTime != null" >
+        received_time = #{receivedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSettlementCommission != null" >
+        is_settlement_commission = #{isSettlementCommission,jdbcType=INTEGER},
+      </if>
+      <if test="isCallInvitation != null" >
+        is_call_invitation = #{isCallInvitation,jdbcType=INTEGER},
+      </if>
+      <if test="isSiteInvitation != null" >
+        is_site_invitation = #{isSiteInvitation,jdbcType=INTEGER},
+      </if>
+      <if test="isInformationSubmit != null" >
+        is_information_submit = #{isInformationSubmit,jdbcType=INTEGER},
+      </if>
+      <if test="isSendInvitationCode != null" >
+        is_send_invitation_code = #{isSendInvitationCode,jdbcType=INTEGER},
+      </if>
+      <if test="bespokeMeetingTime != null" >
+        bespoke_meeting_time = #{bespokeMeetingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followCc != null" >
+        follow_cc = #{followCc,jdbcType=VARCHAR},
+      </if>
+      <if test="isMeeting != null" >
+        is_meeting = #{isMeeting,jdbcType=INTEGER},
+      </if>
+      <if test="isSaleSign != null" >
+        is_sale_sign = #{isSaleSign,jdbcType=INTEGER},
+      </if>
+      <if test="meetingServiceAgreement != null" >
+        meeting_service_agreement = #{meetingServiceAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="meetingAgentAgreement != null" >
+        meeting_agent_agreement = #{meetingAgentAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="meetingEntrustAgreement != null" >
+        meeting_entrust_agreement = #{meetingEntrustAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="assistanceApplyAgreement != null" >
+        assistance_apply_agreement = #{assistanceApplyAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="meetingSecrecyAgreement != null" >
+        meeting_secrecy_agreement = #{meetingSecrecyAgreement,jdbcType=INTEGER},
+      </if>
+      <if test="isMeetingServiceMoney != null" >
+        is_meeting_service_money = #{isMeetingServiceMoney,jdbcType=INTEGER},
+      </if>
+      <if test="isMeetingSign != null" >
+        is_meeting_sign = #{isMeetingSign,jdbcType=INTEGER},
+      </if>
+      <if test="isMeetingReceived != null" >
+        is_meeting_received = #{isMeetingReceived,jdbcType=INTEGER},
+      </if>
+      <if test="isMeetingSettCommission != null" >
+        is_meeting_sett_commission = #{isMeetingSettCommission,jdbcType=INTEGER},
+      </if>
+      <if test="isApplyFinance != null" >
+        is_apply_finance = #{isApplyFinance,jdbcType=INTEGER},
+      </if>
+      <if test="applyLoanMoney != null" >
+        apply_loan_money = #{applyLoanMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="applyLoanTime != null" >
+        apply_loan_time = #{applyLoanTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSucLoanFile != null" >
+        is_suc_loan_file = #{isSucLoanFile,jdbcType=INTEGER},
+      </if>
+      <if test="checkLoanMoney != null" >
+        check_loan_money = #{checkLoanMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="loanMoney != null" >
+        loan_money = #{loanMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="loanTime != null" >
+        loan_time = #{loanTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanCapitalName != null" >
+        loan_capital_name = #{loanCapitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceChannelMoney != null" >
+        advance_channel_money = #{advanceChannelMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="advanceInterestMoney != null" >
+        advance_interest_money = #{advanceInterestMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="isFreeLoan != null" >
+        is_free_loan = #{isFreeLoan,jdbcType=INTEGER},
+      </if>
+      <if test="isTransferLoan != null" >
+        is_transfer_loan = #{isTransferLoan,jdbcType=INTEGER},
+      </if>
+      <if test="isThirdLoan != null" >
+        is_third_loan = #{isThirdLoan,jdbcType=INTEGER},
+      </if>
+      <if test="capitalMoney != null" >
+        capital_money = #{capitalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="interestMoney != null" >
+        interest_money = #{interestMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="channelMoney != null" >
+        channel_money = #{channelMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="loanReturnMoney != null" >
+        loan_return_money = #{loanReturnMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="loanReturnTime != null" >
+        loan_return_time = #{loanReturnTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CasePersonalInfo" >
+    update case_personal_info
+    set case_id = #{caseId,jdbcType=BIGINT},
+      case_type = #{caseType,jdbcType=INTEGER},
+      case_no = #{caseNo,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      user_tel = #{userTel,jdbcType=VARCHAR},
+      visit_hospital = #{visitHospital,jdbcType=VARCHAR},
+      bed_number = #{bedNumber,jdbcType=VARCHAR},
+      injury_desc = #{injuryDesc,jdbcType=VARCHAR},
+      danger_address = #{dangerAddress,jdbcType=VARCHAR},
+      danger_time = #{dangerTime,jdbcType=TIMESTAMP},
+      salesman_id = #{salesmanId,jdbcType=BIGINT},
+      salesman_name = #{salesmanName,jdbcType=VARCHAR},
+      into_time = #{intoTime,jdbcType=TIMESTAMP},
+      is_target = #{isTarget,jdbcType=INTEGER},
+      is_contact = #{isContact,jdbcType=INTEGER},
+      is_keep_tel = #{isKeepTel,jdbcType=INTEGER},
+      disability_grade = #{disabilityGrade,jdbcType=VARCHAR},
+      is_potential = #{isPotential,jdbcType=INTEGER},
+      is_intention = #{isIntention,jdbcType=INTEGER},
+      is_sign = #{isSign,jdbcType=INTEGER},
+      is_overtime = #{isOvertime,jdbcType=INTEGER},
+      timeout_day = #{timeoutDay,jdbcType=INTEGER},
+      service_agreement = #{serviceAgreement,jdbcType=INTEGER},
+      agent_agreement = #{agentAgreement,jdbcType=INTEGER},
+      entrust_agreement = #{entrustAgreement,jdbcType=INTEGER},
+      is_registration = #{isRegistration,jdbcType=INTEGER},
+      is_passed = #{isPassed,jdbcType=INTEGER},
+      estimate_service_money = #{estimateServiceMoney,jdbcType=DOUBLE},
+      advance_basic_money = #{advanceBasicMoney,jdbcType=DOUBLE},
+      charging_type = #{chargingType,jdbcType=INTEGER},
+      audit_service_money = #{auditServiceMoney,jdbcType=DOUBLE},
+      audit_desc = #{auditDesc,jdbcType=VARCHAR},
+      receivable_service_money = #{receivableServiceMoney,jdbcType=DOUBLE},
+      difference_cause = #{differenceCause,jdbcType=VARCHAR},
+      received_money = #{receivedMoney,jdbcType=DOUBLE},
+      received_time = #{receivedTime,jdbcType=TIMESTAMP},
+      is_settlement_commission = #{isSettlementCommission,jdbcType=INTEGER},
+      is_call_invitation = #{isCallInvitation,jdbcType=INTEGER},
+      is_site_invitation = #{isSiteInvitation,jdbcType=INTEGER},
+      is_information_submit = #{isInformationSubmit,jdbcType=INTEGER},
+      is_send_invitation_code = #{isSendInvitationCode,jdbcType=INTEGER},
+      bespoke_meeting_time = #{bespokeMeetingTime,jdbcType=TIMESTAMP},
+      follow_cc = #{followCc,jdbcType=VARCHAR},
+      is_meeting = #{isMeeting,jdbcType=INTEGER},
+      is_sale_sign = #{isSaleSign,jdbcType=INTEGER},
+      meeting_service_agreement = #{meetingServiceAgreement,jdbcType=INTEGER},
+      meeting_agent_agreement = #{meetingAgentAgreement,jdbcType=INTEGER},
+      meeting_entrust_agreement = #{meetingEntrustAgreement,jdbcType=INTEGER},
+      assistance_apply_agreement = #{assistanceApplyAgreement,jdbcType=INTEGER},
+      meeting_secrecy_agreement = #{meetingSecrecyAgreement,jdbcType=INTEGER},
+      is_meeting_service_money = #{isMeetingServiceMoney,jdbcType=INTEGER},
+      is_meeting_sign = #{isMeetingSign,jdbcType=INTEGER},
+      is_meeting_received = #{isMeetingReceived,jdbcType=INTEGER},
+      is_meeting_sett_commission = #{isMeetingSettCommission,jdbcType=INTEGER},
+      is_apply_finance = #{isApplyFinance,jdbcType=INTEGER},
+      apply_loan_money = #{applyLoanMoney,jdbcType=DOUBLE},
+      apply_loan_time = #{applyLoanTime,jdbcType=TIMESTAMP},
+      is_suc_loan_file = #{isSucLoanFile,jdbcType=INTEGER},
+      check_loan_money = #{checkLoanMoney,jdbcType=DOUBLE},
+      loan_money = #{loanMoney,jdbcType=DOUBLE},
+      loan_time = #{loanTime,jdbcType=TIMESTAMP},
+      loan_capital_name = #{loanCapitalName,jdbcType=VARCHAR},
+      advance_channel_money = #{advanceChannelMoney,jdbcType=DOUBLE},
+      advance_interest_money = #{advanceInterestMoney,jdbcType=DOUBLE},
+      is_free_loan = #{isFreeLoan,jdbcType=INTEGER},
+      is_transfer_loan = #{isTransferLoan,jdbcType=INTEGER},
+      is_third_loan = #{isThirdLoan,jdbcType=INTEGER},
+      capital_money = #{capitalMoney,jdbcType=DOUBLE},
+      interest_money = #{interestMoney,jdbcType=DOUBLE},
+      channel_money = #{channelMoney,jdbcType=DOUBLE},
+      loan_return_money = #{loanReturnMoney,jdbcType=DOUBLE},
+      loan_return_time = #{loanReturnTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from case_personal_info b
+        <where>
+            <if test="orgId != null" >
+                and org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="caseNo != null" >
+                and case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="userName != null" >
+                and user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="userTel != null" >
+                and user_tel like concat('%',#{userTel,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseType !=null">
+                and case_type = #{caseType,jdbcType=INTEGER}
+            </if>
+            <if test="isTarget !=null">
+                <if test="isTarget == 1">
+                    and  is_target = #{isTarget,jdbcType=INTEGER}
+                </if>
+                <if test="isTarget == 0">
+                    and (is_target = 0 or is_target is null )
+                </if>
+            </if>
+            <if test="isSign !=null">
+                <if test="isSign == 1">
+                    and is_sign = #{isSign,jdbcType=INTEGER}
+                </if>
+                <if test="isSign == 0">
+                    and (is_sign =0 or is_sign is null )
+                </if>
+            </if>
+            <if test="isApplyFinance !=null">
+                <if test="isApplyFinance == 1">
+                    and is_apply_finance = #{isApplyFinance,jdbcType=INTEGER}
+                </if>
+                <if test="isApplyFinance == 0">
+                    and (is_apply_finance =0 or is_apply_finance is null )
+                </if>
+            </if>
+            <if test="salesmanName != null" >
+                and salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startDate != null" >
+                and DATE_FORMAT(into_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="endDate != null" >
+                and DATE_FORMAT(into_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+        </where>
+        <if test="export != 1">
+            order by id desc limit #{pageIndex} , #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectCountList" resultType="int" parameterType="java.util.Map" >
+        select count(1) from case_personal_info b
+        <where>
+            <if test="orgId != null" >
+                and org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="caseNo != null" >
+                and case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="userName != null" >
+                and user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="userTel != null" >
+                and user_tel like concat('%',#{userTel,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseType !=null">
+                and case_type = #{caseType,jdbcType=INTEGER}
+            </if>
+            <if test="isTarget !=null">
+                <if test="isTarget == 1">
+                    and is_target = #{isTarget,jdbcType=INTEGER}
+                </if>
+                <if test="isTarget == 0">
+                    and (is_target = 0 or is_target is null )
+                </if>
+            </if>
+            <if test="isSign !=null">
+                <if test="isSign == 1">
+                    and is_sign = #{isSign,jdbcType=INTEGER}
+                </if>
+                <if test="isSign == 0">
+                    and (is_sign =0 or is_sign is null )
+                </if>
+            </if>
+            <if test="isApplyFinance !=null">
+                <if test="isApplyFinance == 1">
+                    and is_apply_finance = #{isApplyFinance,jdbcType=INTEGER}
+                </if>
+                <if test="isApplyFinance == 0">
+                    and (is_apply_finance =0 or is_apply_finance is null )
+                </if>
+            </if>
+            <if test="salesmanName != null" >
+                and salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startDate != null" >
+                and DATE_FORMAT(into_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="endDate != null" >
+                and DATE_FORMAT(into_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+        </where>
+    </select>
+</mapper>

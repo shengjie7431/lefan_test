@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BillingApplyCompanyMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BillingApplyCompany" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+        <result column="entrust_org_id" property="entrustOrgId" jdbcType="BIGINT" />
+        <result column="entrust_org_name" property="entrustOrgName" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="BIGINT" />
+        <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, company_name, entrust_org_id, entrust_org_name, create_time, create_by, create_by_name,
+    state, delete_flag
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply_company
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from billing_apply_company
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.BillingApplyCompany" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into billing_apply_company (company_name, entrust_org_id, entrust_org_name,
+        create_time, create_by, create_by_name,
+        state, delete_flag)
+        values (#{companyName,jdbcType=VARCHAR}, #{entrustOrgId,jdbcType=BIGINT}, #{entrustOrgName,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{createByName,jdbcType=VARCHAR},
+        #{state,jdbcType=INTEGER}, #{deleteFlag,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.BillingApplyCompany" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into billing_apply_company
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="companyName != null" >
+                company_name,
+            </if>
+            <if test="entrustOrgId != null" >
+                entrust_org_id,
+            </if>
+            <if test="entrustOrgName != null" >
+                entrust_org_name,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createByName != null" >
+                create_by_name,
+            </if>
+            <if test="state != null" >
+                state,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="companyName != null" >
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustOrgId != null" >
+                #{entrustOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="entrustOrgName != null" >
+                #{entrustOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createByName != null" >
+                #{createByName,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null" >
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.BillingApplyCompany" >
+        update billing_apply_company
+        <set >
+            <if test="companyName != null" >
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustOrgId != null" >
+                entrust_org_id = #{entrustOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="entrustOrgName != null" >
+                entrust_org_name = #{entrustOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createByName != null" >
+                create_by_name = #{createByName,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null" >
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.BillingApplyCompany" >
+    update billing_apply_company
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      entrust_org_id = #{entrustOrgId,jdbcType=BIGINT},
+      entrust_org_name = #{entrustOrgName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_by_name = #{createByName,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        c.*
+        ,n.bill_company_id billCompanyId
+        from billing_apply_company c
+        left join survey_consignor n on c.entrust_org_id = n.id
+        where 1 = 1 and c.delete_flag = 0
+        <if test="companyName!=null">
+            and c.company_name like CONCAT(CONCAT('%',#{companyName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="id != null">
+            and c.id = #{id,jdbcType=BIGINT}
+        </if>
+        <if test="entrustOrgId != null">
+            and c.entrust_org_id = #{entrustOrgId}
+        </if>
+        <if test="state != null">
+            and c.state = #{state}
+        </if>
+        order by c.id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectListSize" resultType="int" parameterType="java.util.Map" >
+        select
+        count(1)
+        from billing_apply_company where 1 = 1 and delete_flag = 0
+        <if test="companyName!=null">
+            and company_name like CONCAT(CONCAT('%',#{companyName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="id != null">
+            and id = #{id,jdbcType=BIGINT}
+        </if>
+        <if test="entrustOrgId != null">
+            and entrust_org_id = #{entrustOrgId}
+        </if>
+        <if test="state != null">
+            and state = #{state}
+        </if>
+    </select>
+
+    <select id="selectByInfo" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply_company
+        where 1 = 1
+        <if test="companyName != null" >
+            and company_name = #{companyName,jdbcType=VARCHAR}
+        </if>
+        <if test="entrustOrgId != null">
+            and entrust_org_id = #{entrustOrgId}
+        </if>
+        <if test="state != null">
+            and state = #{state}
+        </if>
+        limit 1
+    </select>
+</mapper>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseFileMidMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseFileMid" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="file_id" property="fileId" jdbcType="BIGINT" />
+    <result column="catalog_id" property="catalogId" jdbcType="BIGINT" />
+    <result column="catalog_name" property="catalogName" jdbcType="VARCHAR" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseFileMid" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_file_mid (case_id, file_id, catalog_id, 
+      catalog_name,case_no)
+    values (#{caseId,jdbcType=BIGINT}, #{fileId,jdbcType=BIGINT}, #{catalogId,jdbcType=BIGINT}, 
+      #{catalogName,jdbcType=VARCHAR},#{caseNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseFileMid" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_file_mid
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="fileId != null" >
+        file_id,
+      </if>
+      <if test="catalogId != null" >
+        catalog_id,
+      </if>
+      <if test="catalogName != null" >
+        catalog_name,
+      </if>
+        <if test="caseNo != null" >
+            case_no,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=BIGINT},
+      </if>
+      <if test="catalogId != null" >
+        #{catalogId,jdbcType=BIGINT},
+      </if>
+      <if test="catalogName != null" >
+        #{catalogName,jdbcType=VARCHAR},
+      </if>
+        <if test="caseNo != null" >
+            #{caseNo,jdbcType=VARCHAR},
+        </if>
+    </trim>
+  </insert>
+    <select id="selectFileMenuList" resultType="map">
+        SELECT enum_code enumCode,enum_name enumName from common_enum where parent_id=39
+    </select>
+    <select id="selectFilesAddress" parameterType="map" resultType="map">
+        SELECT a.id,b.file_path filePath,b.create_time createTime,DATE_FORMAT(b.create_time,'%Y-%m-%d %H:%i') as createTimeName,
+        a.catalog_name as catalogName
+        from case_file_mid a LEFT JOIN
+        common_file b on a.file_id = b.id
+        WHERE a.case_no=#{caseNo,jdbcType=VARCHAR}
+         <if test="catalogId != 1">
+            and a.catalog_id = #{catalogId,jdbcType=BIGINT}
+         </if>
+        order by b.create_time desc
+    </select>
+    <delete id="deleteFile" parameterType="long">
+        delete from case_file_mid where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByFileId" parameterType="long">
+        delete from case_file_mid where file_id = #{fileId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insertBatchCaseFileMid">
+        insert into case_file_mid(case_id,file_id,catalog_id,catalog_name)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.caseId,jdbcType=BIGINT},
+            #{item.fileId,jdbcType=BIGINT},
+            #{item.catalogId,jdbcType=BIGINT},
+            #{item.catalogName,jdbcType=VARCHAR},
+            #{item.caseNo,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+	<select id="selectByCaseIdAndCatalogId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * from case_file_mid where case_no=#{caseNo,jdbcType=VARCHAR}
+        <if test="catalogId != 1">
+            <if test="catalogId != null">
+                and catalog_id = #{catalogId,jdbcType=BIGINT}
+            </if>
+        </if>
+        order by id desc
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        a.*
+        from case_file_mid a
+        where a.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseFileMid" >
+        update case_file_mid
+        <set >
+            <if test="caseId != null" >
+                case_id = #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="fileId != null" >
+                file_id = #{fileId,jdbcType=BIGINT},
+            </if>
+            <if test="catalogId != null" >
+                catalog_id = #{catalogId,jdbcType=BIGINT},
+            </if>
+            <if test="catalogName != null" >
+                catalog_name = #{catalogName,jdbcType=VARCHAR},
+            </if>
+            <if test="caseNo != null" >
+                case_no = #{caseNo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaSurveyAreaCategoriesAreaCityMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaSurveyAreaCategoriesAreaCity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="price_model_id" property="priceModelId" jdbcType="BIGINT" />
+    <result column="price_model_name" property="priceModelName" jdbcType="VARCHAR" />
+    <result column="area_categories_id" property="areaCategoriesId" jdbcType="BIGINT" />
+    <result column="area_categories_name" property="areaCategoriesName" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="BIGINT" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <resultMap id="CommonAreaBaseResultMap" type="com.lefancrm.apicenter.model.CommonArea" >
+        <id column="area_id" property="areaId" jdbcType="BIGINT" />
+        <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+        <result column="area_type" property="areaType" jdbcType="INTEGER" />
+        <result column="area_shortname" property="areaShortname" jdbcType="VARCHAR" />
+        <result column="area_longname" property="areaLongname" jdbcType="VARCHAR" />
+        <result column="area_order" property="areaOrder" jdbcType="INTEGER" />
+        <result column="long_pinyin" property="longPinyin" jdbcType="VARCHAR" />
+        <result column="short_pinyin" property="shortPinyin" jdbcType="VARCHAR" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="is_show" property="isShow" jdbcType="INTEGER" />
+        <result column="city_type" property="cityType" jdbcType="INTEGER" />
+    </resultMap>
+  <sql id="Base_Column_List" >
+    id, price_model_id, price_model_name, area_categories_id, area_categories_name, area_id, 
+    area_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_survey_area_categories_area_city
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_survey_area_categories_area_city
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyAreaCategoriesAreaCity" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_survey_area_categories_area_city (price_model_id, price_model_name, area_categories_id, 
+      area_categories_name, area_id, area_name
+      )
+    values (#{priceModelId,jdbcType=BIGINT}, #{priceModelName,jdbcType=VARCHAR}, #{areaCategoriesId,jdbcType=BIGINT}, 
+      #{areaCategoriesName,jdbcType=VARCHAR}, #{areaId,jdbcType=BIGINT}, #{areaName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyAreaCategoriesAreaCity" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_survey_area_categories_area_city
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="priceModelId != null" >
+        price_model_id,
+      </if>
+      <if test="priceModelName != null" >
+        price_model_name,
+      </if>
+      <if test="areaCategoriesId != null" >
+        area_categories_id,
+      </if>
+      <if test="areaCategoriesName != null" >
+        area_categories_name,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="areaLongName != null" >
+        area_longname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="priceModelId != null" >
+        #{priceModelId,jdbcType=BIGINT},
+      </if>
+      <if test="priceModelName != null" >
+        #{priceModelName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCategoriesId != null" >
+        #{areaCategoriesId,jdbcType=BIGINT},
+      </if>
+      <if test="areaCategoriesName != null" >
+        #{areaCategoriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaLongName != null" >
+        #{areaLongName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+    <insert id="copyOneByPriceModelId">
+      INSERT INTO fina_survey_area_categories_area_city (price_model_id,price_model_name,area_categories_id,area_categories_name,area_id,area_name,area_longname)
+SELECT #{surveyPriceModelAreaCategory.priceModelId},#{surveyPriceModelAreaCategory.priceModelName},#{surveyPriceModelAreaCategory.id},#{surveyPriceModelAreaCategory.name},area_id,area_name,area_longname FROM fina_survey_area_categories_area_city WHERE price_model_id = #{oldPriceModelId} AND area_categories_id = #{surveyPriceModelAreaCategory.oldAreaCategoriesId}
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyAreaCategoriesAreaCity" >
+    update fina_survey_area_categories_area_city
+    <set >
+      <if test="priceModelId != null" >
+        price_model_id = #{priceModelId,jdbcType=BIGINT},
+      </if>
+      <if test="priceModelName != null" >
+        price_model_name = #{priceModelName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCategoriesId != null" >
+        area_categories_id = #{areaCategoriesId,jdbcType=BIGINT},
+      </if>
+      <if test="areaCategoriesName != null" >
+        area_categories_name = #{areaCategoriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyAreaCategoriesAreaCity" >
+    update fina_survey_area_categories_area_city
+    set price_model_id = #{priceModelId,jdbcType=BIGINT},
+      price_model_name = #{priceModelName,jdbcType=VARCHAR},
+      area_categories_id = #{areaCategoriesId,jdbcType=BIGINT},
+      area_categories_name = #{areaCategoriesName,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=BIGINT},
+      area_name = #{areaName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="priceModelId != null" >
+            and price_model_id = #{priceModelId,jdbcType=BIGINT}
+        </if>
+        <if test="areaCategoriesId != null" >
+            and area_categories_id = #{areaCategoriesId,jdbcType=BIGINT}
+        </if>
+        <if test="areaId != null" >
+            and area_id = #{areaId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from fina_survey_area_categories_area_city
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from fina_survey_area_categories_area_city
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+    <select id="selectAllSelectedCount" resultType="java.lang.Integer">
+      	SELECT COUNT(1) FROM fina_survey_area_categories_area_city WHERE FIND_IN_SET( area_id,#{parentIds}) and  area_categories_id= #{areaCategoriesId}
+
+    </select>
+    <select id="selectAllChildren2" resultType="String">
+        SELECT
+        GROUP_CONCAT(c.area_id)
+        FROM fina_survey_area_categories_area_city c
+        WHERE
+        FIND_IN_SET(c.area_id,(	SELECT GROUP_CONCAT(a.area_id) FROM (
+        SELECT area_id FROM common_area WHERE FIND_IN_SET(parent_id,(SELECT GROUP_CONCAT(area_id) FROM common_area WHERE parent_id = #{areaId}))
+        UNION
+        SELECT area_id FROM common_area WHERE FIND_IN_SET(area_id ,(SELECT GROUP_CONCAT(area_id) FROM common_area WHERE parent_id = #{areaId})))a))
+        AND c.area_categories_id is NOT NULL AND c.area_categories_id = #{getAreaCateGoriesId}
+    </select>
+
+    <select id="selectAllChildren" resultMap="CommonAreaBaseResultMap">
+        SELECT a.*,c.area_categories_name typeName,
+        <if test="getAreaCateGoriesId != null and getAreaCateGoriesId != ''">#{getAreaCateGoriesId} = IFNULL(c.area_categories_id,0) selected</if>
+        <if test="getAreaCateGoriesId == null or getAreaCateGoriesId == ''">false selected</if>
+        ,c.area_categories_id areaCateGoriesId FROM common_area a LEFT JOIN fina_survey_area_categories_area_city c ON a.area_id = c.area_id and c.price_model_id = #{modelId} WHERE a.parent_id = #{areaId}
+    </select>
+
+
+    <delete id="deleteByAreaCategoriesId" parameterType="java.lang.Long" >
+        delete from fina_survey_area_categories_area_city
+        where area_categories_id = #{areaCategoriesId,jdbcType=BIGINT} AND price_model_id = #{modelId}
+    </delete>
+  <delete id="deleteByAreaId">
+     delete from fina_survey_area_categories_area_city
+        where area_id = #{areaId,jdbcType=BIGINT} and price_model_id = #{modelId}
+  </delete>
+</mapper>

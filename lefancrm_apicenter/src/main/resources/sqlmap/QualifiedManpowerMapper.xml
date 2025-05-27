@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.QualifiedManpowerMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.QualifiedManpower" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="level_id" property="levelId" jdbcType="BIGINT" />
+    <result column="level_code" property="levelCode" jdbcType="VARCHAR" />
+    <result column="qualified_mp_num" property="qualifiedMpNum" jdbcType="INTEGER" />
+    <result column="qualified_mp_money" property="qualifiedMpMoney" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, level_id, level_code, qualified_mp_num, qualified_mp_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from qualified_manpower
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from qualified_manpower
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.QualifiedManpower" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into qualified_manpower (level_id, level_code, qualified_mp_num, 
+      qualified_mp_money)
+    values (#{levelId,jdbcType=BIGINT}, #{levelCode,jdbcType=VARCHAR}, #{qualifiedMpNum,jdbcType=INTEGER}, 
+      #{qualifiedMpMoney,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.QualifiedManpower" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into qualified_manpower
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="levelId != null" >
+        level_id,
+      </if>
+      <if test="levelCode != null" >
+        level_code,
+      </if>
+      <if test="qualifiedMpNum != null" >
+        qualified_mp_num,
+      </if>
+      <if test="qualifiedMpMoney != null" >
+        qualified_mp_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="levelId != null" >
+        #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="levelCode != null" >
+        #{levelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="qualifiedMpNum != null" >
+        #{qualifiedMpNum,jdbcType=INTEGER},
+      </if>
+      <if test="qualifiedMpMoney != null" >
+        #{qualifiedMpMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.QualifiedManpower" >
+    update qualified_manpower
+    <set >
+      <if test="levelId != null" >
+        level_id = #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="levelCode != null" >
+        level_code = #{levelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="qualifiedMpNum != null" >
+        qualified_mp_num = #{qualifiedMpNum,jdbcType=INTEGER},
+      </if>
+      <if test="qualifiedMpMoney != null" >
+        qualified_mp_money = #{qualifiedMpMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.QualifiedManpower" >
+    update qualified_manpower
+    set level_id = #{levelId,jdbcType=BIGINT},
+      level_code = #{levelCode,jdbcType=VARCHAR},
+      qualified_mp_num = #{qualifiedMpNum,jdbcType=INTEGER},
+      qualified_mp_money = #{qualifiedMpMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectCountQualifiedManpower" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select
+        count(1)
+        from qualified_manpower
+        where 1=1
+        <if test="levelCode !=null">
+        and level_code  like  CONCAT(CONCAT('%',#{levelCode,jdbcType=VARCHAR}), '%')
+        </if>
+    </select>
+
+    <select id="selectQualifiedManpowerList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.* from qualified_manpower a
+        where 1= 1
+        <if test="levelCode !=null">
+        and level_code  like  CONCAT(CONCAT('%',#{levelCode,jdbcType=VARCHAR}), '%')
+        </if>
+        limit #{pageIndex}, #{pageSize}
+    </select>
+
+    <select id="searchQualifiedManpowerByLevelId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.* from qualified_manpower a
+        where
+        a.level_id = #{id,jdbcType=BIGINT}
+    </select>
+</mapper>

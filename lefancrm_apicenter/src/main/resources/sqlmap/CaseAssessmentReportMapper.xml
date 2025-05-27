@@ -1,0 +1,957 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseAssessmentReportMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseAssessmentReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="insurant_name" property="insurantName" jdbcType="VARCHAR" />
+    <result column="insurant_id" property="insurantId" jdbcType="VARCHAR" />
+    <result column="car_number" property="carNumber" jdbcType="VARCHAR" />
+    <result column="insurant_tel" property="insurantTel" jdbcType="VARCHAR" />
+    <result column="injured_name" property="injuredName" jdbcType="VARCHAR" />
+    <result column="injured_id" property="injuredId" jdbcType="VARCHAR" />
+    <result column="injured_agent_name" property="injuredAgentName" jdbcType="VARCHAR" />
+    <result column="injured_agent_id" property="injuredAgentId" jdbcType="VARCHAR" />
+    <result column="relationship" property="relationship" jdbcType="VARCHAR" />
+    <result column="injured_agent_tel" property="injuredAgentTel" jdbcType="VARCHAR" />
+    <result column="accident_time" property="accidentTime" jdbcType="TIMESTAMP" />
+    <result column="accident_address" property="accidentAddress" jdbcType="VARCHAR" />
+    <result column="traffic_police" property="trafficPolice" jdbcType="VARCHAR" />
+    <result column="police_name" property="policeName" jdbcType="VARCHAR" />
+    <result column="police_tel" property="policeTel" jdbcType="VARCHAR" />
+    <result column="is_identification" property="isIdentification" jdbcType="INTEGER" />
+    <result column="insurant_responsibility" property="insurantResponsibility" jdbcType="VARCHAR" />
+    <result column="injured_responsibility" property="injuredResponsibility" jdbcType="VARCHAR" />
+    <result column="is_advance_notice" property="isAdvanceNotice" jdbcType="INTEGER" />
+    <result column="insurant_accident_proof" property="insurantAccidentProof" jdbcType="VARCHAR" />
+    <result column="injured_accident_proof" property="injuredAccidentProof" jdbcType="VARCHAR" />
+    <result column="accident_desc" property="accidentDesc" jdbcType="VARCHAR" />
+    <result column="hospital" property="hospital" jdbcType="VARCHAR" />
+    <result column="doctor" property="doctor" jdbcType="VARCHAR" />
+    <result column="doctor_tel" property="doctorTel" jdbcType="VARCHAR" />
+    <result column="main_diagnosis" property="mainDiagnosis" jdbcType="VARCHAR" />
+    <result column="other_diagnosis" property="otherDiagnosis" jdbcType="VARCHAR" />
+    <result column="illness_history" property="illnessHistory" jdbcType="VARCHAR" />
+    <result column="operation_name" property="operationName" jdbcType="VARCHAR" />
+    <result column="medical_fee" property="medicalFee" jdbcType="DOUBLE" />
+    <result column="still_medical_fee" property="stillMedicalFee" jdbcType="DOUBLE" />
+    <result column="injured_medical_fee" property="injuredMedicalFee" jdbcType="DOUBLE" />
+    <result column="insurant_medical_fee" property="insurantMedicalFee" jdbcType="VARCHAR" />
+    <result column="is_again_operation" property="isAgainOperation" jdbcType="INTEGER" />
+    <result column="again_operation_fee" property="againOperationFee" jdbcType="DOUBLE" />
+    <result column="insurance_company" property="insuranceCompany" jdbcType="VARCHAR" />
+    <result column="is_compul_insurance" property="isCompulInsurance" jdbcType="INTEGER" />
+    <result column="commer_insurance" property="commerInsurance" jdbcType="DOUBLE" />
+    <result column="is_deductible" property="isDeductible" jdbcType="INTEGER" />
+    <result column="policy_agreement" property="policyAgreement" jdbcType="VARCHAR" />
+    <result column="is_compul_advance" property="isCompulAdvance" jdbcType="INTEGER" />
+    <result column="compul_advance_fee" property="compulAdvanceFee" jdbcType="DOUBLE" />
+    <result column="is_commer_advance" property="isCommerAdvance" jdbcType="INTEGER" />
+    <result column="commer_advance_fee" property="commerAdvanceFee" jdbcType="DOUBLE" />
+    <result column="is_road_ref" property="isRoadRef" jdbcType="INTEGER" />
+    <result column="road_ref_fee" property="roadRefFee" jdbcType="DOUBLE" />
+    <result column="is_other_advance" property="isOtherAdvance" jdbcType="INTEGER" />
+    <result column="other_advance_fee" property="otherAdvanceFee" jdbcType="DOUBLE" />
+    <result column="accident_car_amount" property="accidentCarAmount" jdbcType="DOUBLE" />
+    <result column="three_car_amount" property="threeCarAmount" jdbcType="DOUBLE" />
+    <result column="is_survey" property="isSurvey" jdbcType="INTEGER" />
+    <result column="survey_desc" property="surveyDesc" jdbcType="VARCHAR" />
+    <result column="is_insurance_accident" property="isInsuranceAccident" jdbcType="INTEGER" />
+    <result column="is_claims_rejected" property="isClaimsRejected" jdbcType="INTEGER" />
+    <result column="claims_rejected" property="claimsRejected" jdbcType="VARCHAR" />
+    <result column="is_frame_number" property="isFrameNumber" jdbcType="INTEGER" />
+    <result column="frame_number" property="frameNumber" jdbcType="VARCHAR" />
+    <result column="is_effective_car_number" property="isEffectiveCarNumber" jdbcType="INTEGER" />
+    <result column="effective_car_number" property="effectiveCarNumber" jdbcType="VARCHAR" />
+    <result column="compensation_standard" property="compensationStandard" jdbcType="INTEGER" />
+    <result column="disability_grade" property="disabilityGrade" jdbcType="VARCHAR" />
+    <result column="downtime" property="downtime" jdbcType="INTEGER" />
+    <result column="nursing_time" property="nursingTime" jdbcType="INTEGER" />
+    <result column="nutrition_time" property="nutritionTime" jdbcType="INTEGER" />
+    <result column="insurant_responsibility_rate" property="insurantResponsibilityRate" jdbcType="DOUBLE" />
+    <result column="injured_responsibility_rate" property="injuredResponsibilityRate" jdbcType="DOUBLE" />
+    <result column="insurance_claims_fee" property="insuranceClaimsFee" jdbcType="DOUBLE" />
+    <result column="insurance_claims_desc" property="insuranceClaimsDesc" jdbcType="VARCHAR" />
+    <result column="assessor_name" property="assessorName" jdbcType="VARCHAR" />
+    <result column="auditor_name" property="auditorName" jdbcType="VARCHAR" />
+    <result column="assessor_certificate" property="assessorCertificate" jdbcType="VARCHAR" />
+    <result column="auditor_certificate" property="auditorCertificate" jdbcType="VARCHAR" />
+    <result column="assessment_date" property="assessmentDate" jdbcType="TIMESTAMP" />
+    <result column="assessment_issue_date" property="assessmentIssueDate" jdbcType="TIMESTAMP" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, insurant_name, insurant_id, car_number, insurant_tel, injured_name, injured_id, 
+    injured_agent_name, injured_agent_id, relationship, injured_agent_tel, accident_time, 
+    accident_address, traffic_police, police_name, police_tel, is_identification, insurant_responsibility, 
+    injured_responsibility, is_advance_notice, insurant_accident_proof, injured_accident_proof, 
+    accident_desc, hospital, doctor, doctor_tel, main_diagnosis, other_diagnosis, illness_history, 
+    operation_name, medical_fee, still_medical_fee, injured_medical_fee, insurant_medical_fee, 
+    is_again_operation, again_operation_fee, insurance_company, is_compul_insurance, 
+    commer_insurance, is_deductible, policy_agreement, is_compul_advance, compul_advance_fee, 
+    is_commer_advance, commer_advance_fee, is_road_ref, road_ref_fee, is_other_advance, 
+    other_advance_fee, accident_car_amount, three_car_amount, is_survey, survey_desc, 
+    is_insurance_accident, is_claims_rejected, claims_rejected, is_frame_number, frame_number, 
+    is_effective_car_number, effective_car_number, compensation_standard, disability_grade, 
+    downtime, nursing_time, nutrition_time, insurant_responsibility_rate, injured_responsibility_rate, 
+    insurance_claims_fee, insurance_claims_desc, assessor_name, auditor_name, assessor_certificate, 
+    auditor_certificate, assessment_date, assessment_issue_date, case_id, case_no
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_assessment_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByCaseId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from case_assessment_report
+    where case_id = #{caseId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from case_assessment_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseAssessmentReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_assessment_report (insurant_name, insurant_id, car_number, 
+      insurant_tel, injured_name, injured_id, 
+      injured_agent_name, injured_agent_id, relationship, 
+      injured_agent_tel, accident_time, accident_address, 
+      traffic_police, police_name, police_tel, 
+      is_identification, insurant_responsibility, 
+      injured_responsibility, is_advance_notice, 
+      insurant_accident_proof, injured_accident_proof, 
+      accident_desc, hospital, doctor, 
+      doctor_tel, main_diagnosis, other_diagnosis, 
+      illness_history, operation_name, medical_fee, 
+      still_medical_fee, injured_medical_fee, insurant_medical_fee, 
+      is_again_operation, again_operation_fee, insurance_company, 
+      is_compul_insurance, commer_insurance, is_deductible, 
+      policy_agreement, is_compul_advance, compul_advance_fee, 
+      is_commer_advance, commer_advance_fee, is_road_ref, 
+      road_ref_fee, is_other_advance, other_advance_fee, 
+      accident_car_amount, three_car_amount, is_survey, 
+      survey_desc, is_insurance_accident, is_claims_rejected, 
+      claims_rejected, is_frame_number, frame_number, 
+      is_effective_car_number, effective_car_number, 
+      compensation_standard, disability_grade, 
+      downtime, nursing_time, nutrition_time, 
+      insurant_responsibility_rate, injured_responsibility_rate, 
+      insurance_claims_fee, insurance_claims_desc, 
+      assessor_name, auditor_name, assessor_certificate, 
+      auditor_certificate, assessment_date, assessment_issue_date, 
+      case_id, case_no)
+    values (#{insurantName,jdbcType=VARCHAR}, #{insurantId,jdbcType=VARCHAR}, #{carNumber,jdbcType=VARCHAR}, 
+      #{insurantTel,jdbcType=VARCHAR}, #{injuredName,jdbcType=VARCHAR}, #{injuredId,jdbcType=VARCHAR}, 
+      #{injuredAgentName,jdbcType=VARCHAR}, #{injuredAgentId,jdbcType=VARCHAR}, #{relationship,jdbcType=VARCHAR}, 
+      #{injuredAgentTel,jdbcType=VARCHAR}, #{accidentTime,jdbcType=TIMESTAMP}, #{accidentAddress,jdbcType=VARCHAR}, 
+      #{trafficPolice,jdbcType=VARCHAR}, #{policeName,jdbcType=VARCHAR}, #{policeTel,jdbcType=VARCHAR}, 
+      #{isIdentification,jdbcType=INTEGER}, #{insurantResponsibility,jdbcType=VARCHAR}, 
+      #{injuredResponsibility,jdbcType=VARCHAR}, #{isAdvanceNotice,jdbcType=INTEGER}, 
+      #{insurantAccidentProof,jdbcType=VARCHAR}, #{injuredAccidentProof,jdbcType=VARCHAR}, 
+      #{accidentDesc,jdbcType=VARCHAR}, #{hospital,jdbcType=VARCHAR}, #{doctor,jdbcType=VARCHAR}, 
+      #{doctorTel,jdbcType=VARCHAR}, #{mainDiagnosis,jdbcType=VARCHAR}, #{otherDiagnosis,jdbcType=VARCHAR}, 
+      #{illnessHistory,jdbcType=VARCHAR}, #{operationName,jdbcType=VARCHAR}, #{medicalFee,jdbcType=DOUBLE}, 
+      #{stillMedicalFee,jdbcType=DOUBLE}, #{injuredMedicalFee,jdbcType=DOUBLE}, #{insurantMedicalFee,jdbcType=VARCHAR}, 
+      #{isAgainOperation,jdbcType=INTEGER}, #{againOperationFee,jdbcType=DOUBLE}, #{insuranceCompany,jdbcType=VARCHAR}, 
+      #{isCompulInsurance,jdbcType=INTEGER}, #{commerInsurance,jdbcType=DOUBLE}, #{isDeductible,jdbcType=INTEGER}, 
+      #{policyAgreement,jdbcType=VARCHAR}, #{isCompulAdvance,jdbcType=INTEGER}, #{compulAdvanceFee,jdbcType=DOUBLE}, 
+      #{isCommerAdvance,jdbcType=INTEGER}, #{commerAdvanceFee,jdbcType=DOUBLE}, #{isRoadRef,jdbcType=INTEGER}, 
+      #{roadRefFee,jdbcType=DOUBLE}, #{isOtherAdvance,jdbcType=INTEGER}, #{otherAdvanceFee,jdbcType=DOUBLE}, 
+      #{accidentCarAmount,jdbcType=DOUBLE}, #{threeCarAmount,jdbcType=DOUBLE}, #{isSurvey,jdbcType=INTEGER}, 
+      #{surveyDesc,jdbcType=VARCHAR}, #{isInsuranceAccident,jdbcType=INTEGER}, #{isClaimsRejected,jdbcType=INTEGER}, 
+      #{claimsRejected,jdbcType=VARCHAR}, #{isFrameNumber,jdbcType=INTEGER}, #{frameNumber,jdbcType=VARCHAR}, 
+      #{isEffectiveCarNumber,jdbcType=INTEGER}, #{effectiveCarNumber,jdbcType=VARCHAR}, 
+      #{compensationStandard,jdbcType=INTEGER}, #{disabilityGrade,jdbcType=VARCHAR}, 
+      #{downtime,jdbcType=INTEGER}, #{nursingTime,jdbcType=INTEGER}, #{nutritionTime,jdbcType=INTEGER}, 
+      #{insurantResponsibilityRate,jdbcType=DOUBLE}, #{injuredResponsibilityRate,jdbcType=DOUBLE}, 
+      #{insuranceClaimsFee,jdbcType=DOUBLE}, #{insuranceClaimsDesc,jdbcType=VARCHAR}, 
+      #{assessorName,jdbcType=VARCHAR}, #{auditorName,jdbcType=VARCHAR}, #{assessorCertificate,jdbcType=VARCHAR}, 
+      #{auditorCertificate,jdbcType=VARCHAR}, #{assessmentDate,jdbcType=TIMESTAMP}, #{assessmentIssueDate,jdbcType=TIMESTAMP}, 
+      #{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseAssessmentReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_assessment_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="insurantName != null" >
+        insurant_name,
+      </if>
+      <if test="insurantId != null" >
+        insurant_id,
+      </if>
+      <if test="carNumber != null" >
+        car_number,
+      </if>
+      <if test="insurantTel != null" >
+        insurant_tel,
+      </if>
+      <if test="injuredName != null" >
+        injured_name,
+      </if>
+      <if test="injuredId != null" >
+        injured_id,
+      </if>
+      <if test="injuredAgentName != null" >
+        injured_agent_name,
+      </if>
+      <if test="injuredAgentId != null" >
+        injured_agent_id,
+      </if>
+      <if test="relationship != null" >
+        relationship,
+      </if>
+      <if test="injuredAgentTel != null" >
+        injured_agent_tel,
+      </if>
+      <if test="accidentTime != null" >
+        accident_time,
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address,
+      </if>
+      <if test="trafficPolice != null" >
+        traffic_police,
+      </if>
+      <if test="policeName != null" >
+        police_name,
+      </if>
+      <if test="policeTel != null" >
+        police_tel,
+      </if>
+      <if test="isIdentification != null" >
+        is_identification,
+      </if>
+      <if test="insurantResponsibility != null" >
+        insurant_responsibility,
+      </if>
+      <if test="injuredResponsibility != null" >
+        injured_responsibility,
+      </if>
+      <if test="isAdvanceNotice != null" >
+        is_advance_notice,
+      </if>
+      <if test="insurantAccidentProof != null" >
+        insurant_accident_proof,
+      </if>
+      <if test="injuredAccidentProof != null" >
+        injured_accident_proof,
+      </if>
+      <if test="accidentDesc != null" >
+        accident_desc,
+      </if>
+      <if test="hospital != null" >
+        hospital,
+      </if>
+      <if test="doctor != null" >
+        doctor,
+      </if>
+      <if test="doctorTel != null" >
+        doctor_tel,
+      </if>
+      <if test="mainDiagnosis != null" >
+        main_diagnosis,
+      </if>
+      <if test="otherDiagnosis != null" >
+        other_diagnosis,
+      </if>
+      <if test="illnessHistory != null" >
+        illness_history,
+      </if>
+      <if test="operationName != null" >
+        operation_name,
+      </if>
+      <if test="medicalFee != null" >
+        medical_fee,
+      </if>
+      <if test="stillMedicalFee != null" >
+        still_medical_fee,
+      </if>
+      <if test="injuredMedicalFee != null" >
+        injured_medical_fee,
+      </if>
+      <if test="insurantMedicalFee != null" >
+        insurant_medical_fee,
+      </if>
+      <if test="isAgainOperation != null" >
+        is_again_operation,
+      </if>
+      <if test="againOperationFee != null" >
+        again_operation_fee,
+      </if>
+      <if test="insuranceCompany != null" >
+        insurance_company,
+      </if>
+      <if test="isCompulInsurance != null" >
+        is_compul_insurance,
+      </if>
+      <if test="commerInsurance != null" >
+        commer_insurance,
+      </if>
+      <if test="isDeductible != null" >
+        is_deductible,
+      </if>
+      <if test="policyAgreement != null" >
+        policy_agreement,
+      </if>
+      <if test="isCompulAdvance != null" >
+        is_compul_advance,
+      </if>
+      <if test="compulAdvanceFee != null" >
+        compul_advance_fee,
+      </if>
+      <if test="isCommerAdvance != null" >
+        is_commer_advance,
+      </if>
+      <if test="commerAdvanceFee != null" >
+        commer_advance_fee,
+      </if>
+      <if test="isRoadRef != null" >
+        is_road_ref,
+      </if>
+      <if test="roadRefFee != null" >
+        road_ref_fee,
+      </if>
+      <if test="isOtherAdvance != null" >
+        is_other_advance,
+      </if>
+      <if test="otherAdvanceFee != null" >
+        other_advance_fee,
+      </if>
+      <if test="accidentCarAmount != null" >
+        accident_car_amount,
+      </if>
+      <if test="threeCarAmount != null" >
+        three_car_amount,
+      </if>
+      <if test="isSurvey != null" >
+        is_survey,
+      </if>
+      <if test="surveyDesc != null" >
+        survey_desc,
+      </if>
+      <if test="isInsuranceAccident != null" >
+        is_insurance_accident,
+      </if>
+      <if test="isClaimsRejected != null" >
+        is_claims_rejected,
+      </if>
+      <if test="claimsRejected != null" >
+        claims_rejected,
+      </if>
+      <if test="isFrameNumber != null" >
+        is_frame_number,
+      </if>
+      <if test="frameNumber != null" >
+        frame_number,
+      </if>
+      <if test="isEffectiveCarNumber != null" >
+        is_effective_car_number,
+      </if>
+      <if test="effectiveCarNumber != null" >
+        effective_car_number,
+      </if>
+      <if test="compensationStandard != null" >
+        compensation_standard,
+      </if>
+      <if test="disabilityGrade != null" >
+        disability_grade,
+      </if>
+      <if test="downtime != null" >
+        downtime,
+      </if>
+      <if test="nursingTime != null" >
+        nursing_time,
+      </if>
+      <if test="nutritionTime != null" >
+        nutrition_time,
+      </if>
+      <if test="insurantResponsibilityRate != null" >
+        insurant_responsibility_rate,
+      </if>
+      <if test="injuredResponsibilityRate != null" >
+        injured_responsibility_rate,
+      </if>
+      <if test="insuranceClaimsFee != null" >
+        insurance_claims_fee,
+      </if>
+      <if test="insuranceClaimsDesc != null" >
+        insurance_claims_desc,
+      </if>
+      <if test="assessorName != null" >
+        assessor_name,
+      </if>
+      <if test="auditorName != null" >
+        auditor_name,
+      </if>
+      <if test="assessorCertificate != null" >
+        assessor_certificate,
+      </if>
+      <if test="auditorCertificate != null" >
+        auditor_certificate,
+      </if>
+      <if test="assessmentDate != null" >
+        assessment_date,
+      </if>
+      <if test="assessmentIssueDate != null" >
+        assessment_issue_date,
+      </if>
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseNo != null" >
+        case_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="insurantName != null" >
+        #{insurantName,jdbcType=VARCHAR},
+      </if>
+      <if test="insurantId != null" >
+        #{insurantId,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null" >
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="insurantTel != null" >
+        #{insurantTel,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredName != null" >
+        #{injuredName,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredId != null" >
+        #{injuredId,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredAgentName != null" >
+        #{injuredAgentName,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredAgentId != null" >
+        #{injuredAgentId,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null" >
+        #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredAgentTel != null" >
+        #{injuredAgentTel,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentTime != null" >
+        #{accidentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accidentAddress != null" >
+        #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficPolice != null" >
+        #{trafficPolice,jdbcType=VARCHAR},
+      </if>
+      <if test="policeName != null" >
+        #{policeName,jdbcType=VARCHAR},
+      </if>
+      <if test="policeTel != null" >
+        #{policeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="isIdentification != null" >
+        #{isIdentification,jdbcType=INTEGER},
+      </if>
+      <if test="insurantResponsibility != null" >
+        #{insurantResponsibility,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredResponsibility != null" >
+        #{injuredResponsibility,jdbcType=VARCHAR},
+      </if>
+      <if test="isAdvanceNotice != null" >
+        #{isAdvanceNotice,jdbcType=INTEGER},
+      </if>
+      <if test="insurantAccidentProof != null" >
+        #{insurantAccidentProof,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredAccidentProof != null" >
+        #{injuredAccidentProof,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentDesc != null" >
+        #{accidentDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital != null" >
+        #{hospital,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null" >
+        #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorTel != null" >
+        #{doctorTel,jdbcType=VARCHAR},
+      </if>
+      <if test="mainDiagnosis != null" >
+        #{mainDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="otherDiagnosis != null" >
+        #{otherDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="illnessHistory != null" >
+        #{illnessHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="operationName != null" >
+        #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalFee != null" >
+        #{medicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="stillMedicalFee != null" >
+        #{stillMedicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="injuredMedicalFee != null" >
+        #{injuredMedicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="insurantMedicalFee != null" >
+        #{insurantMedicalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgainOperation != null" >
+        #{isAgainOperation,jdbcType=INTEGER},
+      </if>
+      <if test="againOperationFee != null" >
+        #{againOperationFee,jdbcType=DOUBLE},
+      </if>
+      <if test="insuranceCompany != null" >
+        #{insuranceCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="isCompulInsurance != null" >
+        #{isCompulInsurance,jdbcType=INTEGER},
+      </if>
+      <if test="commerInsurance != null" >
+        #{commerInsurance,jdbcType=DOUBLE},
+      </if>
+      <if test="isDeductible != null" >
+        #{isDeductible,jdbcType=INTEGER},
+      </if>
+      <if test="policyAgreement != null" >
+        #{policyAgreement,jdbcType=VARCHAR},
+      </if>
+      <if test="isCompulAdvance != null" >
+        #{isCompulAdvance,jdbcType=INTEGER},
+      </if>
+      <if test="compulAdvanceFee != null" >
+        #{compulAdvanceFee,jdbcType=DOUBLE},
+      </if>
+      <if test="isCommerAdvance != null" >
+        #{isCommerAdvance,jdbcType=INTEGER},
+      </if>
+      <if test="commerAdvanceFee != null" >
+        #{commerAdvanceFee,jdbcType=DOUBLE},
+      </if>
+      <if test="isRoadRef != null" >
+        #{isRoadRef,jdbcType=INTEGER},
+      </if>
+      <if test="roadRefFee != null" >
+        #{roadRefFee,jdbcType=DOUBLE},
+      </if>
+      <if test="isOtherAdvance != null" >
+        #{isOtherAdvance,jdbcType=INTEGER},
+      </if>
+      <if test="otherAdvanceFee != null" >
+        #{otherAdvanceFee,jdbcType=DOUBLE},
+      </if>
+      <if test="accidentCarAmount != null" >
+        #{accidentCarAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="threeCarAmount != null" >
+        #{threeCarAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="isSurvey != null" >
+        #{isSurvey,jdbcType=INTEGER},
+      </if>
+      <if test="surveyDesc != null" >
+        #{surveyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isInsuranceAccident != null" >
+        #{isInsuranceAccident,jdbcType=INTEGER},
+      </if>
+      <if test="isClaimsRejected != null" >
+        #{isClaimsRejected,jdbcType=INTEGER},
+      </if>
+      <if test="claimsRejected != null" >
+        #{claimsRejected,jdbcType=VARCHAR},
+      </if>
+      <if test="isFrameNumber != null" >
+        #{isFrameNumber,jdbcType=INTEGER},
+      </if>
+      <if test="frameNumber != null" >
+        #{frameNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isEffectiveCarNumber != null" >
+        #{isEffectiveCarNumber,jdbcType=INTEGER},
+      </if>
+      <if test="effectiveCarNumber != null" >
+        #{effectiveCarNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="compensationStandard != null" >
+        #{compensationStandard,jdbcType=INTEGER},
+      </if>
+      <if test="disabilityGrade != null" >
+        #{disabilityGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="downtime != null" >
+        #{downtime,jdbcType=INTEGER},
+      </if>
+      <if test="nursingTime != null" >
+        #{nursingTime,jdbcType=INTEGER},
+      </if>
+      <if test="nutritionTime != null" >
+        #{nutritionTime,jdbcType=INTEGER},
+      </if>
+      <if test="insurantResponsibilityRate != null" >
+        #{insurantResponsibilityRate,jdbcType=DOUBLE},
+      </if>
+      <if test="injuredResponsibilityRate != null" >
+        #{injuredResponsibilityRate,jdbcType=DOUBLE},
+      </if>
+      <if test="insuranceClaimsFee != null" >
+        #{insuranceClaimsFee,jdbcType=DOUBLE},
+      </if>
+      <if test="insuranceClaimsDesc != null" >
+        #{insuranceClaimsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="assessorName != null" >
+        #{assessorName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorName != null" >
+        #{auditorName,jdbcType=VARCHAR},
+      </if>
+      <if test="assessorCertificate != null" >
+        #{assessorCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorCertificate != null" >
+        #{auditorCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="assessmentDate != null" >
+        #{assessmentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assessmentIssueDate != null" >
+        #{assessmentIssueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseAssessmentReport" >
+    update case_assessment_report
+    <set >
+      <if test="insurantName != null" >
+        insurant_name = #{insurantName,jdbcType=VARCHAR},
+      </if>
+      <if test="insurantId != null" >
+        insurant_id = #{insurantId,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null" >
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="insurantTel != null" >
+        insurant_tel = #{insurantTel,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredName != null" >
+        injured_name = #{injuredName,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredId != null" >
+        injured_id = #{injuredId,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredAgentName != null" >
+        injured_agent_name = #{injuredAgentName,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredAgentId != null" >
+        injured_agent_id = #{injuredAgentId,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null" >
+        relationship = #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredAgentTel != null" >
+        injured_agent_tel = #{injuredAgentTel,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentTime != null" >
+        accident_time = #{accidentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficPolice != null" >
+        traffic_police = #{trafficPolice,jdbcType=VARCHAR},
+      </if>
+      <if test="policeName != null" >
+        police_name = #{policeName,jdbcType=VARCHAR},
+      </if>
+      <if test="policeTel != null" >
+        police_tel = #{policeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="isIdentification != null" >
+        is_identification = #{isIdentification,jdbcType=INTEGER},
+      </if>
+      <if test="insurantResponsibility != null" >
+        insurant_responsibility = #{insurantResponsibility,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredResponsibility != null" >
+        injured_responsibility = #{injuredResponsibility,jdbcType=VARCHAR},
+      </if>
+      <if test="isAdvanceNotice != null" >
+        is_advance_notice = #{isAdvanceNotice,jdbcType=INTEGER},
+      </if>
+      <if test="insurantAccidentProof != null" >
+        insurant_accident_proof = #{insurantAccidentProof,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredAccidentProof != null" >
+        injured_accident_proof = #{injuredAccidentProof,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentDesc != null" >
+        accident_desc = #{accidentDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital != null" >
+        hospital = #{hospital,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null" >
+        doctor = #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorTel != null" >
+        doctor_tel = #{doctorTel,jdbcType=VARCHAR},
+      </if>
+      <if test="mainDiagnosis != null" >
+        main_diagnosis = #{mainDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="otherDiagnosis != null" >
+        other_diagnosis = #{otherDiagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="illnessHistory != null" >
+        illness_history = #{illnessHistory,jdbcType=VARCHAR},
+      </if>
+      <if test="operationName != null" >
+        operation_name = #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalFee != null" >
+        medical_fee = #{medicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="stillMedicalFee != null" >
+        still_medical_fee = #{stillMedicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="injuredMedicalFee != null" >
+        injured_medical_fee = #{injuredMedicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="insurantMedicalFee != null" >
+        insurant_medical_fee = #{insurantMedicalFee,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgainOperation != null" >
+        is_again_operation = #{isAgainOperation,jdbcType=INTEGER},
+      </if>
+      <if test="againOperationFee != null" >
+        again_operation_fee = #{againOperationFee,jdbcType=DOUBLE},
+      </if>
+      <if test="insuranceCompany != null" >
+        insurance_company = #{insuranceCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="isCompulInsurance != null" >
+        is_compul_insurance = #{isCompulInsurance,jdbcType=INTEGER},
+      </if>
+      <if test="commerInsurance != null" >
+        commer_insurance = #{commerInsurance,jdbcType=DOUBLE},
+      </if>
+      <if test="isDeductible != null" >
+        is_deductible = #{isDeductible,jdbcType=INTEGER},
+      </if>
+      <if test="policyAgreement != null" >
+        policy_agreement = #{policyAgreement,jdbcType=VARCHAR},
+      </if>
+      <if test="isCompulAdvance != null" >
+        is_compul_advance = #{isCompulAdvance,jdbcType=INTEGER},
+      </if>
+      <if test="compulAdvanceFee != null" >
+        compul_advance_fee = #{compulAdvanceFee,jdbcType=DOUBLE},
+      </if>
+      <if test="isCommerAdvance != null" >
+        is_commer_advance = #{isCommerAdvance,jdbcType=INTEGER},
+      </if>
+      <if test="commerAdvanceFee != null" >
+        commer_advance_fee = #{commerAdvanceFee,jdbcType=DOUBLE},
+      </if>
+      <if test="isRoadRef != null" >
+        is_road_ref = #{isRoadRef,jdbcType=INTEGER},
+      </if>
+      <if test="roadRefFee != null" >
+        road_ref_fee = #{roadRefFee,jdbcType=DOUBLE},
+      </if>
+      <if test="isOtherAdvance != null" >
+        is_other_advance = #{isOtherAdvance,jdbcType=INTEGER},
+      </if>
+      <if test="otherAdvanceFee != null" >
+        other_advance_fee = #{otherAdvanceFee,jdbcType=DOUBLE},
+      </if>
+      <if test="accidentCarAmount != null" >
+        accident_car_amount = #{accidentCarAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="threeCarAmount != null" >
+        three_car_amount = #{threeCarAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="isSurvey != null" >
+        is_survey = #{isSurvey,jdbcType=INTEGER},
+      </if>
+      <if test="surveyDesc != null" >
+        survey_desc = #{surveyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isInsuranceAccident != null" >
+        is_insurance_accident = #{isInsuranceAccident,jdbcType=INTEGER},
+      </if>
+      <if test="isClaimsRejected != null" >
+        is_claims_rejected = #{isClaimsRejected,jdbcType=INTEGER},
+      </if>
+      <if test="claimsRejected != null" >
+        claims_rejected = #{claimsRejected,jdbcType=VARCHAR},
+      </if>
+      <if test="isFrameNumber != null" >
+        is_frame_number = #{isFrameNumber,jdbcType=INTEGER},
+      </if>
+      <if test="frameNumber != null" >
+        frame_number = #{frameNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isEffectiveCarNumber != null" >
+        is_effective_car_number = #{isEffectiveCarNumber,jdbcType=INTEGER},
+      </if>
+      <if test="effectiveCarNumber != null" >
+        effective_car_number = #{effectiveCarNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="compensationStandard != null" >
+        compensation_standard = #{compensationStandard,jdbcType=INTEGER},
+      </if>
+      <if test="disabilityGrade != null" >
+        disability_grade = #{disabilityGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="downtime != null" >
+        downtime = #{downtime,jdbcType=INTEGER},
+      </if>
+      <if test="nursingTime != null" >
+        nursing_time = #{nursingTime,jdbcType=INTEGER},
+      </if>
+      <if test="nutritionTime != null" >
+        nutrition_time = #{nutritionTime,jdbcType=INTEGER},
+      </if>
+      <if test="insurantResponsibilityRate != null" >
+        insurant_responsibility_rate = #{insurantResponsibilityRate,jdbcType=DOUBLE},
+      </if>
+      <if test="injuredResponsibilityRate != null" >
+        injured_responsibility_rate = #{injuredResponsibilityRate,jdbcType=DOUBLE},
+      </if>
+      <if test="insuranceClaimsFee != null" >
+        insurance_claims_fee = #{insuranceClaimsFee,jdbcType=DOUBLE},
+      </if>
+      <if test="insuranceClaimsDesc != null" >
+        insurance_claims_desc = #{insuranceClaimsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="assessorName != null" >
+        assessor_name = #{assessorName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorName != null" >
+        auditor_name = #{auditorName,jdbcType=VARCHAR},
+      </if>
+      <if test="assessorCertificate != null" >
+        assessor_certificate = #{assessorCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorCertificate != null" >
+        auditor_certificate = #{auditorCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="assessmentDate != null" >
+        assessment_date = #{assessmentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assessmentIssueDate != null" >
+        assessment_issue_date = #{assessmentIssueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseAssessmentReport" >
+    update case_assessment_report
+    set insurant_name = #{insurantName,jdbcType=VARCHAR},
+      insurant_id = #{insurantId,jdbcType=VARCHAR},
+      car_number = #{carNumber,jdbcType=VARCHAR},
+      insurant_tel = #{insurantTel,jdbcType=VARCHAR},
+      injured_name = #{injuredName,jdbcType=VARCHAR},
+      injured_id = #{injuredId,jdbcType=VARCHAR},
+      injured_agent_name = #{injuredAgentName,jdbcType=VARCHAR},
+      injured_agent_id = #{injuredAgentId,jdbcType=VARCHAR},
+      relationship = #{relationship,jdbcType=VARCHAR},
+      injured_agent_tel = #{injuredAgentTel,jdbcType=VARCHAR},
+      accident_time = #{accidentTime,jdbcType=TIMESTAMP},
+      accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      traffic_police = #{trafficPolice,jdbcType=VARCHAR},
+      police_name = #{policeName,jdbcType=VARCHAR},
+      police_tel = #{policeTel,jdbcType=VARCHAR},
+      is_identification = #{isIdentification,jdbcType=INTEGER},
+      insurant_responsibility = #{insurantResponsibility,jdbcType=VARCHAR},
+      injured_responsibility = #{injuredResponsibility,jdbcType=VARCHAR},
+      is_advance_notice = #{isAdvanceNotice,jdbcType=INTEGER},
+      insurant_accident_proof = #{insurantAccidentProof,jdbcType=VARCHAR},
+      injured_accident_proof = #{injuredAccidentProof,jdbcType=VARCHAR},
+      accident_desc = #{accidentDesc,jdbcType=VARCHAR},
+      hospital = #{hospital,jdbcType=VARCHAR},
+      doctor = #{doctor,jdbcType=VARCHAR},
+      doctor_tel = #{doctorTel,jdbcType=VARCHAR},
+      main_diagnosis = #{mainDiagnosis,jdbcType=VARCHAR},
+      other_diagnosis = #{otherDiagnosis,jdbcType=VARCHAR},
+      illness_history = #{illnessHistory,jdbcType=VARCHAR},
+      operation_name = #{operationName,jdbcType=VARCHAR},
+      medical_fee = #{medicalFee,jdbcType=DOUBLE},
+      still_medical_fee = #{stillMedicalFee,jdbcType=DOUBLE},
+      injured_medical_fee = #{injuredMedicalFee,jdbcType=DOUBLE},
+      insurant_medical_fee = #{insurantMedicalFee,jdbcType=VARCHAR},
+      is_again_operation = #{isAgainOperation,jdbcType=INTEGER},
+      again_operation_fee = #{againOperationFee,jdbcType=DOUBLE},
+      insurance_company = #{insuranceCompany,jdbcType=VARCHAR},
+      is_compul_insurance = #{isCompulInsurance,jdbcType=INTEGER},
+      commer_insurance = #{commerInsurance,jdbcType=DOUBLE},
+      is_deductible = #{isDeductible,jdbcType=INTEGER},
+      policy_agreement = #{policyAgreement,jdbcType=VARCHAR},
+      is_compul_advance = #{isCompulAdvance,jdbcType=INTEGER},
+      compul_advance_fee = #{compulAdvanceFee,jdbcType=DOUBLE},
+      is_commer_advance = #{isCommerAdvance,jdbcType=INTEGER},
+      commer_advance_fee = #{commerAdvanceFee,jdbcType=DOUBLE},
+      is_road_ref = #{isRoadRef,jdbcType=INTEGER},
+      road_ref_fee = #{roadRefFee,jdbcType=DOUBLE},
+      is_other_advance = #{isOtherAdvance,jdbcType=INTEGER},
+      other_advance_fee = #{otherAdvanceFee,jdbcType=DOUBLE},
+      accident_car_amount = #{accidentCarAmount,jdbcType=DOUBLE},
+      three_car_amount = #{threeCarAmount,jdbcType=DOUBLE},
+      is_survey = #{isSurvey,jdbcType=INTEGER},
+      survey_desc = #{surveyDesc,jdbcType=VARCHAR},
+      is_insurance_accident = #{isInsuranceAccident,jdbcType=INTEGER},
+      is_claims_rejected = #{isClaimsRejected,jdbcType=INTEGER},
+      claims_rejected = #{claimsRejected,jdbcType=VARCHAR},
+      is_frame_number = #{isFrameNumber,jdbcType=INTEGER},
+      frame_number = #{frameNumber,jdbcType=VARCHAR},
+      is_effective_car_number = #{isEffectiveCarNumber,jdbcType=INTEGER},
+      effective_car_number = #{effectiveCarNumber,jdbcType=VARCHAR},
+      compensation_standard = #{compensationStandard,jdbcType=INTEGER},
+      disability_grade = #{disabilityGrade,jdbcType=VARCHAR},
+      downtime = #{downtime,jdbcType=INTEGER},
+      nursing_time = #{nursingTime,jdbcType=INTEGER},
+      nutrition_time = #{nutritionTime,jdbcType=INTEGER},
+      insurant_responsibility_rate = #{insurantResponsibilityRate,jdbcType=DOUBLE},
+      injured_responsibility_rate = #{injuredResponsibilityRate,jdbcType=DOUBLE},
+      insurance_claims_fee = #{insuranceClaimsFee,jdbcType=DOUBLE},
+      insurance_claims_desc = #{insuranceClaimsDesc,jdbcType=VARCHAR},
+      assessor_name = #{assessorName,jdbcType=VARCHAR},
+      auditor_name = #{auditorName,jdbcType=VARCHAR},
+      assessor_certificate = #{assessorCertificate,jdbcType=VARCHAR},
+      auditor_certificate = #{auditorCertificate,jdbcType=VARCHAR},
+      assessment_date = #{assessmentDate,jdbcType=TIMESTAMP},
+      assessment_issue_date = #{assessmentIssueDate,jdbcType=TIMESTAMP},
+      case_id = #{caseId,jdbcType=BIGINT},
+      case_no = #{caseNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

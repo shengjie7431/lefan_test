@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseCenterExtendMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseCenterExtend" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="customer_flow_state" property="customerFlowState" jdbcType="BIGINT" />
+        <result column="assess_flow_state" property="assessFlowState" jdbcType="BIGINT" />
+        <result column="claim_flow_state" property="claimFlowState" jdbcType="BIGINT" />
+        <result column="legal_flow_state" property="legalFlowState" jdbcType="BIGINT" />
+        <result column="define_state" property="defineState" jdbcType="INTEGER" />
+        <result column="define_date" property="defineDate" jdbcType="TIMESTAMP" />
+        <result column="define_amount" property="defineAmount" jdbcType="DOUBLE" />
+        <result column="repay" property="repay" jdbcType="INTEGER" />
+        <result column="repay_img" property="repayImg" jdbcType="VARCHAR" />
+        <result column="operator_flow_state" property="operatorFlowState" jdbcType="BIGINT" />
+        <result column="appraise_type" property="appraiseType" jdbcType="INTEGER" />
+        <result column="mediate_type" property="mediateType" jdbcType="INTEGER" />
+        <result column="close_case_type" property="closeCaseType" jdbcType="INTEGER" />
+        <result column="old_list_state" property="oldListState" jdbcType="INTEGER" />
+        <result column="old_list_state_name" property="oldListStateName" jdbcType="VARCHAR" />
+        <result column="negotiate_date" jdbcType="TIMESTAMP" property="negotiateDate" />
+        <result column="assess_date" jdbcType="TIMESTAMP" property="assessDate" />
+        <result column="claimant_date" jdbcType="TIMESTAMP" property="claimantDate" />
+        <result column="legal_date" jdbcType="TIMESTAMP" property="legalDate" />
+        <result column="closed_date" jdbcType="TIMESTAMP" property="closedDate" />
+        <result column="release_date" jdbcType="TIMESTAMP" property="releaseDate" />
+        <result column="user_promoted_phone" property="userPromotedPhone" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, customer_flow_state, assess_flow_state, claim_flow_state, legal_flow_state, define_state,
+        define_date, define_amount, repay, repay_img, operator_flow_state, appraise_type,
+        mediate_type, close_case_type, old_list_state, old_list_state_name, negotiate_date,
+        assess_date, claimant_date, legal_date, closed_date, release_date,user_promoted_phone
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from case_center_extend
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from case_center_extend
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseCenterExtend" >
+        insert into case_center_extend (id,customer_flow_state, assess_flow_state,
+        claim_flow_state, legal_flow_state, define_state,
+        define_date, define_amount, repay,
+        repay_img, operator_flow_state, appraise_type,
+        mediate_type, close_case_type, old_list_state,
+        old_list_state_name, negotiate_date, assess_date,
+      claimant_date, legal_date, closed_date,
+      release_date,user_promoted_phone)
+        values (#{id,jdbcType=BIGINT},#{customerFlowState,jdbcType=BIGINT}, #{assessFlowState,jdbcType=BIGINT},
+        #{claimFlowState,jdbcType=BIGINT}, #{legalFlowState,jdbcType=BIGINT}, #{defineState,jdbcType=INTEGER},
+        #{defineDate,jdbcType=TIMESTAMP}, #{defineAmount,jdbcType=DOUBLE}, #{repay,jdbcType=INTEGER},
+        #{repayImg,jdbcType=VARCHAR}, #{operatorFlowState,jdbcType=BIGINT}, #{appraiseType,jdbcType=INTEGER},
+        #{mediateType,jdbcType=INTEGER}, #{closeCaseType,jdbcType=INTEGER}, #{oldListState,jdbcType=INTEGER},
+        #{oldListStateName,jdbcType=VARCHAR}, #{negotiateDate,jdbcType=TIMESTAMP}, #{assessDate,jdbcType=TIMESTAMP},
+      #{claimantDate,jdbcType=TIMESTAMP}, #{legalDate,jdbcType=TIMESTAMP}, #{closedDate,jdbcType=TIMESTAMP},
+      #{releaseDate,jdbcType=TIMESTAMP},#{userPromotedPhone,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseCenterExtend" >
+        insert into case_center_extend
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="customerFlowState != null" >
+                customer_flow_state,
+            </if>
+            <if test="assessFlowState != null" >
+                assess_flow_state,
+            </if>
+            <if test="claimFlowState != null" >
+                claim_flow_state,
+            </if>
+            <if test="legalFlowState != null" >
+                legal_flow_state,
+            </if>
+            <if test="defineState != null" >
+                define_state,
+            </if>
+            <if test="defineDate != null" >
+                define_date,
+            </if>
+            <if test="defineAmount != null" >
+                define_amount,
+            </if>
+            <if test="repay != null" >
+                repay,
+            </if>
+            <if test="repayImg != null" >
+                repay_img,
+            </if>
+            <if test="operatorFlowState != null" >
+                operator_flow_state,
+            </if>
+            <if test="appraiseType != null" >
+                appraise_type,
+            </if>
+            <if test="mediateType != null" >
+                mediate_type,
+            </if>
+            <if test="closeCaseType != null" >
+                close_case_type,
+            </if>
+            <if test="oldListState != null" >
+                old_list_state,
+            </if>
+            <if test="oldListStateName != null" >
+                old_list_state_name,
+            </if>
+            <if test="negotiateDate != null">
+                negotiate_date,
+            </if>
+            <if test="assessDate != null">
+                assess_date,
+            </if>
+            <if test="claimantDate != null">
+                claimant_date,
+            </if>
+            <if test="legalDate != null">
+                legal_date,
+            </if>
+            <if test="closedDate != null">
+                closed_date,
+            </if>
+            <if test="releaseDate != null">
+                release_date,
+            </if>
+            <if test="userPromotedPhone != null">
+                user_promoted_phone,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="customerFlowState != null" >
+                #{customerFlowState,jdbcType=BIGINT},
+            </if>
+            <if test="assessFlowState != null" >
+                #{assessFlowState,jdbcType=BIGINT},
+            </if>
+            <if test="claimFlowState != null" >
+                #{claimFlowState,jdbcType=BIGINT},
+            </if>
+            <if test="legalFlowState != null" >
+                #{legalFlowState,jdbcType=BIGINT},
+            </if>
+            <if test="defineState != null" >
+                #{defineState,jdbcType=INTEGER},
+            </if>
+            <if test="defineDate != null" >
+                #{defineDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="defineAmount != null" >
+                #{defineAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="repay != null" >
+                #{repay,jdbcType=INTEGER},
+            </if>
+            <if test="repayImg != null" >
+                #{repayImg,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorFlowState != null" >
+                #{operatorFlowState,jdbcType=BIGINT},
+            </if>
+            <if test="appraiseType != null" >
+                #{appraiseType,jdbcType=INTEGER},
+            </if>
+            <if test="mediateType != null" >
+                #{mediateType,jdbcType=INTEGER},
+            </if>
+            <if test="closeCaseType != null" >
+                #{closeCaseType,jdbcType=INTEGER},
+            </if>
+            <if test="oldListState != null" >
+                #{oldListState,jdbcType=INTEGER},
+            </if>
+            <if test="oldListStateName != null" >
+                #{oldListStateName,jdbcType=VARCHAR},
+            </if>
+            <if test="negotiateDate != null">
+                #{negotiateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="assessDate != null">
+                #{assessDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="claimantDate != null">
+                #{claimantDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="legalDate != null">
+                #{legalDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="closedDate != null">
+                #{closedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="releaseDate != null">
+                #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userPromotedPhone != null" >
+                #{userPromotedPhone,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseCenterExtend" >
+        update case_center_extend
+        <set >
+            <if test="customerFlowState != null" >
+                customer_flow_state = #{customerFlowState,jdbcType=BIGINT},
+            </if>
+            <if test="assessFlowState != null" >
+                assess_flow_state = #{assessFlowState,jdbcType=BIGINT},
+            </if>
+            <if test="claimFlowState != null" >
+                claim_flow_state = #{claimFlowState,jdbcType=BIGINT},
+            </if>
+            <if test="legalFlowState != null" >
+                legal_flow_state = #{legalFlowState,jdbcType=BIGINT},
+            </if>
+            <if test="defineState != null" >
+                define_state = #{defineState,jdbcType=INTEGER},
+            </if>
+            <if test="defineDate != null" >
+                define_date = #{defineDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="defineAmount != null" >
+                define_amount = #{defineAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="repay != null" >
+                repay = #{repay,jdbcType=INTEGER},
+            </if>
+            <if test="repayImg != null" >
+                repay_img = #{repayImg,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorFlowState != null" >
+                operator_flow_state = #{operatorFlowState,jdbcType=BIGINT},
+            </if>
+            <if test="appraiseType != null" >
+                appraise_type = #{appraiseType,jdbcType=INTEGER},
+            </if>
+            <if test="mediateType != null" >
+                mediate_type = #{mediateType,jdbcType=INTEGER},
+            </if>
+            <if test="closeCaseType != null" >
+                close_case_type = #{closeCaseType,jdbcType=INTEGER},
+            </if>
+            <if test="oldListState != null" >
+                old_list_state = #{oldListState,jdbcType=INTEGER},
+            </if>
+            <if test="oldListStateName != null" >
+                old_list_state_name = #{oldListStateName,jdbcType=VARCHAR},
+            </if>
+            <if test="negotiateDate != null">
+                negotiate_date = #{negotiateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="assessDate != null">
+                assess_date = #{assessDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="claimantDate != null">
+                claimant_date = #{claimantDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="legalDate != null">
+                legal_date = #{legalDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="closedDate != null">
+                closed_date = #{closedDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="releaseDate != null">
+                release_date = #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userPromotedPhone != null">
+                user_promoted_phone = #{userPromotedPhone,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseCenterExtend" >
+        update case_center_extend
+        set customer_flow_state = #{customerFlowState,jdbcType=BIGINT},
+        assess_flow_state = #{assessFlowState,jdbcType=BIGINT},
+        claim_flow_state = #{claimFlowState,jdbcType=BIGINT},
+        legal_flow_state = #{legalFlowState,jdbcType=BIGINT},
+        define_state = #{defineState,jdbcType=INTEGER},
+        define_date = #{defineDate,jdbcType=TIMESTAMP},
+        define_amount = #{defineAmount,jdbcType=DOUBLE},
+        repay = #{repay,jdbcType=INTEGER},
+        repay_img = #{repayImg,jdbcType=VARCHAR},
+        operator_flow_state = #{operatorFlowState,jdbcType=BIGINT},
+        appraise_type = #{appraiseType,jdbcType=INTEGER},
+        mediate_type = #{mediateType,jdbcType=INTEGER},
+        close_case_type = #{closeCaseType,jdbcType=INTEGER},
+        old_list_state = #{oldListState,jdbcType=INTEGER},
+        old_list_state_name = #{oldListStateName,jdbcType=VARCHAR},
+          negotiate_date = #{negotiateDate,jdbcType=TIMESTAMP},
+          assess_date = #{assessDate,jdbcType=TIMESTAMP},
+          claimant_date = #{claimantDate,jdbcType=TIMESTAMP},
+          legal_date = #{legalDate,jdbcType=TIMESTAMP},
+          closed_date = #{closedDate,jdbcType=TIMESTAMP},
+          release_date = #{releaseDate,jdbcType=TIMESTAMP},
+          user_promoted_phone = #{userPromotedPhone,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

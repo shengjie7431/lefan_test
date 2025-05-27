@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BillingApplyUnmatchMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BillingApplyUnmatch" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="unmatch_no" property="unmatchNo" jdbcType="VARCHAR" />
+        <result column="money" property="money" jdbcType="DOUBLE" />
+        <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="claim_by_id" property="claimById" jdbcType="BIGINT" />
+        <result column="claim_by" property="claimBy" jdbcType="VARCHAR" />
+        <result column="claim_time" property="claimTime" jdbcType="TIMESTAMP" />
+        <result column="bill_id" property="billId" jdbcType="BIGINT" />
+        <result column="bill_no" property="billNo" jdbcType="VARCHAR" />
+        <result column="payer" property="payer" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+        <result column="comments" property="comments" jdbcType="VARCHAR" />
+        <result column="billing_items_id" property="billingItemsId" jdbcType="INTEGER" />
+        <result column="billing_items_name" property="billingItemsName" jdbcType="VARCHAR" />
+        <result column="receiving_company_id" property="receivingCompanyId" jdbcType="VARCHAR" />
+        <result column="receiving_company_name" property="receivingCompanyName" jdbcType="VARCHAR" />
+        <result column="match_money" property="matchMoney" jdbcType="DOUBLE" />
+        <result column="unmatch_money" property="unmatchMoney" jdbcType="DOUBLE" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, unmatch_no, money, create_by_id, create_by, create_time, state, claim_by_id,
+        claim_by, claim_time, bill_id, bill_no, payer, remark, pay_time,comments,billing_items_id,
+        billing_items_name,receiving_company_id,receiving_company_name,match_money,unmatch_money
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply_unmatch
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from billing_apply_unmatch
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.BillingApplyUnmatch" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into billing_apply_unmatch (unmatch_no, money, create_by_id,
+        create_by, create_time, state,
+        claim_by_id, claim_by, claim_time,
+        bill_id, bill_no, payer,
+        remark, pay_time,comments,billing_items_id,billing_items_name,receiving_company_id,receiving_company_name,
+        match_money,unmatch_money)
+        values (#{unmatchNo,jdbcType=VARCHAR}, #{money,jdbcType=DOUBLE}, #{createById,jdbcType=BIGINT},
+        #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER},
+        #{claimById,jdbcType=BIGINT}, #{claimBy,jdbcType=VARCHAR}, #{claimTime,jdbcType=TIMESTAMP},
+        #{billId,jdbcType=BIGINT}, #{billNo,jdbcType=VARCHAR}, #{payer,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR}, #{payTime,jdbcType=TIMESTAMP},#{comments,jdbcType=VARCHAR},
+        #{billingItemsId,jdbcType=INTEGER}, #{billingItemsName,jdbcType=VARCHAR},
+        #{receivingCompanyId,jdbcType=INTEGER}, #{receivingCompanyName,jdbcType=VARCHAR},#{matchMoney,jdbcType=DOUBLE},
+        #{unmatchMoney,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.BillingApplyUnmatch" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into billing_apply_unmatch
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="unmatchNo != null" >
+                unmatch_no,
+            </if>
+            <if test="money != null" >
+                money,
+            </if>
+            <if test="createById != null" >
+                create_by_id,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="state != null" >
+                state,
+            </if>
+            <if test="claimById != null" >
+                claim_by_id,
+            </if>
+            <if test="claimBy != null" >
+                claim_by,
+            </if>
+            <if test="claimTime != null" >
+                claim_time,
+            </if>
+            <if test="billId != null" >
+                bill_id,
+            </if>
+            <if test="billNo != null" >
+                bill_no,
+            </if>
+            <if test="payer != null" >
+                payer,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="payTime != null" >
+                pay_time,
+            </if>
+            <if test="comments != null" >
+                comments,
+            </if>
+            <if test="billingItemsId != null" >
+                billing_items_id,
+            </if>
+            <if test="billingItemsName != null" >
+                billing_items_name,
+            </if>
+            <if test="receivingCompanyId != null" >
+                receiving_company_id,
+            </if>
+            <if test="receivingCompanyName != null" >
+                receiving_company_name,
+            </if>
+            <if test="matchMoney != null" >
+                match_money,
+            </if>
+            <if test="unmatchMoney != null" >
+                unmatch_money,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="unmatchNo != null" >
+                #{unmatchNo,jdbcType=VARCHAR},
+            </if>
+            <if test="money != null" >
+                #{money,jdbcType=DOUBLE},
+            </if>
+            <if test="createById != null" >
+                #{createById,jdbcType=BIGINT},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="state != null" >
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="claimById != null" >
+                #{claimById,jdbcType=BIGINT},
+            </if>
+            <if test="claimBy != null" >
+                #{claimBy,jdbcType=VARCHAR},
+            </if>
+            <if test="claimTime != null" >
+                #{claimTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="billId != null" >
+                #{billId,jdbcType=BIGINT},
+            </if>
+            <if test="billNo != null" >
+                #{billNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payer != null" >
+                #{payer,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="payTime != null" >
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="comments != null" >
+                #{comments,jdbcType=VARCHAR},
+            </if>
+            <if test="billingItemsId != null" >
+                #{billingItemsId,jdbcType=INTEGER},
+            </if>
+            <if test="billingItemsName != null" >
+                #{billingItemsName,jdbcType=VARCHAR},
+            </if>
+            <if test="receivingCompanyId != null" >
+                #{receivingCompanyId,jdbcType=INTEGER},
+            </if>
+            <if test="receivingCompanyName != null" >
+                #{receivingCompanyName,jdbcType=VARCHAR},
+            </if>
+            <if test="matchMoney != null" >
+                #{matchMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="unmatchMoney != null" >
+                #{unmatchMoney,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.BillingApplyUnmatch" >
+        update billing_apply_unmatch
+        <set >
+            <if test="unmatchNo != null" >
+                unmatch_no = #{unmatchNo,jdbcType=VARCHAR},
+            </if>
+            <if test="money != null" >
+                money = #{money,jdbcType=DOUBLE},
+            </if>
+            <if test="createById != null" >
+                create_by_id = #{createById,jdbcType=BIGINT},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="state != null" >
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="claimById != null" >
+                claim_by_id = #{claimById,jdbcType=BIGINT},
+            </if>
+            <if test="claimBy != null" >
+                claim_by = #{claimBy,jdbcType=VARCHAR},
+            </if>
+            <if test="claimTime != null" >
+                claim_time = #{claimTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="billId != null" >
+                bill_id = #{billId,jdbcType=BIGINT},
+            </if>
+            <if test="billNo != null" >
+                bill_no = #{billNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payer != null" >
+                payer = #{payer,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="payTime != null" >
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="comments != null" >
+                comments = #{comments,jdbcType=VARCHAR},
+            </if>
+            <if test="billingItemsId != null" >
+                billing_items_id = #{billingItemsId,jdbcType=INTEGER},
+            </if>
+            <if test="billingItemsName != null" >
+                billing_items_name = #{billingItemsName,jdbcType=VARCHAR},
+            </if>
+            <if test="receivingCompanyId != null" >
+                receiving_company_id = #{receivingCompanyId,jdbcType=INTEGER},
+            </if>
+            <if test="receivingCompanyName != null" >
+                receiving_company_name = #{receivingCompanyName,jdbcType=VARCHAR},
+            </if>
+            <if test="matchMoney != null" >
+                match_money = #{matchMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="unmatchMoney != null" >
+                unmatch_money = #{unmatchMoney,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.BillingApplyUnmatch" >
+        update billing_apply_unmatch
+        set unmatch_no = #{unmatchNo,jdbcType=VARCHAR},
+        money = #{money,jdbcType=DOUBLE},
+        create_by_id = #{createById,jdbcType=BIGINT},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        state = #{state,jdbcType=INTEGER},
+        claim_by_id = #{claimById,jdbcType=BIGINT},
+        claim_by = #{claimBy,jdbcType=VARCHAR},
+        claim_time = #{claimTime,jdbcType=TIMESTAMP},
+        bill_id = #{billId,jdbcType=BIGINT},
+        bill_no = #{billNo,jdbcType=VARCHAR},
+        payer = #{payer,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+         comments = #{comments,jdbcType=VARCHAR},
+         billing_items_id=#{billingItemsId,jdbcType=INTEGER},
+          billing_items_name=#{billingItemsName,jdbcType=VARCHAR},
+          receiving_company_id=#{receivingCompanyId,jdbcType=INTEGER},
+          receiving_company_name=#{receivingCompanyName,jdbcType=VARCHAR},
+            match_money = #{matchMoney,jdbcType=DOUBLE},
+            unmatch_money = #{unmatchMoney,jdbcType=DOUBLE}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        u.*,IF(i.id is not NULL OR r.id is not null,1,0) waitCheck
+        from billing_apply_unmatch u
+        LEFT JOIN billing_receive_info i ON u.id = i.billing_match_id
+        LEFT JOIN billing_refund_info r ON u.id = r.billing_match_id AND r.refund_type = 2 AND r.refund_status = 1
+        <where>
+            <if test="unmatchNo!=null">
+                and u.unmatch_no like CONCAT(CONCAT('%',#{unmatchNo,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="claimBy!=null">
+                and u.claim_by like CONCAT(CONCAT('%',#{claimBy,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="states != null">
+                and find_in_set(u.state,#{states,jdbcType=VARCHAR})
+            </if>
+            <if test="state!=null">
+                and u.state = #{state,jdbcType=INTEGER}
+            </if>
+            <if test="payTimeStart!=null">
+                AND DATE_FORMAT(u.pay_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{payTimeStart,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="payTimeEnd!=null">
+                AND DATE_FORMAT(u.pay_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{payTimeEnd,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="billingItemsIds != null">
+                and u.billing_items_id in (${billingItemsIds})
+            </if>
+            <if test="receivingCompanyIds != null">
+                and u.receiving_company_id in (${receivingCompanyIds})
+            </if>
+            <if test="payer != null ">
+                and u.payer=#{payer}
+            </if>
+            <if test="waitCheck == 1 ">
+                AND	(i.id is NOt NULL OR r.id is not null)
+            </if>
+            <if test="waitCheck == 0 ">
+                AND	(i.id is NULL AND r.id is  null)
+            </if>
+            <if test="remark != null and remark != ''">
+                and u.remark like concat('%',#{remark},'%')
+            </if>
+
+            <if test="startReceiveTime!=null">
+                AND DATE_FORMAT(i.receive_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startReceiveTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="endReceiveTime != null">
+                and DATE_FORMAT(i.receive_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endReceiveTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+
+            <if test="enums144 == 144">
+                and u.receiving_company_name like '%公估%'
+            </if>
+        </where>
+        GROUP BY u.id
+        order by u.id desc
+        <if test="limit == null || limit == '' || limit == 'true'">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectListSize" resultType="int" parameterType="java.util.Map" >
+            select count(1) from   (
+        select
+        count(1)
+        from billing_apply_unmatch u
+        LEFT JOIN billing_receive_info i ON u.id = i.billing_match_id
+        LEFT JOIN billing_refund_info r ON u.id = r.billing_match_id AND r.refund_type = 2 AND r.refund_status = 1
+        <where>
+            <if test="unmatchNo!=null">
+                and u.unmatch_no like CONCAT(CONCAT('%',#{unmatchNo,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="claimBy!=null">
+                and u.claim_by like CONCAT(CONCAT('%',#{claimBy,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="state!=null">
+                and u.state = #{state,jdbcType=INTEGER}
+            </if>
+            <if test="states != null">
+                and find_in_set(u.state,#{states,jdbcType=VARCHAR})
+            </if>
+            <if test="payTimeStart!=null">
+                AND DATE_FORMAT(u.pay_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{payTimeStart,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="payTimeEnd!=null">
+                AND DATE_FORMAT(u.pay_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{payTimeEnd,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="billingItemsIds != null">
+                and u.billing_items_id in (${billingItemsIds})
+            </if>
+            <if test="receivingCompanyIds != null">
+                and u.receiving_company_id in (${receivingCompanyIds})
+            </if>
+            <if test="payer != null ">
+                and u.payer=#{payer}
+            </if>
+            <if test="waitCheck == 1 ">
+                AND	(i.id is NOt NULL OR r.id is not null)
+            </if>
+            <if test="waitCheck == 0 ">
+                AND	(i.id is NULL AND r.id is  null)
+            </if>
+            <if test="remark != null and remark != ''">
+                and u.remark like concat('%',#{remark},'%')
+            </if>
+
+            <if test="startReceiveTime!=null">
+                AND DATE_FORMAT(i.receive_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startReceiveTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="endReceiveTime != null">
+                and DATE_FORMAT(i.receive_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endReceiveTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+
+            <if test="enums144 == 144">
+                and u.receiving_company_name like '%公估%'
+            </if>
+        </where>
+        GROUP BY u.id) t
+    </select>
+
+    <select id="selectByCaseNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply_unmatch
+        where bill_no = #{billNo,jdbcType=VARCHAR}
+    </select>
+</mapper>

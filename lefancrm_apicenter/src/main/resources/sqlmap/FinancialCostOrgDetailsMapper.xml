@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.FinancialCostOrgDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.FinancialCostOrgDetails" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="financial_re_apply_id" property="financialReApplyId" jdbcType="BIGINT" />
+    <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+    <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+    <result column="cost_type_id" property="costTypeId" jdbcType="INTEGER" />
+    <result column="cost_type_name" property="costTypeName" jdbcType="VARCHAR" />
+    <result column="cost_money" property="costMoney" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, financial_re_apply_id, department_id, department_name, cost_type_id, cost_type_name, 
+    cost_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from financial_cost_org_details
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from financial_cost_org_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.FinancialCostOrgDetails" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into financial_cost_org_details (financial_re_apply_id, department_id, department_name, 
+      cost_type_id, cost_type_name, cost_money
+      )
+    values (#{financialReApplyId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{departmentName,jdbcType=VARCHAR}, 
+      #{costTypeId,jdbcType=INTEGER}, #{costTypeName,jdbcType=VARCHAR}, #{costMoney,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.FinancialCostOrgDetails" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into financial_cost_org_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="financialReApplyId != null" >
+        financial_re_apply_id,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="departmentName != null" >
+        department_name,
+      </if>
+      <if test="costTypeId != null" >
+        cost_type_id,
+      </if>
+      <if test="costTypeName != null" >
+        cost_type_name,
+      </if>
+      <if test="costMoney != null" >
+        cost_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="financialReApplyId != null" >
+        #{financialReApplyId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentName != null" >
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="costTypeId != null" >
+        #{costTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="costTypeName != null" >
+        #{costTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="costMoney != null" >
+        #{costMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.FinancialCostOrgDetails" >
+    update financial_cost_org_details
+    <set >
+      <if test="financialReApplyId != null" >
+        financial_re_apply_id = #{financialReApplyId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentName != null" >
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="costTypeId != null" >
+        cost_type_id = #{costTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="costTypeName != null" >
+        cost_type_name = #{costTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="costMoney != null" >
+        cost_money = #{costMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.FinancialCostOrgDetails" >
+    update financial_cost_org_details
+    set financial_re_apply_id = #{financialReApplyId,jdbcType=BIGINT},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      cost_type_id = #{costTypeId,jdbcType=INTEGER},
+      cost_type_name = #{costTypeName,jdbcType=VARCHAR},
+      cost_money = #{costMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <delete id="deleteByReApplyId" parameterType="java.lang.Long" >
+    delete from financial_cost_org_details
+    where financial_re_apply_id = #{reApplyId,jdbcType=BIGINT}
+  </delete>
+</mapper>

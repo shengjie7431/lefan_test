@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.InvestigatorPreDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.InvestigatorPreDetails" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="investigator_re_id" property="investigatorReId" jdbcType="BIGINT" />
+    <result column="investigator_case_id" property="investigatorCaseId" jdbcType="BIGINT" />
+    <result column="Investigator_re_money" property="investigatorReMoney" jdbcType="DOUBLE" />
+    <result column="survey_case_no" property="surveyCaseNo" jdbcType="VARCHAR" />
+    <result column="investigator_case_id" property="investigatorCaseId" jdbcType="BIGINT" />
+    <result column="survey_person" property="surveyPerson" jdbcType="VARCHAR" />
+    <result column="entrust_org_name" property="entrustOrgName" jdbcType="VARCHAR" />
+    <result column="survey_state_name" property="surveyStateName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_info_id, investigator_re_id, investigator_case_id, Investigator_re_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from investigator_pre_details
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectByInvestigatorReId" resultMap="BaseResultMap">
+      	SELECT d.*,i.org_name ,ca.survey_case_no,ca.survey_person,info.entrust_org_name,info.survey_state_name
+      	FROM investigator_pre_details d
+      LEFT JOIN survey_risk_case_info info on d.survey_info_id = info.id
+      LEFT JOIN survey_risk_case ca ON ca.id = info.survey_id
+      LEFT JOIN survey_investigator_case icase ON d.investigator_case_id = icase.id
+      LEFT JOIN survey_investigator i ON icase.survey_user_id = i.user_id
+      where  info.delete_flag = 0
+      and d.investigator_re_id = #{id}
+      <if test="orgId != null and orgId != ''">
+        and FIND_IN_SET(i.org_id,#{orgId})
+      </if>
+      <if test="surveyInvIds != null and surveyInvIds != ''">
+        and FIND_IN_SET(i.user_id,#{surveyInvIds})
+      </if>
+    </select>
+  <select id="selectByInvCaseId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+      FROM investigator_pre_details
+      WHERE investigator_case_id = #{invCaseId}
+       limit 1
+  </select>
+  <select id="selectAllCaseByUserId" resultType="java.lang.Long">
+    SELECT d.investigator_case_id FROM investigator_re_details d LEFT JOIN investigator_re_info i ON d.investigator_re_id = i.id WHERE i.survey_user_id = #{userId}
+    UNION
+  SELECT d.investigator_case_id  FROM investigator_pre_details d RIGHT JOIN survey_pre_reimbursement r ON d.investigator_re_id = r.id
+  WHERE r.survey_user_id = #{userId}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from investigator_pre_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByPreId" parameterType="java.lang.Long" >
+    delete from investigator_pre_details
+    where investigator_re_id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.InvestigatorPreDetails" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into investigator_pre_details (survey_info_id, investigator_re_id, investigator_case_id, 
+      Investigator_re_money)
+    values (#{surveyInfoId,jdbcType=BIGINT}, #{investigatorReId,jdbcType=BIGINT}, #{investigatorCaseId,jdbcType=BIGINT}, 
+      #{investigatorReMoney,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.InvestigatorPreDetails" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into investigator_pre_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="investigatorReId != null" >
+        investigator_re_id,
+      </if>
+      <if test="investigatorCaseId != null" >
+        investigator_case_id,
+      </if>
+      <if test="investigatorReMoney != null" >
+        Investigator_re_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="investigatorReId != null" >
+        #{investigatorReId,jdbcType=BIGINT},
+      </if>
+      <if test="investigatorCaseId != null" >
+        #{investigatorCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="investigatorReMoney != null" >
+        #{investigatorReMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertBySelect">
+    INSERT INTO investigator_pre_details (survey_info_id,investigator_re_id,investigator_case_id,Investigator_re_money)
+     SELECT
+        c.survey_info_id ,
+        #{preReId},
+        i.id,
+         ROUND(sum(IFNULL( c.medical_history_money, 0 )+ IFNULL( c.troubleshooting_money, 0 )+ IFNULL( c.opc_troubleshooting_money, 0 )+ IFNULL( c.printing_money, 0 )+ IFNULL( c.accommodatio_money, 0 )+ IFNULL( c.cross_driving_money, 0 ) + IFNULL( c.self_driving_money, 0 )+ IFNULL( c.other_money, 0 )+ IFNULL( c.toll_money, 0 )),2) Investigator_re_money
+FROM
+	survey_user_clock u
+	LEFT JOIN survey_clock_case c ON u.id = c.clock_id
+	LEFT JOIN survey_investigator_case i ON c.survey_info_id = i.survey_info_id
+	WHERE
+	u.survey_user_id = #{userId} and u.survey_org_id = #{orgId}
+	AND DATE_FORMAT( u.clock_time, '%Y-%m' ) = DATE_FORMAT(NOW(),'%Y-%m')  AND i.survey_user_id = u.survey_user_id AND c.id IS NOT NULL
+	GROUP BY c.survey_info_id
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.InvestigatorPreDetails" >
+    update investigator_pre_details
+    <set >
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="investigatorReId != null" >
+        investigator_re_id = #{investigatorReId,jdbcType=BIGINT},
+      </if>
+      <if test="investigatorCaseId != null" >
+        investigator_case_id = #{investigatorCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="investigatorReMoney != null" >
+        Investigator_re_money = #{investigatorReMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.InvestigatorPreDetails" >
+    update investigator_pre_details
+    set survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      investigator_re_id = #{investigatorReId,jdbcType=BIGINT},
+      investigator_case_id = #{investigatorCaseId,jdbcType=BIGINT},
+      Investigator_re_money = #{investigatorReMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

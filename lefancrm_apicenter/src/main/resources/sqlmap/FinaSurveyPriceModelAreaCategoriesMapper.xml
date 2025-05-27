@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaSurveyPriceModelAreaCategoriesMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaSurveyPriceModelAreaCategories" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="price_model_id" property="priceModelId" jdbcType="BIGINT" />
+    <result column="price_model_name" property="priceModelName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, price_model_id, price_model_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_survey_price_model_area_categories
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_survey_price_model_area_categories
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByPriceModelId">
+        delete from fina_survey_price_model_area_categories
+    where price_model_id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyPriceModelAreaCategories" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_survey_price_model_area_categories (name, price_model_id, price_model_name
+      )
+    values (#{name,jdbcType=VARCHAR}, #{priceModelId,jdbcType=BIGINT}, #{priceModelName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyPriceModelAreaCategories" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_survey_price_model_area_categories
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="priceModelId != null" >
+        price_model_id,
+      </if>
+      <if test="priceModelName != null" >
+        price_model_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="priceModelId != null" >
+        #{priceModelId,jdbcType=BIGINT},
+      </if>
+      <if test="priceModelName != null" >
+        #{priceModelName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+    <insert id="copyOneByPriceModelId">
+        INSERT INTO fina_survey_price_model_area_categories (name,price_model_id,price_model_name)
+SELECT name,#{newPriceModelId},price_model_name FROM fina_survey_price_model_area_categories WHERE price_model_id = #{oldPriceModelId}
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyPriceModelAreaCategories" >
+    update fina_survey_price_model_area_categories
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="priceModelId != null" >
+        price_model_id = #{priceModelId,jdbcType=BIGINT},
+      </if>
+      <if test="priceModelName != null" >
+        price_model_name = #{priceModelName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyPriceModelAreaCategories" >
+    update fina_survey_price_model_area_categories
+    set name = #{name,jdbcType=VARCHAR},
+      price_model_id = #{priceModelId,jdbcType=BIGINT},
+      price_model_name = #{priceModelName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="name != null" >
+            and name like CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="priceModelId != null" >
+            and price_model_id = #{priceModelId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from fina_survey_price_model_area_categories
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from fina_survey_price_model_area_categories
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+    <select id="selectByPriceModelId" resultMap="BaseResultMap">
+        SELECT
+	a.* ,b.id oldAreaCategoriesId
+FROM
+	fina_survey_price_model_area_categories  a
+	LEFT JOIN (SELECT * FROM fina_survey_price_model_area_categories WHERE price_model_id =#{oldPriceModelId}) b ON a.name = b.name
+WHERE
+	a.price_model_id = #{newPriceModelId}
+
+    </select>
+</mapper>

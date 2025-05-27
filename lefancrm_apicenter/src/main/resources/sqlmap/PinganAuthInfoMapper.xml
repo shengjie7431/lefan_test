@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.PinganAuthInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.PinganAuthInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="req_serial" property="reqSerial" jdbcType="VARCHAR" />
+        <result column="merchant_id" property="merchantId" jdbcType="VARCHAR" />
+        <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+        <result column="user_index_card_no" property="userIndexCardNo" jdbcType="VARCHAR" />
+        <result column="capital_name" property="capitalName" jdbcType="VARCHAR" />
+        <result column="capital_index_card_no" property="capitalIndexCardNo" jdbcType="VARCHAR" />
+        <result column="loan_agreement_no" property="loanAgreementNo" jdbcType="VARCHAR" />
+        <result column="loan_amt" property="loanAmt" jdbcType="DOUBLE" />
+        <result column="loan_desc" property="loanDesc" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="is_success" property="isSuccess" jdbcType="INTEGER" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="repay_loan_agreement_no" property="repayLoanAgreementNo" jdbcType="VARCHAR" />
+        <result column="sign_result" property="signResult" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, req_serial, merchant_id, customer_id, user_index_card_no, capital_name, capital_index_card_no,
+        loan_agreement_no, loan_amt, loan_desc, create_time, is_success, remark,repay_loan_agreement_no,sign_result
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from pingan_auth_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByParams" resultMap="BaseResultMap" parameterType="com.lefancrm.apicenter.model.PinganAuthInfo" >
+        select
+        <include refid="Base_Column_List" />
+        from pingan_auth_info
+        where customer_id = #{customerId,jdbcType=VARCHAR} and user_index_card_no = #{userIndexCardNo,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByCustomerId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from pingan_auth_info
+        where customer_id = #{customerId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByLoanAgreementNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from pingan_auth_info
+        where loan_agreement_no = #{loanAgreementNo,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from pingan_auth_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.PinganAuthInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into pingan_auth_info (req_serial, merchant_id, customer_id,
+        user_index_card_no, capital_name, capital_index_card_no,
+        loan_agreement_no, loan_amt, loan_desc,
+        create_time, is_success, remark,repay_loan_agreement_no,sign_result
+        )
+        values (#{reqSerial,jdbcType=VARCHAR}, #{merchantId,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR},
+        #{userIndexCardNo,jdbcType=VARCHAR}, #{capitalName,jdbcType=VARCHAR}, #{capitalIndexCardNo,jdbcType=VARCHAR},
+        #{loanAgreementNo,jdbcType=VARCHAR}, #{loanAmt,jdbcType=DOUBLE}, #{loanDesc,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{isSuccess,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},#{repayLoanAgreementNo,jdbcType=VARCHAR},
+        #{signResult,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.PinganAuthInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into pingan_auth_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="reqSerial != null" >
+                req_serial,
+            </if>
+            <if test="merchantId != null" >
+                merchant_id,
+            </if>
+            <if test="customerId != null" >
+                customer_id,
+            </if>
+            <if test="userIndexCardNo != null" >
+                user_index_card_no,
+            </if>
+            <if test="capitalName != null" >
+                capital_name,
+            </if>
+            <if test="capitalIndexCardNo != null" >
+                capital_index_card_no,
+            </if>
+            <if test="loanAgreementNo != null" >
+                loan_agreement_no,
+            </if>
+            <if test="loanAmt != null" >
+                loan_amt,
+            </if>
+            <if test="loanDesc != null" >
+                loan_desc,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="isSuccess != null" >
+                is_success,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="repayLoanAgreementNo != null" >
+                repay_loan_agreement_no,
+            </if>
+            <if test="signResult != null" >
+                sign_result,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="reqSerial != null" >
+                #{reqSerial,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantId != null" >
+                #{merchantId,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null" >
+                #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="userIndexCardNo != null" >
+                #{userIndexCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="capitalName != null" >
+                #{capitalName,jdbcType=VARCHAR},
+            </if>
+            <if test="capitalIndexCardNo != null" >
+                #{capitalIndexCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="loanAgreementNo != null" >
+                #{loanAgreementNo,jdbcType=VARCHAR},
+            </if>
+            <if test="loanAmt != null" >
+                #{loanAmt,jdbcType=DOUBLE},
+            </if>
+            <if test="loanDesc != null" >
+                #{loanDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isSuccess != null" >
+                #{isSuccess,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="repayLoanAgreementNo != null" >
+                #{repayLoanAgreementNo,jdbcType=VARCHAR},
+            </if>
+            <if test="signResult != null" >
+                #{signResult,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.PinganAuthInfo" >
+        update pingan_auth_info
+        <set >
+            <if test="reqSerial != null" >
+                req_serial = #{reqSerial,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantId != null" >
+                merchant_id = #{merchantId,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null" >
+                customer_id = #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="userIndexCardNo != null" >
+                user_index_card_no = #{userIndexCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="capitalName != null" >
+                capital_name = #{capitalName,jdbcType=VARCHAR},
+            </if>
+            <if test="capitalIndexCardNo != null" >
+                capital_index_card_no = #{capitalIndexCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="loanAgreementNo != null" >
+                loan_agreement_no = #{loanAgreementNo,jdbcType=VARCHAR},
+            </if>
+            <if test="loanAmt != null" >
+                loan_amt = #{loanAmt,jdbcType=DOUBLE},
+            </if>
+            <if test="loanDesc != null" >
+                loan_desc = #{loanDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isSuccess != null" >
+                is_success = #{isSuccess,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="repayLoanAgreementNo != null" >
+                repay_loan_agreement_no = #{repayLoanAgreementNo,jdbcType=VARCHAR},
+            </if>
+            <if test="signResult != null" >
+                sign_result = #{signResult,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.PinganAuthInfo" >
+        update pingan_auth_info
+        set req_serial = #{reqSerial,jdbcType=VARCHAR},
+        merchant_id = #{merchantId,jdbcType=VARCHAR},
+        customer_id = #{customerId,jdbcType=VARCHAR},
+        user_index_card_no = #{userIndexCardNo,jdbcType=VARCHAR},
+        capital_name = #{capitalName,jdbcType=VARCHAR},
+        capital_index_card_no = #{capitalIndexCardNo,jdbcType=VARCHAR},
+        loan_agreement_no = #{loanAgreementNo,jdbcType=VARCHAR},
+        loan_amt = #{loanAmt,jdbcType=DOUBLE},
+        loan_desc = #{loanDesc,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        is_success = #{isSuccess,jdbcType=INTEGER},
+        remark = #{remark,jdbcType=VARCHAR},
+        repay_loan_agreement_no = #{repayLoanAgreementNo,jdbcType=VARCHAR},
+        sign_result = #{signResult,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

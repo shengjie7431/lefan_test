@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.TcOpenPlatformApiMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.TcOpenPlatformApi" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="platform_id" property="platformId" jdbcType="INTEGER" />
+    <result column="api_name" property="apiName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, platform_id, api_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_open_platform_api
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tc_open_platform_api
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.TcOpenPlatformApi" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tc_open_platform_api (platform_id, api_name)
+    values (#{platformId,jdbcType=INTEGER}, #{apiName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.TcOpenPlatformApi" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tc_open_platform_api
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="platformId != null" >
+        platform_id,
+      </if>
+      <if test="apiName != null" >
+        api_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="platformId != null" >
+        #{platformId,jdbcType=INTEGER},
+      </if>
+      <if test="apiName != null" >
+        #{apiName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.TcOpenPlatformApi" >
+    update tc_open_platform_api
+    <set >
+      <if test="platformId != null" >
+        platform_id = #{platformId,jdbcType=INTEGER},
+      </if>
+      <if test="apiName != null" >
+        api_name = #{apiName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.TcOpenPlatformApi" >
+    update tc_open_platform_api
+    set platform_id = #{platformId,jdbcType=INTEGER},
+      api_name = #{apiName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectListByPlatformId" resultMap="BaseResultMap">
+    select * from tc_open_platform_api where platform_id = #{id}
+  </select>
+</mapper>

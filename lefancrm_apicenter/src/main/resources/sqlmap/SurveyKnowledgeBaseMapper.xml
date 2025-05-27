@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyKnowledgeBaseMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyKnowledgeBase" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="auth_user_id" property="authUserId" jdbcType="BIGINT" />
+    <result column="auth_user_name" property="authUserName" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="comment_num" property="commentNum" jdbcType="INTEGER" />
+    <result column="pointz_num" property="pointzNum" jdbcType="INTEGER" />
+    <result column="knowledge_type_id" property="knowledgeTypeId" jdbcType="BIGINT" />
+    <result column="knowledge_type_name" property="knowledgeTypeName" jdbcType="VARCHAR" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="file_id" property="fileId" jdbcType="BIGINT" />
+    <result column="is_top" property="isTop" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, auth_user_id, auth_user_name, title, remark, content, comment_num, pointz_num, 
+    knowledge_type_id, knowledge_type_name, file_name, file_id, is_top, create_by, create_by_name, 
+    create_time, update_by, update_time, is_delete
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_knowledge_base
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_knowledge_base
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyKnowledgeBase" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_knowledge_base (auth_user_id, auth_user_name, title, 
+      remark, content, comment_num, 
+      pointz_num, knowledge_type_id, knowledge_type_name, 
+      file_name, file_id, is_top, 
+      create_by, create_by_name, create_time, 
+      update_by, update_time, is_delete
+      )
+    values (#{authUserId,jdbcType=BIGINT}, #{authUserName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{commentNum,jdbcType=INTEGER}, 
+      #{pointzNum,jdbcType=INTEGER}, #{knowledgeTypeId,jdbcType=BIGINT}, #{knowledgeTypeName,jdbcType=VARCHAR}, 
+      #{fileName,jdbcType=VARCHAR}, #{fileId,jdbcType=BIGINT}, #{isTop,jdbcType=INTEGER}, 
+      #{createBy,jdbcType=BIGINT}, #{createByName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyKnowledgeBase" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_knowledge_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="authUserId != null" >
+        auth_user_id,
+      </if>
+      <if test="authUserName != null" >
+        auth_user_name,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="commentNum != null" >
+        comment_num,
+      </if>
+      <if test="pointzNum != null" >
+        pointz_num,
+      </if>
+      <if test="knowledgeTypeId != null" >
+        knowledge_type_id,
+      </if>
+      <if test="knowledgeTypeName != null" >
+        knowledge_type_name,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="fileId != null" >
+        file_id,
+      </if>
+      <if test="isTop != null" >
+        is_top,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createByName != null" >
+        create_by_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="authUserId != null" >
+        #{authUserId,jdbcType=BIGINT},
+      </if>
+      <if test="authUserName != null" >
+        #{authUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentNum != null" >
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="pointzNum != null" >
+        #{pointzNum,jdbcType=INTEGER},
+      </if>
+      <if test="knowledgeTypeId != null" >
+        #{knowledgeTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="knowledgeTypeName != null" >
+        #{knowledgeTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=BIGINT},
+      </if>
+      <if test="isTop != null" >
+        #{isTop,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createByName != null" >
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyKnowledgeBase" >
+    update survey_knowledge_base
+    <set >
+      <if test="authUserId != null" >
+        auth_user_id = #{authUserId,jdbcType=BIGINT},
+      </if>
+      <if test="authUserName != null" >
+        auth_user_name = #{authUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentNum != null" >
+        comment_num = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="pointzNum != null" >
+        pointz_num = #{pointzNum,jdbcType=INTEGER},
+      </if>
+      <if test="knowledgeTypeId != null" >
+        knowledge_type_id = #{knowledgeTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="knowledgeTypeName != null" >
+        knowledge_type_name = #{knowledgeTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null" >
+        file_id = #{fileId,jdbcType=BIGINT},
+      </if>
+      <if test="isTop != null" >
+        is_top = #{isTop,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createByName != null" >
+        create_by_name = #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyKnowledgeBase" >
+    update survey_knowledge_base
+    set auth_user_id = #{authUserId,jdbcType=BIGINT},
+      auth_user_name = #{authUserName,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      pointz_num = #{pointzNum,jdbcType=INTEGER},
+      knowledge_type_id = #{knowledgeTypeId,jdbcType=BIGINT},
+      knowledge_type_name = #{knowledgeTypeName,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_id = #{fileId,jdbcType=BIGINT},
+      is_top = #{isTop,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_by_name = #{createByName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="authUserName!=null">
+            and auth_user_name like CONCAT(CONCAT('%',#{authUserName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="title!=null">
+            and title like CONCAT(CONCAT('%',#{title,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="knowledgeTypeId!=null">
+            and knowledge_type_id = #{knowledgeTypeId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_knowledge_base
+        <include refid="joins" />
+        where is_delete=0
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_knowledge_base
+        <include refid="joins" />
+        where is_delete=0
+        <include refid="wheres" />
+    </select>
+</mapper>

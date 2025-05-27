@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.StaffPaySlipMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.StaffPaySlip" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="work_time" property="workTime" jdbcType="VARCHAR" />
+        <result column="slip_state" property="slipState" jdbcType="INTEGER" />
+        <result column="slip_state_name" property="slipStateName" jdbcType="VARCHAR" />
+        <result column="hr_id" property="hrId" jdbcType="BIGINT" />
+        <result column="hr_name" property="hrName" jdbcType="VARCHAR" />
+        <result column="finance_Id" property="financeId" jdbcType="BIGINT" />
+        <result column="finance_name" property="financeName" jdbcType="VARCHAR" />
+        <result column="general_manager_id" property="generalManagerId" jdbcType="BIGINT" />
+        <result column="general_manager_name" property="generalManagerName" jdbcType="VARCHAR" />
+        <result column="hr_time" property="hrTime" jdbcType="TIMESTAMP" />
+        <result column="finance_time" property="financeTime" jdbcType="TIMESTAMP" />
+        <result column="general_manager_time" property="generalManagerTime" jdbcType="TIMESTAMP" />
+        <result column="query_password" property="queryPassword" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="reason" property="reason" jdbcType="VARCHAR" />
+        <result column="dd_url" property="ddUrl" jdbcType="VARCHAR" />
+        <result column="js_url" property="jsUrl" jdbcType="VARCHAR" />
+        <result column="divsion_one" property="divsionOne" jdbcType="VARCHAR" />
+        <result column="divsion_two" property="divsionTwo" jdbcType="VARCHAR" />
+        <result column="divsion_three" property="divsionThree" jdbcType="VARCHAR" />
+        <result column="back_state" property="backState" jdbcType="INTEGER" />
+        <result column="hr_manage_id" property="hrManageId" jdbcType="BIGINT" />
+        <result column="hr_manage_name" property="hrManageName" jdbcType="VARCHAR" />
+        <result column="hr_manage_time" property="hrManageTime" jdbcType="TIMESTAMP" />
+        <result column="is_send" property="isSend" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        a.id, a.work_time, a.slip_state, a.slip_state_name, a.hr_id, a.hr_name, a.finance_Id, a.finance_name, a.general_manager_id,
+        a.general_manager_name, a.hr_time, a.finance_time, a.general_manager_time, a.query_password,
+        a.create_time, a.create_by, a.update_time, a.update_by, a.delete_flag, a.reason, a.dd_url, a.js_url,
+        a.divsion_one, a.divsion_two, a.divsion_three,a.back_state,a.hr_manage_id, a.hr_manage_name, a.hr_manage_time,a.is_send
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from staff_pay_slip a
+        where a.id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from staff_pay_slip
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.StaffPaySlip" useGeneratedKeys="true" keyProperty="id">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into staff_pay_slip (work_time, slip_state, slip_state_name, hr_id,
+        hr_name, finance_Id, finance_name,
+        general_manager_id, general_manager_name, hr_time,
+        finance_time, general_manager_time, query_password,
+        create_time, create_by, update_time,
+        update_by, delete_flag, reason,
+        dd_url, js_url, divsion_one, divsion_two, divsion_three,back_state,hr_manage_id, hr_manage_name, hr_manage_time, is_send)
+        values (#{workTime,jdbcType=VARCHAR}, #{slipState,jdbcType=INTEGER}, #{slipStateName,jdbcType=VARCHAR}, #{hrId,jdbcType=BIGINT},
+        #{hrName,jdbcType=VARCHAR}, #{financeId,jdbcType=BIGINT}, #{financeName,jdbcType=VARCHAR},
+        #{generalManagerId,jdbcType=BIGINT}, #{generalManagerName,jdbcType=VARCHAR}, #{hrTime,jdbcType=TIMESTAMP},
+        #{financeTime,jdbcType=TIMESTAMP}, #{generalManagerTime,jdbcType=TIMESTAMP}, #{queryPassword,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+        #{updateBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, #{reason,jdbcType=VARCHAR},
+        #{ddUrl,jdbcType=VARCHAR}, #{jsUrl,jdbcType=VARCHAR}, #{divsionOne,jdbcType=VARCHAR},
+        #{divsionTwo,jdbcType=VARCHAR}, #{divsionThree,jdbcType=VARCHAR}, #{backState,jdbcType=INTEGER},
+        #{hrManageId,jdbcType=BIGINT}, #{hrManageName,jdbcType=VARCHAR},#{hrManageTime,jdbcType=TIMESTAMP},
+        #{isSend,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.StaffPaySlip" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into staff_pay_slip
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="workTime != null" >
+                work_time,
+            </if>
+            <if test="slipState != null" >
+                slip_state,
+            </if>
+            <if test="slipStateName != null" >
+                slip_state_name,
+            </if>
+            <if test="hrId != null" >
+                hr_id,
+            </if>
+            <if test="hrName != null" >
+                hr_name,
+            </if>
+            <if test="financeId != null" >
+                finance_Id,
+            </if>
+            <if test="financeName != null" >
+                finance_name,
+            </if>
+            <if test="generalManagerId != null" >
+                general_manager_id,
+            </if>
+            <if test="generalManagerName != null" >
+                general_manager_name,
+            </if>
+            <if test="hrTime != null" >
+                hr_time,
+            </if>
+            <if test="financeTime != null" >
+                finance_time,
+            </if>
+            <if test="generalManagerTime != null" >
+                general_manager_time,
+            </if>
+            <if test="queryPassword != null" >
+                query_password,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+            <if test="reason != null" >
+                reason,
+            </if>
+            <if test="ddUrl != null" >
+                dd_url,
+            </if>
+            <if test="jsUrl != null" >
+                js_url,
+            </if>
+            <if test="divsionOne != null" >
+                divsion_one,
+            </if>
+            <if test="divsionTwo != null" >
+                divsion_two,
+            </if>
+            <if test="divsionThree != null" >
+                divsion_three,
+            </if>
+            <if test="backState != null" >
+                back_state,
+            </if>
+            <if test="hrManageId != null" >
+                hr_manage_id,
+            </if>
+            <if test="hrManageName != null" >
+                hr_manage_name,
+            </if>
+            <if test="hrManageTime != null" >
+                hr_manage_time,
+            </if>
+            <if test="isSend != null" >
+                is_send,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="workTime != null" >
+                #{workTime,jdbcType=VARCHAR},
+            </if>
+            <if test="slipState != null" >
+                #{slipState,jdbcType=INTEGER},
+            </if>
+            <if test="slipStateName != null" >
+                #{slipState_name,jdbcType=VARCHAR},
+            </if>
+            <if test="hrId != null" >
+                #{hrId,jdbcType=BIGINT},
+            </if>
+            <if test="hrName != null" >
+                #{hrName,jdbcType=VARCHAR},
+            </if>
+            <if test="financeId != null" >
+                #{financeId,jdbcType=BIGINT},
+            </if>
+            <if test="financeName != null" >
+                #{financeName,jdbcType=VARCHAR},
+            </if>
+            <if test="generalManagerId != null" >
+                #{generalManagerId,jdbcType=BIGINT},
+            </if>
+            <if test="generalManagerName != null" >
+                #{generalManagerName,jdbcType=VARCHAR},
+            </if>
+            <if test="hrTime != null" >
+                #{hrTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="financeTime != null" >
+                #{financeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="generalManagerTime != null" >
+                #{generalManagerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="queryPassword != null" >
+                #{queryPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="reason != null" >
+                #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="ddUrl != null" >
+                #{ddUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="jsUrl != null" >
+                #{jsUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="divsionOne != null" >
+                #{divsionOne,jdbcType=VARCHAR},
+            </if>
+            <if test="divsionTwo != null" >
+                #{divsionTwo,jdbcType=VARCHAR},
+            </if>
+            <if test="divsionThree != null" >
+                #{divsionThree,jdbcType=VARCHAR},
+            </if>
+            <if test="backState != null" >
+                #{backState,jdbcType=INTEGER},
+            </if>
+            <if test="hrManageId != null" >
+                #{hrManageId,jdbcType=BIGINT},
+            </if>
+            <if test="hrManageName != null" >
+                #{hrManageName,jdbcType=VARCHAR},
+            </if>
+            <if test="hrManageTime != null" >
+                #{hrManageTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isSend != null" >
+                #{isSend,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.StaffPaySlip" >
+        update staff_pay_slip
+        <set >
+            <if test="workTime != null" >
+                work_time = #{workTime,jdbcType=VARCHAR},
+            </if>
+            <if test="slipState != null" >
+                slip_state = #{slipState,jdbcType=INTEGER},
+            </if>
+            <if test="slipStateName != null" >
+                slip_state_name = #{slipStateName,jdbcType=VARCHAR},
+            </if>
+            <if test="hrId != null" >
+                hr_id = #{hrId,jdbcType=BIGINT},
+            </if>
+            <if test="hrName != null" >
+                hr_name = #{hrName,jdbcType=VARCHAR},
+            </if>
+            <if test="financeId != null" >
+                finance_Id = #{financeId,jdbcType=BIGINT},
+            </if>
+            <if test="financeName != null" >
+                finance_name = #{financeName,jdbcType=VARCHAR},
+            </if>
+            <if test="generalManagerId != null" >
+                general_manager_id = #{generalManagerId,jdbcType=BIGINT},
+            </if>
+            <if test="generalManagerName != null" >
+                general_manager_name = #{generalManagerName,jdbcType=VARCHAR},
+            </if>
+            <if test="hrTime != null" >
+                hr_time = #{hrTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="financeTime != null" >
+                finance_time = #{financeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="generalManagerTime != null" >
+                general_manager_time = #{generalManagerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="queryPassword != null" >
+                query_password = #{queryPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            update_time = now(),
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="reason != null" >
+                reason = #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="ddUrl != null" >
+                dd_url = #{ddUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="jsUrl != null" >
+                js_url = #{jsUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="divsionOne != null" >
+                divsion_one = #{divsionOne,jdbcType=VARCHAR},
+            </if>
+            <if test="divsionTwo != null" >
+                divsion_two = #{divsionTwo,jdbcType=VARCHAR},
+            </if>
+            <if test="divsionThree != null" >
+                divsion_three = #{divsionThree,jdbcType=VARCHAR},
+            </if>
+            <if test="backState != null" >
+                back_state = #{backState,jdbcType=INTEGER},
+            </if>
+            <if test="hrManageId != null" >
+                hr_manage_id = #{hrManageId,jdbcType=BIGINT},
+            </if>
+            <if test="hrManageName != null" >
+                hr_manage_name = #{hrManageName,jdbcType=VARCHAR},
+            </if>
+            <if test="hrManageTime != null" >
+                hr_manage_time = #{hrManageTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isSend != null" >
+                is_send = #{isSend,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.StaffPaySlip" >
+        update staff_pay_slip
+        set work_time = #{workTime,jdbcType=VARCHAR},
+        slip_state = #{slipState,jdbcType=INTEGER},
+        slip_state_name = #{slipStateName,jdbcType=VARCHAR},
+        hr_id = #{hrId,jdbcType=BIGINT},
+        hr_name = #{hrName,jdbcType=VARCHAR},
+        finance_Id = #{financeId,jdbcType=BIGINT},
+        finance_name = #{financeName,jdbcType=VARCHAR},
+        general_manager_id = #{generalManagerId,jdbcType=BIGINT},
+        general_manager_name = #{generalManagerName,jdbcType=VARCHAR},
+        hr_time = #{hrTime,jdbcType=TIMESTAMP},
+        finance_time = #{financeTime,jdbcType=TIMESTAMP},
+        general_manager_time = #{generalManagerTime,jdbcType=TIMESTAMP},
+        query_password = #{queryPassword,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        update_time = now(),
+        update_by = #{updateBy,jdbcType=VARCHAR},
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+        reason = #{reason,jdbcType=VARCHAR},
+        dd_url = #{ddUrl,jdbcType=VARCHAR},
+        js_url = #{jsUrl,jdbcType=VARCHAR},
+        divsion_one = #{divsionOne,jdbcType=VARCHAR},
+        divsion_two = #{divsionTwo,jdbcType=VARCHAR},
+        divsion_three = #{divsionThree,jdbcType=VARCHAR},
+        back_state = #{backState,jdbcType=INTEGER},
+        hr_manage_id = #{hrManageId,jdbcType=BIGINT},
+        hr_manage_name = #{hrManageName,jdbcType=VARCHAR},
+        hr_manage_time = #{hrManageTime,jdbcType=TIMESTAMP},
+        is_send = #{isSend,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="workTime != null" >
+            and a.work_time = #{workTime,jdbcType=VARCHAR}
+        </if>
+        <if test="slipState != null" >
+            and find_in_set(a.slip_state,#{slipState,jdbcType=VARCHAR})
+        </if>
+        and (
+             1 != 1
+            <if test="roleOne == 1">
+                or a.slip_state in (0,1,2,3,4,5)
+            </if>
+            <if test="roleTwo == 1">
+                or a.slip_state in (1,2,3,4,5)
+            </if>
+            <if test="roleThree == 1">
+                or a.slip_state in (2,3,4,5)
+            </if>
+            <if test="roleFour == 1">
+                or a.slip_state in (4,5)
+            </if>
+            <if test="roleSix == 1">
+                or a.slip_state in (0,1,2,3,4,5)
+            </if>
+            <if test="roleFive == 1">
+                or a.slip_state in (5)
+            </if>
+        )
+    </sql>
+    <select id="list" parameterType="map" resultType="com.lefancrm.apicenter.model.StaffPaySlip">
+        select
+        a.id as id, a.work_time as workTime, a.slip_state as slipState, a.slip_state_name as slipStateName,
+        a.hr_id as hrId, a.hr_name as hrName, a.general_manager_id as generalManagerId,a.general_manager_time as generalManagerTime,
+        a.general_manager_name as generalManagerName, a.query_password as queryPassword,
+        a.reason as reason, a.back_state as backState, a.hr_manage_id as hrManageId, a.hr_manage_name as hrManageName,
+        organ.organManagerInfo as organManagerInfo, superior.superiorManagerInfo as superiorManagerInfo,a.is_send as isSend
+        from staff_pay_slip a
+        left join
+        (
+            SELECT organManager.id as id,
+              cast(GROUP_CONCAT(CONCAT(IFNULL(organManager.bName,''),'_',IFNULL(organManager.bState,''))) as char) as organManagerInfo
+            from
+            (
+                SELECT a.id,b.organ_manager_name as bName,b.state as bState,b.organ_manager_user_id as bUserId
+                FROM staff_pay_slip a
+                left join staff_pay_slip_manager b on a.id = b.staff_pay_slip_id and b.manager_type = 1
+                where 1=1
+                    <if test="roleTwo == 1 and roleThree == null">
+                        and b.organ_manager_user_id = #{userId,jdbcType=BIGINT}
+                    </if>
+                    <if test="roleTwo == null and roleThree == 1">
+                        and b.superior_manager_user_id = #{userId,jdbcType=BIGINT}
+                    </if>
+                    <if test="roleTwo == 1 and roleThree == 1">
+                        and (b.superior_manager_user_id = #{userId,jdbcType=BIGINT} or b.organ_manager_user_id = #{userId,jdbcType=BIGINT})
+                    </if>
+                GROUP BY a.id,b.organ_manager_user_id
+            ) organManager
+            GROUP BY organManager.id
+        ) organ on a.id = organ.id
+
+        <if test="mySuperior == 1">
+            left join
+            (
+                SELECT organManager.id as id,
+                  cast(GROUP_CONCAT(CONCAT(IFNULL(organManager.bName,''),'_',IFNULL(organManager.bState,''))) as char) as superiorManagerInfo
+                from
+                (
+                    SELECT a.id,b.superior_manager_name as bName,c.state as bState,b.superior_manager_user_id as bUserId
+                    FROM staff_pay_slip a
+                    left join staff_pay_slip_manager b on a.id = b.staff_pay_slip_id and b.manager_type = 1
+                    left join staff_pay_slip_manager c on b.superior_manager_user_id = c.organ_manager_user_id AND c.manager_type = 2 and a.id = c.staff_pay_slip_id
+                    where 1=1
+                        <if test="roleTwo == 1 and roleThree == null">
+                            and b.organ_manager_user_id = #{userId,jdbcType=BIGINT}
+                        </if>
+                        <if test="roleTwo == null and roleThree == 1">
+                            and b.superior_manager_user_id = #{userId,jdbcType=BIGINT}
+                        </if>
+                        <if test="roleTwo == 1 and roleThree == 1">
+                            and (b.superior_manager_user_id = #{userId,jdbcType=BIGINT} or b.organ_manager_user_id = #{userId,jdbcType=BIGINT})
+                        </if>
+                    GROUP BY a.id,b.superior_manager_user_id
+                ) organManager
+                GROUP BY organManager.id
+            ) superior on a.id = superior.id
+        </if>
+
+        <if test="mySuperior == null">
+            left join
+            (
+                SELECT superiorManager.id as id,
+                cast(GROUP_CONCAT(CONCAT(IFNULL(superiorManager.cName,''),'_',IFNULL(superiorManager.cState,''))) as char) as superiorManagerInfo
+                from
+                (
+                    SELECT a.id,c.organ_manager_name as cName,c.state as cState,c.organ_manager_user_id as cUserId
+                    FROM staff_pay_slip a
+                    left join staff_pay_slip_manager c on a.id = c.staff_pay_slip_id and c.manager_type = 2
+                    where 1=1
+                        <if test="roleTwo == 1 and roleThree == null">
+                            and c.organ_manager_user_id = #{userId,jdbcType=BIGINT}
+                        </if>
+                        <if test="roleTwo == null and roleThree == 1">
+                            and c.superior_manager_user_id = #{userId,jdbcType=BIGINT}
+                        </if>
+                        <if test="roleTwo == 1 and roleThree == 1">
+                            and (c.superior_manager_user_id = #{userId,jdbcType=BIGINT} or c.organ_manager_user_id = #{userId,jdbcType=BIGINT})
+                        </if>
+                    GROUP BY a.id,c.organ_manager_user_id
+                ) superiorManager
+                GROUP BY superiorManager.id
+            ) superior on a.id = superior.id
+        </if>
+
+        where a.delete_flag =0
+        <include refid="wheres" />
+        order by a.update_time desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from staff_pay_slip a
+        <include refid="joins" />
+        where a.delete_flag =0
+        <include refid="wheres" />
+    </select>
+
+    <select id="allList" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from staff_pay_slip a
+        <include refid="joins" />
+        where a.delete_flag =0
+        <if test="slipState != null" >
+          and slip_state = #{slipState,jdbcType=INTEGER}
+        </if>
+        order by a.id desc
+    </select>
+
+
+
+    <select id="selectByWorkTime" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from staff_pay_slip a where a.work_time = #{workTime,jdbcType=VARCHAR} and a.delete_flag =0 limit 1
+    </select>
+
+</mapper>

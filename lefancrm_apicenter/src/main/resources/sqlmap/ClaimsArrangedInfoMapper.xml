@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.ClaimsArrangedInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.ClaimsArrangedInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="link_name" property="linkName" jdbcType="VARCHAR" />
+    <result column="link_tel" property="linkTel" jdbcType="VARCHAR" />
+    <result column="accident_address" property="accidentAddress" jdbcType="VARCHAR" />
+    <result column="accident_x_lbs" property="accidentXLbs" jdbcType="DOUBLE" />
+    <result column="accident_y_lbs" property="accidentYLbs" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="handle_state" property="handleState" jdbcType="INTEGER" />
+    <result column="handle_user" property="handleUser" jdbcType="VARCHAR" />
+    <result column="handle_time" property="handleTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, link_name, link_tel, accident_address, accident_x_lbs, accident_y_lbs, create_time, 
+    create_by, handle_state, handle_user, handle_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from claims_arranged_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from claims_arranged_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.ClaimsArrangedInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into claims_arranged_info (link_name, link_tel, accident_address, 
+      accident_x_lbs, accident_y_lbs, create_time, 
+      create_by, handle_state, handle_user, 
+      handle_time)
+    values (#{linkName,jdbcType=VARCHAR}, #{linkTel,jdbcType=VARCHAR}, #{accidentAddress,jdbcType=VARCHAR}, 
+      #{accidentXLbs,jdbcType=DOUBLE}, #{accidentYLbs,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{handleState,jdbcType=INTEGER}, #{handleUser,jdbcType=VARCHAR}, 
+      #{handleTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.ClaimsArrangedInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into claims_arranged_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="linkName != null" >
+        link_name,
+      </if>
+      <if test="linkTel != null" >
+        link_tel,
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address,
+      </if>
+      <if test="accidentXLbs != null" >
+        accident_x_lbs,
+      </if>
+      <if test="accidentYLbs != null" >
+        accident_y_lbs,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="handleState != null" >
+        handle_state,
+      </if>
+      <if test="handleUser != null" >
+        handle_user,
+      </if>
+      <if test="handleTime != null" >
+        handle_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="linkName != null" >
+        #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTel != null" >
+        #{linkTel,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentAddress != null" >
+        #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentXLbs != null" >
+        #{accidentXLbs,jdbcType=DOUBLE},
+      </if>
+      <if test="accidentYLbs != null" >
+        #{accidentYLbs,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="handleState != null" >
+        #{handleState,jdbcType=INTEGER},
+      </if>
+      <if test="handleUser != null" >
+        #{handleUser,jdbcType=VARCHAR},
+      </if>
+      <if test="handleTime != null" >
+        #{handleTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.ClaimsArrangedInfo" >
+    update claims_arranged_info
+    <set >
+      <if test="linkName != null" >
+        link_name = #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkTel != null" >
+        link_tel = #{linkTel,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentXLbs != null" >
+        accident_x_lbs = #{accidentXLbs,jdbcType=DOUBLE},
+      </if>
+      <if test="accidentYLbs != null" >
+        accident_y_lbs = #{accidentYLbs,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="handleState != null" >
+        handle_state = #{handleState,jdbcType=INTEGER},
+      </if>
+      <if test="handleUser != null" >
+        handle_user = #{handleUser,jdbcType=VARCHAR},
+      </if>
+      <if test="handleTime != null" >
+        handle_time = #{handleTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.ClaimsArrangedInfo" >
+    update claims_arranged_info
+    set link_name = #{linkName,jdbcType=VARCHAR},
+      link_tel = #{linkTel,jdbcType=VARCHAR},
+      accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      accident_x_lbs = #{accidentXLbs,jdbcType=DOUBLE},
+      accident_y_lbs = #{accidentYLbs,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      handle_state = #{handleState,jdbcType=INTEGER},
+      handle_user = #{handleUser,jdbcType=VARCHAR},
+      handle_time = #{handleTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="linkName != null" >
+            and link_name like CONCAT(CONCAT('%',replace(#{linkName,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="linkTel != null" >
+            and link_tel like CONCAT(CONCAT('%',replace(#{linkTel,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="handleState != null" >
+            and handle_state = #{handleState,jdbcType=INTEGER}
+        </if>
+        <if test="handleUser != null" >
+            and handle_user like CONCAT(CONCAT('%',replace(#{handleUser,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="startTime != null" >
+            and DATE_FORMAT(handle_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="endTime != null" >
+            and DATE_FORMAT(handle_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="createStartTime != null" >
+            and DATE_FORMAT(create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{createStartTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="createEndTime != null" >
+            and DATE_FORMAT(create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{createEndTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from claims_arranged_info
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from claims_arranged_info
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+</mapper>

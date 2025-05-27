@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyInvestigatorRewordMidMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyInvestigatorRewordMid" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_investigator_id" property="surveyInvestigatorId" jdbcType="BIGINT" />
+    <result column="reward_list_id" property="rewardListId" jdbcType="BIGINT" />
+  </resultMap>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyInvestigatorRewordMid" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_investigator_reword_mid (survey_investigator_id, reward_list_id)
+    values (#{surveyInvestigatorId,jdbcType=BIGINT}, #{rewardListId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyInvestigatorRewordMid" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_investigator_reword_mid
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyInvestigatorId != null" >
+        survey_investigator_id,
+      </if>
+      <if test="rewardListId != null" >
+        reward_list_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyInvestigatorId != null" >
+        #{surveyInvestigatorId,jdbcType=BIGINT},
+      </if>
+      <if test="rewardListId != null" >
+        #{rewardListId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateDeleteFlag" parameterType="map" >
+        update survey_investigator_reword_mid set delete_flag = 1 where reward_list_id=#{rewardListId}
+  </update>
+
+  <select id="selectByOne" parameterType="map" resultMap="BaseResultMap">
+    select id,survey_investigator_id,reward_list_id,delete_flag from survey_investigator_reword_mid
+    <where>
+      delete_flag= 0
+      <if test="id != null ">
+        and id=#{id}
+      </if>
+      <if test="surveyInvestigatorId != null ">
+        and survey_investigator_id=#{surveyInvestigatorId}
+      </if>
+      <if test="rewardListId != null ">
+        and reward_list_id=#{rewardListId}
+      </if>
+      <if test="deleteFlag != null ">
+        and delete_flag=#{deleteFlag}
+      </if>
+    </where>
+  </select>
+
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyInvestigatorRewordMid" >
+    update survey_investigator_reword_mid
+    set survey_investigator_id = #{surveyInvestigatorId,jdbcType=BIGINT},
+     reward_list_id = #{rewardListId,jdbcType=BIGINT},
+     delete_flag = #{deleteFlag,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByMap" parameterType="map" resultMap="BaseResultMap">
+    select * from survey_investigator_reword_mid
+    <where>
+      delete_flag= 0
+      <if test="id != null ">
+        and id=#{id}
+      </if>
+      <if test="surveyInvestigatorId != null ">
+        and survey_investigator_id=#{surveyInvestigatorId}
+      </if>
+      <if test="rewardListId != null ">
+        and reward_list_id=#{rewardListId}
+      </if>
+      <if test="deleteFlag != null ">
+        and delete_flag=#{deleteFlag}
+      </if>
+    </where>
+  </select>
+</mapper>

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseApplicationInfoMapper" >
+
+    <select id="selectCaseApplicationInfoList" resultType="com.lefancrm.apicenter.dto.CaseApplicationInfoDto" parameterType="java.util.Map" >
+        select userId,caseNo,userName,userPhone,type,state,createTime,isFined, promoterName, promoterPhone, isTestcase  from
+            (
+            <if test="type == null">
+                select la.user_id as userId, la.loan_no as caseNo, la.user_name as userName, la.user_Phone as userPhone,
+                2 as type, la.state as state,la.create_time as createTime, la.is_fined as isFined,
+                la.user_promoted_name as promoterName, la.user_promoted_phone as promoterPhone, la.is_test_case as isTestcase
+                from loan_application la where 1= 1 and la.delete_flag != 1
+                <if test="userName !=null">
+                    and la.user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="caseNo !=null">
+                    and la.loan_no like CONCAT(CONCAT('%',#{caseNo,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="state !=null">
+                    and la.state = #{state,jdbcType=INTEGER}
+                </if>
+                <if test="isFined !=null">
+                    <if test="isFined != -1">
+                        and la.is_fined = #{isFined,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="promoterName !=null">
+                    and la.user_promoted_name like CONCAT(CONCAT('%',#{promoterName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="promoterPhone !=null">
+                    and la.user_promoted_phone like CONCAT(CONCAT('%',#{promoterPhone,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="numberType == 1">
+                    and la.is_fined is null
+                </if>
+                <if test="isTestcase != null" >
+                    <if test="isTestcase != -1">
+                        and la.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="isTestcase == null" >
+                    <if test="isTest == 0">
+                        and la.is_test_case = 0
+                    </if>
+                    <if test="isTest == 1">
+                        and la.is_test_case = 1
+                    </if>
+                </if>
+                union all
+                select aa.user_id as userId, aa.agent_no as caseNo,aa.user_name as userName, aa.user_Phone as userPhone,
+                1 as type,aa.state as state, aa.create_time as createTime, aa.is_fined as isFined,
+                aa.user_promoted_name as promoterName, aa.user_promoted_phone as promoterPhone, aa.is_test_case as isTestcase
+                from agent_apply aa  where 1= 1 and aa.delete_flag != 1
+                <if test="userName !=null">
+                    and aa.user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="caseNo !=null">
+                    and aa.agent_no like CONCAT(CONCAT('%',#{caseNo,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="state !=null">
+                    and aa.state = #{state,jdbcType=INTEGER}
+                </if>
+                <if test="isFined !=null">
+                    <if test="isFined != -1">
+                        and aa.is_fined = #{isFined,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="promoterName !=null">
+                    and aa.user_promoted_name like CONCAT(CONCAT('%',#{promoterName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="promoterPhone !=null">
+                    and aa.user_promoted_phone like CONCAT(CONCAT('%',#{promoterPhone,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="numberType == 1">
+                    and aa.is_fined is null
+                </if>
+                <if test="isTestcase != null" >
+                    <if test="isTestcase != -1">
+                        and aa.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="isTestcase == null" >
+                    <if test="isTest == 0">
+                        and aa.is_test_case = 0
+                    </if>
+                    <if test="isTest == 1">
+                        and aa.is_test_case = 1
+                    </if>
+                </if>
+            </if>
+            <if test="type == 1">
+                select aa.user_id as userId, aa.agent_no as caseNo,aa.user_name as userName, aa.user_Phone as userPhone,
+                1 as type,aa.state as state, aa.create_time as createTime, aa.is_fined as isFined,
+                aa.user_promoted_name as promoterName, aa.user_promoted_phone as promoterPhone, aa.is_test_case as isTestcase
+                from agent_apply aa where 1= 1 and aa.delete_flag != 1
+                <if test="userName !=null">
+                    and aa.user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="caseNo !=null">
+                    and aa.agent_no like CONCAT(CONCAT('%',#{caseNo,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="state !=null">
+                    and aa.state = #{state,jdbcType=INTEGER}
+                </if>
+                <if test="isFined !=null">
+                    <if test="isFined != -1">
+                        and aa.is_fined = #{isFined,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="promoterName !=null">
+                    and aa.user_promoted_name like CONCAT(CONCAT('%',#{promoterName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="promoterPhone !=null">
+                    and aa.user_promoted_phone like CONCAT(CONCAT('%',#{promoterPhone,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="numberType == 1">
+                    and aa.is_fined is null
+                </if>
+                <if test="isTestcase != null" >
+                    <if test="isTestcase != -1">
+                        and aa.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="isTestcase == null" >
+                    <if test="isTest == 0">
+                        and aa.is_test_case = 0
+                    </if>
+                    <if test="isTest == 1">
+                        and aa.is_test_case = 1
+                    </if>
+                </if>
+            </if>
+            <if test="type == 2">
+                select la.user_id as userId, la.loan_no as caseNo, la.user_name as userName, la.user_Phone as userPhone,
+                2 as type, la.state as state,la.create_time as createTime, la.is_fined as isFined,
+                la.user_promoted_name as promoterName, la.user_promoted_phone as promoterPhone.la.is_test_case as isTestcase
+                from loan_application la where 1= 1 and la.delete_flag != 1
+                <if test="userName !=null">
+                    and la.user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="caseNo !=null">
+                    and la.loan_no like CONCAT(CONCAT('%',#{caseNo,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="state !=null">
+                    and la.state = #{state,jdbcType=INTEGER}
+                </if>
+                <if test="isFined !=null">
+                    <if test="isFined != -1">
+                        and la.is_fined = #{isFined,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="promoterName !=null">
+                    and la.user_promoted_name like CONCAT(CONCAT('%',#{promoterName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="promoterPhone !=null">
+                    and la.user_promoted_phone like CONCAT(CONCAT('%',#{promoterPhone,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="numberType == 1">
+                    and la.is_fined is null
+                </if>
+                <if test="isTestcase != null" >
+                    <if test="isTestcase != -1">
+                        and la.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="isTestcase == null" >
+                    <if test="isTest == 0">
+                        and la.is_test_case = 0
+                    </if>
+                    <if test="isTest == 1">
+                        and la.is_test_case = 1
+                    </if>
+                </if>
+            </if>
+
+            ) a
+        ORDER BY createTime DESC
+        limit #{pageIndex}, #{pageSize};
+    </select>
+
+    <select id="selectCountCaseApplicationInfo" resultType="int" parameterType="java.util.Map" >
+        select count(1) from
+            (
+            <if test="type == null">
+                select la.user_id as userId, la.loan_no as caseNo, la.user_name as userName, la.user_Phone as userPhone,
+                2 as type, la.state as state,la.create_time as createTime, la.is_fined as isFined,
+                la.user_promoted_name as promoterName, la.user_promoted_phone as promoterPhone, la.is_test_case as isTestcase
+                from loan_application la where 1= 1 and la.delete_flag != 1
+                <if test="userName !=null">
+                    and la.user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="caseNo !=null">
+                    and la.loan_no like CONCAT(CONCAT('%',#{caseNo,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="state !=null">
+                    and la.state = #{state,jdbcType=INTEGER}
+                </if>
+                <if test="isFined !=null">
+                    <if test="isFined != -1">
+                        and la.is_fined = #{isFined,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="promoterName !=null">
+                    and la.user_promoted_name like CONCAT(CONCAT('%',#{promoterName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="promoterPhone !=null">
+                    and la.user_promoted_phone like CONCAT(CONCAT('%',#{promoterPhone,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="numberType == 1">
+                    and la.is_fined is null
+                </if>
+                <if test="isTestcase != null" >
+                    <if test="isTestcase != -1">
+                        and la.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="isTestcase == null" >
+                    <if test="isTest == 0">
+                        and la.is_test_case = 0
+                    </if>
+                    <if test="isTest == 1">
+                        and la.is_test_case = 1
+                    </if>
+                </if>
+                union all
+                select aa.user_id as userId, aa.agent_no as caseNo,aa.user_name as userName, aa.user_Phone as userPhone,
+                1 as type,aa.state as state, aa.create_time as createTime, aa.is_fined as isFined,
+                aa.user_promoted_name as promoterName, aa.user_promoted_phone as promoterPhone, aa.is_test_case as isTestcase
+                from agent_apply aa  where 1= 1 and aa.delete_flag != 1
+                <if test="userName !=null">
+                    and aa.user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="caseNo !=null">
+                    and aa.agent_no like CONCAT(CONCAT('%',#{caseNo,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="state !=null">
+                    and aa.state = #{state,jdbcType=INTEGER}
+                </if>
+                <if test="isFined !=null">
+                    <if test="isFined != -1">
+                        and aa.is_fined = #{isFined,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="promoterName !=null">
+                    and aa.user_promoted_name like CONCAT(CONCAT('%',#{promoterName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="promoterPhone !=null">
+                    and aa.user_promoted_phone like CONCAT(CONCAT('%',#{promoterPhone,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="numberType == 1">
+                    and aa.is_fined is null
+                </if>
+                <if test="isTestcase != null" >
+                    <if test="isTestcase != -1">
+                        and aa.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="isTestcase == null" >
+                    <if test="isTest == 0">
+                        and aa.is_test_case = 0
+                    </if>
+                    <if test="isTest == 1">
+                        and aa.is_test_case = 1
+                    </if>
+                </if>
+            </if>
+            <if test="type == 1">
+                select aa.user_id as userId, aa.agent_no as caseNo,aa.user_name as userName, aa.user_Phone as userPhone,
+                1 as type,aa.state as state, aa.create_time as createTime, aa.is_fined as isFined,
+                aa.user_promoted_name as promoterName, aa.user_promoted_phone as promoterPhone, aa.is_test_case as isTestcase
+                from agent_apply aa where 1= 1 and aa.delete_flag != 1
+                <if test="userName !=null">
+                    and aa.user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="caseNo !=null">
+                    and aa.agent_no like CONCAT(CONCAT('%',#{caseNo,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="state !=null">
+                    and aa.state = #{state,jdbcType=INTEGER}
+                </if>
+                <if test="isFined !=null">
+                    <if test="isFined != -1">
+                        and aa.is_fined = #{isFined,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="promoterName !=null">
+                    and aa.user_promoted_name like CONCAT(CONCAT('%',#{promoterName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="promoterPhone !=null">
+                    and aa.user_promoted_phone like CONCAT(CONCAT('%',#{promoterPhone,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="numberType == 1">
+                    and aa.is_fined is null
+                </if>
+                <if test="isTestcase != null" >
+                    <if test="isTestcase != -1">
+                        and aa.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="isTestcase == null" >
+                    <if test="isTest == 0">
+                        and aa.is_test_case = 0
+                    </if>
+                    <if test="isTest == 1">
+                        and aa.is_test_case = 1
+                    </if>
+                </if>
+            </if>
+            <if test="type == 2">
+                select la.user_id as userId, la.loan_no as caseNo, la.user_name as userName, la.user_Phone as userPhone,
+                2 as type, la.state as state,la.create_time as createTime, la.is_fined as isFined,
+                la.user_promoted_name as promoterName, la.user_promoted_phone as promoterPhone,la.is_test_case as isTestcase
+                from loan_application la where 1= 1 and la.delete_flag != 1
+                <if test="userName !=null">
+                    and la.user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="caseNo !=null">
+                    and la.loan_no like CONCAT(CONCAT('%',#{caseNo,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="state !=null">
+                    and la.state = #{state,jdbcType=INTEGER}
+                </if>
+                <if test="isFined !=null">
+                    <if test="isFined != -1">
+                        and la.is_fined = #{isFined,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="promoterName !=null">
+                    and la.user_promoted_name like CONCAT(CONCAT('%',#{promoterName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="promoterPhone !=null">
+                    and la.user_promoted_phone like CONCAT(CONCAT('%',#{promoterPhone,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="numberType == 1">
+                    and la.is_fined is null
+                </if>
+                <if test="isTestcase != null" >
+                    <if test="isTestcase != -1">
+                        and la.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                    </if>
+                </if>
+                <if test="isTestcase == null" >
+                    <if test="isTest == 0">
+                        and la.is_test_case = 0
+                    </if>
+                    <if test="isTest == 1">
+                        and la.is_test_case = 1
+                    </if>
+                </if>
+            </if>
+            ) a
+    </select>
+
+</mapper>

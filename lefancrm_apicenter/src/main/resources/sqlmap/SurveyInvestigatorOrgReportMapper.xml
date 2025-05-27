@@ -1,0 +1,1059 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyInvestigatorOrgReportMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyInvestigatorOrgReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="report_date" property="reportDate" jdbcType="DATE" />
+    <result column="survey_org_id" property="surveyOrgId" jdbcType="BIGINT" />
+    <result column="survey_org_name" property="surveyOrgName" jdbcType="VARCHAR" />
+    <result column="risk_case_num" property="riskCaseNum" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="DOUBLE" />
+    <result column="efficiency" property="efficiency" jdbcType="DOUBLE" />
+    <result column="positive_rate" property="positiveRate" jdbcType="DOUBLE" />
+    <result column="return_rate" property="returnRate" jdbcType="DOUBLE" />
+    <result column="loss_efficiency_rate" property="lossEfficiencyRate" jdbcType="DOUBLE" />
+    <result column="insurance_check_case_num" property="insuranceCheckCaseNum" jdbcType="INTEGER" />
+    <result column="risk_check_case_num" property="riskCheckCaseNum" jdbcType="INTEGER" />
+    <result column="consignor_org_id" property="consignorOrgId" jdbcType="BIGINT" />
+    <result column="consignor_org_name" property="consignorOrgName" jdbcType="VARCHAR" />
+      <result column="investigation_money" property="investigationMoney" jdbcType="DOUBLE" />
+      <result column="survey_org_type" property="surveyOrgType" jdbcType="INTEGER" />
+      <result column="check_type" property="checkType" jdbcType="INTEGER" />
+      <result column="new_send" property="newSend" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, report_date, survey_org_id, survey_org_name, risk_case_num, score, efficiency, 
+    positive_rate, return_rate, loss_efficiency_rate, insurance_check_case_num, risk_check_case_num, 
+    consignor_org_id, consignor_org_name, investigation_money, survey_org_type, check_type, new_send
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_investigator_org_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_investigator_org_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyInvestigatorOrgReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_investigator_org_report (report_date, survey_org_id, survey_org_name, 
+      risk_case_num, score, efficiency, 
+      positive_rate, return_rate, loss_efficiency_rate, 
+      insurance_check_case_num, risk_check_case_num, 
+      consignor_org_id, consignor_org_name, investigation_money, survey_org_type, check_type,
+      new_send)
+    values (#{reportDate,jdbcType=DATE}, #{surveyOrgId,jdbcType=BIGINT}, #{surveyOrgName,jdbcType=VARCHAR}, 
+      #{riskCaseNum,jdbcType=INTEGER}, #{score,jdbcType=DOUBLE}, #{efficiency,jdbcType=DOUBLE}, 
+      #{positiveRate,jdbcType=DOUBLE}, #{returnRate,jdbcType=DOUBLE}, #{lossEfficiencyRate,jdbcType=DOUBLE}, 
+      #{insuranceCheckCaseNum,jdbcType=INTEGER}, #{riskCheckCaseNum,jdbcType=INTEGER}, 
+      #{consignorOrgId,jdbcType=BIGINT}, #{consignorOrgName,jdbcType=VARCHAR}, #{investigationMoney,jdbcType=DOUBLE},
+      #{surveyOrgType,jdbcType=INTEGER}, #{checkType,jdbcType=INTEGER}, #{newSend,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyInvestigatorOrgReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_investigator_org_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reportDate != null" >
+        report_date,
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id,
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name,
+      </if>
+      <if test="riskCaseNum != null" >
+        risk_case_num,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="efficiency != null" >
+        efficiency,
+      </if>
+      <if test="positiveRate != null" >
+        positive_rate,
+      </if>
+      <if test="returnRate != null" >
+        return_rate,
+      </if>
+      <if test="lossEfficiencyRate != null" >
+        loss_efficiency_rate,
+      </if>
+      <if test="insuranceCheckCaseNum != null" >
+        insurance_check_case_num,
+      </if>
+      <if test="riskCheckCaseNum != null" >
+        risk_check_case_num,
+      </if>
+      <if test="consignorOrgId != null" >
+        consignor_org_id,
+      </if>
+      <if test="consignorOrgName != null" >
+        consignor_org_name,
+      </if>
+        <if test="investigationMoney != null" >
+            investigation_money,
+        </if>
+        <if test="surveyOrgType != null" >
+            survey_org_type,
+        </if>
+        <if test="checkType != null" >
+            check_type,
+        </if>
+        <if test="newSend != null" >
+            new_send,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reportDate != null" >
+        #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="surveyOrgId != null" >
+        #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="riskCaseNum != null" >
+        #{riskCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="efficiency != null" >
+        #{efficiency,jdbcType=DOUBLE},
+      </if>
+      <if test="positiveRate != null" >
+        #{positiveRate,jdbcType=DOUBLE},
+      </if>
+      <if test="returnRate != null" >
+        #{returnRate,jdbcType=DOUBLE},
+      </if>
+      <if test="lossEfficiencyRate != null" >
+        #{lossEfficiencyRate,jdbcType=DOUBLE},
+      </if>
+      <if test="insuranceCheckCaseNum != null" >
+        #{insuranceCheckCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="riskCheckCaseNum != null" >
+        #{riskCheckCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="consignorOrgId != null" >
+        #{consignorOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorOrgName != null" >
+        #{consignorOrgName,jdbcType=VARCHAR},
+      </if>
+        <if test="investigationMoney != null" >
+            #{investigationMoney,jdbcType=DOUBLE},
+        </if>
+        <if test="surveyOrgType != null" >
+            #{surveyOrgType,jdbcType=INTEGER},
+        </if>
+        <if test="checkType != null" >
+            #{checkType,jdbcType=INTEGER},
+        </if>
+        <if test="newSend != null" >
+            #{newSend,jdbcType=INTEGER},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyInvestigatorOrgReport" >
+    update survey_investigator_org_report
+    <set >
+      <if test="reportDate != null" >
+        report_date = #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="riskCaseNum != null" >
+        risk_case_num = #{riskCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="efficiency != null" >
+        efficiency = #{efficiency,jdbcType=DOUBLE},
+      </if>
+      <if test="positiveRate != null" >
+        positive_rate = #{positiveRate,jdbcType=DOUBLE},
+      </if>
+      <if test="returnRate != null" >
+        return_rate = #{returnRate,jdbcType=DOUBLE},
+      </if>
+      <if test="lossEfficiencyRate != null" >
+        loss_efficiency_rate = #{lossEfficiencyRate,jdbcType=DOUBLE},
+      </if>
+      <if test="insuranceCheckCaseNum != null" >
+        insurance_check_case_num = #{insuranceCheckCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="riskCheckCaseNum != null" >
+        risk_check_case_num = #{riskCheckCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="consignorOrgId != null" >
+        consignor_org_id = #{consignorOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorOrgName != null" >
+        consignor_org_name = #{consignorOrgName,jdbcType=VARCHAR},
+      </if>
+        <if test="investigationMoney != null" >
+            investigation_money = #{investigationMoney,jdbcType=DOUBLE},
+        </if>
+        <if test="surveyOrgType != null" >
+            survey_org_type = #{surveyOrgType,jdbcType=INTEGER},
+        </if>
+        <if test="checkType != null" >
+            check_type = #{checkType,jdbcType=INTEGER},
+        </if>
+        <if test="newSend != null" >
+            new_send = #{newSend,jdbcType=INTEGER},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyInvestigatorOrgReport" >
+    update survey_investigator_org_report
+    set report_date = #{reportDate,jdbcType=DATE},
+      survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      risk_case_num = #{riskCaseNum,jdbcType=INTEGER},
+      score = #{score,jdbcType=DOUBLE},
+      efficiency = #{efficiency,jdbcType=DOUBLE},
+      positive_rate = #{positiveRate,jdbcType=DOUBLE},
+      return_rate = #{returnRate,jdbcType=DOUBLE},
+      loss_efficiency_rate = #{lossEfficiencyRate,jdbcType=DOUBLE},
+      insurance_check_case_num = #{insuranceCheckCaseNum,jdbcType=INTEGER},
+      risk_check_case_num = #{riskCheckCaseNum,jdbcType=INTEGER},
+      consignor_org_id = #{consignorOrgId,jdbcType=BIGINT},
+      consignor_org_name = #{consignorOrgName,jdbcType=VARCHAR},
+      investigation_money = #{investigationMoney,jdbcType=DOUBLE},
+      survey_org_type = #{surveyOrgType,jdbcType=INTEGER},
+      check_type = #{checkType,jdbcType=INTEGER},
+      new_send = #{newSend,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <sql id="wheres">
+      <if test="startTime != null">
+          AND date_format(s.report_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+      <if test="endTime != null">
+          AND date_format(s.report_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+    <if test="surveyOrgId != null">
+      and s.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+    </if>
+    <if test="entrustOrgId != null">
+      and s.consignor_org_id = #{entrustOrgId,jdbcType=BIGINT}
+    </if>
+      <if test="entrustOrgIds != null">
+          and s.consignor_org_id in (${entrustOrgIds})
+      </if>
+      <if test="checkType != null">
+          and s.check_type = #{checkType,jdbcType=BIGINT}
+      </if>
+  </sql>
+
+    <sql id="wheresOrg">
+        <if test="startTime != null">
+            AND date_format(s.report_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="endTime != null">
+            AND date_format(s.report_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="entrustOrgId != null">
+            and s.consignor_org_id = #{entrustOrgId,jdbcType=BIGINT}
+        </if>
+        <if test="entrustOrgIds != null">
+            and s.consignor_org_id in (${entrustOrgIds})
+        </if>
+        <if test="checkType != null">
+            and s.check_type = #{checkType,jdbcType=BIGINT}
+        </if>
+    </sql>
+
+  <select id="selectAll" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyInvestigatorOrgReport">
+    SELECT
+    f.id as surveyOrgId,
+    f.name as surveyOrgName,
+    ifnull(sum(s.risk_case_num),0) as riskCaseNum,
+    ifnull(sum(s.score),0) as score,
+    ifnull(avg(s.efficiency),0) as efficiency,
+    ifnull(avg(s.positive_rate),0) as positiveRate,
+    ifnull(avg(s.return_rate),0) as returnRate,
+    ifnull(avg(s.loss_efficiency_rate),0) as lossEfficiencyRate,
+    ifnull(sum(s.insurance_check_case_num),0) as insuranceCheckCaseNum,
+    ifnull(sum(s.risk_check_case_num),0) as riskCheckCaseNum,
+    ifnull(sum(s.investigation_money),0) as investigationMoney,
+    f.type as surveyOrgType
+    FROM
+    survey_franchisee f
+    left join survey_investigator_org_report s on f.id = s.survey_org_id and check_type = 2 <include refid="wheres"/>
+    WHERE 1 = 1 and f.delete_flag = 0
+      <if test="surveyOrgId != null">
+          and f.id = #{surveyOrgId,jdbcType=BIGINT}
+      </if>
+    GROUP BY
+    f.id
+    <if test="sortAttr == null">
+        order by sum(s.insurance_check_case_num) desc
+    </if>
+      <if test="sortAttr == 1">
+          <if test="sortType == 1">
+              order by sum(s.insurance_check_case_num) asc
+          </if>
+          <if test="sortType == 2">
+              order by sum(s.insurance_check_case_num) desc
+          </if>
+      </if>
+      <if test="sortAttr == 2">
+          <if test="sortType == 1">
+              order by sum(s.investigation_money) asc
+          </if>
+          <if test="sortType == 2">
+              order by sum(s.investigation_money) desc
+          </if>
+      </if>
+      <if test="sortAttr == 3">
+          <if test="sortType == 1">
+              order by sum(s.score) asc
+          </if>
+          <if test="sortType == 2">
+              order by sum(s.score) desc
+          </if>
+      </if>
+      <if test="sortAttr == 4">
+          <if test="sortType == 1">
+              order by avg(s.positive_rate) asc
+          </if>
+          <if test="sortType == 2">
+              order by avg(s.positive_rate) desc
+          </if>
+      </if>
+      <if test="sortAttr == 5">
+          <if test="sortType == 1">
+              order by avg(s.efficiency)  asc
+          </if>
+          <if test="sortType == 2">
+              order by avg(s.efficiency)  desc
+          </if>
+      </if>
+      <if test="sortAttr == 6">
+          <if test="sortType == 1">
+              order by avg(s.loss_efficiency_rate) asc
+          </if>
+          <if test="sortType == 2">
+              order by avg(s.loss_efficiency_rate) desc
+          </if>
+      </if>
+      <if test="sortAttr == 7">
+          <if test="sortType == 1">
+              order by avg(s.positive_rate) asc
+          </if>
+          <if test="sortType == 2">
+              order by avg(s.positive_rate) desc
+          </if>
+      </if>
+  </select>
+
+
+    <sql id="whereNew">
+        <if test="orgAttr != null">
+            and n.org_attr = #{orgAttr,jdbcType=INTEGER}
+        </if>
+        <if test="checkType == 2">
+            <if test="startTime != null">
+                AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="endTime != null">
+                AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+        </if>
+        <if test="checkType == 1">
+            <if test="startTime != null">
+                AND date_format(r.entrust_report_start_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="endTime != null">
+                AND date_format(r.entrust_report_start_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+        </if>
+        <if test="entrustOrgId != null">
+            and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+        </if>
+        <if test="entrustOrgIds != null">
+            and r.entrust_org_id in (${entrustOrgIds})
+        </if>
+    </sql>
+    <sql id="whereNew1">
+        <if test="orgAttr != null">
+            and n.org_attr = #{orgAttr,jdbcType=INTEGER}
+        </if>
+        <if test="startTime != null">
+            AND date_format(o.create_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="endTime != null">
+            AND date_format(o.create_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="entrustOrgId != null">
+            and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+        </if>
+        <if test="entrustOrgIds != null">
+            and r.entrust_org_id in (${entrustOrgIds})
+        </if>
+    </sql>
+
+    <select id="selectAllNew" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyInvestigatorOrgReport">
+            select f.id surveyOrgId,f.`name` surveyOrgName,ifnull(a.num,0) newSend,ifnull(c.num,0) insuranceCheckCaseNum,ifnull(cc.money,0) investigationMoney,
+            ifnull(cc.entrustOrgMoney,0) as entrustOrgMoney,ifnull(ccc.score,0) score,ifnull(d.num,0) sunNum,
+            ifnull(dd.aging_real,0) efficiency,ifnull(ddd.num,0) lossNum,ifnull(e.num,0) returnNum,
+            ifnull(dir.num,0) as directionNum,
+            ifnull(hb.num,0) hbCaseNum,
+            ifnull(tb.num,0) tbCaseNum,
+            ifnull(k.num,0) markErrorNum
+            from survey_franchisee f
+            left join (
+                select b.org_id,b.org_name,count(1) num from (
+                    select a.org_id,a.org_name,a.survey_info_id from
+                    (
+                        select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                        (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id
+                        from survey_assign_org o
+                        left join survey_franchisee f on o.survey_org_id = f.id
+                        left join survey_risk_case_info r on o.survey_info_id = r.id
+                        left join survey_consignor n on r.entrust_org_id = n.id
+                        where o.delete_flag = 0 and r.delete_flag = 0
+                        <include refid="whereNew1"/>
+                    )
+                    a group by a.org_id,a.survey_info_id
+                ) b group by b.org_id
+            ) a on f.id = a.org_id
+            left join (
+                select b.org_id,b.org_name,count(1) num from (
+                    select a.org_id,a.org_name,a.survey_info_id from
+                    (
+                        select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                        (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id
+                        from survey_assign_org o
+                        left join survey_franchisee f on o.survey_org_id = f.id
+                        left join survey_risk_case_info r on o.survey_info_id = r.id
+                        left join survey_consignor n on r.entrust_org_id = n.id
+                        where o.delete_flag = 0 and r.delete_flag = 0
+                        <if test="orgAttr != null">
+                            and n.org_attr = #{orgAttr,jdbcType=INTEGER}
+                        </if>
+                        <if test="momTime != null">
+                            AND date_format(o.create_time,'%Y-%m-%d') &gt;= date_format(#{momTime,jdbcType=DATE},'%Y-%m-%d')
+                        </if>
+                        <if test="startTime != null">
+                            AND date_format(o.create_time,'%Y-%m-%d') &lt; date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+                        </if>
+                        <if test="entrustOrgId != null">
+                            and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+                        </if>
+                        <if test="entrustOrgIds != null">
+                            and r.entrust_org_id in (${entrustOrgIds})
+                        </if>
+                    )
+                    a group by a.org_id,a.survey_info_id
+                    ) b group by b.org_id
+            ) hb on f.id = hb.org_id
+            left join (
+                select b.org_id,b.org_name,count(1) num from (
+                    select a.org_id,a.org_name,a.survey_info_id from
+                    (
+                        select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                        (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id
+                        from survey_assign_org o
+                        left join survey_franchisee f on o.survey_org_id = f.id
+                        left join survey_risk_case_info r on o.survey_info_id = r.id
+                        left join survey_consignor n on r.entrust_org_id = n.id
+                        where o.delete_flag = 0 and r.delete_flag = 0
+                        <if test="orgAttr != null">
+                            and n.org_attr = #{orgAttr,jdbcType=INTEGER}
+                        </if>
+                        <if test="tbStartTime != null">
+                            AND date_format(o.create_time,'%Y-%m-%d') &gt;= date_format(#{tbStartTime,jdbcType=DATE},'%Y-%m-%d')
+                        </if>
+                        <if test="tbEndTime != null">
+                            AND date_format(o.create_time,'%Y-%m-%d') &lt;= date_format(#{tbEndTime,jdbcType=DATE},'%Y-%m-%d')
+                        </if>
+                        <if test="entrustOrgId != null">
+                            and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+                        </if>
+                        <if test="entrustOrgIds != null">
+                            and r.entrust_org_id in (${entrustOrgIds})
+                        </if>
+                    )
+                    a group by a.org_id,a.survey_info_id
+                ) b group by b.org_id
+            ) tb on f.id = tb.org_id
+            left join (
+                    select b.org_id,b.org_name,count(1) num from (
+                                select a.org_id,a.org_name,a.survey_info_id from
+                                            (
+                                            select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                                                        (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id
+                                             from survey_assign_org o
+                                            left join survey_franchisee f on o.survey_org_id = f.id
+                                            left join survey_risk_case_info r on o.survey_info_id = r.id
+                                            left join survey_consignor n on r.entrust_org_id = n.id
+                                            where o.delete_flag = 0 and r.delete_flag = 0
+                                            <include refid="whereNew"/>
+                                            )
+                                a group by a.org_id,a.survey_info_id
+                    ) b group by b.org_id
+            ) c on f.id = c.org_id
+            left join (
+                    select b.org_id,b.org_name,sum(b.num) num from (
+                        select a.org_id,a.org_name,a.survey_info_id,count(1) num from
+                        (
+                            select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                            (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id
+                            from survey_case_direction d
+                            left join survey_assign_org o on d.survey_assorg_case_id = o.id
+                            left join survey_franchisee f on o.survey_org_id = f.id
+                            left join survey_risk_case_info r on o.survey_info_id = r.id
+                            left join survey_consignor n on r.entrust_org_id = n.id
+                            where o.delete_flag = 0 and r.delete_flag = 0 and d.delete_flag = 0
+                            <include refid="whereNew"/>
+                        )
+                        a group by a.org_id,a.survey_info_id
+                    ) b group by b.org_id
+            ) dir on f.id = dir.org_id
+        left join (
+                    select b.org_id,b.org_name,sum(b.money) as money,sum(b.entrustOrgMoney) as entrustOrgMoney from (
+                                select a.org_id,a.org_name,a.survey_info_id,sum(a.survey_money_submit + a.survery_re_losses_submit) as money,sum(a.inscompany_submit_money) entrustOrgMoney from
+                                            (
+                                            select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                                                        (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id,
+                                                    ifnull(o.survey_money_submit,0) survey_money_submit,
+                                                    ifnull(o.survery_re_losses_submit,0) survery_re_losses_submit,ifnull(o.inscompany_submit_money,ifnull(o.inscompany_money,0)) as inscompany_submit_money
+                                             from survey_assign_org o
+                                            left join survey_franchisee f on o.survey_org_id = f.id
+                                            left join survey_risk_case_info r on o.survey_info_id = r.id
+                                            left join survey_consignor n on r.entrust_org_id = n.id
+                                            where o.delete_flag = 0 and r.delete_flag = 0
+                                            <include refid="whereNew"/>
+                                            )
+                                a group by a.org_id,a.survey_info_id
+                    ) b group by b.org_id
+            ) cc on f.id = cc.org_id
+            left join (
+                    select b.org_id,b.org_name,sum(b.score) as score from (
+                                select a.org_id,a.org_name,a.survey_info_id,sum(a.score) as score from
+                                            (
+                                            select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                                                        (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id,
+                                                    ifnull(c.score,0) score
+                                             from survey_investigator_case c
+                                            left join survey_assign_org o on c.survey_assorg_case_id = o.id
+                                            left join survey_franchisee f on o.survey_org_id = f.id
+                                            left join survey_risk_case_info r on o.survey_info_id = r.id
+                                            left join survey_consignor n on r.entrust_org_id = n.id
+                                            where c.delete_flag = 0 and o.delete_flag = 0 and r.delete_flag = 0
+                                            <include refid="whereNew"/>
+                                            )
+                                a group by a.org_id,a.survey_info_id
+                    ) b group by b.org_id
+            ) ccc on f.id = ccc.org_id
+            left join (
+                    select b.org_id,b.org_name,count(1) num from (
+                                select a.org_id,a.org_name,a.survey_info_id from
+                                            (
+                                            select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                                                        (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id
+                                             from survey_assign_org o
+                                            left join survey_investigator_case c on c.survey_assorg_case_id = o.id
+                                            left join survey_franchisee f on o.survey_org_id = f.id
+                                            left join survey_risk_case_info r on o.survey_info_id = r.id
+                                            left join survey_consignor n on r.entrust_org_id = n.id
+                                            where o.delete_flag = 0 and r.delete_flag = 0
+                                            <include refid="whereNew"/>
+                                            and c.is_sun = 1
+                                            )
+                                a group by a.org_id,a.survey_info_id
+                    ) b group by b.org_id
+            ) d on f.id = d.org_id
+            left join (
+                    select b.org_id,b.org_name,avg(b.aging_real) aging_real from (
+                                select a.org_id,a.org_name,a.survey_info_id,max(a.aging_real) aging_real from
+                                            (
+                                            select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                                                        (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id,ABS(o.aging_real) aging_real
+                                             from survey_assign_org o
+                                            left join survey_investigator_case c on c.survey_assorg_case_id = o.id
+                                            left join survey_franchisee f on o.survey_org_id = f.id
+                                            left join survey_risk_case_info r on o.survey_info_id = r.id
+                                            left join survey_consignor n on r.entrust_org_id = n.id
+                                            where o.delete_flag = 0 and r.delete_flag = 0
+                                            <include refid="whereNew"/>
+                                            )
+                                a group by a.org_id,a.survey_info_id
+                    ) b group by b.org_id
+            ) dd on f.id = dd.org_id
+            left join (
+                    select b.org_id,b.org_name,count(1) num from (
+                                select a.org_id,a.org_name,a.survey_info_id from
+                                            (
+                                            select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                                                        (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id
+                                             from survey_assign_org o
+                                            left join survey_franchisee f on o.survey_org_id = f.id
+                                            left join survey_risk_case_info r on o.survey_info_id = r.id
+                                            left join survey_consignor n on r.entrust_org_id = n.id
+                                            where o.delete_flag = 0 and r.delete_flag = 0
+                                            <include refid="whereNew"/>
+                                            and o.aging_over > 0
+                                            )
+                                a group by a.org_id,a.survey_info_id
+                    ) b group by b.org_id
+            ) ddd on f.id = ddd.org_id
+            left join (
+                    select b.org_id,b.org_name,count(1) num from (
+                                select a.org_id,a.org_name,a.survey_info_id from
+                                            (
+                                            select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                                                        (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id
+                                             from survey_assign_org o
+                                            left join survey_franchisee f on o.survey_org_id = f.id
+                                            left join survey_risk_case_info r on o.survey_info_id = r.id
+                                            left join survey_consignor n on r.entrust_org_id = n.id
+                                            where o.delete_flag = 0 and r.delete_flag = 0
+                                            <include refid="whereNew"/>
+                                            and o.return_state > 0
+                                            )
+                                a group by a.org_id,a.survey_info_id
+                    ) b group by b.org_id
+            ) e on f.id = e.org_id
+
+            left join (
+                select b.org_id,b.org_name,count(1) num from (
+                    select a.org_id,a.org_name,a.survey_info_id from
+                    (
+                        select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                        (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id
+                        from survey_assign_org o
+                        left join survey_franchisee f on o.survey_org_id = f.id
+                        left join survey_risk_case_info r on o.survey_info_id = r.id
+                        left join survey_consignor n on r.entrust_org_id = n.id
+                        where o.delete_flag = 0 and r.delete_flag = 0
+                        <include refid="whereNew"/>
+                        and o.mark_error in (1,2)
+                    )
+                    a group by a.org_id,a.survey_info_id
+                ) b group by b.org_id
+            ) k on f.id = k.org_id
+
+            where f.delete_flag = 0 and f.bus_type in (2,3) and f.parent_id = 0 and f.org_state = 0
+            <if test="surveyOrgId != null">
+                and f.id = #{surveyOrgId,jdbcType=BIGINT}
+            </if>
+        <if test="sortAttr == null">
+            order by c.num desc
+        </if>
+        <if test="sortAttr == 1">
+            <if test="sortType == 1">
+                order by c.num asc
+            </if>
+            <if test="sortType == 2">
+                order by c.num desc
+            </if>
+        </if>
+        <if test="sortAttr == 2">
+            <if test="sortType == 1">
+                order by cc.money asc
+            </if>
+            <if test="sortType == 2">
+                order by cc.money desc
+            </if>
+        </if>
+        <if test="sortAttr == 3">
+            <if test="sortType == 1">
+                order by ccc.score asc
+            </if>
+            <if test="sortType == 2">
+                order by ccc.score desc
+            </if>
+        </if>
+        <if test="sortAttr == 4">
+            <if test="sortType == 1">
+                order by d.num asc
+            </if>
+            <if test="sortType == 2">
+                order by d.num desc
+            </if>
+        </if>
+        <if test="sortAttr == 5">
+            <if test="sortType == 1">
+                order by dd.aging_real  asc
+            </if>
+            <if test="sortType == 2">
+                order by dd.aging_real  desc
+            </if>
+        </if>
+        <if test="sortAttr == 6">
+            <if test="sortType == 1">
+                order by ddd.num asc
+            </if>
+            <if test="sortType == 2">
+                order by ddd.num desc
+            </if>
+        </if>
+        <if test="sortAttr == 7">
+            <if test="sortType == 1">
+                order by e.num asc
+            </if>
+            <if test="sortType == 2">
+                order by e.num desc
+            </if>
+        </if>
+        <if test="sortAttr == 8">
+            <if test="sortType == 1">
+                order by cc.entrustOrgMoney asc
+            </if>
+            <if test="sortType == 2">
+                order by cc.entrustOrgMoney desc
+            </if>
+        </if>
+        <if test="sortAttr == 9">
+            <if test="sortType == 1">
+                order by a.num asc
+            </if>
+            <if test="sortType == 2">
+                order by a.num desc
+            </if>
+        </if>
+        <if test="sortAttr == '10'">
+            <if test="sortType == 1">
+                order by dir.num asc
+            </if>
+            <if test="sortType == 2">
+                order by dir.num desc
+            </if>
+        </if>
+        <if test="sortAttr == '11'">
+            <if test="sortType == 1">
+                order by k.num asc
+            </if>
+            <if test="sortType == 2">
+                order by k.num desc
+            </if>
+        </if>
+    </select>
+
+
+
+    <select id="selectBas" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.report.SurveyReportInvestigatorOrgDTO">
+        select
+        /*名下人员数量*/
+        (select count(1) from survey_investigator t
+          left join bus_user_role b on t.user_id = b.user_id
+        where t.delete_flag = 0 and t.org_id = #{surveyOrgId,jdbcType=BIGINT} and b.role_id = 50
+        ) as basSurveyUsers,
+
+        /*机构待分派*/
+        (SELECT count(1) FROM survey_assign_org a
+            LEFT JOIN survey_risk_case_info s1 ON a.survey_info_id = s1.id
+            LEFT JOIN survey_risk_case s2 ON a.survey_id = s2.id
+            WHERE 1 = 1 AND a.delete_flag = 0 AND s1.delete_flag = 0 AND s2.delete_flag = 0
+            AND a.org_survey_state IN (0, 1, 5) AND a.survey_investigator_case_id IS NULL
+            <if test="surveyOrgId != null">
+                and a.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+            </if>
+            <if test="entrustOrgId != null">
+                and s1.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+            </if>
+            <if test="entrustOrgIds != null ">
+                and s1.entrust_org_id in (${entrustOrgIds})
+            </if>
+        ) as basOrgNotAss,
+        /*机构调查中*/
+        (select count(1) from survey_risk_case_info s left join survey_assign_org ao on ao.survey_info_id = s.id
+          where s.delete_flag = 0 and ao.delete_flag = 0 and ao.org_survey_state in (1)
+            <if test="surveyOrgId != null">
+                and ao.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+            </if>
+            <if test="entrustOrgId != null">
+                and s.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+            </if>
+            <if test="entrustOrgIds != null ">
+                and s.entrust_org_id  in (${entrustOrgIds})
+            </if>
+        ) as basOrgSurveying,
+
+        /*初审中*/
+        (select count(1) from survey_risk_case_info s left join survey_assign_org ao on ao.survey_info_id = s.id
+        where s.delete_flag = 0  and ao.delete_flag = 0 and ao.org_survey_state in (2,5)
+            <if test="surveyOrgId != null">
+                and ao.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+            </if>
+            <if test="entrustOrgId != null">
+                and s.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+            </if>
+            <if test="entrustOrgIds != null ">
+                and s.entrust_org_id  in (${entrustOrgIds})
+            </if>
+        ) as basOrgReviewing,
+        /*平台待终审*/
+        (select count(1) from survey_risk_case_info s left join survey_assign_org ao on ao.survey_info_id = s.id
+            where s.delete_flag = 0 and s.survey_state in (22,30) and ao.delete_flag = 0
+            <if test="surveyOrgId != null">
+                and ao.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+            </if>
+            <if test="entrustOrgId != null">
+                and s.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+            </if>
+            <if test="entrustOrgIds != null ">
+                and s.entrust_org_id  in (${entrustOrgIds})
+            </if>
+        )as basLefanApv,
+
+        /*保司待审核*/
+        (select count(1) from survey_risk_case_info s left join survey_assign_org ao on ao.survey_info_id = s.id
+            where s.delete_flag = 0 and s.survey_state = 24 and ao.delete_flag = 0
+            <if test="surveyOrgId != null">
+                and ao.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+            </if>
+            <if test="entrustOrgId != null">
+                and s.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+            </if>
+            <if test="entrustOrgIds != null ">
+                and s.entrust_org_id  in (${entrustOrgIds})
+            </if>
+        ) as basEntrustApv,
+        /*财务待结案basNotClose*/
+        (select count(1) from survey_risk_case_info s left join survey_assign_org ao on ao.survey_info_id = s.id
+            where s.delete_flag = 0 and s.entrust_report_end_date is not null and s.survey_phase != 3 and ao.delete_flag = 0
+            <if test="surveyOrgId != null">
+                and ao.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+            </if>
+            <if test="entrustOrgId != null">
+                and s.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+            </if>
+            <if test="entrustOrgIds != null ">
+                and s.entrust_org_id  in (${entrustOrgIds})
+            </if>
+        )as basNotClose
+
+        from dual
+    </select>
+
+    <select id="selectBySurveyOrgId" resultType="com.lefancrm.apicenter.model.SurveyInvestigatorOrgReport" parameterType="java.util.Map" >
+        select
+        ifnull(sum(s.risk_case_num),0) as riskCaseNum ,
+        ifnull(sum(s.insurance_check_case_num),0) as insuranceCheckCaseNum ,
+        ifnull(sum(s.risk_check_case_num),0) as riskCheckCaseNum ,
+        ifnull(sum(s.score),0) as score ,
+        ifnull(avg(s.efficiency),0) as efficiency ,
+        ifnull(avg(s.positive_rate),0) as positiveRate ,
+        ifnull(avg(s.return_rate),0) as returnRate ,
+        ifnull(avg(s.loss_efficiency_rate),0) as lossEfficiencyRate,
+        ifnull(sum(s.investigation_money),0) as investigationMoney,
+        ifnull(sum(s.new_send),0) as newSend
+        from survey_investigator_org_report s
+        where 1=1
+        <include refid="wheres"/>
+    </select>
+
+    <select id="selectAllTrend" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyInvestigatorOrgReport">
+        SELECT
+        s.report_date as reportDate,
+        sum(s.score) as score,
+        sum(s.investigation_money) as investigationMoney
+        FROM
+        survey_investigator_org_report s
+        WHERE 1 = 1
+        <include refid="wheres"/>
+        GROUP BY
+        s.report_date
+    </select>
+    <select id="selectAllTrendNew" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyInvestigatorOrgReport">
+        select
+            <if test="checkType == 2">
+                date_format(a.entrust_report_end_date,'%Y-%m-%d') as reportDate,
+            </if>
+            <if test="checkType == 1">
+                date_format(a.entrust_report_start_date,'%Y-%m-%d') as reportDate,
+            </if>
+            sum(ifnull(a.score,0)) as score,
+            sum(ifnull(a.money,0)) as investigationMoney
+          from (
+            select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                        (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id,
+                    ifnull(c.score,0) score,r.entrust_report_end_date,r.entrust_report_start_date,(ifnull(o.survey_money_submit,0) + ifnull(o.survery_re_losses_submit,0)) as money
+             from survey_investigator_case c
+            left join survey_assign_org o on c.survey_assorg_case_id = o.id
+            left join survey_franchisee f on o.survey_org_id = f.id
+            left join survey_risk_case_info r on o.survey_info_id = r.id
+            left join survey_consignor n on r.entrust_org_id = n.id
+            where c.delete_flag = 0 and o.delete_flag = 0 and r.delete_flag = 0
+            <include refid="whereNew"/>
+        ) a
+        group by a.org_id,
+        <if test="checkType == 2">
+            date_format(a.entrust_report_end_date,'%Y-%m-%d')
+        </if>
+        <if test="checkType == 1">
+            date_format(a.entrust_report_start_date,'%Y-%m-%d')
+        </if>
+        <if test="surveyOrgId != null">
+            having a.org_id = #{surveyOrgId,jdbcType=BIGINT}
+        </if>
+    </select>
+
+    <select id="selectMinReportDate" parameterType="java.util.Map" resultType="java.util.Date">
+        select min(report_date) as minReportDate from survey_investigator_org_report
+        where survey_org_id = #{surveyOrgId,jdbcType=BIGINT} and consignor_org_id = #{entrustOrgId,jdbcType=BIGINT}
+        and check_type = #{checkType,jdbcType=BIGINT}
+    </select>
+    <select id="selectMaxReportDate" parameterType="java.util.Map" resultType="java.util.Date">
+        select max(report_date) as maxReportDate from survey_investigator_org_report
+        where survey_org_id = #{surveyOrgId,jdbcType=BIGINT} and consignor_org_id = #{entrustOrgId,jdbcType=BIGINT}
+        and check_type = #{checkType,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectOrgKeyTar" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyInvestigatorOrgReport">
+        select
+            ifnull((select sum(s.score) from survey_investigator_org_report s where 1= 1 <include refid="wheres" />),0) as score,
+            ifnull((select sum(s.risk_case_num) from survey_investigator_org_report s where 1= 1 <include refid="wheres" />),0) as riskCaseNum,
+            ifnull((select avg(s.efficiency) from survey_investigator_org_report s where 1= 1 <include refid="wheres" />),0) as efficiency,
+            ifnull((select avg(s.positive_rate) from survey_investigator_org_report s where 1= 1 <include refid="wheres" />),0) as positiveRate,
+            ifnull((select avg(s.return_rate) from survey_investigator_org_report s where 1= 1 <include refid="wheres" />),0) as returnRate,
+            ifnull((select avg(s.loss_efficiency_rate) from survey_investigator_org_report s where 1= 1 <include refid="wheres" />),0) as lossEfficiencyRate,
+            ifnull((select sum(s.risk_check_case_num) from survey_investigator_org_report s where 1= 1 <include refid="wheres" />),0) as riskCheckCaseNum,
+            ifnull((select sum(s.insurance_check_case_num) from survey_investigator_org_report s where 1= 1 <include refid="wheres" />),0) as insuranceCheckCaseNum,
+            ifnull((select sum(s.investigation_money) from survey_investigator_org_report s where 1= 1 <include refid="wheres" />),0) as investigationMoney,
+            1 as returnType
+        from dual
+        union all
+        select
+            ifnull((select sum(s.score) from survey_investigator_org_report s where 1= 1 <include refid="wheresOrg" />),0) as score,
+            ifnull((select sum(s.risk_case_num) from survey_investigator_org_report s where 1= 1 <include refid="wheresOrg" />),0) as riskCaseNum,
+            ifnull((select avg(s.efficiency) from survey_investigator_org_report s where 1= 1 <include refid="wheresOrg" />),0) as efficiency,
+            ifnull((select avg(s.positive_rate) from survey_investigator_org_report s where 1= 1 <include refid="wheresOrg" />),0) as positiveRate,
+            ifnull((select avg(s.return_rate) from survey_investigator_org_report s where 1= 1 <include refid="wheresOrg" />),0) as returnRate,
+            ifnull((select avg(s.loss_efficiency_rate) from survey_investigator_org_report s where 1= 1 <include refid="wheresOrg" />),0) as lossEfficiencyRate,
+            ifnull((select sum(s.risk_check_case_num) from survey_investigator_org_report s where 1= 1 <include refid="wheresOrg" />),0) as riskCheckCaseNum,
+            ifnull((select sum(s.insurance_check_case_num) from survey_investigator_org_report s where 1= 1 <include refid="wheresOrg" />),0) as insuranceCheckCaseNum,
+            ifnull((select sum(s.investigation_money) from survey_investigator_org_report s where 1= 1 <include refid="wheresOrg" />),0) as investigationMoney,
+            2 as returnType
+        from dual
+        union all
+        select
+            ifnull((select max(a.score) from (select sum(s.score) score from survey_investigator_org_report s where 1 = 1 <include refid="wheresOrg" /> group by s.survey_org_id) a),0) as surveyMoney,
+            ifnull((select max(a.risk_case_num) from (select sum(s.risk_case_num) risk_case_num from survey_investigator_org_report s where 1 = 1 <include refid="wheresOrg" /> group by s.survey_org_id) a),0) as newSurveyCaseNum,
+            ifnull((select max(a.efficiency) from (select avg(s.efficiency) efficiency from survey_investigator_org_report s where 1 = 1 <include refid="wheresOrg" /> group by s.survey_org_id) a),0) as lossEfficiencyRate,
+            ifnull((select max(a.positive_rate) from (select avg(s.positive_rate) positive_rate from survey_investigator_org_report s where 1 = 1 <include refid="wheresOrg" /> group by s.survey_org_id) a),0) as positiveRate,
+            ifnull((select max(a.return_rate) from (select avg(s.return_rate) return_rate from survey_investigator_org_report s where 1 = 1 <include refid="wheresOrg" /> group by s.survey_org_id) a),0) as regional,
+            ifnull((select max(a.loss_efficiency_rate) from (select avg(s.loss_efficiency_rate) loss_efficiency_rate from survey_investigator_org_report s where 1 = 1 <include refid="wheresOrg" /> group by s.survey_org_id) a),0) as efficiency,
+            ifnull((select max(a.risk_check_case_num) from (select sum(s.risk_check_case_num) risk_check_case_num from survey_investigator_org_report s where 1 = 1 <include refid="wheresOrg" /> group by s.survey_org_id) a),0) as riskCheckCaseNum,
+            ifnull((select max(a.insurance_check_case_num) from (select sum(s.insurance_check_case_num) insurance_check_case_num from survey_investigator_org_report s where 1 = 1 <include refid="wheresOrg" /> group by s.survey_org_id) a),0) as insuranceCheckCaseNum,
+            ifnull((select max(a.investigation_money) from (select sum(s.investigation_money) investigation_money from survey_investigator_org_report s where 1 = 1 <include refid="wheresOrg" /> group by s.survey_org_id) a),0) as investigationMoney,
+            3 as returnType
+        from dual
+    </select>
+    <select id="selectOrgKeyTarOrgs" parameterType="java.util.Map" resultType="int">
+        select count(1) from (select count(1),s.survey_org_id from survey_investigator_org_report s where 1 = 1 <include refid="wheresOrg"/> group by s.survey_org_id) a
+    </select>
+
+    <select id="selectBasMoneyNotAcc" parameterType="java.lang.Long" resultType="double">
+        SELECT ifnull(sum(sic.survey_task_money),0)
+        FROM survey_risk_case_info a
+        left join survey_investigator_case sic on sic.survey_info_id = a.id
+        WHERE 1 = 1 AND a.delete_flag = 0 AND a.survey_state = 28 AND (a.price_1_is_calc = 0 or a.price_2_is_calc = 0)
+        AND sic.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+    </select>
+
+
+    <select id="selectReportTarOverData" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from (
+                select a.survey_info_id from (
+                            select (case f.parent_id when 0 then f.id else f.parent_id end ) org_id,o.survey_info_id  from survey_assign_org o
+                            left join survey_risk_case_info r on o.survey_info_id = r.id
+                            left join survey_consignor n on r.entrust_org_id = n.id
+                            left join survey_franchisee f on o.survey_org_id = f.id
+                            where  1 = 1
+                            <if test="orgAttr != null">
+                                and n.org_attr = #{orgAttr,jdbcType=INTEGER}
+                            </if>
+                            <if test="checkType == 2">
+                                <if test="startTime != null">
+                                    AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+                                </if>
+                                <if test="endTime != null">
+                                    AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+                                </if>
+                            </if>
+                            <if test="checkType == 1">
+                                <if test="startTime != null">
+                                    AND date_format(r.entrust_report_start_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+                                </if>
+                                <if test="endTime != null">
+                                    AND date_format(r.entrust_report_start_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+                                </if>
+                            </if>
+                            <if test="over != null">
+                                <if test="over == 1">
+                                    and o.report_date &gt; o.utter_end_time
+                                </if>
+                                <if test="over == 2">
+                                    and o.report_date &gt; o.org_end_time and o.extension_time is not null
+                                </if>
+                            </if>
+                            <if test="entrustOrgId != null">
+                                and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+                            </if>
+                            <if test="entrustOrgIds != null">
+                                and r.entrust_org_id in (${entrustOrgIds})
+                            </if>
+                ) a
+                group by a.org_id,a.survey_info_id having a.org_id = #{surveyOrgId,jdbcType=BIGINT}
+        )t
+    </select>
+
+    <select id="selectEntrustAgreementMoney" parameterType="map" resultType="double">
+        select IFNULL(SUM(aa.inscompany_money),0) entrustAgreementMoney from (
+            SELECT c.inscompany_money FROM survey_consignor a
+            LEFT JOIN survey_risk_case_info b ON a.id=b.entrust_org_id
+            LEFT JOIN survey_assign_org c ON b.id=c.survey_info_id
+            LEFT JOIN survey_franchisee f ON c.survey_org_id = f.id
+            WHERE a.org_attr = 1 AND a.delete_flag = 0 AND b.delete_flag = 0 AND c.delete_flag = 0 AND f.delete_flag = 0
+            <if test="surveyOrgId != null ">AND (f.id=#{surveyOrgId} OR f.parent_id = #{surveyOrgId} )
+            </if>
+            <if test="
+            entrustOrgIds != null ">and b.entrust_org_id in (${entrustOrgIds})
+            </if>
+                <if test="checkType == 1 ">
+                    AND b.entrust_report_start_date IS NOT NULL
+                    <if test="startTime != null">
+                        AND date_format(b.entrust_report_start_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+                    </if>
+                    <if test="endTime != null">
+                        AND date_format(b.entrust_report_start_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+                    </if>
+                </if>
+                <if test="checkType == 2 ">
+                    AND b.entrust_report_end_date IS NOT NULL
+                    <if test="startTime != null">
+                        AND date_format(b.entrust_report_end_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+                    </if>
+                    <if test="endTime != null">
+                        AND date_format(b.entrust_report_end_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+                    </if>
+                </if>
+        ) aa
+    </select>
+
+</mapper>

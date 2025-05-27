@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BusApplyEnumRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BusApplyEnumRole" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="enum_id" property="enumId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_id, enum_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_apply_enum_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bus_apply_enum_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.BusApplyEnumRole" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bus_apply_enum_role (role_id, enum_id)
+    values (#{roleId,jdbcType=BIGINT}, #{enumId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.BusApplyEnumRole" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bus_apply_enum_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="enumId != null" >
+        enum_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="enumId != null" >
+        #{enumId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.BusApplyEnumRole" >
+    update bus_apply_enum_role
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="enumId != null" >
+        enum_id = #{enumId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.BusApplyEnumRole" >
+    update bus_apply_enum_role
+    set role_id = #{roleId,jdbcType=BIGINT},
+      enum_id = #{enumId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="listByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from bus_apply_enum_role
+    where role_id in (select b.role_id from bus_user_role b where b.user_id = #{userId,jdbcType=BIGINT})
+  </select>
+  <delete id="deleteByRoleId" parameterType="java.lang.Long">
+    delete from bus_apply_enum_role where role_id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByLeftId" parameterType="java.lang.Long">
+    delete from bus_apply_enum_role where enum_id = #{leftId,jdbcType=BIGINT}
+  </delete>
+</mapper>

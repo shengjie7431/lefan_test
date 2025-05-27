@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.FrontMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.FrontMenu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="menu_code" property="menuCode" jdbcType="VARCHAR" />
+    <result column="menu_url" property="menuUrl" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="SMALLINT" />
+    <result column="is_show" property="isShow" jdbcType="SMALLINT" />
+    <result column="menu_summary" property="menuSummary" jdbcType="VARCHAR" />
+    <result column="depth" property="depth" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, menu_name, menu_code, menu_url, pid, sort, is_delete, is_show, menu_summary, 
+    depth
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_menu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from front_menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.FrontMenu" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into front_menu (menu_name, menu_code, menu_url, 
+      pid, sort, is_delete, 
+      is_show, menu_summary, depth
+      )
+    values (#{menuName,jdbcType=VARCHAR}, #{menuCode,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, 
+      #{pid,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{isDelete,jdbcType=SMALLINT}, 
+      #{isShow,jdbcType=SMALLINT}, #{menuSummary,jdbcType=VARCHAR}, #{depth,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.FrontMenu" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into front_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="menuCode != null" >
+        menu_code,
+      </if>
+      <if test="menuUrl != null" >
+        menu_url,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="isShow != null" >
+        is_show,
+      </if>
+      <if test="menuSummary != null" >
+        menu_summary,
+      </if>
+      <if test="depth != null" >
+        depth,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuCode != null" >
+        #{menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=SMALLINT},
+      </if>
+      <if test="isShow != null" >
+        #{isShow,jdbcType=SMALLINT},
+      </if>
+      <if test="menuSummary != null" >
+        #{menuSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="depth != null" >
+        #{depth,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.FrontMenu" >
+    update front_menu
+    <set >
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuCode != null" >
+        menu_code = #{menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=SMALLINT},
+      </if>
+      <if test="isShow != null" >
+        is_show = #{isShow,jdbcType=SMALLINT},
+      </if>
+      <if test="menuSummary != null" >
+        menu_summary = #{menuSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="depth != null" >
+        depth = #{depth,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.FrontMenu" >
+    update front_menu
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_code = #{menuCode,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=SMALLINT},
+      is_show = #{isShow,jdbcType=SMALLINT},
+      menu_summary = #{menuSummary,jdbcType=VARCHAR},
+      depth = #{depth,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectTreeList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+        front_menu.id,
+        front_menu.menu_name,
+        front_menu.menu_code,
+        front_menu.menu_url,
+        front_menu.pid,
+        front_menu.sort,
+        front_menu.is_show,
+        front_menu.menu_summary,
+        front_menu.depth
+        FROM `front_menu`
+        WHERE is_delete = 0
+        <if test="isShow!=null">
+            and is_show = #{isShow,jdbcType=SMALLINT}
+        </if>
+        <if test="userId!=null">
+            and front_menu.id IN (SELECT fr.front_menu_id FROM front_role_menu AS fr JOIN bus_user_role AS bu ON fr.front_role_id = bu.role_id
+            WHERE
+            bu.user_id = #{userId,jdbcType=BIGINT})
+        </if>
+        order by pid,sort
+    </select>
+</mapper>

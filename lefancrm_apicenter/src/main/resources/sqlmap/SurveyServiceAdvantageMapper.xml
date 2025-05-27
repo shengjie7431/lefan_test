@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyServiceAdvantageMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyServiceAdvantage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="service_ad_title" property="serviceAdTitle" jdbcType="VARCHAR" />
+    <result column="service_ad_abstract" property="serviceAdAbstract" jdbcType="VARCHAR" />
+    <result column="service_ad_content" property="serviceAdContent" jdbcType="VARCHAR" />
+    <result column="service_ad_img" property="serviceAdImg" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, service_ad_title, service_ad_abstract, service_ad_content, service_ad_img, create_by, 
+    update_by, create_time, update_time, delete_flag, create_by_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_service_advantage
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_service_advantage
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyServiceAdvantage" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_service_advantage (service_ad_title, service_ad_abstract, 
+      service_ad_content, service_ad_img, create_by, 
+      update_by, create_time, update_time, 
+      delete_flag, create_by_name)
+    values (#{serviceAdTitle,jdbcType=VARCHAR}, #{serviceAdAbstract,jdbcType=VARCHAR}, 
+      #{serviceAdContent,jdbcType=VARCHAR}, #{serviceAdImg,jdbcType=VARCHAR}, #{createBy,jdbcType=BIGINT}, 
+      #{updateBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{deleteFlag,jdbcType=INTEGER}, #{createByName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyServiceAdvantage" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_service_advantage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceAdTitle != null" >
+        service_ad_title,
+      </if>
+      <if test="serviceAdAbstract != null" >
+        service_ad_abstract,
+      </if>
+      <if test="serviceAdContent != null" >
+        service_ad_content,
+      </if>
+      <if test="serviceAdImg != null" >
+        service_ad_img,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="createByName != null" >
+        create_by_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceAdTitle != null" >
+        #{serviceAdTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceAdAbstract != null" >
+        #{serviceAdAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceAdContent != null" >
+        #{serviceAdContent,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceAdImg != null" >
+        #{serviceAdImg,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createByName != null" >
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyServiceAdvantage" >
+    update survey_service_advantage
+    <set >
+      <if test="serviceAdTitle != null" >
+        service_ad_title = #{serviceAdTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceAdAbstract != null" >
+        service_ad_abstract = #{serviceAdAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceAdContent != null" >
+        service_ad_content = #{serviceAdContent,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceAdImg != null" >
+        service_ad_img = #{serviceAdImg,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createByName != null" >
+        create_by_name = #{createByName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyServiceAdvantage" >
+    update survey_service_advantage
+    set service_ad_title = #{serviceAdTitle,jdbcType=VARCHAR},
+      service_ad_abstract = #{serviceAdAbstract,jdbcType=VARCHAR},
+      service_ad_content = #{serviceAdContent,jdbcType=VARCHAR},
+      service_ad_img = #{serviceAdImg,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      create_by_name = #{createByName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="serviceAdTitle!=null">
+            and service_ad_title like CONCAT(CONCAT('%',#{serviceAdTitle,jdbcType=VARCHAR}), '%')
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_service_advantage
+        <include refid="joins" />
+        where  delete_flag =0
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_service_advantage
+        <include refid="joins" />
+        where  delete_flag =0
+        <include refid="wheres" />
+    </select>
+</mapper>

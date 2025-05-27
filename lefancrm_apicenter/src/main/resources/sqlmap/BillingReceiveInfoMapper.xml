@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BillingReceiveInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BillingReceiveInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="billing_match_id" property="billingMatchId" jdbcType="VARCHAR" />
+    <result column="billing_id" property="billingId" jdbcType="DOUBLE" />
+    <result column="billing_imgs_id" property="billingImgsId" jdbcType="DOUBLE" />
+    <result column="receive_money" property="receiveMoney" jdbcType="DOUBLE" />
+    <result column="receive_user_id" property="receiveUserId" jdbcType="DOUBLE" />
+    <result column="receive_user_name" property="receiveUserName" jdbcType="DOUBLE" />
+    <result column="receive_time" property="receiveTime" jdbcType="DOUBLE" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+    id, billing_match_id, billing_id, billing_imgs_id,receive_money, receive_user_id,receive_user_name,receive_time
+  </sql>
+
+    <sql id="wheres">
+        <where>
+            <if test="id != null ">
+                id=#{id}
+            </if>
+            <if test="billingMatchId != null ">
+                billing_match_id=#{billingMatchId}
+            </if>
+            <if test="billingId != null ">
+                billing_id=#{billingId}
+            </if>
+            <if test="billingImgsId != null ">
+                billing_imgs_id=#{billingImgsId}
+            </if>
+            <if test="receiveMoney != null ">
+                receive_money=#{receiveMoney}
+            </if>
+            <if test="receiveUserId != null ">
+                receive_user_id=#{receiveUserId}
+            </if>
+            <if test="receiveUserName != null ">
+                receive_user_name=#{receiveUserName}
+            </if>
+            <if test="receiveTime != null ">
+                receive_time=#{receiveTime}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByMap" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from billing_receive_info
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectByList" parameterType="map" resultMap="BaseResultMap">
+        select
+        billing_match_id,receive_time,receive_user_name,SUM(receive_money) receive_money
+        from billing_receive_info
+        <include refid="wheres" />
+        GROUP BY  billing_match_id, DATE_FORMAT(receive_time,'%Y-%m-%d %H:%i')
+    </select>
+
+    <select id="selectByOne" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from billing_receive_info
+        <include refid="wheres" />
+    </select>
+
+    <update id="updateOne" parameterType="com.lefancrm.apicenter.model.BillingReceiveInfo">
+        update billing_receive_info
+        <set>
+            <if test="billingMatchId != null ">
+                billing_match_id=#{billingMatchId},
+            </if>
+            <if test="billingId != null ">
+                billing_id=#{billingId},
+            </if>
+            <if test="billingImgsId != null ">
+                billing_imgs_id=#{billingImgsId},
+            </if>
+            <if test="receiveMoney != null ">
+                receive_money=#{receiveMoney},
+            </if>
+            <if test="receiveUserId != null ">
+                receive_user_id=#{receiveUserId},
+            </if>
+            <if test="receiveUserName != null ">
+                receive_user_name=#{receiveUserName},
+            </if>
+            <if test="receiveTime != null ">
+                receive_time=#{receiveTime},
+            </if>
+            <if test="receiveType != null ">
+                receive_type=#{receiveType},
+            </if>
+            <if test="receiveStatus != null ">
+                receive_status=#{receiveStatus},
+            </if>
+            <if test="rejectReason != null ">
+                reject_reason=#{rejectReason},
+            </if>
+        </set>
+         where id=#{id}
+    </update>
+
+    <insert id="insertOne" parameterType="com.lefancrm.apicenter.model.BillingReceiveInfo">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into billing_receive_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="billingMatchId != null ">
+                billing_match_id,
+            </if>
+            <if test="billingId != null ">
+                billing_id,
+            </if>
+            <if test="billingImgsId != null ">
+                billing_imgs_id,
+            </if>
+            <if test="receiveMoney != null ">
+                receive_money,
+            </if>
+            <if test="receiveUserId != null ">
+                receive_user_id,
+            </if>
+            <if test="receiveUserName != null ">
+                receive_user_name,
+            </if>
+            <if test="receiveTime != null ">
+                receive_time,
+            </if>
+            <if test="receiveType != null ">
+                receive_type,
+            </if>
+            <if test="receiveStatus != null ">
+                receive_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="billingMatchId != null ">
+                #{billingMatchId},
+            </if>
+            <if test="billingId != null ">
+                #{billingId},
+            </if>
+            <if test="billingImgsId != null ">
+                #{billingImgsId},
+            </if>
+            <if test="receiveMoney != null ">
+                #{receiveMoney},
+            </if>
+            <if test="receiveUserId != null ">
+                #{receiveUserId},
+            </if>
+            <if test="receiveUserName != null ">
+                #{receiveUserName},
+            </if>
+            <if test="receiveTime != null ">
+                #{receiveTime},
+            </if>
+            <if test="receiveType != null ">
+                #{receiveType},
+            </if>
+            <if test="receiveStatus != null ">
+                #{receiveStatus},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteOne" parameterType="integer">
+        delete from billing_receive_info where id=#{id}
+    </delete>
+
+    <select id="selectByMatchIds" resultMap="BaseResultMap">
+        select
+        r.*,
+        e.enum_name billProName,
+        b.company_name billComp,
+        b.staff_org_name billStaffOrgName
+        from billing_receive_info r
+        left join billing_apply b on r.billing_id = b.id
+        left join common_enum e on b.billing_enum = e.enum_code and e.parent_id = 76
+        where
+        find_in_set(billing_match_id,#{matchIds,jdbcType=VARCHAR})
+    </select>
+</mapper>

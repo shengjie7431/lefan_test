@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.PinganRepayInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.PinganRepayInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="req_serial" property="reqSerial" jdbcType="VARCHAR" />
+    <result column="merchant_id" property="merchantId" jdbcType="VARCHAR" />
+    <result column="repayment_agreement_no" property="repaymentAgreementNo" jdbcType="VARCHAR" />
+    <result column="repayment_type" property="repaymentType" jdbcType="VARCHAR" />
+    <result column="repayment_amt" property="repaymentAmt" jdbcType="DOUBLE" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="success" property="success" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+      <result column="case_id" property="caseId" jdbcType="BIGINT" />
+      <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, req_serial, merchant_id, repayment_agreement_no, repayment_type, repayment_amt, 
+    token, create_time, create_by, success, remark,case_id, case_no
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pingan_repay_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pingan_repay_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.PinganRepayInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pingan_repay_info (req_serial, merchant_id, repayment_agreement_no, 
+      repayment_type, repayment_amt, token, 
+      create_time, create_by, success, 
+      remark,case_id, case_no)
+    values (#{reqSerial,jdbcType=VARCHAR}, #{merchantId,jdbcType=VARCHAR}, #{repaymentAgreementNo,jdbcType=VARCHAR}, 
+      #{repaymentType,jdbcType=VARCHAR}, #{repaymentAmt,jdbcType=DOUBLE}, #{token,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{success,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR},#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.PinganRepayInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pingan_repay_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reqSerial != null" >
+        req_serial,
+      </if>
+      <if test="merchantId != null" >
+        merchant_id,
+      </if>
+      <if test="repaymentAgreementNo != null" >
+        repayment_agreement_no,
+      </if>
+      <if test="repaymentType != null" >
+        repayment_type,
+      </if>
+      <if test="repaymentAmt != null" >
+        repayment_amt,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="success != null" >
+        success,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+        <if test="caseId != null" >
+            case_id,
+        </if>
+        <if test="caseNo != null" >
+            case_no,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reqSerial != null" >
+        #{reqSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantId != null" >
+        #{merchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentAgreementNo != null" >
+        #{repaymentAgreementNo,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentType != null" >
+        #{repaymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentAmt != null" >
+        #{repaymentAmt,jdbcType=DOUBLE},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="success != null" >
+        #{success,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+        <if test="caseId != null" >
+            #{caseId,jdbcType=BIGINT},
+        </if>
+        <if test="caseNo != null" >
+            #{caseNo,jdbcType=VARCHAR},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.PinganRepayInfo" >
+    update pingan_repay_info
+    <set >
+      <if test="reqSerial != null" >
+        req_serial = #{reqSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantId != null" >
+        merchant_id = #{merchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentAgreementNo != null" >
+        repayment_agreement_no = #{repaymentAgreementNo,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentType != null" >
+        repayment_type = #{repaymentType,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentAmt != null" >
+        repayment_amt = #{repaymentAmt,jdbcType=DOUBLE},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="success != null" >
+        success = #{success,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+        <if test="caseId != null" >
+            case_id = #{caseId,jdbcType=BIGINT},
+        </if>
+        <if test="caseNo != null" >
+            case_no = #{caseNo,jdbcType=VARCHAR},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.PinganRepayInfo" >
+    update pingan_repay_info
+    set req_serial = #{reqSerial,jdbcType=VARCHAR},
+      merchant_id = #{merchantId,jdbcType=VARCHAR},
+      repayment_agreement_no = #{repaymentAgreementNo,jdbcType=VARCHAR},
+      repayment_type = #{repaymentType,jdbcType=VARCHAR},
+      repayment_amt = #{repaymentAmt,jdbcType=DOUBLE},
+      token = #{token,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      success = #{success,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      case_id = #{caseId,jdbcType=BIGINT},
+      case_no = #{caseNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

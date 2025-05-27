@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SuningWithholdApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SuningWithholdApply" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+    <result column="case_title" property="caseTitle" jdbcType="VARCHAR" />
+    <result column="withhold_money" property="withholdMoney" jdbcType="DOUBLE" />
+    <result column="withhold_time" property="withholdTime" jdbcType="TIMESTAMP" />
+    <result column="withhold_state" property="withholdState" jdbcType="INTEGER" />
+    <result column="withhold_type" property="withholdType" jdbcType="INTEGER" />
+    <result column="app_user_id" property="appUserId" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="VARCHAR"/>
+    <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    <result column="account_state" property="accountState" jdbcType="INTEGER" />
+    <result column="apply_type" property="applyType" jdbcType="INTEGER" />
+    <result column="order_code" property="orderCode" jdbcType="VARCHAR"/>
+    <result column="trade_code" property="tradeCode" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_id, case_no, case_title, withhold_money, withhold_time, withhold_state, 
+    withhold_type,app_user_id,code,remark,account_state,apply_type,order_code,trade_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from suning_withhold_apply
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectByCaseInfo" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from suning_withhold_apply
+        where case_id = #{caseId,jdbcType=BIGINT} and case_no = #{caseNo,jdbcType=VARCHAR}
+        <if test="withholdState != null" >
+            and withhold_state = #{withholdState,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="selectListSize" resultType="int" parameterType="java.util.Map" >
+        select
+        count(1)
+        from suning_withhold_apply swa
+        left join case_center_info cci on swa.case_id = cci.id
+        <where>
+            <if test="caseId != null" >
+                and swa.case_id = #{caseId,jdbcType=BIGINT}
+            </if>
+            <if test="caseNo != null" >
+                and swa.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseTitle != null" >
+                and swa.case_title like concat('%',#{caseTitle,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="withholdMoney != null" >
+                and swa.withhold_money = #{withholdMoney,jdbcType=DOUBLE}
+            </if>
+            <if test="withholdTime != null" >
+                and swa.withhold_time = #{withholdTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="withholdState != null" >
+                and swa.withhold_state = #{withholdState,jdbcType=INTEGER}
+            </if>
+            <if test="withholdType != null" >
+                and swa.withhold_type = #{withholdType,jdbcType=INTEGER}
+            </if>
+            <if test="appUserId != null" >
+                and swa.app_user_id = #{appUserId,jdbcType=BIGINT}
+            </if>
+            <if test="code != null" >
+                and swa.code = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="remark != null" >
+                and swa.remark like concat('%',#{remark,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="accountState != null" >
+                and swa.account_state = #{accountState,jdbcType=INTEGER}
+            </if>
+            <if test="applyType != null">
+                <if test="applyType == -1">
+                    and swa.apply_type in (0,2)
+                </if>
+                <if test="applyType == -2">
+                    and swa.apply_type in (1,2,4)
+                </if>
+            </if>
+            <if test="orderCode != null" >
+                and swa.order_code like concat('%',#{orderCode,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="tradeCode != null" >
+                and swa.trade_code like concat('%',#{tradeCode,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="mType == 0" >
+                and (swa.account_state is null or swa.account_state != 1)  and swa.withhold_state = 2
+            </if>
+            <if test="mType == 3" >
+                and swa.withhold_money > 0
+            </if>
+            <if test="numberType == 11" >
+                and (swa.account_state =0 or swa.account_state is null )
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and (cci.is_test_case = #{isTestcase,jdbcType=INTEGER} and cci.delete_flag !=1 or swa.case_id is null)
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and (cci.is_test_case = 0 and cci.delete_flag !=1 or swa.case_id is null)
+                </if>
+                <if test="isTest == 1">
+                    and (cci.is_test_case = 1 and cci.delete_flag !=1 or swa.case_id is null)
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        swa.id as id, swa.case_id as caseId, swa.case_no as caseNo, swa.case_title as caseTitle, swa.withhold_money as withholdMoney,
+        swa.withhold_time as withholdTime, swa.withhold_state as withholdState, swa.withhold_type as withholdType,
+        swa.app_user_id as appUserId, swa.code as code, swa.remark as remark,swa.account_state as accountState,
+        swa.apply_type as applyType, swa.order_code as orderCode,swa.trade_code as tradeCode
+        from suning_withhold_apply swa
+        left join case_center_info cci on swa.case_id = cci.id
+        <where>
+            <if test="caseId != null" >
+                and swa.case_id = #{caseId,jdbcType=BIGINT}
+            </if>
+            <if test="caseNo != null" >
+                and swa.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseTitle != null" >
+                and swa.case_title like concat('%',#{caseTitle,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="withholdMoney != null" >
+                and swa.withhold_money = #{withholdMoney,jdbcType=DOUBLE}
+            </if>
+            <if test="withholdTime != null" >
+                and swa.withhold_time = #{withholdTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="withholdState != null" >
+                and swa.withhold_state = #{withholdState,jdbcType=INTEGER}
+            </if>
+            <if test="withholdType != null" >
+                and swa.withhold_type = #{withholdType,jdbcType=INTEGER}
+            </if>
+            <if test="appUserId != null" >
+                and swa.app_user_id = #{appUserId,jdbcType=BIGINT}
+            </if>
+            <if test="code != null" >
+                and swa.code = #{code,jdbcType=VARCHAR}
+            </if>
+            <if test="remark != null" >
+                and swa.remark like concat('%',#{remark,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="accountState != null" >
+                and swa.account_state = #{accountState,jdbcType=INTEGER}
+            </if>
+            <if test="applyType != null">
+                <if test="applyType == -1">
+                    and swa.apply_type in (0,2)
+                </if>
+                <if test="applyType == -2">
+                    and swa.apply_type in (1,2,4)
+                </if>
+            </if>
+            <if test="orderCode != null" >
+                and swa.order_code like concat('%',#{orderCode,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="tradeCode != null" >
+                and swa.trade_code like concat('%',#{tradeCode,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="mType == 0" >
+                and (swa.account_state is null or swa.account_state != 1)  and swa.withhold_state = 2
+            </if>
+            <if test="mType == 3" >
+                and swa.withhold_money > 0
+            </if>
+            <if test="numberType == 11" >
+                and (swa.account_state =0 or swa.account_state is null )
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and (cci.is_test_case = #{isTestcase,jdbcType=INTEGER} and cci.delete_flag !=1 or swa.case_id is null)
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and (cci.is_test_case = 0 and cci.delete_flag !=1 or swa.case_id is null)
+                </if>
+                <if test="isTest == 1">
+                    and (cci.is_test_case = 1 and cci.delete_flag !=1 or swa.case_id is null)
+                </if>
+            </if>
+        </where>
+        order by swa.id desc limit #{pageIndex} , #{pageSize}
+    </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from suning_withhold_apply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SuningWithholdApply" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into suning_withhold_apply (case_id, case_no, case_title, 
+      withhold_money, withhold_time, withhold_state, 
+      withhold_type,app_user_id,code,remark,account_state,apply_type,order_code,trade_code)
+    values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{caseTitle,jdbcType=VARCHAR}, 
+      #{withholdMoney,jdbcType=DOUBLE}, #{withholdTime,jdbcType=TIMESTAMP}, #{withholdState,jdbcType=INTEGER}, 
+      #{withholdType,jdbcType=INTEGER},#{appUserId,jdbcType=BIGINT},#{code,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},
+      #{accountState,jdbcType=INTEGER},#{applyType,jdbcType=INTEGER},#{orderCode,jdbcType=VARCHAR},#{tradeCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SuningWithholdApply" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into suning_withhold_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseNo != null" >
+        case_no,
+      </if>
+      <if test="caseTitle != null" >
+        case_title,
+      </if>
+      <if test="withholdMoney != null" >
+        withhold_money,
+      </if>
+      <if test="withholdTime != null" >
+        withhold_time,
+      </if>
+      <if test="withholdState != null" >
+        withhold_state,
+      </if>
+      <if test="withholdType != null" >
+        withhold_type,
+      </if>
+      <if test="appUserId != null" >
+        app_user_id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="accountState != null" >
+        account_state,
+      </if>
+      <if test="applyType != null" >
+        apply_type,
+      </if>
+      <if test="orderCode != null" >
+        order_code,
+      </if>
+      <if test="tradeCode != null" >
+        trade_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseTitle != null" >
+        #{caseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="withholdMoney != null" >
+        #{withholdMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="withholdTime != null" >
+        #{withholdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="withholdState != null" >
+        #{withholdState,jdbcType=INTEGER},
+      </if>
+      <if test="withholdType != null" >
+        #{withholdType,jdbcType=INTEGER},
+      </if>
+      <if test="appUserId != null" >
+        #{appUserId,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="accountState != null" >
+        #{accountState,jdbcType=INTEGER},
+      </if>
+      <if test="applyType != null" >
+        #{applyType,jdbcType=INTEGER},
+      </if>
+      <if test="orderCode != null" >
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeCode != null" >
+        #{tradeCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SuningWithholdApply" >
+    update suning_withhold_apply
+    <set >
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseTitle != null" >
+        case_title = #{caseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="withholdMoney != null" >
+        withhold_money = #{withholdMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="withholdTime != null" >
+        withhold_time = #{withholdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="withholdState != null" >
+        withhold_state = #{withholdState,jdbcType=INTEGER},
+      </if>
+      <if test="withholdType != null" >
+        withhold_type = #{withholdType,jdbcType=INTEGER},
+      </if>
+        <if test="appUserId != null" >
+            app_user_id = #{appUserId,jdbcType=BIGINT},
+        </if>
+        <if test="code != null" >
+            code = #{code,jdbcType=VARCHAR},
+        </if>
+        <if test="remark != null" >
+            remark = #{remark,jdbcType=VARCHAR},
+        </if>
+        <if test="accountState != null" >
+            account_state = #{accountState,jdbcType=INTEGER},
+        </if>
+        <if test="applyType != null" >
+            apply_type = #{applyType,jdbcType=INTEGER},
+        </if>
+        <if test="orderCode != null" >
+            order_code = #{orderCode,jdbcType=VARCHAR},
+        </if>
+        <if test="tradeCode != null" >
+            trade_code = #{tradeCode,jdbcType=VARCHAR},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SuningWithholdApply" >
+    update suning_withhold_apply
+    set case_id = #{caseId,jdbcType=BIGINT},
+      case_no = #{caseNo,jdbcType=VARCHAR},
+      case_title = #{caseTitle,jdbcType=VARCHAR},
+      withhold_money = #{withholdMoney,jdbcType=DOUBLE},
+      withhold_time = #{withholdTime,jdbcType=TIMESTAMP},
+      withhold_state = #{withholdState,jdbcType=INTEGER},
+      withhold_type = #{withholdType,jdbcType=INTEGER},
+      app_user_id = #{appUserId,jdbcType=BIGINT},
+      code = #{code,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      account_state = #{accountState,jdbcType=INTEGER},
+      apply_type = #{applyType,jdbcType=INTEGER},
+      order_code = #{orderCode,jdbcType=VARCHAR},
+      trade_code = #{tradeCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectCountForAccountState" resultType="int" parameterType="java.util.Map" >
+        select
+        count(1)
+        from suning_withhold_apply
+        where case_id = #{caseId,jdbcType=BIGINT} and case_no = #{caseNo,jdbcType=VARCHAR}
+          and withhold_state = 2 and (account_state is null or account_state = 0)
+
+    </select>
+</mapper>

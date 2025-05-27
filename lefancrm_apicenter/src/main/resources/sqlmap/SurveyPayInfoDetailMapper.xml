@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyPayInfoDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyPayInfoDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pay_id" property="payId" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, pay_id, case_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_pay_info_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_pay_info_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyPayInfoDetail" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_pay_info_detail (pay_id, case_id)
+    values (#{payId,jdbcType=BIGINT}, #{caseId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyPayInfoDetail" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_pay_info_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payId != null" >
+        pay_id,
+      </if>
+      <if test="caseId != null" >
+        case_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payId != null" >
+        #{payId,jdbcType=BIGINT},
+      </if>
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyPayInfoDetail" >
+    update survey_pay_info_detail
+    <set >
+      <if test="payId != null" >
+        pay_id = #{payId,jdbcType=BIGINT},
+      </if>
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyPayInfoDetail" >
+    update survey_pay_info_detail
+    set pay_id = #{payId,jdbcType=BIGINT},
+      case_id = #{caseId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <sql id="joins">
+
+  </sql>
+
+  <sql id="wheres">
+    <if test="payId != null" >
+      and pay_id = #{payId,jdbcType=BIGINT}
+    </if>
+    <if test="caseId != null" >
+      and case_id = #{caseId,jdbcType=BIGINT}
+    </if>
+  </sql>
+
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_pay_info_detail
+    <include refid="joins" />
+    where 1=1
+    <include refid="wheres" />
+    order by id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from survey_pay_info_detail
+    <include refid="joins" />
+    where 1=1
+    <include refid="wheres" />
+  </select>
+
+
+  <insert id="insertItems" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+    insert into survey_pay_info_detail(pay_id,case_id)
+    values
+    <foreach collection="ids" item="id" separator=",">
+      (
+      #{payId,jdbcType=BIGINT},
+      #{id,jdbcType=BIGINT}
+      )
+    </foreach>
+  </insert>
+
+  <update id="updateChannelItems" parameterType="java.lang.String">
+      update survey_channel_cost set is_pro_pay = 2 where id in (
+          select p.case_id from survey_pay_info_detail p
+           left join survey_pay_info s on p.pay_id = s.id
+           where s.pay_type = 3 and find_in_set(p.pay_id,#{payIds,jdbcType=VARCHAR})
+      )
+  </update>
+</mapper>

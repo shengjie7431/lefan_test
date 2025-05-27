@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.ReInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.ReInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="re_name" property="reName" jdbcType="VARCHAR" />
+    <result column="re_state" property="reState" jdbcType="INTEGER" />
+    <result column="down_time" property="downTime" jdbcType="TIMESTAMP" />
+    <result column="succes_time" property="succesTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="total_case_num" property="totalCaseNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, re_name, re_state, down_time, succes_time, create_time, create_by, update_time,
+    update_by, delete_flag,total_case_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from re_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from re_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.ReInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into re_info (re_name, re_state, down_time,
+    succes_time, create_time, create_by,
+    update_time, update_by, delete_flag,total_case_num
+    )
+    values (#{reName,jdbcType=VARCHAR}, #{reState,jdbcType=INTEGER}, #{downTime,jdbcType=TIMESTAMP},
+    #{succesTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, #{totalCaseNum,jdbcType=INTEGER}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.ReInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into re_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reName != null" >
+        re_name,
+      </if>
+      <if test="reState != null" >
+        re_state,
+      </if>
+      <if test="downTime != null" >
+        down_time,
+      </if>
+      <if test="succesTime != null" >
+        succes_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reName != null" >
+        #{reName,jdbcType=VARCHAR},
+      </if>
+      <if test="reState != null" >
+        #{reState,jdbcType=INTEGER},
+      </if>
+      <if test="downTime != null" >
+        #{downTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="succesTime != null" >
+        #{succesTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.ReInfo" >
+    update re_info
+    <set >
+      <if test="reName != null" >
+        re_name = #{reName,jdbcType=VARCHAR},
+      </if>
+      <if test="reState != null" >
+        re_state = #{reState,jdbcType=INTEGER},
+      </if>
+      <if test="downTime != null" >
+        down_time = #{downTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="succesTime != null" >
+        succes_time = #{succesTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.ReInfo" >
+    update re_info
+    set re_name = #{reName,jdbcType=VARCHAR},
+      re_state = #{reState,jdbcType=INTEGER},
+      down_time = #{downTime,jdbcType=TIMESTAMP},
+      succes_time = #{succesTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      total_case_num = #{totalCaseNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <sql id="dataWhere">
+    <if test="surveyOrgId != null" >
+      and r.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+    </if>
+    <if test="parentOrgIds != null">
+      and find_in_set(r.survey_org_id,#{parentOrgIds,jdbcType=VARCHAR})
+    </if>
+  </sql>
+
+  <sql id="wheres">
+    <if test="feeReName != null" >
+      and t.re_name like CONCAT(CONCAT('%',#{feeReName,jdbcType=VARCHAR}), '%')
+    </if>
+    <if test="orgRole != null">
+      and (select count(1) from investigator_re_info r where r.re_id = t.id <include refid="dataWhere"/>) > 0
+    </if>
+    <if test="success != null">
+      <if test="orgRole != null">
+        <if test="success == 0">
+          and (select count(1) from investigator_re_info r where r.re_id = t.id <include refid="dataWhere"/>) != (select count(1) from investigator_re_info r where r.re_id = t.id and r.re_state = 6 <include refid="dataWhere"/>)
+        </if>
+        <if test="success == 1">
+          and (select count(1) from investigator_re_info r where r.re_id = t.id <include refid="dataWhere"/>) == (select count(1) from investigator_re_info r where r.re_id = t.id and r.re_state = 6 <include refid="dataWhere"/>)
+        </if>
+      </if>
+      <if test="finance != null">
+        <if test="success == 0">
+            and t.re_state = 0
+        </if>
+        <if test="success == 1">
+            and t.re_state = 1
+        </if>
+      </if>
+    </if>
+  </sql>
+
+  <select id="selectReinfos" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.ReInfoDTO">
+    select
+        t.id reId,t.re_name feeReName,t.re_state reState,t.create_by createBy,t.create_time createDate,
+        c.caseNum as caseNum,
+        (select count(1) from investigator_re_info r where r.re_id = t.id <include refid="dataWhere"/>) as personNum,
+        (select count(1) from investigator_re_info r where r.re_id = t.id and r.re_state = 1 <include refid="dataWhere"/>) as num1,
+        (select count(1) from investigator_re_info r where r.re_id = t.id and r.re_state = 2 <include refid="dataWhere"/>) as num2,
+        (select count(1) from investigator_re_info r where r.re_id = t.id and r.re_state = 3 <include refid="dataWhere"/>) as num3,
+        (select count(1) from investigator_re_info r where r.re_id = t.id and r.re_state = 4 <include refid="dataWhere"/>) as num4,
+        (select count(1) from investigator_re_info r where r.re_id = t.id and r.re_state = 5 <include refid="dataWhere"/>) as num5,
+        (select count(1) from investigator_re_info r where r.re_id = t.id and r.re_state = 6 <include refid="dataWhere"/>) as num6,
+        (select ifnull(sum(d.Investigator_re_money),0) from investigator_re_info r left join investigator_re_details d on r.id = d.investigator_re_id where r.re_id = t.id <include refid="dataWhere"/>) as totalMoney
+     from re_info t
+    left join (select b.re_id,count(1) as caseNum from (select r.re_id,d.survey_info_id from investigator_re_info r left join investigator_re_details d on r.id = d.investigator_re_id
+    where 1 = 1 <include refid="dataWhere"/> group by r.re_id,d.survey_info_id ) b group by b.re_id
+    ) c on t.id = c.re_id
+    where t.delete_flag = 0
+     <include refid="wheres"/>
+     order by
+    <if test="sortField !=null and sortField =='createTime'">
+      t.create_time
+      <if test="sortType =='down'">
+        desc,
+      </if>
+      <if test="sortType =='up'">
+        asc,
+      </if>
+    </if>
+
+     t.id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+
+  <select id="selectReinfosSize" parameterType="java.util.Map" resultType="int">
+    select
+        count(1)
+     from re_info t where t.delete_flag = 0
+    <include refid="wheres"/>
+  </select>
+
+  <select id="selectByReName" parameterType="java.lang.String" resultType="int">
+    select count(1) from (
+        select id from re_info where re_name = #{reName,jdbcType=VARCHAR}
+    ) a
+  </select>
+</mapper>

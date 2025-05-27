@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BillingApplyRefundMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BillingApplyRefund" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bill_id" property="billId" jdbcType="BIGINT" />
+    <result column="refund_money" property="refundMoney" jdbcType="DOUBLE" />
+    <result column="refund_time" property="refundTime" jdbcType="TIMESTAMP" />
+    <result column="refund_user" property="refundUser" jdbcType="BIGINT" />
+    <result column="refund_user_by" property="refundUserBy" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bill_id, refund_money, refund_time, refund_user, refund_user_by, remark, create_time, 
+    delete_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from billing_apply_refund
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from billing_apply_refund
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.BillingApplyRefund" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into billing_apply_refund (bill_id, refund_money, refund_time, 
+      refund_user, refund_user_by, remark, 
+      create_time, delete_flag)
+    values (#{billId,jdbcType=BIGINT}, #{refundMoney,jdbcType=DOUBLE}, #{refundTime,jdbcType=TIMESTAMP}, 
+      #{refundUser,jdbcType=BIGINT}, #{refundUserBy,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.BillingApplyRefund" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into billing_apply_refund
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="billId != null" >
+        bill_id,
+      </if>
+      <if test="refundMoney != null" >
+        refund_money,
+      </if>
+      <if test="refundTime != null" >
+        refund_time,
+      </if>
+      <if test="refundUser != null" >
+        refund_user,
+      </if>
+      <if test="refundUserBy != null" >
+        refund_user_by,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="billId != null" >
+        #{billId,jdbcType=BIGINT},
+      </if>
+      <if test="refundMoney != null" >
+        #{refundMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="refundTime != null" >
+        #{refundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundUser != null" >
+        #{refundUser,jdbcType=BIGINT},
+      </if>
+      <if test="refundUserBy != null" >
+        #{refundUserBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.BillingApplyRefund" >
+    update billing_apply_refund
+    <set >
+      <if test="billId != null" >
+        bill_id = #{billId,jdbcType=BIGINT},
+      </if>
+      <if test="refundMoney != null" >
+        refund_money = #{refundMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="refundTime != null" >
+        refund_time = #{refundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundUser != null" >
+        refund_user = #{refundUser,jdbcType=BIGINT},
+      </if>
+      <if test="refundUserBy != null" >
+        refund_user_by = #{refundUserBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.BillingApplyRefund" >
+    update billing_apply_refund
+    set bill_id = #{billId,jdbcType=BIGINT},
+      refund_money = #{refundMoney,jdbcType=DOUBLE},
+      refund_time = #{refundTime,jdbcType=TIMESTAMP},
+      refund_user = #{refundUser,jdbcType=BIGINT},
+      refund_user_by = #{refundUserBy,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <sql id="joins">
+
+  </sql>
+  <sql id="wheres">
+    <if test="billId != null">
+      and bill_id = #{billId,jdbcType=BIGINT}
+    </if>
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from billing_apply_refund
+    <include refid="joins" />
+    where delete_flag = 0
+    <include refid="wheres" />
+    order by id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from billing_apply_refund
+    <include refid="joins" />
+    where delete_flag = 0
+    <include refid="wheres" />
+  </select>
+</mapper>

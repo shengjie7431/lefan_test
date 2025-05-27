@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.InfoPublishsMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.InfoPublishs" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_tel" property="userTel" jdbcType="VARCHAR" />
+    <result column="user_cardid" property="userCardid" jdbcType="VARCHAR" />
+    <result column="user_other_info" property="userOtherInfo" jdbcType="VARCHAR" />
+    <result column="problem_remark" property="problemRemark" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="is_publish" property="isPublish" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    a.id, a.user_name, a.user_tel, a.user_cardid, a.user_other_info, a.problem_remark, a.create_time,
+    a.create_by, a.create_name, a.is_delete, a.is_publish
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from info_publishs a
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from info_publishs
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.InfoPublishs" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into info_publishs (user_name, user_tel, user_cardid, 
+      user_other_info, problem_remark, create_time, 
+      create_by, create_name, is_delete, 
+      is_publish)
+    values (#{userName,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}, #{userCardid,jdbcType=VARCHAR}, 
+      #{userOtherInfo,jdbcType=VARCHAR}, #{problemRemark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
+      #{isPublish,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.InfoPublishs" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into info_publishs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userTel != null" >
+        user_tel,
+      </if>
+      <if test="userCardid != null" >
+        user_cardid,
+      </if>
+      <if test="userOtherInfo != null" >
+        user_other_info,
+      </if>
+      <if test="problemRemark != null" >
+        problem_remark,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="isPublish != null" >
+        is_publish,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null" >
+        #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="userCardid != null" >
+        #{userCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="userOtherInfo != null" >
+        #{userOtherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="problemRemark != null" >
+        #{problemRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="isPublish != null" >
+        #{isPublish,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.InfoPublishs" >
+    update info_publishs
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null" >
+        user_tel = #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="userCardid != null" >
+        user_cardid = #{userCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="userOtherInfo != null" >
+        user_other_info = #{userOtherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="problemRemark != null" >
+        problem_remark = #{problemRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="isPublish != null" >
+        is_publish = #{isPublish,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.InfoPublishs" >
+    update info_publishs
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_tel = #{userTel,jdbcType=VARCHAR},
+      user_cardid = #{userCardid,jdbcType=VARCHAR},
+      user_other_info = #{userOtherInfo,jdbcType=VARCHAR},
+      problem_remark = #{problemRemark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_name = #{createName,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      is_publish = #{isPublish,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <sql id="wheres">
+      <where>
+          <if test="userName != null" >
+              and a.user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
+          </if>
+          <if test="userTel != null" >
+              and a.user_tel like concat('%',#{userTel,jdbcType=VARCHAR},'%')
+          </if>
+          <if test="userCardid != null" >
+              and a.user_cardid like concat('%',#{userCardid,jdbcType=VARCHAR},'%')
+          </if>
+          <if test="userOtherInfo != null" >
+              and a.user_other_info = #{userOtherInfo,jdbcType=VARCHAR}
+          </if>
+          <if test="problemRemark != null" >
+              and a.problem_remark = #{problemRemark,jdbcType=VARCHAR}
+          </if>
+          <if test="createTime != null" >
+              and a.create_time = #{createTime,jdbcType=TIMESTAMP}
+          </if>
+          <if test="createBy != null" >
+              and a.create_by = #{createBy,jdbcType=BIGINT}
+          </if>
+          <if test="createName != null" >
+              and a.create_name = #{createName,jdbcType=VARCHAR}
+          </if>
+          <if test="isDelete != null" >
+              and a.is_delete = #{isDelete,jdbcType=INTEGER}
+          </if>
+          <if test="isPublish != null" >
+              and a.is_publish = #{isPublish,jdbcType=INTEGER}
+          </if>
+          <if test="menuType == 4">
+              and u.publishs_id is not null
+          </if>
+      </where>
+  </sql>
+  <select id="findList" resultMap="BaseResultMap" parameterType="map">
+      select
+      <include refid="Base_Column_List" />
+      from info_publishs a
+      <if test="menuType == 4">
+          left join (
+              select distinct pc.publishs_id from info_publishs_safe_company pc where pc.safe_company_id in (select u.safe_company_id from info_safe_user u where u.user_id = #{currentUserId,jdbcType=BIGINT})
+          ) u on a.id = u.publishs_id
+      </if>
+      <include refid="wheres" />
+      ORDER by a.create_time desc limit #{pageIndex} , #{pageSize}
+  </select>
+  <select id="findListSize" parameterType="map" resultType="int">
+      select
+      count(1)
+      from info_publishs a
+      <if test="menuType == 4">
+          left join (
+          select distinct pc.publishs_id from info_publishs_safe_company pc where pc.safe_company_id in (select u.safe_company_id from info_safe_user u where u.user_id = #{currentUserId,jdbcType=BIGINT})
+          ) u on a.id = u.publishs_id
+      </if>
+      <include refid="wheres" />
+  </select>
+
+  <select id="findListPart" resultMap="BaseResultMap" parameterType="map">
+
+  </select>
+  <select id="findListPartSize" parameterType="map" resultType="int">
+
+  </select>
+</mapper>

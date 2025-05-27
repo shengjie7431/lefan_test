@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyCaseArchivesMapper">
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyCaseArchives" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="survey_id" property="surveyId" jdbcType="BIGINT" />
+        <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+        <result column="survey_no" property="surveyNo" jdbcType="VARCHAR" />
+        <result column="survey_case_no" property="surveyCaseNo" jdbcType="VARCHAR" />
+        <result column="interview_record" property="interviewRecord" jdbcType="INTEGER" />
+        <result column="medical_record" property="medicalRecord" jdbcType="INTEGER" />
+        <result column="medical_report" property="medicalReport" jdbcType="INTEGER" />
+        <result column="social_insurance" property="socialInsurance" jdbcType="INTEGER" />
+        <result column="is_death" property="isDeath" jdbcType="INTEGER" />
+        <result column="legal_heir" property="legalHeir" jdbcType="INTEGER" />
+        <result column="legal_heir_relationship" property="legalHeirRelationship" jdbcType="INTEGER" />
+        <result column="death_certificate" property="deathCertificate" jdbcType="INTEGER" />
+        <result column="is_give_up" property="isGiveUp" jdbcType="INTEGER" />
+        <result column="claims_give_up" property="claimsGiveUp" jdbcType="INTEGER" />
+        <result column="other_statement" property="otherStatement" jdbcType="INTEGER" />
+        <result column="is_accident" property="isAccident" jdbcType="INTEGER" />
+        <result column="an_accident" property="anAccident" jdbcType="INTEGER" />
+        <result column="no_accident" property="noAccident" jdbcType="INTEGER" />
+        <result column="public_inspection" property="publicInspection" jdbcType="INTEGER" />
+        <result column="appraisal_report" property="appraisalReport" jdbcType="INTEGER" />
+        <result column="legal_instrument" property="legalInstrument" jdbcType="INTEGER" />
+        <result column="other_items" property="otherItems" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="archives_state" property="archivesState" jdbcType="INTEGER" />
+        <result column="archives_time" property="archivesTime" jdbcType="TIMESTAMP" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="archives_by" property="archivesBy" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, survey_id, survey_info_id, survey_no, survey_case_no, interview_record, medical_record,
+    medical_report, social_insurance, is_death, legal_heir, legal_heir_relationship,
+    death_certificate, is_give_up, claims_give_up, other_statement, is_accident, an_accident,
+    no_accident, public_inspection, appraisal_report, legal_instrument, other_items,
+    create_time, create_by, archives_state, archives_time, delete_flag, archives_by,
+    remark
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_case_archives
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_case_archives
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyCaseArchives" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_case_archives (survey_id, survey_info_id, survey_no,
+        survey_case_no, interview_record, medical_record,
+        medical_report, social_insurance, is_death,
+        legal_heir, legal_heir_relationship, death_certificate,
+        is_give_up, claims_give_up, other_statement,
+        is_accident, an_accident, no_accident,
+        public_inspection, appraisal_report, legal_instrument,
+        other_items, create_time, create_by,
+        archives_state, archives_time, delete_flag,
+        archives_by, remark)
+        values (#{surveyId,jdbcType=BIGINT}, #{surveyInfoId,jdbcType=BIGINT}, #{surveyNo,jdbcType=VARCHAR},
+        #{surveyCaseNo,jdbcType=VARCHAR}, #{interviewRecord,jdbcType=INTEGER}, #{medicalRecord,jdbcType=INTEGER},
+        #{medicalReport,jdbcType=INTEGER}, #{socialInsurance,jdbcType=INTEGER}, #{isDeath,jdbcType=INTEGER},
+        #{legalHeir,jdbcType=INTEGER}, #{legalHeirRelationship,jdbcType=INTEGER}, #{deathCertificate,jdbcType=INTEGER},
+        #{isGiveUp,jdbcType=INTEGER}, #{claimsGiveUp,jdbcType=INTEGER}, #{otherStatement,jdbcType=INTEGER},
+        #{isAccident,jdbcType=INTEGER}, #{anAccident,jdbcType=INTEGER}, #{noAccident,jdbcType=INTEGER},
+        #{publicInspection,jdbcType=INTEGER}, #{appraisalReport,jdbcType=INTEGER}, #{legalInstrument,jdbcType=INTEGER},
+        #{otherItems,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},
+        #{archivesState,jdbcType=INTEGER}, #{archivesTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER},
+        #{archivesBy,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyCaseArchives" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_case_archives
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="surveyId != null" >
+                survey_id,
+            </if>
+            <if test="surveyInfoId != null" >
+                survey_info_id,
+            </if>
+            <if test="surveyNo != null" >
+                survey_no,
+            </if>
+            <if test="surveyCaseNo != null" >
+                survey_case_no,
+            </if>
+            <if test="interviewRecord != null" >
+                interview_record,
+            </if>
+            <if test="medicalRecord != null" >
+                medical_record,
+            </if>
+            <if test="medicalReport != null" >
+                medical_report,
+            </if>
+            <if test="socialInsurance != null" >
+                social_insurance,
+            </if>
+            <if test="isDeath != null" >
+                is_death,
+            </if>
+            <if test="legalHeir != null" >
+                legal_heir,
+            </if>
+            <if test="legalHeirRelationship != null" >
+                legal_heir_relationship,
+            </if>
+            <if test="deathCertificate != null" >
+                death_certificate,
+            </if>
+            <if test="isGiveUp != null" >
+                is_give_up,
+            </if>
+            <if test="claimsGiveUp != null" >
+                claims_give_up,
+            </if>
+            <if test="otherStatement != null" >
+                other_statement,
+            </if>
+            <if test="isAccident != null" >
+                is_accident,
+            </if>
+            <if test="anAccident != null" >
+                an_accident,
+            </if>
+            <if test="noAccident != null" >
+                no_accident,
+            </if>
+            <if test="publicInspection != null" >
+                public_inspection,
+            </if>
+            <if test="appraisalReport != null" >
+                appraisal_report,
+            </if>
+            <if test="legalInstrument != null" >
+                legal_instrument,
+            </if>
+            <if test="otherItems != null" >
+                other_items,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="archivesState != null" >
+                archives_state,
+            </if>
+            <if test="archivesTime != null" >
+                archives_time,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+            <if test="archivesBy != null" >
+                archives_by,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="surveyId != null" >
+                #{surveyId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyInfoId != null" >
+                #{surveyInfoId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyNo != null" >
+                #{surveyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyCaseNo != null" >
+                #{surveyCaseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="interviewRecord != null" >
+                #{interviewRecord,jdbcType=INTEGER},
+            </if>
+            <if test="medicalRecord != null" >
+                #{medicalRecord,jdbcType=INTEGER},
+            </if>
+            <if test="medicalReport != null" >
+                #{medicalReport,jdbcType=INTEGER},
+            </if>
+            <if test="socialInsurance != null" >
+                #{socialInsurance,jdbcType=INTEGER},
+            </if>
+            <if test="isDeath != null" >
+                #{isDeath,jdbcType=INTEGER},
+            </if>
+            <if test="legalHeir != null" >
+                #{legalHeir,jdbcType=INTEGER},
+            </if>
+            <if test="legalHeirRelationship != null" >
+                #{legalHeirRelationship,jdbcType=INTEGER},
+            </if>
+            <if test="deathCertificate != null" >
+                #{deathCertificate,jdbcType=INTEGER},
+            </if>
+            <if test="isGiveUp != null" >
+                #{isGiveUp,jdbcType=INTEGER},
+            </if>
+            <if test="claimsGiveUp != null" >
+                #{claimsGiveUp,jdbcType=INTEGER},
+            </if>
+            <if test="otherStatement != null" >
+                #{otherStatement,jdbcType=INTEGER},
+            </if>
+            <if test="isAccident != null" >
+                #{isAccident,jdbcType=INTEGER},
+            </if>
+            <if test="anAccident != null" >
+                #{anAccident,jdbcType=INTEGER},
+            </if>
+            <if test="noAccident != null" >
+                #{noAccident,jdbcType=INTEGER},
+            </if>
+            <if test="publicInspection != null" >
+                #{publicInspection,jdbcType=INTEGER},
+            </if>
+            <if test="appraisalReport != null" >
+                #{appraisalReport,jdbcType=INTEGER},
+            </if>
+            <if test="legalInstrument != null" >
+                #{legalInstrument,jdbcType=INTEGER},
+            </if>
+            <if test="otherItems != null" >
+                #{otherItems,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="archivesState != null" >
+                #{archivesState,jdbcType=INTEGER},
+            </if>
+            <if test="archivesTime != null" >
+                #{archivesTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="archivesBy != null" >
+                #{archivesBy,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyCaseArchives" >
+        update survey_case_archives
+        <set >
+            <if test="surveyId != null" >
+                survey_id = #{surveyId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyInfoId != null" >
+                survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyNo != null" >
+                survey_no = #{surveyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyCaseNo != null" >
+                survey_case_no = #{surveyCaseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="interviewRecord != null" >
+                interview_record = #{interviewRecord,jdbcType=INTEGER},
+            </if>
+            <if test="medicalRecord != null" >
+                medical_record = #{medicalRecord,jdbcType=INTEGER},
+            </if>
+            <if test="medicalReport != null" >
+                medical_report = #{medicalReport,jdbcType=INTEGER},
+            </if>
+            <if test="socialInsurance != null" >
+                social_insurance = #{socialInsurance,jdbcType=INTEGER},
+            </if>
+            <if test="isDeath != null" >
+                is_death = #{isDeath,jdbcType=INTEGER},
+            </if>
+            <if test="legalHeir != null" >
+                legal_heir = #{legalHeir,jdbcType=INTEGER},
+            </if>
+            <if test="legalHeirRelationship != null" >
+                legal_heir_relationship = #{legalHeirRelationship,jdbcType=INTEGER},
+            </if>
+            <if test="deathCertificate != null" >
+                death_certificate = #{deathCertificate,jdbcType=INTEGER},
+            </if>
+            <if test="isGiveUp != null" >
+                is_give_up = #{isGiveUp,jdbcType=INTEGER},
+            </if>
+            <if test="claimsGiveUp != null" >
+                claims_give_up = #{claimsGiveUp,jdbcType=INTEGER},
+            </if>
+            <if test="otherStatement != null" >
+                other_statement = #{otherStatement,jdbcType=INTEGER},
+            </if>
+            <if test="isAccident != null" >
+                is_accident = #{isAccident,jdbcType=INTEGER},
+            </if>
+            <if test="anAccident != null" >
+                an_accident = #{anAccident,jdbcType=INTEGER},
+            </if>
+            <if test="noAccident != null" >
+                no_accident = #{noAccident,jdbcType=INTEGER},
+            </if>
+            <if test="publicInspection != null" >
+                public_inspection = #{publicInspection,jdbcType=INTEGER},
+            </if>
+            <if test="appraisalReport != null" >
+                appraisal_report = #{appraisalReport,jdbcType=INTEGER},
+            </if>
+            <if test="legalInstrument != null" >
+                legal_instrument = #{legalInstrument,jdbcType=INTEGER},
+            </if>
+            <if test="otherItems != null" >
+                other_items = #{otherItems,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="archivesState != null" >
+                archives_state = #{archivesState,jdbcType=INTEGER},
+            </if>
+            <if test="archivesTime != null" >
+                archives_time = #{archivesTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="archivesBy != null" >
+                archives_by = #{archivesBy,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyCaseArchives" >
+    update survey_case_archives
+    set survey_id = #{surveyId,jdbcType=BIGINT},
+      survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      survey_no = #{surveyNo,jdbcType=VARCHAR},
+      survey_case_no = #{surveyCaseNo,jdbcType=VARCHAR},
+      interview_record = #{interviewRecord,jdbcType=INTEGER},
+      medical_record = #{medicalRecord,jdbcType=INTEGER},
+      medical_report = #{medicalReport,jdbcType=INTEGER},
+      social_insurance = #{socialInsurance,jdbcType=INTEGER},
+      is_death = #{isDeath,jdbcType=INTEGER},
+      legal_heir = #{legalHeir,jdbcType=INTEGER},
+      legal_heir_relationship = #{legalHeirRelationship,jdbcType=INTEGER},
+      death_certificate = #{deathCertificate,jdbcType=INTEGER},
+      is_give_up = #{isGiveUp,jdbcType=INTEGER},
+      claims_give_up = #{claimsGiveUp,jdbcType=INTEGER},
+      other_statement = #{otherStatement,jdbcType=INTEGER},
+      is_accident = #{isAccident,jdbcType=INTEGER},
+      an_accident = #{anAccident,jdbcType=INTEGER},
+      no_accident = #{noAccident,jdbcType=INTEGER},
+      public_inspection = #{publicInspection,jdbcType=INTEGER},
+      appraisal_report = #{appraisalReport,jdbcType=INTEGER},
+      legal_instrument = #{legalInstrument,jdbcType=INTEGER},
+      other_items = #{otherItems,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      archives_state = #{archivesState,jdbcType=INTEGER},
+      archives_time = #{archivesTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      archives_by = #{archivesBy,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+        left join survey_risk_case_info b on a.survey_info_id = b.id and b.delete_flag=0
+        left join survey_risk_case c on a.survey_id = c.id and c.delete_flag=0
+        left join survey_assign_org o on a.survey_info_id = o.survey_info_id and o.delete_flag=0
+    </sql>
+    <sql id="wheres">
+        <if test="surveyCaseNo != nul">
+            and (
+            c.survey_case_no like CONCAT(CONCAT('%',#{surveyCaseNo,jdbcType=VARCHAR}), '%')
+            or r.survey_no like CONCAT(CONCAT('%',#{surveyCaseNo,jdbcType=VARCHAR}), '%')
+            or c.survey_person like CONCAT(CONCAT('%',#{surveyCaseNo,jdbcType=VARCHAR}), '%')
+            or c.survery_person_tel like CONCAT(CONCAT('%',#{surveyCaseNo,jdbcType=VARCHAR}), '%')
+            or c.id_number like CONCAT(CONCAT('%',#{surveyCaseNo,jdbcType=VARCHAR}), '%')
+            )
+        </if>
+        <if test="surveyNo != null">
+            and r.survey_no like CONCAT(CONCAT('%',#{surveyNo,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="entrustOrgIds != null" >
+            and find_in_set(r.entrust_org_id,#{entrustOrgIds,jdbcType=VARCHAR})
+        </if>
+        <if test="surveyOrgIds != null" >
+            and find_in_set(o.survey_org_id,#{surveyOrgIds,jdbcType=VARCHAR})
+        </if>
+        <if test="startTime != null" >
+            and DATE_FORMAT(r.entrust_report_end_date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="endTime != null" >
+            and DATE_FORMAT(r.entrust_report_end_date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="archivesState != null">
+            <if test="archivesState == 0">
+                and (a.archives_state = #{archivesState,jdbcType=INTEGER} or a.archives_state is null)
+            </if>
+            <if test="archivesState == 1">
+                and a.archives_state = #{archivesState,jdbcType=INTEGER}
+            </if>
+        </if>
+        <if test="updStartTime != null" >
+            and DATE_FORMAT(a.archives_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{updStartTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="updEndTime != null" >
+            and DATE_FORMAT(a.archives_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{updEndTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="lefanStartTime != null" >
+            and DATE_FORMAT(r.entrust_report_start_date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{lefanStartTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="lefanEndTime != null" >
+            and DATE_FORMAT(r.entrust_report_start_date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{lefanEndTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+    </sql>
+
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        a.id as id, a.survey_id as surveyId, a.survey_info_id as surveyInfoId, a.survey_no as surveyNo,
+        a.survey_case_no as surveyCaseNo, a.interview_record as interviewRecord, a.medical_record as medicalRecord,
+        a.social_insurance as socialInsurance, a.is_death as isDeath, a.legal_heir as legalHeir, a.medical_report as medicalReport,
+        a.legal_heir_relationship as legalHeirRelationship, a.death_certificate as deathCertificate,
+        a.is_give_up as isGiveUp, a.claims_give_up as claimsGiveUp, a.other_statement as otherStatement,
+        a.is_accident as isAccident, a.an_accident as anAccident, a.no_accident as noAccident,
+        a.public_inspection as publicInspection, a.appraisal_report as appraisalReport, a.legal_instrument as legalInstrument,
+        a.other_items as otherItems, a.create_time as createTime,a.create_by as createBy, a.archives_state as archivesState,
+        a.archives_time as archivesTime, a.delete_flag as deleteFlag, a.archives_by as archivesBy,
+        a.remark,
+        c.survey_person as surveyPerson, b.entrust_report_end_date as entrustReportEndDate,
+        c.entrust_org_name as entrustOrgName, GROUP_CONCAT(o.survey_org_name) as surveyOrgName
+        from survey_case_archives a
+        <include refid="joins" />
+        where a.delete_flag=0 and b.entrust_report_end_date is not null
+        <include refid="wheres" />
+        group by a.survey_info_id
+        order by
+        <if test="order != null">
+            <if test="order == 50">
+                <if test="colSortType == 1">
+                    b.entrust_report_end_date asc,
+                </if>
+                <if test="colSortType == 2">
+                    b.entrust_report_end_date desc,
+                </if>
+            </if>
+            <if test="order == 51">
+                <if test="colSortType == 1">
+                    a.archives_time asc,
+                </if>
+                <if test="colSortType == 2">
+                    a.archives_time desc,
+                </if>
+            </if>
+        </if>
+        a.id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1) from (
+            select a.id
+            from survey_case_archives a
+            <include refid="joins" />
+            where a.delete_flag=0 and b.entrust_report_end_date is not null
+            <include refid="wheres" />
+            group by a.survey_info_id
+        ) b
+    </select>
+
+    <select id="selectOne" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_case_archives
+        where delete_flag=0
+        <if test="surveyInfoId != null">
+            and survey_info_id = #{surveyInfoId,jdbcType=BIGINT}
+        </if>
+        <if test="surveyId != null">
+            and survey_id = #{surveyId,jdbcType=BIGINT}
+        </if>
+        limit 1;
+    </select>
+
+
+    <insert id="insertByBsCaseList" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into survey_case_archives(survey_id, survey_info_id, survey_no,
+            survey_case_no, create_time, create_by,
+            archives_state, delete_flag)
+        values
+        <foreach collection="surveyRiskCaseInfos" item="item" separator=",">
+            (
+            #{item.surveyId,jdbcType=BIGINT},
+            #{item.id,jdbcType=BIGINT},
+            #{item.surveyNo,jdbcType=VARCHAR},
+            #{item.surveyCaseNo,jdbcType=VARCHAR},
+            #{item.entrustReportEndDate,jdbcType=TIMESTAMP},
+            #{item.dealUserName,jdbcType=VARCHAR},
+            0,
+            0
+            )
+        </foreach>
+    </insert>
+    
+    
+    <select id="selectArchives" parameterType="map" resultMap="BaseResultMap">
+        select
+        a.id as id, r.survey_id as surveyId, r.id as surveyInfoId, r.survey_no as surveyNo,
+        c.survey_case_no as surveyCaseNo, a.interview_record as interviewRecord, a.medical_record as medicalRecord,
+        a.social_insurance as socialInsurance, a.is_death as isDeath, a.legal_heir as legalHeir, a.medical_report as medicalReport,
+        a.legal_heir_relationship as legalHeirRelationship, a.death_certificate as deathCertificate,
+        a.is_give_up as isGiveUp, a.claims_give_up as claimsGiveUp, a.other_statement as otherStatement,
+        a.is_accident as isAccident, a.an_accident as anAccident, a.no_accident as noAccident,
+        a.public_inspection as publicInspection, a.appraisal_report as appraisalReport, a.legal_instrument as legalInstrument,
+        a.other_items as otherItems, a.create_time as createTime,a.create_by as createBy, a.archives_state as archivesState,
+        a.archives_time as archivesTime, a.delete_flag as deleteFlag, a.archives_by as archivesBy,
+        a.remark,
+        c.survey_person as surveyPerson, r.entrust_report_end_date as entrustReportEndDate,r.entrust_report_start_date entrustReportStartDate,
+        c.entrust_org_name as entrustOrgName, GROUP_CONCAT(o.survey_org_name) as surveyOrgName
+        from survey_risk_case_info r
+        left join survey_case_archives a on r.id = a.survey_info_id and a.delete_flag = 0
+        left join survey_risk_case c on r.survey_id = c.id and c.delete_flag = 0
+        left join survey_assign_org o on r.id = o.survey_info_id and o.delete_flag = 0
+        where r.delete_flag = 0 and r.entrust_report_start_date is not null
+        <include refid="wheres" />
+        group by r.id
+        order by
+        <if test="order != null">
+            <if test="order == 50">
+                <if test="colSortType == 1">
+                    r.entrust_report_end_date asc,
+                </if>
+                <if test="colSortType == 2">
+                    r.entrust_report_end_date desc,
+                </if>
+            </if>
+            <if test="order == 51">
+                <if test="colSortType == 1">
+                    a.archives_time asc,
+                </if>
+                <if test="colSortType == 2">
+                    a.archives_time desc,
+                </if>
+            </if>
+            <if test="order == 52">
+                <if test="colSortType == 1">
+                    r.entrust_report_start_date asc,
+                </if>
+                <if test="colSortType == 2">
+                    r.entrust_report_start_date desc,
+                </if>
+            </if>
+        </if>
+        r.id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectArchivesSize" parameterType="map" resultType="int">
+        select count(1) from (
+            select
+            r.id
+            from survey_risk_case_info r
+            left join survey_case_archives a on r.id = a.survey_info_id and a.delete_flag = 0
+            left join survey_risk_case c on r.survey_id = c.id and c.delete_flag = 0
+            left join survey_assign_org o on r.id = o.survey_info_id and o.delete_flag = 0
+            where r.delete_flag = 0 and r.entrust_report_start_date is not null
+            <include refid="wheres" />
+            group by r.id
+        ) a
+    </select>
+</mapper>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseEntrustInputMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseEntrustInput" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="injured_person" property="injuredPerson" jdbcType="VARCHAR" />
+    <result column="injured_tel" property="injuredTel" jdbcType="VARCHAR" />
+    <result column="accident_province_id" property="accidentProvinceId" jdbcType="BIGINT" />
+    <result column="accident_city_id" property="accidentCityId" jdbcType="BIGINT" />
+    <result column="accident_district_id" property="accidentDistrictId" jdbcType="BIGINT" />
+    <result column="accident_province" property="accidentProvince" jdbcType="VARCHAR" />
+    <result column="accident_city" property="accidentCity" jdbcType="VARCHAR" />
+    <result column="accident_district" property="accidentDistrict" jdbcType="VARCHAR" />
+    <result column="accident_address" property="accidentAddress" jdbcType="VARCHAR" />
+    <result column="agent_type" property="agentType" jdbcType="INTEGER" />
+    <result column="agent_desc" property="agentDesc" jdbcType="VARCHAR" />
+    <result column="accident_time" property="accidentTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="check_state" property="checkState" jdbcType="INTEGER" />
+    <result column="reson" property="reson" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, injured_person, injured_tel, accident_province_id, accident_city_id, accident_district_id, 
+    accident_province, accident_city, accident_district, accident_address, agent_type, 
+    agent_desc, accident_time, create_time, create_by, delete_flag, check_state, reson
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_entrust_input
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from case_entrust_input
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseEntrustInput" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_entrust_input (injured_person, injured_tel, accident_province_id, 
+      accident_city_id, accident_district_id, accident_province, 
+      accident_city, accident_district, accident_address, 
+      agent_type, agent_desc, accident_time, 
+      create_time, create_by, delete_flag, 
+      check_state, reson)
+    values (#{injuredPerson,jdbcType=VARCHAR}, #{injuredTel,jdbcType=VARCHAR}, #{accidentProvinceId,jdbcType=BIGINT}, 
+      #{accidentCityId,jdbcType=BIGINT}, #{accidentDistrictId,jdbcType=BIGINT}, #{accidentProvince,jdbcType=VARCHAR}, 
+      #{accidentCity,jdbcType=VARCHAR}, #{accidentDistrict,jdbcType=VARCHAR}, #{accidentAddress,jdbcType=VARCHAR}, 
+      #{agentType,jdbcType=INTEGER}, #{agentDesc,jdbcType=VARCHAR}, #{accidentTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, 
+      #{checkState,jdbcType=INTEGER}, #{reson,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseEntrustInput" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_entrust_input
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="injuredPerson != null" >
+        injured_person,
+      </if>
+      <if test="injuredTel != null" >
+        injured_tel,
+      </if>
+      <if test="accidentProvinceId != null" >
+        accident_province_id,
+      </if>
+      <if test="accidentCityId != null" >
+        accident_city_id,
+      </if>
+      <if test="accidentDistrictId != null" >
+        accident_district_id,
+      </if>
+      <if test="accidentProvince != null" >
+        accident_province,
+      </if>
+      <if test="accidentCity != null" >
+        accident_city,
+      </if>
+      <if test="accidentDistrict != null" >
+        accident_district,
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address,
+      </if>
+      <if test="agentType != null" >
+        agent_type,
+      </if>
+      <if test="agentDesc != null" >
+        agent_desc,
+      </if>
+      <if test="accidentTime != null" >
+        accident_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="checkState != null" >
+        check_state,
+      </if>
+      <if test="reson != null" >
+        reson,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="injuredPerson != null" >
+        #{injuredPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredTel != null" >
+        #{injuredTel,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentProvinceId != null" >
+        #{accidentProvinceId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentCityId != null" >
+        #{accidentCityId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentDistrictId != null" >
+        #{accidentDistrictId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentProvince != null" >
+        #{accidentProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentCity != null" >
+        #{accidentCity,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentDistrict != null" >
+        #{accidentDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentAddress != null" >
+        #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="agentType != null" >
+        #{agentType,jdbcType=INTEGER},
+      </if>
+      <if test="agentDesc != null" >
+        #{agentDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentTime != null" >
+        #{accidentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="checkState != null" >
+        #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="reson != null" >
+        #{reson,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseEntrustInput" >
+    update case_entrust_input
+    <set >
+      <if test="injuredPerson != null" >
+        injured_person = #{injuredPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredTel != null" >
+        injured_tel = #{injuredTel,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentProvinceId != null" >
+        accident_province_id = #{accidentProvinceId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentCityId != null" >
+        accident_city_id = #{accidentCityId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentDistrictId != null" >
+        accident_district_id = #{accidentDistrictId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentProvince != null" >
+        accident_province = #{accidentProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentCity != null" >
+        accident_city = #{accidentCity,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentDistrict != null" >
+        accident_district = #{accidentDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="agentType != null" >
+        agent_type = #{agentType,jdbcType=INTEGER},
+      </if>
+      <if test="agentDesc != null" >
+        agent_desc = #{agentDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentTime != null" >
+        accident_time = #{accidentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="checkState != null" >
+        check_state = #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="reson != null" >
+        reson = #{reson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseEntrustInput" >
+    update case_entrust_input
+    set injured_person = #{injuredPerson,jdbcType=VARCHAR},
+      injured_tel = #{injuredTel,jdbcType=VARCHAR},
+      accident_province_id = #{accidentProvinceId,jdbcType=BIGINT},
+      accident_city_id = #{accidentCityId,jdbcType=BIGINT},
+      accident_district_id = #{accidentDistrictId,jdbcType=BIGINT},
+      accident_province = #{accidentProvince,jdbcType=VARCHAR},
+      accident_city = #{accidentCity,jdbcType=VARCHAR},
+      accident_district = #{accidentDistrict,jdbcType=VARCHAR},
+      accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      agent_type = #{agentType,jdbcType=INTEGER},
+      agent_desc = #{agentDesc,jdbcType=VARCHAR},
+      accident_time = #{accidentTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      check_state = #{checkState,jdbcType=INTEGER},
+      reson = #{reson,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="injuredPerson != null" >
+            and injured_person like CONCAT(CONCAT('%',#{injuredPerson,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="injuredTel != null" >
+            and injured_tel like CONCAT(CONCAT('%',#{injuredTel,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="checkState != null" >
+            and check_state = #{checkState,jdbcType=INTEGER}
+        </if>
+        <if test="agentType != null" >
+            and agent_type = #{agentType,jdbcType=INTEGER}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from case_entrust_input
+        <include refid="joins" />
+        where delete_flag =0
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from case_entrust_input
+        <include refid="joins" />
+        where delete_flag =0
+        <include refid="wheres" />
+    </select>
+</mapper>

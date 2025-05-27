@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.PinganBindCardMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.PinganBindCard" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+    <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+    <result column="cvv" property="cvv" jdbcType="VARCHAR" />
+    <result column="exp_date" property="expDate" jdbcType="TIMESTAMP" />
+    <result column="bank_code" property="bankCode" jdbcType="VARCHAR" />
+    <result column="card_type_code" property="cardTypeCode" jdbcType="VARCHAR" />
+    <result column="card_num" property="cardNum" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="identity_num" property="identityNum" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    <result column="request_msg" property="requestMsg" jdbcType="VARCHAR" />
+    <result column="is_success" property="isSuccess" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_id, case_no, card_no, cvv, exp_date, bank_code, card_type_code, card_num, 
+    name, identity_num, customer_id, request_msg, is_success, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from pingan_bind_card
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectByCardNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from pingan_bind_card
+        where card_no = #{cardNo,jdbcType=VARCHAR} limit 1
+    </select>
+    <select id="selectByCustomerId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from pingan_bind_card
+        where customer_id = #{customerId,jdbcType=VARCHAR} limit 1
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from pingan_bind_card
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.PinganBindCard" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pingan_bind_card (case_id, case_no, card_no, 
+      cvv, exp_date, bank_code, 
+      card_type_code, card_num, name, 
+      identity_num, customer_id, request_msg, 
+      is_success, remark)
+    values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{cardNo,jdbcType=VARCHAR}, 
+      #{cvv,jdbcType=VARCHAR}, #{expDate,jdbcType=TIMESTAMP}, #{bankCode,jdbcType=VARCHAR}, 
+      #{cardTypeCode,jdbcType=VARCHAR}, #{cardNum,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{identityNum,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, #{requestMsg,jdbcType=VARCHAR}, 
+      #{isSuccess,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.PinganBindCard" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into pingan_bind_card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseNo != null" >
+        case_no,
+      </if>
+      <if test="cardNo != null" >
+        card_no,
+      </if>
+      <if test="cvv != null" >
+        cvv,
+      </if>
+      <if test="expDate != null" >
+        exp_date,
+      </if>
+      <if test="bankCode != null" >
+        bank_code,
+      </if>
+      <if test="cardTypeCode != null" >
+        card_type_code,
+      </if>
+      <if test="cardNum != null" >
+        card_num,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="identityNum != null" >
+        identity_num,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="requestMsg != null" >
+        request_msg,
+      </if>
+      <if test="isSuccess != null" >
+        is_success,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cvv != null" >
+        #{cvv,jdbcType=VARCHAR},
+      </if>
+      <if test="expDate != null" >
+        #{expDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bankCode != null" >
+        #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTypeCode != null" >
+        #{cardTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNum != null" >
+        #{cardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="identityNum != null" >
+        #{identityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMsg != null" >
+        #{requestMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="isSuccess != null" >
+        #{isSuccess,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.PinganBindCard" >
+    update pingan_bind_card
+    <set >
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cvv != null" >
+        cvv = #{cvv,jdbcType=VARCHAR},
+      </if>
+      <if test="expDate != null" >
+        exp_date = #{expDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bankCode != null" >
+        bank_code = #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTypeCode != null" >
+        card_type_code = #{cardTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNum != null" >
+        card_num = #{cardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="identityNum != null" >
+        identity_num = #{identityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMsg != null" >
+        request_msg = #{requestMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="isSuccess != null" >
+        is_success = #{isSuccess,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.PinganBindCard" >
+    update pingan_bind_card
+    set case_id = #{caseId,jdbcType=BIGINT},
+      case_no = #{caseNo,jdbcType=VARCHAR},
+      card_no = #{cardNo,jdbcType=VARCHAR},
+      cvv = #{cvv,jdbcType=VARCHAR},
+      exp_date = #{expDate,jdbcType=TIMESTAMP},
+      bank_code = #{bankCode,jdbcType=VARCHAR},
+      card_type_code = #{cardTypeCode,jdbcType=VARCHAR},
+      card_num = #{cardNum,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      identity_num = #{identityNum,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=VARCHAR},
+      request_msg = #{requestMsg,jdbcType=VARCHAR},
+      is_success = #{isSuccess,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

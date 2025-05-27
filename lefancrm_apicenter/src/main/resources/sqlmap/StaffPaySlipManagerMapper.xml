@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.StaffPaySlipManagerMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.StaffPaySlipManager" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="staff_pay_slip_id" property="staffPaySlipId" jdbcType="BIGINT" />
+    <result column="manager_type" property="managerType" jdbcType="INTEGER" />
+    <result column="organ_manager_user_id" property="organManagerUserId" jdbcType="BIGINT" />
+    <result column="organ_manager_staff_id" property="organManagerStaffId" jdbcType="BIGINT" />
+    <result column="organ_manager_name" property="organManagerName" jdbcType="VARCHAR" />
+    <result column="superior_manager_user_id" property="superiorManagerUserId" jdbcType="BIGINT" />
+    <result column="superior_manager_staff_id" property="superiorManagerStaffId" jdbcType="BIGINT" />
+    <result column="superior_manager_name" property="superiorManagerName" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, staff_pay_slip_id, manager_type, organ_manager_user_id, organ_manager_staff_id, 
+    organ_manager_name, superior_manager_user_id, superior_manager_staff_id, superior_manager_name, 
+    state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from staff_pay_slip_manager
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from staff_pay_slip_manager
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.StaffPaySlipManager" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_pay_slip_manager (staff_pay_slip_id, manager_type, organ_manager_user_id, 
+      organ_manager_staff_id, organ_manager_name, superior_manager_user_id, 
+      superior_manager_staff_id, superior_manager_name, 
+      state)
+    values (#{staffPaySlipId,jdbcType=BIGINT}, #{managerType,jdbcType=INTEGER}, #{organManagerUserId,jdbcType=BIGINT}, 
+      #{organManagerStaffId,jdbcType=BIGINT}, #{organManagerName,jdbcType=VARCHAR}, #{superiorManagerUserId,jdbcType=BIGINT}, 
+      #{superiorManagerStaffId,jdbcType=BIGINT}, #{superiorManagerName,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.StaffPaySlipManager" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_pay_slip_manager
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="staffPaySlipId != null" >
+        staff_pay_slip_id,
+      </if>
+      <if test="managerType != null" >
+        manager_type,
+      </if>
+      <if test="organManagerUserId != null" >
+        organ_manager_user_id,
+      </if>
+      <if test="organManagerStaffId != null" >
+        organ_manager_staff_id,
+      </if>
+      <if test="organManagerName != null" >
+        organ_manager_name,
+      </if>
+      <if test="superiorManagerUserId != null" >
+        superior_manager_user_id,
+      </if>
+      <if test="superiorManagerStaffId != null" >
+        superior_manager_staff_id,
+      </if>
+      <if test="superiorManagerName != null" >
+        superior_manager_name,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="staffPaySlipId != null" >
+        #{staffPaySlipId,jdbcType=BIGINT},
+      </if>
+      <if test="managerType != null" >
+        #{managerType,jdbcType=INTEGER},
+      </if>
+      <if test="organManagerUserId != null" >
+        #{organManagerUserId,jdbcType=BIGINT},
+      </if>
+      <if test="organManagerStaffId != null" >
+        #{organManagerStaffId,jdbcType=BIGINT},
+      </if>
+      <if test="organManagerName != null" >
+        #{organManagerName,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorManagerUserId != null" >
+        #{superiorManagerUserId,jdbcType=BIGINT},
+      </if>
+      <if test="superiorManagerStaffId != null" >
+        #{superiorManagerStaffId,jdbcType=BIGINT},
+      </if>
+      <if test="superiorManagerName != null" >
+        #{superiorManagerName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.StaffPaySlipManager" >
+    update staff_pay_slip_manager
+    <set >
+      <if test="staffPaySlipId != null" >
+        staff_pay_slip_id = #{staffPaySlipId,jdbcType=BIGINT},
+      </if>
+      <if test="managerType != null" >
+        manager_type = #{managerType,jdbcType=INTEGER},
+      </if>
+      <if test="organManagerUserId != null" >
+        organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT},
+      </if>
+      <if test="organManagerStaffId != null" >
+        organ_manager_staff_id = #{organManagerStaffId,jdbcType=BIGINT},
+      </if>
+      <if test="organManagerName != null" >
+        organ_manager_name = #{organManagerName,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorManagerUserId != null" >
+        superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT},
+      </if>
+      <if test="superiorManagerStaffId != null" >
+        superior_manager_staff_id = #{superiorManagerStaffId,jdbcType=BIGINT},
+      </if>
+      <if test="superiorManagerName != null" >
+        superior_manager_name = #{superiorManagerName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.StaffPaySlipManager" >
+    update staff_pay_slip_manager
+    set staff_pay_slip_id = #{staffPaySlipId,jdbcType=BIGINT},
+      manager_type = #{managerType,jdbcType=INTEGER},
+      organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT},
+      organ_manager_staff_id = #{organManagerStaffId,jdbcType=BIGINT},
+      organ_manager_name = #{organManagerName,jdbcType=VARCHAR},
+      superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT},
+      superior_manager_staff_id = #{superiorManagerStaffId,jdbcType=BIGINT},
+      superior_manager_name = #{superiorManagerName,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <insert id="generateOrganManager" parameterType="java.util.Map">
+      insert into staff_pay_slip_manager(
+        staff_pay_slip_id, manager_type, organ_manager_user_id, organ_manager_staff_id, organ_manager_name,
+        superior_manager_user_id, superior_manager_staff_id, superior_manager_name, state
+      )
+      select * from (
+        select #{staffPaySlipId,jdbcType=BIGINT}, 1 as manager_type, o.organ_manager_user_id as organ_manager_user_id,
+        o.organ_manager_staff_id as organ_manager_staff_id, o.organ_manager_name as organ_manager_name,
+        o.superior_manager_user_id as superior_manager_user_id, o.superior_manager_staff_id as superior_manager_staff_id,
+        o.superior_manager_name as superior_manager_name, 0 as state
+        from staff_personnel_info p
+        LEFT JOIN staff_organ o on p.organ_id = o.id
+        where p.delete_flag =0 and p.staff_state != 6 and p.relation != 2 and p.relation != 6
+        and DATE_FORMAT(p.entry_time,'%Y-%m') &lt; DATE_FORMAT(#{entryTime,jdbcType=DATE},'%Y-%m')
+        and o.organ_manager_user_id is not null
+        GROUP BY o.organ_manager_user_id,o.superior_manager_user_id
+      ) a
+    </insert>
+
+    <insert id="generateSuperiorManager" parameterType="java.util.Map">
+        insert into staff_pay_slip_manager(
+        staff_pay_slip_id, manager_type, organ_manager_user_id, organ_manager_staff_id, organ_manager_name,state
+        )
+        select * from (
+        select #{staffPaySlipId,jdbcType=BIGINT}, 2 as manager_type, o.superior_manager_user_id as organ_manager_user_id,
+        o.superior_manager_staff_id as organ_manager_staff_id, o.superior_manager_name as organ_manager_name, 0 as state
+        from staff_personnel_info p
+        LEFT JOIN staff_organ o on p.organ_id = o.id
+        where p.delete_flag =0 and p.staff_state != 6 and p.relation != 2 and p.relation != 6
+        and DATE_FORMAT(p.entry_time,'%Y-%m') &lt; DATE_FORMAT(#{entryTime,jdbcType=DATE},'%Y-%m')
+        and o.organ_manager_user_id is not null
+        GROUP BY o.superior_manager_user_id
+        ) a
+    </insert>
+
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="staffPaySlipId != null" >
+          and staff_pay_slip_id = #{staffPaySlipId,jdbcType=BIGINT}
+        </if>
+        <if test="managerType != null" >
+           and manager_type = #{managerType,jdbcType=INTEGER}
+        </if>
+        <if test="organManagerUserId != null" >
+          and organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT}
+        </if>
+        <if test="organManagerStaffId != null" >
+          and organ_manager_staff_id = #{organManagerStaffId,jdbcType=BIGINT}
+        </if>
+        <if test="superiorManagerUserId != null" >
+          and superior_manager_user_id = #{superiorManagerUserId,jdbcType=BIGINT}
+        </if>
+        <if test="superiorManagerStaffId != null" >
+          and superior_manager_staff_id = #{superiorManagerStaffId,jdbcType=BIGINT}
+        </if>
+        <if test="state != null" >
+          and state = #{state,jdbcType=INTEGER}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from staff_pay_slip_manager
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectByOne" resultMap="BaseResultMap" parameterType="map" >
+        select
+        <include refid="Base_Column_List" />
+        from staff_pay_slip_manager
+        where staff_pay_slip_id = #{staffPaySlipId,jdbcType=BIGINT}
+          and manager_type = #{managerType,jdbcType=INTEGER}
+          and organ_manager_user_id = #{organManagerUserId,jdbcType=BIGINT}
+        limit 1;
+    </select>
+</mapper>

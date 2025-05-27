@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyChannelCostMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyChannelCost" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_org_id" property="surveyOrgId" jdbcType="BIGINT" />
+    <result column="survey_org_name" property="surveyOrgName" jdbcType="VARCHAR" />
+    <result column="survey_user_id" property="surveyUserId" jdbcType="BIGINT" />
+    <result column="survey_user_name" property="surveyUserName" jdbcType="VARCHAR" />
+    <result column="chnannel_money" property="chnannelMoney" jdbcType="DOUBLE" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="operation_time" property="operationTime" jdbcType="TIMESTAMP" />
+    <result column="operation_user_id" property="operationUserId" jdbcType="BIGINT" />
+    <result column="operation_user_name" property="operationUserName" jdbcType="VARCHAR" />
+    <result column="payee_user_name" property="payeeUserName" jdbcType="VARCHAR" />
+    <result column="bank_deposit" property="bankDeposit" jdbcType="VARCHAR" />
+    <result column="bank_branch" property="bankBranch" jdbcType="VARCHAR" />
+    <result column="bank_no" property="bankNo" jdbcType="VARCHAR" />
+    <result column="reject_desc" property="rejectDesc" jdbcType="VARCHAR" />
+    <result column="reviewer_user_id" property="reviewerUserId" jdbcType="BIGINT" />
+    <result column="reviewer_user_name" property="reviewerUserName" jdbcType="VARCHAR" />
+    <result column="reviewer_time" property="reviewerTime" jdbcType="TIMESTAMP" />
+    <result column="channel_desc" property="channelDesc" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="is_pro_pay" property="isProPay" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_org_id, survey_org_name, survey_user_id, survey_user_name, chnannel_money, 
+    state, operation_time, operation_user_id, operation_user_name, payee_user_name, bank_deposit, 
+    bank_branch, bank_no, reject_desc, reviewer_user_id, reviewer_user_name, reviewer_time, 
+    channel_desc,delete_flag,is_pro_pay
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_channel_cost
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_channel_cost
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyChannelCost" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_channel_cost (survey_org_id, survey_org_name, survey_user_id, 
+      survey_user_name, chnannel_money, state, 
+      operation_time, operation_user_id, operation_user_name, 
+      payee_user_name, bank_deposit, bank_branch, 
+      bank_no, reject_desc, reviewer_user_id, 
+      reviewer_user_name, reviewer_time, channel_desc,delete_flag,is_pro_pay
+      )
+    values (#{surveyOrgId,jdbcType=BIGINT}, #{surveyOrgName,jdbcType=VARCHAR}, #{surveyUserId,jdbcType=BIGINT}, 
+      #{surveyUserName,jdbcType=VARCHAR}, #{chnannelMoney,jdbcType=DOUBLE}, #{state,jdbcType=INTEGER}, 
+      #{operationTime,jdbcType=TIMESTAMP}, #{operationUserId,jdbcType=BIGINT}, #{operationUserName,jdbcType=VARCHAR}, 
+      #{payeeUserName,jdbcType=VARCHAR}, #{bankDeposit,jdbcType=VARCHAR}, #{bankBranch,jdbcType=VARCHAR}, 
+      #{bankNo,jdbcType=VARCHAR}, #{rejectDesc,jdbcType=VARCHAR}, #{reviewerUserId,jdbcType=BIGINT}, 
+      #{reviewerUserName,jdbcType=VARCHAR}, #{reviewerTime,jdbcType=TIMESTAMP}, #{channelDesc,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, #{isProPay,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyChannelCost" >
+    update survey_channel_cost
+    set survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      chnannel_money = #{chnannelMoney,jdbcType=DOUBLE},
+      state = #{state,jdbcType=INTEGER},
+      operation_time = #{operationTime,jdbcType=TIMESTAMP},
+      operation_user_id = #{operationUserId,jdbcType=BIGINT},
+      operation_user_name = #{operationUserName,jdbcType=VARCHAR},
+      payee_user_name = #{payeeUserName,jdbcType=VARCHAR},
+      bank_deposit = #{bankDeposit,jdbcType=VARCHAR},
+      bank_branch = #{bankBranch,jdbcType=VARCHAR},
+      bank_no = #{bankNo,jdbcType=VARCHAR},
+      reject_desc = #{rejectDesc,jdbcType=VARCHAR},
+      reviewer_user_id = #{reviewerUserId,jdbcType=BIGINT},
+      reviewer_user_name = #{reviewerUserName,jdbcType=VARCHAR},
+      reviewer_time = #{reviewerTime,jdbcType=TIMESTAMP},
+      channel_desc = #{channelDesc,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      is_pro_pay = #{isProPay,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectUpItem" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from survey_channel_cost
+    where  1 = 1 and delete_flag = 0
+    <if test="surveyOrgId != null">
+      and survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+    </if>
+    <if test="surveyUserId != null">
+      and survey_user_id = #{surveyUserId,jdbcType=BIGINT}
+    </if>
+     order by id desc limit 1
+  </select>
+
+
+
+
+
+  <resultMap id="collection1" type="com.lefancrm.apicenter.model.SurveyChannelCost" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_org_id" property="surveyOrgId" jdbcType="BIGINT" />
+    <result column="survey_org_name" property="surveyOrgName" jdbcType="VARCHAR" />
+    <result column="survey_user_id" property="surveyUserId" jdbcType="BIGINT" />
+    <result column="survey_user_name" property="surveyUserName" jdbcType="VARCHAR" />
+    <result column="chnannel_money" property="chnannelMoney" jdbcType="DOUBLE" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="operation_time" property="operationTime" jdbcType="TIMESTAMP" />
+    <result column="operation_user_id" property="operationUserId" jdbcType="BIGINT" />
+    <result column="operation_user_name" property="operationUserName" jdbcType="VARCHAR" />
+    <result column="payee_user_name" property="payeeUserName" jdbcType="VARCHAR" />
+    <result column="bank_deposit" property="bankDeposit" jdbcType="VARCHAR" />
+    <result column="bank_branch" property="bankBranch" jdbcType="VARCHAR" />
+    <result column="bank_no" property="bankNo" jdbcType="VARCHAR" />
+    <result column="reject_desc" property="rejectDesc" jdbcType="VARCHAR" />
+    <result column="reviewer_user_id" property="reviewerUserId" jdbcType="BIGINT" />
+    <result column="reviewer_user_name" property="reviewerUserName" jdbcType="VARCHAR" />
+    <result column="reviewer_time" property="reviewerTime" jdbcType="TIMESTAMP" />
+    <result column="channel_desc" property="channelDesc" jdbcType="VARCHAR" />
+    <result column="is_pro_pay" property="isProPay" jdbcType="INTEGER" />
+
+    <collection property="surveyInfos" column="id" javaType="java.util.ArrayList" ofType="com.lefancrm.apicenter.model.SurveyChannelCase" select="selectCasesByChannelId"></collection>
+  </resultMap>
+
+  <resultMap id="collection2" type="com.lefancrm.apicenter.model.SurveyChannelCase">
+    <result column="survey_info_id" property="surveyInfoId"></result>
+    <result column="survey_no" property="surveyNo"></result>
+    <result column="survey_channel_id" property="surveyChannelId"></result>
+    <collection property="directions" column="{surveyInfoId=survey_info_id,surveyChannelId=survey_channel_id}" javaType="java.util.ArrayList" ofType="com.lefancrm.apicenter.model.SurveyChannelCase" select="selectDirectionBySurveyInfoId"></collection>
+  </resultMap>
+
+  <select id="selectCasesByChannelId" parameterType="java.lang.Integer" resultMap="collection2">
+    select
+     t.survey_info_id survey_info_id,s.survey_case_no as survey_no,t.survey_channel_id
+     from survey_channel_cost_item t
+    left join survey_risk_case_info r on t.survey_info_id = r.id
+    left join survey_risk_case s on r.survey_id = s.id
+    where t.survey_channel_id = #{id,jdbcType=BIGINT}
+    order by t.id asc
+  </select>
+
+  <select id="selectDirectionBySurveyInfoId" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyChannelCase">
+    select
+    s.survey_info_id surveyInfoId,s.survey_direction_name surveyDirectionName
+    from survey_channel_case s
+    left join survey_channel_cost c on s.survey_channel_id = c.id
+    where c.delete_flag = 0 and s.survey_info_id = #{surveyInfoId,jdbcType=BIGINT} and c.id = #{surveyChannelId,jdbcType=BIGINT}
+    order by s.id asc
+  </select>
+
+  <select id="list" resultMap="collection1" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from survey_channel_cost c
+    where 1 = 1 and c.delete_flag = 0
+    <if test="surveyUserId != null">
+        and c.survey_user_id = #{surveyUserId,jdbcType=BIGINT}
+    </if>
+    <if test="states != null">
+      and find_in_set(c.state,#{states,jdbcType=VARCHAR})
+    </if>
+    <if test="orgUserName != null">
+      and c.survey_user_name like CONCAT(CONCAT('%',#{orgUserName,jdbcType=VARCHAR}), '%')
+    </if>
+    <if test="isProPay != null">
+      and c.is_pro_pay = #{isProPay,jdbcType=INTEGER}
+    </if>
+    <if test="startTime != null">
+      AND date_format(c.operation_time,'%Y-%m-%d') &gt;= #{startTime,jdbcType=VARCHAR}
+    </if>
+    <if test="endTime != null">
+      AND date_format(c.operation_time,'%Y-%m-%d') &lt;= #{endTime,jdbcType=VARCHAR}
+    </if>
+    order by c.id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from survey_channel_cost c where 1 = 1 and c.delete_flag = 0
+    <if test="surveyUserId != null">
+      and c.survey_user_id = #{surveyUserId,jdbcType=BIGINT}
+    </if>
+    <if test="states != null">
+      and find_in_set(c.state,#{states,jdbcType=VARCHAR})
+    </if>
+    <if test="orgUserName != null">
+      and c.survey_user_name like CONCAT(CONCAT('%',#{orgUserName,jdbcType=VARCHAR}), '%')
+    </if>
+    <if test="isProPay != null">
+      and c.is_pro_pay = #{isProPay,jdbcType=INTEGER}
+    </if>
+    <if test="startTime != null">
+      AND date_format(c.operation_time,'%Y-%m-%d') &gt;= #{startTime,jdbcType=VARCHAR}
+    </if>
+    <if test="endTime != null">
+      AND date_format(c.operation_time,'%Y-%m-%d') &lt;= #{endTime,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+
+  <select id="selectGeneratePayInfo" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyChannelCost">
+    select
+    GROUP_CONCAT(s.id) as ids,s.id as id, s.survey_org_id as surveyOrgId, s.survey_org_name as surveyOrgName, GROUP_CONCAT(s.survey_user_name) as surveyUsersStr, sum(ifnull(s.chnannel_money,0)) as chnannelMoney,
+        s.payee_user_name payeeUserName, s.bank_deposit bankDeposit, s.bank_branch bankBranch, s.bank_no bankNo,s.survey_user_id as surveyUserId, s.survey_user_name as surveyUserName,
+        p.social_security_company_id as socialSecurityCompanyId, p.social_security_company  as socialSecurityCompany,
+        p.organ_id as organId, p.organ as organ, p.department_id as departmentId, p.department as department, p.team_id as teamId, p.team as team
+     from survey_channel_cost s
+     left join staff_personnel_info p on s.survey_user_id = p.user_id and p.delete_flag = 0
+    where s.delete_flag = 0 and s.is_pro_pay = 0 and s.state = 3
+    group by s.survey_org_id,s.survey_user_id,s.payee_user_name,s.bank_branch,s.bank_deposit,s.bank_no
+  </select>
+
+
+  <update id="updateProPayByIds" parameterType="java.lang.String">
+    update survey_channel_cost
+    set is_pro_pay = 1 where find_in_set(id,#{ids,jdbcType=VARCHAR})
+  </update>
+</mapper>

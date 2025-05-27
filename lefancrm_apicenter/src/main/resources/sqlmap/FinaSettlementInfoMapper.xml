@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaSettlementInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaSettlementInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="settlement_no" property="settlementNo" jdbcType="VARCHAR" />
+    <result column="real_money" property="realMoney" jdbcType="DOUBLE" />
+    <result column="medical_money" property="medicalMoney" jdbcType="DOUBLE" />
+    <result column="medical_insurance_money" property="medicalInsuranceMoney" jdbcType="DOUBLE" />
+    <result column="customer_payment_money" property="customerPaymentMoney" jdbcType="DOUBLE" />
+    <result column="refund_money" property="refundMoney" jdbcType="DOUBLE" />
+    <result column="customer_receives_money" property="customerReceivesMoney" jdbcType="DOUBLE" />
+    <result column="lefan_receives_money" property="lefanReceivesMoney" jdbcType="DOUBLE" />
+    <result column="lefan_receives_time" property="lefanReceivesTime" jdbcType="TIMESTAMP" />
+    <result column="lefan_receives_user_name" property="lefanReceivesUserName" jdbcType="VARCHAR" />
+    <result column="lefan_payment_money" property="lefanPaymentMoney" jdbcType="DOUBLE" />
+    <result column="deductible_money" property="deductibleMoney" jdbcType="DOUBLE" />
+    <result column="refund_channel" property="refundChannel" jdbcType="INTEGER" />
+    <result column="leave_hospital_file" property="leaveHospitalFile" jdbcType="INTEGER" />
+    <result column="refund_state" property="refundState" jdbcType="INTEGER" />
+    <result column="refund_mode" property="refundMode" jdbcType="INTEGER" />
+    <result column="settlement_info_file" property="settlementInfoFile" jdbcType="VARCHAR" />
+    <result column="services_money" property="servicesMoney" jdbcType="DOUBLE" />
+    <result column="submit_services_money" property="submitServicesMoney" jdbcType="DOUBLE" />
+    <result column="check_man_id" property="checkManId" jdbcType="BIGINT" />
+    <result column="check_man_name" property="checkManName" jdbcType="VARCHAR" />
+    <result column="settlement_state" property="settlementState" jdbcType="INTEGER" />
+    <result column="repayment_state" property="repaymentState" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="finsh_settlement_time" property="finshSettlementTime" jdbcType="TIMESTAMP" />
+    <result column="finsh_claims_time" property="finshClaimsTime" jdbcType="TIMESTAMP" />
+    <result column="finsh_repayment_time" property="finshRepaymentTime" jdbcType="TIMESTAMP" />
+    <result column="finsh_passed_time" property="finshPassedTime" jdbcType="TIMESTAMP" />
+    <result column="finsh_invoce_time" property="finshInvoceTime" jdbcType="TIMESTAMP" />
+    <result column="finsh_account_time" property="finshAccountTime" jdbcType="TIMESTAMP" />
+    <result column="finsh_close_time" property="finshCloseTime" jdbcType="TIMESTAMP" />
+    <result column="finance_user_id" property="financeUserId" jdbcType="BIGINT" />
+    <result column="finance_user_name" property="financeUserName" jdbcType="VARCHAR" />
+    <result column="repayment_money" property="repaymentMoney" jdbcType="DOUBLE" />
+    <result column="no_repayment_money" property="noRepaymentMoney" jdbcType="DOUBLE" />
+    <result column="is_bad" property="isBad" jdbcType="INTEGER" />
+    <result column="urge_state" property="urgeState" jdbcType="INTEGER" />
+    <result column="fina_info_parent_id" property="finaInfoParentId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, settlement_no, real_money, medical_money, medical_insurance_money, customer_payment_money,
+    refund_money, customer_receives_money, lefan_receives_money, lefan_receives_time,
+    lefan_receives_user_name, lefan_payment_money, deductible_money, refund_channel,
+    leave_hospital_file, refund_state, refund_mode, settlement_info_file, services_money,
+    submit_services_money, check_man_id, check_man_name, settlement_state, repayment_state,
+    create_time, create_by, update_time, update_by, delete_flag, finsh_settlement_time,
+    finsh_claims_time, finsh_repayment_time, finsh_passed_time, finsh_invoce_time, finsh_account_time,
+    finsh_close_time, finance_user_id, finance_user_name, repayment_money, no_repayment_money,
+    is_bad, urge_state, fina_info_parent_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from fina_settlement_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_settlement_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaSettlementInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_settlement_info (settlement_no, real_money, medical_money,
+    medical_insurance_money, customer_payment_money,
+    refund_money, customer_receives_money, lefan_receives_money,
+    lefan_receives_time, lefan_receives_user_name,
+    lefan_payment_money, deductible_money, refund_channel,
+    leave_hospital_file, refund_state, refund_mode,
+    settlement_info_file, services_money, submit_services_money,
+    check_man_id, check_man_name, settlement_state,
+    repayment_state, create_time, create_by,
+    update_time, update_by, delete_flag,
+    finsh_settlement_time, finsh_claims_time,
+    finsh_repayment_time, finsh_passed_time,
+    finsh_invoce_time, finsh_account_time,
+    finsh_close_time, finance_user_id, finance_user_name,
+    repayment_money, no_repayment_money, is_bad,
+    urge_state, fina_info_parent_id)
+    values (#{settlementNo,jdbcType=VARCHAR}, #{realMoney,jdbcType=DOUBLE}, #{medicalMoney,jdbcType=DOUBLE},
+    #{medicalInsuranceMoney,jdbcType=DOUBLE}, #{customerPaymentMoney,jdbcType=DOUBLE},
+    #{refundMoney,jdbcType=DOUBLE}, #{customerReceivesMoney,jdbcType=DOUBLE}, #{lefanReceivesMoney,jdbcType=DOUBLE},
+    #{lefanReceivesTime,jdbcType=TIMESTAMP}, #{lefanReceivesUserName,jdbcType=VARCHAR},
+    #{lefanPaymentMoney,jdbcType=DOUBLE}, #{deductibleMoney,jdbcType=DOUBLE}, #{refundChannel,jdbcType=INTEGER},
+    #{leaveHospitalFile,jdbcType=INTEGER}, #{refundState,jdbcType=INTEGER}, #{refundMode,jdbcType=INTEGER},
+    #{settlementInfoFile,jdbcType=VARCHAR}, #{servicesMoney,jdbcType=DOUBLE}, #{submitServicesMoney,jdbcType=DOUBLE},
+    #{checkManId,jdbcType=BIGINT}, #{checkManName,jdbcType=VARCHAR}, #{settlementState,jdbcType=INTEGER},
+    #{repaymentState,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER},
+    #{finshSettlementTime,jdbcType=TIMESTAMP}, #{finshClaimsTime,jdbcType=TIMESTAMP},
+    #{finshRepaymentTime,jdbcType=TIMESTAMP}, #{finshPassedTime,jdbcType=TIMESTAMP},
+    #{finshInvoceTime,jdbcType=TIMESTAMP}, #{finshAccountTime,jdbcType=TIMESTAMP},
+    #{finshCloseTime,jdbcType=TIMESTAMP}, #{financeUserId,jdbcType=BIGINT}, #{financeUserName,jdbcType=VARCHAR},
+    #{repaymentMoney,jdbcType=DOUBLE}, #{noRepaymentMoney,jdbcType=DOUBLE}, #{isBad,jdbcType=INTEGER},
+    #{urgeState,jdbcType=INTEGER}, #{finaInfoParentId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSettlementInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_settlement_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="settlementNo != null" >
+        settlement_no,
+      </if>
+      <if test="realMoney != null" >
+        real_money,
+      </if>
+      <if test="medicalMoney != null" >
+        medical_money,
+      </if>
+      <if test="medicalInsuranceMoney != null" >
+        medical_insurance_money,
+      </if>
+      <if test="customerPaymentMoney != null" >
+        customer_payment_money,
+      </if>
+      <if test="refundMoney != null" >
+        refund_money,
+      </if>
+      <if test="customerReceivesMoney != null" >
+        customer_receives_money,
+      </if>
+      <if test="lefanReceivesMoney != null" >
+        lefan_receives_money,
+      </if>
+      <if test="lefanReceivesTime != null" >
+        lefan_receives_time,
+      </if>
+      <if test="lefanReceivesUserName != null" >
+        lefan_receives_user_name,
+      </if>
+      <if test="lefanPaymentMoney != null" >
+        lefan_payment_money,
+      </if>
+      <if test="deductibleMoney != null" >
+        deductible_money,
+      </if>
+      <if test="refundChannel != null" >
+        refund_channel,
+      </if>
+      <if test="leaveHospitalFile != null" >
+        leave_hospital_file,
+      </if>
+      <if test="refundState != null" >
+        refund_state,
+      </if>
+      <if test="refundMode != null" >
+        refund_mode,
+      </if>
+      <if test="settlementInfoFile != null" >
+        settlement_info_file,
+      </if>
+      <if test="servicesMoney != null" >
+        services_money,
+      </if>
+      <if test="submitServicesMoney != null" >
+        submit_services_money,
+      </if>
+      <if test="checkManId != null" >
+        check_man_id,
+      </if>
+      <if test="checkManName != null" >
+        check_man_name,
+      </if>
+      <if test="settlementState != null" >
+        settlement_state,
+      </if>
+      <if test="repaymentState != null" >
+        repayment_state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="finshSettlementTime != null" >
+        finsh_settlement_time,
+      </if>
+      <if test="finshClaimsTime != null" >
+        finsh_claims_time,
+      </if>
+      <if test="finshRepaymentTime != null" >
+        finsh_repayment_time,
+      </if>
+      <if test="finshPassedTime != null" >
+        finsh_passed_time,
+      </if>
+      <if test="finshInvoceTime != null" >
+        finsh_invoce_time,
+      </if>
+      <if test="finshAccountTime != null" >
+        finsh_account_time,
+      </if>
+      <if test="finshCloseTime != null" >
+        finsh_close_time,
+      </if>
+      <if test="financeUserId != null" >
+        finance_user_id,
+      </if>
+      <if test="financeUserName != null" >
+        finance_user_name,
+      </if>
+      <if test="repaymentMoney != null" >
+        repayment_money,
+      </if>
+      <if test="noRepaymentMoney != null" >
+        no_repayment_money,
+      </if>
+      <if test="isBad != null" >
+        is_bad,
+      </if>
+      <if test="urgeState != null" >
+        urge_state,
+      </if>
+      <if test="finaInfoParentId != null" >
+        fina_info_parent_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="settlementNo != null" >
+        #{settlementNo,jdbcType=VARCHAR},
+      </if>
+      <if test="realMoney != null" >
+        #{realMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="medicalMoney != null" >
+        #{medicalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="medicalInsuranceMoney != null" >
+        #{medicalInsuranceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="customerPaymentMoney != null" >
+        #{customerPaymentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="refundMoney != null" >
+        #{refundMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="customerReceivesMoney != null" >
+        #{customerReceivesMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="lefanReceivesMoney != null" >
+        #{lefanReceivesMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="lefanReceivesTime != null" >
+        #{lefanReceivesTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lefanReceivesUserName != null" >
+        #{lefanReceivesUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lefanPaymentMoney != null" >
+        #{lefanPaymentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="deductibleMoney != null" >
+        #{deductibleMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="refundChannel != null" >
+        #{refundChannel,jdbcType=INTEGER},
+      </if>
+      <if test="leaveHospitalFile != null" >
+        #{leaveHospitalFile,jdbcType=INTEGER},
+      </if>
+      <if test="refundState != null" >
+        #{refundState,jdbcType=INTEGER},
+      </if>
+      <if test="refundMode != null" >
+        #{refundMode,jdbcType=INTEGER},
+      </if>
+      <if test="settlementInfoFile != null" >
+        #{settlementInfoFile,jdbcType=VARCHAR},
+      </if>
+      <if test="servicesMoney != null" >
+        #{servicesMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="submitServicesMoney != null" >
+        #{submitServicesMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="checkManId != null" >
+        #{checkManId,jdbcType=BIGINT},
+      </if>
+      <if test="checkManName != null" >
+        #{checkManName,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementState != null" >
+        #{settlementState,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentState != null" >
+        #{repaymentState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="finshSettlementTime != null" >
+        #{finshSettlementTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshClaimsTime != null" >
+        #{finshClaimsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshRepaymentTime != null" >
+        #{finshRepaymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshPassedTime != null" >
+        #{finshPassedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshInvoceTime != null" >
+        #{finshInvoceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshAccountTime != null" >
+        #{finshAccountTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshCloseTime != null" >
+        #{finshCloseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="financeUserId != null" >
+        #{financeUserId,jdbcType=BIGINT},
+      </if>
+      <if test="financeUserName != null" >
+        #{financeUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentMoney != null" >
+        #{repaymentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="noRepaymentMoney != null" >
+        #{noRepaymentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="isBad != null" >
+        #{isBad,jdbcType=INTEGER},
+      </if>
+      <if test="urgeState != null" >
+        #{urgeState,jdbcType=INTEGER},
+      </if>
+      <if test="finaInfoParentId != null" >
+        #{finaInfoParentId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSettlementInfo" >
+    update fina_settlement_info
+    <set >
+      <if test="settlementNo != null" >
+        settlement_no = #{settlementNo,jdbcType=VARCHAR},
+      </if>
+      <if test="realMoney != null" >
+        real_money = #{realMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="medicalMoney != null" >
+        medical_money = #{medicalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="medicalInsuranceMoney != null" >
+        medical_insurance_money = #{medicalInsuranceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="customerPaymentMoney != null" >
+        customer_payment_money = #{customerPaymentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="refundMoney != null" >
+        refund_money = #{refundMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="customerReceivesMoney != null" >
+        customer_receives_money = #{customerReceivesMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="lefanReceivesMoney != null" >
+        lefan_receives_money = #{lefanReceivesMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="lefanReceivesTime != null" >
+        lefan_receives_time = #{lefanReceivesTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lefanReceivesUserName != null" >
+        lefan_receives_user_name = #{lefanReceivesUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lefanPaymentMoney != null" >
+        lefan_payment_money = #{lefanPaymentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="deductibleMoney != null" >
+        deductible_money = #{deductibleMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="refundChannel != null" >
+        refund_channel = #{refundChannel,jdbcType=INTEGER},
+      </if>
+      <if test="leaveHospitalFile != null" >
+        leave_hospital_file = #{leaveHospitalFile,jdbcType=INTEGER},
+      </if>
+      <if test="refundState != null" >
+        refund_state = #{refundState,jdbcType=INTEGER},
+      </if>
+      <if test="refundMode != null" >
+        refund_mode = #{refundMode,jdbcType=INTEGER},
+      </if>
+      <if test="settlementInfoFile != null" >
+        settlement_info_file = #{settlementInfoFile,jdbcType=VARCHAR},
+      </if>
+      <if test="servicesMoney != null" >
+        services_money = #{servicesMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="submitServicesMoney != null" >
+        submit_services_money = #{submitServicesMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="checkManId != null" >
+        check_man_id = #{checkManId,jdbcType=BIGINT},
+      </if>
+      <if test="checkManName != null" >
+        check_man_name = #{checkManName,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementState != null" >
+        settlement_state = #{settlementState,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentState != null" >
+        repayment_state = #{repaymentState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="finshSettlementTime != null" >
+        finsh_settlement_time = #{finshSettlementTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshClaimsTime != null" >
+        finsh_claims_time = #{finshClaimsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshRepaymentTime != null" >
+        finsh_repayment_time = #{finshRepaymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshPassedTime != null" >
+        finsh_passed_time = #{finshPassedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshInvoceTime != null" >
+        finsh_invoce_time = #{finshInvoceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshAccountTime != null" >
+        finsh_account_time = #{finshAccountTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finshCloseTime != null" >
+        finsh_close_time = #{finshCloseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="financeUserId != null" >
+        finance_user_id = #{financeUserId,jdbcType=BIGINT},
+      </if>
+      <if test="financeUserName != null" >
+        finance_user_name = #{financeUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentMoney != null" >
+        repayment_money = #{repaymentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="noRepaymentMoney != null" >
+        no_repayment_money = #{noRepaymentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="isBad != null" >
+        is_bad = #{isBad,jdbcType=INTEGER},
+      </if>
+      <if test="urgeState != null" >
+        urge_state = #{urgeState,jdbcType=INTEGER},
+      </if>
+      <if test="finaInfoParentId != null" >
+        fina_info_parent_id = #{finaInfoParentId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaSettlementInfo" >
+    update fina_settlement_info
+    set settlement_no = #{settlementNo,jdbcType=VARCHAR},
+      real_money = #{realMoney,jdbcType=DOUBLE},
+      medical_money = #{medicalMoney,jdbcType=DOUBLE},
+      medical_insurance_money = #{medicalInsuranceMoney,jdbcType=DOUBLE},
+      customer_payment_money = #{customerPaymentMoney,jdbcType=DOUBLE},
+      refund_money = #{refundMoney,jdbcType=DOUBLE},
+      customer_receives_money = #{customerReceivesMoney,jdbcType=DOUBLE},
+      lefan_receives_money = #{lefanReceivesMoney,jdbcType=DOUBLE},
+      lefan_receives_time = #{lefanReceivesTime,jdbcType=TIMESTAMP},
+      lefan_receives_user_name = #{lefanReceivesUserName,jdbcType=VARCHAR},
+      lefan_payment_money = #{lefanPaymentMoney,jdbcType=DOUBLE},
+      deductible_money = #{deductibleMoney,jdbcType=DOUBLE},
+      refund_channel = #{refundChannel,jdbcType=INTEGER},
+      leave_hospital_file = #{leaveHospitalFile,jdbcType=INTEGER},
+      refund_state = #{refundState,jdbcType=INTEGER},
+      refund_mode = #{refundMode,jdbcType=INTEGER},
+      settlement_info_file = #{settlementInfoFile,jdbcType=VARCHAR},
+      services_money = #{servicesMoney,jdbcType=DOUBLE},
+      submit_services_money = #{submitServicesMoney,jdbcType=DOUBLE},
+      check_man_id = #{checkManId,jdbcType=BIGINT},
+      check_man_name = #{checkManName,jdbcType=VARCHAR},
+      settlement_state = #{settlementState,jdbcType=INTEGER},
+      repayment_state = #{repaymentState,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      finsh_settlement_time = #{finshSettlementTime,jdbcType=TIMESTAMP},
+      finsh_claims_time = #{finshClaimsTime,jdbcType=TIMESTAMP},
+      finsh_repayment_time = #{finshRepaymentTime,jdbcType=TIMESTAMP},
+      finsh_passed_time = #{finshPassedTime,jdbcType=TIMESTAMP},
+      finsh_invoce_time = #{finshInvoceTime,jdbcType=TIMESTAMP},
+      finsh_account_time = #{finshAccountTime,jdbcType=TIMESTAMP},
+      finsh_close_time = #{finshCloseTime,jdbcType=TIMESTAMP},
+      finance_user_id = #{financeUserId,jdbcType=BIGINT},
+      finance_user_name = #{financeUserName,jdbcType=VARCHAR},
+      repayment_money = #{repaymentMoney,jdbcType=DOUBLE},
+      no_repayment_money = #{noRepaymentMoney,jdbcType=DOUBLE},
+      is_bad = #{isBad,jdbcType=INTEGER},
+      urge_state = #{urgeState,jdbcType=INTEGER},
+      fina_info_parent_id = #{finaInfoParentId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <sql id="wheres">
+    <if test="menuCode == 'app-claims-list'">
+      and a.finsh_settlement_time is not null
+    </if>
+    <if test="menuCode == 'repay-app-list' or menuCode == 'repay-order-list'">
+      and a.finsh_claims_time is not null
+    </if>
+    <if test="menuCode == 'safe-list'">
+      and a.finsh_repayment_time is not null
+    </if>
+    <if test="menuCode == 'bad-list'">
+      and a.is_bad = 1
+    </if>
+    <if test="menuCode == 'acc-list'">
+        and a.finsh_passed_time is not null
+    </if>
+
+    <if test="searchStr != null">
+      and (
+      a.settlement_no like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      or b.insured_name like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      or b.insured_tel like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      or b.case_applicant_no like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      or b.insurance_policy_no like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      or d.fina_user_name like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      or d.fina_user_tel like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+      )
+    </if>
+    <if test="entrustOrgIds != null" >
+      and find_in_set(b.entrust_org_id, #{entrustOrgIds,jdbcType=VARCHAR})
+    </if>
+    <if test="settlementStates != null" >
+      and find_in_set(a.settlement_state, #{settlementStates,jdbcType=VARCHAR})
+    </if>
+    <if test="claimsStates != null">
+        and
+        (
+          1 != 1
+          <if test="claimsStatesWait == 'yes'">
+              or (a.finsh_claims_time is null and a.settlement_state = 2)
+          </if>
+          <if test="claimsStatesEd == 'yes'">
+            or (a.finsh_claims_time is not null)
+          </if>
+          <if test="claimsStatesWait == 'yes' and claimsStatesEd == 'yes'">
+            and 1 = 1
+          </if>
+        )
+    </if>
+    <if test="repaymentStates != null">
+      and find_in_set(a.repayment_state, #{repaymentStates,jdbcType=VARCHAR})
+    </if>
+    <if test="urgeStates != null">
+      and find_in_set(a.urge_state, #{urgeStates,jdbcType=VARCHAR})
+    </if>
+
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    a.*,
+    b.entrust_org_id as entrustOrgId,b.entrust_org_name as entrustOrgName,b.insured_name as insuredName,b.insured_tel as insuredTel,b.insurance_policy_no as insurancePolicyNo,
+    b.hospital_id as hospitalId,b.hospital_name as hospitalName,b.department as department,b.in_hospital_time as inHospitalTime,
+    d.fina_user_name as finaUserName,d.fina_user_tel as finaUserTel
+    from fina_settlement_info a
+    left join fina_applicant_info b on a.fina_info_parent_id = b.id
+    left join fina_applicant_money c on b.id = c.fina_info_id
+    left join fina_applicant d on b.fina_id = d.id
+    where a.delete_flag =0 and b.delete_flag =0
+    <include refid="wheres" />
+    order by a.id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from fina_settlement_info a
+    left join fina_applicant_info b on a.fina_info_parent_id = b.id
+    left join fina_applicant_money c on b.id = c.fina_info_id
+    left join fina_applicant d on b.fina_id = d.id
+    where a.delete_flag =0 and b.delete_flag =0
+    <include refid="wheres" />
+  </select>
+
+  <select id="selectServiceMoney" parameterType="java.util.List" resultType="java.lang.Double">
+    select sum(ifnull(a.submit_services_money,0)) from fina_settlement_info a
+    where a.id in
+    <foreach collection="ids" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+
+  <update id="updateDataByIds" parameterType="java.util.Map">
+    update fina_settlement_info a
+    <if test="updateType == 1">
+      set finsh_invoce_time = now(),settlement_state = #{settlementState}
+    </if>
+    <if test="updateType == 2">
+      set finsh_account_time = now(),finsh_close_time = now(),settlement_state = #{settlementState}
+    </if>
+    where a.id in
+    <foreach collection="ids" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </update>
+</mapper>

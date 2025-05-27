@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyAssignOrgExtensionMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyAssignOrgExtension" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_id" property="surveyId" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="survey_assign_org_id" property="surveyAssignOrgId" jdbcType="BIGINT" />
+    <result column="extension_state" property="extensionState" jdbcType="INTEGER" />
+    <result column="extension_time" property="extensionTime" jdbcType="TIMESTAMP" />
+    <result column="extension_reason" property="extensionReason" jdbcType="VARCHAR" />
+    <result column="extension_back_reason" property="extensionBackReason" jdbcType="VARCHAR" />
+    <result column="extension_files" property="extensionFiles" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+      <result column="old_org_end_time" property="oldOrgEndTime" jdbcType="TIMESTAMP" />
+      <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="extension_reason_result" property="extensionReasonResult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_id, survey_info_id, survey_assign_org_id, extension_state, extension_time, 
+    extension_reason, extension_back_reason, extension_files, create_by, create_time, 
+    update_by, update_time, delete_flag, old_org_end_time, end_time,extension_reason_result
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_assign_org_extension
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_assign_org_extension
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyAssignOrgExtension" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_assign_org_extension (survey_id, survey_info_id, survey_assign_org_id, 
+      extension_state, extension_time, extension_reason, 
+      extension_back_reason, extension_files, create_by, 
+      create_time, update_by, update_time, 
+      delete_flag, old_org_end_time, end_time,extension_reason_result)
+    values (#{surveyId,jdbcType=BIGINT}, #{surveyInfoId,jdbcType=BIGINT}, #{surveyAssignOrgId,jdbcType=BIGINT}, 
+      #{extensionState,jdbcType=INTEGER}, #{extensionTime,jdbcType=TIMESTAMP}, #{extensionReason,jdbcType=VARCHAR}, 
+      #{extensionBackReason,jdbcType=VARCHAR}, #{extensionFiles,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{deleteFlag,jdbcType=INTEGER}, #{oldOrgEndTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},#{extensionReasonResult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyAssignOrgExtension" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_assign_org_extension
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        survey_id,
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="surveyAssignOrgId != null" >
+        survey_assign_org_id,
+      </if>
+      <if test="extensionState != null" >
+        extension_state,
+      </if>
+      <if test="extensionTime != null" >
+        extension_time,
+      </if>
+      <if test="extensionReason != null" >
+        extension_reason,
+      </if>
+      <if test="extensionBackReason != null" >
+        extension_back_reason,
+      </if>
+      <if test="extensionFiles != null" >
+        extension_files,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+        <if test="oldOrgEndTime != null" >
+            old_org_end_time,
+        </if>
+        <if test="endTime != null" >
+            end_time,
+        </if>
+      <if test="extensionReasonResult != null" >
+        extension_reason_result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyAssignOrgId != null" >
+        #{surveyAssignOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="extensionState != null" >
+        #{extensionState,jdbcType=INTEGER},
+      </if>
+      <if test="extensionTime != null" >
+        #{extensionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extensionReason != null" >
+        #{extensionReason,jdbcType=VARCHAR},
+      </if>
+      <if test="extensionBackReason != null" >
+        #{extensionBackReason,jdbcType=VARCHAR},
+      </if>
+      <if test="extensionFiles != null" >
+        #{extensionFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+        <if test="oldOrgEndTime != null" >
+            #{oldOrgEndTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="endTime != null" >
+            #{endTime,jdbcType=TIMESTAMP},
+        </if>
+      <if test="extensionReasonResult != null" >
+        #{extensionReasonResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyAssignOrgExtension" >
+    update survey_assign_org_extension
+    <set >
+      <if test="surveyId != null" >
+        survey_id = #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyAssignOrgId != null" >
+        survey_assign_org_id = #{surveyAssignOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="extensionState != null" >
+        extension_state = #{extensionState,jdbcType=INTEGER},
+      </if>
+      <if test="extensionTime != null" >
+        extension_time = #{extensionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extensionReason != null" >
+        extension_reason = #{extensionReason,jdbcType=VARCHAR},
+      </if>
+      <if test="extensionBackReason != null" >
+        extension_back_reason = #{extensionBackReason,jdbcType=VARCHAR},
+      </if>
+      <if test="extensionFiles != null" >
+        extension_files = #{extensionFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+        <if test="oldOrgEndTime != null" >
+            old_org_end_time = #{oldOrgEndTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="endTime != null" >
+            end_time = #{endTime,jdbcType=TIMESTAMP},
+        </if>
+      <if test="extensionReasonResult != null" >
+        extension_reason_result = #{extensionReasonResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyAssignOrgExtension" >
+    update survey_assign_org_extension
+    set survey_id = #{surveyId,jdbcType=BIGINT},
+      survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      survey_assign_org_id = #{surveyAssignOrgId,jdbcType=BIGINT},
+      extension_state = #{extensionState,jdbcType=INTEGER},
+      extension_time = #{extensionTime,jdbcType=TIMESTAMP},
+      extension_reason = #{extensionReason,jdbcType=VARCHAR},
+      extension_back_reason = #{extensionBackReason,jdbcType=VARCHAR},
+      extension_files = #{extensionFiles,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      old_org_end_time = #{oldOrgEndTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+        extension_reason_result = #{extensionReasonResult,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_assign_org_extension
+        where 1=1
+        <if test="surveyId != null" >
+           and survey_id = #{surveyId,jdbcType=BIGINT}
+        </if>
+        <if test="surveyInfoId != null" >
+            and survey_info_id = #{surveyInfoId,jdbcType=BIGINT}
+        </if>
+        <if test="surveyAssignOrgId != null" >
+            and survey_assign_org_id = #{surveyAssignOrgId,jdbcType=BIGINT}
+        </if>
+        <if test="extensionState != null" >
+            and extension_state = #{extensionState,jdbcType=INTEGER}
+        </if>
+
+        <if test="order != null">
+            <if test="order == 1">
+              order by id asc
+            </if>
+        </if>
+        <if test="order == null">
+          order by id desc
+        </if>
+    </select>
+
+
+
+  <select id="listByIds" resultMap="BaseResultMap"  parameterType="java.util.List">
+    select
+    <include refid="Base_Column_List" />
+    from survey_assign_org_extension
+    where 1 = 1
+    <if test="surveyInfoIds != null">
+      and survey_info_id IN
+      <foreach collection="surveyInfoIds" item="surveyInfoId" open="(" separator="," close=")">
+        #{surveyInfoId}
+      </foreach>
+    </if>
+  </select>
+
+</mapper>

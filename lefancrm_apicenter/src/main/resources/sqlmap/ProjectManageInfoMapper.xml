@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.ProjectManageInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.ProjectManageInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="project_name" property="projectName" jdbcType="BIGINT" />
+        <result column="industry_attributes" property="industryAttributes" jdbcType="VARCHAR" />
+        <result column="industry_attributes_id" property="industryAttributesId" jdbcType="VARCHAR" />
+        <result column="business_attributes" property="businessAttributes" jdbcType="INTEGER" />
+        <result column="business_attributes_id" property="businessAttributesId" jdbcType="VARCHAR" />
+        <result column="manager_id" property="managerId" jdbcType="INTEGER" />
+        <result column="manager_name" property="managerName" jdbcType="INTEGER" />
+        <result column="manager_state" property="managerState" jdbcType="INTEGER" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="price_model_id" property="priceModelId" jdbcType="INTEGER" />
+        <result column="entrust_org_id" property="entrustOrgId" jdbcType="BIGINT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+    id, project_name,industry_attributes,industry_attributes_id,business_attributes,business_attributes_id,manager_id,
+    manager_name,manager_state,create_by,create_time,delete_flag,price_model_id,entrust_org_id
+  </sql>
+
+    <sql id="wheres">
+        <if test="id != null">
+            and id=#{id}
+        </if>
+        <if test="projectName != null ">
+            and project_name = #{projectName}
+        </if>
+        <if test="projectNameLike != null ">
+            and project_name like  CONCAT(CONCAT('%',#{projectNameLike,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="industryAttributes != null ">
+            and industry_attributes=#{industryAttributes}
+        </if>
+        <if test="industryAttributesId != null ">
+            and industry_attributes_id = #{industryAttributesId}
+        </if>
+        <if test="industryAttributesIds != null ">
+            and find_in_set(industry_attributes_id,#{industryAttributesIds,jdbcType=VARCHAR})
+        </if>
+        <if test="businessAttributes != null ">
+            and business_attributes=#{businessAttributes}
+        </if>
+        <if test="businessAttributesId != null ">
+            and business_attributes_id = #{businessAttributesId}
+        </if>
+        <if test="businessAttributesIds != null ">
+            and find_in_set(business_attributes_id,#{businessAttributesIds,jdbcType=VARCHAR})
+        </if>
+        <if test="managerId != null">
+            and manager_id = #{managerId}
+        </if>
+        <if test="managerIds != null">
+            and find_in_set(manager_id,#{managerIds,jdbcType=VARCHAR})
+        </if>
+        <if test="managerName != null ">
+            and manager_name=#{managerName}
+        </if>
+        <if test="managerState != null">
+            and manager_state = #{managerState}
+        </if>
+        <if test="managerStates != null">
+            and find_in_set(manager_state,#{managerStates,jdbcType=VARCHAR})
+        </if>
+        <if test="startTime != null">
+            and DATE_FORMAT(create_time,'%Y-%m-%d') &gt;=  #{startTime}
+        </if>
+        <if test="endTime != null">
+            and DATE_FORMAT(create_time,'%Y-%m-%d') &lt;=  #{endTime}
+        </if>
+    </sql>
+    
+    <select id="selectByMap" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from project_manage_info
+        where delete_flag = 0
+        <include refid="wheres"/>
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectByOne" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from project_manage_info
+        where delete_flag = 0
+        <include refid="wheres"/>
+    </select>
+    <select id="queryDataByEntrustOrgId" resultType="java.util.Map">
+        SELECT * FROM
+        (SELECT
+        COUNT(*) entrustCaseNum
+        FROM
+        survey_risk_case
+        WHERE
+        entrust_org_id = #{entrustOrgId} AND delete_flag = 0
+        AND DATE_FORMAT( entrust_time, '%Y-%m-%d' ) &gt;= #{startTime}
+        AND DATE_FORMAT( entrust_time, '%Y-%m-%d' ) &lt;= #{endTime}) tabA,
+
+        (SELECT
+        COUNT(*) finishCaseNum
+        FROM
+        survey_risk_case c
+        LEFT JOIN survey_risk_case_info i ON c.id = i.survey_id
+        WHERE
+        c.entrust_org_id = #{entrustOrgId}  AND c.delete_flag = 0 AND i.delete_flag = 0
+        AND DATE_FORMAT( i.entrust_report_end_date, '%Y-%m-%d' ) &gt;= #{startTime}
+        AND DATE_FORMAT( i.entrust_report_end_date, '%Y-%m-%d' ) &lt;= #{endTime}) tabB,
+
+        (SELECT
+        IFNULL(SUM(i.billing_money),0) imgMoney
+        FROM
+        billing_apply a
+        LEFT JOIN billing_apply_imgs i ON a.id = i.bill_id
+        WHERE
+        a.survey_consignor_id = #{entrustOrgId}  AND i.state = 1
+        AND DATE_FORMAT( i.create_time, '%Y-%m-%d' ) &gt;= #{startTime}
+        AND DATE_FORMAT( i.create_time, '%Y-%m-%d' ) &lt;= #{endTime}) tabC,
+
+        (SELECT
+        IFNULL(SUM(s.money),0) imgAccountMoney
+        FROM
+        billing_apply a
+        LEFT JOIN billing_apply_imgs i ON a.id = i.bill_id
+        LEFT JOIN billing_apply_accounts s ON i.id = s.bill_imgs_id
+        WHERE
+        a.survey_consignor_id = #{entrustOrgId}  AND i.state = 1 AND s.state = 1
+        AND DATE_FORMAT( s.account_time, '%Y-%m-%d' ) &gt;= #{startTime}
+        AND DATE_FORMAT( s.account_time, '%Y-%m-%d' ) &lt;= #{endTime}) tabD
+
+    </select>
+
+    <update id="updateOne" parameterType="map">
+        update project_manage_info
+        <set>
+            <if test="projectName != null ">
+                 project_name=#{projectName},
+            </if>
+            <if test="industryAttributes != null ">
+                 industry_attributes=#{industryAttributes},
+            </if>
+            <if test="industryAttributesId != null ">
+                 industry_attributes_id=#{industryAttributesId},
+            </if>
+            <if test="businessAttributes != null ">
+                 business_attributes=#{businessAttributes},
+            </if>
+            <if test="businessAttributesId != null ">
+                 business_attributes_id=#{businessAttributesId},
+            </if>
+            <if test="managerId != null">
+                 manager_id=#{managerId},
+            </if>
+            <if test="managerName != null ">
+                 manager_name=#{managerName},
+            </if>
+            <if test="managerState != null">
+                 manager_state=#{managerState},
+            </if>
+            <if test="createBy != null">
+                create_by=#{createBy},
+            </if>
+            <if test="createTime != null">
+                create_time=#{createTime},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag=#{deleteFlag},
+            </if>
+            <if test="priceModelId != null">
+                price_model_id=#{priceModelId},
+            </if>
+            <if test="entrustOrgId != null">
+                entrust_org_id=#{entrustOrgId},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <insert id="insertOne" parameterType="com.lefancrm.apicenter.model.ReInfo" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into project_manage_info
+        (project_name,industry_attributes,industry_attributes_id,business_attributes,business_attributes_id,manager_id,
+         manager_name,manager_state,create_by,create_time,price_model_id,entrust_org_id)
+        values (#{projectName,jdbcType=VARCHAR},#{industryAttributes,jdbcType=VARCHAR},#{industryAttributesId,jdbcType=INTEGER},
+        #{businessAttributes,jdbcType=VARCHAR},#{businessAttributesId,jdbcType=INTEGER},#{managerId,jdbcType=INTEGER},
+        #{managerName,jdbcType=VARCHAR},#{managerState,jdbcType=INTEGER},#{createBy,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},
+        #{priceModelId,jdbcType=INTEGER},#{entrustOrgId})
+    </insert>
+
+
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.ReInfo" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into project_manage_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="projectName != null ">project_name,</if>
+            <if test="industryAttributes != null ">industry_attributes,</if>
+            <if test="industryAttributesId != null ">industry_attributes_id,</if>
+            <if test="businessAttributes != null ">business_attributes,</if>
+            <if test="businessAttributesId != null ">business_attributes_id,</if>
+            <if test="managerId != null ">manager_id,</if>
+            <if test="managerName != null ">manager_name,</if>
+            <if test="managerState != null ">manager_state,</if>
+            <if test="createBy != null ">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="priceModelId != null ">price_model_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="projectName != null ">#{projectName,jdbcType=VARCHAR},</if>
+            <if test="industryAttributes != null ">#{industryAttributes,jdbcType=VARCHAR},</if>
+            <if test="industryAttributesId != null ">#{industryAttributesId,jdbcType=INTEGER},</if>
+            <if test="businessAttributes != null ">#{businessAttributes,jdbcType=VARCHAR},</if>
+            <if test="businessAttributesId != null ">#{businessAttributesId,jdbcType=INTEGER},</if>
+            <if test="managerId != null ">#{managerId,jdbcType=INTEGER},</if>
+            <if test="managerName != null ">#{managerName,jdbcType=VARCHAR},</if>
+            <if test="managerState != null ">#{managerState,jdbcType=INTEGER},</if>
+            <if test="createBy != null ">#{createBy,jdbcType=VARCHAR},</if>
+            <if test="createTime != null ">#{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="priceModelId != null ">#{priceModelId,jdbcType=INTEGER},</if>
+        </trim>
+    </insert>
+
+
+    <delete id="deleteOne" parameterType="map">
+        delete from project_manage_info
+        where id=#{id}
+    </delete>
+</mapper>

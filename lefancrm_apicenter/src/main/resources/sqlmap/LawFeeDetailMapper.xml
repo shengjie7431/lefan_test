@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.LawFeeDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.LawFeeDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DOUBLE" />
+    <result column="retreat_time" property="retreatTime" jdbcType="TIMESTAMP" />
+    <result column="arr_time" property="arrTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_id, case_no, money, retreat_time, arr_time, type, create_time,state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from law_fee_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from law_fee_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.LawFeeDetail" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into law_fee_detail (case_id, case_no, money, 
+      retreat_time, arr_time, type, 
+      create_time,state)
+    values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{money,jdbcType=DOUBLE}, 
+      #{retreatTime,jdbcType=TIMESTAMP}, #{arrTime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.LawFeeDetail" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into law_fee_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseNo != null" >
+        case_no,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="retreatTime != null" >
+        retreat_time,
+      </if>
+      <if test="arrTime != null" >
+        arr_time,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="state != null" >
+          state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="retreatTime != null" >
+        #{retreatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrTime != null" >
+        #{arrTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+        <if test="state != null" >
+            #{state,jdbcType=INTEGER},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.LawFeeDetail" >
+    update law_fee_detail
+    <set >
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="retreatTime != null" >
+        retreat_time = #{retreatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrTime != null" >
+        arr_time = #{arrTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+        <if test="state != null" >
+            state = #{state,jdbcType=INTEGER},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.LawFeeDetail" >
+    update law_fee_detail
+    set case_id = #{caseId,jdbcType=BIGINT},
+      case_no = #{caseNo,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DOUBLE},
+      retreat_time = #{retreatTime,jdbcType=TIMESTAMP},
+      arr_time = #{arrTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="findList" resultType="com.lefancrm.apicenter.dto.LawFeeDetailDto" parameterType="java.util.Map" >
+        select fd.id as id, fd.case_id as caseId, fd.case_no as caseNo, fd.money as money,
+        fd.retreat_time as retreatTime, fd.type as type, fd.state as state,
+        ci.entrust_user_id as entrustUserId, ci.entrust_user_name as entrustUserName,
+        ci.entrust_user_tel as entrustUserTel, ci.refound_remark as refoundRemark
+        from law_fee_detail fd
+        left join law_case_info ci on fd.case_id = ci.id
+        where 1=1
+        <if test="caseNo != null" >
+            and fd.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="entrustUserName != null" >
+            and ci.entrust_user_name like concat('%',#{entrustUserName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="entrustUserTel != null" >
+            and ci.entrust_user_tel like concat('%',#{entrustUserTel,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="type != null" >
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="state != null" >
+            and state = #{state,jdbcType=INTEGER}
+        </if>
+        order by id desc limit #{pageIndex}, #{pageSize}
+    </select>
+
+    <select id="findListSize" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select count(1)
+        from law_fee_detail fd
+        left join law_case_info ci on fd.case_id = ci.id
+        where 1=1
+        <if test="caseNo != null" >
+            and fd.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="entrustUserName != null" >
+            and ci.entrust_user_name like concat('%',#{entrustUserName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="entrustUserTel != null" >
+            and ci.entrust_user_tel like concat('%',#{entrustUserTel,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="type != null" >
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="state != null" >
+            and state = #{state,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="selectByInfo" resultType="com.lefancrm.apicenter.dto.LawFeeDetailDto" parameterType="java.util.Map" >
+        select
+        fd.id as id, fd.case_id as caseId, fd.case_no as caseNo, fd.money as money,
+        fd.retreat_time as retreatTime, fd.type as type, fd.state as state,fd.arr_time as arrTime, fd.create_time as createTime,
+        ci.entrust_user_id as entrustUserId, ci.entrust_user_name as entrustUserName,
+        ci.entrust_user_tel as entrustUserTel, ci.refound_remark as refoundRemark
+        from law_fee_detail fd
+        left join law_case_info ci on fd.case_id = ci.id
+        where 1 = 1
+        <if test="caseId != null" >
+            and fd.case_id = #{caseId,jdbcType=BIGINT}
+        </if>
+        <if test="type != null" >
+            and fd.type = #{type,jdbcType=BIGINT}
+        </if>
+        <if test="id != null" >
+            and fd.id = #{id,jdbcType=BIGINT}
+        </if>
+        limit 1
+    </select>
+</mapper>

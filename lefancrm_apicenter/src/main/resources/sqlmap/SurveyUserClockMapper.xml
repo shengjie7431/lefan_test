@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyUserClockMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.dto.SurveyUserClockDto" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="survey_user_id" property="surveyUserId" jdbcType="BIGINT" />
+        <result column="survey_user_name" property="surveyUserName" jdbcType="VARCHAR" />
+        <result column="clock_lbs_x" property="clockLbsX" jdbcType="DOUBLE" />
+        <result column="clock_lbs_y" property="clockLbsY" jdbcType="DOUBLE" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="address_name" property="addressName" jdbcType="VARCHAR" />
+        <result column="clock_time" property="clockTime" jdbcType="TIMESTAMP" />
+        <result column="survey_org_id" property="surveyOrgId" jdbcType="BIGINT" />
+        <result column="survey_org_name" property="surveyOrgName" jdbcType="VARCHAR" />
+        <result column="re_id" property="reId" jdbcType="BIGINT" />
+        <result column="re_info_id" property="reInfoId" jdbcType="BIGINT" />
+        <result column="address_desc" property="addressDesc" jdbcType="VARCHAR" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="district" property="district" jdbcType="VARCHAR" />
+        <result column="before_distance" property="beforeDistance" jdbcType="DOUBLE" />
+        <result column="home_distance" property="homeDistance" jdbcType="DOUBLE" />
+        <result column="last_today" property="lastToday" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, survey_user_id, survey_user_name, clock_lbs_x, clock_lbs_y, address, address_name,
+    clock_time, survey_org_id, survey_org_name, re_id, re_info_id, address_desc, province,
+    city, district, before_distance, home_distance, last_today
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_user_clock
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_user_clock
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyUserClock" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_user_clock (survey_user_id, survey_user_name, clock_lbs_x,
+        clock_lbs_y, address, address_name,
+        clock_time, survey_org_id, survey_org_name,
+        re_id, re_info_id, address_desc,
+        province, city, district,
+        before_distance, home_distance, last_today
+        )
+        values (#{surveyUserId,jdbcType=BIGINT}, #{surveyUserName,jdbcType=VARCHAR}, #{clockLbsX,jdbcType=DOUBLE},
+        #{clockLbsY,jdbcType=DOUBLE}, #{address,jdbcType=VARCHAR}, #{addressName,jdbcType=VARCHAR},
+        #{clockTime,jdbcType=TIMESTAMP}, #{surveyOrgId,jdbcType=BIGINT}, #{surveyOrgName,jdbcType=VARCHAR},
+        #{reId,jdbcType=BIGINT}, #{reInfoId,jdbcType=BIGINT}, #{addressDesc,jdbcType=VARCHAR},
+        #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR},
+        #{beforeDistance,jdbcType=DOUBLE}, #{homeDistance,jdbcType=DOUBLE}, #{lastToday,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyUserClock" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_user_clock
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="surveyUserId != null" >
+                survey_user_id,
+            </if>
+            <if test="surveyUserName != null" >
+                survey_user_name,
+            </if>
+            <if test="clockLbsX != null" >
+                clock_lbs_x,
+            </if>
+            <if test="clockLbsY != null" >
+                clock_lbs_y,
+            </if>
+            <if test="address != null" >
+                address,
+            </if>
+            <if test="addressName != null" >
+                address_name,
+            </if>
+            <if test="clockTime != null" >
+                clock_time,
+            </if>
+            <if test="surveyOrgId != null" >
+                survey_org_id,
+            </if>
+            <if test="surveyOrgName != null" >
+                survey_org_name,
+            </if>
+            <if test="reId != null" >
+                re_id,
+            </if>
+            <if test="reInfoId != null" >
+                re_info_id,
+            </if>
+            <if test="addressDesc != null" >
+                address_desc,
+            </if>
+            <if test="province != null" >
+                province,
+            </if>
+            <if test="city != null" >
+                city,
+            </if>
+            <if test="district != null" >
+                district,
+            </if>
+            <if test="beforeDistance != null" >
+                before_distance,
+            </if>
+            <if test="homeDistance != null" >
+                home_distance,
+            </if>
+            <if test="lastToday != null" >
+                last_today,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="surveyUserId != null" >
+                #{surveyUserId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyUserName != null" >
+                #{surveyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="clockLbsX != null" >
+                #{clockLbsX,jdbcType=DOUBLE},
+            </if>
+            <if test="clockLbsY != null" >
+                #{clockLbsY,jdbcType=DOUBLE},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="addressName != null" >
+                #{addressName,jdbcType=VARCHAR},
+            </if>
+            <if test="clockTime != null" >
+                #{clockTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="surveyOrgId != null" >
+                #{surveyOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyOrgName != null" >
+                #{surveyOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="reId != null" >
+                #{reId,jdbcType=BIGINT},
+            </if>
+            <if test="reInfoId != null" >
+                #{reInfoId,jdbcType=BIGINT},
+            </if>
+            <if test="addressDesc != null" >
+                #{addressDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="beforeDistance != null" >
+                #{beforeDistance,jdbcType=DOUBLE},
+            </if>
+            <if test="homeDistance != null" >
+                #{homeDistance,jdbcType=DOUBLE},
+            </if>
+            <if test="lastToday != null" >
+                #{lastToday,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyUserClock" >
+        update survey_user_clock
+        <set >
+            <if test="surveyUserId != null" >
+                survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyUserName != null" >
+                survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="clockLbsX != null" >
+                clock_lbs_x = #{clockLbsX,jdbcType=DOUBLE},
+            </if>
+            <if test="clockLbsY != null" >
+                clock_lbs_y = #{clockLbsY,jdbcType=DOUBLE},
+            </if>
+            <if test="address != null" >
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="addressName != null" >
+                address_name = #{addressName,jdbcType=VARCHAR},
+            </if>
+            <if test="clockTime != null" >
+                clock_time = #{clockTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="surveyOrgId != null" >
+                survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyOrgName != null" >
+                survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="reId != null" >
+                re_id = #{reId,jdbcType=BIGINT},
+            </if>
+            <if test="reInfoId != null" >
+                re_info_id = #{reInfoId,jdbcType=BIGINT},
+            </if>
+            <if test="addressDesc != null" >
+                address_desc = #{addressDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                district = #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="beforeDistance != null" >
+                before_distance = #{beforeDistance,jdbcType=DOUBLE},
+            </if>
+            <if test="homeDistance != null" >
+                home_distance = #{homeDistance,jdbcType=DOUBLE},
+            </if>
+            <if test="lastToday != null" >
+                last_today = #{lastToday,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyUserClock" >
+    update survey_user_clock
+    set survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      clock_lbs_x = #{clockLbsX,jdbcType=DOUBLE},
+      clock_lbs_y = #{clockLbsY,jdbcType=DOUBLE},
+      address = #{address,jdbcType=VARCHAR},
+      address_name = #{addressName,jdbcType=VARCHAR},
+      clock_time = #{clockTime,jdbcType=TIMESTAMP},
+      survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      re_id = #{reId,jdbcType=BIGINT},
+      re_info_id = #{reInfoId,jdbcType=BIGINT},
+      address_desc = #{addressDesc,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      before_distance = #{beforeDistance,jdbcType=DOUBLE},
+      home_distance = #{homeDistance,jdbcType=DOUBLE},
+      last_today = #{lastToday,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByParam" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_user_clock
+    where re_info_id = #{reInfoId}
+    <if test="!orgRole and !finance and !lfManger and !reSupervisor">
+      and survey_user_id = #{surveyUserId,jdbcType=BIGINT}
+    </if>
+    <if test="orgRole">
+     and FIND_IN_SET(survey_user_id,
+      (SELECT GROUP_CONCAT(i.user_id) FROM survey_investigator i LEFT JOIN (SELECT id FROM survey_franchisee WHERE id = #{orgId}
+      UNION
+      SELECT id FROM survey_franchisee WHERE parent_id = #{orgId}) f ON i.org_id  = f.id
+      WHERE f.id is not null))
+    </if>
+    order by clock_time desc
+  </select>
+  <select id="selectClockCaseCount" resultType="java.lang.Integer">
+    SELECT COUNT(c.id) FROM survey_user_clock u LEFT JOIN survey_clock_case c ON u.id = c.clock_id WHERE u.re_info_id = #{reInfoId}
+  </select>
+  <update id="updateReIdForBatch">
+    UPDATE survey_user_clock c
+    LEFT JOIN (
+    SELECT id,re_id,survey_user_id,survey_org_id FROM survey_investigator_re_info WHERE DATE_FORMAT(down_time,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')
+    ) r ON c.survey_user_id = r.survey_user_id  AND r.survey_org_id = c.survey_org_id
+    SET c.re_id = r.re_id,c.re_info_id = r.id
+    WHERE DATE_FORMAT(c.clock_time,'%Y-%m') = #{reDate};
+  </update>
+
+  <select id="selectByMap" parameterType="map" resultType="com.lefancrm.apicenter.dto.SurveyUserClockDto">
+        SELECT a.id,a.clock_time clockTime,a.address,a.clock_lbs_x clockLbsX,a.clock_lbs_y clockLbsY,GROUP_CONCAT(b.survey_person) surveyPerson,
+        ifnull(sum(b.re_total_money),0) reTotalMoney,a.address_desc addressDesc,a.survey_user_id surveyUserId,a.survey_org_id surveyOrgId,a.clock_time clockTime
+        FROM survey_user_clock a
+        LEFT JOIN survey_clock_case b ON a.id=b.clock_id
+        <where>
+            <if test="userId != null ">
+              and survey_user_id=#{userId}
+              <if test="orgId !=null">
+                  AND FIND_IN_SET(a.survey_org_id,(SELECT GROUP_CONCAT(id) FROM (
+                  SELECT id FROM survey_franchisee WHERE id = #{orgId}
+                  UNION ALL
+                  SELECT id FROM survey_franchisee WHERE parent_id = #{orgId} )t))
+              </if>
+            </if>
+            <if test="dateTime != null ">
+              and DATE_FORMAT(a.clock_time, '%Y-%m-%d')=#{dateTime}
+            </if>
+            <if test="startTime != null">
+                and DATE_FORMAT(a.clock_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="endTime != null">
+                and DATE_FORMAT(a.clock_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+        </where>
+    GROUP BY a.id order by a.clock_time
+  </select>
+
+  <select id="selectPunchTheClock" parameterType="map" resultType="com.lefancrm.apicenter.dto.SurveyUserClockDto">
+        SELECT aa.clockTime,COUNT(aa.recordCount) recordCount,COUNT(aa.caseCount) caseCount,IF(MAX(aa.d)>1.5,TRUE,FALSE) red FROM (
+	        SELECT DATE_FORMAT(a.clock_time, '%Y-%m-%d') clockTime,a.id recordCount, b.id caseCount,r.cityin_driving_money/r.reference_money d
+	        FROM  survey_user_clock  a
+	        LEFT JOIN survey_clock_case b ON a.id=b.clock_id
+	        LEFT JOIN survey_clock_re_info r ON a.id = r.clock_id
+	        WHERE DATE_FORMAT(a.clock_time, '%Y-%m')=#{dateTime}
+	        AND a.survey_user_id = #{userId}
+	        <if test="orgId != null">
+                and a.survey_org_id = #{orgId}
+            </if>
+	        GROUP BY a.id
+	    )aa  GROUP BY DATE_FORMAT(aa.clockTime, '%Y-%m-%d')
+  </select>
+  <select id="selectByParamFromPre" resultMap="BaseResultMap">
+	SELECT * FROM survey_user_clock u WHERE FIND_IN_SET(u.id,#{clockIds})
+  </select>
+  <select id="selectByUserIdAndDate" resultType="java.lang.Integer">
+    SELECT
+	IFNULL(COUNT(DISTINCT u.id),0)
+FROM
+	survey_user_clock u
+	LEFT JOIN survey_clock_case c ON u.id = c.clock_id
+	WHERE u.survey_user_id = #{userId} AND DATE_FORMAT(u.clock_time,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')
+	AND c.id IS NOT NULL
+  </select>
+
+  <select id="selectCaseClockDetails" parameterType="integer" resultMap="BaseResultMap">
+        SELECT c.clock_time,c.address,c.address_desc,c.survey_org_id,c.survey_org_name,c.survey_user_id,c.survey_user_name,c.clock_lbs_x,c.clock_lbs_y,
+        a.id clockCaseId
+        FROM survey_clock_case a
+        LEFT JOIN survey_user_clock c ON c.id=a.clock_id
+        WHERE a.survey_info_id=#{surveyInfoId}
+        order by c.clock_time
+  </select>
+
+
+  <select id="clocks" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.report.SurveyClockDTO">
+    select t.user_id surveyUserId,t.real_name surveyUserName,t.org_id surveyOrgId,t.org_name surveyOrgName,ifnull(a.clockNum,0) clockNum,ifnull(a.totalMoney,0) totalMoney,ifnull(a.distance,0) distance,
+    ifnull(e.totalNum,0) as totalNum,
+    ifnull(b.caseNum,0) caseNum,
+    ifnull(bb.directionNum,0) directionNum,c.first_clock_time firstClockTime,ifnull(c.firstClockTimestamp,0) firstClockTimestamp,
+    ifnull(a.money1,0) money1,ifnull(a.money2,0) money2,ifnull(a.money3,0) money3,ifnull(a.money4,0) money4,ifnull(a.money5,0) money5,ifnull(a.money6,0) money6,ifnull(a.money7,0) money7,ifnull(a.money8,0) money8,ifnull(a.money9,0) money9,
+    ifnull(d.lackClockNum,0)lackClockNum,ifnull(c.everyDayFirstClockAllSec,0) everyDayFirstClockAllSec,ifnull(c.clockDay,0)clockDay
+    from survey_investigator t
+    left join survey_franchisee f on t.org_id = f.id
+    left join staff_personnel_info s on t.user_id = s.user_id
+    left join (
+        select b.user_id from bus_user_role b where b.role_id = 50 group by b.user_id
+    ) tt on t.user_id = tt.user_id
+    left join (
+            select t.survey_user_id,count(1) clockNum,sum(t.before_distance + t.home_distance) distance,
+                SUM(IFNULL(r.cityin_driving_money,0)) + SUM(IFNULL(r.medical_history_money,0)) + sum(IFNULL(r.troubleshooting_money,0)) +
+                sum(IFNULL(r.opc_troubleshooting_money,0)) + sum(IFNULL(r.printing_money,0)) + SUM(IFNULL(r.accommodatio_money,0)) +
+                SUM(IFNULL(r.cross_driving_money,0)) + sum(IFNULL(r.self_driving_money,0)) + sum(IFNULL(r.toll_money,0)) + sum(IFNULL(r.other_money,0)) as totalMoney,
+                SUM(IFNULL(r.cityin_driving_money,0)) as money1,SUM(IFNULL(r.medical_history_money,0))  as money2,sum(IFNULL(r.troubleshooting_money,0))  as money3,
+                sum(IFNULL(r.opc_troubleshooting_money,0))  as money4,sum(IFNULL(r.printing_money,0))  as money5,SUM(IFNULL(r.accommodatio_money,0))  as money6,
+                SUM(IFNULL(r.cross_driving_money,0))  as money7,sum(IFNULL(r.self_driving_money,0)) + sum(IFNULL(r.toll_money,0))  as money8,sum(IFNULL(r.other_money,0))  as money9
+            from survey_user_clock t
+            left join survey_clock_re_info r on t.id = r.clock_id
+            left join (
+                    select u.id from survey_user_clock u
+                    left join survey_clock_case c on u.id = c.clock_id
+                    where c.clock_id is not null group by u.id
+            ) a on t.id = a.id
+            where a.id is not null
+            <if test="startTime != null">
+              and DATE_FORMAT(t.clock_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            <if test="endTime != null">
+              and DATE_FORMAT(t.clock_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+            </if>
+            group by t.survey_user_id
+    ) a on t.user_id = a.survey_user_id
+    left join (
+        select t.survey_user_id,count(1) caseNum from (
+        select u.survey_user_id,c.survey_info_id from survey_clock_case c
+        left join survey_user_clock u on c.clock_id = u.id
+        where 1 = 1
+        <if test="startTime != null">
+          and DATE_FORMAT(u.clock_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="endTime != null">
+          and DATE_FORMAT(u.clock_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        group by c.survey_info_id,u.survey_user_id ) t group by t.survey_user_id
+    ) b on t.user_id = b.survey_user_id
+    left join (
+      select t.survey_user_id,count(1) directionNum from (
+      select u.survey_user_id,d.id from survey_clock_case c
+      left join survey_user_clock u on c.clock_id = u.id
+      left join survey_investigator_case i on c.survey_info_id = i.survey_info_id and i.survey_user_id = u.survey_user_id and i.delete_flag = 0
+      left join survey_case_direction d on i.id = d.survey_investigator_case_id and d.delete_flag = 0 and d.invalid_state = 0
+      where 1 = 1
+      <if test="startTime != null">
+          and DATE_FORMAT(u.clock_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+      <if test="endTime != null">
+          and DATE_FORMAT(u.clock_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+      group by d.id,u.survey_user_id ) t group by t.survey_user_id
+    ) bb on t.user_id = bb.survey_user_id
+    left join (
+          select t.survey_user_id,count(1) totalNum from (
+              select u.survey_user_id,c.survey_info_id from survey_clock_case c
+              left join survey_user_clock u on c.clock_id = u.id
+              where 1 = 1
+              <if test="startTime != null">
+                  and DATE_FORMAT(u.clock_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+              </if>
+              <if test="endTime != null">
+                  and DATE_FORMAT(u.clock_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+              </if>
+           ) t group by t.survey_user_id
+    ) e on t.user_id = e.survey_user_id
+    left join (
+        select a.survey_user_id,DATE_FORMAT(DATE_SUB(FROM_UNIXTIME(avg(TIME_TO_SEC(a.clock_time))),INTERVAL 8 HOUR),'%H:%i:%s') first_clock_time,
+        avg(TIME_TO_SEC(a.clock_time)) firstClockTimestamp,
+        SUM(TIME_TO_SEC(a.clock_time)) everyDayFirstClockAllSec,/**每天首次打卡时间相加得到所有的秒数*/
+        COUNT(1) clockDay  /**打卡天数*/
+        from (
+                select u.survey_user_id,DATE_FORMAT(u.clock_time,'%Y-%m-%d'),min(u.clock_time) clock_time
+                from survey_user_clock u
+                left join (
+                  select u.id from survey_user_clock u
+                  left join survey_clock_case c on u.id = c.clock_id
+                  where c.clock_id is not null group by u.id
+                ) a on u.id = a.id
+                where 1 = 1 and a.id is not null
+                <if test="startTime != null">
+                  and DATE_FORMAT(u.clock_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="endTime != null">
+                  and DATE_FORMAT(u.clock_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                group by u.survey_user_id,DATE_FORMAT(u.clock_time,'%Y-%m-%d')
+        ) a group by a.survey_user_id
+    ) c on t.user_id = c.survey_user_id
+
+    left join
+    (
+        <if test="dateList == null or dateList.size() == 0 ">
+            SELECT i.user_id,0 lackClockNum FROM survey_investigator i WHERE i.delete_flag = 0 AND acc_state = 0
+        </if>
+
+        <if test="dateList != null and dateList.size() > 0 ">
+            SELECT a.*,COUNT(1) lackClockNum FROM ( SELECT i.user_id,t.date FROM survey_investigator i , (
+            <foreach collection="dateList" item="item" index="index">
+                SELECT DATE_FORMAT(#{item},'%Y-%m-%d') date
+                <if test="index != dateList.size() - 1">
+                    UNION ALL
+                </if>
+            </foreach>
+             ) t  WHERE i.delete_flag = 0 AND acc_state = 0) a
+            LEFT JOIN
+            (SELECT u.survey_user_id,DATE_FORMAT(u.clock_time,'%Y-%m-%d') clock_time FROM survey_user_clock u GROUP BY survey_user_id,DATE_FORMAT(u.clock_time,'%Y-%m-%d'))  b ON a.user_id = b.survey_user_id AND a.date = b.clock_time
+            WHERE b.clock_time IS NULL
+            GROUP BY a.user_id
+        </if>
+    ) d on t.user_id = d.user_id
+
+    where t.delete_flag = 0 and (f.type = 1 || f.insurance_type = 1) and f.org_state = 0 and tt.user_id is not null
+    <if test="endQuitTime != null">
+        and (s.staff_state != 6  or (s.staff_state = 6 and DATE_FORMAT(s.quit_time,'%Y-%m-%d') &gt; #{endQuitTime,jdbcType=VARCHAR}))
+    </if>
+    <if test="surveyOrgIds != null">
+      and find_in_set(t.org_id,#{surveyOrgIds,jdbcType=VARCHAR})
+    </if>
+    <if test="surveyUserIds != null">
+      and find_in_set(t.user_id,#{surveyUserIds,jdbcType=VARCHAR})
+    </if>
+    <if test="curSurveyOrgId != null">
+        and t.org_id = #{curSurveyOrgId,jdbcType=BIGINT}
+    </if>
+    order by ifnull(a.totalMoney,0) desc
+  </select>
+</mapper>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyProductRoleMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyProductRole" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="product_id" property="productId" jdbcType="BIGINT" />
+        <result column="role_id" property="roleId" jdbcType="BIGINT" />
+        <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, product_id, role_id, role_name
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_product_role
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from survey_product_role
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyProductRole" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_product_role (product_id, role_id, role_name
+        )
+        values (#{productId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyProductRole" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_product_role
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="productId != null" >
+                product_id,
+            </if>
+            <if test="roleId != null" >
+                role_id,
+            </if>
+            <if test="roleName != null" >
+                role_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="productId != null" >
+                #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null" >
+                #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="roleName != null" >
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyProductRole" >
+        update survey_product_role
+        <set >
+            <if test="productId != null" >
+                product_id = #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null" >
+                role_id = #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="roleName != null" >
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyProductRole" >
+    update survey_product_role
+    set product_id = #{productId,jdbcType=BIGINT},
+      role_id = #{roleId,jdbcType=BIGINT},
+      role_name = #{roleName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectInfo" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_product_role
+        <where>
+            <if test="productId != null" >
+                and product_id = #{productId,jdbcType=BIGINT}
+            </if>
+            <if test="roleId != null" >
+                and role_id = #{roleId,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteByProductId" parameterType="java.lang.Long" >
+        delete from survey_product_role
+        where product_id = #{productId,jdbcType=BIGINT}
+    </delete>
+</mapper>

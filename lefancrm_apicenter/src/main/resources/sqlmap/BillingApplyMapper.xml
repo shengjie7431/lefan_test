@@ -1,0 +1,2008 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BillingApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BillingApply" >
+      <id column="id" property="id" jdbcType="BIGINT" />
+      <result column="case_id" property="caseId" jdbcType="BIGINT" />
+      <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+      <result column="case_title" property="caseTitle" jdbcType="VARCHAR" />
+      <result column="servcie_money" property="servcieMoney" jdbcType="DOUBLE" />
+      <result column="channel_money" property="channelMoney" jdbcType="DOUBLE" />
+      <result column="insurance_money" property="insuranceMoney" jdbcType="DOUBLE" />
+      <result column="deduction_money" property="deductionMoney" jdbcType="DOUBLE" />
+      <result column="billing_money" property="billingMoney" jdbcType="DOUBLE" />
+      <result column="billing_state" property="billingState" jdbcType="INTEGER" />
+      <result column="billing_time" property="billingTime" jdbcType="TIMESTAMP" />
+      <result column="img" property="img" jdbcType="VARCHAR" />
+      <result column="billing_code" property="billingCode" jdbcType="VARCHAR" />
+      <result column="billing_enum" property="billingEnum" jdbcType="INTEGER" />
+      <result column="billing_item" property="billingItem" jdbcType="INTEGER" />
+      <result column="billing_type" property="billingType" jdbcType="INTEGER" />
+      <result column="org_id" property="orgId" jdbcType="BIGINT" />
+      <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+      <result column="recipients_name" property="recipientsName" jdbcType="VARCHAR" />
+      <result column="recipients_phone" property="recipientsPhone" jdbcType="VARCHAR" />
+      <result column="province" property="province" jdbcType="VARCHAR" />
+      <result column="city" property="city" jdbcType="VARCHAR" />
+      <result column="district" property="district" jdbcType="VARCHAR" />
+      <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+      <result column="city_id" property="cityId" jdbcType="INTEGER" />
+      <result column="district_id" property="districtId" jdbcType="INTEGER" />
+      <result column="address" property="address" jdbcType="VARCHAR" />
+      <result column="insured_name" property="insuredName" jdbcType="VARCHAR" />
+      <result column="car_no" property="carNo" jdbcType="VARCHAR" />
+      <result column="wounded_name" property="woundedName" jdbcType="VARCHAR" />
+      <result column="insurer_company_name" property="insurerCompanyName" jdbcType="VARCHAR" />
+      <result column="policy_no" property="policyNo" jdbcType="VARCHAR" />
+      <result column="report_no" property="reportNo" jdbcType="VARCHAR" />
+      <result column="remark" property="remark" jdbcType="VARCHAR" />
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+      <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+      <result column="billing_by_id" property="billingById" jdbcType="BIGINT" />
+      <result column="billing_by" property="billingBy" jdbcType="VARCHAR" />
+      <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+      <result column="update_by_id" property="updateById" jdbcType="BIGINT" />
+      <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+      <result column="oper_reason" property="operReason" jdbcType="VARCHAR" />
+      <result column="is_pre_sign" property="isPreSign" jdbcType="INTEGER" />
+      <result column="business_type" property="businessType" jdbcType="INTEGER" />
+      <result column="merit_name" property="meritName" jdbcType="VARCHAR" />
+      <result column="confirm_account_money" property="confirmAccountMoney" jdbcType="DOUBLE" />
+      <result column="confirm_account_state" property="confirmAccountState" jdbcType="INTEGER" />
+      <result column="confirm_account_time" property="confirmAccountTime" jdbcType="TIMESTAMP" />
+      <result column="reject_reason" property="rejectReason" jdbcType="VARCHAR" />
+      <result column="company_id" property="companyId" jdbcType="BIGINT" />
+      <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+      <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+      <result column="is_merge" property="isMerge" jdbcType="INTEGER" />
+      <result column="survey_department_id" property="surveyDepartmentId" jdbcType="BIGINT" />
+      <result column="survey_department_name" property="surveyDepartmentName" jdbcType="VARCHAR" />
+      <result column="survey_consignor_id" property="surveyConsignorId" jdbcType="BIGINT" />
+      <result column="survey_consignor_name" property="surveyConsignorName" jdbcType="VARCHAR" />
+      <result column="product_type" property="productType" jdbcType="INTEGER" />
+      <result column="billing_source" property="billingSource" jdbcType="INTEGER" />
+      <result column="survey_bill_subject_id" property="surveyBillSubjectId" jdbcType="BIGINT" />
+      <result column="survey_bill_subject_name" property="surveyBillSubjectName" jdbcType="VARCHAR" />
+      <result column="survey_org_id" property="surveyOrgId" jdbcType="BIGINT" />
+      <result column="survey_org_name" property="surveyOrgName" jdbcType="VARCHAR" />
+      <result column="merit_user_id" property="meritUserId" jdbcType="BIGINT" />
+      <result column="staff_org_id" property="staffOrgId" jdbcType="BIGINT" />
+      <result column="staff_org_name" property="staffOrgName" jdbcType="VARCHAR" />
+      <result column="tax_rate" property="taxRate" jdbcType="DOUBLE" />
+  </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, case_id, case_no, case_title, servcie_money, channel_money, insurance_money,
+        deduction_money, billing_money, billing_state, billing_time, img, billing_code, billing_enum,
+        billing_item, billing_type, org_id, org_name, recipients_name, recipients_phone,
+        province, city, district, province_id, city_id, district_id, address, insured_name,
+        car_no, wounded_name, insurer_company_name, policy_no, report_no, remark, create_time,
+        create_by_id, create_by, billing_by_id, billing_by, update_time, update_by_id, update_by,oper_reason,
+        is_pre_sign,business_type,merit_name,confirm_account_money,confirm_account_state,confirm_account_time,
+        reject_reason,company_id,company_name,parent_id,is_merge,survey_department_id, survey_department_name,
+        survey_consignor_id, survey_consignor_name, product_type, billing_source, survey_bill_subject_id,
+        survey_bill_subject_name, survey_org_id, survey_org_name,merit_user_id,staff_org_id,staff_org_name,tax_rate
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from billing_apply
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.BillingApply" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into billing_apply (case_id, case_no, case_title,
+        servcie_money, channel_money, insurance_money,
+        deduction_money, billing_money, billing_state,
+        billing_time, img, billing_code,
+        billing_enum, billing_item, billing_type,
+        org_id, org_name, recipients_name,
+        recipients_phone, province, city,
+        district, province_id, city_id,
+        district_id, address, insured_name,
+        car_no, wounded_name, insurer_company_name,
+        policy_no, report_no, remark,
+        create_time, create_by_id, create_by,
+        billing_by_id, billing_by, update_time,
+        update_by_id, update_by,oper_reason,is_pre_sign,business_type,merit_name,
+        confirm_account_money,confirm_account_state,confirm_account_time,reject_reason,
+        company_id,company_name,parent_id,is_merge, survey_department_id, survey_department_name,
+        survey_consignor_id, survey_consignor_name,product_type, billing_source,survey_bill_subject_id,
+        survey_bill_subject_name, survey_org_id, survey_org_name,merit_user_id,staff_org_id,staff_org_name,tax_rate)
+        values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{caseTitle,jdbcType=VARCHAR},
+        #{servcieMoney,jdbcType=DOUBLE}, #{channelMoney,jdbcType=DOUBLE}, #{insuranceMoney,jdbcType=DOUBLE},
+        #{deductionMoney,jdbcType=DOUBLE}, #{billingMoney,jdbcType=DOUBLE}, #{billingState,jdbcType=INTEGER},
+        #{billingTime,jdbcType=TIMESTAMP}, #{img,jdbcType=VARCHAR}, #{billingCode,jdbcType=VARCHAR},
+        #{billingEnum,jdbcType=INTEGER}, #{billingItem,jdbcType=INTEGER}, #{billingType,jdbcType=INTEGER},
+        #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, #{recipientsName,jdbcType=VARCHAR},
+        #{recipientsPhone,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+        #{district,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER},
+        #{districtId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{insuredName,jdbcType=VARCHAR},
+        #{carNo,jdbcType=VARCHAR}, #{woundedName,jdbcType=VARCHAR}, #{insurerCompanyName,jdbcType=VARCHAR},
+        #{policyNo,jdbcType=VARCHAR}, #{reportNo,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{createById,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR},
+        #{billingById,jdbcType=BIGINT}, #{billingBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+        #{updateById,jdbcType=BIGINT}, #{updateBy,jdbcType=VARCHAR}, #{operReason,jdbcType=VARCHAR},
+        #{isPreSign,jdbcType=INTEGER}, #{businessType,jdbcType=INTEGER}, #{meritName,jdbcType=VARCHAR},
+        #{confirmAccountMoney,jdbcType=DOUBLE}, #{confirmAccountState,jdbcType=INTEGER},
+        #{confirmAccountTime,jdbcType=TIMESTAMP}, #{rejectReason,jdbcType=VARCHAR},#{companyId,jdbcType=BIGINT},
+        #{companyName,jdbcType=VARCHAR},#{parentId,jdbcType=BIGINT},#{isMerge,jdbcType=INTEGER},
+        #{surveyDepartmentId,jdbcType=BIGINT},#{surveyDepartmentName,jdbcType=VARCHAR},
+        #{surveyConsignorId,jdbcType=BIGINT}, #{surveyConsignorName,jdbcType=VARCHAR},#{productType,jdbcType=INTEGER},
+        #{billingSource,jdbcType=INTEGER},#{surveyBillSubjectId,jdbcType=BIGINT},#{surveyBillSubjectName,jdbcType=VARCHAR},
+        #{surveyOrgId,jdbcType=BIGINT},#{surveyOrgName,jdbcType=VARCHAR},#{meritUserId,jdbcType=BIGINT},
+        #{staffOrgId,jdbcType=BIGINT},#{staffOrgName,jdbcType=VARCHAR},#{taxRate,jdbcType=DOUBLE}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.BillingApply" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into billing_apply
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="caseId != null" >
+                case_id,
+            </if>
+            <if test="caseNo != null" >
+                case_no,
+            </if>
+            <if test="caseTitle != null" >
+                case_title,
+            </if>
+            <if test="servcieMoney != null" >
+                servcie_money,
+            </if>
+            <if test="channelMoney != null" >
+                channel_money,
+            </if>
+            <if test="insuranceMoney != null" >
+                insurance_money,
+            </if>
+            <if test="deductionMoney != null" >
+                deduction_money,
+            </if>
+            <if test="billingMoney != null" >
+                billing_money,
+            </if>
+            <if test="billingState != null" >
+                billing_state,
+            </if>
+            <if test="billingTime != null" >
+                billing_time,
+            </if>
+            <if test="img != null" >
+                img,
+            </if>
+            <if test="billingCode != null" >
+                billing_code,
+            </if>
+            <if test="billingEnum != null" >
+                billing_enum,
+            </if>
+            <if test="billingItem != null" >
+                billing_item,
+            </if>
+            <if test="billingType != null" >
+                billing_type,
+            </if>
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="orgName != null" >
+                org_name,
+            </if>
+            <if test="recipientsName != null" >
+                recipients_name,
+            </if>
+            <if test="recipientsPhone != null" >
+                recipients_phone,
+            </if>
+            <if test="province != null" >
+                province,
+            </if>
+            <if test="city != null" >
+                city,
+            </if>
+            <if test="district != null" >
+                district,
+            </if>
+            <if test="provinceId != null" >
+                province_id,
+            </if>
+            <if test="cityId != null" >
+                city_id,
+            </if>
+            <if test="districtId != null" >
+                district_id,
+            </if>
+            <if test="address != null" >
+                address,
+            </if>
+            <if test="insuredName != null" >
+                insured_name,
+            </if>
+            <if test="carNo != null" >
+                car_no,
+            </if>
+            <if test="woundedName != null" >
+                wounded_name,
+            </if>
+            <if test="insurerCompanyName != null" >
+                insurer_company_name,
+            </if>
+            <if test="policyNo != null" >
+                policy_no,
+            </if>
+            <if test="reportNo != null" >
+                report_no,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createById != null" >
+                create_by_id,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="billingById != null" >
+                billing_by_id,
+            </if>
+            <if test="billingBy != null" >
+                billing_by,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="updateById != null" >
+                update_by_id,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="operReason != null" >
+                oper_reason,
+            </if>
+            <if test="isPreSign != null" >
+                is_pre_sign,
+            </if>
+            <if test="businessType != null" >
+                business_type,
+            </if>
+            <if test="meritName != null" >
+                merit_name,
+            </if>
+            <if test="confirmAccountMoney != null" >
+                confirm_account_money,
+            </if>
+            <if test="confirmAccountState != null" >
+                confirm_account_state,
+            </if>
+            <if test="confirmAccountTime != null" >
+                confirm_account_time,
+            </if>
+            <if test="rejectReason != null" >
+                reject_reason,
+            </if>
+            <if test="companyId != null" >
+                company_id,
+            </if>
+            <if test="companyName != null" >
+                company_name,
+            </if>
+            <if test="parentId != null" >
+                parent_id,
+            </if>
+            <if test="isMerge != null" >
+                is_merge,
+            </if>
+            <if test="surveyDepartmentId != null" >
+                survey_department_id,
+            </if>
+            <if test="surveyDepartmentName != null" >
+                survey_department_name,
+            </if>
+            <if test="surveyConsignorId != null" >
+                survey_consignor_id,
+            </if>
+            <if test="surveyConsignorName != null" >
+                survey_consignor_name,
+            </if>
+            <if test="productType != null" >
+                product_type,
+            </if>
+            <if test="billingSource != null" >
+                billing_source,
+            </if>
+            <if test="surveyBillSubjectId != null" >
+                survey_bill_subject_id,
+            </if>
+            <if test="surveyBillSubjectName != null" >
+                survey_bill_subject_name,
+            </if>
+            <if test="surveyOrgId != null" >
+                survey_org_id,
+            </if>
+            <if test="surveyOrgName != null" >
+                survey_org_name,
+            </if>
+            <if test="meritUserId != null" >
+                merit_user_id,
+            </if>
+            <if test="staffOrgName != null" >
+                staff_org_id,
+            </if>
+            <if test="meritUserId != null" >
+                staff_org_name,
+            </if>
+            <if test="taxRate != null" >
+                tax_rate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="caseId != null" >
+                #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="caseTitle != null" >
+                #{caseTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="servcieMoney != null" >
+                #{servcieMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="channelMoney != null" >
+                #{channelMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="insuranceMoney != null" >
+                #{insuranceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="deductionMoney != null" >
+                #{deductionMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="billingMoney != null" >
+                #{billingMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="billingState != null" >
+                #{billingState,jdbcType=INTEGER},
+            </if>
+            <if test="billingTime != null" >
+                #{billingTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="img != null" >
+                #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="billingCode != null" >
+                #{billingCode,jdbcType=VARCHAR},
+            </if>
+            <if test="billingEnum != null" >
+                #{billingEnum,jdbcType=INTEGER},
+            </if>
+            <if test="billingItem != null" >
+                #{billingItem,jdbcType=INTEGER},
+            </if>
+            <if test="billingType != null" >
+                #{billingType,jdbcType=INTEGER},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="recipientsName != null" >
+                #{recipientsName,jdbcType=VARCHAR},
+            </if>
+            <if test="recipientsPhone != null" >
+                #{recipientsPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null" >
+                #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="districtId != null" >
+                #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="insuredName != null" >
+                #{insuredName,jdbcType=VARCHAR},
+            </if>
+            <if test="carNo != null" >
+                #{carNo,jdbcType=VARCHAR},
+            </if>
+            <if test="woundedName != null" >
+                #{woundedName,jdbcType=VARCHAR},
+            </if>
+            <if test="insurerCompanyName != null" >
+                #{insurerCompanyName,jdbcType=VARCHAR},
+            </if>
+            <if test="policyNo != null" >
+                #{policyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="reportNo != null" >
+                #{reportNo,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createById != null" >
+                #{createById,jdbcType=BIGINT},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="billingById != null" >
+                #{billingById,jdbcType=BIGINT},
+            </if>
+            <if test="billingBy != null" >
+                #{billingBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateById != null" >
+                #{updateById,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="operReason != null" >
+                #{operReason,jdbcType=VARCHAR},
+            </if>
+            <if test="isPreSign != null" >
+                #{isPreSign,jdbcType=INTEGER},
+            </if>
+            <if test="businessType != null" >
+                #{businessType,jdbcType=INTEGER},
+            </if>
+            <if test="meritName != null" >
+                #{meritName,jdbcType=VARCHAR},
+            </if>
+            <if test="confirmAccountMoney != null" >
+                #{confirmAccountMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="confirmAccountState != null" >
+                #{confirmAccountState,jdbcType=INTEGER},
+            </if>
+            <if test="confirmAccountTime != null" >
+                #{confirmAccountTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rejectReason != null" >
+                #{rejectReason,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                #{companyId,jdbcType=BIGINT},
+            </if>
+            <if test="companyName != null" >
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null" >
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="isMerge != null" >
+                #{isMerge,jdbcType=INTEGER},
+            </if>
+            <if test="surveyDepartmentId != null" >
+                #{surveyDepartmentId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyDepartmentName != null" >
+                #{surveyDepartmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyConsignorId != null" >
+                #{surveyConsignorId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyConsignorName != null" >
+                #{surveyConsignorName,jdbcType=VARCHAR},
+            </if>
+            <if test="productType != null" >
+                #{productType,jdbcType=INTEGER},
+            </if>
+            <if test="billingSource != null" >
+                #{billingSource,jdbcType=INTEGER},
+            </if>
+            <if test="surveyBillSubjectId != null" >
+                #{surveyBillSubjectId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyBillSubjectName != null" >
+                #{surveyBillSubjectName,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyOrgId != null" >
+                #{surveyOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyOrgName != null" >
+                #{surveyOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="meritUserId != null" >
+                #{meritUserId,jdbcType=BIGINT},
+            </if>
+            <if test="staffOrgId != null" >
+                #{staffOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="staffOrgName != null" >
+                #{staffOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="taxRate != null" >
+                #{taxRate,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.BillingApply" >
+        update billing_apply
+        <set >
+            <if test="caseId != null" >
+                case_id = #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                case_no = #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="caseTitle != null" >
+                case_title = #{caseTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="servcieMoney != null" >
+                servcie_money = #{servcieMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="channelMoney != null" >
+                channel_money = #{channelMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="insuranceMoney != null" >
+                insurance_money = #{insuranceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="deductionMoney != null" >
+                deduction_money = #{deductionMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="billingMoney != null" >
+                billing_money = #{billingMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="billingState != null" >
+                billing_state = #{billingState,jdbcType=INTEGER},
+            </if>
+            <if test="billingTime != null" >
+                billing_time = #{billingTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="img != null" >
+                img = #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="billingCode != null" >
+                billing_code = #{billingCode,jdbcType=VARCHAR},
+            </if>
+            <if test="billingEnum != null" >
+                billing_enum = #{billingEnum,jdbcType=INTEGER},
+            </if>
+            <if test="billingItem != null" >
+                billing_item = #{billingItem,jdbcType=INTEGER},
+            </if>
+            <if test="billingType != null" >
+                billing_type = #{billingType,jdbcType=INTEGER},
+            </if>
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="recipientsName != null" >
+                recipients_name = #{recipientsName,jdbcType=VARCHAR},
+            </if>
+            <if test="recipientsPhone != null" >
+                recipients_phone = #{recipientsPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                district = #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                province_id = #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null" >
+                city_id = #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="districtId != null" >
+                district_id = #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="address != null" >
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="insuredName != null" >
+                insured_name = #{insuredName,jdbcType=VARCHAR},
+            </if>
+            <if test="carNo != null" >
+                car_no = #{carNo,jdbcType=VARCHAR},
+            </if>
+            <if test="woundedName != null" >
+                wounded_name = #{woundedName,jdbcType=VARCHAR},
+            </if>
+            <if test="insurerCompanyName != null" >
+                insurer_company_name = #{insurerCompanyName,jdbcType=VARCHAR},
+            </if>
+            <if test="policyNo != null" >
+                policy_no = #{policyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="reportNo != null" >
+                report_no = #{reportNo,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createById != null" >
+                create_by_id = #{createById,jdbcType=BIGINT},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="billingById != null" >
+                billing_by_id = #{billingById,jdbcType=BIGINT},
+            </if>
+            <if test="billingBy != null" >
+                billing_by = #{billingBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateById != null" >
+                update_by_id = #{updateById,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="operReason != null" >
+                oper_reason = #{operReason,jdbcType=VARCHAR},
+            </if>
+            <if test="isPreSign != null" >
+                is_pre_sign = #{isPreSign,jdbcType=INTEGER},
+            </if>
+            <if test="businessType != null" >
+                business_type = #{businessType,jdbcType=INTEGER},
+            </if>
+            <if test="meritName != null" >
+                merit_name = #{meritName,jdbcType=VARCHAR},
+            </if>
+            <if test="confirmAccountMoney != null" >
+                confirm_account_money = #{confirmAccountMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="confirmAccountState != null" >
+                confirm_account_state = #{confirmAccountState,jdbcType=INTEGER},
+            </if>
+            <if test="confirmAccountTime != null" >
+                confirm_account_time = #{confirmAccountTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="rejectReason != null" >
+                reject_reason = #{rejectReason,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                company_id = #{companyId,jdbcType=BIGINT},
+            </if>
+            <if test="companyName != null" >
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null" >
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="isMerge != null" >
+                is_merge = #{isMerge,jdbcType=INTEGER},
+            </if>
+            <if test="surveyDepartmentId != null" >
+                survey_department_id = #{surveyDepartmentId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyDepartmentName != null" >
+                survey_department_name = #{surveyDepartmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyConsignorId != null" >
+                survey_consignor_id = #{surveyConsignorId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyConsignorName != null" >
+                survey_consignor_name = #{surveyConsignorName,jdbcType=VARCHAR},
+            </if>
+            <if test="productType != null" >
+                product_type = #{productType,jdbcType=INTEGER},
+            </if>
+            <if test="billingSource != null" >
+                billing_source = #{billingSource,jdbcType=INTEGER},
+            </if>
+            <if test="surveyBillSubjectId != null" >
+                survey_bill_subject_id = #{surveyBillSubjectId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyBillSubjectName != null" >
+                survey_bill_subject_name = #{surveyBillSubjectName,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyOrgId != null" >
+                survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="surveyOrgName != null" >
+                survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="meritUserId != null" >
+                merit_user_id = #{meritUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="staffOrgId != null" >
+                staff_org_id = #{staffOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="staffOrgName != null" >
+                staff_org_name = #{staffOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="taxRate != null" >
+                tax_rate = #{taxRate,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.BillingApply" >
+        update billing_apply
+        set case_id = #{caseId,jdbcType=BIGINT},
+        case_no = #{caseNo,jdbcType=VARCHAR},
+        case_title = #{caseTitle,jdbcType=VARCHAR},
+        servcie_money = #{servcieMoney,jdbcType=DOUBLE},
+        channel_money = #{channelMoney,jdbcType=DOUBLE},
+        insurance_money = #{insuranceMoney,jdbcType=DOUBLE},
+        deduction_money = #{deductionMoney,jdbcType=DOUBLE},
+        billing_money = #{billingMoney,jdbcType=DOUBLE},
+        billing_state = #{billingState,jdbcType=INTEGER},
+        billing_time = #{billingTime,jdbcType=TIMESTAMP},
+        img = #{img,jdbcType=VARCHAR},
+        billing_code = #{billingCode,jdbcType=VARCHAR},
+        billing_enum = #{billingEnum,jdbcType=INTEGER},
+        billing_item = #{billingItem,jdbcType=INTEGER},
+        billing_type = #{billingType,jdbcType=INTEGER},
+        org_id = #{orgId,jdbcType=BIGINT},
+        org_name = #{orgName,jdbcType=VARCHAR},
+        recipients_name = #{recipientsName,jdbcType=VARCHAR},
+        recipients_phone = #{recipientsPhone,jdbcType=VARCHAR},
+        province = #{province,jdbcType=VARCHAR},
+        city = #{city,jdbcType=VARCHAR},
+        district = #{district,jdbcType=VARCHAR},
+        province_id = #{provinceId,jdbcType=INTEGER},
+        city_id = #{cityId,jdbcType=INTEGER},
+        district_id = #{districtId,jdbcType=INTEGER},
+        address = #{address,jdbcType=VARCHAR},
+        insured_name = #{insuredName,jdbcType=VARCHAR},
+        car_no = #{carNo,jdbcType=VARCHAR},
+        wounded_name = #{woundedName,jdbcType=VARCHAR},
+        insurer_company_name = #{insurerCompanyName,jdbcType=VARCHAR},
+        policy_no = #{policyNo,jdbcType=VARCHAR},
+        report_no = #{reportNo,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        create_by_id = #{createById,jdbcType=BIGINT},
+        create_by = #{createBy,jdbcType=VARCHAR},
+        billing_by_id = #{billingById,jdbcType=BIGINT},
+        billing_by = #{billingBy,jdbcType=VARCHAR},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_by_id = #{updateById,jdbcType=BIGINT},
+        update_by = #{updateBy,jdbcType=VARCHAR},
+        oper_reason = #{operReason,jdbcType=VARCHAR},
+        is_pre_sign = #{isPreSign,jdbcType=INTEGER},
+        business_type = #{businessType,jdbcType=INTEGER},
+        merit_name = #{meritName,jdbcType=VARCHAR},
+        confirm_account_money = #{confirmAccountMoney,jdbcType=DOUBLE},
+        confirm_account_state = #{confirmAccountState,jdbcType=INTEGER},
+        confirm_account_time = #{confirmAccountTime,jdbcType=TIMESTAMP},
+        reject_reason = #{rejectReason,jdbcType=VARCHAR},
+        company_id = #{companyId,jdbcType=BIGINT},
+        company_name = #{companyName,jdbcType=VARCHAR},
+        parent_id = #{parentId,jdbcType=BIGINT},
+        is_merge = #{isMerge,jdbcType=INTEGER},
+        survey_department_id = #{surveyDepartmentId,jdbcType=BIGINT},
+        survey_department_name = #{surveyDepartmentName,jdbcType=VARCHAR},
+        survey_consignor_id = #{surveyConsignorId,jdbcType=BIGINT},
+        survey_consignor_name = #{surveyConsignorName,jdbcType=VARCHAR},
+        product_type = #{productType,jdbcType=INTEGER},
+        billing_source = #{billingSource,jdbcType=INTEGER},
+        survey_bill_subject_id = #{surveyBillSubjectId,jdbcType=BIGINT},
+        survey_bill_subject_name = #{surveyBillSubjectName,jdbcType=VARCHAR},
+        survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+        survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+        merit_user_id = #{meritUserId,jdbcType=BIGINT},
+        staff_org_id = #{staffOrgId,jdbcType=BIGINT},
+        staff_org_name = #{staffOrgName,jdbcType=VARCHAR},
+        tax_rate = #{taxRate,jdbcType=DOUBLE}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+   <select id="selectListSize" resultType="int" parameterType="java.util.Map" >
+       <if test="fromType != null and fromType == 'ggywkp'">
+       select  count(1) from (
+           select
+           count(1)
+           from billing_apply b
+           LEFT JOIN billing_apply_imgs i ON b.id = i.bill_id
+           LEFT JOIN billing_apply_accounts a ON i.id = a.bill_imgs_id and a.state = 1
+           <include refid="joins" />
+           <include refid="wheres" />
+           group by b.id) a
+       </if>
+       <if test="fromType == null">
+           select
+           count(1)
+           from billing_apply b
+           <include refid="joins" />
+           <include refid="wheres" />
+       </if>
+    </select>
+
+    <select id="selectBillMoneyByCaseId" resultType="java.lang.Double" parameterType="java.lang.Long" >
+        select
+        sum(b.billing_money)
+        from billing_apply b
+        where b.case_id = #{caseId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        b.*
+        from billing_apply b
+        <if test="fromType != null and fromType == 'ggywkp'">
+            LEFT JOIN billing_apply_imgs i ON b.id = i.bill_id
+            LEFT JOIN billing_apply_accounts a ON i.id = a.bill_imgs_id and a.state = 1
+        </if>
+        <include refid="joins" />
+        <include refid="wheres" />
+        <if test="fromType != null and fromType == 'ggywkp'">
+            GROUP BY b.id
+        </if>
+        order by b.id desc
+        <if test="menuType != 101">
+            limit #{pageIndex} , #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectByMap" resultType="com.lefancrm.apicenter.dto.BillingApplyDto" parameterType="java.util.Map" >
+        SELECT * FROM (
+           SELECT b.id AS billingId,a.id AS billingImgsId,b.case_no AS caseNo,b.case_title AS caseTitle,b.billing_enum AS billingEnum,
+            b.billing_item AS billingItem,a.billing_code AS billingCode,a.billing_money AS billingMoney,b.company_name AS companyName,a.create_time AS createTime,
+            b.org_name AS orgName,b.staff_org_name AS staffOrgName,IFNULL(SUM(c.money),0) AS theAccountMoney
+            FROM  billing_apply_imgs a
+            LEFT JOIN billing_apply b ON a.bill_id=b.id
+            LEFT JOIN billing_apply_accounts c ON a.id=c.bill_imgs_id and c.state = 1
+            where b.billing_enum !=7 and b.billing_state = #{billingState,jdbcType=INTEGER}
+--             and (b.confirm_account_state = 1 or b.confirm_account_state = 3)
+             AND a.state = 1
+            <if test="caseNo != null ">
+                and b.case_no=#{caseNo}
+            </if>
+            <if test="caseTitle != null ">
+                and b.case_title=#{caseTitle}
+            </if>
+            <if test="billingCode != null ">
+                and a.billing_code=#{billingCode}
+            </if>
+            <if test="apply == 'true'">
+                and b.create_by_id = #{currentUserId}
+            </if>
+            GROUP BY a.id
+        ) aa WHERE aa.billingMoney &gt; aa.theAccountMoney
+        order by aa.createTime desc
+    </select>
+
+
+    <select id="selectByList" resultType="com.lefancrm.apicenter.dto.BillingApplyDto" parameterType="java.util.Map" >
+        SELECT aa.*,bb.receive_money AS theAccountMoney,bb.receive_user_id as receiveUserId,bb.receive_user_name as receiveUserName,bb.receive_time as receiveTime,
+         bb.receive_type AS receiveType,bb.receive_status AS receiveStatus,bb.reject_reason rejectReason,bb.id receiveId
+         FROM (
+            SELECT b.id AS billingId,a.id AS billingImgsId,b.case_no AS caseNo,b.case_title AS caseTitle,b.billing_enum AS billingEnum,
+            b.billing_item AS billingItem,a.billing_code AS billingCode,a.billing_money AS billingMoney,b.company_name AS companyName,a.create_time AS createTime,
+            b.org_name AS orgName,b.staff_org_name AS staffOrgName
+            FROM  billing_apply_imgs a
+            LEFT JOIN billing_apply b ON a.bill_id=b.id
+            LEFT JOIN billing_apply_accounts c ON a.id=c.bill_imgs_id
+            where b.billing_enum !=7 and b.billing_state = 3 and  a.state = 1
+            GROUP BY a.id
+        ) aa  LEFT JOIN  billing_receive_info bb ON aa.billingId=bb.billing_id AND aa.billingImgsId=bb.billing_imgs_id
+        WHERE bb.billing_match_id=#{unmatchId}
+    </select>
+
+    <select id="selectByInfo" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply
+        where 1 = 1
+        <if test="caseId != null" >
+            and case_id = #{caseId,jdbcType=BIGINT}
+        </if>
+        <if test="isPreSign != null" >
+            and is_pre_sign = #{isPreSign,jdbcType=BIGINT}
+        </if>
+        <if test="caseNo != null" >
+            and case_no = #{caseNo,jdbcType=VARCHAR}
+        </if>
+         limit 1
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply b
+    </select>
+
+    <select id="selectImgsInfoForExport" resultType="com.lefancrm.apicenter.dto.BillingApplyImgsMaterialDto" parameterType="java.util.Map" >
+        select
+        b.case_id as caseId, b.case_no as caseNo, b.case_title as caseTitle, bai.billing_code as billingCode,
+        bai.billing_imgs as billingImgs, bai.create_by as imgsCreateBy, bai.create_time as imgsCreateTime, bai.state as imgsState
+        from billing_apply_imgs bai
+        left join billing_apply b on b.id = bai.bill_id
+        <include refid="wheres" />
+    </select>
+    <select id="selectMaterialInfoForExport" resultType="com.lefancrm.apicenter.dto.BillingApplyImgsMaterialDto" parameterType="java.util.Map" >
+        select
+        b.case_id as caseId, b.case_no as caseNo, b.case_title as caseTitle,
+        bam.material_imgs as materialImgs, bam.create_by as materialCreateBy, bam.create_time as materialCreateTime
+        from billing_apply_material bam
+        left join billing_apply b on b.id = bam.bill_id
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectListForMerge" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply b
+        where 1 = 1 and b.billing_state = 1 and b.parent_id is null and b.is_merge is null
+        <if test="companyId != null" >
+            and b.company_id = #{companyId,jdbcType=BIGINT}
+        </if>
+        <if test="billingType != null" >
+            and b.billing_type = #{billingType,jdbcType=INTEGER}
+        </if>
+        <if test="businessType != null" >
+            and b.business_type = #{businessType,jdbcType=INTEGER}
+        </if>
+        <if test="mType == 1" >
+            and b.org_id = #{orgId,jdbcType=BIGINT}
+        </if>
+        <if test="mType == 2" >
+            and b.create_by_id = #{currentUserId,jdbcType=BIGINT}
+        </if>
+
+    </select>
+
+    <update id="updateAccountState" parameterType="com.lefancrm.apicenter.model.BillingApply" >
+        update billing_apply
+        <set >
+            <if test="confirmAccountState != null" >
+                confirm_account_state = #{confirmAccountState,jdbcType=INTEGER},
+            </if>
+            <if test="confirmAccountTime != null" >
+                confirm_account_time = #{confirmAccountTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where case_id = #{caseId,jdbcType=BIGINT}
+    </update>
+    <resultMap id="BaseResultMap2" type="com.lefancrm.apicenter.dto.BillingApplyDto" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="case_id" property="caseId" jdbcType="BIGINT" />
+        <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+        <result column="case_title" property="caseTitle" jdbcType="VARCHAR" />
+        <result column="servcie_money" property="servcieMoney" jdbcType="DOUBLE" />
+        <result column="channel_money" property="channelMoney" jdbcType="DOUBLE" />
+        <result column="insurance_money" property="insuranceMoney" jdbcType="DOUBLE" />
+        <result column="deduction_money" property="deductionMoney" jdbcType="DOUBLE" />
+        <result column="billing_money" property="billingMoney" jdbcType="DOUBLE" />
+        <result column="billing_state" property="billingState" jdbcType="INTEGER" />
+        <result column="billing_time" property="billingTime" jdbcType="TIMESTAMP" />
+        <result column="img" property="img" jdbcType="VARCHAR" />
+        <result column="billing_code" property="billingCode" jdbcType="VARCHAR" />
+        <result column="billing_enum" property="billingEnum" jdbcType="INTEGER" />
+        <result column="billing_item" property="billingItem" jdbcType="INTEGER" />
+        <result column="billing_type" property="billingType" jdbcType="INTEGER" />
+        <result column="org_id" property="orgId" jdbcType="BIGINT" />
+        <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+        <result column="recipients_name" property="recipientsName" jdbcType="VARCHAR" />
+        <result column="recipients_phone" property="recipientsPhone" jdbcType="VARCHAR" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="district" property="district" jdbcType="VARCHAR" />
+        <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+        <result column="city_id" property="cityId" jdbcType="INTEGER" />
+        <result column="district_id" property="districtId" jdbcType="INTEGER" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="insured_name" property="insuredName" jdbcType="VARCHAR" />
+        <result column="car_no" property="carNo" jdbcType="VARCHAR" />
+        <result column="wounded_name" property="woundedName" jdbcType="VARCHAR" />
+        <result column="insurer_company_name" property="insurerCompanyName" jdbcType="VARCHAR" />
+        <result column="policy_no" property="policyNo" jdbcType="VARCHAR" />
+        <result column="report_no" property="reportNo" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="billing_by_id" property="billingById" jdbcType="BIGINT" />
+        <result column="billing_by" property="billingBy" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="update_by_id" property="updateById" jdbcType="BIGINT" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="oper_reason" property="operReason" jdbcType="VARCHAR" />
+        <result column="is_pre_sign" property="isPreSign" jdbcType="INTEGER" />
+        <result column="business_type" property="businessType" jdbcType="INTEGER" />
+        <result column="merit_name" property="meritName" jdbcType="VARCHAR" />
+        <result column="confirm_account_money" property="confirmAccountMoney" jdbcType="DOUBLE" />
+        <result column="confirm_account_state" property="confirmAccountState" jdbcType="INTEGER" />
+        <result column="confirm_account_time" property="confirmAccountTime" jdbcType="TIMESTAMP" />
+        <result column="reject_reason" property="rejectReason" jdbcType="VARCHAR" />
+        <result column="company_id" property="companyId" jdbcType="BIGINT" />
+        <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+        <result column="is_merge" property="isMerge" jdbcType="INTEGER" />
+        <result column="survey_department_id" property="surveyDepartmentId" jdbcType="BIGINT" />
+        <result column="survey_department_name" property="surveyDepartmentName" jdbcType="VARCHAR" />
+        <result column="survey_consignor_id" property="surveyConsignorId" jdbcType="BIGINT" />
+        <result column="survey_consignor_name" property="surveyConsignorName" jdbcType="VARCHAR" />
+        <result column="product_type" property="productType" jdbcType="INTEGER" />
+        <result column="billing_source" property="billingSource" jdbcType="INTEGER" />
+        <result column="survey_bill_subject_id" property="surveyBillSubjectId" jdbcType="BIGINT" />
+        <result column="survey_bill_subject_name" property="surveyBillSubjectName" jdbcType="VARCHAR" />
+        <result column="survey_org_id" property="surveyOrgId" jdbcType="BIGINT" />
+        <result column="survey_org_name" property="surveyOrgName" jdbcType="VARCHAR" />
+        <result column="staff_org_id" property="staffOrgId" jdbcType="BIGINT" />
+        <result column="staff_org_name" property="staffOrgName" jdbcType="VARCHAR" />
+        <collection property="billingApplyAccountsList" javaType="java.util.ArrayList"  ofType="com.lefancrm.apicenter.model.BillingApplyAccounts" select="selectListByImgsId" column="id">
+        </collection>
+    </resultMap>
+    <resultMap id="BaseResultMap3" type="com.lefancrm.apicenter.model.BillingApplyAccounts" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="bill_id" property="billId" jdbcType="BIGINT" />
+        <result column="money" property="money" jdbcType="DOUBLE" />
+        <result column="imgs" property="imgs" jdbcType="VARCHAR" />
+        <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="account_time" property="accountTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <select id="selectListByImgsId" resultMap="BaseResultMap3">
+        select
+            id, bill_id, money, imgs, create_by_id, create_by, create_time, state,remark,account_time
+        from billing_apply_accounts
+        where bill_imgs_id = #{id}
+        and state = 1
+    </select>
+
+    <select id="selectListForExport" resultType="com.lefancrm.apicenter.dto.BillingApplyDto" parameterType="map" >
+        select
+        b.id as id, b.case_id as caseId, b.case_no as caseNo, b.case_title as caseTitle, b.servcie_money as servcieMoney,
+        b.channel_money as channelMoney, b.insurance_money as insuranceMoney,
+        b.deduction_money as deductionMoney, b.billing_money as billingMoney, b.billing_state as billingState,
+        b.billing_time as billingTime, b.img as img, b.billing_code as billingCode, b.billing_enum as billingEnum,
+        b.billing_item as billingItem, b.billing_type as billingType, b.org_id as orgId, b.org_name as orgName,
+        b.recipients_name as recipientsName, b.recipients_phone as recipientsPhone,
+        b.province as province, b.city as city, b.district as district, b.province_id as provinceId, b.city_id as cityId,
+        b.district_id as districtId, b.address as address, b.insured_name as insuredName,
+        b.car_no as carNo, b.wounded_name as woundedName, b.insurer_company_name as insurerCompanyName, b.policy_no as policyNo,
+        b.report_no as reportNo, b.remark as remark, b.create_time as createTime,
+        b.create_by_id as createById, b.create_by as createBy, b.billing_by_id as billingById, b.billing_by as billingBy,
+        b.update_time as updateTime, b.update_by_id as updateById, b.update_by as updateBy, b.oper_reason as operReason,
+        b.is_pre_sign as isPreSign, b.business_type as businessType, b.merit_name as meritName,
+        b.confirm_account_money as confirmAccountMoney, b.confirm_account_state as confirmAccountState ,
+        b.confirm_account_time as confirmAccountTime,
+        b.reject_reason as rejectReason,b.company_name as companyName, b.is_merge as isMerge,
+        b.staff_org_name staffOrgName,b.staff_org_id staffOrgId,
+        ce.enum_name as billingEnumName, cd.enum_name as billingItemName, b.merit_name as meritName
+        from billing_apply b
+        left join common_enum ce on b.billing_enum = ce.enum_code and ce.parent_id =(select id from common_enum where enum_code='billingEnum')
+        left join common_enum cd on b.billing_item = cd.enum_code and cd.parent_id =(select id from common_enum where enum_code='billingItem')
+
+        <include refid="wheres" />
+    </select>
+    <select id="selectListForExportGonggu" resultMap="BaseResultMap2" parameterType="map" >
+
+        select
+        i.id,
+        i.billing_money billingMoney,i.billing_code billingCode,ifnull(i.state,1) billingState,
+        i.create_time,
+        b.org_name orgName,b.company_name companyName,b.billing_type billingType,b.wounded_name woundedName,b.insured_name insuredName,b.car_no carNo,b.remark,
+        ce.enum_name as billingEnumName, cd.enum_name as billingItemName, b.merit_name as meritName,b.business_type,
+        b.staff_org_name staffOrgName,b.staff_org_id staffOrgId
+
+        from billing_apply b
+        left join common_enum ce on b.billing_enum = ce.enum_code and ce.parent_id =(select id from common_enum where enum_code='billingEnum')
+        left join common_enum cd on b.billing_item = cd.enum_code and cd.parent_id =(select id from common_enum where enum_code='billingItem')
+        LEFT JOIN billing_apply_imgs i ON b.id = i.bill_id
+        LEFT JOIN billing_apply_accounts a ON i.id = a.bill_imgs_id and a.state = 1
+        <include refid="wheres" />
+        and (i.state = 1 or i.state = 3)
+        GROUP BY i.id
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="selectMoneyById" resultMap="BaseResultMap">
+
+SELECT a.billing_money - IFNULL(b.okBillMoney,0) noBillMoney,IFNULL(b.okBillMoney,0)okBillMoney,IFNULL(b.okAccountMoney,0)okAccountMoney,IFNULL(b.noAccountMoney,0)noAccountMoney FROM
+	(SELECT billing_money FROM billing_apply WHERE id = #{id}) a,
+	(SELECT SUM(tab.billing_money) okBillMoney,SUM(tab.okAccountMoney) okAccountMoney,SUM(tab.noAccountMoney) noAccountMoney FROM (
+SELECT
+	i.id,i.billing_money ,SUM(IFNULL(a.money,0)) okAccountMoney, i.billing_money - SUM(IFNULL(a.money,0)) noAccountMoney
+FROM
+	billing_apply_imgs i
+	LEFT JOIN billing_apply_accounts a ON i.id = a.bill_imgs_id AND a.state = 1
+WHERE
+	i.bill_id = #{id} AND i.state != 2 and i.state !=3
+	GROUP BY i.id) tab) b
+    </select>
+    <select id="selectListForExportGongguCount" resultType="java.lang.Integer">
+      select  count(1) from
+      (
+        select
+        count(*)
+        from billing_apply b
+        left join common_enum ce on b.billing_enum = ce.enum_code and ce.parent_id =(select id from common_enum where enum_code='billingEnum')
+        left join common_enum cd on b.billing_item = cd.enum_code and cd.parent_id =(select id from common_enum where enum_code='billingItem')
+        LEFT JOIN billing_apply_imgs i ON b.id = i.bill_id
+        LEFT JOIN billing_apply_accounts a ON i.id = a.bill_imgs_id and a.state = 1
+        <include refid="wheres" />
+        group by i.id
+      ) t
+    </select>
+    <select id="selectEnumMoneyList" resultType="com.lefancrm.apicenter.dto.CommonEnumDto">
+        <if test="type == 'single'">
+            <foreach collection="dateTimes" item="item" index="index" >
+                SELECT tabA.*,tabB.accMoney as accMoney,tabC.unmatchMoney,#{item.months} dateTime FROM
+                (
+
+                    SELECT
+                    e.enum_code enumCode,e.enum_name enumName, IFNULL(b.imgMoney,0) as  imgMoney
+                    FROM
+                        (  select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id =
+                          (SELECT a.id from common_enum a where a.enum_code = 'billingEnum')
+                        UNION ALL
+                            SELECT -2 id,-2 enum_code, CONCAT(#{item.months},'开票总金额') as  enum_name
+                            UNION ALL
+                            SELECT 99999 id,99999 enum_code,CONCAT(#{item.months},'应收账款余额') as enum_name
+                            UNION ALL
+                            SELECT -1 id,-1 enum_code, CONCAT(#{item.months},'到账总金额') as enum_name) a
+                            <if test="enumCode != null and enumCode != ''">
+                                where FIND_IN_SET(a.enum_code,#{enumCode})
+                            </if>
+                        ) e
+                    left join (
+                        select SUM(IFNULL(i.billing_money, 0)) imgMoney,a.billing_enum as billing_enum
+                        from billing_apply a LEFT JOIN billing_apply_imgs i ON a.id = i.bill_id
+                        where DATE_FORMAT(i.create_time,'%Y-%m') = #{item.months}
+                        <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                        <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if>
+                        GROUP BY a.billing_enum
+                    )b on b.billing_enum= e.enum_code
+
+
+                    GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+                ) tabA
+                LEFT JOIN
+                (
+                    SELECT
+                    e.enum_code enumCode,e.enum_name enumName,SUM(IFNULL(a.unmatch_money,0)) unmatchMoney
+                    FROM
+                    (  SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id =
+                    (SELECT a.id from common_enum a where a.enum_code = 'billingEnum')
+                    <if test="enumCode != null and enumCode != ''">
+                        AND FIND_IN_SET(b.enum_code,#{enumCode})
+                    </if>
+                    ) e
+                    LEFT JOIN billing_apply_unmatch a ON e.id = a.billing_items_id  AND DATE_FORMAT(a.pay_time,'%Y-%m') = #{item.months}
+
+                    GROUP BY e.enum_code
+                ) tabC ON tabA.enumCode = tabC.enumCode
+                LEFT JOIN
+                (
+                    SELECT
+                    e.enum_code enumCode,e.enum_name enumName, IFNULL(b.accMoney,0) as accMoney
+                    FROM
+                    (  select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id =
+                    (SELECT a.id from common_enum a where a.enum_code = 'billingEnum')
+                    UNION ALL
+                    SELECT -2 id,-2 enum_code, CONCAT(#{item.months},'开票总金额') as  enum_name
+                    UNION ALL
+                    SELECT 99999 id,99999 enum_code,CONCAT(#{item.months},'应收账款余额') as enum_name
+                    UNION ALL
+                    SELECT -1 id,-1 enum_code, CONCAT(#{item.months},'到账总金额') as enum_name) a
+                    <if test="enumCode != null and enumCode != ''">
+                        where FIND_IN_SET(a.enum_code,#{enumCode})
+                    </if>
+                    ) e
+                    left join (
+                        select SUM(IFNULL(s.money, 0)) accMoney, a.billing_enum as billing_enum
+                        from billing_apply a LEFT JOIN billing_apply_accounts s ON a.id = s.bill_id
+                        where DATE_FORMAT(s.account_time,'%Y-%m') = #{item.months}
+                        <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                        <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if>
+                        GROUP BY a.billing_enum
+                    )b on b.billing_enum= e.enum_code
+                GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+                ) tabB on tabA.enumCode = tabB.enumCode
+
+
+
+
+                <if test="index != (dateTimes.size() - 1)">
+                    union all
+                </if>
+            </foreach>
+        </if>
+        <if test="type == 'all'">
+            SELECT
+            e.enum_code enumCode,e.enum_name enumName,SUM(IFNULL(i.money,0)) accMoney,SUM(IFNULL(s.billing_money,0)) imgMoney
+            FROM
+            (  select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id =
+            (SELECT a.id from common_enum a where a.enum_code = 'billingEnum')
+            UNION ALL
+            SELECT -2 id,-2 enum_code,CONCAT(#{item.months},'开票总金额') as enum_name
+            UNION ALL
+            SELECT -1 id,-1 enum_code,CONCAT(#{item.months},'到账总金额') as enum_name) a
+            <if test="enumCode != null and enumCode != ''">
+                where FIND_IN_SET(a.enum_code,#{enumCode})
+            </if>
+            ) e
+            LEFT JOIN billing_apply a ON e.enum_code = a.billing_enum AND a.org_id = #{orgId}
+            <if test="businessTypeId != null and businessTypeId != ''">
+                and a.business_type = #{businessTypeId,jdbcType=BIGINT}
+            </if>
+            left join billing_apply_imgs s on  a.id = s.bill_id AND DATE_FORMAT(s.create_time,'%Y') = '2020'
+            LEFT JOIN billing_apply_accounts i ON a.id = i.bill_id AND DATE_FORMAT(i.account_time,'%Y') = '2020'
+
+            GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+        </if>
+
+
+    </select>
+
+    <sql id="joins">
+
+    </sql>
+
+    <sql id="wheres">
+        <where>
+            <if test="caseNo != null" >
+                and b.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseTitle != null" >
+                and b.case_title like concat('%',#{caseTitle,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="billingState != null" >
+                and b.billing_state = #{billingState,jdbcType=INTEGER}
+            </if>
+            <if test="billingStates != null" >
+                and find_in_set(b.billing_state,#{billingStates,jdbcType=VARCHAR})
+            </if>
+            <if test="mType == 3" >
+                and b.billing_state != 1
+            </if>
+            <if test="menuType == 51">
+                and b.billing_state in (3,5,6,7,8)
+            </if>
+            <if test="menuType == 52">
+                and b.billing_state in (5,6)
+            </if>
+
+            <if test="orgId != null" >
+--                 and b.org_id = #{orgId,jdbcType=BIGINT}
+                and find_in_set(b.org_id,#{orgId})
+            </if>
+            <if test="orgIdGGs != null" >
+                and find_in_set(b.org_id,#{orgIdGGs,jdbcType=VARCHAR})
+            </if>
+            <if test="orgIdGR != null" >
+                and b.org_id = #{orgIdGR,jdbcType=BIGINT}
+            </if>
+            <if test="orgIdGRs != null" >
+                and find_in_set(b.org_id,#{orgIdGRs,jdbcType=VARCHAR})
+            </if>
+            <if test="staffOrgIds != null" >
+                and find_in_set(b.staff_org_id,#{staffOrgIds,jdbcType=VARCHAR})
+            </if>
+            <if test="billingEnum != null" >
+                and b.billing_enum = #{billingEnum,jdbcType=INTEGER}
+            </if>
+            <if test="billingEnums != null" >
+                and find_in_set(b.billing_enum,#{billingEnums,jdbcType=VARCHAR})
+            </if>
+            <if test="mType == 1" >
+                and b.billing_enum !=7
+            </if>
+            <if test="mType == 4" >
+                and b.billing_enum = 7
+            </if>
+            <if test="mType == 3" >
+                and b.billing_enum !=7
+            </if>
+
+            <if test="billingItem != null" >
+                and b.billing_item = #{billingItem,jdbcType=INTEGER}
+            </if>
+            <if test="billingItems != null" >
+                and find_in_set(b.billing_item,#{billingItems,jdbcType=VARCHAR})
+            </if>
+            <if test="billingType != null" >
+                and b.billing_type = #{billingType,jdbcType=INTEGER}
+            </if>
+            <if test="billingTypes != null" >
+                and find_in_set(b.billing_type,#{billingTypes,jdbcType=VARCHAR})
+            </if>
+            <if test="businessType != null" >
+                and b.business_type = #{businessType,jdbcType=INTEGER}
+            </if>
+            <if test="businessTypeIds != null" >
+                and find_in_set(b.business_type,#{businessTypeIds,jdbcType=VARCHAR})
+            </if>
+            <if test="fromType != null and fromType == 'ggywkp'">
+                <if test="startDate != null" >
+                    and DATE_FORMAT(i.create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="endDate != null" >
+                    and DATE_FORMAT(i.create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+            </if>
+            <if test="fromType == null">
+                <if test="startDate != null" >
+                    and DATE_FORMAT(b.billing_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="endDate != null" >
+                    and DATE_FORMAT(b.billing_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+            </if>
+
+            <if test="insuredName != null" >
+                and b.insured_name like concat('%',#{insuredName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="recipientsName != null" >
+                and b.recipients_name like concat('%',#{recipientsName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="carNo != null" >
+                and b.car_no like concat('%',#{carNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="woundedName != null" >
+                and b.wounded_name like concat('%',#{woundedName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="fromType != null and fromType == 'ggywkp'">
+                <if test="confirmStartDate != null" >
+                    and DATE_FORMAT(a.account_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{confirmStartDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="confirmEndDate != null" >
+                    and DATE_FORMAT(a.account_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{confirmEndDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+            </if>
+            <if test="fromType == null">
+                <if test="confirmStartDate != null" >
+                    and DATE_FORMAT(b.confirm_account_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{confirmStartDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="confirmEndDate != null" >
+                    and DATE_FORMAT(b.confirm_account_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{confirmEndDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+            </if>
+            <if test="mType == 2" >
+                and b.billing_enum !=7 and b.create_by_id = #{currentUserId,jdbcType=BIGINT}
+            </if>
+            <if test="billingCodeType == 5" >
+                and b.id in (SELECT bai.bill_id FROM billing_apply_imgs bai where bai.billing_code like concat('%',#{billingCode,jdbcType=VARCHAR},'%') GROUP BY bai.bill_id)
+            </if>
+            <if test="menuType == 2">
+                and b.parent_id is null
+            </if>
+            <if test="mType == 11" >
+                and b.billing_enum = 7 and b.billing_state = 2
+            </if>
+            <if test="mType == 12" >
+                and b.billing_enum !=7 and b.billing_state = 2
+            </if>
+            <if test="mType == 13" >
+                and b.billing_enum !=7 and (b.confirm_account_state = 1 or b.confirm_account_state is null)
+            </if>
+            <if test="confirmAccountState != null" >
+                and b.confirm_account_state = #{confirmAccountState,jdbcType=INTEGER}
+            </if>
+            <if test="confirmAccountStates != null" >
+                and find_in_set(b.confirm_account_state,#{confirmAccountStates,jdbcType=VARCHAR})
+            </if>
+            <if test="billingCompanyType == 5" >
+                and b.company_name like concat('%',#{billingCompany,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="mType == 5" >
+                and b.billing_enum !=7 and (b.create_by_id = #{currentUserId,jdbcType=BIGINT} or b.staff_org_id = #{myOrgId,jdbcType=BIGINT})
+            </if>
+            <if test="meritName != null" >
+                and b.merit_name like concat('%',#{meritName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="imgsState != null" >
+                and b.id in (SELECT bai.bill_id FROM billing_apply_imgs bai where bai.state = #{imgsState,jdbcType=INTEGER} GROUP BY bai.bill_id)
+            </if>
+            <if test="imgsStates != null" >
+                and b.id in (SELECT bai.bill_id FROM billing_apply_imgs bai where find_in_set(bai.state,#{imgsStates,jdbcType=VARCHAR}) GROUP BY bai.bill_id)
+            </if>
+            <if test="surveyOrgId != null" >
+                and b.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+            </if>
+            <if test="companyIds != null" >
+                and find_in_set(b.business_type,#{companyIds,jdbcType=VARCHAR})
+            </if>
+            <if test="ycRole == 1 || csRole == 1 || cwRole == 1 || wxRole == 1 || ntRole == 1">
+                and (
+                    1 = 2
+                    <if test="ycRole == 1">
+                        or b.business_type = 6
+                    </if>
+                    <if test="csRole == 1">
+                        or b.business_type = 7
+                    </if>
+                    <if test="cwRole == 1">
+                        or 1 = 1
+                    </if>
+
+                    <if test="wxRole == 1">
+                        or b.business_type = 46
+                    </if>
+                    <if test="ntRole == 1">
+                        or b.business_type = 45
+                    </if>
+                )
+            </if>
+            <if test="enums144 == 144">
+                and b.billing_enum in (1,2,3,9,11,257,17,8,13) and b.business_type in (2,6,7)
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectTest" resultType="com.lefancrm.apicenter.dto.CommonEnumDto">
+        select
+        A.aa as aa,
+        A.bb as bb,
+        A.cc as cc,
+        A.dd as dd,
+        A.ee as ee,
+        A.ff as ff,
+        A.gg as gg,
+        A.hh as hh,
+        A.ii as ii,
+        A.jj as jj,
+        A.kk as kk,
+        A.ll as ll,
+        A.mm as mm,
+        A.nn as nn,
+
+        A.enumCode as enumCode, A.enumName as enumName, A.unmatchMoney as unmatchMoney, A.dateTime as dateTime,
+        A.aa as imgMoney, A.bb as accMoney,
+        convert((A.aa - A.cc )/ A.cc, decimal(15,4)) as monthImgMoneyHBRate,
+        convert((A.aa - A.ee )/ A.ee, decimal(15,4)) as monthImgMoneyTBRate,
+        convert((A.bb - A.dd )/ A.dd, decimal(15,4)) as monthAccMoneyHBRate,
+        convert((A.bb - A.ff )/ A.ff, decimal(15,4)) as monthAccMoneyTBRate,
+        A.gg as yearImgMoneyYear,
+        convert((A.gg - A.ii )/ A.ii, decimal(15,4)) as yearImgMoneyTBRate,
+        A.hh as yearAccMoneyYear,
+        convert((A.hh - A.jj )/ A.jj, decimal(15,4)) as  yearAccMoneyTBRate,
+        (#{lastYearMoney,jdbcType=DOUBLE} + A.kk - A.ll)  as hisReceMoneyYear,
+        convert((#{lastYearMoney,jdbcType=DOUBLE} + A.kk - A.ll) - (#{thisYearMoney,jdbcType=DOUBLE} + A.mm - A.nn) / (#{thisYearMoney,jdbcType=DOUBLE} + A.mm - A.nn), decimal(15,4)) as hisReceMoneyTBRate
+
+        from (
+            select thisMonth.enumCode as enumCode, thisMonth.enumName as enumName, thisMonth.unmatchMoney as thisMonth,
+            thisMonth.dateTime as dateTime, thisMonth.unmatchMoney as unmatchMoney,
+            ifnull(thisMonth.imgMoney, 0) as aa,
+            ifnull(thisMonthAccMoney.accMoney, 0) as bb,
+            ifnull(lastMonthImgMoney.imgMoney, 0) as cc,
+            ifnull(lastMonthAccMoney.accMoney, 0) as dd,
+            ifnull(lastYearMonthImgMoney.imgMoney, 0) as ee,
+            ifnull(lastYearMonthAccMoney.accMoney, 0) as ff,
+            ifnull(thisAllYearImgMoney.imgMoney, 0) as gg,
+            ifnull(thisAllYearAccMoney.accMoney, 0) as hh,
+            ifnull(lastAllYearImgMoney.imgMoney, 0) as ii,
+            ifnull(lastAllYearAccMoney.accMoney, 0) as jj,
+            ifnull(thisYearPartTimeImgMoney.imgMoney, 0) as kk,
+            ifnull(thisYearPartTimeAccMoney.accMoney, 0) as ll,
+            ifnull(lastYearPartTimeImgMoney.imgMoney, 0) as mm,
+            ifnull(lastYearPartTimeAccMoney.accMoney, 0) as nn
+        from
+        (
+          SELECT tabA.*, tabC.unmatchMoney, #{dateTimes} as dateTime
+          FROM
+            (SELECT e.enum_code enumCode,e.enum_name enumName, b.imgMoney as imgMoney
+                FROM
+                (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from common_enum a where a.enum_code = 'billingEnum')
+                    UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+                    UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+                    UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+                    <if test="enumCode != null and enumCode != ''">
+                        where FIND_IN_SET(a.enum_code,#{enumCode})
+                    </if>
+                ) e
+                left join (
+                    select SUM(IFNULL(i.billing_money, 0)) imgMoney,a.billing_enum as billing_enum
+                    from billing_apply a
+                    LEFT JOIN billing_apply_imgs i ON a.id = i.bill_id
+                    where DATE_FORMAT(i.create_time,'%Y-%m') = #{dateTimes} and (i.state = 1 or i.state = 3)
+                    <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                    <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if>
+                    GROUP BY a.billing_enum
+                )b on b.billing_enum= e.enum_code
+
+                GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+            ) tabA
+          LEFT JOIN
+            (SELECT e.enum_code enumCode,e.enum_name enumName,SUM(IFNULL(a.unmatch_money,0)) unmatchMoney
+                FROM
+                (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from common_enum a where a.enum_code = 'billingEnum')
+                    <if test="enumCode != null and enumCode != ''">
+                        AND FIND_IN_SET(b.enum_code,#{enumCode})
+                    </if>
+                ) e
+                LEFT JOIN billing_apply_unmatch a ON e.id = a.billing_items_id
+                where DATE_FORMAT(a.pay_time,'%Y-%m') = #{dateTimes}
+                GROUP BY e.enum_code
+            ) tabC ON tabA.enumCode = tabC.enumCode
+        ) thisMonth
+
+        left join (
+            SELECT tabA.accMoney as accMoney,tabA.enumCode as enumCode, #{dateTimes} as dateTime
+            FROM
+                (SELECT e.enum_code enumCode,e.enum_name enumName, b.accMoney as  accMoney
+                    FROM
+                    (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from common_enum a where a.enum_code = 'billingEnum')
+                    UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+                    UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+                    UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+                    <if test="enumCode != null and enumCode != ''">
+                        where FIND_IN_SET(a.enum_code,#{enumCode})
+                    </if>
+                ) e
+                left join (
+                    select SUM(IFNULL(s.money, 0)) accMoney, a.billing_enum as billing_enum
+                    from billing_apply a
+                    LEFT JOIN billing_apply_accounts s ON a.id = s.bill_id
+                    LEFT JOIN billing_apply_imgs i ON i.id = s.bill_imgs_id
+                    where DATE_FORMAT(s.account_time,'%Y-%m') = #{dateTimes} and i.state = 1
+                    <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                    <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if>
+                  GROUP BY a.billing_enum
+                )b on b.billing_enum= e.enum_code
+                GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+            ) tabA
+        ) thisMonthAccMoney on thisMonth.enumCode = thisMonthAccMoney.enumCode
+
+        left join (
+            SELECT monthTabA.*, monthTabC.unmatchMoney, #{monthDateTimes} as dateTime
+            FROM
+            (SELECT e.enum_code enumCode,e.enum_name enumName, b.imgMoney as imgMoney
+                FROM
+                (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from
+                common_enum a where a.enum_code = 'billingEnum')
+                UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+                UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+                UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+                <if test="enumCode != null and enumCode != ''">
+                    where FIND_IN_SET(a.enum_code,#{enumCode})
+                </if>
+                ) e
+                left join (
+                select SUM(IFNULL(i.billing_money, 0)) imgMoney,a.billing_enum as billing_enum
+                from billing_apply a LEFT JOIN billing_apply_imgs i ON a.id = i.bill_id
+                where DATE_FORMAT(i.create_time,'%Y-%m') = #{monthDateTimes} and  (i.state = 1 or i.state = 3)
+                <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if> GROUP BY a.billing_enum
+                )b on b.billing_enum= e.enum_code
+                GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+            ) monthTabA
+            LEFT JOIN
+            (SELECT e.enum_code enumCode,e.enum_name enumName,SUM(IFNULL(a.unmatch_money,0)) unmatchMoney
+            FROM
+            (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from common_enum a
+            where a.enum_code = 'billingEnum')
+            <if test="enumCode != null and enumCode != ''">
+                AND FIND_IN_SET(b.enum_code,#{enumCode})
+            </if>
+            ) e
+            LEFT JOIN billing_apply_unmatch a ON e.id = a.billing_items_id
+            where DATE_FORMAT(a.pay_time,'%Y-%m') = #{monthDateTimes}
+            GROUP BY e.enum_code
+            ) monthTabC ON monthTabA.enumCode = monthTabC.enumCode
+        ) lastMonthImgMoney on thisMonth.enumCode = lastMonthImgMoney.enumCode
+
+        left join (
+            SELECT monthTabA.accMoney as accMoney, monthTabA.enumCode as enumCode, #{monthDateTimes} as dateTime
+            FROM
+            (SELECT e.enum_code enumCode,e.enum_name enumName, b.accMoney as accMoney
+                FROM
+                (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from
+                common_enum a where a.enum_code = 'billingEnum')
+                UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+                UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+                UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+                <if test="enumCode != null and enumCode != ''">
+                    where FIND_IN_SET(a.enum_code,#{enumCode})
+                </if>
+                ) e
+                left join (
+                    select SUM(IFNULL(s.money, 0)) accMoney, a.billing_enum as billing_enum
+                    from billing_apply a
+                    LEFT JOIN billing_apply_accounts s ON a.id = s.bill_id
+                    LEFT JOIN billing_apply_imgs i ON i.id = s.bill_imgs_id
+                    where DATE_FORMAT(s.account_time,'%Y-%m') = #{monthDateTimes} and i.state = 1
+                    <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                    <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if> GROUP BY a.billing_enum
+                )b on b.billing_enum= e.enum_code
+                GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+            ) monthTabA
+        ) lastMonthAccMoney on thisMonth.enumCode = lastMonthAccMoney.enumCode
+
+        left join (
+            SELECT yearTabA.*, yearTabC.unmatchMoney, #{yearDateTimes} as dateTime
+            FROM
+            (SELECT e.enum_code enumCode,e.enum_name enumName, b.imgMoney as imgMoney
+                FROM
+                (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from
+                common_enum a where a.enum_code = 'billingEnum')
+                UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+                UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+                UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+                <if test="enumCode != null and enumCode != ''">
+                    where FIND_IN_SET(a.enum_code,#{enumCode})
+                </if>
+                ) e
+                left join (
+                    select SUM(IFNULL(i.billing_money, 0)) imgMoney,a.billing_enum as billing_enum
+                    from billing_apply a LEFT JOIN billing_apply_imgs i ON a.id = i.bill_id
+                    where DATE_FORMAT(i.create_time,'%Y-%m') = #{yearDateTimes} and  (i.state = 1 or i.state = 3)
+                    <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                    <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if> GROUP BY a.billing_enum
+                )b on b.billing_enum= e.enum_code
+                GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+            ) yearTabA
+            LEFT JOIN
+            (SELECT e.enum_code enumCode,e.enum_name enumName,SUM(IFNULL(a.unmatch_money,0)) unmatchMoney
+                FROM
+                (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from common_enum a
+                where a.enum_code = 'billingEnum')
+                <if test="enumCode != null and enumCode != ''">
+                    AND FIND_IN_SET(b.enum_code,#{enumCode})
+                </if>
+                ) e
+                LEFT JOIN billing_apply_unmatch a ON e.id = a.billing_items_id
+                where DATE_FORMAT(a.pay_time,'%Y-%m') = #{yearDateTimes}
+                GROUP BY e.enum_code
+            ) yearTabC ON yearTabA.enumCode = yearTabC.enumCode
+        )lastYearMonthImgMoney on thisMonth.enumCode = lastYearMonthImgMoney.enumCode
+
+        left join (
+            SELECT yearTabA.enumCode as enumCode, yearTabA.accMoney, #{yearDateTimes} as dateTime
+            FROM
+            (SELECT e.enum_code enumCode,e.enum_name enumName, b.accMoney as accMoney
+            FROM
+            (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from
+            common_enum a where a.enum_code = 'billingEnum')
+            UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+            UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+            UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+            <if test="enumCode != null and enumCode != ''">
+                where FIND_IN_SET(a.enum_code,#{enumCode})
+            </if>
+            ) e
+            left join (
+                select SUM(IFNULL(s.money, 0)) accMoney, a.billing_enum as billing_enum
+                from billing_apply a
+                LEFT JOIN billing_apply_accounts s ON a.id = s.bill_id
+                LEFT JOIN billing_apply_imgs i ON i.id = s.bill_imgs_id
+                where DATE_FORMAT(s.account_time,'%Y-%m') = #{yearDateTimes} and i.state = 1
+                <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if> GROUP BY a.billing_enum
+            )b on b.billing_enum= e.enum_code
+            GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+            ) yearTabA
+        )lastYearMonthAccMoney on thisMonth.enumCode = lastYearMonthAccMoney.enumCode
+
+        left join (
+            SELECT yearTabA.*, yearTabC.unmatchMoney, #{yearDateTimes} as dateTime
+            FROM
+            (SELECT e.enum_code enumCode,e.enum_name enumName, b.imgMoney as imgMoney
+            FROM
+            (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from
+            common_enum a where a.enum_code = 'billingEnum')
+            UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+            UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+            UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+            <if test="enumCode != null and enumCode != ''">
+                where FIND_IN_SET(a.enum_code,#{enumCode})
+            </if>
+            ) e
+            left join (
+                select SUM(IFNULL(i.billing_money, 0)) imgMoney,a.billing_enum as billing_enum
+                from billing_apply a LEFT JOIN billing_apply_imgs i ON a.id = i.bill_id
+                where DATE_FORMAT(i.create_time,'%Y') = #{thisYearTimes} and (i.state = 1 or i.state = 3)
+                <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if> GROUP BY a.billing_enum
+            )b on b.billing_enum= e.enum_code
+            GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+            ) yearTabA
+            LEFT JOIN
+            (SELECT e.enum_code enumCode,e.enum_name enumName,SUM(IFNULL(a.unmatch_money,0)) unmatchMoney
+            FROM
+            (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from common_enum a
+            where a.enum_code = 'billingEnum')
+            <if test="enumCode != null and enumCode != ''">
+                AND FIND_IN_SET(b.enum_code,#{enumCode})
+            </if>
+            ) e
+            LEFT JOIN billing_apply_unmatch a ON e.id = a.billing_items_id
+            where DATE_FORMAT(a.pay_time,'%Y') = #{thisYearTimes}
+            GROUP BY e.enum_code
+            ) yearTabC ON yearTabA.enumCode = yearTabC.enumCode
+        )thisAllYearImgMoney on thisMonth.enumCode = thisAllYearImgMoney.enumCode
+
+        left join (
+
+          SELECT yearTabA.enumCode as enumCode, yearTabA.accMoney as accMoney, #{yearDateTimes} as dateTime
+            FROM
+            (SELECT e.enum_code enumCode,e.enum_name enumName, b.accMoney as accMoney
+            FROM
+            (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from
+            common_enum a where a.enum_code = 'billingEnum')
+            UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+            UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+            UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+            <if test="enumCode != null and enumCode != ''">
+                where FIND_IN_SET(a.enum_code,#{enumCode})
+            </if>
+            ) e
+            left join (
+                select SUM(IFNULL(s.money, 0)) accMoney, a.billing_enum as billing_enum
+                from billing_apply a
+                LEFT JOIN billing_apply_accounts s ON a.id = s.bill_id
+                LEFT JOIN billing_apply_imgs i ON i.id = s.bill_imgs_id
+                where DATE_FORMAT(s.account_time,'%Y') = #{thisYearTimes} and i.state = 1
+                <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if> GROUP BY a.billing_enum
+            )b on b.billing_enum= e.enum_code
+            GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+            ) yearTabA
+        )thisAllYearAccMoney on thisMonth.enumCode = thisAllYearAccMoney.enumCode
+
+        left join (
+            SELECT yearTabA.*, yearTabC.unmatchMoney, #{yearDateTimes} as dateTime
+            FROM
+            (SELECT e.enum_code enumCode,e.enum_name enumName, b.imgMoney as imgMoney
+            FROM
+            (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from
+            common_enum a where a.enum_code = 'billingEnum')
+            UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+            UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+            UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+            <if test="enumCode != null and enumCode != ''">
+                where FIND_IN_SET(a.enum_code,#{enumCode})
+            </if>
+            ) e
+
+            left join (
+                select SUM(IFNULL(i.billing_money, 0)) imgMoney,a.billing_enum as billing_enum
+                from billing_apply a LEFT JOIN billing_apply_imgs i ON a.id = i.bill_id
+                where DATE_FORMAT(i.create_time,'%Y') = #{lastYearTimes} and i.state = 1
+                <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if> GROUP BY a.billing_enum
+            )b on b.billing_enum= e.enum_code
+
+            GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+            ) yearTabA
+            LEFT JOIN
+            (SELECT e.enum_code enumCode,e.enum_name enumName,SUM(IFNULL(a.unmatch_money,0)) unmatchMoney
+            FROM
+            (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from common_enum a
+            where a.enum_code = 'billingEnum')
+            <if test="enumCode != null and enumCode != ''">
+                AND FIND_IN_SET(b.enum_code,#{enumCode})
+            </if>
+            ) e
+            LEFT JOIN billing_apply_unmatch a ON e.id = a.billing_items_id
+            where DATE_FORMAT(a.pay_time,'%Y') = #{lastYearTimes}
+            GROUP BY e.enum_code
+            ) yearTabC ON yearTabA.enumCode = yearTabC.enumCode
+        )lastAllYearImgMoney on thisMonth.enumCode = lastAllYearImgMoney.enumCode
+
+        left join (
+        SELECT yearTabA.enumCode as enumCode, yearTabA.accMoney as accMoney, #{yearDateTimes} as dateTime
+            FROM
+                (SELECT e.enum_code enumCode,e.enum_name enumName, b.accMoney as accMoney
+                FROM
+                (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from
+                common_enum a where a.enum_code = 'billingEnum')
+                UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+                UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+                UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+                <if test="enumCode != null and enumCode != ''">
+                    where FIND_IN_SET(a.enum_code,#{enumCode})
+                </if>
+                ) e
+                left join (
+                    select SUM(IFNULL(s.money, 0)) accMoney, a.billing_enum as billing_enum
+                    from billing_apply a
+                    LEFT JOIN billing_apply_accounts s ON a.id = s.bill_id
+                    LEFT JOIN billing_apply_imgs i ON i.id = s.bill_imgs_id
+                    where DATE_FORMAT(s.account_time,'%Y') = #{lastYearTimes} and i.state = 1
+                    <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                    <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if> GROUP BY a.billing_enum
+                )b on b.billing_enum= e.enum_code
+                GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+            ) yearTabA
+        )lastAllYearAccMoney on thisMonth.enumCode = lastAllYearAccMoney.enumCode
+
+        left join (
+
+            SELECT yearTabA.*, yearTabC.unmatchMoney, #{yearDateTimes} as dateTime
+            FROM
+            (SELECT e.enum_code enumCode,e.enum_name enumName, b.imgMoney as imgMoney
+            FROM
+            (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from
+            common_enum a where a.enum_code = 'billingEnum')
+            UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+            UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+            UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+            <if test="enumCode != null and enumCode != ''">
+                where FIND_IN_SET(a.enum_code,#{enumCode})
+            </if>
+            ) e
+
+        left join (
+            select SUM(IFNULL(i.billing_money, 0)) imgMoney,a.billing_enum as billing_enum
+            from billing_apply a LEFT JOIN billing_apply_imgs i ON a.id = i.bill_id
+            where DATE_FORMAT(i.create_time,'%Y-%m') &gt;= DATE_FORMAT(#{thisYearBeginTime,jdbcType=DATE},'%Y-%m') and i.state = 1
+            and DATE_FORMAT(i.create_time,'%Y-%m') &lt;= DATE_FORMAT(#{thisYearEndTime,jdbcType=DATE},'%Y-%m')
+            <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+            <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if> GROUP BY a.billing_enum
+        )b on b.billing_enum= e.enum_code
+
+            GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+            ) yearTabA
+            LEFT JOIN
+            (SELECT e.enum_code enumCode,e.enum_name enumName,SUM(IFNULL(a.unmatch_money,0)) unmatchMoney
+            FROM
+            (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from common_enum a
+            where a.enum_code = 'billingEnum')
+            <if test="enumCode != null and enumCode != ''">
+                AND FIND_IN_SET(b.enum_code,#{enumCode})
+            </if>
+            ) e
+            LEFT JOIN billing_apply_unmatch a ON e.id = a.billing_items_id
+            where 1=1
+            <if test="thisYearBeginTime != null" >
+                and DATE_FORMAT(a.pay_time,'%Y-%m') &gt;= DATE_FORMAT(#{thisYearBeginTime,jdbcType=DATE},'%Y-%m')
+            </if>
+            <if test="thisYearEndTime != null" >
+                and DATE_FORMAT(a.pay_time,'%Y-%m') &lt;= DATE_FORMAT(#{thisYearEndTime,jdbcType=DATE},'%Y-%m')
+            </if>
+            GROUP BY e.enum_code
+            ) yearTabC ON yearTabA.enumCode = yearTabC.enumCode
+        )thisYearPartTimeImgMoney on thisMonth.enumCode = thisYearPartTimeImgMoney.enumCode
+
+        left join (
+        SELECT yearTabA.enumCode as enumCode, yearTabA.accMoney as accMoney, #{yearDateTimes} as dateTime
+            FROM
+            (SELECT e.enum_code enumCode,e.enum_name enumName, b.accMoney as accMoney
+            FROM
+            (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from
+            common_enum a where a.enum_code = 'billingEnum')
+            UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+            UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+            UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+            <if test="enumCode != null and enumCode != ''">
+                where FIND_IN_SET(a.enum_code,#{enumCode})
+            </if>
+            ) e
+        left join (
+            select SUM(IFNULL(s.money, 0)) accMoney, a.billing_enum as billing_enum
+            from billing_apply a
+            LEFT JOIN billing_apply_accounts s ON a.id = s.bill_id
+            LEFT JOIN billing_apply_imgs i ON i.id = s.bill_imgs_id
+            where DATE_FORMAT(s.account_time,'%Y-%m') &gt;= DATE_FORMAT(#{thisYearBeginTime,jdbcType=DATE},'%Y-%m') and i.state = 1
+            and DATE_FORMAT(s.account_time,'%Y-%m') &lt;= DATE_FORMAT(#{thisYearEndTime,jdbcType=DATE},'%Y-%m')
+            <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+            <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if> GROUP BY a.billing_enum
+        )b on b.billing_enum= e.enum_code
+
+            GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+            ) yearTabA
+        )thisYearPartTimeAccMoney on thisMonth.enumCode = thisYearPartTimeAccMoney.enumCode
+
+        left join (
+            SELECT yearTabA.*, yearTabC.unmatchMoney, #{yearDateTimes} as dateTime
+            FROM
+            (SELECT e.enum_code enumCode,e.enum_name enumName, b.imgMoney as imgMoney
+            FROM
+            (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from
+            common_enum a where a.enum_code = 'billingEnum')
+            UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+            UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+            UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+            <if test="enumCode != null and enumCode != ''">
+                where FIND_IN_SET(a.enum_code,#{enumCode})
+            </if>
+            ) e
+
+            left join (
+                select SUM(IFNULL(i.billing_money, 0)) imgMoney,a.billing_enum as billing_enum
+                from billing_apply a LEFT JOIN billing_apply_imgs i ON a.id = i.bill_id
+                where DATE_FORMAT(i.create_time,'%Y-%m') &gt;= DATE_FORMAT(#{lastYearBeginTime,jdbcType=DATE},'%Y-%m') and i.state = 1
+                and DATE_FORMAT(i.create_time,'%Y-%m') &lt;= DATE_FORMAT(#{lastYearEndTime,jdbcType=DATE},'%Y-%m')
+                <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if> GROUP BY a.billing_enum
+            )b on b.billing_enum= e.enum_code
+
+            GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+            ) yearTabA
+            LEFT JOIN
+            (SELECT e.enum_code enumCode,e.enum_name enumName,SUM(IFNULL(a.unmatch_money,0)) unmatchMoney
+            FROM
+            (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from common_enum a
+            where a.enum_code = 'billingEnum')
+            <if test="enumCode != null and enumCode != ''">
+                AND FIND_IN_SET(b.enum_code,#{enumCode})
+            </if>
+            ) e
+            LEFT JOIN billing_apply_unmatch a ON e.id = a.billing_items_id
+            where 1=1
+            <if test="lastYearBeginTime != null" >
+                and DATE_FORMAT(a.pay_time,'%Y-%m') &gt;= DATE_FORMAT(#{lastYearBeginTime,jdbcType=DATE},'%Y-%m')
+            </if>
+            <if test="lastYearEndTime != null" >
+                and DATE_FORMAT(a.pay_time,'%Y-%m') &lt;= DATE_FORMAT(#{lastYearEndTime,jdbcType=DATE},'%Y-%m')
+            </if>
+            GROUP BY e.enum_code
+            ) yearTabC ON yearTabA.enumCode = yearTabC.enumCode
+        )lastYearPartTimeImgMoney on thisMonth.enumCode = lastYearPartTimeImgMoney.enumCode
+
+        left join (
+        SELECT yearTabA.enumCode as enumCode, yearTabA.accMoney as accMoney, #{yearDateTimes} as dateTime
+        FROM
+            (SELECT e.enum_code enumCode,e.enum_name enumName, b.accMoney as accMoney
+            FROM
+            (select * from (SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id = (SELECT a.id from
+            common_enum a where a.enum_code = 'billingEnum')
+            UNION ALL SELECT -2 id,-2 enum_code,'开票总金额' enum_name
+            UNION ALL SELECT 99999 id,99999 enum_code,'应收账款余额' enum_name
+            UNION ALL SELECT -1 id,-1 enum_code,'到账总金额' enum_name) a
+            <if test="enumCode != null and enumCode != ''">
+                where FIND_IN_SET(a.enum_code,#{enumCode})
+            </if>
+            ) e
+            left join (
+                select SUM(IFNULL(s.money, 0)) accMoney, a.billing_enum as billing_enum
+                from billing_apply a
+                LEFT JOIN billing_apply_accounts s ON a.id = s.bill_id
+                LEFT JOIN billing_apply_imgs i ON i.id = s.bill_imgs_id
+                where DATE_FORMAT(s.account_time,'%Y-%m') &gt;= DATE_FORMAT(#{lastYearBeginTime,jdbcType=DATE},'%Y-%m')
+                and DATE_FORMAT(s.account_time,'%Y-%m') &lt;= DATE_FORMAT(#{lastYearEndTime,jdbcType=DATE},'%Y-%m')
+
+                <if test="orgId != null and orgId != ''">AND a.org_id = #{orgId}</if>
+                <if test="businessType != null and businessType != ''">and find_in_set(a.business_type,#{businessType,jdbcType=VARCHAR})</if> GROUP BY a.billing_enum
+            )b on b.billing_enum= e.enum_code
+            GROUP BY e.enum_code ORDER BY cast(e.enum_code as SIGNED INTEGER)
+        ) yearTabA
+
+        )lastYearPartTimeAccMoney on thisMonth.enumCode = lastYearPartTimeAccMoney.enumCode
+
+        ) A
+
+    </select>
+</mapper>

@@ -1,0 +1,1426 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyInvestigatorMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyInvestigator" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+        <result column="real_name" property="realName" jdbcType="VARCHAR" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="district" property="district" jdbcType="VARCHAR" />
+        <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+        <result column="city_id" property="cityId" jdbcType="INTEGER" />
+        <result column="district_id" property="districtId" jdbcType="INTEGER" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="include_area" property="includeArea" jdbcType="VARCHAR" />
+        <result column="include_area_name" property="includeAreaName" jdbcType="VARCHAR" />
+        <result column="include_bus" property="includeBus" jdbcType="VARCHAR" />
+        <result column="include_bus_name" property="includeBusName" jdbcType="VARCHAR" />
+        <result column="tel" property="tel" jdbcType="VARCHAR" />
+        <result column="auth_type" property="authType" jdbcType="INTEGER" />
+        <result column="acc_state" property="accState" jdbcType="INTEGER" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="lefan_currency" property="lefanCurrency" jdbcType="BIGINT" />
+        <result column="ach_point" property="achPoint" jdbcType="BIGINT" />
+        <result column="amount" property="amount" jdbcType="DOUBLE" />
+        <result column="title_id" property="titleId" jdbcType="BIGINT" />
+        <result column="title_name" property="titleName" jdbcType="VARCHAR" />
+        <result column="org_id" property="orgId" jdbcType="BIGINT" />
+        <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="create_by" property="createBy" jdbcType="BIGINT" />
+        <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="include_task" property="includeTask" jdbcType="VARCHAR" />
+        <result column="include_task_name" property="includeTaskName" jdbcType="VARCHAR" />
+        <result column="sign_url" property="signUrl" jdbcType="VARCHAR" />
+        <result column="bank_no" property="bankNo" jdbcType="VARCHAR" />
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+        <result column="res_area" property="resArea" jdbcType="VARCHAR" />
+        <result column="other_overlay_area" property="otherOverlayArea" jdbcType="VARCHAR" />
+        <result column="res_area_id" property="resAreaId" jdbcType="VARCHAR" />
+        <result column="other_overlay_area_id" property="otherOverlayAreaId" jdbcType="VARCHAR" />
+        <result column="bus_type" property="busType" jdbcType="INTEGER" />
+        <result column="quit_time" property="quitTime" jdbcType="DATE" />
+        <result column="teacher_user_id" property="teacherUserId" jdbcType="BIGINT" />
+        <result column="teacher_user_name" property="teacherUserName" jdbcType="VARCHAR" />
+        <result column="teacher_org_id" property="teacherOrgId" jdbcType="BIGINT" />
+        <result column="teacher_org_name" property="teacherOrgName" jdbcType="VARCHAR" />
+        <result column="teacher_user_tel" property="teacherUserTel" jdbcType="VARCHAR" />
+        <result column="is_new_people" property="isNewPeople" jdbcType="INTEGER" />
+        <result column="is_settlement" property="isSettlement" jdbcType="INTEGER" />
+        <result column="real_qualified_time" property="realQualifiedTime" jdbcType="TIMESTAMP" />
+        <result column="qualified_enfd_time" property="qualifiedEnfdTime" jdbcType="TIMESTAMP" />
+        <result column="effec_days" property="effecDays" jdbcType="INTEGER" />
+        <result column="teacher_reward" property="teacherReward" jdbcType="DOUBLE" />
+        <result column="teacher_real_reward" property="teacherRealReward" jdbcType="DOUBLE" />
+        <result column="reward_desc" property="rewardDesc" jdbcType="VARCHAR" />
+        <result column="operate_user_id" property="operateUserId" jdbcType="BIGINT" />
+        <result column="operate_user_name" property="operateUserName" jdbcType="VARCHAR" />
+        <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+        <result column="basic_score" property="basicScore" jdbcType="DOUBLE" />
+        <result column="basic_integral" property="basicIntegral" jdbcType="DOUBLE" />
+        <result column="survey_area_name" property="surveyAreaName" jdbcType="VARCHAR" />
+        <result column="survey_area_id" property="surveyAreaId" jdbcType="BIGINT" />
+        <result column="channel_type" property="channelType" jdbcType="INTEGER" />
+        <result column="have_nw_account" property="haveNwAccount" jdbcType="INTEGER" />
+        <result column="register_no" property="registerNo" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, nick_name, real_name, user_id, idcard, province, city, district, province_id,
+    city_id, district_id, address, include_area, include_area_name, include_bus, include_bus_name,
+    tel, auth_type, acc_state, remark, lefan_currency, ach_point, amount, title_id, title_name,
+    org_id, org_name, type, create_by, create_by_name, create_time, update_by, update_time,
+    delete_flag, include_task, include_task_name, sign_url, bank_no, bank_name, res_area,
+    other_overlay_area, res_area_id, other_overlay_area_id, bus_type, quit_time, teacher_user_id,
+    teacher_user_name, teacher_org_id, teacher_org_name, teacher_user_tel, is_new_people,
+    is_settlement, real_qualified_time, qualified_enfd_time, effec_days, teacher_reward,
+    teacher_real_reward, reward_desc, operate_user_id, operate_user_name, operate_time,
+    basic_score, basic_integral, survey_area_name, survey_area_id, channel_type, have_nw_account,
+    register_no
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_investigator
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_investigator
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyInvestigator" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_investigator (nick_name, real_name, user_id,
+        idcard, province, city,
+        district, province_id, city_id,
+        district_id, address, include_area,
+        include_area_name, include_bus, include_bus_name,
+        tel, auth_type, acc_state,
+        remark, lefan_currency, ach_point,
+        amount, title_id, title_name,
+        org_id, org_name, type,
+        create_by, create_by_name, create_time,
+        update_by, update_time, delete_flag,
+        include_task, include_task_name, sign_url,
+        bank_no, bank_name, res_area,
+        other_overlay_area, res_area_id, other_overlay_area_id,
+        bus_type, quit_time, teacher_user_id,
+        teacher_user_name, teacher_org_id, teacher_org_name,
+        teacher_user_tel, is_new_people, is_settlement,
+        real_qualified_time, qualified_enfd_time,
+        effec_days, teacher_reward, teacher_real_reward,
+        reward_desc, operate_user_id, operate_user_name,
+        operate_time, basic_score, basic_integral,
+        survey_area_name, survey_area_id, channel_type,
+        have_nw_account, register_no)
+        values (#{nickName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT},
+        #{idcard,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+        #{district,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER},
+        #{districtId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{includeArea,jdbcType=VARCHAR},
+        #{includeAreaName,jdbcType=VARCHAR}, #{includeBus,jdbcType=VARCHAR}, #{includeBusName,jdbcType=VARCHAR},
+        #{tel,jdbcType=VARCHAR}, #{authType,jdbcType=INTEGER}, #{accState,jdbcType=INTEGER},
+        #{remark,jdbcType=VARCHAR}, #{lefanCurrency,jdbcType=BIGINT}, #{achPoint,jdbcType=BIGINT},
+        #{amount,jdbcType=DOUBLE}, #{titleId,jdbcType=BIGINT}, #{titleName,jdbcType=VARCHAR},
+        #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+        #{createBy,jdbcType=BIGINT}, #{createByName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER},
+        #{includeTask,jdbcType=VARCHAR}, #{includeTaskName,jdbcType=VARCHAR}, #{signUrl,jdbcType=VARCHAR},
+        #{bankNo,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{resArea,jdbcType=VARCHAR},
+        #{otherOverlayArea,jdbcType=VARCHAR}, #{resAreaId,jdbcType=VARCHAR}, #{otherOverlayAreaId,jdbcType=VARCHAR},
+        #{busType,jdbcType=INTEGER}, #{quitTime,jdbcType=DATE}, #{teacherUserId,jdbcType=BIGINT},
+        #{teacherUserName,jdbcType=VARCHAR}, #{teacherOrgId,jdbcType=BIGINT}, #{teacherOrgName,jdbcType=VARCHAR},
+        #{teacherUserTel,jdbcType=VARCHAR}, #{isNewPeople,jdbcType=INTEGER}, #{isSettlement,jdbcType=INTEGER},
+        #{realQualifiedTime,jdbcType=TIMESTAMP}, #{qualifiedEnfdTime,jdbcType=TIMESTAMP},
+        #{effecDays,jdbcType=INTEGER}, #{teacherReward,jdbcType=DOUBLE}, #{teacherRealReward,jdbcType=DOUBLE},
+        #{rewardDesc,jdbcType=VARCHAR}, #{operateUserId,jdbcType=BIGINT}, #{operateUserName,jdbcType=VARCHAR},
+        #{operateTime,jdbcType=TIMESTAMP}, #{basicScore,jdbcType=DOUBLE}, #{basicIntegral,jdbcType=DOUBLE},
+        #{surveyAreaName,jdbcType=VARCHAR}, #{surveyAreaId,jdbcType=BIGINT}, #{channelType,jdbcType=INTEGER},
+        #{haveNwAccount,jdbcType=INTEGER}, #{registerNo,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyInvestigator" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_investigator
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="nickName != null" >
+                nick_name,
+            </if>
+            <if test="realName != null" >
+                real_name,
+            </if>
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="idcard != null" >
+                idcard,
+            </if>
+            <if test="province != null" >
+                province,
+            </if>
+            <if test="city != null" >
+                city,
+            </if>
+            <if test="district != null" >
+                district,
+            </if>
+            <if test="provinceId != null" >
+                province_id,
+            </if>
+            <if test="cityId != null" >
+                city_id,
+            </if>
+            <if test="districtId != null" >
+                district_id,
+            </if>
+            <if test="address != null" >
+                address,
+            </if>
+            <if test="includeArea != null" >
+                include_area,
+            </if>
+            <if test="includeAreaName != null" >
+                include_area_name,
+            </if>
+            <if test="includeBus != null" >
+                include_bus,
+            </if>
+            <if test="includeBusName != null" >
+                include_bus_name,
+            </if>
+            <if test="tel != null" >
+                tel,
+            </if>
+            <if test="authType != null" >
+                auth_type,
+            </if>
+            <if test="accState != null" >
+                acc_state,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="lefanCurrency != null" >
+                lefan_currency,
+            </if>
+            <if test="achPoint != null" >
+                ach_point,
+            </if>
+            <if test="amount != null" >
+                amount,
+            </if>
+            <if test="titleId != null" >
+                title_id,
+            </if>
+            <if test="titleName != null" >
+                title_name,
+            </if>
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="orgName != null" >
+                org_name,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createByName != null" >
+                create_by_name,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+            <if test="includeTask != null" >
+                include_task,
+            </if>
+            <if test="includeTaskName != null" >
+                include_task_name,
+            </if>
+            <if test="signUrl != null" >
+                sign_url,
+            </if>
+            <if test="bankNo != null" >
+                bank_no,
+            </if>
+            <if test="bankName != null" >
+                bank_name,
+            </if>
+            <if test="resArea != null" >
+                res_area,
+            </if>
+            <if test="otherOverlayArea != null" >
+                other_overlay_area,
+            </if>
+            <if test="resAreaId != null" >
+                res_area_id,
+            </if>
+            <if test="otherOverlayAreaId != null" >
+                other_overlay_area_id,
+            </if>
+            <if test="busType != null" >
+                bus_type,
+            </if>
+            <if test="quitTime != null" >
+                quit_time,
+            </if>
+            <if test="teacherUserId != null" >
+                teacher_user_id,
+            </if>
+            <if test="teacherUserName != null" >
+                teacher_user_name,
+            </if>
+            <if test="teacherOrgId != null" >
+                teacher_org_id,
+            </if>
+            <if test="teacherOrgName != null" >
+                teacher_org_name,
+            </if>
+            <if test="teacherUserTel != null" >
+                teacher_user_tel,
+            </if>
+            <if test="isNewPeople != null" >
+                is_new_people,
+            </if>
+            <if test="isSettlement != null" >
+                is_settlement,
+            </if>
+            <if test="realQualifiedTime != null" >
+                real_qualified_time,
+            </if>
+            <if test="qualifiedEnfdTime != null" >
+                qualified_enfd_time,
+            </if>
+            <if test="effecDays != null" >
+                effec_days,
+            </if>
+            <if test="teacherReward != null" >
+                teacher_reward,
+            </if>
+            <if test="teacherRealReward != null" >
+                teacher_real_reward,
+            </if>
+            <if test="rewardDesc != null" >
+                reward_desc,
+            </if>
+            <if test="operateUserId != null" >
+                operate_user_id,
+            </if>
+            <if test="operateUserName != null" >
+                operate_user_name,
+            </if>
+            <if test="operateTime != null" >
+                operate_time,
+            </if>
+            <if test="basicScore != null" >
+                basic_score,
+            </if>
+            <if test="basicIntegral != null" >
+                basic_integral,
+            </if>
+            <if test="surveyAreaName != null" >
+                survey_area_name,
+            </if>
+            <if test="surveyAreaId != null" >
+                survey_area_id,
+            </if>
+            <if test="channelType != null" >
+                channel_type,
+            </if>
+            <if test="haveNwAccount != null" >
+                have_nw_account,
+            </if>
+            <if test="registerNo != null" >
+                register_no,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="nickName != null" >
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null" >
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="idcard != null" >
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null" >
+                #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="districtId != null" >
+                #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="includeArea != null" >
+                #{includeArea,jdbcType=VARCHAR},
+            </if>
+            <if test="includeAreaName != null" >
+                #{includeAreaName,jdbcType=VARCHAR},
+            </if>
+            <if test="includeBus != null" >
+                #{includeBus,jdbcType=VARCHAR},
+            </if>
+            <if test="includeBusName != null" >
+                #{includeBusName,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null" >
+                #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="authType != null" >
+                #{authType,jdbcType=INTEGER},
+            </if>
+            <if test="accState != null" >
+                #{accState,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="lefanCurrency != null" >
+                #{lefanCurrency,jdbcType=BIGINT},
+            </if>
+            <if test="achPoint != null" >
+                #{achPoint,jdbcType=BIGINT},
+            </if>
+            <if test="amount != null" >
+                #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="titleId != null" >
+                #{titleId,jdbcType=BIGINT},
+            </if>
+            <if test="titleName != null" >
+                #{titleName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createByName != null" >
+                #{createByName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="includeTask != null" >
+                #{includeTask,jdbcType=VARCHAR},
+            </if>
+            <if test="includeTaskName != null" >
+                #{includeTaskName,jdbcType=VARCHAR},
+            </if>
+            <if test="signUrl != null" >
+                #{signUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="bankNo != null" >
+                #{bankNo,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null" >
+                #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="resArea != null" >
+                #{resArea,jdbcType=VARCHAR},
+            </if>
+            <if test="otherOverlayArea != null" >
+                #{otherOverlayArea,jdbcType=VARCHAR},
+            </if>
+            <if test="resAreaId != null" >
+                #{resAreaId,jdbcType=VARCHAR},
+            </if>
+            <if test="otherOverlayAreaId != null" >
+                #{otherOverlayAreaId,jdbcType=VARCHAR},
+            </if>
+            <if test="busType != null" >
+                #{busType,jdbcType=INTEGER},
+            </if>
+            <if test="quitTime != null" >
+                #{quitTime,jdbcType=DATE},
+            </if>
+            <if test="teacherUserId != null" >
+                #{teacherUserId,jdbcType=BIGINT},
+            </if>
+            <if test="teacherUserName != null" >
+                #{teacherUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherOrgId != null" >
+                #{teacherOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="teacherOrgName != null" >
+                #{teacherOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherUserTel != null" >
+                #{teacherUserTel,jdbcType=VARCHAR},
+            </if>
+            <if test="isNewPeople != null" >
+                #{isNewPeople,jdbcType=INTEGER},
+            </if>
+            <if test="isSettlement != null" >
+                #{isSettlement,jdbcType=INTEGER},
+            </if>
+            <if test="realQualifiedTime != null" >
+                #{realQualifiedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="qualifiedEnfdTime != null" >
+                #{qualifiedEnfdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="effecDays != null" >
+                #{effecDays,jdbcType=INTEGER},
+            </if>
+            <if test="teacherReward != null" >
+                #{teacherReward,jdbcType=DOUBLE},
+            </if>
+            <if test="teacherRealReward != null" >
+                #{teacherRealReward,jdbcType=DOUBLE},
+            </if>
+            <if test="rewardDesc != null" >
+                #{rewardDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="operateUserId != null" >
+                #{operateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="operateUserName != null" >
+                #{operateUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="operateTime != null" >
+                #{operateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="basicScore != null" >
+                #{basicScore,jdbcType=DOUBLE},
+            </if>
+            <if test="basicIntegral != null" >
+                #{basicIntegral,jdbcType=DOUBLE},
+            </if>
+            <if test="surveyAreaName != null" >
+                #{surveyAreaName,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyAreaId != null" >
+                #{surveyAreaId,jdbcType=BIGINT},
+            </if>
+            <if test="channelType != null" >
+                #{channelType,jdbcType=INTEGER},
+            </if>
+            <if test="haveNwAccount != null" >
+                #{haveNwAccount,jdbcType=INTEGER},
+            </if>
+            <if test="registerNo != null" >
+                #{registerNo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyInvestigator" >
+        update survey_investigator
+        <set >
+            <if test="nickName != null" >
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null" >
+                real_name = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="idcard != null" >
+                idcard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                district = #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                province_id = #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null" >
+                city_id = #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="districtId != null" >
+                district_id = #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="address != null" >
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="includeArea != null" >
+                include_area = #{includeArea,jdbcType=VARCHAR},
+            </if>
+            <if test="includeAreaName != null" >
+                include_area_name = #{includeAreaName,jdbcType=VARCHAR},
+            </if>
+            <if test="includeBus != null" >
+                include_bus = #{includeBus,jdbcType=VARCHAR},
+            </if>
+            <if test="includeBusName != null" >
+                include_bus_name = #{includeBusName,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null" >
+                tel = #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="authType != null" >
+                auth_type = #{authType,jdbcType=INTEGER},
+            </if>
+            <if test="accState != null" >
+                acc_state = #{accState,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="lefanCurrency != null" >
+                lefan_currency = #{lefanCurrency,jdbcType=BIGINT},
+            </if>
+            <if test="achPoint != null" >
+                ach_point = #{achPoint,jdbcType=BIGINT},
+            </if>
+            <if test="amount != null" >
+                amount = #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="titleId != null" >
+                title_id = #{titleId,jdbcType=BIGINT},
+            </if>
+            <if test="titleName != null" >
+                title_name = #{titleName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createByName != null" >
+                create_by_name = #{createByName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="includeTask != null" >
+                include_task = #{includeTask,jdbcType=VARCHAR},
+            </if>
+            <if test="includeTaskName != null" >
+                include_task_name = #{includeTaskName,jdbcType=VARCHAR},
+            </if>
+            <if test="signUrl != null" >
+                sign_url = #{signUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="bankNo != null" >
+                bank_no = #{bankNo,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null" >
+                bank_name = #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="resArea != null" >
+                res_area = #{resArea,jdbcType=VARCHAR},
+            </if>
+            <if test="otherOverlayArea != null" >
+                other_overlay_area = #{otherOverlayArea,jdbcType=VARCHAR},
+            </if>
+            <if test="resAreaId != null" >
+                res_area_id = #{resAreaId,jdbcType=VARCHAR},
+            </if>
+            <if test="otherOverlayAreaId != null" >
+                other_overlay_area_id = #{otherOverlayAreaId,jdbcType=VARCHAR},
+            </if>
+            <if test="busType != null" >
+                bus_type = #{busType,jdbcType=INTEGER},
+            </if>
+            <if test="quitTime != null" >
+                quit_time = #{quitTime,jdbcType=DATE},
+            </if>
+            <if test="teacherUserId != null" >
+                teacher_user_id = #{teacherUserId,jdbcType=BIGINT},
+            </if>
+            <if test="teacherUserName != null" >
+                teacher_user_name = #{teacherUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherOrgId != null" >
+                teacher_org_id = #{teacherOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="teacherOrgName != null" >
+                teacher_org_name = #{teacherOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherUserTel != null" >
+                teacher_user_tel = #{teacherUserTel,jdbcType=VARCHAR},
+            </if>
+            <if test="isNewPeople != null" >
+                is_new_people = #{isNewPeople,jdbcType=INTEGER},
+            </if>
+            <if test="isSettlement != null" >
+                is_settlement = #{isSettlement,jdbcType=INTEGER},
+            </if>
+            <if test="realQualifiedTime != null" >
+                real_qualified_time = #{realQualifiedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="qualifiedEnfdTime != null" >
+                qualified_enfd_time = #{qualifiedEnfdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="effecDays != null" >
+                effec_days = #{effecDays,jdbcType=INTEGER},
+            </if>
+            <if test="teacherReward != null" >
+                teacher_reward = #{teacherReward,jdbcType=DOUBLE},
+            </if>
+            <if test="teacherRealReward != null" >
+                teacher_real_reward = #{teacherRealReward,jdbcType=DOUBLE},
+            </if>
+            <if test="rewardDesc != null" >
+                reward_desc = #{rewardDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="operateUserId != null" >
+                operate_user_id = #{operateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="operateUserName != null" >
+                operate_user_name = #{operateUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="operateTime != null" >
+                operate_time = #{operateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="basicScore != null" >
+                basic_score = #{basicScore,jdbcType=DOUBLE},
+            </if>
+            <if test="basicIntegral != null" >
+                basic_integral = #{basicIntegral,jdbcType=DOUBLE},
+            </if>
+            <if test="surveyAreaName != null" >
+                survey_area_name = #{surveyAreaName,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyAreaId != null" >
+                survey_area_id = #{surveyAreaId,jdbcType=BIGINT},
+            </if>
+            <if test="channelType != null" >
+                channel_type = #{channelType,jdbcType=INTEGER},
+            </if>
+            <if test="haveNwAccount != null" >
+                have_nw_account = #{haveNwAccount,jdbcType=INTEGER},
+            </if>
+            <if test="registerNo != null" >
+                register_no = #{registerNo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyInvestigator" >
+    update survey_investigator
+    set nick_name = #{nickName,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      district_id = #{districtId,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      include_area = #{includeArea,jdbcType=VARCHAR},
+      include_area_name = #{includeAreaName,jdbcType=VARCHAR},
+      include_bus = #{includeBus,jdbcType=VARCHAR},
+      include_bus_name = #{includeBusName,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      auth_type = #{authType,jdbcType=INTEGER},
+      acc_state = #{accState,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      lefan_currency = #{lefanCurrency,jdbcType=BIGINT},
+      ach_point = #{achPoint,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=DOUBLE},
+      title_id = #{titleId,jdbcType=BIGINT},
+      title_name = #{titleName,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_by_name = #{createByName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      include_task = #{includeTask,jdbcType=VARCHAR},
+      include_task_name = #{includeTaskName,jdbcType=VARCHAR},
+      sign_url = #{signUrl,jdbcType=VARCHAR},
+      bank_no = #{bankNo,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      res_area = #{resArea,jdbcType=VARCHAR},
+      other_overlay_area = #{otherOverlayArea,jdbcType=VARCHAR},
+      res_area_id = #{resAreaId,jdbcType=VARCHAR},
+      other_overlay_area_id = #{otherOverlayAreaId,jdbcType=VARCHAR},
+      bus_type = #{busType,jdbcType=INTEGER},
+      quit_time = #{quitTime,jdbcType=DATE},
+      teacher_user_id = #{teacherUserId,jdbcType=BIGINT},
+      teacher_user_name = #{teacherUserName,jdbcType=VARCHAR},
+      teacher_org_id = #{teacherOrgId,jdbcType=BIGINT},
+      teacher_org_name = #{teacherOrgName,jdbcType=VARCHAR},
+      teacher_user_tel = #{teacherUserTel,jdbcType=VARCHAR},
+      is_new_people = #{isNewPeople,jdbcType=INTEGER},
+      is_settlement = #{isSettlement,jdbcType=INTEGER},
+      real_qualified_time = #{realQualifiedTime,jdbcType=TIMESTAMP},
+      qualified_enfd_time = #{qualifiedEnfdTime,jdbcType=TIMESTAMP},
+      effec_days = #{effecDays,jdbcType=INTEGER},
+      teacher_reward = #{teacherReward,jdbcType=DOUBLE},
+      teacher_real_reward = #{teacherRealReward,jdbcType=DOUBLE},
+      reward_desc = #{rewardDesc,jdbcType=VARCHAR},
+      operate_user_id = #{operateUserId,jdbcType=BIGINT},
+      operate_user_name = #{operateUserName,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      basic_score = #{basicScore,jdbcType=DOUBLE},
+      basic_integral = #{basicIntegral,jdbcType=DOUBLE},
+      survey_area_name = #{surveyAreaName,jdbcType=VARCHAR},
+      survey_area_id = #{surveyAreaId,jdbcType=BIGINT},
+      channel_type = #{channelType,jdbcType=INTEGER},
+      have_nw_account = #{haveNwAccount,jdbcType=INTEGER},
+      register_no = #{registerNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="realName!=null">
+            and real_name like CONCAT(CONCAT('%',#{realName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="type != null" >
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="orgId != null" >
+            and (org_id = #{orgId,jdbcType=BIGINT})
+        </if>
+        <if test="surveyOrgId != null" >
+            and (org_id = #{surveyOrgId,jdbcType=BIGINT} or org_id in (select f.id from survey_franchisee f where f.parent_id = #{surveyOrgId,jdbcType=BIGINT} and f.delete_flag = 0))
+        </if>
+        <if test="authType != null" >
+            and auth_type = #{authType,jdbcType=INTEGER}
+        </if>
+        <if test="accState != null" >
+            and acc_state = #{accState,jdbcType=INTEGER}
+        </if>
+        <if test="orgName!=null">
+            and org_name like CONCAT(CONCAT('%',#{orgName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="tel!=null">
+            and tel like CONCAT(CONCAT('%',#{tel,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="condition != null" >
+            <if test="condition == 1" >
+              and user_id = #{userId,jdbcType=BIGINT}
+            </if>
+        </if>
+        <if test="isNewPeople != null ">
+            and is_new_people=#{isNewPeople}
+        </if>
+        <if test="ids != null ">
+            and id in(${ids})
+        </if>
+        <if test="busType == 1">
+            and (bus_type = 2 or bus_type =3)
+        </if>
+        <if test="userId != null ">
+            and user_id = #{userId}
+        </if>
+        <if test="surveyAreaId != null ">
+            and survey_area_id=#{surveyAreaId}
+        </if>
+        <if test="channelType != null ">
+            and channel_type=#{channelType}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_investigator
+        <include refid="joins" />
+        where delete_flag=0
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_investigator
+        <include refid="joins" />
+        where delete_flag=0
+        <include refid="wheres" />
+    </select>
+
+
+    <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_investigator
+        where user_id = #{userId,jdbcType=BIGINT} limit 1;
+    </select>
+
+    <update id="updateTypeByFranchiseeId" parameterType="map">
+        update survey_investigator
+        set  type = #{type,jdbcType=INTEGER} where org_id = #{orgId,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectInfoByRole" parameterType="map" resultMap="BaseResultMap">
+        select
+        a.id as id, a.nick_name as nickName, a.real_name as realName, a.user_id as userId,
+        a.tel as tel, a.org_id as orgId, a.org_name as orgName, a.type as type
+        from survey_investigator a
+        left join bus_user_role b on a.user_id = b.user_id
+        where a.delete_flag=0
+        and b.role_id = #{roleId,jdbcType=BIGINT}
+        <if test="orgId != null" >
+            and a.org_id in (select id from survey_franchisee where id = #{orgId,jdbcType=BIGINT} or parent_id = #{orgId,jdbcType=BIGINT})
+        </if>
+        order by a.id desc
+    </select>
+
+    <select id="selectNumberIndividual" parameterType="map" resultType="com.lefancrm.apicenter.dto.SurveyInvestigatorDto">
+        SELECT aa.*,IFNULL(bb.opinionPoll,0) opinionPoll,IFNULL(cc.overdue,0) overdue FROM (
+            select a.id as id, a.nick_name as nickName, a.real_name as realName, a.user_id as userId,
+            a.tel as tel, a.org_id as orgId, a.org_name as orgName, a.type as type
+            from survey_investigator a
+            left join bus_user_role b on a.user_id = b.user_id
+            where a.delete_flag=0
+            and b.role_id = #{roleId,jdbcType=BIGINT}
+            <if test="orgId != null">
+                and a.org_id in (select id from survey_franchisee where id = #{orgId,jdbcType=BIGINT} or parent_id =  #{orgId,jdbcType=BIGINT})
+            </if>
+            <if test="surveyAreaId != null">
+                and a.survey_area_id=#{surveyAreaId}
+            </if>
+            <if test="userId != null">
+                and a.user_id=#{userId}
+            </if>
+            order by a.id desc
+        ) aa
+        LEFT JOIN
+        (
+            SELECT a.survey_user_id,COUNT(1) opinionPoll FROM survey_investigator_case a
+            LEFT JOIN survey_risk_case_info b ON a.survey_info_id=b.id
+            WHERE a.survey_state = 1  AND a.delete_flag=0 AND b.delete_flag = 0
+            GROUP BY a.survey_user_id
+        ) bb ON aa.userId=bb.survey_user_id
+        LEFT JOIN
+        (
+            SELECT a.survey_user_id,COUNT(1) overdue FROM survey_investigator_case a
+            LEFT JOIN survey_risk_case_info b ON a.survey_info_id=b.id
+            WHERE a.delete_flag=0 AND b.delete_flag = 0 AND a.aging_day &lt; 0 AND  a.survey_state = 1
+            GROUP BY a.survey_user_id
+        ) cc ON aa.userId=cc.survey_user_id
+    </select>
+
+    <select id="selectInfoAndCaseNum" resultType="com.lefancrm.apicenter.model.SurveyInvestigator" parameterType="java.lang.Long" >
+        select t.user_id as userId,t.real_name as realName,ifnull(a.num,0) as dcyCaseNum
+        from survey_investigator t
+        left join bus_user_role r on t.user_id = r.user_id and r.role_id = 50
+        left join (
+            select c.survey_user_id,c.survey_user_name,count(1) num from survey_investigator_case c where c.delete_flag = 0
+              and (c.survey_state = 1 or c.is_direction_success = 0) group by c.survey_user_id) a on t.user_id = a.survey_user_id
+        where r.id is not null
+        and t.org_id in (select id from survey_franchisee where id = #{orgId,jdbcType=BIGINT} or parent_id = #{orgId,jdbcType=BIGINT})
+        order by t.org_id;
+    </select>
+    <select id="selectOrgIdByUserIdStr" resultType="java.lang.Long">
+        	SELECT  DISTINCT org_id  FROM survey_investigator WHERE  FIND_IN_SET( user_id,#{userIdStr})
+    </select>
+
+
+    <select id="selectManPowerData" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.report.SurveyManPowerItemDTO">
+        select t.user_id as surveyUserId,t.real_name as surveyUserName,ifnull(a.score,0) score ,ifnull(b.score,0) momscore,ifnull(t.survey_area_id,f.id) sonOrgId,ifnull(t.survey_area_name,f.`name`) as sonOrgName,
+--             (case f.parent_id when 0 then f.id else f.parent_id end) as orgId,
+--             (case f.parent_id when 0 then f.`name` else f.parent_name end) as orgName,
+            f.id as orgId,
+            f.`name` as orgName,
+            1 as orgLevel,
+            t.quit_time quitTime,t.create_time entryTime,t.delete_flag deleteFlag
+            from survey_investigator t
+        left join survey_franchisee f on t.org_id = f.id
+        left join bus_user_role bu on t.user_id = bu.user_id and bu.role_id = 50
+        left join (
+            select c.survey_user_id,ifnull(sum(c.score),0) score from survey_investigator_case c
+                left join survey_assign_org o on c.survey_assorg_case_id = o.id and o.delete_flag = 0
+                left join survey_risk_case_info r on c.survey_info_id = r.id
+            where c.delete_flag = 0 and r.delete_flag = 0
+            AND date_format(o.review_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+            AND date_format(o.review_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+            group by c.survey_user_id
+        ) a on t.user_id = a.survey_user_id
+        left join (
+            select c.survey_user_id,ifnull(sum(c.score),0) score from survey_investigator_case c
+                left join survey_assign_org o on c.survey_assorg_case_id = o.id and o.delete_flag = 0
+            left join survey_risk_case_info r on c.survey_info_id = r.id
+            where c.delete_flag = 0 and r.delete_flag = 0
+            AND date_format(o.review_time,'%Y-%m-%d') &gt;= date_format(#{momTime,jdbcType=DATE},'%Y-%m-%d')
+            AND date_format(o.review_time,'%Y-%m-%d') &lt; date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+            group by c.survey_user_id
+        ) b on t.user_id = b.survey_user_id
+        where t.org_id is not null and bu.id is not null and t.create_time &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+        <if test="orgDataType == 1">
+            and f.bus_type in (1,3)
+        </if>
+        <if test="orgId != null">
+            <if test="son == 0">
+                and f.id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="son == 1">
+                and f.id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="son == 2">
+                and f.id = #{orgId,jdbcType=BIGINT} and t.survey_area_id is null
+            </if>
+            <if test="son == 3">
+                and t.survey_area_id = #{orgId,jdbcType=BIGINT}
+            </if>
+        </if>
+        <if test="colType == 2">
+            and ifnull(a.score,0) &gt;= 250
+        </if>
+        <if test="colType == 3">
+            and ifnull(a.score,0) &gt;= 150 and ifnull(a.score,0) &lt; 250
+        </if>
+        <if test="colType == 4">
+            and ifnull(a.score,0) &gt;= 50 and ifnull(a.score,0) &lt; 150
+        </if>
+        <if test="colType == 5">
+            and  ifnull(a.score,0) &gt; 0 and ifnull(a.score,0) &lt; 50
+        </if>
+        <if test="colType == 6">
+            and ifnull(a.score,0) &gt; 0
+        </if>
+        <if test="colType == 7">
+            and ifnull(a.score,0) = 0
+        </if>
+        order by t.org_id
+
+    </select>
+
+    <select id="selectManPowerDataBs" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.report.SurveyManPowerItemDTO">
+        select t.user_id as surveyUserId,t.real_name as surveyUserName,ifnull(a.score,0) score ,ifnull(b.score,0) momscore,ifnull(c.num,0) caseNum,ifnull(d.num,0) momCaseNum,ifnull(t.survey_area_id,f.id) sonOrgId,ifnull(t.survey_area_name,f.`name`) as sonOrgName,
+--             (case f.parent_id when 0 then f.id else f.parent_id end) as orgId,
+--             (case f.parent_id when 0 then f.`name` else f.parent_name end) as orgName,
+--             (case f.parent_id when 0 then 1 else 2 end) as orgLevel,
+            f.id as orgId,
+            f.`name` as orgName,
+            1 as orgLevel,
+            t.quit_time quitTime,t.create_time entryTime,t.delete_flag deleteFlag
+            from survey_investigator t
+        left join survey_franchisee f on t.org_id = f.id
+        left join bus_user_role bu on t.user_id = bu.user_id and bu.role_id = 50
+        left join (
+            select c.survey_user_id,ifnull(sum(c.score),0) score from survey_investigator_case c
+                left join survey_risk_case_info r on c.survey_info_id = r.id
+            where c.delete_flag = 0 and r.delete_flag = 0
+            AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+            AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+            group by c.survey_user_id
+        ) a on t.user_id = a.survey_user_id
+        left join (
+            select c.survey_user_id,ifnull(sum(c.score),0) score from survey_investigator_case c
+            left join survey_risk_case_info r on c.survey_info_id = r.id
+            where c.delete_flag = 0 and r.delete_flag = 0
+            AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &gt;= date_format(#{momTime,jdbcType=DATE},'%Y-%m-%d')
+            AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &lt; date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+            group by c.survey_user_id
+        ) b on t.user_id = b.survey_user_id
+        left join (
+            select x.survey_user_id,count(1) num from (
+                select c.survey_user_id,r.id from survey_investigator_case c
+                left join survey_risk_case_info r on c.survey_info_id = r.id
+                where c.delete_flag = 0 and r.delete_flag = 0
+                AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+                AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+                group by c.survey_user_id,r.id
+            ) x group by x.survey_user_id
+        ) c on t.user_id = c.survey_user_id
+        left join (
+            select y.survey_user_id,count(1) num from (
+                select c.survey_user_id,r.id from survey_investigator_case c
+                left join survey_risk_case_info r on c.survey_info_id = r.id
+                where c.delete_flag = 0 and r.delete_flag = 0
+                AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &gt;= date_format(#{momTime,jdbcType=DATE},'%Y-%m-%d')
+                AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &lt; date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+                group by c.survey_user_id,r.id
+            ) y group by y.survey_user_id
+        ) d on t.user_id = d.survey_user_id
+        where t.org_id is not null and bu.id is not null and t.create_time &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+        <if test="orgDataType == 1">
+            and f.bus_type in (1,3)
+        </if>
+        <if test="orgDataType == 2">
+            and f.bus_type in (2,3)
+        </if>
+        <if test="orgId != null">
+            <if test="son == 0">
+                and f.id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="son == 1">
+                and f.id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="son == 2">
+                and f.id = #{orgId,jdbcType=BIGINT} and t.survey_area_id is null
+            </if>
+            <if test="son == 3">
+                and t.survey_area_id = #{orgId,jdbcType=BIGINT}
+            </if>
+        </if>
+        <if test="colType == 1">
+
+        </if>
+        <if test="colType == 2">
+            and ifnull(a.score,0) &gt; 0
+        </if>
+        <if test="colType == 3">
+            and ifnull(a.score,0) &gt;= 70
+        </if>
+        <if test="colType == 4">
+            and  ifnull(a.score,0) &gt; 0 and ifnull(a.score,0) &lt; 70
+        </if>
+        <if test="colType == 5">
+            and ifnull(a.score,0) = 0
+        </if>
+        order by t.org_id
+
+    </select>
+
+
+    <select id="selectAssePersonData" resultType="com.lefancrm.apicenter.dto.hzReport.AssessmentIndexDto">
+        SELECT i.id,
+        i.real_name surveyUserName,
+        i.user_id surveyUserId,
+        i.org_id surveyOrgId,
+        i.org_name surveyOrgName,
+        r.role_id,
+        case #{caseState} when '0' then '全部'
+        when '1' then '单点'
+        when '2' then '单点+单点'
+        when '3' then '全案'
+        when '4' then '全案+单点'
+        when '5' then '全案+全案' end as caseStateName,
+        case #{orgCaseState} when '0' then '全部'
+        when '1' then '单点'
+        when '2' then '全案' end as servicesName,
+        i.survey_area_id surveyAreaId
+         FROM 	survey_investigator i
+        LEFT JOIN bus_user_role r ON i.user_id = r.user_id
+--         LEFT JOIN survey_franchisee f ON i.org_id = f.id
+        WHERE
+        i.delete_flag = 0
+        <if test="surveyInvestigators!=null and surveyInvestigators!=''">
+             AND FIND_IN_SET(i.user_id,#{surveyInvestigators})
+        </if>
+        <if test="surveyInvestigators == null and surveyOrgIds!=null and surveyOrgIds!=''">
+            AND FIND_IN_SET(i.org_id,#{surveyOrgIds})
+            <if test="surveyAreaId == null">
+                and i.survey_area_id is null
+            </if>
+        </if>
+        <if test="surveyAreaId != null and surveyAreaId != ''">
+            and i.survey_area_id = #{surveyAreaId}
+        </if>
+        and r.role_id = 50
+    </select>
+
+    <select id="selectRookieList" parameterType="map" resultType="com.lefancrm.apicenter.model.SurveyInvestigator">
+        SELECT aa.id,aa.user_id as userId,aa.real_name as realName,aa.org_name as orgName,aa.tel,aa.create_time as createTime,
+        IFNULL(score,0) score,aa.real_qualified_time as realQualifiedTime,aa.qualified_enfd_time as qualifiedEnfdTime,
+        aa.effec_days as effecDays,aa.teacher_user_name as teacherUserName,aa.teacher_org_name as teacherOrgName,
+        aa.teacher_user_tel as teacherUserTel,aa.teacher_reward as teacherReward,aa.teacher_real_reward as teacherRealReward,
+        aa.reward_desc as rewardDesc,aa.is_new_people as isNewPeople,aa.operate_user_name as operateUserName,aa.operate_time as operateTime
+        FROM survey_investigator aa
+        LEFT JOIN (
+              SELECT a.survey_user_id,IFNULL(SUM(a.score),0) score
+              FROM survey_investigator_case a
+              LEFT JOIN survey_risk_case_info b ON a.survey_info_id=b.id
+              LEFT JOIN survey_assign_org c ON a.survey_assorg_case_id = c.id
+              LEFT JOIN survey_consignor d ON a.entrust_org_id=d.id
+              WHERE a.delete_flag=0 AND b.delete_flag=0 AND c.delete_flag=0
+              AND d.delete_flag=0 AND d.org_attr =2
+              GROUP BY a.survey_user_id
+        ) bb ON aa. user_id=bb.survey_user_id
+        <where>
+            aa.delete_flag=0 and (aa.bus_type = 1 or aa.bus_type = 3 )
+            <if test="userId != null ">
+                and aa.user_id in (${userId})
+            </if>
+            <if test="orgId != null ">
+                and aa.org_id in (${orgId})
+            </if>
+            <if test="teacherUserId != null ">
+                and teacher_user_id in (${teacherUserId})
+            </if>
+            <if test="startClosingTime != null">
+                and qualified_enfd_time &gt;= #{startClosingTime}
+            </if>
+            <if test="endClosingTime != null ">
+                and qualified_enfd_time &lt;= #{endClosingTime}
+            </if>
+            <if test="isNewPeople != null ">
+                and is_new_people=#{isNewPeople}
+            </if>
+        </where>
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="createTeachingList" parameterType="map" resultType="com.lefancrm.apicenter.model.SurveyInvestigator">
+         SELECT aa.id,aa.teacher_user_id as teacherUserId,aa.teacher_user_name AS teacherUserName,aa.teacher_org_name AS teacherOrgName,
+             aa.nick_name AS nickName,aa.real_name AS realName,aa.user_id AS userId,
+             aa.tel,aa.org_name AS orgName,aa.create_time AS createTime,aa.real_qualified_time AS realQualifiedTime,
+             aa.qualified_enfd_time AS qualifiedEnfdTime,aa.effec_days AS effecDays,aa.teacher_reward AS teacherReward,
+             aa.teacher_real_reward AS teacherRealReward,aa.reward_desc AS rewardDesc,IFNULL(bb.totalAmount,0) totalAmount FROM
+            (select * from survey_investigator where id not in (
+                select survey_investigator_id from survey_investigator_reword_mid
+                where reward_list_id in (
+                    select id from survey_teach_reward_list
+                    where delete_flag = 0
+                )
+                and delete_flag = 0
+            ) AND is_new_people=1 and is_settlement = 0 ) aa
+        left join
+            (SELECT teacher_user_id,SUM(teacher_real_reward) totalAmount FROM survey_investigator
+                WHERE  id NOT IN (
+                    SELECT survey_investigator_id FROM survey_investigator_reword_mid where delete_flag = 0
+                ) and delete_flag = 0 AND is_new_people=1 GROUP BY teacher_user_id
+            ) bb
+        on aa.teacher_user_id=bb.teacher_user_id
+        where aa.delete_flag = 0
+    </select>
+
+    <select id="detailsTeachingList" parameterType="map" resultType="com.lefancrm.apicenter.model.SurveyInvestigator">
+         SELECT aa.id,aa.teacher_user_id AS teacherUserId,aa.teacher_user_name AS teacherUserName,aa.teacher_org_name
+           AS teacherOrgName, aa.nick_name AS nickName,aa.real_name AS realName,aa.user_id AS userId, aa.tel,aa.org_name
+           AS orgName,aa.create_time AS createTime,aa.real_qualified_time AS realQualifiedTime, aa.qualified_enfd_time AS qualifiedEnfdTime,
+           aa.effec_days AS effecDays,aa.teacher_reward AS teacherReward, aa.teacher_real_reward AS teacherRealReward,aa.reward_desc AS rewardDesc,
+           IFNULL(bb.totalAmount,0) totalAmount  FROM
+           (
+               SELECT * FROM survey_investigator WHERE id IN (
+               SELECT survey_investigator_id FROM survey_investigator_reword_mid WHERE  reward_list_id = #{id} )
+           ) aa
+           LEFT JOIN
+           (
+               SELECT teacher_user_id,SUM(teacher_real_reward) totalAmount  FROM survey_investigator
+               WHERE id IN (
+               SELECT survey_investigator_id FROM survey_investigator_reword_mid WHERE delete_flag= 0 AND reward_list_id = #{id})
+               AND delete_flag= 0  GROUP BY teacher_user_id
+            ) bb
+           ON aa.teacher_user_id=bb.teacher_user_id
+    </select>
+
+    <select id="selectTeacherUserCount" parameterType="map" resultType="int">
+         SELECT COUNT(1) FROM (
+             SELECT teacher_user_id FROM  survey_investigator
+             <where>
+                 teacher_user_id IS NOT NULL
+                 <if test="ids != null ">
+                     and id in (${ids})
+                 </if>
+             </where>
+             GROUP BY teacher_user_id
+         ) aa
+    </select>
+
+    <select id="selectTeacherCount" parameterType="long" resultType="int">
+        SELECT COUNT(1) FROM (SELECT COUNT(1) FROM  survey_investigator WHERE id IN (
+	        SELECT survey_investigator_id FROM survey_investigator_reword_mid
+	        WHERE reward_list_id =#{rewardListId} and delete_flag=0
+        )
+        AND delete_flag=0 AND teacher_user_id IS NOT NULL GROUP BY teacher_user_id) aa
+    </select>
+
+    <select id="updateIsSettlement" parameterType="string" resultType="int">
+        update survey_investigator set is_settlement = 1 where id in (${ids})
+    </select>
+
+    <select id="selectSumTeacherRealReward" parameterType="long" resultType="double">
+        SELECT SUM(teacher_real_reward) FROM survey_investigator WHERE id IN (
+		    SELECT survey_investigator_id FROM survey_investigator_reword_mid
+		    WHERE reward_list_id =#{rewardListId} and delete_flag = 0
+	    ) and delete_flag = 0
+    </select>
+
+    <select id="selectByUser" parameterType="map" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from survey_investigator
+        <where>
+            <if test="homePage != null ">
+                <if test="userId != null ">
+                    and user_id=#{userId}
+                </if>
+            </if>
+        </where>
+    </select>
+    <select id="selectOrgUser" resultMap="BaseResultMap">
+
+        SELECT * FROM
+            survey_investigator i
+            LEFT JOIN bus_user_role r ON i.user_id = r.user_id
+        WHERE
+            i.delete_flag = 0
+            AND r.role_id = 50
+        <if test="level == 1">
+            AND FIND_IN_SET(
+            i.org_id,
+            (SELECT GROUP_CONCAT(id) FROM survey_franchisee WHERE parent_id = #{orgId} or id= #{orgId}))
+        </if>
+        <if test="level == 2">
+            AND i.org_id = #{orgId}
+        </if>
+
+    </select>
+    <select id="selectOrgAllSurveyInv" resultMap="BaseResultMap">
+        SELECT * FROM survey_investigator i
+        LEFT JOIN bus_user_role r ON i.user_id = r.user_id
+        WHERE FIND_IN_SET(i.org_id,(SELECT GROUP_CONCAT(id) FROM survey_franchisee WHERE id =  #{orgId} OR parent_id = #{orgId}))  AND i.delete_flag = 0 AND r.role_id = 50
+    </select>
+
+    <select id="selectOrgAllSurveyInvPre" resultMap="BaseResultMap">
+        <if test="orgRole and !finance">
+            SELECT i.* FROM survey_pre_reimbursement r
+            LEFT JOIN survey_investigator i ON i.user_id = r.survey_user_id
+            WHERE FIND_IN_SET(r.survey_org_id,(SELECT GROUP_CONCAT(id) FROM survey_franchisee WHERE id =  #{surveyInvestigator.orgId} OR parent_id = #{surveyInvestigator.orgId}))
+            GROUP BY i.id
+        </if>
+        <if test="finance">
+            SELECT i.* FROM survey_pre_reimbursement r LEFT JOIN survey_investigator i ON r.survey_user_id = i.user_id
+            WHERE (r.state = 2 or r.state = 3)
+            GROUP BY i.id
+        </if>
+    </select>
+
+    <select id="selectByMap" parameterType="map" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List" />
+        from survey_investigator
+        <where>
+            delete_flag=0
+            <if test="orgId != null ">
+                and org_id=#{orgId}
+            </if>
+            <if test="orgIdsList != null ">
+                and org_id in
+                <foreach collection="orgIdsList" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="type != null">
+                and type=#{type}
+            </if>
+            <if test="busType == 1 ">
+                and (bus_type = 2 or bus_type=3)
+            </if>
+            <if test="surveyAreaId != null ">
+                and survey_area_id=#{surveyAreaId}
+            </if>
+            <if test="register == 'yes'">
+                and register_no is not null and org_id != 83
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByMapJurisdiction" parameterType="map" resultType="com.lefancrm.apicenter.model.SurveyInvestigator">
+        select  a.user_id as userId,a.real_name as realName
+        FROM survey_investigator a
+        LEFT JOIN bus_user_role b ON a.user_id=b.user_id
+        LEFT JOIN business_role c ON c.id=b.role_id
+        LEFT JOIN survey_franchisee d ON a.org_id=d.id
+        <where>
+            a.delete_flag=0 and b.role_id=50 AND d.delete_flag = 0
+            <if test="orgId != null ">
+                AND (d.id=#{orgId} OR d.parent_id=#{orgId})
+            </if>
+            <if test="type != null">
+                and a.type=#{type}
+            </if>
+            <if test="busType == 1 ">
+                and (a.bus_type = 2 or a.bus_type=3)
+            </if>
+            <if test="surveyAreaId != null">
+                and survey_area_id = #{surveyAreaId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectBusinessRole" parameterType="map" resultMap="BaseResultMap">
+        select a.user_id,a.real_name from survey_investigator a
+        left join bus_user_role b on a.user_id=b.user_id
+        left join business_role c on b.role_id=c.id
+        where a.delete_flag = 0
+        <if test="roleId != null">
+            and b.role_id = #{roleId}
+        </if>
+    </select>
+
+    <update id="updateSurveyAreaId" parameterType="map">
+        update survey_investigator set survey_area_id=#{surveyAreaId},survey_area_name=#{surveyAreaName}
+        <where>
+            <if test="ids != null ">
+                and find_in_set(id,#{ids})
+            </if>
+            <if test="areaId != null ">
+                and survey_area_id=#{areaId}
+            </if>
+        </where>
+    </update>
+</mapper>

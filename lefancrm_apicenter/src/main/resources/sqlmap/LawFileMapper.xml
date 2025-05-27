@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.LawFileMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.LawFile" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+    <result column="file_type" property="fileType" jdbcType="INTEGER" />
+    <result column="file_id" property="fileId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_id, case_no, file_type, file_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from law_file
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from law_file
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.LawFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into law_file (case_id, case_no, file_type, 
+      file_id)
+    values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{fileType,jdbcType=INTEGER}, 
+      #{fileId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.LawFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into law_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseNo != null" >
+        case_no,
+      </if>
+      <if test="fileType != null" >
+        file_type,
+      </if>
+      <if test="fileId != null" >
+        file_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        #{fileType,jdbcType=INTEGER},
+      </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.LawFile" >
+    update law_file
+    <set >
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        file_type = #{fileType,jdbcType=INTEGER},
+      </if>
+      <if test="fileId != null" >
+        file_id = #{fileId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.LawFile" >
+    update law_file
+    set case_id = #{caseId,jdbcType=BIGINT},
+      case_no = #{caseNo,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=INTEGER},
+      file_id = #{fileId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByCaseId" resultType="com.lefancrm.apicenter.dto.LawFileDto" parameterType="java.util.Map" >
+        select lf.id as id, lf.case_id as caseId, lf.case_no as caseNo,
+        lf.file_type as fileType, lf.file_id as fileId
+        from law_file lf
+        where  lf.case_id = #{caseId,jdbcType=BIGINT}
+        <if test="fileType != null">
+            and lf.file_type = #{fileType,jdbcType=BIGINT}
+        </if>
+        <if test="fileType == null">
+            and lf.file_type = 1
+        </if>
+        order by id desc
+    </select>
+
+    <select id="selectFilesAddress" parameterType="map" resultType="map">
+        SELECT a.id,b.file_path filePath,b.create_time createTime,DATE_FORMAT(b.create_time,'%Y-%m-%d %H:%i') as createTimeName
+        from law_file a LEFT JOIN
+        common_file b on a.file_id = b.id
+        WHERE a.case_id=#{caseId,jdbcType=BIGINT}
+        <if test="fileType != null">
+            and a.file_type = #{fileType,jdbcType=BIGINT}
+        </if>
+        order by b.create_time desc
+    </select>
+</mapper>

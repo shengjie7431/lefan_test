@@ -1,0 +1,2691 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseCenterInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseCenterInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="case_id" property="caseId" jdbcType="BIGINT" />
+        <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+        <result column="case_title" property="caseTitle" jdbcType="VARCHAR" />
+        <result column="case_name" property="caseName" jdbcType="VARCHAR" />
+        <result column="case_tel" property="caseTel" jdbcType="VARCHAR" />
+        <result column="case_state" property="caseState" jdbcType="INTEGER" />
+        <result column="case_state_str" property="caseStateStr" jdbcType="VARCHAR" />
+        <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+        <result column="org_id" property="orgId" jdbcType="BIGINT" />
+        <result column="org_user_id" property="orgUserId" jdbcType="BIGINT" />
+        <result column="org_user_name" property="orgUserName" jdbcType="VARCHAR" />
+        <result column="c_org_name" property="cOrgName" jdbcType="VARCHAR" />
+        <result column="c_org_user_id" property="cOrgUserId" jdbcType="BIGINT" />
+        <result column="c_org_type" property="cOrgType" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="BIGINT" />
+        <result column="salesman_id" property="salesmanId" jdbcType="BIGINT" />
+        <result column="salesman_name" property="salesmanName" jdbcType="VARCHAR" />
+        <result column="gradation_state" property="gradationState" jdbcType="INTEGER" />
+        <result column="ins_officer_id" property="insOfficerId" jdbcType="BIGINT" />
+        <result column="ins_officer_name" property="insOfficerName" jdbcType="VARCHAR" />
+        <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
+        <result column="operator_name" property="operatorName" jdbcType="VARCHAR" />
+        <result column="assess_id" property="assessId" jdbcType="BIGINT" />
+        <result column="assess_name" property="assessName" jdbcType="VARCHAR" />
+        <result column="legal_user_id" property="legalUserId" jdbcType="BIGINT" />
+        <result column="legal_user_name" property="legalUserName" jdbcType="VARCHAR" />
+        <result column="claimant_id" property="claimantId" jdbcType="BIGINT" />
+        <result column="claimant_name" property="claimantName" jdbcType="VARCHAR" />
+        <result column="insurance_company_id" property="insuranceCompanyId" jdbcType="BIGINT" />
+        <result column="insurance_company" property="insuranceCompany" jdbcType="VARCHAR" />
+        <result column="danger_time" property="dangerTime" jdbcType="TIMESTAMP" />
+        <result column="insured" property="insured" jdbcType="VARCHAR" />
+        <result column="car_no" property="carNo" jdbcType="VARCHAR" />
+        <result column="is_read" property="isRead" jdbcType="INTEGER" />
+        <result column="ins_is_read" property="insIsRead" jdbcType="INTEGER" />
+        <result column="card_id" property="cardId" jdbcType="BIGINT" />
+        <result column="bank_card_no" property="bankCardNo" jdbcType="VARCHAR" />
+        <result column="release_state" property="releaseState" jdbcType="INTEGER" />
+        <result column="release_reason" property="releaseReason" jdbcType="VARCHAR" />
+        <result column="issuance_state" property="issuanceState" jdbcType="INTEGER" />
+        <result column="issuance_reason" property="issuanceReason" jdbcType="VARCHAR" />
+        <result column="claim_state" property="claimState" jdbcType="INTEGER" />
+        <result column="claim_reason" property="claimReason" jdbcType="VARCHAR" />
+        <result column="is_feedback" property="isFeedback" jdbcType="INTEGER" />
+        <result column="closed_state" property="closedState" jdbcType="INTEGER" />
+        <result column="closed_reason" property="closedReason" jdbcType="VARCHAR" />
+        <result column="distribution_time" property="distributionTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="negotiate_state" property="negotiateState" jdbcType="INTEGER" />
+        <result column="negotiate_reason" property="negotiateReason" jdbcType="VARCHAR" />
+        <result column="hand_out_time" property="handOutTime" jdbcType="TIMESTAMP" />
+        <result column="hand_out_flag" property="handOutFlag" jdbcType="VARCHAR" />
+        <result column="hand_in_time" property="handInTime" jdbcType="TIMESTAMP" />
+        <result column="hand_in_flag" property="handInFlag" jdbcType="VARCHAR" />
+        <result column="close_report_state" property="closeReportState" jdbcType="INTEGER" />
+        <result column="agree_sign_time" property="agreeSignTime" jdbcType="TIMESTAMP" />
+        <result column="list_state" property="listState" jdbcType="INTEGER" />
+        <result column="list_state_name" property="listStateName" jdbcType="VARCHAR" />
+        <result column="oper_reason" property="operReason" jdbcType="VARCHAR" />
+        <result column="insured_amount" property="insuredAmount" jdbcType="DOUBLE" />
+        <result column="legal_user_id" property="legalUserId" jdbcType="BIGINT" />
+        <result column="legal_user_name" property="legalUserName" jdbcType="VARCHAR" />
+        <result column="is_test_case" property="isTestcase" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, type, case_id, case_no, case_title, case_name, case_tel, case_state, case_state_str,
+        org_name, org_id, org_user_id, org_user_name, create_time, create_by, salesman_id,
+        salesman_name, gradation_state, ins_officer_id, ins_officer_name, operator_id, operator_name,
+        assess_id, assess_name, claimant_id, claimant_name, insurance_company_id, insurance_company,
+        danger_time, insured, car_no, is_read, ins_is_read, card_id, bank_card_no, release_state,
+        release_reason, issuance_state, issuance_reason, claim_state, claim_reason, is_feedback,
+        closed_state, closed_reason, distribution_time, update_time, negotiate_state, negotiate_reason,
+        hand_out_time,hand_out_flag,hand_in_time,hand_in_flag,close_report_state,agree_sign_time,list_state,
+        list_state_name,oper_reason,insured_amount,legal_user_id,legal_user_name,is_test_case,delete_flag
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from case_center_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from case_center_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseCenterInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_center_info (type, case_id, case_no,
+        case_title, case_name, case_tel,
+        case_state, case_state_str, org_name,
+        org_id, org_user_id, org_user_name,
+        create_time, create_by, salesman_id,
+        salesman_name, gradation_state, ins_officer_id,
+        ins_officer_name, operator_id, operator_name,
+        assess_id, assess_name, claimant_id,
+        claimant_name, insurance_company_id, insurance_company,
+        danger_time, insured, car_no,
+        is_read, ins_is_read, card_id,
+        bank_card_no, release_state, release_reason,
+        issuance_state, issuance_reason, claim_state,
+        claim_reason, is_feedback, closed_state,
+        closed_reason, distribution_time, update_time,
+        negotiate_state, negotiate_reason,hand_out_time,hand_out_flag,hand_in_time,hand_in_flag,close_report_state,agree_sign_time,list_state,
+        list_state_name,oper_reason,insured_amount,legal_user_id,legal_user_name,is_test_case,delete_flag)
+        values (#{type,jdbcType=INTEGER}, #{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR},
+        #{caseTitle,jdbcType=VARCHAR}, #{caseName,jdbcType=VARCHAR}, #{caseTel,jdbcType=VARCHAR},
+        #{caseState,jdbcType=INTEGER}, #{caseStateStr,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR},
+        #{orgId,jdbcType=BIGINT}, #{orgUserId,jdbcType=BIGINT}, #{orgUserName,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{salesmanId,jdbcType=BIGINT},
+        #{salesmanName,jdbcType=VARCHAR}, #{gradationState,jdbcType=INTEGER}, #{insOfficerId,jdbcType=BIGINT},
+        #{insOfficerName,jdbcType=VARCHAR}, #{operatorId,jdbcType=BIGINT}, #{operatorName,jdbcType=VARCHAR},
+        #{assessId,jdbcType=BIGINT}, #{assessName,jdbcType=VARCHAR}, #{claimantId,jdbcType=BIGINT},
+        #{claimantName,jdbcType=VARCHAR}, #{insuranceCompanyId,jdbcType=BIGINT}, #{insuranceCompany,jdbcType=VARCHAR},
+        #{dangerTime,jdbcType=TIMESTAMP}, #{insured,jdbcType=VARCHAR}, #{carNo,jdbcType=VARCHAR},
+        #{isRead,jdbcType=INTEGER}, #{insIsRead,jdbcType=INTEGER}, #{cardId,jdbcType=BIGINT},
+        #{bankCardNo,jdbcType=VARCHAR}, #{releaseState,jdbcType=INTEGER}, #{releaseReason,jdbcType=VARCHAR},
+        #{issuanceState,jdbcType=INTEGER}, #{issuanceReason,jdbcType=VARCHAR}, #{claimState,jdbcType=INTEGER},
+        #{claimReason,jdbcType=VARCHAR}, #{isFeedback,jdbcType=INTEGER}, #{closedState,jdbcType=INTEGER},
+        #{closedReason,jdbcType=VARCHAR}, #{distributionTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+        #{negotiateState,jdbcType=INTEGER}, #{negotiateReason,jdbcType=VARCHAR},
+        #{hand_out_time,jdbcType=TIMESTAMP}, #{hand_out_flag,jdbcType=VARCHAR},
+        #{hand_in_time,jdbcType=TIMESTAMP}, #{hand_in_flag,jdbcType=VARCHAR},#{closeReportState,jdbcType=INTEGER},
+        #{agreeSignTime,jdbcType=TIMESTAMP},#{listState,jdbcType=INTEGER},#{listStateName,jdbcType=VARCHAR},#{operReason,jdbcType=VARCHAR},insured_amount,
+        #{legalUserId,jdbcType=BIGINT}, #{legalUserName,jdbcType=VARCHAR},#{isTestcase,jdbcType=INTEGER},#{deleteFlag,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseCenterInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_center_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="caseId != null" >
+                case_id,
+            </if>
+            <if test="caseNo != null" >
+                case_no,
+            </if>
+            <if test="caseTitle != null" >
+                case_title,
+            </if>
+            <if test="caseName != null" >
+                case_name,
+            </if>
+            <if test="caseTel != null" >
+                case_tel,
+            </if>
+            <if test="caseState != null" >
+                case_state,
+            </if>
+            <if test="caseStateStr != null" >
+                case_state_str,
+            </if>
+            <if test="orgName != null" >
+                org_name,
+            </if>
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="orgUserId != null" >
+                org_user_id,
+            </if>
+            <if test="orgUserName != null" >
+                org_user_name,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="salesmanId != null" >
+                salesman_id,
+            </if>
+            <if test="salesmanName != null" >
+                salesman_name,
+            </if>
+            <if test="gradationState != null" >
+                gradation_state,
+            </if>
+            <if test="insOfficerId != null" >
+                ins_officer_id,
+            </if>
+            <if test="insOfficerName != null" >
+                ins_officer_name,
+            </if>
+            <if test="operatorId != null" >
+                operator_id,
+            </if>
+            <if test="operatorName != null" >
+                operator_name,
+            </if>
+            <if test="assessId != null" >
+                assess_id,
+            </if>
+            <if test="assessName != null" >
+                assess_name,
+            </if>
+            <if test="claimantId != null" >
+                claimant_id,
+            </if>
+            <if test="claimantName != null" >
+                claimant_name,
+            </if>
+            <if test="insuranceCompanyId != null" >
+                insurance_company_id,
+            </if>
+            <if test="insuranceCompany != null" >
+                insurance_company,
+            </if>
+            <if test="dangerTime != null" >
+                danger_time,
+            </if>
+            <if test="insured != null" >
+                insured,
+            </if>
+            <if test="carNo != null" >
+                car_no,
+            </if>
+            <if test="isRead != null" >
+                is_read,
+            </if>
+            <if test="insIsRead != null" >
+                ins_is_read,
+            </if>
+            <if test="cardId != null" >
+                card_id,
+            </if>
+            <if test="bankCardNo != null" >
+                bank_card_no,
+            </if>
+            <if test="releaseState != null" >
+                release_state,
+            </if>
+            <if test="releaseReason != null" >
+                release_reason,
+            </if>
+            <if test="issuanceState != null" >
+                issuance_state,
+            </if>
+            <if test="issuanceReason != null" >
+                issuance_reason,
+            </if>
+            <if test="claimState != null" >
+                claim_state,
+            </if>
+            <if test="claimReason != null" >
+                claim_reason,
+            </if>
+            <if test="isFeedback != null" >
+                is_feedback,
+            </if>
+            <if test="closedState != null" >
+                closed_state,
+            </if>
+            <if test="closedReason != null" >
+                closed_reason,
+            </if>
+            <if test="distributionTime != null" >
+                distribution_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="negotiateState != null" >
+                negotiate_state,
+            </if>
+            <if test="negotiateReason != null" >
+                negotiate_reason,
+            </if>
+            <if test="handOutTime != null" >
+                hand_out_time,
+            </if>
+            <if test="handOutFlag != null" >
+                hand_out_flag,
+            </if>
+            <if test="handInTime != null" >
+                hand_in_time,
+            </if>
+            <if test="handInFlag != null" >
+                hand_in_flag,
+            </if>
+            <if test="closeReportState != null" >
+                close_report_state,
+            </if>
+            <if test="agreeSignTime != null" >
+                agree_sign_time,
+            </if>
+            <if test="listState != null" >
+                list_state,
+            </if>
+            <if test="listStateName != null" >
+                list_state_name,
+            </if>
+            <if test="operReason != null" >
+                oper_reason,
+            </if>
+            <if test="insuredAmount != null" >
+                insured_amount,
+            </if>
+            <if test="legalUserId != null" >
+                legal_user_id,
+            </if>
+            <if test="legalUserName != null" >
+                legal_user_name,
+            </if>
+            <if test="isTestcase != null" >
+                is_test_case,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="caseId != null" >
+                #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="caseTitle != null" >
+                #{caseTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="caseName != null" >
+                #{caseName,jdbcType=VARCHAR},
+            </if>
+            <if test="caseTel != null" >
+                #{caseTel,jdbcType=VARCHAR},
+            </if>
+            <if test="caseState != null" >
+                #{caseState,jdbcType=INTEGER},
+            </if>
+            <if test="caseStateStr != null" >
+                #{caseStateStr,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgUserId != null" >
+                #{orgUserId,jdbcType=BIGINT},
+            </if>
+            <if test="orgUserName != null" >
+                #{orgUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="salesmanId != null" >
+                #{salesmanId,jdbcType=BIGINT},
+            </if>
+            <if test="salesmanName != null" >
+                #{salesmanName,jdbcType=VARCHAR},
+            </if>
+            <if test="gradationState != null" >
+                #{gradationState,jdbcType=INTEGER},
+            </if>
+            <if test="insOfficerId != null" >
+                #{insOfficerId,jdbcType=BIGINT},
+            </if>
+            <if test="insOfficerName != null" >
+                #{insOfficerName,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorId != null" >
+                #{operatorId,jdbcType=BIGINT},
+            </if>
+            <if test="operatorName != null" >
+                #{operatorName,jdbcType=VARCHAR},
+            </if>
+            <if test="assessId != null" >
+                #{assessId,jdbcType=BIGINT},
+            </if>
+            <if test="assessName != null" >
+                #{assessName,jdbcType=VARCHAR},
+            </if>
+            <if test="claimantId != null" >
+                #{claimantId,jdbcType=BIGINT},
+            </if>
+            <if test="claimantName != null" >
+                #{claimantName,jdbcType=VARCHAR},
+            </if>
+            <if test="insuranceCompanyId != null" >
+                #{insuranceCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="insuranceCompany != null" >
+                #{insuranceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="dangerTime != null" >
+                #{dangerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insured != null" >
+                #{insured,jdbcType=VARCHAR},
+            </if>
+            <if test="carNo != null" >
+                #{carNo,jdbcType=VARCHAR},
+            </if>
+            <if test="isRead != null" >
+                #{isRead,jdbcType=INTEGER},
+            </if>
+            <if test="insIsRead != null" >
+                #{insIsRead,jdbcType=INTEGER},
+            </if>
+            <if test="cardId != null" >
+                #{cardId,jdbcType=BIGINT},
+            </if>
+            <if test="bankCardNo != null" >
+                #{bankCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseState != null" >
+                #{releaseState,jdbcType=INTEGER},
+            </if>
+            <if test="releaseReason != null" >
+                #{releaseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="issuanceState != null" >
+                #{issuanceState,jdbcType=INTEGER},
+            </if>
+            <if test="issuanceReason != null" >
+                #{issuanceReason,jdbcType=VARCHAR},
+            </if>
+            <if test="claimState != null" >
+                #{claimState,jdbcType=INTEGER},
+            </if>
+            <if test="claimReason != null" >
+                #{claimReason,jdbcType=VARCHAR},
+            </if>
+            <if test="isFeedback != null" >
+                #{isFeedback,jdbcType=INTEGER},
+            </if>
+            <if test="closedState != null" >
+                #{closedState,jdbcType=INTEGER},
+            </if>
+            <if test="closedReason != null" >
+                #{closedReason,jdbcType=VARCHAR},
+            </if>
+            <if test="distributionTime != null" >
+                #{distributionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="negotiateState != null" >
+                #{negotiateState,jdbcType=INTEGER},
+            </if>
+            <if test="negotiateReason != null" >
+                #{negotiateReason,jdbcType=VARCHAR},
+            </if>
+            <if test="handOutTime != null" >
+                #{handOutTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="handOutFlag != null" >
+                #{handOutFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="handInTime != null" >
+                #{handInTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="handInFlag != null" >
+                #{handInFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="closeReportState != null" >
+                #{closeReportState,jdbcType=INTEGER},
+            </if>
+            <if test="agreeSignTime != null" >
+                #{agreeSignTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="listState != null" >
+                #{listState,jdbcType=INTEGER},
+            </if>
+            <if test="listStateName != null" >
+                #{listStateName,jdbcType=VARCHAR},
+            </if>
+            <if test="operReason != null" >
+                #{operReason,jdbcType=VARCHAR},
+            </if>
+            <if test="insuredAmount != null" >
+                #{insuredAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="legalUserId != null" >
+                #{legalUserId,jdbcType=BIGINT},
+            </if>
+            <if test="legalUserName != null" >
+                #{legalUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="isTestcase != null" >
+                #{isTestcase,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseCenterInfo" >
+        update case_center_info
+        <set >
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="caseId != null" >
+                case_id = #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                case_no = #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="caseTitle != null" >
+                case_title = #{caseTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="caseName != null" >
+                case_name = #{caseName,jdbcType=VARCHAR},
+            </if>
+            <if test="caseTel != null" >
+                case_tel = #{caseTel,jdbcType=VARCHAR},
+            </if>
+            <if test="caseState != null" >
+                case_state = #{caseState,jdbcType=INTEGER},
+            </if>
+            <if test="caseStateStr != null" >
+                case_state_str = #{caseStateStr,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null" >
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgUserId != null" >
+                org_user_id = #{orgUserId,jdbcType=BIGINT},
+            </if>
+            <if test="orgUserName != null" >
+                org_user_name = #{orgUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="salesmanId != null" >
+                salesman_id = #{salesmanId,jdbcType=BIGINT},
+            </if>
+            <if test="salesmanName != null" >
+                salesman_name = #{salesmanName,jdbcType=VARCHAR},
+            </if>
+            <if test="gradationState != null" >
+                gradation_state = #{gradationState,jdbcType=INTEGER},
+            </if>
+            <if test="insOfficerId != null" >
+                ins_officer_id = #{insOfficerId,jdbcType=BIGINT},
+            </if>
+            <if test="insOfficerName != null" >
+                ins_officer_name = #{insOfficerName,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorId != null" >
+                operator_id = #{operatorId,jdbcType=BIGINT},
+            </if>
+            <if test="operatorName != null" >
+                operator_name = #{operatorName,jdbcType=VARCHAR},
+            </if>
+            <if test="assessId != null" >
+                assess_id = #{assessId,jdbcType=BIGINT},
+            </if>
+            <if test="assessName != null" >
+                assess_name = #{assessName,jdbcType=VARCHAR},
+            </if>
+            <if test="claimantId != null" >
+                claimant_id = #{claimantId,jdbcType=BIGINT},
+            </if>
+            <if test="claimantName != null" >
+                claimant_name = #{claimantName,jdbcType=VARCHAR},
+            </if>
+            <if test="insuranceCompanyId != null" >
+                insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="insuranceCompany != null" >
+                insurance_company = #{insuranceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="dangerTime != null" >
+                danger_time = #{dangerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insured != null" >
+                insured = #{insured,jdbcType=VARCHAR},
+            </if>
+            <if test="carNo != null" >
+                car_no = #{carNo,jdbcType=VARCHAR},
+            </if>
+            <if test="isRead != null" >
+                is_read = #{isRead,jdbcType=INTEGER},
+            </if>
+            <if test="insIsRead != null" >
+                ins_is_read = #{insIsRead,jdbcType=INTEGER},
+            </if>
+            <if test="cardId != null" >
+                card_id = #{cardId,jdbcType=BIGINT},
+            </if>
+            <if test="bankCardNo != null" >
+                bank_card_no = #{bankCardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseState != null" >
+                release_state = #{releaseState,jdbcType=INTEGER},
+            </if>
+            <if test="releaseReason != null" >
+                release_reason = #{releaseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="issuanceState != null" >
+                issuance_state = #{issuanceState,jdbcType=INTEGER},
+            </if>
+            <if test="issuanceReason != null" >
+                issuance_reason = #{issuanceReason,jdbcType=VARCHAR},
+            </if>
+            <if test="claimState != null" >
+                claim_state = #{claimState,jdbcType=INTEGER},
+            </if>
+            <if test="claimReason != null" >
+                claim_reason = #{claimReason,jdbcType=VARCHAR},
+            </if>
+            <if test="isFeedback != null" >
+                is_feedback = #{isFeedback,jdbcType=INTEGER},
+            </if>
+            <if test="closedState != null" >
+                closed_state = #{closedState,jdbcType=INTEGER},
+            </if>
+            <if test="closedReason != null" >
+                closed_reason = #{closedReason,jdbcType=VARCHAR},
+            </if>
+            <if test="distributionTime != null" >
+                distribution_time = #{distributionTime,jdbcType=TIMESTAMP},
+            </if>
+            <!--<if test="updateTime != null" >-->
+                <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <if test="updateTime != null || updateTime == null" >
+                update_time = SYSDATE(),
+            </if>
+            <if test="negotiateState != null" >
+                negotiate_state = #{negotiateState,jdbcType=INTEGER},
+            </if>
+            <if test="negotiateReason != null" >
+                negotiate_reason = #{negotiateReason,jdbcType=VARCHAR},
+            </if>
+            <if test="handOutTime != null" >
+                hand_out_time = #{handOutTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="handOutFlag != null" >
+                hand_out_flag = #{handOutFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="handInTime != null" >
+                hand_in_time = #{handInTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="handInFlag != null" >
+                hand_in_flag = #{handInFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="closeReportState != null" >
+                close_report_state = #{closeReportState,jdbcType=INTEGER},
+            </if>
+            <if test="agreeSignTime != null" >
+                agree_sign_time = #{agreeSignTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="listState != null" >
+                list_state = #{listState,jdbcType=INTEGER},
+            </if>
+            <if test="listStateName != null" >
+                list_state_name = #{listStateName,jdbcType=VARCHAR},
+            </if>
+            <if test="operReason != null" >
+                oper_reason = #{operReason,jdbcType=VARCHAR},
+            </if>
+            <if test="insuredAmount != null" >
+                insured_amount = #{insuredAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="legalUserId != null" >
+                legal_user_id = #{legalUserId,jdbcType=BIGINT},
+            </if>
+            <if test="legalUserName != null" >
+                legal_user_name = #{legalUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="isTestcase != null" >
+                is_test_case = #{isTestcase,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseCenterInfo" >
+        update case_center_info
+        set type = #{type,jdbcType=INTEGER},
+        case_id = #{caseId,jdbcType=BIGINT},
+        case_no = #{caseNo,jdbcType=VARCHAR},
+        case_title = #{caseTitle,jdbcType=VARCHAR},
+        case_name = #{caseName,jdbcType=VARCHAR},
+        case_tel = #{caseTel,jdbcType=VARCHAR},
+        case_state = #{caseState,jdbcType=INTEGER},
+        case_state_str = #{caseStateStr,jdbcType=VARCHAR},
+        org_name = #{orgName,jdbcType=VARCHAR},
+        org_id = #{orgId,jdbcType=BIGINT},
+        org_user_id = #{orgUserId,jdbcType=BIGINT},
+        org_user_name = #{orgUserName,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=BIGINT},
+        salesman_id = #{salesmanId,jdbcType=BIGINT},
+        salesman_name = #{salesmanName,jdbcType=VARCHAR},
+        gradation_state = #{gradationState,jdbcType=INTEGER},
+        ins_officer_id = #{insOfficerId,jdbcType=BIGINT},
+        ins_officer_name = #{insOfficerName,jdbcType=VARCHAR},
+        operator_id = #{operatorId,jdbcType=BIGINT},
+        operator_name = #{operatorName,jdbcType=VARCHAR},
+        assess_id = #{assessId,jdbcType=BIGINT},
+        assess_name = #{assessName,jdbcType=VARCHAR},
+        claimant_id = #{claimantId,jdbcType=BIGINT},
+        claimant_name = #{claimantName,jdbcType=VARCHAR},
+        insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT},
+        insurance_company = #{insuranceCompany,jdbcType=VARCHAR},
+        danger_time = #{dangerTime,jdbcType=TIMESTAMP},
+        insured = #{insured,jdbcType=VARCHAR},
+        car_no = #{carNo,jdbcType=VARCHAR},
+        is_read = #{isRead,jdbcType=INTEGER},
+        ins_is_read = #{insIsRead,jdbcType=INTEGER},
+        card_id = #{cardId,jdbcType=BIGINT},
+        bank_card_no = #{bankCardNo,jdbcType=VARCHAR},
+        release_state = #{releaseState,jdbcType=INTEGER},
+        release_reason = #{releaseReason,jdbcType=VARCHAR},
+        issuance_state = #{issuanceState,jdbcType=INTEGER},
+        issuance_reason = #{issuanceReason,jdbcType=VARCHAR},
+        claim_state = #{claimState,jdbcType=INTEGER},
+        claim_reason = #{claimReason,jdbcType=VARCHAR},
+        is_feedback = #{isFeedback,jdbcType=INTEGER},
+        closed_state = #{closedState,jdbcType=INTEGER},
+        closed_reason = #{closedReason,jdbcType=VARCHAR},
+        distribution_time = #{distributionTime,jdbcType=TIMESTAMP},
+        update_time = SYSDATE(),
+        negotiate_state = #{negotiateState,jdbcType=INTEGER},
+        negotiate_reason = #{negotiateReason,jdbcType=VARCHAR},
+        hand_out_time = #{handOutTime,jdbcType=TIMESTAMP},
+        hand_out_flag = #{handOutFlag,jdbcType=VARCHAR},
+        hand_in_time = #{handInTime,jdbcType=TIMESTAMP},
+        hand_in_flag = #{handInFlag,jdbcType=VARCHAR},
+        close_report_state = #{closeReportState,jdbcType=INTEGER},
+        agree_sign_time = #{agreeSignTime,jdbcType=TIMESTAMP},
+        list_state = #{listState,jdbcType=INTEGER},
+        list_state_name = #{listStateName,jdbcType=VARCHAR},
+        oper_reason = #{operReason,jdbcType=VARCHAR},
+        insured_amount = #{insuredAmount,jdbcType=DOUBLE},
+        legal_user_id = #{legalUserId,jdbcType=BIGINT},
+        legal_user_name = #{legalUserName,jdbcType=VARCHAR},
+        is_test_case = #{isTestcase,jdbcType=INTEGER},
+        delete_flag = #{deleteFlag,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+
+    <!--整理后-->
+    <sql id="columns">
+        a.id as id,
+        a.type as type,
+        a.case_id as caseId,
+        a.case_no as caseNo,
+        a.case_title as caseTitle,
+        a.case_name as caseName,
+        a.case_tel as caseTel,
+        a.case_state as caseState,
+        a.case_state_str as caseStateStr,
+        a.org_name as orgName,
+        a.org_id as orgId,
+        a.org_user_id as orgUserId,
+        a.org_user_name as orgUserName,
+        a.create_time as createTime,
+        a.create_by as createBy,
+        a.salesman_id as salesmanId,
+        a.salesman_name as salesmanName,
+        a.gradation_state as gradationState,
+        a.ins_officer_id as insOfficerId,
+        a.ins_officer_name as insOfficerName,
+        a.operator_id as operatorId,
+        a.operator_name as operatorName,
+        a.assess_id as assessId,
+        a.assess_name as assessName,
+        a.claimant_id as claimantId,
+        a.claimant_name as claimantName,
+        a.insurance_company_id as insuranceCompanyId,
+        a.insurance_company as insuranceCompany,
+        a.danger_time as dangerTime,
+        a.insured as insured,
+        a.car_no as carNo,
+        a.is_read as isRead,
+        a.ins_is_read as insIsRead,
+        a.card_id as cardId,
+        a.bank_card_no as bankCardNo,
+        a.release_state as releaseState,
+        a.release_reason as releaseReason,
+        a.issuance_state as issuanceState,
+        a.issuance_reason as issuanceReason,
+        a.claim_state as claimState,
+        a.claim_reason as claimReason,
+        a.is_feedback as isFeedback,
+        a.closed_state as closedState,
+        a.closed_reason as closedReason,
+        a.distribution_time as distributionTime,
+        a.update_time as updateTime,
+        a.negotiate_state as negotiateState,
+        a.negotiate_reason as negotiateReason,
+        a.hand_out_time as handOutTime,
+        a.hand_out_flag as handOutFlag,
+        a.hand_in_time as handInTime,
+        a.hand_in_flag as handInFlag,
+        a.close_report_state as closeReportState,
+        a.agree_sign_time as agreeSignTime,
+        a.list_state as listState,
+        a.list_state_name as listStateName,
+        a.oper_reason as operReason,
+        a.insured_amount as insuredAmount,
+        a.legal_user_id as legalUserId,
+        a.legal_user_name as legalUserName,
+        e.define_amount as defineAmount,
+        e.define_state as defineState,
+        e.define_date as defineDate,
+        e.define_amount as defineAmount,
+        '' as reportCaseNo,
+        '' as controlCaseNo,
+        '' as closeCaseNo,
+        a.is_test_case as isTestcase,
+        a.delete_flag as deleteFlag
+
+    </sql>
+    <sql id="joins">
+        left join case_center_extend e on a.id = e.id
+    </sql>
+    <select id="findList" resultType="com.lefancrm.apicenter.dto.CaseCenterInfoDto"
+            parameterType="map">
+        select
+        <include refid="columns" />
+        from case_center_info a
+        <include refid="joins" />
+        <where>
+            <if test="type != null" >
+                and a.type = #{type,jdbcType=INTEGER}
+            </if>
+            <if test="caseId != null" >
+                and a.case_id = #{caseId,jdbcType=BIGINT}
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseTitle != null" >
+                and a.case_title like concat('%',#{caseTitle,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseTel != null" >
+                and a.case_tel = #{caseTel,jdbcType=VARCHAR}
+            </if>
+            <if test="caseState != null" >
+                <if test="caseState == -1">
+                    and a.case_state != 1
+                </if>
+                <if test="caseState != -1">
+                    and a.case_state = #{caseState,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="caseStateStr != null" >
+                and a.case_state_str = #{caseStateStr,jdbcType=VARCHAR}
+            </if>
+            <if test="orgName != null" >
+                and a.org_name = #{orgName,jdbcType=VARCHAR}
+            </if>
+            <if test="orgId != null" >
+                and a.org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="orgUserId != null" >
+                and a.org_user_id = #{orgUserId,jdbcType=BIGINT}
+            </if>
+            <if test="orgUserName != null" >
+                and a.org_user_name = #{orgUserName,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null" >
+                and a.create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createBy != null" >
+                and a.create_by = #{createBy,jdbcType=BIGINT}
+            </if>
+            <if test="salesmanId != null" >
+                and a.salesman_id = #{salesmanId,jdbcType=BIGINT}
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="gradationState != null" >
+                and a.gradation_state = #{gradationState,jdbcType=INTEGER}
+            </if>
+            <if test="insOfficerId != null" >
+                and a.ins_officer_id = #{insOfficerId,jdbcType=BIGINT}
+            </if>
+            <if test="insOfficerName != null" >
+                and a.ins_officer_name = #{insOfficerName,jdbcType=VARCHAR}
+            </if>
+            <if test="assessId != null" >
+                and a.assess_id = #{assessId,jdbcType=BIGINT}
+            </if>
+            <if test="assessName != null" >
+                and a.assess_name = #{assessName,jdbcType=VARCHAR}
+            </if>
+            <if test="claimantId != null" >
+                and a.claimant_id = #{claimantId,jdbcType=BIGINT}
+            </if>
+            <if test="claimantName != null" >
+                and a.claimant_name = #{claimantName,jdbcType=VARCHAR}
+            </if>
+            <if test="insuranceCompanyId != null" >
+                and a.insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT}
+            </if>
+            <if test="insuranceCompany != null" >
+                and a.insurance_company = #{insuranceCompany,jdbcType=VARCHAR}
+            </if>
+            <if test="dangerTime != null" >
+                and a.danger_time = #{dangerTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="insured != null" >
+                and a.insured = #{insured,jdbcType=VARCHAR}
+            </if>
+            <if test="carNo != null" >
+                and a.car_no = #{carNo,jdbcType=VARCHAR}
+            </if>
+            <if test="isRead != null" >
+                and a.is_read = #{isRead,jdbcType=INTEGER}
+            </if>
+            <if test="insIsRead != null" >
+                and a.ins_is_read = #{insIsRead,jdbcType=INTEGER}
+            </if>
+            <if test="cardId != null" >
+                and a.card_id = #{cardId,jdbcType=BIGINT}
+            </if>
+            <if test="bankCardNo != null" >
+                and a.bank_card_no = #{bankCardNo,jdbcType=VARCHAR}
+            </if>
+            <if test="releaseState != null" >
+                and a.release_state = #{releaseState,jdbcType=INTEGER}
+            </if>
+            <if test="releaseReason != null" >
+                and a.release_reason = #{releaseReason,jdbcType=VARCHAR}
+            </if>
+            <if test="issuanceReason != null" >
+                and a.issuance_reason = #{issuanceReason,jdbcType=VARCHAR}
+            </if>
+            <if test="claimState != null" >
+                and a.claim_state = #{claimState,jdbcType=INTEGER}
+            </if>
+            <if test="claimReason != null" >
+                and a.claim_reason = #{claimReason,jdbcType=VARCHAR}
+            </if>
+            <if test="isFeedback != null" >
+                and a.is_feedback = #{isFeedback,jdbcType=INTEGER}
+            </if>
+            <if test="closedState != null" >
+                and a.closed_state = #{closedState,jdbcType=INTEGER}
+            </if>
+            <if test="closedReason != null" >
+                and a.closed_reason = #{closedReason,jdbcType=VARCHAR}
+            </if>
+            <if test="distributionTime != null" >
+                and a.distribution_time = #{distributionTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null" >
+                and a.update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="negotiateState != null" >
+                and a.negotiate_state = #{negotiateState,jdbcType=INTEGER}
+            </if>
+            <if test="negotiateReason != null" >
+                and a.negotiate_reason = #{negotiateReason,jdbcType=VARCHAR}
+            </if>
+            <if test="handOutTime != null" >
+                and a.hand_out_time = #{handOutTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="handOutFlag != null" >
+                and a.hand_out_flag = #{handOutFlag,jdbcType=VARCHAR}
+            </if>
+            <if test="handInTime != null" >
+                and a.hand_in_time = #{handInTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="handInFlag != null" >
+                and a.hand_in_flag = #{handInFlag,jdbcType=VARCHAR}
+            </if>
+            <if test="closeReportState != null" >
+                and a.close_report_state = #{closeReportState,jdbcType=INTEGER}
+            </if>
+            <if test="agreeSignTime != null" >
+                and agree_sign_time = #{agreeSignTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="listState != null" >
+                and  list_state = #{listState,jdbcType=INTEGER}
+            </if>
+            <if test="operReason != null" >
+                and  oper_reason = #{operReason,jdbcType=VARCHAR}
+            </if>
+            <if test="legalUserId != null" >
+                and a.legal_user_id = #{legalUserId,jdbcType=BIGINT}
+            </if>
+            <if test="legalUserName != null" >
+                and a.legal_user_name = #{legalUserName,jdbcType=VARCHAR}
+            </if>
+            <if test="fakeState != null" >
+                and a.fake_state = #{fakeState,jdbcType=INTEGER}
+            </if>
+            <if test="giveupState != null" >
+                and a.giveup_state = #{giveupState,jdbcType=INTEGER}
+            </if>
+            <if test="menuType == 11">
+                and a.gradation_state != 1 and a.type = 1
+            </if>
+            <if test="menuType == 111">
+                and a.gradation_state not in (1,2)
+            </if>
+            <if test="menuType == 1111">
+                and (a.gradation_state = 6 or (a.legal_user_id is not null and a.gradation_state = 4))
+            </if>
+            <if test="menuType == 15">
+                and a.issuance_state in (1,5)
+            </if>
+            <if test="menuType == 25">
+                and a.hand_out_flag != 2
+            </if>
+            <if test="menuType == 27">
+                and a.gradation_state != 1
+            </if>
+            <if test="menuType == 35">
+<!--
+                and (a.claim_state = 2 or a.close_report_state =2 or a.closed_state = 1 and (a.release_state in (0,3) or a.release_state is null))
+-->
+                and a.claim_state in (7,10,13)
+            </if>
+            <if test="menuType == 50">
+<!--
+                and (a.claim_state = 2 or a.close_report_state =2 or a.closed_state = 1 and (a.release_state in (0,3) or a.release_state is null))
+-->
+                and a.claim_state in (7,11,14)
+            </if>
+            <if test="menuType == 56">
+                and a.release_state in (1,4)
+            </if>
+
+            <if test="pgChoose == 1">
+                and (a.list_state = 888 || a.list_state = 6 || a.list_state = 10 || a.list_state = 11)
+            </if>
+            <if test="pgChoose == 2">
+                and (a.list_state = 8)
+            </if>
+            <if test="pgChoose == 3">
+                and (a.list_state = 12)
+            </if>
+            <if test="pgChoose == 4">
+                and (a.list_state = 14)
+            </if>
+            <if test="pgChoose == 5">
+                and (a.list_state = 16)
+            </if>
+            <if test="pgChoose == 6">
+                and (e.define_state != 1)
+            </if>
+
+            <if test="spChoose == 1">
+                and (a.claim_state = 4)
+            </if>
+            <if test="spChoose == 2">
+                and (a.claim_state = 5)
+            </if>
+            <if test="spChoose == 3">
+                and (a.claim_state = 8)
+            </if>
+            <if test="spChoose == 4">
+                and (a.claim_state = 9)
+            </if>
+            <if test="spChoose == 5">
+                and (a.claim_state = 11)
+            </if>
+            <if test="spChoose == 6">
+                and (a.claim_state = 12)
+            </if>
+            <if test="spChoose == 7">
+                and (a.claim_state = 6)
+            </if>
+
+            <if test="ssChoose == 1">
+                and (a.claim_state = 4)
+            </if>
+            <if test="ssChoose == 2">
+                and (a.claim_state = 6)
+            </if>
+            <if test="ssChoose == 3">
+                and (a.claim_state = 8)
+            </if>
+            <if test="ssChoose == 4">
+                and (a.claim_state = 10)
+            </if>
+            <if test="ssChoose == 5">
+                and (a.claim_state = 12)
+            </if>
+            <if test="ssChoose == 6">
+                and (a.claim_state = 13)
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag !=1
+        </where>
+        ORDER by a.create_time desc,a.case_state limit #{pageIndex} , #{pageSize}
+    </select>
+    <select id="findListSize" resultType="int"
+            parameterType="map">
+        select
+        count(1)
+        from case_center_info a
+        <include refid="joins" />
+        <where>
+            <if test="type != null" >
+                and a.type = #{type,jdbcType=INTEGER}
+            </if>
+            <if test="caseId != null" >
+                and a.case_id = #{caseId,jdbcType=BIGINT}
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseTitle != null" >
+                and a.case_title like concat('%',#{caseTitle,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseTel != null" >
+                and a.case_tel = #{caseTel,jdbcType=VARCHAR}
+            </if>
+            <if test="caseState != null" >
+                <if test="caseState == -1">
+                    and a.case_state != 1
+                </if>
+                <if test="caseState != -1">
+                    and a.case_state = #{caseState,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="caseStateStr != null" >
+                and a.case_state_str = #{caseStateStr,jdbcType=VARCHAR}
+            </if>
+            <if test="orgName != null" >
+                and a.org_name = #{orgName,jdbcType=VARCHAR}
+            </if>
+            <if test="orgId != null" >
+                and a.org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="orgUserId != null" >
+                and a.org_user_id = #{orgUserId,jdbcType=BIGINT}
+            </if>
+            <if test="orgUserName != null" >
+                and a.org_user_name = #{orgUserName,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null" >
+                and a.create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createBy != null" >
+                and a.create_by = #{createBy,jdbcType=BIGINT}
+            </if>
+            <if test="salesmanId != null" >
+                and a.salesman_id = #{salesmanId,jdbcType=BIGINT}
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="gradationState != null" >
+                and a.gradation_state = #{gradationState,jdbcType=INTEGER}
+            </if>
+            <if test="insOfficerId != null" >
+                and a.ins_officer_id = #{insOfficerId,jdbcType=BIGINT}
+            </if>
+            <if test="insOfficerName != null" >
+                and a.ins_officer_name = #{insOfficerName,jdbcType=VARCHAR}
+            </if>
+            <if test="assessId != null" >
+                and a.assess_id = #{assessId,jdbcType=BIGINT}
+            </if>
+            <if test="assessName != null" >
+                and a.assess_name = #{assessName,jdbcType=VARCHAR}
+            </if>
+            <if test="claimantId != null" >
+                and a.claimant_id = #{claimantId,jdbcType=BIGINT}
+            </if>
+            <if test="claimantName != null" >
+                and a.claimant_name = #{claimantName,jdbcType=VARCHAR}
+            </if>
+            <if test="insuranceCompanyId != null" >
+                and a.insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT}
+            </if>
+            <if test="insuranceCompany != null" >
+                and a.insurance_company = #{insuranceCompany,jdbcType=VARCHAR}
+            </if>
+            <if test="dangerTime != null" >
+                and a.danger_time = #{dangerTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="insured != null" >
+                and a.insured = #{insured,jdbcType=VARCHAR}
+            </if>
+            <if test="carNo != null" >
+                and a.car_no = #{carNo,jdbcType=VARCHAR}
+            </if>
+            <if test="isRead != null" >
+                and a.is_read = #{isRead,jdbcType=INTEGER}
+            </if>
+            <if test="insIsRead != null" >
+                and a.ins_is_read = #{insIsRead,jdbcType=INTEGER}
+            </if>
+            <if test="cardId != null" >
+                and a.card_id = #{cardId,jdbcType=BIGINT}
+            </if>
+            <if test="bankCardNo != null" >
+                and a.bank_card_no = #{bankCardNo,jdbcType=VARCHAR}
+            </if>
+            <if test="releaseState != null" >
+                and a.release_state = #{releaseState,jdbcType=INTEGER}
+            </if>
+            <if test="releaseReason != null" >
+                and a.release_reason = #{releaseReason,jdbcType=VARCHAR}
+            </if>
+            <if test="issuanceReason != null" >
+                and a.issuance_reason = #{issuanceReason,jdbcType=VARCHAR}
+            </if>
+            <if test="claimState != null" >
+                and a.claim_state = #{claimState,jdbcType=INTEGER}
+            </if>
+            <if test="claimReason != null" >
+                and a.claim_reason = #{claimReason,jdbcType=VARCHAR}
+            </if>
+            <if test="isFeedback != null" >
+                and a.is_feedback = #{isFeedback,jdbcType=INTEGER}
+            </if>
+            <if test="closedState != null" >
+                and a.closed_state = #{closedState,jdbcType=INTEGER}
+            </if>
+            <if test="closedReason != null" >
+                and a.closed_reason = #{closedReason,jdbcType=VARCHAR}
+            </if>
+            <if test="distributionTime != null" >
+                and a.distribution_time = #{distributionTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null" >
+                and a.update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="negotiateState != null" >
+                and a.negotiate_state = #{negotiateState,jdbcType=INTEGER}
+            </if>
+            <if test="negotiateReason != null" >
+                and a.negotiate_reason = #{negotiateReason,jdbcType=VARCHAR}
+            </if>
+            <if test="handOutTime != null" >
+                and a.hand_out_time = #{handOutTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="handOutFlag != null" >
+                and a.hand_out_flag = #{handOutFlag,jdbcType=VARCHAR}
+            </if>
+            <if test="handInTime != null" >
+                and a.hand_in_time = #{handInTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="handInFlag != null" >
+                and a.hand_in_flag = #{handInFlag,jdbcType=VARCHAR}
+            </if>
+            <if test="closeReportState != null" >
+                and a.close_report_state = #{closeReportState,jdbcType=INTEGER}
+            </if>
+            <if test="agreeSignTime != null" >
+                and agree_sign_time = #{agreeSignTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="listState != null" >
+                and  list_state = #{listState,jdbcType=INTEGER}
+            </if>
+            <if test="operReason != null" >
+                and  oper_reason = #{operReason,jdbcType=VARCHAR}
+            </if>
+            <if test="legalUserId != null" >
+                and a.legal_user_id = #{legalUserId,jdbcType=BIGINT}
+            </if>
+            <if test="legalUserName != null" >
+                and a.legal_user_name = #{legalUserName,jdbcType=VARCHAR}
+            </if>
+            <if test="fakeState != null" >
+                and a.fake_state = #{fakeState,jdbcType=INTEGER}
+            </if>
+            <if test="giveupState != null" >
+                and a.giveup_state = #{giveupState,jdbcType=INTEGER}
+            </if>
+            <if test="menuType == 11">
+                and a.gradation_state != 1 and a.type = 1
+            </if>
+            <if test="menuType == 111">
+                and a.gradation_state not in (1,2)
+            </if>
+            <if test="menuType == 1111">
+                and (a.gradation_state = 6 or (a.legal_user_id is not null and a.gradation_state = 4))
+            </if>
+            <if test="menuType == 15">
+                and a.issuance_state in (1,5)
+            </if>
+            <if test="menuType == 25">
+                and a.hand_out_flag != 2
+            </if>
+            <if test="menuType == 27">
+                and a.gradation_state != 1
+            </if>
+            <if test="menuType == 35">
+<!--
+                and (a.claim_state = 2 or a.close_report_state =2 or a.closed_state = 1 and (a.release_state in (0,3) or a.release_state is null))
+-->
+                and a.claim_state in (7,10,13)
+            </if>
+            <if test="menuType == 50">
+<!--
+                and (a.claim_state = 2 or a.close_report_state =2 or a.closed_state = 1 and (a.release_state in (0,3) or a.release_state is null))
+-->
+                and a.claim_state in (7,11,14)
+            </if>
+            <if test="menuType == 56">
+                and a.release_state in (1,4)
+            </if>
+
+            <if test="pgChoose == 1">
+                and (a.list_state = 888 || a.list_state = 6 || a.list_state = 10 || a.list_state = 11)
+            </if>
+            <if test="pgChoose == 2">
+                and (a.list_state = 8)
+            </if>
+            <if test="pgChoose == 3">
+                and (a.list_state = 12)
+            </if>
+            <if test="pgChoose == 4">
+                and (a.list_state = 14)
+            </if>
+            <if test="pgChoose == 5">
+                and (a.list_state = 16)
+            </if>
+            <if test="pgChoose == 6">
+                and (e.define_state != 1)
+            </if>
+
+            <if test="spChoose == 1">
+                and (a.claim_state = 4)
+            </if>
+            <if test="spChoose == 2">
+                and (a.claim_state = 5)
+            </if>
+            <if test="spChoose == 3">
+                and (a.claim_state = 8)
+            </if>
+            <if test="spChoose == 4">
+                and (a.claim_state = 9)
+            </if>
+            <if test="spChoose == 5">
+                and (a.claim_state = 11)
+            </if>
+            <if test="spChoose == 6">
+                and (a.claim_state = 12)
+            </if>
+            <if test="spChoose == 7">
+                and (a.claim_state = 6)
+            </if>
+
+            <if test="ssChoose == 1">
+                and (a.claim_state = 4)
+            </if>
+            <if test="ssChoose == 2">
+                and (a.claim_state = 6)
+            </if>
+            <if test="ssChoose == 3">
+                and (a.claim_state = 8)
+            </if>
+            <if test="ssChoose == 4">
+                and (a.claim_state = 10)
+            </if>
+            <if test="ssChoose == 5">
+                and (a.claim_state = 12)
+            </if>
+            <if test="ssChoose == 6">
+                and (a.claim_state = 13)
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag !=1
+        </where>
+    </select>
+    <select id="findListByInfo" resultType="com.lefancrm.apicenter.dto.CaseCenterInfoDto"
+            parameterType="map">
+        select
+        <include refid="columns" />
+        from case_center_info a
+        <include refid="joins" />
+        <where>
+            <if test="type != null" >
+                and a.type = #{type,jdbcType=INTEGER}
+            </if>
+            <if test="caseId != null" >
+                and a.case_id = #{caseId,jdbcType=BIGINT}
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseTitle != null" >
+                and a.case_title = #{caseTitle,jdbcType=VARCHAR}
+            </if>
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseTel != null" >
+                and a.case_tel = #{caseTel,jdbcType=VARCHAR}
+            </if>
+            <if test="caseState != null" >
+                <if test="caseState == -1">
+                    and a.case_state != 1
+                </if>
+                <if test="caseState != -1">
+                    and a.case_state = #{caseState,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="caseStateStr != null" >
+                and a.case_state_str = #{caseStateStr,jdbcType=VARCHAR}
+            </if>
+            <if test="orgName != null" >
+                and a.org_name = #{orgName,jdbcType=VARCHAR}
+            </if>
+            <if test="orgId != null" >
+                and a.org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="orgUserId != null" >
+                and a.org_user_id = #{orgUserId,jdbcType=BIGINT}
+            </if>
+            <if test="orgUserName != null" >
+                and a.org_user_name = #{orgUserName,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null" >
+                and a.create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createBy != null" >
+                and a.create_by = #{createBy,jdbcType=BIGINT}
+            </if>
+            <if test="salesmanId != null" >
+                and a.salesman_id = #{salesmanId,jdbcType=BIGINT}
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name = #{salesmanName,jdbcType=VARCHAR}
+            </if>
+            <if test="gradationState != null" >
+                and a.gradation_state = #{gradationState,jdbcType=INTEGER}
+            </if>
+            <if test="insOfficerId != null" >
+                and a.ins_officer_id = #{insOfficerId,jdbcType=BIGINT}
+            </if>
+            <if test="insOfficerName != null" >
+                and a.ins_officer_name = #{insOfficerName,jdbcType=VARCHAR}
+            </if>
+            <if test="assessId != null" >
+                and a.assess_id = #{assessId,jdbcType=BIGINT}
+            </if>
+            <if test="assessName != null" >
+                and a.assess_name = #{assessName,jdbcType=VARCHAR}
+            </if>
+            <if test="claimantId != null" >
+                and a.claimant_id = #{claimantId,jdbcType=BIGINT}
+            </if>
+            <if test="claimantName != null" >
+                and a.claimant_name = #{claimantName,jdbcType=VARCHAR}
+            </if>
+            <if test="insuranceCompanyId != null" >
+                and a.insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT}
+            </if>
+            <if test="insuranceCompany != null" >
+                and a.insurance_company = #{insuranceCompany,jdbcType=VARCHAR}
+            </if>
+            <if test="dangerTime != null" >
+                and a.danger_time = #{dangerTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="insured != null" >
+                and a.insured = #{insured,jdbcType=VARCHAR}
+            </if>
+            <if test="carNo != null" >
+                and a.car_no = #{carNo,jdbcType=VARCHAR}
+            </if>
+            <if test="isRead != null" >
+                and a.is_read = #{isRead,jdbcType=INTEGER}
+            </if>
+            <if test="insIsRead != null" >
+                and a.ins_is_read = #{insIsRead,jdbcType=INTEGER}
+            </if>
+            <if test="cardId != null" >
+                and a.card_id = #{cardId,jdbcType=BIGINT}
+            </if>
+            <if test="bankCardNo != null" >
+                and a.bank_card_no = #{bankCardNo,jdbcType=VARCHAR}
+            </if>
+            <if test="releaseState != null" >
+                and a.release_state = #{releaseState,jdbcType=INTEGER}
+            </if>
+            <if test="releaseReason != null" >
+                and a.release_reason = #{releaseReason,jdbcType=VARCHAR}
+            </if>
+            <if test="issuanceReason != null" >
+                and a.issuance_reason = #{issuanceReason,jdbcType=VARCHAR}
+            </if>
+            <if test="claimState != null" >
+                and a.claim_state = #{claimState,jdbcType=INTEGER}
+            </if>
+            <if test="claimReason != null" >
+                and a.claim_reason = #{claimReason,jdbcType=VARCHAR}
+            </if>
+            <if test="isFeedback != null" >
+                and a.is_feedback = #{isFeedback,jdbcType=INTEGER}
+            </if>
+            <if test="closedState != null" >
+                and a.closed_state = #{closedState,jdbcType=INTEGER}
+            </if>
+            <if test="closedReason != null" >
+                and a.closed_reason = #{closedReason,jdbcType=VARCHAR}
+            </if>
+            <if test="distributionTime != null" >
+                and a.distribution_time = #{distributionTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null" >
+                and a.update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="negotiateState != null" >
+                and a.negotiate_state = #{negotiateState,jdbcType=INTEGER}
+            </if>
+            <if test="negotiateReason != null" >
+                and a.negotiate_reason = #{negotiateReason,jdbcType=VARCHAR}
+            </if>
+            <if test="handOutTime != null" >
+                and a.hand_out_time = #{handOutTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="handOutFlag != null" >
+                and a.hand_out_flag = #{handOutFlag,jdbcType=VARCHAR}
+            </if>
+            <if test="handInTime != null" >
+                and a.hand_in_time = #{handInTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="handInFlag != null" >
+                and a.hand_in_flag = #{handInFlag,jdbcType=VARCHAR}
+            </if>
+            <if test="closeReportState != null" >
+                and a.close_report_state = #{closeReportState,jdbcType=INTEGER}
+            </if>
+            <if test="agreeSignTime != null" >
+                and agree_sign_time = #{agreeSignTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="listState != null" >
+                and  list_state = #{listState,jdbcType=INTEGER}
+            </if>
+            <if test="operReason != null" >
+                and  oper_reason = #{operReason,jdbcType=VARCHAR}
+            </if>
+            <if test="legalUserId != null" >
+                and a.legal_user_id = #{legalUserId,jdbcType=BIGINT}
+            </if>
+            <if test="legalUserName != null" >
+                and a.legal_user_name = #{legalUserName,jdbcType=VARCHAR}
+            </if>
+            <if test="menuType == 11">
+                and a.gradation_state != 1 and a.type = 1
+            </if>
+            <if test="menuType == 111">
+                and a.gradation_state not in (1,2)
+            </if>
+            <if test="menuType == 1111">
+                and (a.gradation_state = 6 or (a.legal_user_id is not null and a.gradation_state = 4))
+            </if>
+            <if test="menuType == 15">
+                and a.issuance_state in (1,5)
+            </if>
+            <if test="menuType == 25">
+                and a.hand_out_flag != 2
+            </if>
+            <if test="menuType == 27">
+                and a.gradation_state != 1
+            </if>
+            <if test="menuType == 35">
+                and (a.claim_state = 2 or a.close_report_state =2 or a.closed_state = 1 or a.release_state = 1)
+            </if>
+            <if test="menuType == 50">
+                and (a.claim_state = 2 or a.close_report_state =2 or a.closed_state = 1)
+            </if>
+            <if test="menuType == 43">
+                and TIMESTAMPDIFF(DAY,update_time,NOW())>=30 and gradation_state != 4
+            </if>
+            <if test="menuType == 44">
+                and TIMESTAMPDIFF(DAY,create_time,NOW())>=7 and case_state in(1,2,3) and gradation_state = 1
+            </if>
+            <if test="menuType == 56">
+                and a.release_state in (1,4)
+            </if>
+        </where>
+        ORDER by a.create_time desc,a.case_state
+    </select>
+
+    <select id="selectNewestPayInquiry" resultType="com.lefancrm.apicenter.dto.PaymentEstimateInquiryDto" parameterType="java.util.Map">
+        select inquiry.id as id,
+        inquiry.payable_fee as payableFee,
+        inquiry.free_pre_pay_fee as freePrePayFee,
+        inquiry.medical_fee as medicalFee,
+        inquiry.service_rate as serviceRate,
+        inquiry.agent_service_fee as agentServiceFee,
+        inquiry.reduction_service_fee as reductionServiceFee,
+        inquiry.payment_estimate_id as paymentEstimateId,
+        inquiry.user_id as userId,
+        inquiry.advance_fee as advanceFee,
+        inquiry.service_fee as serviceFee,
+        inquiry.service_pay_rate as servicePayRate,
+        inquiry.final_fee as finalFee,
+        inquiry.is_update as isUpdate,
+        inquiry.discount_loan_fee as discountLoanFee,
+        inquiry.apply_discount_loan_fee as applyDiscountLoanFee,
+        inquiry.should_de_fee as shouldDeFee,
+        inquiry.real_de_fee as realDeFee,
+        inquiry.is_need_loan as isNeedLoan,
+        inquiry.still_need_fee as stillNeedFee,
+        inquiry.loan_rate as loanRate,
+        inquiry.loan_fee as loanFee,
+        inquiry.insurance_fee as insuranceFee,
+        inquiry.interest_rate as interestRate,
+        inquiry.total_loan_fee as totalLoanFee,
+        inquiry.total_de_fee as totalDeFee,
+        inquiry.charge_type as chargeType,
+        inquiry.advcance_type as advcanceType,
+        0 as amount
+        from payment_estimate_inquiry inquiry
+        left join payment_estimate_apply apply on inquiry.payment_estimate_id = apply.id
+        where
+        apply.delete_flag != 1
+        and apply.case_id = #{caseId,jdbcType=BIGINT}
+        and apply.case_type = #{caseType,jdbcType=INTEGER}
+        order by inquiry.id limit 1
+    </select>
+
+    <select id="selectNewestPayInquiryNew" resultType="com.lefancrm.apicenter.dto.PaymentEstimateInquiryDto" parameterType="java.lang.Long">
+        select inquiry.id as id,
+        inquiry.payable_fee as payableFee,
+        inquiry.free_pre_pay_fee as freePrePayFee,
+        inquiry.medical_fee as medicalFee,
+        inquiry.service_rate as serviceRate,
+        inquiry.agent_service_fee as agentServiceFee,
+        inquiry.reduction_service_fee as reductionServiceFee,
+        inquiry.payment_estimate_id as paymentEstimateId,
+        inquiry.user_id as userId,
+        inquiry.advance_fee as advanceFee,
+        inquiry.service_fee as serviceFee,
+        inquiry.service_pay_rate as servicePayRate,
+        inquiry.final_fee as finalFee,
+        inquiry.is_update as isUpdate,
+        inquiry.discount_loan_fee as discountLoanFee,
+        inquiry.apply_discount_loan_fee as applyDiscountLoanFee,
+        inquiry.should_de_fee as shouldDeFee,
+        inquiry.real_de_fee as realDeFee,
+        inquiry.is_need_loan as isNeedLoan,
+        inquiry.still_need_fee as stillNeedFee,
+        inquiry.loan_rate as loanRate,
+        inquiry.loan_fee as loanFee,
+        inquiry.insurance_fee as insuranceFee,
+        inquiry.interest_rate as interestRate,
+        inquiry.total_loan_fee as totalLoanFee,
+        inquiry.total_de_fee as totalDeFee,
+        inquiry.charge_type as chargeType,
+        inquiry.advcance_type as advcanceType,
+        inquiry.calculation_type as calculationType,
+        inquiry.rate_base_type as rateBaseType,
+        0 as amount
+        from payment_estimate_inquiry inquiry
+        where
+        inquiry.case_id = #{caseId,jdbcType=BIGINT}
+        order by inquiry.id limit 1
+    </select>
+
+    <!-- old  -->
+    <select id="selectCaseCenterInfoByParam" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from case_center_info
+        where 1=1
+        <if test="type !=null">
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="caseId !=null">
+            and case_id = #{caseId,jdbcType=BIGINT}
+        </if>
+        <if test="caseNo !=null">
+            and case_no = #{caseNo,jdbcType=VARCHAR}
+        </if>
+        <if test="caseName !=null">
+            and case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseTel !=null">
+            and case_tel = #{caseTel,jdbcType=VARCHAR}
+        </if>
+        <if test="caseState !=null">
+            and case_state = #{caseState,jdbcType=INTEGER}
+        </if>
+        <if test="orgName !=null">
+            and org_name = #{orgName,jdbcType=VARCHAR}
+        </if>
+        <if test="orgUserName !=null">
+            and org_user_name like concat('%',#{orgUserName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="insOfficerId !=null">
+            and ins_officer_id = #{insOfficerId,jdbcType=BIGINT}
+        </if>
+        <if test="insOfficerIds !=null">
+            and ins_officer_id in (SELECT b.user_id FROM user_insurance b where b.parent_id=#{insOfficerIds,jdbcType=BIGINT})
+        </if>
+        <if test="gradationState !=null">
+            and gradation_state = #{gradationState,jdbcType=INTEGER}
+        </if>
+        <if test="closedState !=null">
+            and closed_state = #{closedState,jdbcType=INTEGER}
+        </if>
+        ORDER by create_time desc,case_state limit #{pageIndex} , #{pageSize}
+    </select>
+    <select id="selectCountCaseCenterInfoByParam" parameterType="map" resultType="int">
+        select
+        count(1)
+        from case_center_info
+        where 1=1
+        <if test="type !=null">
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="caseId !=null">
+            and case_id = #{caseId,jdbcType=BIGINT}
+        </if>
+        <if test="caseNo !=null">
+            and case_no = #{caseNo,jdbcType=VARCHAR}
+        </if>
+        <if test="caseName !=null">
+            and case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseTel !=null">
+            and case_tel = #{caseTel,jdbcType=VARCHAR}
+        </if>
+        <if test="caseState !=null">
+            and case_state = #{caseState,jdbcType=INTEGER}
+        </if>
+        <if test="orgName !=null">
+            and org_name = #{orgName,jdbcType=VARCHAR}
+        </if>
+        <if test="orgUserName !=null">
+            and org_user_name like concat('%',#{orgUserName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="insOfficerId !=null">
+            and ins_officer_id = #{insOfficerId,jdbcType=BIGINT}
+        </if>
+        <if test="insOfficerIds !=null">
+            and ins_officer_id in (SELECT b.user_id FROM user_insurance b where b.parent_id=#{insOfficerIds,jdbcType=BIGINT})
+        </if>
+        <if test="orgUserId !=null">
+            and org_user_id = #{orgUserId,jdbcType=BIGINT}
+        </if>
+        <if test="gradationState !=null">
+            and gradation_state = #{gradationState,jdbcType=INTEGER}
+        </if>
+        <if test="closedState !=null">
+            and closed_state = #{closedState,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="queryCaseNegotiateState" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select * from (
+        SELECT a.*,b.case_id as p_case_id,b.case_type
+        from (select * from case_center_info WHERE gradation_state = 1
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and is_test_case = 1
+                </if>
+            </if>
+        ) a
+        LEFT JOIN (select * from  payment_estimate_apply where case_id is not null GROUP BY case_id,case_type) b on a.case_id = b.case_id and a.type = b.case_type
+        ) c where  c.p_case_id is not null
+        <if test="type !=null">
+            and c.type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="caseNo !=null">
+            and c.case_no = #{caseNo,jdbcType=VARCHAR}
+        </if>
+        <if test="caseTel !=null">
+            and c.case_tel like concat('%',#{caseTel,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseState !=null">
+            and c.case_state = #{caseState,jdbcType=INTEGER}
+        </if>
+        <if test="orgId ==null">
+            and c.org_id in (select u.org_id from user_risk_org u where u.user_id = #{userId,jdbcType=BIGINT})
+        </if>
+        <if test="orgId !=null">
+            and find_in_set(c.org_id,SUBSTR((select getOrgList(#{orgId,jdbcType=BIGINT})) FROM 3 FOR 10000))
+        </if>
+        <if test="caseName !=null">
+            and case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="negotiateState != null">
+            <if test="negotiateState == 0">
+                and (c.negotiate_state = #{negotiateState,jdbcType=INTEGER} or c.negotiate_state is null)
+            </if>
+            <if test="negotiateState != 0">
+                and c.negotiate_state = #{negotiateState,jdbcType=INTEGER}
+            </if>
+        </if>
+        <!--<if test="orgUserName !=null">-->
+            <!--and c.org_user_name like concat('%',#{orgUserName,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+        ORDER by c.create_time desc,c.case_state
+        <!--<if test="pageIndex !=null and pageSize != null">-->
+            limit #{pageIndex} , #{pageSize}
+        <!--</if>-->
+
+    </select>
+    <select id="queryCaseNegotiateStateCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) from (
+        SELECT a.*,b.case_id as p_case_id,b.case_type
+        from (select * from case_center_info WHERE gradation_state = 1
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and is_test_case = 1
+                </if>
+            </if>
+        ) a
+        LEFT JOIN (select * from  payment_estimate_apply where case_id is not null GROUP BY case_id,case_type) b on a.case_id = b.case_id and a.type = b.case_type
+        ) c where  c.p_case_id is not null
+        <if test="type !=null">
+            and c.type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="caseNo !=null">
+            and c.case_no = #{caseNo,jdbcType=VARCHAR}
+        </if>
+        <if test="caseTel !=null">
+            and c.case_tel like concat('%',#{caseTel,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseState !=null">
+            and c.case_state = #{caseState,jdbcType=INTEGER}
+        </if>
+        <if test="orgId ==null">
+            and c.org_id in (select u.org_id from user_risk_org u where u.user_id = #{userId,jdbcType=BIGINT})
+        </if>
+        <if test="orgId !=null">
+            and find_in_set(c.org_id,SUBSTR((select getOrgList(#{orgId,jdbcType=BIGINT})) FROM 3 FOR 10000))
+        </if>
+        <if test="caseName !=null">
+            and case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="orgUserName !=null">
+            and c.org_user_name like concat('%',#{orgUserName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="negotiateState != null">
+            <if test="negotiateState == 0">
+                and (c.negotiate_state = #{negotiateState,jdbcType=INTEGER} or c.negotiate_state is null)
+            </if>
+            <if test="negotiateState != 0">
+                and c.negotiate_state = #{negotiateState,jdbcType=INTEGER}
+            </if>
+        </if>
+    </select>
+
+    <select id="searchMonthNewSignList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select * from case_center_info where org_user_id = #{userId,jdbcType=BIGINT} and DATE_FORMAT(agree_sign_time,'%Y%m') = #{agreeSignTime,jdbcType=TIMESTAMP}
+    </select>
+
+    <select id="selectUserNameCaseCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) from case_center_info where case_name = #{caseName,jdbcType=VARCHAR} and case_tel = #{caseTel,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByOrgIdAndOrgName" parameterType="int" resultType="map">
+        select a.org_id orgId,a.org_name orgName from user_info a where a.user_id=#{userId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByApplyInfoOrgIdAndOrgNameByCaseId" parameterType="long" resultType="map">
+        SELECT a.id orgId,a.org_name orgName from org_info a LEFT JOIN agent_apply b on a.org_city_id = b.accident_city_id where b.id=#{id,jdbcType=BIGINT} and a.org_type=1 LIMIT 1
+    </select>
+
+    <select id="searchBillApplyByCase" resultType="com.lefancrm.apicenter.model.BillingApply" parameterType="java.util.Map" >
+        select
+        b.id as id , b.case_id as caseId , b.case_no as caseNo, b.case_title as caseTitle, b.servcie_money as servcieMoney, b.channel_money as channelMoney, b.insurance_money as insuranceMoney,
+        b.deduction_money as deductionMoney, b.billing_money as billingMoney, b.billing_state as billingState, b.billing_time as billingTime,
+		b.billing_by_id as billingById, b.billing_by as billingBy, b.billing_enum as billingEnum, b.billing_item as billingItem,
+		b.billing_type as billingType,b.create_time as createTime, b.create_by_id as createById, b.create_by as createBy,b.business_type as businessType,
+		b.update_time as updateTime, b.update_by_id as updateById, b.update_by as updateBy,b.oper_reason as operReason,b.merit_name as meritName,
+		cci.org_id as orgId, cci.org_name as orgName, cci.car_no as carNo, cci.insurance_company as insurerCompanyName
+        from billing_apply b
+        left join case_center_info cci on cci.id = b.case_id
+        where b.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectCaseCenterInfoForRepay" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select * from case_center_info
+        where hand_out_flag in (2,5,6)
+        <if test="gradationState != null" >
+            and gradation_state = #{gradationState,jdbcType=BIGINT}
+        </if>
+        <if test="caseName != null" >
+            and case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseNo != null" >
+            and case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="handOutFlag != null" >
+            and hand_out_flag = #{handOutFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="isTestcase != null" >
+            <if test="isTestcase != -1">
+                and is_test_case = #{isTestcase,jdbcType=INTEGER}
+            </if>
+        </if>
+        <if test="isTestcase == null" >
+            <if test="isTest == 0">
+                and is_test_case = 0
+            </if>
+            <if test="isTest == 1">
+                and is_test_case = 1
+            </if>
+        </if>
+        and delete_flag !=1
+        ORDER by create_time desc limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="selectCaseCenterInfoForRepaySize" resultType="int" parameterType="java.util.Map" >
+        select count(1) from case_center_info
+        where hand_out_flag in (2,5,6)
+        <if test="gradationState != null" >
+            and gradation_state = #{gradationState,jdbcType=BIGINT}
+        </if>
+        <if test="caseName != null" >
+            and case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseNo != null" >
+            and case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="handOutFlag != null" >
+            and hand_out_flag = #{handOutFlag,jdbcType=VARCHAR}
+        </if>
+        <if test="isTestcase != null" >
+            <if test="isTestcase != -1">
+                and is_test_case = #{isTestcase,jdbcType=INTEGER}
+            </if>
+        </if>
+        <if test="isTestcase == null" >
+            <if test="isTest == 0">
+                and is_test_case = 0
+            </if>
+            <if test="isTest == 1">
+                and is_test_case = 1
+            </if>
+        </if>
+        and delete_flag !=1
+    </select>
+
+    <select id="selectConfirmRepayCaseCenterInfo" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select * from case_center_info
+        where hand_out_flag = 5
+        <if test="gradationState != null" >
+            and gradation_state = #{gradationState,jdbcType=BIGINT}
+        </if>
+        <if test="caseName != null" >
+            and case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseNo != null" >
+            and case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="isTestcase != null" >
+            <if test="isTestcase != -1">
+                and is_test_case = #{isTestcase,jdbcType=INTEGER}
+            </if>
+        </if>
+        <if test="isTestcase == null" >
+            <if test="isTest == 0">
+                and is_test_case = 0
+            </if>
+            <if test="isTest == 1">
+                and is_test_case = 1
+            </if>
+        </if>
+        and delete_flag !=1
+        ORDER by create_time desc limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="selectConfirmRepayCaseCenterInfoSize" resultType="int" parameterType="java.util.Map" >
+        select count(1) from case_center_info
+        where hand_out_flag = 5
+        <if test="gradationState != null" >
+            and gradation_state = #{gradationState,jdbcType=BIGINT}
+        </if>
+        <if test="caseName != null" >
+            and case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseNo != null" >
+            and case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="isTestcase != null" >
+            <if test="isTestcase != -1">
+                and is_test_case = #{isTestcase,jdbcType=INTEGER}
+            </if>
+        </if>
+        <if test="isTestcase == null" >
+            <if test="isTest == 0">
+                and is_test_case = 0
+            </if>
+            <if test="isTest == 1">
+                and is_test_case = 1
+            </if>
+        </if>
+        and delete_flag !=1
+    </select>
+
+    <select id="selectOrgIdAndOrgNameByCaseId" parameterType="map" resultType="map">
+        <if test="type == 1">
+            SELECT a.id orgId,a.org_name orgName from org_info a LEFT JOIN loan_application b on a.org_city_id = b.accident_city where b.id=#{id,jdbcType=BIGINT} and a.org_type=1 LIMIT 1
+        </if>
+        <if test="type == 2">
+            SELECT a.id orgId,a.org_name orgName from org_info a LEFT JOIN agent_apply b on a.org_city_id = b.accident_city_id  where b.id=#{id,jdbcType=BIGINT} and a.org_type=1 LIMIT 1
+        </if>
+    </select>
+
+    <select id="selectFour" resultType="com.lefancrm.apicenter.dto.CaseCenterInfoDto" parameterType="map" >
+
+          select id,type,caseId,caseNo,caseTitle,caseName,caseTel,caseState,caseStateStr,orgName,orgId,orgUserId,orgUserName,createTime,createBy,
+            salesmanId,salesmanName,gradationState,insOfficerId,insOfficerName,operatorId,operatorName,assessId,assessName,claimantId,
+            claimantName,insuranceCompanyId,insuranceCompany,dangerTime,insured,carNo,isRead,insIsRead,cardId,bankCardNo,releaseState,
+            releaseReason,issuanceState,issuanceReason,claimState,claimReason,isFeedback,closedState,closedReason,distributionTime,updateTime,
+            negotiateState,negotiateReason,handOutTime,handOutFlag,handInTime,handInFlag,closeReportState,agreeSignTime,listState,listStateName,
+            operReason,insuredAmount,overTimeType,salesmanPhone  from
+        (
+        <if test="overTimeType == null" >
+            select
+              <include refid="columnsFour" />,1 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from case_center_info a
+            left join case_center_extend up on  a.id = up.id
+            where a.case_state = 1 and a.gradation_state in (1,2,3,6) and TIMESTAMPDIFF(DAY,a.distribution_time,NOW())>=2
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+          UNION all
+            select
+            <include refid="columnsFour" />,2 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from case_center_info a
+            LEFT JOIN case_center_info_follow f on f.case_id= a.id
+            left join case_center_extend up on  a.id = up.id
+            where f.follow_type=1 and a.id is not null and TIMESTAMPDIFF(MINUTE,f.next_follow_time,NOW())> 0
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+            and a.gradation_state in (1,2,3,6)
+            GROUP BY f.case_id
+          UNION all
+            select
+            <include refid="columnsFour" />,3 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from case_center_info a
+            left join case_center_extend up on  a.id = up.id
+            where 1=1 and TIMESTAMPDIFF(DAY,a.update_time,NOW())>=30 and a.gradation_state != 4
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+          UNION ALL
+            select
+            <include refid="columnsFour" />,4 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from  case_center_info a
+            left join case_center_extend up on  a.id = up.id
+            where 1=1 and TIMESTAMPDIFF(DAY,a.create_time,NOW())>=7 and a.case_state in(1,2,3) and a.gradation_state = 1
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+        </if>
+        <if test="overTimeType == 1" >
+            select
+            <include refid="columnsFour" />,1 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from case_center_info a
+            left join case_center_extend up on  a.id = up.id
+            where a.case_state = 1 and a.gradation_state in (1,2,3,6) and TIMESTAMPDIFF(DAY,a.distribution_time,NOW())>=2
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+        </if>
+        <if test="overTimeType == 2" >
+            select
+            <include refid="columnsFour" />,2 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from case_center_info a
+            LEFT JOIN case_center_info_follow f on f.case_id= a.id
+            left join case_center_extend up on  a.id = up.id
+            where f.follow_type=1 and a.id is not null and TIMESTAMPDIFF(MINUTE,f.next_follow_time,NOW())> 0
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+            and a.gradation_state in (1,2,3,6)
+            GROUP BY f.case_id
+        </if>
+        <if test="overTimeType == 3" >
+            select
+            <include refid="columnsFour" />,3 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from case_center_info a
+            left join case_center_extend up on  a.id = up.id
+            where 1=1 and TIMESTAMPDIFF(DAY,a.update_time,NOW())>=30 and a.gradation_state != 4
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+        </if>
+        <if test="overTimeType == 4" >
+            select
+            <include refid="columnsFour" />,4 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from  case_center_info a
+            left join case_center_extend up on  a.id = up.id
+            where 1=1 and TIMESTAMPDIFF(DAY,a.create_time,NOW())>=7 and a.case_state in(1,2,3) and a.gradation_state = 1
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+        </if>
+        ) four
+        ORDER BY createTime DESC
+         limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="selectCountFour" resultType="int" parameterType="java.util.Map" >
+
+        select count(1)  from
+        (
+        <if test="overTimeType == null" >
+            select
+            <include refid="columnsFour" />,1 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from case_center_info a
+            left join case_center_extend up on  a.id = up.id
+            where a.case_state = 1 and a.gradation_state in (1,2,3,6) and TIMESTAMPDIFF(DAY,a.distribution_time,NOW())>=2
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+            UNION all
+            select
+            <include refid="columnsFour" />,2 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from case_center_info a
+            LEFT JOIN case_center_info_follow f on f.case_id= a.id
+            left join case_center_extend up on  a.id = up.id
+            where f.follow_type=1 and a.id is not null and TIMESTAMPDIFF(MINUTE,f.next_follow_time,NOW())> 0
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+            and a.gradation_state in (1,2,3,6)
+            GROUP BY f.case_id
+            UNION all
+            select
+            <include refid="columnsFour" />,3 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from case_center_info a
+            left join case_center_extend up on  a.id = up.id
+            where 1=1 and TIMESTAMPDIFF(DAY,a.update_time,NOW())>=30 and a.gradation_state != 4
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+            UNION ALL
+            select
+            <include refid="columnsFour" />,4 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from  case_center_info a
+            left join case_center_extend up on  a.id = up.id
+            where 1=1 and TIMESTAMPDIFF(DAY,a.create_time,NOW())>=7 and a.case_state in(1,2,3) and a.gradation_state = 1
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+        </if>
+        <if test="overTimeType == 1" >
+            select
+            <include refid="columnsFour" />,1 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from case_center_info a
+            left join case_center_extend up on  a.id = up.id
+            where a.case_state = 1 and a.gradation_state in (1,2,3,6) and TIMESTAMPDIFF(DAY,a.distribution_time,NOW())>=2
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+        </if>
+        <if test="overTimeType == 2" >
+            select
+            <include refid="columnsFour" />,2 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from case_center_info a
+            LEFT JOIN case_center_info_follow f on f.case_id= a.id
+            left join case_center_extend up on  a.id = up.id
+            where f.follow_type=1 and a.id is not null and TIMESTAMPDIFF(MINUTE,f.next_follow_time,NOW())> 0
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+            and a.gradation_state in (1,2,3,6)
+            GROUP BY f.case_id
+        </if>
+        <if test="overTimeType == 3" >
+            select
+            <include refid="columnsFour" />,3 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from case_center_info a
+            left join case_center_extend up on  a.id = up.id
+            where 1=1 and TIMESTAMPDIFF(DAY,a.update_time,NOW())>=30 and a.gradation_state != 4
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+        </if>
+        <if test="overTimeType == 4" >
+            select
+            <include refid="columnsFour" />,4 as overTimeType,up.user_promoted_phone as salesmanPhone
+            from  case_center_info a
+            left join case_center_extend up on  a.id = up.id
+            where 1=1 and TIMESTAMPDIFF(DAY,a.create_time,NOW())>=7 and a.case_state in(1,2,3) and a.gradation_state = 1
+            <if test="caseName != null" >
+                and a.case_name like concat('%',#{caseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="caseNo != null" >
+                and a.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and a.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanPhone != null" >
+                and up.user_promoted_phone like concat('%',#{salesmanPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="isTestcase != null" >
+                <if test="isTestcase != -1">
+                    and a.is_test_case = #{isTestcase,jdbcType=INTEGER}
+                </if>
+            </if>
+            <if test="isTestcase == null" >
+                <if test="isTest == 0">
+                    and a.is_test_case = 0
+                </if>
+                <if test="isTest == 1">
+                    and a.is_test_case = 1
+                </if>
+            </if>
+            and a.delete_flag != 1
+        </if>
+        ) four
+
+
+    </select>
+
+    <sql id="columnsFour">
+        a.id as id,
+        a.type as type,
+        a.case_id as caseId,
+        a.case_no as caseNo,
+        a.case_title as caseTitle,
+        a.case_name as caseName,
+        a.case_tel as caseTel,
+        a.case_state as caseState,
+        a.case_state_str as caseStateStr,
+        a.org_name as orgName,
+        a.org_id as orgId,
+        a.org_user_id as orgUserId,
+        a.org_user_name as orgUserName,
+        a.create_time as createTime,
+        a.create_by as createBy,
+        a.salesman_id as salesmanId,
+        a.salesman_name as salesmanName,
+        a.gradation_state as gradationState,
+        a.ins_officer_id as insOfficerId,
+        a.ins_officer_name as insOfficerName,
+        a.operator_id as operatorId,
+        a.operator_name as operatorName,
+        a.assess_id as assessId,
+        a.assess_name as assessName,
+        a.claimant_id as claimantId,
+        a.claimant_name as claimantName,
+        a.insurance_company_id as insuranceCompanyId,
+        a.insurance_company as insuranceCompany,
+        a.danger_time as dangerTime,
+        a.insured as insured,
+        a.car_no as carNo,
+        a.is_read as isRead,
+        a.ins_is_read as insIsRead,
+        a.card_id as cardId,
+        a.bank_card_no as bankCardNo,
+        a.release_state as releaseState,
+        a.release_reason as releaseReason,
+        a.issuance_state as issuanceState,
+        a.issuance_reason as issuanceReason,
+        a.claim_state as claimState,
+        a.claim_reason as claimReason,
+        a.is_feedback as isFeedback,
+        a.closed_state as closedState,
+        a.closed_reason as closedReason,
+        a.distribution_time as distributionTime,
+        a.update_time as updateTime,
+        a.negotiate_state as negotiateState,
+        a.negotiate_reason as negotiateReason,
+        a.hand_out_time as handOutTime,
+        a.hand_out_flag as handOutFlag,
+        a.hand_in_time as handInTime,
+        a.hand_in_flag as handInFlag,
+        a.close_report_state as closeReportState,
+        a.agree_sign_time as agreeSignTime,
+        a.list_state as listState,
+        a.list_state_name as listStateName,
+        a.oper_reason as operReason,
+        a.insured_amount as insuredAmount
+    </sql>
+</mapper>

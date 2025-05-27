@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaDiagnosisTreatmentMidMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaDiagnosisTreatmentMid" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="diagnosis_id" property="diagnosisId" jdbcType="BIGINT" />
+    <result column="treatment_id" property="treatmentId" jdbcType="BIGINT" />
+    <result column="disease_type_score" property="diseaseTypeScore" jdbcType="DOUBLE" />
+    <result column="triple_a_chs" property="tripleAChs" jdbcType="DOUBLE" />
+    <result column="triple_a_spe" property="tripleASpe" jdbcType="DOUBLE" />
+    <result column="triple_other" property="tripleOther" jdbcType="DOUBLE" />
+    <result column="double_a_chs" property="doubleAChs" jdbcType="DOUBLE" />
+    <result column="double_other" property="doubleOther" jdbcType="DOUBLE" />
+    <result column="first_hosptal" property="firstHosptal" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, diagnosis_id, treatment_id, disease_type_score, triple_a_chs, triple_a_spe, triple_other, 
+    double_a_chs, double_other, first_hosptal, create_time, create_by, delete_flag, update_time, 
+    update_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_diagnosis_treatment_mid
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_diagnosis_treatment_mid
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaDiagnosisTreatmentMid" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_diagnosis_treatment_mid (diagnosis_id, treatment_id, disease_type_score, 
+      triple_a_chs, triple_a_spe, triple_other, 
+      double_a_chs, double_other, first_hosptal, 
+      create_time, create_by, delete_flag, 
+      update_time, update_by)
+    values (#{diagnosisId,jdbcType=BIGINT}, #{treatmentId,jdbcType=BIGINT}, #{diseaseTypeScore,jdbcType=DOUBLE}, 
+      #{tripleAChs,jdbcType=DOUBLE}, #{tripleASpe,jdbcType=DOUBLE}, #{tripleOther,jdbcType=DOUBLE}, 
+      #{doubleAChs,jdbcType=DOUBLE}, #{doubleOther,jdbcType=DOUBLE}, #{firstHosptal,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaDiagnosisTreatmentMid" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_diagnosis_treatment_mid
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="diagnosisId != null" >
+        diagnosis_id,
+      </if>
+      <if test="treatmentId != null" >
+        treatment_id,
+      </if>
+      <if test="diseaseTypeScore != null" >
+        disease_type_score,
+      </if>
+      <if test="tripleAChs != null" >
+        triple_a_chs,
+      </if>
+      <if test="tripleASpe != null" >
+        triple_a_spe,
+      </if>
+      <if test="tripleOther != null" >
+        triple_other,
+      </if>
+      <if test="doubleAChs != null" >
+        double_a_chs,
+      </if>
+      <if test="doubleOther != null" >
+        double_other,
+      </if>
+      <if test="firstHosptal != null" >
+        first_hosptal,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="diagnosisId != null" >
+        #{diagnosisId,jdbcType=BIGINT},
+      </if>
+      <if test="treatmentId != null" >
+        #{treatmentId,jdbcType=BIGINT},
+      </if>
+      <if test="diseaseTypeScore != null" >
+        #{diseaseTypeScore,jdbcType=DOUBLE},
+      </if>
+      <if test="tripleAChs != null" >
+        #{tripleAChs,jdbcType=DOUBLE},
+      </if>
+      <if test="tripleASpe != null" >
+        #{tripleASpe,jdbcType=DOUBLE},
+      </if>
+      <if test="tripleOther != null" >
+        #{tripleOther,jdbcType=DOUBLE},
+      </if>
+      <if test="doubleAChs != null" >
+        #{doubleAChs,jdbcType=DOUBLE},
+      </if>
+      <if test="doubleOther != null" >
+        #{doubleOther,jdbcType=DOUBLE},
+      </if>
+      <if test="firstHosptal != null" >
+        #{firstHosptal,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaDiagnosisTreatmentMid" >
+    update fina_diagnosis_treatment_mid
+    <set >
+      <if test="diagnosisId != null" >
+        diagnosis_id = #{diagnosisId,jdbcType=BIGINT},
+      </if>
+      <if test="treatmentId != null" >
+        treatment_id = #{treatmentId,jdbcType=BIGINT},
+      </if>
+      <if test="diseaseTypeScore != null" >
+        disease_type_score = #{diseaseTypeScore,jdbcType=DOUBLE},
+      </if>
+      <if test="tripleAChs != null" >
+        triple_a_chs = #{tripleAChs,jdbcType=DOUBLE},
+      </if>
+      <if test="tripleASpe != null" >
+        triple_a_spe = #{tripleASpe,jdbcType=DOUBLE},
+      </if>
+      <if test="tripleOther != null" >
+        triple_other = #{tripleOther,jdbcType=DOUBLE},
+      </if>
+      <if test="doubleAChs != null" >
+        double_a_chs = #{doubleAChs,jdbcType=DOUBLE},
+      </if>
+      <if test="doubleOther != null" >
+        double_other = #{doubleOther,jdbcType=DOUBLE},
+      </if>
+      <if test="firstHosptal != null" >
+        first_hosptal = #{firstHosptal,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaDiagnosisTreatmentMid" >
+    update fina_diagnosis_treatment_mid
+    set diagnosis_id = #{diagnosisId,jdbcType=BIGINT},
+      treatment_id = #{treatmentId,jdbcType=BIGINT},
+      disease_type_score = #{diseaseTypeScore,jdbcType=DOUBLE},
+      triple_a_chs = #{tripleAChs,jdbcType=DOUBLE},
+      triple_a_spe = #{tripleASpe,jdbcType=DOUBLE},
+      triple_other = #{tripleOther,jdbcType=DOUBLE},
+      double_a_chs = #{doubleAChs,jdbcType=DOUBLE},
+      double_other = #{doubleOther,jdbcType=DOUBLE},
+      first_hosptal = #{firstHosptal,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="diagnosisId != null" >
+            and a.diagnosis_id = #{diagnosisId,jdbcType=BIGINT}
+        </if>
+        <if test="treatmentId != null" >
+            and a.treatment_id = #{treatmentId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select a.*
+        from fina_diagnosis_treatment_mid a
+        <include refid="joins" />
+        where a.delete_flag =0
+        <include refid="wheres" />
+        order by a.id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select count(1)
+        from fina_diagnosis_treatment_mid a
+        <include refid="joins" />
+        where a.delete_flag =0
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectOne" parameterType="map" resultMap="BaseResultMap">
+        select a.*
+        from fina_diagnosis_treatment_mid a
+        where a.delete_flag =0
+        <if test="diagnosisId != null" >
+            and a.diagnosis_id = #{diagnosisId,jdbcType=BIGINT}
+        </if>
+        <if test="treatmentId != null" >
+            and a.treatment_id = #{treatmentId,jdbcType=BIGINT}
+        </if>
+        order by a.id desc limit 1;
+    </select>
+</mapper>

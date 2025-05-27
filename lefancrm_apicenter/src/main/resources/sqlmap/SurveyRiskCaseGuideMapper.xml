@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyRiskCaseGuideMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyRiskCaseGuide" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_id" property="surveyId" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="disease" property="disease" jdbcType="VARCHAR" />
+    <result column="may_sun" property="maySun" jdbcType="VARCHAR" />
+    <result column="direction" property="direction" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="guide_by" property="guideBy" jdbcType="BIGINT" />
+    <result column="guide_by_name" property="guideByName" jdbcType="VARCHAR" />
+    <result column="guide_time" property="guideTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="is_sun" property="isSun" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_id, survey_info_id, disease, may_sun, direction, note, guide_by, guide_by_name, 
+    guide_time, create_by, create_by_name, create_time, update_by, update_time, delete_flag, is_sun
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_risk_case_guide
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_risk_case_guide
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyRiskCaseGuide" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_risk_case_guide (survey_id, survey_info_id, disease, 
+      may_sun, direction, note, 
+      guide_by, guide_by_name, guide_time, 
+      create_by, create_by_name, create_time, 
+      update_by, update_time, delete_flag, is_sun
+      )
+    values (#{surveyId,jdbcType=BIGINT}, #{surveyInfoId,jdbcType=BIGINT}, #{disease,jdbcType=VARCHAR}, 
+      #{maySun,jdbcType=VARCHAR}, #{direction,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{guideBy,jdbcType=BIGINT}, #{guideByName,jdbcType=VARCHAR}, #{guideTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=BIGINT}, #{createByName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER},
+      #{isSun,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyRiskCaseGuide" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_risk_case_guide
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        survey_id,
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="disease != null" >
+        disease,
+      </if>
+      <if test="maySun != null" >
+        may_sun,
+      </if>
+      <if test="direction != null" >
+        direction,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="guideBy != null" >
+        guide_by,
+      </if>
+      <if test="guideByName != null" >
+        guide_by_name,
+      </if>
+      <if test="guideTime != null" >
+        guide_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createByName != null" >
+        create_by_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+        <if test="is_sun != null" >
+            isSun,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="disease != null" >
+        #{disease,jdbcType=VARCHAR},
+      </if>
+      <if test="maySun != null" >
+        #{maySun,jdbcType=VARCHAR},
+      </if>
+      <if test="direction != null" >
+        #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="guideBy != null" >
+        #{guideBy,jdbcType=BIGINT},
+      </if>
+      <if test="guideByName != null" >
+        #{guideByName,jdbcType=VARCHAR},
+      </if>
+      <if test="guideTime != null" >
+        #{guideTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createByName != null" >
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+        <if test="isSun != null" >
+            #{isSun,jdbcType=INTEGER},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyRiskCaseGuide" >
+    update survey_risk_case_guide
+    <set >
+      <if test="surveyId != null" >
+        survey_id = #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="disease != null" >
+        disease = #{disease,jdbcType=VARCHAR},
+      </if>
+      <if test="maySun != null" >
+        may_sun = #{maySun,jdbcType=VARCHAR},
+      </if>
+      <if test="direction != null" >
+        direction = #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="guideBy != null" >
+        guide_by = #{guideBy,jdbcType=BIGINT},
+      </if>
+      <if test="guideByName != null" >
+        guide_by_name = #{guideByName,jdbcType=VARCHAR},
+      </if>
+      <if test="guideTime != null" >
+        guide_time = #{guideTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="createByName != null" >
+        create_by_name = #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+        <if test="isSun != null" >
+            is_sun = #{isSun,jdbcType=INTEGER},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyRiskCaseGuide" >
+    update survey_risk_case_guide
+    set survey_id = #{surveyId,jdbcType=BIGINT},
+      survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      disease = #{disease,jdbcType=VARCHAR},
+      may_sun = #{maySun,jdbcType=VARCHAR},
+      direction = #{direction,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      guide_by = #{guideBy,jdbcType=BIGINT},
+      guide_by_name = #{guideByName,jdbcType=VARCHAR},
+      guide_time = #{guideTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_by_name = #{createByName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      is_sun = #{isSun,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectBySurveyInfoId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_risk_case_guide
+        where survey_info_id = #{surveyInfoId,jdbcType=BIGINT} and delete_flag = 0
+        order by id desc limit 1;
+    </select>
+</mapper>

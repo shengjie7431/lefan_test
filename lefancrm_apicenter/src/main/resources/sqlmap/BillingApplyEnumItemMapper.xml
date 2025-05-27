@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BillingApplyEnumItemMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BillingApplyEnumItem" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="billing_corporation_enum_id" property="billingCorporationEnumId" jdbcType="BIGINT" />
+        <result column="corporation_id" property="corporationId" jdbcType="BIGINT" />
+        <result column="corporation_name" property="corporationName" jdbcType="VARCHAR" />
+        <result column="billing_enum_id" property="billingEnumId" jdbcType="BIGINT" />
+        <result column="billing_enum_name" property="billingEnumName" jdbcType="VARCHAR" />
+        <result column="billing_item_id" property="billingItemId" jdbcType="BIGINT" />
+        <result column="billing_item_name" property="billingItemName" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, billing_corporation_enum_id, corporation_id, corporation_name, billing_enum_id,
+        billing_enum_name, billing_item_id, billing_item_name
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply_enum_item
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from billing_apply_enum_item
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.BillingApplyEnumItem" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into billing_apply_enum_item (billing_corporation_enum_id, corporation_id,
+        corporation_name, billing_enum_id, billing_enum_name,
+        billing_item_id, billing_item_name)
+        values (#{billingCorporationEnumId,jdbcType=BIGINT}, #{corporationId,jdbcType=BIGINT},
+        #{corporationName,jdbcType=VARCHAR}, #{billingEnumId,jdbcType=BIGINT}, #{billingEnumName,jdbcType=VARCHAR},
+        #{billingItemId,jdbcType=BIGINT}, #{billingItemName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.BillingApplyEnumItem" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into billing_apply_enum_item
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="billingCorporationEnumId != null" >
+                billing_corporation_enum_id,
+            </if>
+            <if test="corporationId != null" >
+                corporation_id,
+            </if>
+            <if test="corporationName != null" >
+                corporation_name,
+            </if>
+            <if test="billingEnumId != null" >
+                billing_enum_id,
+            </if>
+            <if test="billingEnumName != null" >
+                billing_enum_name,
+            </if>
+            <if test="billingItemId != null" >
+                billing_item_id,
+            </if>
+            <if test="billingItemName != null" >
+                billing_item_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="billingCorporationEnumId != null" >
+                #{billingCorporationEnumId,jdbcType=BIGINT},
+            </if>
+            <if test="corporationId != null" >
+                #{corporationId,jdbcType=BIGINT},
+            </if>
+            <if test="corporationName != null" >
+                #{corporationName,jdbcType=VARCHAR},
+            </if>
+            <if test="billingEnumId != null" >
+                #{billingEnumId,jdbcType=BIGINT},
+            </if>
+            <if test="billingEnumName != null" >
+                #{billingEnumName,jdbcType=VARCHAR},
+            </if>
+            <if test="billingItemId != null" >
+                #{billingItemId,jdbcType=BIGINT},
+            </if>
+            <if test="billingItemName != null" >
+                #{billingItemName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.BillingApplyEnumItem" >
+        update billing_apply_enum_item
+        <set >
+            <if test="billingCorporationEnumId != null" >
+                billing_corporation_enum_id = #{billingCorporationEnumId,jdbcType=BIGINT},
+            </if>
+            <if test="corporationId != null" >
+                corporation_id = #{corporationId,jdbcType=BIGINT},
+            </if>
+            <if test="corporationName != null" >
+                corporation_name = #{corporationName,jdbcType=VARCHAR},
+            </if>
+            <if test="billingEnumId != null" >
+                billing_enum_id = #{billingEnumId,jdbcType=BIGINT},
+            </if>
+            <if test="billingEnumName != null" >
+                billing_enum_name = #{billingEnumName,jdbcType=VARCHAR},
+            </if>
+            <if test="billingItemId != null" >
+                billing_item_id = #{billingItemId,jdbcType=BIGINT},
+            </if>
+            <if test="billingItemName != null" >
+                billing_item_name = #{billingItemName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.BillingApplyEnumItem" >
+        update billing_apply_enum_item
+        set billing_corporation_enum_id = #{billingCorporationEnumId,jdbcType=BIGINT},
+        corporation_id = #{corporationId,jdbcType=BIGINT},
+        corporation_name = #{corporationName,jdbcType=VARCHAR},
+        billing_enum_id = #{billingEnumId,jdbcType=BIGINT},
+        billing_enum_name = #{billingEnumName,jdbcType=VARCHAR},
+        billing_item_id = #{billingItemId,jdbcType=BIGINT},
+        billing_item_name = #{billingItemName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <!--<if test="corporationId != null" >-->
+            <!--and corporation_id = #{corporationId,jdbcType=BIGINT}-->
+        <!--</if>-->
+        <if test="billingEnumId != null" >
+            and billing_enum_id = #{billingEnumId,jdbcType=BIGINT}
+        </if>
+        <if test="billingItemId != null" >
+            and billing_item_id = #{billingItemId,jdbcType=BIGINT}
+        </if>
+        <if test="billingCorporationEnumId != null" >
+            and billing_corporation_enum_id = #{billingCorporationEnumId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply_enum_item
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from billing_apply_enum_item
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectByInfo" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply_enum_item
+        <include refid="joins" />
+        where 1=1  and billing_enum_id = #{billingEnumId,jdbcType=BIGINT}
+        and billing_item_id = #{billingItemId,jdbcType=BIGINT} limit 1
+    </select>
+
+    <delete id="deleteByInfo" parameterType="map">
+        delete from billing_apply_enum_item
+        where 1=1
+        <include refid="wheres" />
+    </delete>
+
+    <select id="selectByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM billing_apply_enum_item i
+        WHERE i.billing_enum_id IN (
+            SELECT
+                e.billing_enum_id
+            FROM
+                billing_apply_corporation_enum e
+            WHERE
+                e.corporation_id IN (
+                    SELECT b.corporation_id FROM bus_apply_corporation_role b
+                    WHERE b.role_id = #{roleId,jdbcType=BIGINT}
+                )
+	    )
+        <!--and i.corporation_id in (SELECT b.corporation_id FROM bus_apply_corporation_role b-->
+          <!--WHERE b.role_id = #{roleId,jdbcType=BIGINT})-->
+    </select>
+</mapper>

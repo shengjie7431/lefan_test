@@ -1,0 +1,889 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseClosedReportMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseClosedReport" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="case_id" property="caseId" jdbcType="BIGINT" />
+        <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+        <result column="clientele_name" property="clienteleName" jdbcType="VARCHAR" />
+        <result column="clientele_id" property="clienteleId" jdbcType="BIGINT" />
+        <result column="org_id" property="orgId" jdbcType="BIGINT" />
+        <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+        <result column="entrust_type" property="entrustType" jdbcType="INTEGER" />
+        <result column="entrust_time" property="entrustTime" jdbcType="TIMESTAMP" />
+        <result column="closed_type" property="closedType" jdbcType="INTEGER" />
+        <result column="compensate_rate" property="compensateRate" jdbcType="DOUBLE" />
+        <result column="claimant_id" property="claimantId" jdbcType="BIGINT" />
+        <result column="claimant_name" property="claimantName" jdbcType="VARCHAR" />
+        <result column="claimant_pre" property="claimantPre" jdbcType="VARCHAR" />
+        <result column="agent_firm" property="agentFirm" jdbcType="VARCHAR" />
+        <result column="agent_lawyer" property="agentLawyer" jdbcType="VARCHAR" />
+        <result column="compensate_money" property="compensateMoney" jdbcType="DOUBLE" />
+        <result column="compulsory_money" property="compulsoryMoney" jdbcType="DOUBLE" />
+        <result column="commercial_money" property="commercialMoney" jdbcType="DOUBLE" />
+        <result column="driver_money" property="driverMoney" jdbcType="DOUBLE" />
+        <result column="injured_money" property="injuredMoney" jdbcType="DOUBLE" />
+        <result column="fixed_money" property="fixedMoney" jdbcType="DOUBLE" />
+        <result column="is_fixed" property="isFixed" jdbcType="INTEGER" />
+        <result column="pro_money" property="proMoney" jdbcType="DOUBLE" />
+        <result column="is_pro" property="isPro" jdbcType="INTEGER" />
+        <result column="charge_desc" property="chargeDesc" jdbcType="VARCHAR" />
+        <result column="included_total_money" property="includedTotalMoney" jdbcType="DOUBLE" />
+        <result column="should_total_money" property="shouldTotalMoney" jdbcType="DOUBLE" />
+        <result column="actual_total_money" property="actualTotalMoney" jdbcType="DOUBLE" />
+        <result column="is_deducted_loan" property="isDeductedLoan" jdbcType="VARCHAR" />
+        <result column="deducted_loan_money" property="deductedLoanMoney" jdbcType="DOUBLE" />
+        <result column="loan_money" property="loanMoney" jdbcType="DOUBLE" />
+        <result column="is_pre" property="isPre" jdbcType="INTEGER" />
+        <result column="pre_money" property="preMoney" jdbcType="DOUBLE" />
+        <result column="loan_type" property="loanType" jdbcType="INTEGER" />
+        <result column="loan_cycle" property="loanCycle" jdbcType="INTEGER" />
+        <result column="back_time" property="backTime" jdbcType="TIMESTAMP" />
+        <result column="insurance_money" property="insuranceMoney" jdbcType="DOUBLE" />
+        <result column="interest_money" property="interestMoney" jdbcType="DOUBLE" />
+        <result column="lawyer_money" property="lawyerMoney" jdbcType="DOUBLE" />
+        <result column="appraisal_money" property="appraisalMoney" jdbcType="DOUBLE" />
+        <result column="litigate_money" property="litigateMoney" jdbcType="DOUBLE" />
+        <result column="preserve_money" property="preserveMoney" jdbcType="DOUBLE" />
+        <result column="other_desc" property="otherDesc" jdbcType="VARCHAR" />
+        <result column="money_desc" property="moneyDesc" jdbcType="VARCHAR" />
+        <result column="finance_sign" property="financeSign" jdbcType="VARCHAR" />
+        <result column="risk_sign" property="riskSign" jdbcType="VARCHAR" />
+        <result column="finance_sign_time" property="financeSignTime" jdbcType="TIMESTAMP" />
+        <result column="risk_sign_time" property="riskSignTime" jdbcType="TIMESTAMP" />
+        <result column="claim_begin_time" property="claimBeginTime" jdbcType="TIMESTAMP" />
+        <result column="legal_user" property="legalUser" jdbcType="VARCHAR" />
+        <result column="legal_user_id" property="legalUserId" jdbcType="BIGINT" />
+        <result column="legal_begin_time" property="legalBeginTime" jdbcType="TIMESTAMP" />
+        <result column="agent_lawyer_money" property="agentLawyerMoney" jdbcType="DOUBLE" />
+        <result column="loan_channel_rate" property="loanChannelRate" jdbcType="DOUBLE" />
+        <result column="loan_channel_money" property="loanChannelMoney" jdbcType="DOUBLE" />
+        <result column="surplus_total_money" property="surplusTotalMoney" jdbcType="DOUBLE" />
+        <result column="claim_money" property="claimMoney" jdbcType="DOUBLE" />
+        <result column="other_money" property="otherMoney" jdbcType="DOUBLE" />
+        <result column="closed_report_de_money" property="closedReportDeMoney" jdbcType="DOUBLE" />
+        <result column="charge_type" property="chargeType" jdbcType="INTEGER" />
+        <result column="fixed_charge_money" property="fixedChargeMoney" jdbcType="DOUBLE" />
+        <result column="proportion_charge_money" property="proportionChargeMoney" jdbcType="DOUBLE" />
+        <result column="proportion_charge_rate" property="proportionChargeRate" jdbcType="DOUBLE" />
+        <result column="blend_fixed_charge_money" property="blendFixedChargeMoney" jdbcType="DOUBLE" />
+        <result column="blend_proportion_charge_money" property="blendProportionChargeMoney" jdbcType="DOUBLE" />
+        <result column="blend_proportion_charge_rate" property="blendProportionChargeRate" jdbcType="DOUBLE" />
+        <result column="pay_wounded_money" property="payWoundedMoney" jdbcType="DOUBLE" />
+        <result column="pay_driver_money" property="payDriverMoney" jdbcType="DOUBLE" />
+        <result column="pay_safe_money" property="paySafeMoney" jdbcType="DOUBLE" />
+        <result column="stage_type" property="stageType" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, case_id, case_no, clientele_name, clientele_id, org_id, org_name, entrust_type,
+        entrust_time, closed_type, compensate_rate, claimant_id, claimant_name, claimant_pre,
+        agent_firm, agent_lawyer, compensate_money, compulsory_money, commercial_money, driver_money,
+        injured_money, fixed_money, is_fixed, pro_money, is_pro, charge_desc, included_total_money,
+        should_total_money, actual_total_money, is_deducted_loan, deducted_loan_money, loan_money,
+        is_pre, pre_money, loan_type, loan_cycle, back_time, insurance_money, interest_money,
+        lawyer_money, appraisal_money, litigate_money, preserve_money, other_desc, money_desc,
+        finance_sign, risk_sign, finance_sign_time, risk_sign_time, claim_begin_time, legal_user,
+        legal_user_id, legal_begin_time, agent_lawyer_money, loan_channel_rate, loan_channel_money,
+        surplus_total_money, claim_money, other_money, closed_report_de_money, charge_type,
+        fixed_charge_money, proportion_charge_money, proportion_charge_rate, blend_fixed_charge_money,
+        blend_proportion_charge_money, blend_proportion_charge_rate, pay_wounded_money, pay_driver_money,
+        pay_safe_money, stage_type
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from case_closed_report
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from case_closed_report
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseClosedReport" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_closed_report (case_id, case_no, clientele_name,
+        clientele_id, org_id, org_name,
+        entrust_type, entrust_time, closed_type,
+        compensate_rate, claimant_id, claimant_name,
+        claimant_pre, agent_firm, agent_lawyer,
+        compensate_money, compulsory_money, commercial_money,
+        driver_money, injured_money, fixed_money,
+        is_fixed, pro_money, is_pro,
+        charge_desc, included_total_money, should_total_money,
+        actual_total_money, is_deducted_loan, deducted_loan_money,
+        loan_money, is_pre, pre_money,
+        loan_type, loan_cycle, back_time,
+        insurance_money, interest_money, lawyer_money,
+        appraisal_money, litigate_money, preserve_money,
+        other_desc, money_desc, finance_sign,
+        risk_sign, finance_sign_time, risk_sign_time,
+        claim_begin_time, legal_user, legal_user_id,
+        legal_begin_time, agent_lawyer_money, loan_channel_rate,
+        loan_channel_money, surplus_total_money, claim_money,
+        other_money, closed_report_de_money, charge_type,
+        fixed_charge_money, proportion_charge_money,
+        proportion_charge_rate, blend_fixed_charge_money,
+        blend_proportion_charge_money, blend_proportion_charge_rate,
+        pay_wounded_money, pay_driver_money, pay_safe_money,
+        stage_type
+        )
+        values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{clienteleName,jdbcType=VARCHAR},
+        #{clienteleId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR},
+        #{entrustType,jdbcType=INTEGER}, #{entrustTime,jdbcType=TIMESTAMP}, #{closedType,jdbcType=INTEGER},
+        #{compensateRate,jdbcType=DOUBLE}, #{claimantId,jdbcType=BIGINT}, #{claimantName,jdbcType=VARCHAR},
+        #{claimantPre,jdbcType=VARCHAR}, #{agentFirm,jdbcType=VARCHAR}, #{agentLawyer,jdbcType=VARCHAR},
+        #{compensateMoney,jdbcType=DOUBLE}, #{compulsoryMoney,jdbcType=DOUBLE}, #{commercialMoney,jdbcType=DOUBLE},
+        #{driverMoney,jdbcType=DOUBLE}, #{injuredMoney,jdbcType=DOUBLE}, #{fixedMoney,jdbcType=DOUBLE},
+        #{isFixed,jdbcType=INTEGER}, #{proMoney,jdbcType=DOUBLE}, #{isPro,jdbcType=INTEGER},
+        #{chargeDesc,jdbcType=VARCHAR}, #{includedTotalMoney,jdbcType=DOUBLE}, #{shouldTotalMoney,jdbcType=DOUBLE},
+        #{actualTotalMoney,jdbcType=DOUBLE}, #{isDeductedLoan,jdbcType=VARCHAR}, #{deductedLoanMoney,jdbcType=DOUBLE},
+        #{loanMoney,jdbcType=DOUBLE}, #{isPre,jdbcType=INTEGER}, #{preMoney,jdbcType=DOUBLE},
+        #{loanType,jdbcType=INTEGER}, #{loanCycle,jdbcType=INTEGER}, #{backTime,jdbcType=TIMESTAMP},
+        #{insuranceMoney,jdbcType=DOUBLE}, #{interestMoney,jdbcType=DOUBLE}, #{lawyerMoney,jdbcType=DOUBLE},
+        #{appraisalMoney,jdbcType=DOUBLE}, #{litigateMoney,jdbcType=DOUBLE}, #{preserveMoney,jdbcType=DOUBLE},
+        #{otherDesc,jdbcType=VARCHAR}, #{moneyDesc,jdbcType=VARCHAR}, #{financeSign,jdbcType=VARCHAR},
+        #{riskSign,jdbcType=VARCHAR}, #{financeSignTime,jdbcType=TIMESTAMP}, #{riskSignTime,jdbcType=TIMESTAMP},
+        #{claimBeginTime,jdbcType=TIMESTAMP}, #{legalUser,jdbcType=VARCHAR}, #{legalUserId,jdbcType=BIGINT},
+        #{legalBeginTime,jdbcType=TIMESTAMP}, #{agentLawyerMoney,jdbcType=DOUBLE}, #{loanChannelRate,jdbcType=DOUBLE},
+        #{loanChannelMoney,jdbcType=DOUBLE}, #{surplusTotalMoney,jdbcType=DOUBLE}, #{claimMoney,jdbcType=DOUBLE},
+        #{otherMoney,jdbcType=DOUBLE}, #{closedReportDeMoney,jdbcType=DOUBLE}, #{chargeType,jdbcType=INTEGER},
+        #{fixedChargeMoney,jdbcType=DOUBLE}, #{proportionChargeMoney,jdbcType=DOUBLE},
+        #{proportionChargeRate,jdbcType=DOUBLE}, #{blendFixedChargeMoney,jdbcType=DOUBLE},
+        #{blendProportionChargeMoney,jdbcType=DOUBLE}, #{blendProportionChargeRate,jdbcType=DOUBLE},
+        #{payWoundedMoney,jdbcType=DOUBLE}, #{payDriverMoney,jdbcType=DOUBLE}, #{paySafeMoney,jdbcType=DOUBLE},
+        #{stageType,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseClosedReport" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_closed_report
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="caseId != null" >
+                case_id,
+            </if>
+            <if test="caseNo != null" >
+                case_no,
+            </if>
+            <if test="clienteleName != null" >
+                clientele_name,
+            </if>
+            <if test="clienteleId != null" >
+                clientele_id,
+            </if>
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="orgName != null" >
+                org_name,
+            </if>
+            <if test="entrustType != null" >
+                entrust_type,
+            </if>
+            <if test="entrustTime != null" >
+                entrust_time,
+            </if>
+            <if test="closedType != null" >
+                closed_type,
+            </if>
+            <if test="compensateRate != null" >
+                compensate_rate,
+            </if>
+            <if test="claimantId != null" >
+                claimant_id,
+            </if>
+            <if test="claimantName != null" >
+                claimant_name,
+            </if>
+            <if test="claimantPre != null" >
+                claimant_pre,
+            </if>
+            <if test="agentFirm != null" >
+                agent_firm,
+            </if>
+            <if test="agentLawyer != null" >
+                agent_lawyer,
+            </if>
+            <if test="compensateMoney != null" >
+                compensate_money,
+            </if>
+            <if test="compulsoryMoney != null" >
+                compulsory_money,
+            </if>
+            <if test="commercialMoney != null" >
+                commercial_money,
+            </if>
+            <if test="driverMoney != null" >
+                driver_money,
+            </if>
+            <if test="injuredMoney != null" >
+                injured_money,
+            </if>
+            <if test="fixedMoney != null" >
+                fixed_money,
+            </if>
+            <if test="isFixed != null" >
+                is_fixed,
+            </if>
+            <if test="proMoney != null" >
+                pro_money,
+            </if>
+            <if test="isPro != null" >
+                is_pro,
+            </if>
+            <if test="chargeDesc != null" >
+                charge_desc,
+            </if>
+            <if test="includedTotalMoney != null" >
+                included_total_money,
+            </if>
+            <if test="shouldTotalMoney != null" >
+                should_total_money,
+            </if>
+            <if test="actualTotalMoney != null" >
+                actual_total_money,
+            </if>
+            <if test="isDeductedLoan != null" >
+                is_deducted_loan,
+            </if>
+            <if test="deductedLoanMoney != null" >
+                deducted_loan_money,
+            </if>
+            <if test="loanMoney != null" >
+                loan_money,
+            </if>
+            <if test="isPre != null" >
+                is_pre,
+            </if>
+            <if test="preMoney != null" >
+                pre_money,
+            </if>
+            <if test="loanType != null" >
+                loan_type,
+            </if>
+            <if test="loanCycle != null" >
+                loan_cycle,
+            </if>
+            <if test="backTime != null" >
+                back_time,
+            </if>
+            <if test="insuranceMoney != null" >
+                insurance_money,
+            </if>
+            <if test="interestMoney != null" >
+                interest_money,
+            </if>
+            <if test="lawyerMoney != null" >
+                lawyer_money,
+            </if>
+            <if test="appraisalMoney != null" >
+                appraisal_money,
+            </if>
+            <if test="litigateMoney != null" >
+                litigate_money,
+            </if>
+            <if test="preserveMoney != null" >
+                preserve_money,
+            </if>
+            <if test="otherDesc != null" >
+                other_desc,
+            </if>
+            <if test="moneyDesc != null" >
+                money_desc,
+            </if>
+            <if test="financeSign != null" >
+                finance_sign,
+            </if>
+            <if test="riskSign != null" >
+                risk_sign,
+            </if>
+            <if test="financeSignTime != null" >
+                finance_sign_time,
+            </if>
+            <if test="riskSignTime != null" >
+                risk_sign_time,
+            </if>
+            <if test="claimBeginTime != null" >
+                claim_begin_time,
+            </if>
+            <if test="legalUser != null" >
+                legal_user,
+            </if>
+            <if test="legalUserId != null" >
+                legal_user_id,
+            </if>
+            <if test="legalBeginTime != null" >
+                legal_begin_time,
+            </if>
+            <if test="agentLawyerMoney != null" >
+                agent_lawyer_money,
+            </if>
+            <if test="loanChannelRate != null" >
+                loan_channel_rate,
+            </if>
+            <if test="loanChannelMoney != null" >
+                loan_channel_money,
+            </if>
+            <if test="surplusTotalMoney != null" >
+                surplus_total_money,
+            </if>
+            <if test="claimMoney != null" >
+                claim_money,
+            </if>
+            <if test="otherMoney != null" >
+                other_money,
+            </if>
+            <if test="closedReportDeMoney != null" >
+                closed_report_de_money,
+            </if>
+            <if test="chargeType != null" >
+                charge_type,
+            </if>
+            <if test="fixedChargeMoney != null" >
+                fixed_charge_money,
+            </if>
+            <if test="proportionChargeMoney != null" >
+                proportion_charge_money,
+            </if>
+            <if test="proportionChargeRate != null" >
+                proportion_charge_rate,
+            </if>
+            <if test="blendFixedChargeMoney != null" >
+                blend_fixed_charge_money,
+            </if>
+            <if test="blendProportionChargeMoney != null" >
+                blend_proportion_charge_money,
+            </if>
+            <if test="blendProportionChargeRate != null" >
+                blend_proportion_charge_rate,
+            </if>
+            <if test="payWoundedMoney != null" >
+                pay_wounded_money,
+            </if>
+            <if test="payDriverMoney != null" >
+                pay_driver_money,
+            </if>
+            <if test="paySafeMoney != null" >
+                pay_safe_money,
+            </if>
+            <if test="stageType != null" >
+                stage_type,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="caseId != null" >
+                #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="clienteleName != null" >
+                #{clienteleName,jdbcType=VARCHAR},
+            </if>
+            <if test="clienteleId != null" >
+                #{clienteleId,jdbcType=BIGINT},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustType != null" >
+                #{entrustType,jdbcType=INTEGER},
+            </if>
+            <if test="entrustTime != null" >
+                #{entrustTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="closedType != null" >
+                #{closedType,jdbcType=INTEGER},
+            </if>
+            <if test="compensateRate != null" >
+                #{compensateRate,jdbcType=DOUBLE},
+            </if>
+            <if test="claimantId != null" >
+                #{claimantId,jdbcType=BIGINT},
+            </if>
+            <if test="claimantName != null" >
+                #{claimantName,jdbcType=VARCHAR},
+            </if>
+            <if test="claimantPre != null" >
+                #{claimantPre,jdbcType=VARCHAR},
+            </if>
+            <if test="agentFirm != null" >
+                #{agentFirm,jdbcType=VARCHAR},
+            </if>
+            <if test="agentLawyer != null" >
+                #{agentLawyer,jdbcType=VARCHAR},
+            </if>
+            <if test="compensateMoney != null" >
+                #{compensateMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="compulsoryMoney != null" >
+                #{compulsoryMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="commercialMoney != null" >
+                #{commercialMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="driverMoney != null" >
+                #{driverMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="injuredMoney != null" >
+                #{injuredMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fixedMoney != null" >
+                #{fixedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="isFixed != null" >
+                #{isFixed,jdbcType=INTEGER},
+            </if>
+            <if test="proMoney != null" >
+                #{proMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="isPro != null" >
+                #{isPro,jdbcType=INTEGER},
+            </if>
+            <if test="chargeDesc != null" >
+                #{chargeDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="includedTotalMoney != null" >
+                #{includedTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="shouldTotalMoney != null" >
+                #{shouldTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="actualTotalMoney != null" >
+                #{actualTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="isDeductedLoan != null" >
+                #{isDeductedLoan,jdbcType=VARCHAR},
+            </if>
+            <if test="deductedLoanMoney != null" >
+                #{deductedLoanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="loanMoney != null" >
+                #{loanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="isPre != null" >
+                #{isPre,jdbcType=INTEGER},
+            </if>
+            <if test="preMoney != null" >
+                #{preMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="loanType != null" >
+                #{loanType,jdbcType=INTEGER},
+            </if>
+            <if test="loanCycle != null" >
+                #{loanCycle,jdbcType=INTEGER},
+            </if>
+            <if test="backTime != null" >
+                #{backTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insuranceMoney != null" >
+                #{insuranceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="interestMoney != null" >
+                #{interestMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="lawyerMoney != null" >
+                #{lawyerMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="appraisalMoney != null" >
+                #{appraisalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="litigateMoney != null" >
+                #{litigateMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="preserveMoney != null" >
+                #{preserveMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherDesc != null" >
+                #{otherDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="moneyDesc != null" >
+                #{moneyDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="financeSign != null" >
+                #{financeSign,jdbcType=VARCHAR},
+            </if>
+            <if test="riskSign != null" >
+                #{riskSign,jdbcType=VARCHAR},
+            </if>
+            <if test="financeSignTime != null" >
+                #{financeSignTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="riskSignTime != null" >
+                #{riskSignTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="claimBeginTime != null" >
+                #{claimBeginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="legalUser != null" >
+                #{legalUser,jdbcType=VARCHAR},
+            </if>
+            <if test="legalUserId != null" >
+                #{legalUserId,jdbcType=BIGINT},
+            </if>
+            <if test="legalBeginTime != null" >
+                #{legalBeginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="agentLawyerMoney != null" >
+                #{agentLawyerMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="loanChannelRate != null" >
+                #{loanChannelRate,jdbcType=DOUBLE},
+            </if>
+            <if test="loanChannelMoney != null" >
+                #{loanChannelMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="surplusTotalMoney != null" >
+                #{surplusTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="claimMoney != null" >
+                #{claimMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherMoney != null" >
+                #{otherMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="closedReportDeMoney != null" >
+                #{closedReportDeMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="chargeType != null" >
+                #{chargeType,jdbcType=INTEGER},
+            </if>
+            <if test="fixedChargeMoney != null" >
+                #{fixedChargeMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="proportionChargeMoney != null" >
+                #{proportionChargeMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="proportionChargeRate != null" >
+                #{proportionChargeRate,jdbcType=DOUBLE},
+            </if>
+            <if test="blendFixedChargeMoney != null" >
+                #{blendFixedChargeMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="blendProportionChargeMoney != null" >
+                #{blendProportionChargeMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="blendProportionChargeRate != null" >
+                #{blendProportionChargeRate,jdbcType=DOUBLE},
+            </if>
+            <if test="payWoundedMoney != null" >
+                #{payWoundedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="payDriverMoney != null" >
+                #{payDriverMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="paySafeMoney != null" >
+                #{paySafeMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="stageType != null" >
+                #{stageType,jdbcType=INTEGER},
+            </if>
+
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseClosedReport" >
+        update case_closed_report
+        <set >
+            <if test="caseId != null" >
+                case_id = #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                case_no = #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="clienteleName != null" >
+                clientele_name = #{clienteleName,jdbcType=VARCHAR},
+            </if>
+            <if test="clienteleId != null" >
+                clientele_id = #{clienteleId,jdbcType=BIGINT},
+            </if>
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustType != null" >
+                entrust_type = #{entrustType,jdbcType=INTEGER},
+            </if>
+            <if test="entrustTime != null" >
+                entrust_time = #{entrustTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="closedType != null" >
+                closed_type = #{closedType,jdbcType=INTEGER},
+            </if>
+            <if test="compensateRate != null" >
+                compensate_rate = #{compensateRate,jdbcType=DOUBLE},
+            </if>
+            <if test="claimantId != null" >
+                claimant_id = #{claimantId,jdbcType=BIGINT},
+            </if>
+            <if test="claimantName != null" >
+                claimant_name = #{claimantName,jdbcType=VARCHAR},
+            </if>
+            <if test="claimantPre != null" >
+                claimant_pre = #{claimantPre,jdbcType=VARCHAR},
+            </if>
+            <if test="agentFirm != null" >
+                agent_firm = #{agentFirm,jdbcType=VARCHAR},
+            </if>
+            <if test="agentLawyer != null" >
+                agent_lawyer = #{agentLawyer,jdbcType=VARCHAR},
+            </if>
+            <if test="compensateMoney != null" >
+                compensate_money = #{compensateMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="compulsoryMoney != null" >
+                compulsory_money = #{compulsoryMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="commercialMoney != null" >
+                commercial_money = #{commercialMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="driverMoney != null" >
+                driver_money = #{driverMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="injuredMoney != null" >
+                injured_money = #{injuredMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fixedMoney != null" >
+                fixed_money = #{fixedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="isFixed != null" >
+                is_fixed = #{isFixed,jdbcType=INTEGER},
+            </if>
+            <if test="proMoney != null" >
+                pro_money = #{proMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="isPro != null" >
+                is_pro = #{isPro,jdbcType=INTEGER},
+            </if>
+            <if test="chargeDesc != null" >
+                charge_desc = #{chargeDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="includedTotalMoney != null" >
+                included_total_money = #{includedTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="shouldTotalMoney != null" >
+                should_total_money = #{shouldTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="actualTotalMoney != null" >
+                actual_total_money = #{actualTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="isDeductedLoan != null" >
+                is_deducted_loan = #{isDeductedLoan,jdbcType=VARCHAR},
+            </if>
+            <if test="deductedLoanMoney != null" >
+                deducted_loan_money = #{deductedLoanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="loanMoney != null" >
+                loan_money = #{loanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="isPre != null" >
+                is_pre = #{isPre,jdbcType=INTEGER},
+            </if>
+            <if test="preMoney != null" >
+                pre_money = #{preMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="loanType != null" >
+                loan_type = #{loanType,jdbcType=INTEGER},
+            </if>
+            <if test="loanCycle != null" >
+                loan_cycle = #{loanCycle,jdbcType=INTEGER},
+            </if>
+            <if test="backTime != null" >
+                back_time = #{backTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insuranceMoney != null" >
+                insurance_money = #{insuranceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="interestMoney != null" >
+                interest_money = #{interestMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="lawyerMoney != null" >
+                lawyer_money = #{lawyerMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="appraisalMoney != null" >
+                appraisal_money = #{appraisalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="litigateMoney != null" >
+                litigate_money = #{litigateMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="preserveMoney != null" >
+                preserve_money = #{preserveMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherDesc != null" >
+                other_desc = #{otherDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="moneyDesc != null" >
+                money_desc = #{moneyDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="financeSign != null" >
+                finance_sign = #{financeSign,jdbcType=VARCHAR},
+            </if>
+            <if test="riskSign != null" >
+                risk_sign = #{riskSign,jdbcType=VARCHAR},
+            </if>
+            <if test="financeSignTime != null" >
+                finance_sign_time = #{financeSignTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="riskSignTime != null" >
+                risk_sign_time = #{riskSignTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="claimBeginTime != null" >
+                claim_begin_time = #{claimBeginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="legalUser != null" >
+                legal_user = #{legalUser,jdbcType=VARCHAR},
+            </if>
+            <if test="legalUserId != null" >
+                legal_user_id = #{legalUserId,jdbcType=BIGINT},
+            </if>
+            <if test="legalBeginTime != null" >
+                legal_begin_time = #{legalBeginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="agentLawyerMoney != null" >
+                agent_lawyer_money = #{agentLawyerMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="loanChannelRate != null" >
+                loan_channel_rate = #{loanChannelRate,jdbcType=DOUBLE},
+            </if>
+            <if test="loanChannelMoney != null" >
+                loan_channel_money = #{loanChannelMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="surplusTotalMoney != null" >
+                surplus_total_money = #{surplusTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="claimMoney != null" >
+                claim_money = #{claimMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherMoney != null" >
+                other_money = #{otherMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="closedReportDeMoney != null" >
+                closed_report_de_money = #{closedReportDeMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="chargeType != null" >
+                charge_type = #{chargeType,jdbcType=INTEGER},
+            </if>
+            <if test="fixedChargeMoney != null" >
+                fixed_charge_money = #{fixedChargeMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="proportionChargeMoney != null" >
+                proportion_charge_money = #{proportionChargeMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="proportionChargeRate != null" >
+                proportion_charge_rate = #{proportionChargeRate,jdbcType=DOUBLE},
+            </if>
+            <if test="blendFixedChargeMoney != null" >
+                blend_fixed_charge_money = #{blendFixedChargeMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="blendProportionChargeMoney != null" >
+                blend_proportion_charge_money = #{blendProportionChargeMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="blendProportionChargeRate != null" >
+                blend_proportion_charge_rate = #{blendProportionChargeRate,jdbcType=DOUBLE},
+            </if>
+            <if test="payWoundedMoney != null" >
+                pay_wounded_money = #{payWoundedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="payDriverMoney != null" >
+                pay_driver_money = #{payDriverMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="paySafeMoney != null" >
+                pay_safe_money = #{paySafeMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="stageType != null" >
+                stage_type = #{stageType,jdbcType=INTEGER},
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseClosedReport" >
+        update case_closed_report
+        set case_id = #{caseId,jdbcType=BIGINT},
+        case_no = #{caseNo,jdbcType=VARCHAR},
+        clientele_name = #{clienteleName,jdbcType=VARCHAR},
+        clientele_id = #{clienteleId,jdbcType=BIGINT},
+        org_id = #{orgId,jdbcType=BIGINT},
+        org_name = #{orgName,jdbcType=VARCHAR},
+        entrust_type = #{entrustType,jdbcType=INTEGER},
+        entrust_time = #{entrustTime,jdbcType=TIMESTAMP},
+        closed_type = #{closedType,jdbcType=INTEGER},
+        compensate_rate = #{compensateRate,jdbcType=DOUBLE},
+        claimant_id = #{claimantId,jdbcType=BIGINT},
+        claimant_name = #{claimantName,jdbcType=VARCHAR},
+        claimant_pre = #{claimantPre,jdbcType=VARCHAR},
+        agent_firm = #{agentFirm,jdbcType=VARCHAR},
+        agent_lawyer = #{agentLawyer,jdbcType=VARCHAR},
+        compensate_money = #{compensateMoney,jdbcType=DOUBLE},
+        compulsory_money = #{compulsoryMoney,jdbcType=DOUBLE},
+        commercial_money = #{commercialMoney,jdbcType=DOUBLE},
+        driver_money = #{driverMoney,jdbcType=DOUBLE},
+        injured_money = #{injuredMoney,jdbcType=DOUBLE},
+        fixed_money = #{fixedMoney,jdbcType=DOUBLE},
+        is_fixed = #{isFixed,jdbcType=INTEGER},
+        pro_money = #{proMoney,jdbcType=DOUBLE},
+        is_pro = #{isPro,jdbcType=INTEGER},
+        charge_desc = #{chargeDesc,jdbcType=VARCHAR},
+        included_total_money = #{includedTotalMoney,jdbcType=DOUBLE},
+        should_total_money = #{shouldTotalMoney,jdbcType=DOUBLE},
+        actual_total_money = #{actualTotalMoney,jdbcType=DOUBLE},
+        is_deducted_loan = #{isDeductedLoan,jdbcType=VARCHAR},
+        deducted_loan_money = #{deductedLoanMoney,jdbcType=DOUBLE},
+        loan_money = #{loanMoney,jdbcType=DOUBLE},
+        is_pre = #{isPre,jdbcType=INTEGER},
+        pre_money = #{preMoney,jdbcType=DOUBLE},
+        loan_type = #{loanType,jdbcType=INTEGER},
+        loan_cycle = #{loanCycle,jdbcType=INTEGER},
+        back_time = #{backTime,jdbcType=TIMESTAMP},
+        insurance_money = #{insuranceMoney,jdbcType=DOUBLE},
+        interest_money = #{interestMoney,jdbcType=DOUBLE},
+        lawyer_money = #{lawyerMoney,jdbcType=DOUBLE},
+        appraisal_money = #{appraisalMoney,jdbcType=DOUBLE},
+        litigate_money = #{litigateMoney,jdbcType=DOUBLE},
+        preserve_money = #{preserveMoney,jdbcType=DOUBLE},
+        other_desc = #{otherDesc,jdbcType=VARCHAR},
+        money_desc = #{moneyDesc,jdbcType=VARCHAR},
+        finance_sign = #{financeSign,jdbcType=VARCHAR},
+        risk_sign = #{riskSign,jdbcType=VARCHAR},
+        finance_sign_time = #{financeSignTime,jdbcType=TIMESTAMP},
+        risk_sign_time = #{riskSignTime,jdbcType=TIMESTAMP},
+        claim_begin_time = #{claimBeginTime,jdbcType=TIMESTAMP},
+        legal_user = #{legalUser,jdbcType=VARCHAR},
+        legal_user_id = #{legalUserId,jdbcType=BIGINT},
+        legal_begin_time = #{legalBeginTime,jdbcType=TIMESTAMP},
+        agent_lawyer_money = #{agentLawyerMoney,jdbcType=DOUBLE},
+        loan_channel_rate = #{loanChannelRate,jdbcType=DOUBLE},
+        loan_channel_money = #{loanChannelMoney,jdbcType=DOUBLE},
+        surplus_total_money = #{surplusTotalMoney,jdbcType=DOUBLE},
+        claim_money = #{claimMoney,jdbcType=DOUBLE},
+        other_money = #{otherMoney,jdbcType=DOUBLE},
+        closed_report_de_money = #{closedReportDeMoney,jdbcType=DOUBLE},
+        charge_type = #{chargeType,jdbcType=INTEGER},
+        fixed_charge_money = #{fixedChargeMoney,jdbcType=DOUBLE},
+        proportion_charge_money = #{proportionChargeMoney,jdbcType=DOUBLE},
+        proportion_charge_rate = #{proportionChargeRate,jdbcType=DOUBLE},
+        blend_fixed_charge_money = #{blendFixedChargeMoney,jdbcType=DOUBLE},
+        blend_proportion_charge_money = #{blendProportionChargeMoney,jdbcType=DOUBLE},
+        blend_proportion_charge_rate = #{blendProportionChargeRate,jdbcType=DOUBLE},
+        pay_wounded_money = #{payWoundedMoney,jdbcType=DOUBLE},
+        pay_driver_money = #{payDriverMoney,jdbcType=DOUBLE},
+        pay_safe_money = #{paySafeMoney,jdbcType=DOUBLE},
+        stage_type = #{stageType,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByCaseId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from case_closed_report
+        where case_id = #{caseId,jdbcType=BIGINT} order by id asc limit 1
+    </select>
+</mapper>

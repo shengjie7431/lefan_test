@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:task="http://www.springframework.org/schema/task" xmlns:p="http://www.springframework.org/schema/p"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/aop
+     	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     	http://www.springframework.org/schema/task
+     	http://www.springframework.org/schema/task/spring-task-3.0.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+	<context:component-scan base-package="com.lefancrm.apicenter.dao" />
+	<context:component-scan base-package="com.lefancrm.apicenter.domain" />
+	<context:component-scan base-package="com.lefancrm.apicenter.service com.lefancrm.apicenter.inner com.lefancrm.apicenter.appapi com.lefancrm.apicenter.backendapi com.lefancrm.apicenter.tree com.lefancrm.apicenter.task" />
+
+
+	<context:component-scan base-package="com.lefancrm.apicenter.fina.dao" />
+	<context:component-scan base-package="com.lefancrm.apicenter.fina.api" />
+	<bean class="com.lefancrm.apicenter.util.ServiceLocator"></bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<property name="mapperLocations">
+			<array>
+				<value>classpath*:/sqlmap/**</value>
+			</array>
+		</property>
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.lefancrm.apicenter.dao,com.lefancrm.apicenter.fina.dao"></property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<task:executor id="myExecutor" pool-size="10"/>
+	<task:scheduler id="myScheduler" pool-size="10"/>
+	<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
+
+	<task:scheduled-tasks>
+<!--		<task:scheduled ref="myJob" method="surveyCaseTaskTimer" cron="0 00 8 1/1 * ?"/>-->
+		<task:scheduled ref="myJob" method="surveyCaseTaskTimer" cron="0 00 08 ? * *"/>
+		<task:scheduled ref="myJob" method="everyDayCaseRemind" cron="0 00 07 ? * *"/><!-- 每天早上7点 -->
+		<task:scheduled ref="synJob" method="synOrg" cron="0 00 02 ? * *"/>
+		<task:scheduled ref="synJob" method="synSurvey" cron="0 30 02 ? * *"/>
+		<task:scheduled ref="staffJob" method="staffPaySlip" cron="0 */5 * * * ?"/>
+		<task:scheduled ref="reJob" method="issuedReInfo" cron="0 30 3 1 * ?"/>
+<!--		<task:scheduled ref="reJob" method="channel" cron="0 30 4 1 * ?"/>  &lt;!&ndash; 每月1号凌晨4:30执行&ndash;&gt;-->
+<!--		<task:scheduled ref="reJob" method="channelNew" cron="0 30 4 ? * MON"/>  &lt;!&ndash; 每周周一凌晨4:30 &ndash;&gt;-->
+		<!--	每月5号凌晨1点15分执行 2021年5月7日 需求由每周变成每月 -->
+		<task:scheduled ref="reJob" method="channelNew" cron="0 0 0 5 * ?"/>
+		<!--        <task:scheduled ref="myJob" method="http" cron="0/10 * * * * ? "/>-->
+		<task:scheduled ref="thinkJob" method="think" cron="0 00 3 1 * ?"/><!--		每个月1号 凌晨3点执行-->
+
+
+		<task:scheduled ref="reJob" method="deleteChannelNew" cron="0 10 04 ? * *"/>  <!-- 每天凌晨4:10执行 -->
+	</task:scheduled-tasks>
+
+	<bean id="myJob" class="com.lefancrm.apicenter.task.SurveyCaseTask"></bean>
+	<bean id="synJob" class="com.lefancrm.apicenter.task.SurveySynAgingTask"></bean>
+	<bean id="staffJob" class="com.lefancrm.apicenter.task.StaffTask"></bean>
+	<bean id="reJob" class="com.lefancrm.apicenter.task.ReTask"></bean>
+	<bean id="thinkJob" class="com.lefancrm.apicenter.task.ThinkTask"></bean>
+
+	<!--<task:scheduled-tasks>-->
+	<!--<task:scheduled ref="myJob" method="surveyMessageTimer" cron="0 0/10 * * * ?"/>-->
+	<!--</task:scheduled-tasks>-->
+	<!--<bean id="myJob" class="com.lefancrm.apicenter.task.SurveyCaseTask"></bean>-->
+
+	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" p:host-name="${redis.host}" p:port="${redis.port}" p:password="${redis.password}" p:usePool="false" />
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" p:connection-factory-ref="jedisConnectionFactory"/>
+	<bean id="redisService" class="com.lefancrm.apicenter.service.impl.RedisServiceImpl"></bean>
+	<bean id="initProject" class="com.lefancrm.apicenter.util.tsign.utils.InitProject"></bean>
+	<!-- <bean id="stringRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+	<bean id="jdkSerializationRedisSerializer" class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>	
+	<bean id="ufopMessageDelegate" class="com.ccplay.task.service.impl.UfopMessageDelegate"/>
+	<bean id="cleanCacheMessageDelegate" class="com.ccplay.task.service.impl.CleanCacheMessageDelegate"/>
+	<bean id="ufopMessageListener" class="org.springframework.data.redis.listener.adapter.MessageListenerAdapter">
+		<property name="delegate" ref="ufopMessageDelegate"/>
+		<property name="serializer" ref="jdkSerializationRedisSerializer"/>
+	</bean>
+	<bean id="cleanCacheMessageListener" class="org.springframework.data.redis.listener.adapter.MessageListenerAdapter">
+		<property name="delegate" ref="cleanCacheMessageDelegate"/>
+		<property name="serializer" ref="jdkSerializationRedisSerializer"/>
+	</bean>
+	<bean id="redisContainer" class="org.springframework.data.redis.listener.RedisMessageListenerContainer">
+		<property name="connectionFactory" ref="jedisConnectionFactory" />
+		<property name="messageListeners">
+			<map>
+				<entry key-ref="ufopMessageListener">
+					<bean class="org.springframework.data.redis.listener.ChannelTopic">
+						<constructor-arg value="ufopMessageChannel"/>
+					</bean>
+				</entry>
+				<entry key-ref="cleanCacheMessageListener">
+					<bean class="org.springframework.data.redis.listener.ChannelTopic">
+						<constructor-arg value="cleanCacheMessageChannel"/>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean> -->
+</beans>

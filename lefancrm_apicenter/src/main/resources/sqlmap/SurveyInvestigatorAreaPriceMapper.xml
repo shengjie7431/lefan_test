@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyInvestigatorAreaPriceMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyInvestigatorAreaPrice" >
+    <id column="area_id" property="areaId" jdbcType="BIGINT" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="area_type" property="areaType" jdbcType="VARCHAR" />
+    <result column="area_shortname" property="areaShortname" jdbcType="VARCHAR" />
+    <result column="area_longname" property="areaLongname" jdbcType="VARCHAR" />
+    <result column="area_order" property="areaOrder" jdbcType="INTEGER" />
+    <result column="long_pinyin" property="longPinyin" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="short_pinyin" property="shortPinyin" jdbcType="VARCHAR" />
+    <result column="is_show" property="isShow" jdbcType="INTEGER" />
+    <result column="task_id" property="taskId" jdbcType="INTEGER" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+      <result column="city_type" property="cityType" jdbcType="INTEGER" />
+      <result column="task_info_content_id" property="taskInfoContentId" jdbcType="BIGINT" />
+      <result column="task_info_content_name" property="taskInfoContentName" jdbcType="VARCHAR" />
+      <result column="direction_result_type_id" property="directionResultTypeId" jdbcType="BIGINT" />
+      <result column="direction_result_type_name" property="directionResultTypeName" jdbcType="VARCHAR" />
+      <result column="price_type" property="priceType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    area_id, area_name, parent_id, area_type, area_shortname, area_longname, area_order, 
+    long_pinyin, delete_flag, short_pinyin, is_show, task_id, task_name, price, city_type,
+    task_info_content_id, task_info_content_name, direction_result_type_id, direction_result_type_name,price_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_investigator_area_price
+    where area_id = #{areaId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_investigator_area_price
+    where area_id = #{areaId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyInvestigatorAreaPrice" >
+    insert into survey_investigator_area_price (area_id, area_name, parent_id, 
+      area_type, area_shortname, area_longname, 
+      area_order, long_pinyin, delete_flag, 
+      short_pinyin, is_show, task_id, 
+      task_name, price, city_type,task_info_content_id,
+      task_info_content_name, direction_result_type_id, direction_result_type_name,price_type)
+    values (#{areaId,jdbcType=BIGINT}, #{areaName,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{areaType,jdbcType=VARCHAR}, #{areaShortname,jdbcType=VARCHAR}, #{areaLongname,jdbcType=VARCHAR}, 
+      #{areaOrder,jdbcType=INTEGER}, #{longPinyin,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, 
+      #{shortPinyin,jdbcType=VARCHAR}, #{isShow,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER}, 
+      #{taskName,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{cityType,jdbcType=INTEGER},
+      #{taskInfoContentId,jdbcType=BIGINT}, #{taskInfoContentName,jdbcType=VARCHAR},
+      #{directionResultTypeId,jdbcType=BIGINT}, #{directionResultTypeName,jdbcType=VARCHAR},
+      #{priceType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyInvestigatorAreaPrice" >
+    insert into survey_investigator_area_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="areaType != null" >
+        area_type,
+      </if>
+      <if test="areaShortname != null" >
+        area_shortname,
+      </if>
+      <if test="areaLongname != null" >
+        area_longname,
+      </if>
+      <if test="areaOrder != null" >
+        area_order,
+      </if>
+      <if test="longPinyin != null" >
+        long_pinyin,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="shortPinyin != null" >
+        short_pinyin,
+      </if>
+      <if test="isShow != null" >
+        is_show,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="taskName != null" >
+        task_name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+        <if test="cityType != null" >
+            city_type,
+        </if>
+        <if test="taskInfoContentId != null" >
+            task_info_content_id,
+        </if>
+        <if test="taskInfoContentName != null" >
+            task_info_content_name,
+        </if>
+        <if test="directionResultTypeId != null" >
+            direction_result_type_id,
+        </if>
+        <if test="directionResultTypeName != null" >
+            direction_result_type_name,
+        </if>
+        <if test="priceType != null" >
+            price_type,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="areaId != null" >
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="areaType != null" >
+        #{areaType,jdbcType=VARCHAR},
+      </if>
+      <if test="areaShortname != null" >
+        #{areaShortname,jdbcType=VARCHAR},
+      </if>
+      <if test="areaLongname != null" >
+        #{areaLongname,jdbcType=VARCHAR},
+      </if>
+      <if test="areaOrder != null" >
+        #{areaOrder,jdbcType=INTEGER},
+      </if>
+      <if test="longPinyin != null" >
+        #{longPinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="shortPinyin != null" >
+        #{shortPinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null" >
+        #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+        <if test="cityType != null" >
+            #{cityType,jdbcType=INTEGER},
+        </if>
+        <if test="taskInfoContentId != null" >
+            #{taskInfoContentId,jdbcType=BIGINT},
+        </if>
+        <if test="taskInfoContentName != null" >
+            #{taskInfoContentName,jdbcType=VARCHAR},
+        </if>
+        <if test="directionResultTypeId != null" >
+            #{directionResultTypeId,jdbcType=BIGINT},
+        </if>
+        <if test="directionResultTypeName != null" >
+            #{directionResultTypeName,jdbcType=VARCHAR},
+        </if>
+        <if test="priceType != null" >
+            #{priceType,jdbcType=INTEGER},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyInvestigatorAreaPrice" >
+    update survey_investigator_area_price
+    <set >
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="areaType != null" >
+        area_type = #{areaType,jdbcType=VARCHAR},
+      </if>
+      <if test="areaShortname != null" >
+        area_shortname = #{areaShortname,jdbcType=VARCHAR},
+      </if>
+      <if test="areaLongname != null" >
+        area_longname = #{areaLongname,jdbcType=VARCHAR},
+      </if>
+      <if test="areaOrder != null" >
+        area_order = #{areaOrder,jdbcType=INTEGER},
+      </if>
+      <if test="longPinyin != null" >
+        long_pinyin = #{longPinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="shortPinyin != null" >
+        short_pinyin = #{shortPinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null" >
+        is_show = #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+        <if test="cityType != null" >
+            city_type = #{cityType,jdbcType=INTEGER},
+        </if>
+        <if test="taskInfoContentId != null" >
+            task_info_content_id = #{taskInfoContentId,jdbcType=BIGINT},
+        </if>
+        <if test="taskInfoContentName != null" >
+            task_info_content_name = #{taskInfoContentName,jdbcType=VARCHAR},
+        </if>
+        <if test="directionResultTypeId != null" >
+            direction_result_type_id = #{directionResultTypeId,jdbcType=BIGINT},
+        </if>
+        <if test="directionResultTypeName != null" >
+            direction_result_type_name = #{directionResultTypeName,jdbcType=VARCHAR},
+        </if>
+        <if test="priceType != null" >
+            price_type = #{priceType,jdbcType=INTEGER},
+        </if>
+    </set>
+    where area_id = #{areaId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyInvestigatorAreaPrice" >
+    update survey_investigator_area_price
+    set area_name = #{areaName,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      area_type = #{areaType,jdbcType=VARCHAR},
+      area_shortname = #{areaShortname,jdbcType=VARCHAR},
+      area_longname = #{areaLongname,jdbcType=VARCHAR},
+      area_order = #{areaOrder,jdbcType=INTEGER},
+      long_pinyin = #{longPinyin,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      short_pinyin = #{shortPinyin,jdbcType=VARCHAR},
+      is_show = #{isShow,jdbcType=INTEGER},
+      task_id = #{taskId,jdbcType=INTEGER},
+      task_name = #{taskName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      city_type = #{cityType,jdbcType=INTEGER},
+        task_info_content_id = #{taskInfoContentId,jdbcType=BIGINT},
+        task_info_content_name = #{taskInfoContentName,jdbcType=VARCHAR},
+        direction_result_type_id = #{directionResultTypeId,jdbcType=BIGINT},
+        direction_result_type_name = #{directionResultTypeName,jdbcType=VARCHAR},
+        price_type = #{priceType,jdbcType=INTEGER}
+    where area_id = #{areaId,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="areaName != null" >
+            and area_name like CONCAT(CONCAT('%',#{areaName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="areaId != null" >
+            and area_id = #{areaId,jdbcType=BIGINT}
+        </if>
+        <if test="taskId != null" >
+            and task_id = #{taskId,jdbcType=INTEGER}
+        </if>
+        <if test="cityType != null" >
+            and city_type = #{cityType,jdbcType=INTEGER}
+        </if>
+        <if test="taskInfoContentId != null" >
+            and task_info_content_id = #{taskInfoContentId,jdbcType=BIGINT}
+        </if>
+        <if test="directionResultTypeId != null" >
+            and direction_result_type_id = #{directionResultTypeId,jdbcType=BIGINT}
+        </if>
+        <if test="priceType != null" >
+            and price_type = #{priceType,jdbcType=INTEGER}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_investigator_area_price
+        <include refid="joins" />
+        where delete_flag=0
+        <include refid="wheres" />
+        order by area_id, city_type
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_investigator_area_price
+        <include refid="joins" />
+        where delete_flag=0
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectByInfo" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_investigator_area_price
+        <include refid="joins" />
+        where delete_flag=0 and task_id = #{taskId,jdbcType=INTEGER} and area_id = #{areaId,jdbcType=BIGINT}
+        and city_type = #{cityType,jdbcType=INTEGER}
+        <if test="taskInfoContentId != null" >
+            and task_info_content_id = #{taskInfoContentId,jdbcType=BIGINT}
+        </if>
+        <if test="directionResultTypeId != null" >
+            and direction_result_type_id = #{directionResultTypeId,jdbcType=BIGINT}
+        </if>
+        <if test="priceType != null" >
+            and price_type = #{priceType,jdbcType=INTEGER}
+        </if>
+        limit 1
+    </select>
+
+    <update id="updateByInfo" parameterType="com.lefancrm.apicenter.model.SurveyInvestigatorAreaPrice" >
+        update survey_investigator_area_price
+        set  price = #{price,jdbcType=DOUBLE}
+        <if test="deleteFlag != null" >
+            , delete_flag = #{deleteFlag,jdbcType=INTEGER}
+        </if>
+        where area_id = #{areaId,jdbcType=BIGINT} and task_id = #{taskId,jdbcType=INTEGER} and city_type = #{cityType,jdbcType=INTEGER}
+        and task_info_content_id = #{taskInfoContentId,jdbcType=BIGINT} and direction_result_type_id = #{directionResultTypeId,jdbcType=BIGINT}
+        and price_type = #{priceType,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectList" resultType="com.lefancrm.apicenter.dto.SurveyInvestigatorAreaPrice2Dto" parameterType="java.util.Map">
+        select p.area_id as areaId, p.area_name as areaName,p.city_type as cityType,
+        p.task_id as taskId, p.task_name as TaskName,
+        ca.city_type as areaType,
+        max(case when p.task_id=18 then p.price else null end) as taskPriceMZ,
+        max(case when p.task_id=17 then p.price else null end) as taskPriceQY,
+        max(case when p.task_id=16 then p.price else null end) as taskPriceSC,
+        max(case when p.task_id=15 then p.price else null end) as taskPriceTJ,
+        max(case when p.task_id=14 then p.price else null end) as taskPriceKC,
+        max(case when p.task_id=13 then p.price else null end) as taskPriceYL,
+        max(case when p.task_id=12 then p.price else null end) as taskPriceBL,
+        max(case when p.task_id=11 then p.price else null end) as taskPriceSD,
+        max(case when p.task_id=10 then p.price else null end) as taskPriceYB,
+        max(case when p.task_id=9  then p.price else null end) as taskPriceZF
+        FROM survey_investigator_area_price p
+        left join common_area ca on p.area_id = ca.area_id
+        where p.delete_flag =0
+        <if test="areaName != null" >
+            and p.area_name like CONCAT(CONCAT('%',#{areaName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="areaId != null" >
+            and p.area_id = #{areaId,jdbcType=BIGINT}
+        </if>
+        <if test="taskId != null" >
+            and p.task_id = #{taskId,jdbcType=INTEGER}
+        </if>
+        <if test="cityType != null" >
+            and p.city_type = #{cityType,jdbcType=INTEGER}
+        </if>
+        GROUP BY p.area_id,p.city_type
+    </select>
+
+    <delete id="deleteByInfo" parameterType="java.util.Map" >
+        delete from survey_investigator_area_price
+        where area_id = #{areaId,jdbcType=INTEGER}
+        <if test="taskId != null" >
+            and task_id = #{taskId,jdbcType=INTEGER}
+        </if>
+        <if test="taskInfoContentId != null" >
+            and task_info_content_id = #{taskInfoContentId,jdbcType=BIGINT}
+        </if>
+        <if test="directionResultTypeId != null" >
+            and direction_result_type_id = #{directionResultTypeId,jdbcType=BIGINT}
+        </if>
+        <if test="cityType != null" >
+            and city_type = #{cityType,jdbcType=INTEGER}
+        </if>
+        <if test="priceType != null" >
+            and price_type = #{priceType,jdbcType=INTEGER}
+        </if>
+    </delete>
+
+    <select id="selectFranchiseePrice" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.SurveyFranchiseePrice2Dto">
+        select A.area_id as areaId,A.city_type as cityType,A.str as strPirce, A.area_name as areaName, A.area_type as areaType,
+             A.price_type as priceType
+        from (
+            select t.area_id,t.city_type,t.area_name,t.area_type,t.price_type,
+            GROUP_CONCAT(CONCAT(t.task_id,'_',t.task_info_content_id,'_',t.direction_result_type_id,'_',t.price)) str
+            from (
+                SELECT
+                p.area_id,
+                p.area_name,
+                p.city_type,
+                p.task_id,
+                p.task_info_content_id,
+                p.direction_result_type_id,
+                p.area_type,
+                p.price_type,
+                max(p.price) price
+                FROM
+                survey_investigator_area_price p
+                where 1=1 and p.price > 0 and p.price_type = #{priceType,jdbcType=INTEGER}
+                <if test="areaName != null" >
+                    and p.area_name like CONCAT(CONCAT('%',#{areaName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="cityType != null" >
+                    and p.city_type = #{cityType,jdbcType=INTEGER}
+                </if>
+                GROUP BY
+                p.area_id,
+                p.city_type,
+                p.task_id,
+                p.task_info_content_id,
+                p.direction_result_type_id
+            )
+        t group by t.area_id,t.city_type) A
+    </select>
+</mapper>

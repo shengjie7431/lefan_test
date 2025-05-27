@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.TcOpenPlatformMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.TcOpenPlatform" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="authkey" property="authkey" jdbcType="VARCHAR" />
+    <result column="secert" property="secert" jdbcType="VARCHAR" />
+    <result column="grant_author" property="grantAuthor" jdbcType="VARCHAR" />
+    <result column="grant_time" property="grantTime" jdbcType="TIMESTAMP" />
+    <result column="grand_state" property="grandState" jdbcType="INTEGER" />
+    <result column="grand_img" property="grandImg" jdbcType="VARCHAR" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <collection property="tcOpenPlatformApiList" javaType="java.util.ArrayList" ofType="com.lefancrm.apicenter.model.TcOpenPlatformApi"
+                select="com.lefancrm.apicenter.dao.TcOpenPlatformApiMapper.selectListByPlatformId" column="{id=id}" >
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, authkey, secert, grant_author, grant_time, grand_state, grand_img, user_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_open_platform
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectApiListByParam" resultMap="BaseResultMap">
+    SELECT p.* FROM tc_open_platform p
+    WHERE p.authkey = #{apiKey}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tc_open_platform
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.TcOpenPlatform" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tc_open_platform (authkey, secert, grant_author, 
+      grant_time, grand_state, grand_img, 
+      user_type)
+    values (#{authkey,jdbcType=VARCHAR}, #{secert,jdbcType=VARCHAR}, #{grantAuthor,jdbcType=VARCHAR}, 
+      #{grantTime,jdbcType=TIMESTAMP}, #{grandState,jdbcType=INTEGER}, #{grandImg,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.TcOpenPlatform" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tc_open_platform
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="authkey != null" >
+        authkey,
+      </if>
+      <if test="secert != null" >
+        secert,
+      </if>
+      <if test="grantAuthor != null" >
+        grant_author,
+      </if>
+      <if test="grantTime != null" >
+        grant_time,
+      </if>
+      <if test="grandState != null" >
+        grand_state,
+      </if>
+      <if test="grandImg != null" >
+        grand_img,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="authkey != null" >
+        #{authkey,jdbcType=VARCHAR},
+      </if>
+      <if test="secert != null" >
+        #{secert,jdbcType=VARCHAR},
+      </if>
+      <if test="grantAuthor != null" >
+        #{grantAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="grantTime != null" >
+        #{grantTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grandState != null" >
+        #{grandState,jdbcType=INTEGER},
+      </if>
+      <if test="grandImg != null" >
+        #{grandImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.TcOpenPlatform" >
+    update tc_open_platform
+    <set >
+      <if test="authkey != null" >
+        authkey = #{authkey,jdbcType=VARCHAR},
+      </if>
+      <if test="secert != null" >
+        secert = #{secert,jdbcType=VARCHAR},
+      </if>
+      <if test="grantAuthor != null" >
+        grant_author = #{grantAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="grantTime != null" >
+        grant_time = #{grantTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grandState != null" >
+        grand_state = #{grandState,jdbcType=INTEGER},
+      </if>
+      <if test="grandImg != null" >
+        grand_img = #{grandImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.TcOpenPlatform" >
+    update tc_open_platform
+    set authkey = #{authkey,jdbcType=VARCHAR},
+      secert = #{secert,jdbcType=VARCHAR},
+      grant_author = #{grantAuthor,jdbcType=VARCHAR},
+      grant_time = #{grantTime,jdbcType=TIMESTAMP},
+      grand_state = #{grandState,jdbcType=INTEGER},
+      grand_img = #{grandImg,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

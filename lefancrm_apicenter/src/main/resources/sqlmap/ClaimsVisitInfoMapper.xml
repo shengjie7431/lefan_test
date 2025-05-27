@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.ClaimsVisitInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.ClaimsVisitInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="driver_name" property="driverName" jdbcType="VARCHAR" />
+    <result column="driver_tel" property="driverTel" jdbcType="VARCHAR" />
+    <result column="injured_name" property="injuredName" jdbcType="VARCHAR" />
+    <result column="injured_tel" property="injuredTel" jdbcType="VARCHAR" />
+    <result column="hospital" property="hospital" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="bed" property="bed" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="handle_state" property="handleState" jdbcType="INTEGER" />
+    <result column="handle_user" property="handleUser" jdbcType="VARCHAR" />
+    <result column="handle_time" property="handleTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, driver_name, driver_tel, injured_name, injured_tel, hospital, department, bed, 
+    create_time, create_by, handle_state, handle_user, handle_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from claims_visit_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from claims_visit_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.ClaimsVisitInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into claims_visit_info (driver_name, driver_tel, injured_name, 
+      injured_tel, hospital, department, 
+      bed, create_time, create_by, 
+      handle_state, handle_user, handle_time
+      )
+    values (#{driverName,jdbcType=VARCHAR}, #{driverTel,jdbcType=VARCHAR}, #{injuredName,jdbcType=VARCHAR}, 
+      #{injuredTel,jdbcType=VARCHAR}, #{hospital,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, 
+      #{bed,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{handleState,jdbcType=INTEGER}, #{handleUser,jdbcType=VARCHAR}, #{handleTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.ClaimsVisitInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into claims_visit_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="driverName != null" >
+        driver_name,
+      </if>
+      <if test="driverTel != null" >
+        driver_tel,
+      </if>
+      <if test="injuredName != null" >
+        injured_name,
+      </if>
+      <if test="injuredTel != null" >
+        injured_tel,
+      </if>
+      <if test="hospital != null" >
+        hospital,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="bed != null" >
+        bed,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="handleState != null" >
+        handle_state,
+      </if>
+      <if test="handleUser != null" >
+        handle_user,
+      </if>
+      <if test="handleTime != null" >
+        handle_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="driverName != null" >
+        #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverTel != null" >
+        #{driverTel,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredName != null" >
+        #{injuredName,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredTel != null" >
+        #{injuredTel,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital != null" >
+        #{hospital,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="bed != null" >
+        #{bed,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="handleState != null" >
+        #{handleState,jdbcType=INTEGER},
+      </if>
+      <if test="handleUser != null" >
+        #{handleUser,jdbcType=VARCHAR},
+      </if>
+      <if test="handleTime != null" >
+        #{handleTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.ClaimsVisitInfo" >
+    update claims_visit_info
+    <set >
+      <if test="driverName != null" >
+        driver_name = #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverTel != null" >
+        driver_tel = #{driverTel,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredName != null" >
+        injured_name = #{injuredName,jdbcType=VARCHAR},
+      </if>
+      <if test="injuredTel != null" >
+        injured_tel = #{injuredTel,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital != null" >
+        hospital = #{hospital,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="bed != null" >
+        bed = #{bed,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="handleState != null" >
+        handle_state = #{handleState,jdbcType=INTEGER},
+      </if>
+      <if test="handleUser != null" >
+        handle_user = #{handleUser,jdbcType=VARCHAR},
+      </if>
+      <if test="handleTime != null" >
+        handle_time = #{handleTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.ClaimsVisitInfo" >
+    update claims_visit_info
+    set driver_name = #{driverName,jdbcType=VARCHAR},
+      driver_tel = #{driverTel,jdbcType=VARCHAR},
+      injured_name = #{injuredName,jdbcType=VARCHAR},
+      injured_tel = #{injuredTel,jdbcType=VARCHAR},
+      hospital = #{hospital,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      bed = #{bed,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      handle_state = #{handleState,jdbcType=INTEGER},
+      handle_user = #{handleUser,jdbcType=VARCHAR},
+      handle_time = #{handleTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="driverName != null" >
+            and driver_name like CONCAT(CONCAT('%',replace(#{driverName,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="driverTel != null" >
+            and driver_tel like CONCAT(CONCAT('%',replace(#{driverTel,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="injuredName != null" >
+            and injured_name like CONCAT(CONCAT('%',replace(#{injuredName,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="injuredTel != null" >
+            and injured_tel like CONCAT(CONCAT('%',replace(#{injuredTel,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="handleState != null" >
+            and handle_state = #{handleState,jdbcType=INTEGER}
+        </if>
+        <if test="handleUser != null" >
+            and handle_user like CONCAT(CONCAT('%',replace(#{handleUser,jdbcType=VARCHAR},' ','')), '%')
+        </if>
+        <if test="startTime != null" >
+            and DATE_FORMAT(handle_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="endTime != null" >
+            and DATE_FORMAT(handle_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="createStartTime != null" >
+            and DATE_FORMAT(create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{createStartTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="createEndTime != null" >
+            and DATE_FORMAT(create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{createEndTime,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from claims_visit_info
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from claims_visit_info
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+</mapper>

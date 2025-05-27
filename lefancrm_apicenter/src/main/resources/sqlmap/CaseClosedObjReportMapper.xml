@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseClosedObjReportMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseClosedObjReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+    <result column="closed_report_id" property="closedReportId" jdbcType="BIGINT" />
+    <result column="object_name" property="objectName" jdbcType="VARCHAR" />
+    <result column="opinion_money" property="opinionMoney" jdbcType="DOUBLE" />
+    <result column="ins_ompany_money" property="insOmpanyMoney" jdbcType="DOUBLE" />
+    <result column="driver_money" property="driverMoney" jdbcType="DOUBLE" />
+    <result column="commer_money" property="commerMoney" jdbcType="DOUBLE" />
+    <result column="compul_money" property="compulMoney" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_id, case_no, closed_report_id, object_name, opinion_money, ins_ompany_money, 
+    driver_money,commer_money,compul_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_closed_obj_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from case_closed_obj_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseClosedObjReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_closed_obj_report (case_id, case_no, closed_report_id, 
+      object_name, opinion_money, ins_ompany_money, 
+      driver_money,commer_money,compul_money)
+    values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{closedReportId,jdbcType=BIGINT}, 
+      #{objectName,jdbcType=VARCHAR}, #{opinionMoney,jdbcType=DOUBLE}, #{insOmpanyMoney,jdbcType=DOUBLE}, 
+      #{driverMoney,jdbcType=DOUBLE},#{commerMoney,jdbcType=DOUBLE},#{compulMoney,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseClosedObjReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_closed_obj_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseNo != null" >
+        case_no,
+      </if>
+      <if test="closedReportId != null" >
+        closed_report_id,
+      </if>
+      <if test="objectName != null" >
+        object_name,
+      </if>
+      <if test="opinionMoney != null" >
+        opinion_money,
+      </if>
+      <if test="insOmpanyMoney != null" >
+        ins_ompany_money,
+      </if>
+      <if test="driverMoney != null" >
+        driver_money,
+      </if>
+        <if test="commerMoney != null" >
+            commer_money,
+        </if>
+        <if test="compulMoney != null" >
+            compul_money,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="closedReportId != null" >
+        #{closedReportId,jdbcType=BIGINT},
+      </if>
+      <if test="objectName != null" >
+        #{objectName,jdbcType=VARCHAR},
+      </if>
+      <if test="opinionMoney != null" >
+        #{opinionMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="insOmpanyMoney != null" >
+        #{insOmpanyMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="driverMoney != null" >
+        #{driverMoney,jdbcType=DOUBLE},
+      </if>
+        <if test="commerMoney != null" >
+            #{commerMoney,jdbcType=DOUBLE},
+        </if>
+        <if test="compulMoney != null" >
+            #{compulMoney,jdbcType=DOUBLE},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseClosedObjReport" >
+    update case_closed_obj_report
+    <set >
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="closedReportId != null" >
+        closed_report_id = #{closedReportId,jdbcType=BIGINT},
+      </if>
+      <if test="objectName != null" >
+        object_name = #{objectName,jdbcType=VARCHAR},
+      </if>
+      <if test="opinionMoney != null" >
+        opinion_money = #{opinionMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="insOmpanyMoney != null" >
+        ins_ompany_money = #{insOmpanyMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="driverMoney != null" >
+        driver_money = #{driverMoney,jdbcType=DOUBLE},
+      </if>
+        <if test="commerMoney != null" >
+            commer_money = #{commerMoney,jdbcType=DOUBLE},
+        </if>
+        <if test="compulMoney != null" >
+            compul_money = #{compulMoney,jdbcType=DOUBLE},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseClosedObjReport" >
+    update case_closed_obj_report
+    set case_id = #{caseId,jdbcType=BIGINT},
+      case_no = #{caseNo,jdbcType=VARCHAR},
+      closed_report_id = #{closedReportId,jdbcType=BIGINT},
+      object_name = #{objectName,jdbcType=VARCHAR},
+      opinion_money = #{opinionMoney,jdbcType=DOUBLE},
+      ins_ompany_money = #{insOmpanyMoney,jdbcType=DOUBLE},
+      driver_money = #{driverMoney,jdbcType=DOUBLE},
+      commer_money = #{commerMoney,jdbcType=DOUBLE},
+      compul_money = #{compulMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="queryByCaseId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select * from case_closed_obj_report where case_id = #{caseId,jdbcType=BIGINT} order by id asc
+    </select>
+
+    <select id="selectByCaseIdOrProjectName" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from case_closed_obj_report
+        where case_id = #{caseId,jdbcType=BIGINT} and object_name = #{objectName,jdbcType=VARCHAR} order by id asc limit 1
+    </select>
+</mapper>

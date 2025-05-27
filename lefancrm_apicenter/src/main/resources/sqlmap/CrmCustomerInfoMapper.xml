@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CrmCustomerInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CrmCustomerInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="INTEGER" />
+        <result column="age" property="age" jdbcType="INTEGER" />
+        <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="city_id" property="cityId" jdbcType="INTEGER" />
+        <result column="district" property="district" jdbcType="VARCHAR" />
+        <result column="district_id" property="districtId" jdbcType="INTEGER" />
+        <result column="family_address" property="familyAddress" jdbcType="VARCHAR" />
+        <result column="households" property="households" jdbcType="INTEGER" />
+        <result column="job_company" property="jobCompany" jdbcType="VARCHAR" />
+        <result column="income" property="income" jdbcType="DOUBLE" />
+        <result column="dependants" property="dependants" jdbcType="INTEGER" />
+        <result column="link_user" property="linkUser" jdbcType="VARCHAR" />
+        <result column="link_tel" property="linkTel" jdbcType="VARCHAR" />
+        <result column="data_rate" property="dataRate" jdbcType="DOUBLE" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="cc_id" property="ccId" jdbcType="BIGINT" />
+        <result column="cc_name" property="ccName" jdbcType="VARCHAR" />
+        <result column="org_id" property="orgId" jdbcType="BIGINT" />
+        <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+        <result column="total" property="total" jdbcType="DOUBLE"/>
+        <result column="is_intention" property="isIntention" jdbcType="INTEGER"/>
+        <result column="case_progress" property="caseProgress" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="CrmCustomerFollowsDto" type="com.lefancrm.apicenter.dto.CrmCustomerFollowsDto" >
+        <result column="cc_id" property="ccId" jdbcType="BIGINT" />
+        <result column="cc_name" property="ccName" jdbcType="VARCHAR" />
+        <result column="org_id" property="orgId" jdbcType="BIGINT" />
+        <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+        <result column="data_rate" property="dataRate" jdbcType="DOUBLE" />
+        <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+        <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+        <result column="follow_state" property="followState" jdbcType="INTEGER" />
+        <result column="follow_type" property="followType" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, user_name, sex, age, user_phone, province, province_id, city, city_id, district,
+        district_id, family_address, households, job_company, income, dependants, link_user,
+        link_tel, data_rate, create_time, update_time, cc_id, cc_name, org_id, org_name
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from crm_customer_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from crm_customer_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.CrmCustomerInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into crm_customer_info (user_name, sex, age,
+        user_phone, province, province_id,
+        city, city_id, district,
+        district_id, family_address, households,
+        job_company, income, dependants,
+        link_user, link_tel, data_rate,
+        create_time, update_time, cc_id,
+        cc_name, org_id, org_name
+        )
+        values (#{userName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{age,jdbcType=INTEGER},
+        #{userPhone,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{provinceId,jdbcType=INTEGER},
+        #{city,jdbcType=VARCHAR}, #{cityId,jdbcType=INTEGER}, #{district,jdbcType=VARCHAR},
+        #{districtId,jdbcType=INTEGER}, #{familyAddress,jdbcType=VARCHAR}, #{households,jdbcType=INTEGER},
+        #{jobCompany,jdbcType=VARCHAR}, #{income,jdbcType=DOUBLE}, #{dependants,jdbcType=INTEGER},
+        #{linkUser,jdbcType=VARCHAR}, #{linkTel,jdbcType=VARCHAR}, #{dataRate,jdbcType=DOUBLE},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{ccId,jdbcType=BIGINT},
+        #{ccName,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CrmCustomerInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into crm_customer_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userName != null" >
+                user_name,
+            </if>
+            <if test="sex != null" >
+                sex,
+            </if>
+            <if test="age != null" >
+                age,
+            </if>
+            <if test="userPhone != null" >
+                user_phone,
+            </if>
+            <if test="province != null" >
+                province,
+            </if>
+            <if test="provinceId != null" >
+                province_id,
+            </if>
+            <if test="city != null" >
+                city,
+            </if>
+            <if test="cityId != null" >
+                city_id,
+            </if>
+            <if test="district != null" >
+                district,
+            </if>
+            <if test="districtId != null" >
+                district_id,
+            </if>
+            <if test="familyAddress != null" >
+                family_address,
+            </if>
+            <if test="households != null" >
+                households,
+            </if>
+            <if test="jobCompany != null" >
+                job_company,
+            </if>
+            <if test="income != null" >
+                income,
+            </if>
+            <if test="dependants != null" >
+                dependants,
+            </if>
+            <if test="linkUser != null" >
+                link_user,
+            </if>
+            <if test="linkTel != null" >
+                link_tel,
+            </if>
+            <if test="dataRate != null" >
+                data_rate,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="ccId != null" >
+                cc_id,
+            </if>
+            <if test="ccName != null" >
+                cc_name,
+            </if>
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="orgName != null" >
+                org_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userName != null" >
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null" >
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="userPhone != null" >
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="city != null" >
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null" >
+                #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="district != null" >
+                #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="districtId != null" >
+                #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="familyAddress != null" >
+                #{familyAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="households != null" >
+                #{households,jdbcType=INTEGER},
+            </if>
+            <if test="jobCompany != null" >
+                #{jobCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="income != null" >
+                #{income,jdbcType=DOUBLE},
+            </if>
+            <if test="dependants != null" >
+                #{dependants,jdbcType=INTEGER},
+            </if>
+            <if test="linkUser != null" >
+                #{linkUser,jdbcType=VARCHAR},
+            </if>
+            <if test="linkTel != null" >
+                #{linkTel,jdbcType=VARCHAR},
+            </if>
+            <if test="dataRate != null" >
+                #{dataRate,jdbcType=DOUBLE},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ccId != null" >
+                #{ccId,jdbcType=BIGINT},
+            </if>
+            <if test="ccName != null" >
+                #{ccName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CrmCustomerInfo" >
+        update crm_customer_info
+        <set >
+            <if test="userName != null" >
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null" >
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="userPhone != null" >
+                user_phone = #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                province_id = #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="city != null" >
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null" >
+                city_id = #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="district != null" >
+                district = #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="districtId != null" >
+                district_id = #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="familyAddress != null" >
+                family_address = #{familyAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="households != null" >
+                households = #{households,jdbcType=INTEGER},
+            </if>
+            <if test="jobCompany != null" >
+                job_company = #{jobCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="income != null" >
+                income = #{income,jdbcType=DOUBLE},
+            </if>
+            <if test="dependants != null" >
+                dependants = #{dependants,jdbcType=INTEGER},
+            </if>
+            <if test="linkUser != null" >
+                link_user = #{linkUser,jdbcType=VARCHAR},
+            </if>
+            <if test="linkTel != null" >
+                link_tel = #{linkTel,jdbcType=VARCHAR},
+            </if>
+            <if test="dataRate != null" >
+                data_rate = #{dataRate,jdbcType=DOUBLE},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ccId != null" >
+                cc_id = #{ccId,jdbcType=BIGINT},
+            </if>
+            <if test="ccName != null" >
+                cc_name = #{ccName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CrmCustomerInfo" >
+        update crm_customer_info
+        set user_name = #{userName,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=INTEGER},
+        age = #{age,jdbcType=INTEGER},
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+        province = #{province,jdbcType=VARCHAR},
+        province_id = #{provinceId,jdbcType=INTEGER},
+        city = #{city,jdbcType=VARCHAR},
+        city_id = #{cityId,jdbcType=INTEGER},
+        district = #{district,jdbcType=VARCHAR},
+        district_id = #{districtId,jdbcType=INTEGER},
+        family_address = #{familyAddress,jdbcType=VARCHAR},
+        households = #{households,jdbcType=INTEGER},
+        job_company = #{jobCompany,jdbcType=VARCHAR},
+        income = #{income,jdbcType=DOUBLE},
+        dependants = #{dependants,jdbcType=INTEGER},
+        link_user = #{linkUser,jdbcType=VARCHAR},
+        link_tel = #{linkTel,jdbcType=VARCHAR},
+        data_rate = #{dataRate,jdbcType=DOUBLE},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        cc_id = #{ccId,jdbcType=BIGINT},
+        cc_name = #{ccName,jdbcType=VARCHAR},
+        org_id = #{orgId,jdbcType=BIGINT},
+        org_name = #{orgName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectCustomerByOrgIdOrCcId" resultMap="BaseResultMap" parameterType="map">
+        select IFNULL(cci.data_rate,0) + IFNULL(caseInfo.data_rate,0) + IFNULL(cii.data_rate,0) + IFNULL(cai.data_rate,0) total , caseInfo.is_intention isIntention,caseInfo.case_progress caseProgress ,cci.*
+        from crm_customer_info cci,
+        crm_case_info caseInfo,
+        crm_injury_info cii,
+        crm_accident_info cai
+        where
+        1=1
+        AND cci.id=caseInfo.customer_id
+        AND cci.id = cii.customer_id
+        AND cci.id = cai.customer_id
+        <if test="orgId !=null">
+            and cci.org_id = #{orgId,jdbcType=BIGINT}
+        </if>
+        <if test="ccId != null">
+            and cci.cc_id = #{ccId,jdbcType=BIGINT}
+        </if>
+        <if test="userName!=null">
+            and cci.user_name = #{userName,jdbcType=VARCHAR}
+        </if>
+        <if test="isIntention !=null">
+            and caseInfo.is_intention = #{isIntention}
+        </if>
+        <if test="caseProgress !=null">
+            and caseInfo.case_progress = #{caseProgress}
+        </if>
+        <if test="sort==null">
+            ORDER BY cci.create_time DESC
+        </if>
+        <if test="sort==0">
+            ORDER BY cci.create_time DESC
+        </if>
+        <if test="sort ==1">
+            ORDER BY cci.user_name DESC
+        </if>
+         LIMIT #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="selectCustomerByOrgIdOrCcIdCount" resultType="int" parameterType="map">
+        select count(cci.id)
+        from crm_customer_info cci,
+        crm_case_info caseInfo,
+        crm_injury_info cii,
+        crm_accident_info cai
+        where
+        1=1
+        AND cci.id=caseInfo.customer_id
+        AND cci.id = cii.customer_id
+        AND cci.id = cai.customer_id
+        <if test="orgId !=null">
+            and cci.org_id = #{orgId,jdbcType=BIGINT}
+        </if>
+        <if test="ccId != null">
+            and cci.cc_id = #{ccId,jdbcType=BIGINT}
+        </if>
+        <if test="userName!=null">
+            and cci.user_name = #{userName,jdbcType=VARCHAR}
+        </if>
+        <if test="isIntention !=null">
+            and caseInfo.is_intention = #{isIntention}
+        </if>
+        <if test="caseProgress !=null">
+            and caseInfo.case_progress = #{caseProgress}
+        </if>
+        <if test="sort==null">
+            ORDER BY cci.create_time DESC
+        </if>
+        <if test="sort==0">
+            ORDER BY cci.create_time DESC
+        </if>
+        <if test="sort ==1">
+            ORDER BY cci.user_name DESC
+        </if>
+    </select>
+
+    <select id="selectCustomerByOrgIds" resultMap="BaseResultMap" parameterType="map">
+        select IFNULL(cci.data_rate,0) + IFNULL(caseInfo.data_rate,0) + IFNULL(cii.data_rate,0) + IFNULL(cai.data_rate,0) total , caseInfo.is_intention isIntention,caseInfo.case_progress caseProgress ,cci.*
+        from crm_customer_info cci,
+        crm_case_info caseInfo,
+        crm_injury_info cii,
+        crm_accident_info cai
+        WHERE
+        cci.id=caseInfo.customer_id
+        AND cci.id = cii.customer_id
+        AND cci.id = cai.customer_id
+        AND find_in_set(cci.org_id,SUBSTR((select getOrgList(#{orgId,jdbcType=BIGINT})) FROM 3 FOR 10000))
+        <if test="sort==null">
+            ORDER BY cci.create_time DESC
+        </if>
+        <if test="sort==0">
+            ORDER BY cci.create_time DESC
+        </if>
+        <if test="sort ==1">
+            ORDER BY cci.user_name DESC
+        </if>
+        LIMIT #{pageIndex} , #{pageSize}
+    </select>
+    <select id="selectCustomerByOrgIdsCount" resultType="int" parameterType="map">
+        select count(cci.id)
+        from crm_customer_info cci,
+        crm_case_info caseInfo,
+        crm_injury_info cii,
+        crm_accident_info cai
+        WHERE
+        cci.id=caseInfo.customer_id
+        AND cci.id = cii.customer_id
+        AND cci.id = cai.customer_id
+        AND find_in_set(cci.org_id,SUBSTR((select getOrgList(#{orgId,jdbcType=BIGINT})) FROM 3 FOR 10000))
+        <if test="sort==null">
+            ORDER BY cci.create_time DESC
+        </if>
+        <if test="sort==0">
+            ORDER BY cci.create_time DESC
+        </if>
+        <if test="sort ==1">
+            ORDER BY cci.user_name DESC
+        </if>
+    </select>
+
+    <select id="selectCrmCustomerInfoByCcid" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from crm_customer_info where  cc_id = #{userId,jdbcType=BIGINT}
+    </select>
+    <select id="listForFollowStatus" parameterType="java.util.Map" resultMap="CrmCustomerFollowsDto">
+         SELECT
+        crm_customer_follows.customer_name,
+        crm_customer_follows.follow_state,
+        crm_customer_follows.follow_type,
+        crm_customer_info.user_phone,
+        (IFNULL(crm_customer_info.data_rate,0) + IFNULL(crm_case_info.data_rate,0) + IFNULL(crm_accident_info.data_rate,0) + IFNULL(crm_injury_info.data_rate,0)) as data_rate,
+        crm_customer_info.cc_id,
+        crm_customer_info.cc_name,
+        crm_customer_info.org_id,
+        crm_customer_info.org_name
+        FROM
+        crm_customer_info,
+				crm_case_info,
+				crm_injury_info,
+				crm_accident_info,
+				crm_customer_follows
+        WHERE
+        crm_customer_info.cc_id = #{ccId} AND
+        crm_customer_follows.follow_state IN (
+        ${followState}) AND
+                crm_customer_follows.next_follow_time =  #{nowDate}
+        AND 	crm_customer_info.id = crm_case_info.customer_id
+        AND crm_customer_info.id = crm_injury_info.customer_id
+        AND crm_customer_info.id = crm_accident_info.customer_id
+        and crm_customer_info.id = crm_customer_follows.customer_id
+        ORDER BY crm_customer_follows.create_time DESC
+    </select>
+    <select id="listForFollowOverTime" parameterType="java.util.Map"  resultMap="CrmCustomerFollowsDto">
+          SELECT
+        crm_customer_follows.customer_name,
+        crm_customer_follows.follow_state,
+        crm_customer_follows.follow_type,
+        crm_customer_info.user_phone,
+        (IFNULL(crm_customer_info.data_rate,0) + IFNULL(crm_case_info.data_rate,0) + IFNULL(crm_accident_info.data_rate,0) + IFNULL(crm_injury_info.data_rate,0)) as data_rate,
+        crm_customer_info.cc_id,
+        crm_customer_info.cc_name,
+        crm_customer_info.org_id,
+        crm_customer_info.org_name
+        FROM
+        crm_customer_info,
+				crm_case_info,
+				crm_injury_info,
+				crm_accident_info,
+				crm_customer_follows
+        WHERE
+        crm_customer_info.cc_id = #{ccId} AND
+        crm_customer_follows.follow_state IN (
+        ${followState}) AND
+                crm_customer_follows.next_follow_time &lt; #{nowDate}
+        AND 	crm_customer_info.id = crm_case_info.customer_id
+        AND crm_customer_info.id = crm_injury_info.customer_id
+        AND crm_customer_info.id = crm_accident_info.customer_id
+        and crm_customer_info.id = crm_customer_follows.customer_id
+        ORDER BY crm_customer_follows.create_time DESC
+    </select>
+    <select id="listForAlreadyOrGiveupFollowStatus" parameterType="java.util.Map"  resultMap="CrmCustomerFollowsDto">
+         SELECT
+        crm_customer_follows.customer_name,
+        crm_customer_follows.follow_state,
+        crm_customer_follows.follow_type,
+        crm_customer_info.user_phone,
+        (IFNULL(crm_customer_info.data_rate,0) + IFNULL(crm_case_info.data_rate,0) + IFNULL(crm_accident_info.data_rate,0) + IFNULL(crm_injury_info.data_rate,0)) as data_rate,
+        crm_customer_info.cc_id,
+        crm_customer_info.cc_name,
+        crm_customer_info.org_id,
+        crm_customer_info.org_name
+        FROM
+        crm_customer_info,
+				crm_case_info,
+				crm_injury_info,
+				crm_accident_info,
+				crm_customer_follows
+        WHERE
+        crm_customer_info.cc_id = #{ccId} AND
+        crm_customer_follows.follow_state =${followState}
+        AND 	crm_customer_info.id = crm_case_info.customer_id
+        AND crm_customer_info.id = crm_injury_info.customer_id
+        AND crm_customer_info.id = crm_accident_info.customer_id
+        and crm_customer_info.id = crm_customer_follows.customer_id
+        ORDER BY crm_customer_follows.create_time DESC
+    </select>
+
+    <select id="queryAllOrgInfo" resultType="map">
+    SELECT id,org_name orgName FROM org_info WHERE state=2 and delete_flag=0 AND org_type=1
+    </select>
+    <select id="queryUserInfoByCc" resultType="map">
+        SELECT
+        ui.user_id userId,ui.user_name userName
+        FROM
+        user_info ui,
+        org_info oi,
+        bus_user_role bur
+        WHERE
+        ui.org_id = oi.id
+        AND ui.user_id = bur.user_id
+        AND oi.state = 2
+        AND oi.delete_flag = 0
+        AND oi.org_type = 1
+        AND FIND_IN_SET(bur.role_id,'2, 17, 19, 20')
+        GROUP BY ui.user_id
+    </select>
+    <select id="queryOrgIdAndOrgNameByOrgId" resultType="map" parameterType="long">
+        SELECT id,org_name orgName FROM org_info WHERE FIND_IN_SET(id,SUBSTR((select getOrgList(#{orgId})) FROM 3 FOR 10000))
+    </select>
+    <select id="queryUserIdAndUserNameByOrgIds" resultType="map" parameterType="long">
+        SELECT
+        ui.user_id userId,
+        ui.user_name userName
+        FROM
+        user_info ui,
+        bus_user_role bur
+        WHERE
+        ui.user_id = bur.user_id
+        AND FIND_IN_SET(
+        bur.role_id,
+        '2, 17, 19, 20'
+        )
+        AND FIND_IN_SET(
+        ui.org_id,
+        SUBSTR(
+        (SELECT getOrgList(#{orgId}))
+        FROM
+        3 FOR 10000
+        )
+        ) GROUP BY ui.user_id
+    </select>
+    <select id="queryUserIdAndUserNameByOrgId" resultType="map" parameterType="long">
+        SELECT
+        ui.user_id userId,
+        ui.user_name userName
+        FROM
+        user_info ui,
+        bus_user_role bur
+        WHERE
+        ui.user_id = bur.user_id
+        AND FIND_IN_SET(
+        bur.role_id,
+        '2, 17, 19, 20'
+        )
+        AND org_id = #{orgId}
+        GROUP BY
+        ui.user_id
+    </select>
+
+    <select id="backendList" parameterType="map" resultType="com.lefancrm.apicenter.dto.CciListDto">
+        SELECT * FROM(
+        SELECT
+        cci.id,
+        cci.user_name userName,
+        caseInfo.is_intention isIntention,
+        caseInfo.case_progress caseProgress,
+        caseInfo.case_source caseSource,
+        ccf.follow_time followTime,
+        ccf.next_follow_time nextFollowTime,
+        cci.cc_name ccName,
+        cci.org_name orgName,
+        cci.update_time updateTime,
+        ccf.follow_desc followDesc,
+        cci.family_address familyAddress,
+        cci.user_phone userPhone
+        FROM
+        crm_customer_info cci LEFT JOIN
+        crm_case_info caseInfo ON cci.id=caseInfo.customer_id LEFT JOIN
+        crm_customer_follows ccf ON cci.id=ccf.customer_id
+        WHERE
+        1=1
+        <if test="caseProgress != null">
+        AND caseInfo.case_progress = #{caseProgress}
+        </if>
+        <if test="caseSource != null">
+        AND caseInfo.case_source = #{caseSource}
+        </if>
+        <if test="orgId !=null">
+        AND cci.org_id=#{orgId}
+        </if>
+        <if test="ccId != null">
+        AND cci.cc_id=#{ccId}
+        </if>
+        ORDER BY ccf.create_time DESC
+        ) a
+        GROUP BY a.id LIMIT #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="backendListCount" parameterType="map" resultType="int">
+        SELECT
+        count(1)
+        FROM
+        crm_customer_info cci LEFT JOIN
+        crm_case_info caseInfo ON cci.id=caseInfo.customer_id
+        WHERE
+        1=1
+        <if test="caseProgress != null">
+            AND caseInfo.case_progress = #{caseProgress}
+        </if>
+        <if test="caseSource != null">
+            AND caseInfo.case_source = #{caseSource}
+        </if>
+        <if test="orgId !=null">
+            AND cci.org_id=#{orgId}
+        </if>
+        <if test="ccId != null">
+            AND cci.cc_id=#{ccId}
+        </if>
+    </select>
+    
+    <select id="selectAreaByAreaName" parameterType="map" resultType="long">
+        SELECT area_id FROM common_area WHERE area_name=#{areaName} AND area_type=#{areaType}
+    </select>
+
+</mapper>

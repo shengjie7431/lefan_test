@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CasePersonalCwInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CasePersonalCwInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="org_id" property="orgId" jdbcType="BIGINT" />
+        <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+        <result column="case_entry_time" property="caseEntryTime" jdbcType="TIMESTAMP" />
+        <result column="sign_time" property="signTime" jdbcType="TIMESTAMP" />
+        <result column="salesman_id" property="salesmanId" jdbcType="BIGINT" />
+        <result column="salesman_name" property="salesmanName" jdbcType="VARCHAR" />
+        <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+        <result column="case_state" property="caseState" jdbcType="VARCHAR" />
+        <result column="gradation_state" property="gradationState" jdbcType="VARCHAR" />
+        <result column="client_name" property="clientName" jdbcType="VARCHAR" />
+        <result column="contract_summary" property="contractSummary" jdbcType="VARCHAR" />
+        <result column="estimate_service_money" property="estimateServiceMoney" jdbcType="DOUBLE" />
+        <result column="check_service_money" property="checkServiceMoney" jdbcType="DOUBLE" />
+        <result column="re_basic_money" property="reBasicMoney" jdbcType="DOUBLE" />
+        <result column="re_tail_money" property="reTailMoney" jdbcType="DOUBLE" />
+        <result column="re_interest_money" property="reInterestMoney" jdbcType="DOUBLE" />
+        <result column="re_other_money" property="reOtherMoney" jdbcType="DOUBLE" />
+        <result column="re_total_money" property="reTotalMoney" jdbcType="DOUBLE" />
+        <result column="basic_money" property="basicMoney" jdbcType="DOUBLE" />
+        <result column="basic_money_time" property="basicMoneyTime" jdbcType="TIMESTAMP" />
+        <result column="other_cost_money" property="otherCostMoney" jdbcType="DOUBLE" />
+        <result column="return_money" property="returnMoney" jdbcType="DOUBLE" />
+        <result column="return_money_time" property="returnMoneyTime" jdbcType="TIMESTAMP" />
+        <result column="return_total_money" property="returnTotalMoney" jdbcType="DOUBLE" />
+        <result column="total_service_money" property="totalServiceMoney" jdbcType="DOUBLE" />
+        <result column="billing_code" property="billingCode" jdbcType="VARCHAR" />
+        <result column="billing_money" property="billingMoney" jdbcType="DOUBLE" />
+        <result column="billing_time" property="billingTime" jdbcType="TIMESTAMP" />
+        <result column="billing_total_money" property="billingTotalMoney" jdbcType="DOUBLE" />
+        <result column="is_loan" property="isLoan" jdbcType="INTEGER" />
+        <result column="loan_money" property="loanMoney" jdbcType="DOUBLE" />
+        <result column="loan_company" property="loanCompany" jdbcType="VARCHAR" />
+        <result column="loan_time" property="loanTime" jdbcType="TIMESTAMP" />
+        <result column="real_loan_money" property="realLoanMoney" jdbcType="DOUBLE" />
+        <result column="insurance_money" property="insuranceMoney" jdbcType="DOUBLE" />
+        <result column="interest_money" property="interestMoney" jdbcType="DOUBLE" />
+        <result column="injured_money" property="injuredMoney" jdbcType="DOUBLE" />
+        <result column="real_interest_money" property="realInterestMoney" jdbcType="DOUBLE" />
+        <result column="claim_name" property="claimName" jdbcType="VARCHAR" />
+        <result column="claim_time" property="claimTime" jdbcType="TIMESTAMP" />
+        <result column="is_closed" property="isClosed" jdbcType="INTEGER" />
+        <result column="closed_time" property="closedTime" jdbcType="TIMESTAMP" />
+        <result column="is_commission" property="isCommission" jdbcType="INTEGER" />
+        <result column="commission_money" property="commissionMoney" jdbcType="DOUBLE" />
+        <result column="commission_time" property="commissionTime" jdbcType="TIMESTAMP" />
+        <result column="litigation_money" property="litigationMoney" jdbcType="DOUBLE" />
+        <result column="litigation_time" property="litigationTime" jdbcType="TIMESTAMP" />
+        <result column="maintain_money" property="maintainMoney" jdbcType="DOUBLE" />
+        <result column="maintain_time" property="maintainTime" jdbcType="TIMESTAMP" />
+        <result column="other_cost_time" property="otherCostTime" jdbcType="TIMESTAMP" />
+        <result column="re_loan_money" property="reLoanMoney" jdbcType="DOUBLE" />
+        <result column="re_loan_time" property="reLoanTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, org_id, org_name, case_entry_time, sign_time, salesman_id, salesman_name, case_no,
+        case_state, gradation_state, client_name, contract_summary, estimate_service_money,
+        check_service_money, re_basic_money, re_tail_money, re_interest_money, re_other_money,
+        re_total_money, basic_money, basic_money_time, other_cost_money, return_money, return_money_time,
+        return_total_money, total_service_money, billing_code, billing_money, billing_time,
+        billing_total_money, is_loan, loan_money, loan_company, loan_time, real_loan_money,
+        insurance_money, interest_money, injured_money, real_interest_money, claim_name,
+        claim_time, is_closed, closed_time, is_commission, commission_money, commission_time,
+        litigation_money, litigation_time, maintain_money, maintain_time, other_cost_time,
+        re_loan_money, re_loan_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from case_personal_cw_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from case_personal_cw_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.CasePersonalCwInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_personal_cw_info (org_id, org_name, case_entry_time,
+        sign_time, salesman_id, salesman_name,
+        case_no, case_state, gradation_state,
+        client_name, contract_summary, estimate_service_money,
+        check_service_money, re_basic_money, re_tail_money,
+        re_interest_money, re_other_money, re_total_money,
+        basic_money, basic_money_time, other_cost_money,
+        return_money, return_money_time, return_total_money,
+        total_service_money, billing_code, billing_money,
+        billing_time, billing_total_money, is_loan,
+        loan_money, loan_company, loan_time,
+        real_loan_money, insurance_money, interest_money,
+        injured_money, real_interest_money, claim_name,
+        claim_time, is_closed, closed_time,
+        is_commission, commission_money, commission_time,
+        litigation_money, litigation_time, maintain_money,
+        maintain_time, other_cost_time, re_loan_money,
+        re_loan_time)
+        values (#{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, #{caseEntryTime,jdbcType=TIMESTAMP},
+        #{signTime,jdbcType=TIMESTAMP}, #{salesmanId,jdbcType=BIGINT}, #{salesmanName,jdbcType=VARCHAR},
+        #{caseNo,jdbcType=VARCHAR}, #{caseState,jdbcType=VARCHAR}, #{gradationState,jdbcType=VARCHAR},
+        #{clientName,jdbcType=VARCHAR}, #{contractSummary,jdbcType=VARCHAR}, #{estimateServiceMoney,jdbcType=DOUBLE},
+        #{checkServiceMoney,jdbcType=DOUBLE}, #{reBasicMoney,jdbcType=DOUBLE}, #{reTailMoney,jdbcType=DOUBLE},
+        #{reInterestMoney,jdbcType=DOUBLE}, #{reOtherMoney,jdbcType=DOUBLE}, #{reTotalMoney,jdbcType=DOUBLE},
+        #{basicMoney,jdbcType=DOUBLE}, #{basicMoneyTime,jdbcType=TIMESTAMP}, #{otherCostMoney,jdbcType=DOUBLE},
+        #{returnMoney,jdbcType=DOUBLE}, #{returnMoneyTime,jdbcType=TIMESTAMP}, #{returnTotalMoney,jdbcType=DOUBLE},
+        #{totalServiceMoney,jdbcType=DOUBLE}, #{billingCode,jdbcType=VARCHAR}, #{billingMoney,jdbcType=DOUBLE},
+        #{billingTime,jdbcType=TIMESTAMP}, #{billingTotalMoney,jdbcType=DOUBLE}, #{isLoan,jdbcType=INTEGER},
+        #{loanMoney,jdbcType=DOUBLE}, #{loanCompany,jdbcType=VARCHAR}, #{loanTime,jdbcType=TIMESTAMP},
+        #{realLoanMoney,jdbcType=DOUBLE}, #{insuranceMoney,jdbcType=DOUBLE}, #{interestMoney,jdbcType=DOUBLE},
+        #{injuredMoney,jdbcType=DOUBLE}, #{realInterestMoney,jdbcType=DOUBLE}, #{claimName,jdbcType=VARCHAR},
+        #{claimTime,jdbcType=TIMESTAMP}, #{isClosed,jdbcType=INTEGER}, #{closedTime,jdbcType=TIMESTAMP},
+        #{isCommission,jdbcType=INTEGER}, #{commissionMoney,jdbcType=DOUBLE}, #{commissionTime,jdbcType=TIMESTAMP},
+        #{litigationMoney,jdbcType=DOUBLE}, #{litigationTime,jdbcType=TIMESTAMP}, #{maintainMoney,jdbcType=DOUBLE},
+        #{maintainTime,jdbcType=TIMESTAMP}, #{otherCostTime,jdbcType=TIMESTAMP}, #{reLoanMoney,jdbcType=DOUBLE},
+        #{reLoanTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CasePersonalCwInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_personal_cw_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="orgName != null" >
+                org_name,
+            </if>
+            <if test="caseEntryTime != null" >
+                case_entry_time,
+            </if>
+            <if test="signTime != null" >
+                sign_time,
+            </if>
+            <if test="salesmanId != null" >
+                salesman_id,
+            </if>
+            <if test="salesmanName != null" >
+                salesman_name,
+            </if>
+            <if test="caseNo != null" >
+                case_no,
+            </if>
+            <if test="caseState != null" >
+                case_state,
+            </if>
+            <if test="gradationState != null" >
+                gradation_state,
+            </if>
+            <if test="clientName != null" >
+                client_name,
+            </if>
+            <if test="contractSummary != null" >
+                contract_summary,
+            </if>
+            <if test="estimateServiceMoney != null" >
+                estimate_service_money,
+            </if>
+            <if test="checkServiceMoney != null" >
+                check_service_money,
+            </if>
+            <if test="reBasicMoney != null" >
+                re_basic_money,
+            </if>
+            <if test="reTailMoney != null" >
+                re_tail_money,
+            </if>
+            <if test="reInterestMoney != null" >
+                re_interest_money,
+            </if>
+            <if test="reOtherMoney != null" >
+                re_other_money,
+            </if>
+            <if test="reTotalMoney != null" >
+                re_total_money,
+            </if>
+            <if test="basicMoney != null" >
+                basic_money,
+            </if>
+            <if test="basicMoneyTime != null" >
+                basic_money_time,
+            </if>
+            <if test="otherCostMoney != null" >
+                other_cost_money,
+            </if>
+            <if test="returnMoney != null" >
+                return_money,
+            </if>
+            <if test="returnMoneyTime != null" >
+                return_money_time,
+            </if>
+            <if test="returnTotalMoney != null" >
+                return_total_money,
+            </if>
+            <if test="totalServiceMoney != null" >
+                total_service_money,
+            </if>
+            <if test="billingCode != null" >
+                billing_code,
+            </if>
+            <if test="billingMoney != null" >
+                billing_money,
+            </if>
+            <if test="billingTime != null" >
+                billing_time,
+            </if>
+            <if test="billingTotalMoney != null" >
+                billing_total_money,
+            </if>
+            <if test="isLoan != null" >
+                is_loan,
+            </if>
+            <if test="loanMoney != null" >
+                loan_money,
+            </if>
+            <if test="loanCompany != null" >
+                loan_company,
+            </if>
+            <if test="loanTime != null" >
+                loan_time,
+            </if>
+            <if test="realLoanMoney != null" >
+                real_loan_money,
+            </if>
+            <if test="insuranceMoney != null" >
+                insurance_money,
+            </if>
+            <if test="interestMoney != null" >
+                interest_money,
+            </if>
+            <if test="injuredMoney != null" >
+                injured_money,
+            </if>
+            <if test="realInterestMoney != null" >
+                real_interest_money,
+            </if>
+            <if test="claimName != null" >
+                claim_name,
+            </if>
+            <if test="claimTime != null" >
+                claim_time,
+            </if>
+            <if test="isClosed != null" >
+                is_closed,
+            </if>
+            <if test="closedTime != null" >
+                closed_time,
+            </if>
+            <if test="isCommission != null" >
+                is_commission,
+            </if>
+            <if test="commissionMoney != null" >
+                commission_money,
+            </if>
+            <if test="commissionTime != null" >
+                commission_time,
+            </if>
+            <if test="litigationMoney != null" >
+                litigation_money,
+            </if>
+            <if test="litigationTime != null" >
+                litigation_time,
+            </if>
+            <if test="maintainMoney != null" >
+                maintain_money,
+            </if>
+            <if test="maintainTime != null" >
+                maintain_time,
+            </if>
+            <if test="otherCostTime != null" >
+                other_cost_time,
+            </if>
+            <if test="reLoanMoney != null" >
+                re_loan_money,
+            </if>
+            <if test="reLoanTime != null" >
+                re_loan_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="orgId != null" >
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="caseEntryTime != null" >
+                #{caseEntryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="signTime != null" >
+                #{signTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="salesmanId != null" >
+                #{salesmanId,jdbcType=BIGINT},
+            </if>
+            <if test="salesmanName != null" >
+                #{salesmanName,jdbcType=VARCHAR},
+            </if>
+            <if test="caseNo != null" >
+                #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="caseState != null" >
+                #{caseState,jdbcType=VARCHAR},
+            </if>
+            <if test="gradationState != null" >
+                #{gradationState,jdbcType=VARCHAR},
+            </if>
+            <if test="clientName != null" >
+                #{clientName,jdbcType=VARCHAR},
+            </if>
+            <if test="contractSummary != null" >
+                #{contractSummary,jdbcType=VARCHAR},
+            </if>
+            <if test="estimateServiceMoney != null" >
+                #{estimateServiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="checkServiceMoney != null" >
+                #{checkServiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="reBasicMoney != null" >
+                #{reBasicMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="reTailMoney != null" >
+                #{reTailMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="reInterestMoney != null" >
+                #{reInterestMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="reOtherMoney != null" >
+                #{reOtherMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="reTotalMoney != null" >
+                #{reTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="basicMoney != null" >
+                #{basicMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="basicMoneyTime != null" >
+                #{basicMoneyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="otherCostMoney != null" >
+                #{otherCostMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="returnMoney != null" >
+                #{returnMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="returnMoneyTime != null" >
+                #{returnMoneyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="returnTotalMoney != null" >
+                #{returnTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="totalServiceMoney != null" >
+                #{totalServiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="billingCode != null" >
+                #{billingCode,jdbcType=VARCHAR},
+            </if>
+            <if test="billingMoney != null" >
+                #{billingMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="billingTime != null" >
+                #{billingTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="billingTotalMoney != null" >
+                #{billingTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="isLoan != null" >
+                #{isLoan,jdbcType=INTEGER},
+            </if>
+            <if test="loanMoney != null" >
+                #{loanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="loanCompany != null" >
+                #{loanCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="loanTime != null" >
+                #{loanTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="realLoanMoney != null" >
+                #{realLoanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="insuranceMoney != null" >
+                #{insuranceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="interestMoney != null" >
+                #{interestMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="injuredMoney != null" >
+                #{injuredMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="realInterestMoney != null" >
+                #{realInterestMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="claimName != null" >
+                #{claimName,jdbcType=VARCHAR},
+            </if>
+            <if test="claimTime != null" >
+                #{claimTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isClosed != null" >
+                #{isClosed,jdbcType=INTEGER},
+            </if>
+            <if test="closedTime != null" >
+                #{closedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isCommission != null" >
+                #{isCommission,jdbcType=INTEGER},
+            </if>
+            <if test="commissionMoney != null" >
+                #{commissionMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="commissionTime != null" >
+                #{commissionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="litigationMoney != null" >
+                #{litigationMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="litigationTime != null" >
+                #{litigationTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="maintainMoney != null" >
+                #{maintainMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="maintainTime != null" >
+                #{maintainTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="otherCostTime != null" >
+                #{otherCostTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reLoanMoney != null" >
+                #{reLoanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="reLoanTime != null" >
+                #{reLoanTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CasePersonalCwInfo" >
+        update case_personal_cw_info
+        <set >
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="caseEntryTime != null" >
+                case_entry_time = #{caseEntryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="signTime != null" >
+                sign_time = #{signTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="salesmanId != null" >
+                salesman_id = #{salesmanId,jdbcType=BIGINT},
+            </if>
+            <if test="salesmanName != null" >
+                salesman_name = #{salesmanName,jdbcType=VARCHAR},
+            </if>
+            <if test="caseNo != null" >
+                case_no = #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="caseState != null" >
+                case_state = #{caseState,jdbcType=VARCHAR},
+            </if>
+            <if test="gradationState != null" >
+                gradation_state = #{gradationState,jdbcType=VARCHAR},
+            </if>
+            <if test="clientName != null" >
+                client_name = #{clientName,jdbcType=VARCHAR},
+            </if>
+            <if test="contractSummary != null" >
+                contract_summary = #{contractSummary,jdbcType=VARCHAR},
+            </if>
+            <if test="estimateServiceMoney != null" >
+                estimate_service_money = #{estimateServiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="checkServiceMoney != null" >
+                check_service_money = #{checkServiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="reBasicMoney != null" >
+                re_basic_money = #{reBasicMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="reTailMoney != null" >
+                re_tail_money = #{reTailMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="reInterestMoney != null" >
+                re_interest_money = #{reInterestMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="reOtherMoney != null" >
+                re_other_money = #{reOtherMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="reTotalMoney != null" >
+                re_total_money = #{reTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="basicMoney != null" >
+                basic_money = #{basicMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="basicMoneyTime != null" >
+                basic_money_time = #{basicMoneyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="otherCostMoney != null" >
+                other_cost_money = #{otherCostMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="returnMoney != null" >
+                return_money = #{returnMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="returnMoneyTime != null" >
+                return_money_time = #{returnMoneyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="returnTotalMoney != null" >
+                return_total_money = #{returnTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="totalServiceMoney != null" >
+                total_service_money = #{totalServiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="billingCode != null" >
+                billing_code = #{billingCode,jdbcType=VARCHAR},
+            </if>
+            <if test="billingMoney != null" >
+                billing_money = #{billingMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="billingTime != null" >
+                billing_time = #{billingTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="billingTotalMoney != null" >
+                billing_total_money = #{billingTotalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="isLoan != null" >
+                is_loan = #{isLoan,jdbcType=INTEGER},
+            </if>
+            <if test="loanMoney != null" >
+                loan_money = #{loanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="loanCompany != null" >
+                loan_company = #{loanCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="loanTime != null" >
+                loan_time = #{loanTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="realLoanMoney != null" >
+                real_loan_money = #{realLoanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="insuranceMoney != null" >
+                insurance_money = #{insuranceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="interestMoney != null" >
+                interest_money = #{interestMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="injuredMoney != null" >
+                injured_money = #{injuredMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="realInterestMoney != null" >
+                real_interest_money = #{realInterestMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="claimName != null" >
+                claim_name = #{claimName,jdbcType=VARCHAR},
+            </if>
+            <if test="claimTime != null" >
+                claim_time = #{claimTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isClosed != null" >
+                is_closed = #{isClosed,jdbcType=INTEGER},
+            </if>
+            <if test="closedTime != null" >
+                closed_time = #{closedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isCommission != null" >
+                is_commission = #{isCommission,jdbcType=INTEGER},
+            </if>
+            <if test="commissionMoney != null" >
+                commission_money = #{commissionMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="commissionTime != null" >
+                commission_time = #{commissionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="litigationMoney != null" >
+                litigation_money = #{litigationMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="litigationTime != null" >
+                litigation_time = #{litigationTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="maintainMoney != null" >
+                maintain_money = #{maintainMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="maintainTime != null" >
+                maintain_time = #{maintainTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="otherCostTime != null" >
+                other_cost_time = #{otherCostTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reLoanMoney != null" >
+                re_loan_money = #{reLoanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="reLoanTime != null" >
+                re_loan_time = #{reLoanTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CasePersonalCwInfo" >
+        update case_personal_cw_info
+        set org_id = #{orgId,jdbcType=BIGINT},
+        org_name = #{orgName,jdbcType=VARCHAR},
+        case_entry_time = #{caseEntryTime,jdbcType=TIMESTAMP},
+        sign_time = #{signTime,jdbcType=TIMESTAMP},
+        salesman_id = #{salesmanId,jdbcType=BIGINT},
+        salesman_name = #{salesmanName,jdbcType=VARCHAR},
+        case_no = #{caseNo,jdbcType=VARCHAR},
+        case_state = #{caseState,jdbcType=VARCHAR},
+        gradation_state = #{gradationState,jdbcType=VARCHAR},
+        client_name = #{clientName,jdbcType=VARCHAR},
+        contract_summary = #{contractSummary,jdbcType=VARCHAR},
+        estimate_service_money = #{estimateServiceMoney,jdbcType=DOUBLE},
+        check_service_money = #{checkServiceMoney,jdbcType=DOUBLE},
+        re_basic_money = #{reBasicMoney,jdbcType=DOUBLE},
+        re_tail_money = #{reTailMoney,jdbcType=DOUBLE},
+        re_interest_money = #{reInterestMoney,jdbcType=DOUBLE},
+        re_other_money = #{reOtherMoney,jdbcType=DOUBLE},
+        re_total_money = #{reTotalMoney,jdbcType=DOUBLE},
+        basic_money = #{basicMoney,jdbcType=DOUBLE},
+        basic_money_time = #{basicMoneyTime,jdbcType=TIMESTAMP},
+        other_cost_money = #{otherCostMoney,jdbcType=DOUBLE},
+        return_money = #{returnMoney,jdbcType=DOUBLE},
+        return_money_time = #{returnMoneyTime,jdbcType=TIMESTAMP},
+        return_total_money = #{returnTotalMoney,jdbcType=DOUBLE},
+        total_service_money = #{totalServiceMoney,jdbcType=DOUBLE},
+        billing_code = #{billingCode,jdbcType=VARCHAR},
+        billing_money = #{billingMoney,jdbcType=DOUBLE},
+        billing_time = #{billingTime,jdbcType=TIMESTAMP},
+        billing_total_money = #{billingTotalMoney,jdbcType=DOUBLE},
+        is_loan = #{isLoan,jdbcType=INTEGER},
+        loan_money = #{loanMoney,jdbcType=DOUBLE},
+        loan_company = #{loanCompany,jdbcType=VARCHAR},
+        loan_time = #{loanTime,jdbcType=TIMESTAMP},
+        real_loan_money = #{realLoanMoney,jdbcType=DOUBLE},
+        insurance_money = #{insuranceMoney,jdbcType=DOUBLE},
+        interest_money = #{interestMoney,jdbcType=DOUBLE},
+        injured_money = #{injuredMoney,jdbcType=DOUBLE},
+        real_interest_money = #{realInterestMoney,jdbcType=DOUBLE},
+        claim_name = #{claimName,jdbcType=VARCHAR},
+        claim_time = #{claimTime,jdbcType=TIMESTAMP},
+        is_closed = #{isClosed,jdbcType=INTEGER},
+        closed_time = #{closedTime,jdbcType=TIMESTAMP},
+        is_commission = #{isCommission,jdbcType=INTEGER},
+        commission_money = #{commissionMoney,jdbcType=DOUBLE},
+        commission_time = #{commissionTime,jdbcType=TIMESTAMP},
+        litigation_money = #{litigationMoney,jdbcType=DOUBLE},
+        litigation_time = #{litigationTime,jdbcType=TIMESTAMP},
+        maintain_money = #{maintainMoney,jdbcType=DOUBLE},
+        maintain_time = #{maintainTime,jdbcType=TIMESTAMP},
+        other_cost_time = #{otherCostTime,jdbcType=TIMESTAMP},
+        re_loan_money = #{reLoanMoney,jdbcType=DOUBLE},
+        re_loan_time = #{reLoanTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!--<select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map" >-->
+        <!--select-->
+        <!--<include refid="Base_Column_List" />-->
+        <!--from case_personal_cw_info b-->
+        <!--<where>-->
+            <!--<if test="orgId != null" >-->
+                <!--and org_id = #{orgId,jdbcType=BIGINT}-->
+            <!--</if>-->
+            <!--<if test="caseNo != null" >-->
+                <!--and case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')-->
+            <!--</if>-->
+            <!--<if test="salesmanName != null" >-->
+                <!--and salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')-->
+            <!--</if>-->
+            <!--<if test="clientName != null" >-->
+                <!--and client_name like concat('%',#{clientName,jdbcType=VARCHAR},'%')-->
+            <!--</if>-->
+            <!--<if test="gradationState != null" >-->
+                <!--and gradation_state = #{gradationState,jdbcType=VARCHAR}-->
+            <!--</if>-->
+        <!--</where>-->
+        <!--<if test="export != 1">-->
+            <!--order by id desc limit #{pageIndex} , #{pageSize}-->
+        <!--</if>-->
+    <!--</select>-->
+
+    <select id="selectList" resultType="com.lefancrm.apicenter.dto.CasePersonalCwInfoDto" parameterType="java.util.Map" >
+        select
+        b.id as id, b.org_id as orgId, b.org_name as orgName, b.case_entry_time as caseEntryTime,
+        b.sign_time as signTime, b.salesman_id as salesmanId, b.salesman_name as salesmanName,
+        b.case_no as caseNo, b.case_state as caseState, b.gradation_state as gradationState,
+        b.client_name as clientName, b.contract_summary as contractSummary, b.estimate_service_money as estimateServiceMoney,
+        b.check_service_money as checkServiceMoney, b.re_basic_money as reBasicMoney, b.re_tail_money as reTailMoney,
+        b.re_interest_money as reInterestMoney, b.re_other_money as reOtherMoney, b.re_total_money as reTotalMoney,
+        b.basic_money as basicMoney, b.basic_money_time as basicMoneyTime, b.other_cost_money as otherCostMoney,
+        b.return_money as returnMoney, b.return_money_time as returnMoneyTime, b.return_total_money as returnTotalMoney,
+        b.total_service_money as totalServiceMoney, b.billing_code as billingCode, b.billing_money as billingMoney,
+        b.billing_time as billingTime, b.billing_total_money as billingTotalMoney, b.is_loan as isLoan,
+        b.loan_money as loanMoney, b.loan_company as loanCompany, b.loan_time as loanTime,
+        b.real_loan_money as realLoanMoney, b.insurance_money as insuranceMoney, b.interest_money as interestMoney,
+        b.injured_money as injuredMoney, b.real_interest_money as realInterestMoney, b.claim_name as claimName,
+        b.claim_time as claimTime, b.is_closed as isClosed, b.closed_time as closedTime,
+        b.is_commission as isCommission, b.commission_money as commissionMoney, b.commission_time as commissionTime,
+        b.litigation_money as litigationMoney, b.litigation_time as litigationTime, b.maintain_money as maintainMoney,
+        b.maintain_time as maintainTime, b.other_cost_time as otherCostTime, b.re_loan_money as reLoanMoney,
+        b.re_loan_time  as reLoanTime,
+        (IFNULL(b.litigation_money,0.00) + IFNULL(b.commission_money,0.00) + IFNULL(b.maintain_money,0.00) + IFNULL(b.real_interest_money,0.00) + IFNULL(b.other_cost_money,0.00)) as costTotle
+        from case_personal_cw_info b
+        <where>
+            <if test="orgId != null" >
+                and b.org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="caseNo != null" >
+                and b.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and b.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="clientName != null" >
+                and b.client_name like concat('%',#{clientName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="gradationState != null" >
+                and b.gradation_state = #{gradationState,jdbcType=VARCHAR}
+            </if>
+        </where>
+        <if test="export != 1">
+            order by b.id desc limit #{pageIndex} , #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectCountList" resultType="int" parameterType="java.util.Map" >
+        select count(1) from case_personal_cw_info b
+        <where>
+            <if test="orgId != null" >
+                and b.org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="caseNo != null" >
+                and b.case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and b.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="clientName != null" >
+                and b.client_name like concat('%',#{clientName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="gradationState != null" >
+                and b.gradation_state = #{gradationState,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectById" resultType="com.lefancrm.apicenter.dto.CasePersonalCwInfoDto" parameterType="java.lang.Long" >
+        select
+        b.id as id, b.org_id as orgId, b.org_name as orgName, b.case_entry_time as caseEntryTime,
+        b.sign_time as signTime, b.salesman_id as salesmanId, b.salesman_name as salesmanName,
+        b.case_no as caseNo, b.case_state as caseState, b.gradation_state as gradationState,
+        b.client_name as clientName, b.contract_summary as contractSummary, b.estimate_service_money as estimateServiceMoney,
+        b.check_service_money as checkServiceMoney, b.re_basic_money as reBasicMoney, b.re_tail_money as reTailMoney,
+        b.re_interest_money as reInterestMoney, b.re_other_money as reOtherMoney, b.re_total_money as reTotalMoney,
+        b.basic_money as basicMoney, b.basic_money_time as basicMoneyTime, b.other_cost_money as otherCostMoney,
+        b.return_money as returnMoney, b.return_money_time as returnMoneyTime, b.return_total_money as returnTotalMoney,
+        b.total_service_money as totalServiceMoney, b.billing_code as billingCode, b.billing_money as billingMoney,
+        b.billing_time as billingTime, b.billing_total_money as billingTotalMoney, b.is_loan as isLoan,
+        b.loan_money as loanMoney, b.loan_company as loanCompany, b.loan_time as loanTime,
+        b.real_loan_money as realLoanMoney, b.insurance_money as insuranceMoney, b.interest_money as interestMoney,
+        b.injured_money as injuredMoney, b.real_interest_money as realInterestMoney, b.claim_name as claimName,
+        b.claim_time as claimTime, b.is_closed as isClosed, b.closed_time as closedTime,
+        b.is_commission as isCommission, b.commission_money as commissionMoney, b.commission_time as commissionTime,
+        b.litigation_money as litigationMoney, b.litigation_time as litigationTime, b.maintain_money as maintainMoney,
+        b.maintain_time as maintainTime, b.other_cost_time as otherCostTime, b.re_loan_money as reLoanMoney,
+        b.re_loan_time  as reLoanTime,
+        (IFNULL(b.litigation_money,0.00) + IFNULL(b.commission_money,0.00) + IFNULL(b.maintain_money,0.00) + IFNULL(b.real_interest_money,0.00) + IFNULL(b.other_cost_money,0.00)) as costTotle
+        from case_personal_cw_info b
+        where b.id = #{id,jdbcType=BIGINT}
+    </select>
+</mapper>

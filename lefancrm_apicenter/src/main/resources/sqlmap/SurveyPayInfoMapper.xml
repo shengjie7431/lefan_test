@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyPayInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.dto.SurveyPayInfoDTO" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pay_no" property="payNo" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="source_support_type" property="sourceSupportType" jdbcType="INTEGER" />
+    <result column="app_pay_money" property="appPayMoney" jdbcType="DOUBLE" />
+    <result column="real_pay_money" property="realPayMoney" jdbcType="DOUBLE" />
+    <result column="app_start_date" property="appStartDate" jdbcType="TIMESTAMP" />
+    <result column="app_end_date" property="appEndDate" jdbcType="TIMESTAMP" />
+    <result column="app_type" property="appType" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="pay_state" property="payState" jdbcType="INTEGER" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="pay_user_id" property="payUserId" jdbcType="BIGINT" />
+    <result column="pay_user_name" property="payUserName" jdbcType="VARCHAR" />
+    <result column="pay_img_url" property="payImgUrl" jdbcType="VARCHAR" />
+    <result column="pay_state_ok_time" property="payStateOkTime" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
+    <result column="opinion" property="opinion" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="re_create_by" property="reCreateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" />
+    <result column="pay_survey_user_id" property="paySurveyUserId" jdbcType="BIGINT" />
+    <result column="pay_survey_user_name" property="paySurveyUserName" jdbcType="VARCHAR" />
+    <result column="pay_key_id" property="payKeyId" jdbcType="BIGINT" />
+      <result column="user_id" property="userId" jdbcType="BIGINT" />
+      <result column="real_name" property="realName" jdbcType="VARCHAR" />
+      <result column="staff_personnel_id" property="staffPersonnelId" jdbcType="BIGINT" />
+      <result column="social_security_company_id" property="socialSecurityCompanyId" jdbcType="BIGINT" />
+      <result column="social_security_company" property="socialSecurityCompany" jdbcType="VARCHAR" />
+      <result column="organ_id" property="organId" jdbcType="BIGINT" />
+      <result column="organ" property="organ" jdbcType="VARCHAR" />
+      <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+      <result column="department" property="department" jdbcType="VARCHAR" />
+      <result column="team_id" property="teamId" jdbcType="BIGINT" />
+      <result column="team" property="team" jdbcType="VARCHAR" />
+      <result column="pay_rate" property="payRate" jdbcType="DOUBLE" />
+      <result column="pay_tax" property="payTax" jdbcType="DOUBLE" />
+      <result column="pay_tax_rate" property="payTaxRate" jdbcType="DOUBLE" />
+      <result column="job_post_id" property="jobPostId" jdbcType="BIGINT" />
+      <result column="job_post" property="jobPost" jdbcType="VARCHAR" />
+      <result column="short_url" property="shortUrl" jdbcType="VARCHAR" />
+      <result column="real_income_money" property="realIncomeMoney" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, pay_no, org_id, org_name, source_support_type, app_pay_money, real_pay_money,
+    app_start_date, app_end_date, app_type, remark, pay_state, pay_time, pay_user_id,
+    pay_user_name, pay_img_url, pay_state_ok_time, create_user_id, opinion, create_time,
+    create_by, update_time, update_by, delete_flag,pay_type,pay_survey_user_id,pay_survey_user_name,pay_key_id,
+    user_id, real_name, staff_personnel_id, social_security_company_id, social_security_company,
+    organ_id, organ, department_id, department, team_id, team, pay_rate, pay_tax, pay_tax_rate,
+    job_post_id, job_post, short_url,real_income_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from survey_pay_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_pay_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyPayInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_pay_info (pay_no, org_id, org_name,
+    source_support_type, app_pay_money, real_pay_money,
+    app_start_date, app_end_date, app_type,
+    remark, pay_state, pay_time,
+    pay_user_id, pay_user_name, pay_img_url,
+    pay_state_ok_time, create_user_id, opinion,
+    create_time, create_by, update_time,
+    update_by, delete_flag,pay_type,pay_survey_user_id,pay_survey_user_name,pay_key_id,
+    user_id, real_name, staff_personnel_id, social_security_company_id, social_security_company,
+    organ_id, organ, department_id, department, team_id, team, pay_rate, pay_tax, pay_tax_rate,
+      job_post_id, job_post, short_url,real_income_money)
+    values (#{payNo,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR},
+    #{sourceSupportType,jdbcType=INTEGER}, #{appPayMoney,jdbcType=DOUBLE}, #{realPayMoney,jdbcType=DOUBLE},
+    #{appStartDate,jdbcType=TIMESTAMP}, #{appEndDate,jdbcType=TIMESTAMP}, #{appType,jdbcType=INTEGER},
+    #{remark,jdbcType=VARCHAR}, #{payState,jdbcType=INTEGER}, #{payTime,jdbcType=TIMESTAMP},
+    #{payUserId,jdbcType=BIGINT}, #{payUserName,jdbcType=VARCHAR}, #{payImgUrl,jdbcType=VARCHAR},
+    #{payStateOkTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{opinion,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+    #{updateBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, #{payType,jdbcType=INTEGER},
+    #{paySurveyUserId,jdbcType=BIGINT}, #{paySurveyUserName,jdbcType=VARCHAR}, #{payKeyId,jdbcType=BIGINT},
+      #{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{staffPersonnelId,jdbcType=BIGINT},
+      #{socialSecurityCompanyId,jdbcType=BIGINT}, #{socialSecurityCompany,jdbcType=VARCHAR},
+      #{organId,jdbcType=BIGINT}, #{organ,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT},
+      #{department,jdbcType=VARCHAR}, #{teamId,jdbcType=BIGINT}, #{team,jdbcType=VARCHAR},
+      #{payRate,jdbcType=DOUBLE}, #{payTax,jdbcType=DOUBLE}, #{payTaxRate,jdbcType=DOUBLE},
+      #{jobPostId,jdbcType=BIGINT}, #{jobPost,jdbcType=VARCHAR}, #{shortUrl,jdbcType=VARCHAR}, #{realIncomeMoney,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyPayInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_pay_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payNo != null" >
+        pay_no,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="sourceSupportType != null" >
+        source_support_type,
+      </if>
+      <if test="appPayMoney != null" >
+        app_pay_money,
+      </if>
+      <if test="realPayMoney != null" >
+        real_pay_money,
+      </if>
+      <if test="appStartDate != null" >
+        app_start_date,
+      </if>
+      <if test="appEndDate != null" >
+        app_end_date,
+      </if>
+      <if test="appType != null" >
+        app_type,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="payState != null" >
+        pay_state,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="payUserId != null" >
+        pay_user_id,
+      </if>
+      <if test="payUserName != null" >
+        pay_user_name,
+      </if>
+      <if test="payImgUrl != null" >
+        pay_img_url,
+      </if>
+      <if test="payStateOkTime != null" >
+        pay_state_ok_time,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="opinion != null" >
+        opinion,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="paySurveyUserId != null" >
+        pay_survey_user_id,
+      </if>
+      <if test="paySurveyUserName != null and paySurveyUserName != ''" >
+        pay_survey_user_name,
+      </if>
+      <if test="payKeyId != null" >
+        pay_key_id,
+      </if>
+        <if test="userId != null" >
+            user_id,
+        </if>
+        <if test="realName != null" >
+            real_name,
+        </if>
+        <if test="staffPersonnelId != null" >
+            staff_personnel_id,
+        </if>
+        <if test="socialSecurityCompanyId != null" >
+            social_security_company_id,
+        </if>
+        <if test="socialSecurityCompany != null" >
+            social_security_company,
+        </if>
+        <if test="organId != null" >
+            organ_id,
+        </if>
+        <if test="organ != null" >
+            organ,
+        </if>
+        <if test="departmentId != null" >
+            department_id,
+        </if>
+        <if test="department != null" >
+            department,
+        </if>
+        <if test="teamId != null" >
+            team_id,
+        </if>
+        <if test="team != null" >
+            team,
+        </if>
+        <if test="payRate != null" >
+            pay_rate,
+        </if>
+        <if test="payTax != null" >
+            pay_tax,
+        </if>
+        <if test="payTaxRate != null" >
+            pay_tax_rate,
+        </if>
+        <if test="jobPostId != null" >
+            job_post_id,
+        </if>
+        <if test="jobPost != null" >
+            job_post,
+        </if>
+        <if test="shortUrl != null" >
+            short_url,
+        </if>
+      <if test="realIncomeMoney != null" >
+        real_income_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payNo != null" >
+        #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceSupportType != null" >
+        #{sourceSupportType,jdbcType=INTEGER},
+      </if>
+      <if test="appPayMoney != null" >
+        #{appPayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="realPayMoney != null" >
+        #{realPayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="appStartDate != null" >
+        #{appStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appEndDate != null" >
+        #{appEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appType != null" >
+        #{appType,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="payState != null" >
+        #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payUserId != null" >
+        #{payUserId,jdbcType=BIGINT},
+      </if>
+      <if test="payUserName != null" >
+        #{payUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="payImgUrl != null" >
+        #{payImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="payStateOkTime != null" >
+        #{payStateOkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="opinion != null" >
+        #{opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="paySurveyUserId != null" >
+        #{paySurveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="paySurveyUserName != null and paySurveyUserName != ''" >
+        #{paySurveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="payKeyId != null" >
+        #{payKeyId,jdbcType=BIGINT},
+      </if>
+        <if test="userId != null" >
+            #{userId,jdbcType=BIGINT},
+        </if>
+        <if test="realName != null" >
+            #{realName,jdbcType=VARCHAR},
+        </if>
+        <if test="staffPersonnelId != null" >
+            #{staffPersonnelId,jdbcType=BIGINT},
+        </if>
+        <if test="socialSecurityCompanyId != null" >
+            #{socialSecurityCompanyId,jdbcType=BIGINT},
+        </if>
+        <if test="socialSecurityCompany != null" >
+            #{socialSecurityCompany,jdbcType=VARCHAR},
+        </if>
+        <if test="organId != null" >
+            #{organId,jdbcType=BIGINT},
+        </if>
+        <if test="organ != null" >
+            #{organ,jdbcType=VARCHAR},
+        </if>
+        <if test="departmentId != null" >
+            #{departmentId,jdbcType=BIGINT},
+        </if>
+        <if test="department != null" >
+            #{department,jdbcType=VARCHAR},
+        </if>
+        <if test="teamId != null" >
+            #{teamId,jdbcType=BIGINT},
+        </if>
+        <if test="team != null" >
+            #{team,jdbcType=VARCHAR},
+        </if>
+        <if test="payRate != null" >
+            #{payRate,jdbcType=DOUBLE},
+        </if>
+        <if test="payTax != null" >
+            #{payTax,jdbcType=DOUBLE},
+        </if>
+        <if test="payTaxRate != null" >
+            #{payTaxRate,jdbcType=DOUBLE},
+        </if>
+        <if test="jobPostId != null" >
+            #{jobPostId,jdbcType=BIGINT},
+        </if>
+        <if test="jobPost != null" >
+            #{jobPost,jdbcType=VARCHAR},
+        </if>
+        <if test="shortUrl != null" >
+            #{shortUrl,jdbcType=VARCHAR},
+        </if>
+      <if test="realIncomeMoney != null" >
+        #{realIncomeMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyPayInfo" >
+    update survey_pay_info
+    <set >
+      <if test="payNo != null" >
+        pay_no = #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceSupportType != null" >
+        source_support_type = #{sourceSupportType,jdbcType=INTEGER},
+      </if>
+      <if test="appPayMoney != null" >
+        app_pay_money = #{appPayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="realPayMoney != null" >
+        real_pay_money = #{realPayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="appStartDate != null" >
+        app_start_date = #{appStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appEndDate != null" >
+        app_end_date = #{appEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appType != null" >
+        app_type = #{appType,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="payState != null" >
+        pay_state = #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payUserId != null" >
+        pay_user_id = #{payUserId,jdbcType=BIGINT},
+      </if>
+      <if test="payUserName != null" >
+        pay_user_name = #{payUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="payImgUrl != null" >
+        pay_img_url = #{payImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="payStateOkTime != null" >
+        pay_state_ok_time = #{payStateOkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="opinion != null" >
+        opinion = #{opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+        <if test="payType != null" >
+            pay_type =#{payType,jdbcType=INTEGER},
+        </if>
+        <if test="paySurveyUserId != null" >
+            pay_survey_user_id = #{paySurveyUserId,jdbcType=BIGINT},
+        </if>
+        <if test="paySurveyUserName != null and paySurveyUserName != ''" >
+            pay_survey_user_name =#{paySurveyUserName,jdbcType=VARCHAR},
+        </if>
+        <if test="payKeyId != null" >
+            pay_key_id =#{payKeyId,jdbcType=BIGINT},
+        </if>
+        <if test="userId != null" >
+            user_id = #{userId,jdbcType=BIGINT},
+        </if>
+        <if test="realName != null" >
+            real_name = #{realName,jdbcType=VARCHAR},
+        </if>
+        <if test="staffPersonnelId != null" >
+            staff_personnel_id = #{staffPersonnelId,jdbcType=BIGINT},
+        </if>
+        <if test="socialSecurityCompanyId != null" >
+            social_security_company_id = #{socialSecurityCompanyId,jdbcType=BIGINT},
+        </if>
+        <if test="socialSecurityCompany != null" >
+            social_security_company = #{socialSecurityCompany,jdbcType=VARCHAR},
+        </if>
+        <if test="organId != null" >
+            organ_id = #{organId,jdbcType=BIGINT},
+        </if>
+        <if test="organ != null" >
+            organ = #{organ,jdbcType=VARCHAR},
+        </if>
+        <if test="departmentId != null" >
+            department_id = #{departmentId,jdbcType=BIGINT},
+        </if>
+        <if test="department != null" >
+            department = #{department,jdbcType=VARCHAR},
+        </if>
+        <if test="teamId != null" >
+            team_id = #{teamId,jdbcType=BIGINT},
+        </if>
+        <if test="team != null" >
+            team = #{team,jdbcType=VARCHAR},
+        </if>
+        <if test="payRate != null" >
+            pay_rate = #{payRate,jdbcType=DOUBLE},
+        </if>
+        <if test="payTax != null" >
+            pay_tax = #{payTax,jdbcType=DOUBLE},
+        </if>
+        <if test="payTaxRate != null" >
+            pay_tax_rate = #{payTaxRate,jdbcType=DOUBLE},
+        </if>
+        <if test="jobPostId != null" >
+            job_post_id = #{jobPostId,jdbcType=BIGINT},
+        </if>
+        <if test="jobPost != null" >
+            job_post = #{jobPost,jdbcType=VARCHAR},
+        </if>
+        <if test="shortUrl != null" >
+            short_url = #{shortUrl,jdbcType=VARCHAR},
+        </if>
+      <if test="realIncomeMoney != null" >
+        real_income_money = #{realIncomeMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyPayInfo" >
+    update survey_pay_info
+    set pay_no = #{payNo,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      source_support_type = #{sourceSupportType,jdbcType=INTEGER},
+      app_pay_money = #{appPayMoney,jdbcType=DOUBLE},
+      real_pay_money = #{realPayMoney,jdbcType=DOUBLE},
+      app_start_date = #{appStartDate,jdbcType=TIMESTAMP},
+      app_end_date = #{appEndDate,jdbcType=TIMESTAMP},
+      app_type = #{appType,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      pay_state = #{payState,jdbcType=INTEGER},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_user_id = #{payUserId,jdbcType=BIGINT},
+      pay_user_name = #{payUserName,jdbcType=VARCHAR},
+      pay_img_url = #{payImgUrl,jdbcType=VARCHAR},
+      pay_state_ok_time = #{payStateOkTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      opinion = #{opinion,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      pay_type =  #{payType,jdbcType=INTEGER},
+      pay_survey_user_id = #{paySurveyUserId,jdbcType=BIGINT},
+      pay_survey_user_name  =#{paySurveyUserName,jdbcType=VARCHAR},
+      pay_key_id = #{payKeyId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      real_name = #{realName,jdbcType=VARCHAR},
+      staff_personnel_id = #{staffPersonnelId,jdbcType=BIGINT},
+      social_security_company_id = #{socialSecurityCompanyId,jdbcType=BIGINT},
+      social_security_company = #{socialSecurityCompany,jdbcType=VARCHAR},
+      organ_id = #{organId,jdbcType=BIGINT},
+      organ = #{organ,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      department = #{department,jdbcType=VARCHAR},
+      team_id = #{teamId,jdbcType=BIGINT},
+      team = #{team,jdbcType=VARCHAR},
+      pay_rate = #{payRate,jdbcType=DOUBLE},
+      pay_tax = #{payTax,jdbcType=DOUBLE},
+      pay_tax_rate = #{payTaxRate,jdbcType=DOUBLE},
+      job_post_id = #{jobPostId,jdbcType=BIGINT},
+      job_post = #{jobPost,jdbcType=VARCHAR},
+      short_url = #{shortUrl,jdbcType=VARCHAR},
+      real_income_money = #{realIncomeMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateByKeyId">
+      update survey_pay_info set pay_state = #{payState} where pay_key_id = #{keyId} and pay_type = 2
+    </update>
+
+    <sql id="joins">
+
+  </sql>
+  <sql id="wheres">
+    <if test="payNo != null" >
+      and pay_no like CONCAT(CONCAT('%',#{payNo,jdbcType=VARCHAR}), '%')
+    </if>
+    <if test="orgId != null" >
+      and org_id = #{orgId,jdbcType=BIGINT}
+    </if>
+    <if test="surveyOrgIds != null" >
+      and find_in_set(org_id,#{surveyOrgIds,jdbcType=VARCHAR})
+    </if>
+    <if test="orgName != null" >
+      and org_name = #{orgName,jdbcType=VARCHAR}
+    </if>
+    <if test="sourceSupportType != null" >
+      and source_support_type = #{sourceSupportType,jdbcType=INTEGER}
+    </if>
+    <if test="sourceSupportTypes != null" >
+      and find_in_set(source_support_type,#{sourceSupportTypes,jdbcType=VARCHAR})
+    </if>
+    <if test="appPayMoney != null" >
+      and app_pay_money = #{appPayMoney,jdbcType=DOUBLE}
+    </if>
+    <if test="realPayMoney != null" >
+      and real_pay_money = #{realPayMoney,jdbcType=DOUBLE}
+    </if>
+    <if test="appStartDate != null" >
+      and app_start_date = #{appStartDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="appEndDate != null" >
+      and app_end_date = #{appEndDate,jdbcType=TIMESTAMP}
+    </if>
+    <if test="appType != null" >
+      and app_type = #{appType,jdbcType=INTEGER}
+    </if>
+    <if test="remark != null" >
+      and remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="payState != null" >
+      and FIND_IN_SET(pay_state,#{payState,jdbcType=INTEGER})
+    </if>
+    <if test="payStates != null" >
+      and find_in_set(pay_state,#{payStates,jdbcType=VARCHAR})
+    </if>
+    <if test="payTime != null" >
+      and pay_time = #{payTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="payUserId != null" >
+      and pay_user_id = #{payUserId,jdbcType=BIGINT}
+    </if>
+    <if test="payUserName != null" >
+      and pay_user_name = #{payUserName,jdbcType=VARCHAR}
+    </if>
+    <if test="payStateOkTime != null" >
+      and pay_state_ok_time = #{payStateOkTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createUserId != null" >
+      and create_user_id = #{createUserId,jdbcType=BIGINT}
+    </if>
+    <if test="createTime != null" >
+      and create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createBy != null" >
+      and create_by = #{createBy,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateBy != null" >
+      and update_by = #{updateBy,jdbcType=VARCHAR}
+    </if>
+    <if test="deleteFlag != null" >
+      and delete_flag = #{deleteFlag,jdbcType=INTEGER}
+    </if>
+    <if test="startCreateDate != null" >
+      and DATE_FORMAT(create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startCreateDate,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="endCreateDate != null" >
+      and DATE_FORMAT(create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endCreateDate,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="startPayTime != null" >
+      and DATE_FORMAT(pay_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startPayTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="endPayTime != null" >
+      and DATE_FORMAT(pay_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endPayTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="payType != null" >
+      and pay_type = #{payType,jdbcType=INTEGER}
+    </if>
+      <if test="companyIds != null" >
+          and find_in_set(social_security_company_id,#{companyIds,jdbcType=VARCHAR})
+      </if>
+      <if test="organIds != null" >
+          and find_in_set(organ_id,#{organIds,jdbcType=VARCHAR})
+      </if>
+      <if test="departmentIds != null" >
+          and find_in_set(department_id,#{departmentIds,jdbcType=VARCHAR})
+      </if>
+      <if test="teamIds != null" >
+          and find_in_set(team_id,#{teamIds,jdbcType=VARCHAR})
+      </if>
+      <if test="jobPostIds != null" >
+          and find_in_set(job_post_id,#{jobPostIds,jdbcType=VARCHAR})
+      </if>
+      <if test="payTypes != null" >
+          and find_in_set(pay_type,#{payTypes,jdbcType=VARCHAR})
+      </if>
+      <if test="realName != null" >
+          and real_name like CONCAT(CONCAT('%',#{realName,jdbcType=VARCHAR}), '%')
+      </if>
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_pay_info
+    <include refid="joins" />
+    where 1=1 and delete_flag = 0
+    <include refid="wheres" />
+    order by id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from survey_pay_info
+    <include refid="joins" />
+    where 1=1 and delete_flag = 0
+    <include refid="wheres" />
+  </select>
+  
+  <select id="selectByInfo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_pay_info
+    where 1=1 and delete_flag = 0 and org_id = #{orgId,jdbcType=BIGINT} and pay_state = 2 and (pay_type = 1 or pay_type is null) order by id desc limit 1
+  </select>
+  <select id="selectByPaySurveyUserId" resultMap="BaseResultMap">
+    SELECT
+    pinfo.*,re.create_by re_create_by
+    FROM
+    survey_pay_info pinfo
+    LEFT JOIN investigator_re_info reinfo ON pinfo.pay_key_id = reinfo.id
+    LEFT JOIN re_info re ON reinfo.re_id = re.id
+    WHERE pinfo.delete_flag = 0
+    AND pinfo.pay_survey_user_id =  #{surveyUserId,jdbcType=BIGINT}
+    AND pinfo.pay_state = 2
+    AND pinfo.pay_type = 2
+    ORDER BY
+    pinfo.id DESC
+    LIMIT 1
+  </select>
+
+
+  <select id="selectByPayKeyId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from survey_pay_info
+    where pay_key_id = #{payKeyId,jdbcType=BIGINT}
+  </select>
+
+    <select id="selectByShortUrl" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_pay_info
+        where short_url = #{shortUrl,jdbcType=VARCHAR} limit 1;
+    </select>
+
+  <select id="zcMoney" parameterType="java.util.Map" resultType="java.lang.Double">
+    select ifnull(sum(s.real_pay_money),0) money from survey_pay_info s where s.delete_flag = 0 and s.organ_id = #{staffOrgId}
+    <if test="startTime != null">
+      and date_format(s.create_time,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+    <if test="endTime != null">
+      and date_format(s.create_time,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+    </if>
+  </select>
+</mapper>

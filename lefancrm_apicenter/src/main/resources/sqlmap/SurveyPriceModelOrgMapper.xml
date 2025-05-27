@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyPriceModelOrgMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyPriceModelOrg" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="price_model_id" property="priceModelId" jdbcType="BIGINT" />
+    <result column="price_model_name" property="priceModelName" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, price_model_id, price_model_name, org_id, org_name, type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_price_model_org
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_price_model_org
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyPriceModelOrg" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_price_model_org (price_model_id, price_model_name, org_id, 
+      org_name, type)
+    values (#{priceModelId,jdbcType=BIGINT}, #{priceModelName,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, 
+      #{orgName,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyPriceModelOrg" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_price_model_org
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="priceModelId != null" >
+        price_model_id,
+      </if>
+      <if test="priceModelName != null" >
+        price_model_name,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="priceModelId != null" >
+        #{priceModelId,jdbcType=BIGINT},
+      </if>
+      <if test="priceModelName != null" >
+        #{priceModelName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyPriceModelOrg" >
+    update survey_price_model_org
+    <set >
+      <if test="priceModelId != null" >
+        price_model_id = #{priceModelId,jdbcType=BIGINT},
+      </if>
+      <if test="priceModelName != null" >
+        price_model_name = #{priceModelName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyPriceModelOrg" >
+    update survey_price_model_org
+    set price_model_id = #{priceModelId,jdbcType=BIGINT},
+      price_model_name = #{priceModelName,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="priceModelId != null" >
+            and price_model_id = #{priceModelId,jdbcType=BIGINT}
+        </if>
+        <if test="orgId != null" >
+            and org_id = #{orgId,jdbcType=BIGINT}
+        </if>
+        <if test="type != null" >
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_price_model_org
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_price_model_org
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectOneByInfo" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_price_model_org
+        where 1=1 and org_id = #{orgId,jdbcType=BIGINT} and type = #{type,jdbcType=INTEGER} limit 1;
+    </select>
+
+    <delete id="deleteByInfo" parameterType="map" >
+        delete from survey_price_model_org
+        where price_model_id = #{priceModelId,jdbcType=BIGINT} and type = #{type,jdbcType=INTEGER}
+    </delete>
+</mapper>

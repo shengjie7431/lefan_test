@@ -1,0 +1,1127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseCenterInfoExtend2Mapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseCenterInfoExtend2" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="case_id" property="caseId" jdbcType="BIGINT" />
+        <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="INTEGER" />
+        <result column="age" property="age" jdbcType="INTEGER" />
+        <result column="marital_status" property="maritalStatus" jdbcType="INTEGER" />
+        <result column="basic_finish_num" property="basicFinishNum" jdbcType="INTEGER" />
+        <result column="basic_total_num" property="basicTotalNum" jdbcType="INTEGER" />
+        <result column="domicile" property="domicile" jdbcType="VARCHAR" />
+        <result column="domicile_province_id" property="domicileProvinceId" jdbcType="BIGINT" />
+        <result column="domicile_province" property="domicileProvince" jdbcType="VARCHAR" />
+        <result column="domicile_city_id" property="domicileCityId" jdbcType="BIGINT" />
+        <result column="domicile_city" property="domicileCity" jdbcType="VARCHAR" />
+        <result column="domicile_district_id" property="domicileDistrictId" jdbcType="BIGINT" />
+        <result column="domicile_district" property="domicileDistrict" jdbcType="VARCHAR" />
+        <result column="domicile_address" property="domicileAddress" jdbcType="VARCHAR" />
+        <result column="domicile_finish_num" property="domicileFinishNum" jdbcType="INTEGER" />
+        <result column="domicile_total_num" property="domicileTotalNum" jdbcType="INTEGER" />
+        <result column="is_job_satisfy" property="isJobSatisfy" jdbcType="INTEGER" />
+        <result column="is_servant" property="isServant" jdbcType="INTEGER" />
+        <result column="labor_contract" property="laborContract" jdbcType="INTEGER" />
+        <result column="bank_info" property="bankInfo" jdbcType="INTEGER" />
+        <result column="tax_certificate" property="taxCertificate" jdbcType="INTEGER" />
+        <result column="work_certificate" property="workCertificate" jdbcType="INTEGER" />
+        <result column="wages" property="wages" jdbcType="DOUBLE" />
+        <result column="other_work_info" property="otherWorkInfo" jdbcType="VARCHAR" />
+        <result column="work_finish_num" property="workFinishNum" jdbcType="INTEGER" />
+        <result column="work_total_num" property="workTotalNum" jdbcType="INTEGER" />
+        <result column="habitation" property="habitation" jdbcType="VARCHAR" />
+        <result column="is_town_satisfy" property="isTownSatisfy" jdbcType="INTEGER" />
+        <result column="residence_permit" property="residencePermit" jdbcType="INTEGER" />
+        <result column="land_expropriation" property="landExpropriation" jdbcType="INTEGER" />
+        <result column="other_live" property="otherLive" jdbcType="VARCHAR" />
+        <result column="live_finish_num" property="liveFinishNum" jdbcType="INTEGER" />
+        <result column="live_total_num" property="liveTotalNum" jdbcType="INTEGER" />
+        <result column="accident_type" property="accidentType" jdbcType="INTEGER" />
+        <result column="is_motor_vehicle" property="isMotorVehicle" jdbcType="INTEGER" />
+        <result column="is_human_injury" property="isHumanInjury" jdbcType="INTEGER" />
+        <result column="is_vehicle_damage" property="isVehicleDamage" jdbcType="INTEGER" />
+        <result column="our_responsibilities" property="ourResponsibilities" jdbcType="INTEGER" />
+        <result column="our_transportation" property="ourTransportation" jdbcType="INTEGER" />
+        <result column="police_team" property="policeTeam" jdbcType="VARCHAR" />
+        <result column="other_accident_liability" property="otherAccidentLiability" jdbcType="VARCHAR" />
+        <result column="accident_finish_num" property="accidentFinishNum" jdbcType="INTEGER" />
+        <result column="accident_total_num" property="accidentTotalNum" jdbcType="INTEGER" />
+        <result column="accept_insurance" property="acceptInsurance" jdbcType="INTEGER" />
+        <result column="insurance_company_id" property="insuranceCompanyId" jdbcType="BIGINT" />
+        <result column="insurance_company" property="insuranceCompany" jdbcType="VARCHAR" />
+        <result column="insurance_company2_id" property="insuranceCompany2Id" jdbcType="BIGINT" />
+        <result column="insurance_company2" property="insuranceCompany2" jdbcType="VARCHAR" />
+        <result column="underwriting_place_id" property="underwritingPlaceId" jdbcType="BIGINT" />
+        <result column="underwriting_place" property="underwritingPlace" jdbcType="VARCHAR" />
+        <result column="underwriting_place2_id" property="underwritingPlace2Id" jdbcType="BIGINT" />
+        <result column="underwriting_place2" property="underwritingPlace2" jdbcType="VARCHAR" />
+        <result column="commercial_insurance" property="commercialInsurance" jdbcType="DOUBLE" />
+        <result column="excluding_deductible" property="excludingDeductible" jdbcType="INTEGER" />
+        <result column="underwriting_finish_num" property="underwritingFinishNum" jdbcType="INTEGER" />
+        <result column="underwriting_total_num" property="underwritingTotalNum" jdbcType="INTEGER" />
+        <result column="visiting_hospital" property="visitingHospital" jdbcType="VARCHAR" />
+        <result column="Injury_diagnosis" property="injuryDiagnosis" jdbcType="VARCHAR" />
+        <result column="is_agree_appraisal" property="isAgreeAppraisal" jdbcType="INTEGER" />
+        <result column="is_agree_litigation" property="isAgreeLitigation" jdbcType="INTEGER" />
+        <result column="customer_intention" property="customerIntention" jdbcType="VARCHAR" />
+        <result column="other_finish_num" property="otherFinishNum" jdbcType="INTEGER" />
+        <result column="other_total_num" property="otherTotalNum" jdbcType="INTEGER" />
+        <result column="total_num" property="totalNum" jdbcType="INTEGER" />
+        <result column="finish_num" property="finishNum" jdbcType="INTEGER" />
+        <result column="process_state" property="processState" jdbcType="INTEGER" />
+        <result column="user_promoted_name" property="userPromotedName" jdbcType="VARCHAR" />
+        <result column="user_promonted_phone" property="userPromontedPhone" jdbcType="VARCHAR" />
+        <result column="is_fined" property="isFined" jdbcType="INTEGER" />
+        <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+        <result column="work_unit" property="workUnit" jdbcType="VARCHAR" />
+        <result column="entry_time" property="entryTime" jdbcType="TIMESTAMP" />
+        <result column="pay_social_security" property="paySocialSecurity" jdbcType="INTEGER" />
+        <result column="unit_province" property="unitProvince" jdbcType="VARCHAR" />
+        <result column="unit_province_id" property="unitProvinceId" jdbcType="BIGINT" />
+        <result column="unit_city" property="unitCity" jdbcType="VARCHAR" />
+        <result column="unit_city_id" property="unitCityId" jdbcType="BIGINT" />
+        <result column="unit_district" property="unitDistrict" jdbcType="VARCHAR" />
+        <result column="unit_district_id" property="unitDistrictId" jdbcType="BIGINT" />
+        <result column="unit_address" property="unitAddress" jdbcType="VARCHAR" />
+        <result column="live_province" property="liveProvince" jdbcType="VARCHAR" />
+        <result column="live_province_id" property="liveProvinceId" jdbcType="BIGINT" />
+        <result column="live_city" property="liveCity" jdbcType="VARCHAR" />
+        <result column="live_city_id" property="liveCityId" jdbcType="BIGINT" />
+        <result column="live_district" property="liveDistrict" jdbcType="VARCHAR" />
+        <result column="live_district_id" property="liveDistrictId" jdbcType="BIGINT" />
+        <result column="live_address" property="liveAddress" jdbcType="VARCHAR" />
+        <result column="live_time" property="liveTime" jdbcType="VARCHAR" />
+        <result column="live_time_type" property="liveTimeType" jdbcType="INTEGER" />
+        <result column="responsible_party_pay_ratio" property="responsiblePartyPayRatio" jdbcType="DOUBLE" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, case_id, case_no, sex, age, marital_status, basic_finish_num, basic_total_num,
+        domicile, domicile_province_id, domicile_province, domicile_city_id, domicile_city,
+        domicile_district_id, domicile_district, domicile_address, domicile_finish_num, domicile_total_num,
+        is_job_satisfy, is_servant, labor_contract, bank_info, tax_certificate, work_certificate,
+        wages, other_work_info, work_finish_num, work_total_num, habitation, is_town_satisfy,
+        residence_permit, land_expropriation, other_live, live_finish_num, live_total_num,
+        accident_type, is_motor_vehicle, is_human_injury, is_vehicle_damage, our_responsibilities,
+        our_transportation, police_team, other_accident_liability, accident_finish_num, accident_total_num,
+        accept_insurance, insurance_company_id, insurance_company, insurance_company2_id,
+        insurance_company2, underwriting_place_id, underwriting_place, underwriting_place2_id,
+        underwriting_place2, commercial_insurance, excluding_deductible, underwriting_finish_num,
+        underwriting_total_num, visiting_hospital, Injury_diagnosis, is_agree_appraisal,
+        is_agree_litigation, customer_intention, other_finish_num, other_total_num, total_num,
+        finish_num, process_state, user_promoted_name, user_promonted_phone, is_fined, id_card,
+        work_unit, entry_time, pay_social_security, unit_province, unit_province_id, unit_city,
+        unit_city_id, unit_district, unit_district_id, unit_address, live_province, live_province_id,
+        live_city, live_city_id, live_district, live_district_id, live_address, live_time,live_time_type,
+        responsible_party_pay_ratio
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from case_center_info_extend2
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from case_center_info_extend2
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseCenterInfoExtend2" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_center_info_extend2 (case_id, case_no, sex,
+        age, marital_status, basic_finish_num,
+        basic_total_num, domicile, domicile_province_id,
+        domicile_province, domicile_city_id, domicile_city,
+        domicile_district_id, domicile_district, domicile_address,
+        domicile_finish_num, domicile_total_num, is_job_satisfy,
+        is_servant, labor_contract, bank_info,
+        tax_certificate, work_certificate, wages,
+        other_work_info, work_finish_num, work_total_num,
+        habitation, is_town_satisfy, residence_permit,
+        land_expropriation, other_live, live_finish_num,
+        live_total_num, accident_type, is_motor_vehicle,
+        is_human_injury, is_vehicle_damage, our_responsibilities,
+        our_transportation, police_team, other_accident_liability,
+        accident_finish_num, accident_total_num, accept_insurance,
+        insurance_company_id, insurance_company, insurance_company2_id,
+        insurance_company2, underwriting_place_id,
+        underwriting_place, underwriting_place2_id,
+        underwriting_place2, commercial_insurance,
+        excluding_deductible, underwriting_finish_num,
+        underwriting_total_num, visiting_hospital,
+        Injury_diagnosis, is_agree_appraisal, is_agree_litigation,
+        customer_intention, other_finish_num, other_total_num,
+        total_num, finish_num, process_state,
+        user_promoted_name, user_promonted_phone, is_fined,
+        id_card, work_unit, entry_time,
+        pay_social_security, unit_province, unit_province_id,
+        unit_city, unit_city_id, unit_district,
+        unit_district_id, unit_address, live_province,
+        live_province_id, live_city, live_city_id,
+        live_district, live_district_id, live_address,
+        live_time, live_time_type,responsible_party_pay_ratio)
+        values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER},
+        #{age,jdbcType=INTEGER}, #{maritalStatus,jdbcType=INTEGER}, #{basicFinishNum,jdbcType=INTEGER},
+        #{basicTotalNum,jdbcType=INTEGER}, #{domicile,jdbcType=VARCHAR}, #{domicileProvinceId,jdbcType=BIGINT},
+        #{domicileProvince,jdbcType=VARCHAR}, #{domicileCityId,jdbcType=BIGINT}, #{domicileCity,jdbcType=VARCHAR},
+        #{domicileDistrictId,jdbcType=BIGINT}, #{domicileDistrict,jdbcType=VARCHAR}, #{domicileAddress,jdbcType=VARCHAR},
+        #{domicileFinishNum,jdbcType=INTEGER}, #{domicileTotalNum,jdbcType=INTEGER}, #{isJobSatisfy,jdbcType=INTEGER},
+        #{isServant,jdbcType=INTEGER}, #{laborContract,jdbcType=INTEGER}, #{bankInfo,jdbcType=INTEGER},
+        #{taxCertificate,jdbcType=INTEGER}, #{workCertificate,jdbcType=INTEGER}, #{wages,jdbcType=DOUBLE},
+        #{otherWorkInfo,jdbcType=VARCHAR}, #{workFinishNum,jdbcType=INTEGER}, #{workTotalNum,jdbcType=INTEGER},
+        #{habitation,jdbcType=VARCHAR}, #{isTownSatisfy,jdbcType=INTEGER}, #{residencePermit,jdbcType=INTEGER},
+        #{landExpropriation,jdbcType=INTEGER}, #{otherLive,jdbcType=VARCHAR}, #{liveFinishNum,jdbcType=INTEGER},
+        #{liveTotalNum,jdbcType=INTEGER}, #{accidentType,jdbcType=INTEGER}, #{isMotorVehicle,jdbcType=INTEGER},
+        #{isHumanInjury,jdbcType=INTEGER}, #{isVehicleDamage,jdbcType=INTEGER}, #{ourResponsibilities,jdbcType=INTEGER},
+        #{ourTransportation,jdbcType=INTEGER}, #{policeTeam,jdbcType=VARCHAR}, #{otherAccidentLiability,jdbcType=VARCHAR},
+        #{accidentFinishNum,jdbcType=INTEGER}, #{accidentTotalNum,jdbcType=INTEGER}, #{acceptInsurance,jdbcType=INTEGER},
+        #{insuranceCompanyId,jdbcType=BIGINT}, #{insuranceCompany,jdbcType=VARCHAR}, #{insuranceCompany2Id,jdbcType=BIGINT},
+        #{insuranceCompany2,jdbcType=VARCHAR}, #{underwritingPlaceId,jdbcType=BIGINT},
+        #{underwritingPlace,jdbcType=VARCHAR}, #{underwritingPlace2Id,jdbcType=BIGINT},
+        #{underwritingPlace2,jdbcType=VARCHAR}, #{commercialInsurance,jdbcType=DOUBLE},
+        #{excludingDeductible,jdbcType=INTEGER}, #{underwritingFinishNum,jdbcType=INTEGER},
+        #{underwritingTotalNum,jdbcType=INTEGER}, #{visitingHospital,jdbcType=VARCHAR},
+        #{injuryDiagnosis,jdbcType=VARCHAR}, #{isAgreeAppraisal,jdbcType=INTEGER}, #{isAgreeLitigation,jdbcType=INTEGER},
+        #{customerIntention,jdbcType=VARCHAR}, #{otherFinishNum,jdbcType=INTEGER}, #{otherTotalNum,jdbcType=INTEGER},
+        #{totalNum,jdbcType=INTEGER}, #{finishNum,jdbcType=INTEGER}, #{processState,jdbcType=INTEGER},
+        #{userPromotedName,jdbcType=VARCHAR}, #{userPromontedPhone,jdbcType=VARCHAR}, #{isFined,jdbcType=INTEGER},
+        #{idCard,jdbcType=VARCHAR}, #{workUnit,jdbcType=VARCHAR}, #{entryTime,jdbcType=TIMESTAMP},
+        #{paySocialSecurity,jdbcType=INTEGER}, #{unitProvince,jdbcType=VARCHAR}, #{unitProvinceId,jdbcType=BIGINT},
+        #{unitCity,jdbcType=VARCHAR}, #{unitCityId,jdbcType=BIGINT}, #{unitDistrict,jdbcType=VARCHAR},
+        #{unitDistrictId,jdbcType=BIGINT}, #{unitAddress,jdbcType=VARCHAR}, #{liveProvince,jdbcType=VARCHAR},
+        #{liveProvinceId,jdbcType=BIGINT}, #{liveCity,jdbcType=VARCHAR}, #{liveCityId,jdbcType=BIGINT},
+        #{liveDistrict,jdbcType=VARCHAR}, #{liveDistrictId,jdbcType=BIGINT}, #{liveAddress,jdbcType=VARCHAR},
+        #{liveTime,jdbcType=VARCHAR},#{liveTimeType,jdbcType=INTEGER}, #{responsiblePartyPayRatio,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseCenterInfoExtend2" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_center_info_extend2
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="caseId != null" >
+                case_id,
+            </if>
+            <if test="caseNo != null" >
+                case_no,
+            </if>
+            <if test="sex != null" >
+                sex,
+            </if>
+            <if test="age != null" >
+                age,
+            </if>
+            <if test="maritalStatus != null" >
+                marital_status,
+            </if>
+            <if test="basicFinishNum != null" >
+                basic_finish_num,
+            </if>
+            <if test="basicTotalNum != null" >
+                basic_total_num,
+            </if>
+            <if test="domicile != null" >
+                domicile,
+            </if>
+            <if test="domicileProvinceId != null" >
+                domicile_province_id,
+            </if>
+            <if test="domicileProvince != null" >
+                domicile_province,
+            </if>
+            <if test="domicileCityId != null" >
+                domicile_city_id,
+            </if>
+            <if test="domicileCity != null" >
+                domicile_city,
+            </if>
+            <if test="domicileDistrictId != null" >
+                domicile_district_id,
+            </if>
+            <if test="domicileDistrict != null" >
+                domicile_district,
+            </if>
+            <if test="domicileAddress != null" >
+                domicile_address,
+            </if>
+            <if test="domicileFinishNum != null" >
+                domicile_finish_num,
+            </if>
+            <if test="domicileTotalNum != null" >
+                domicile_total_num,
+            </if>
+            <if test="isJobSatisfy != null" >
+                is_job_satisfy,
+            </if>
+            <if test="isServant != null" >
+                is_servant,
+            </if>
+            <if test="laborContract != null" >
+                labor_contract,
+            </if>
+            <if test="bankInfo != null" >
+                bank_info,
+            </if>
+            <if test="taxCertificate != null" >
+                tax_certificate,
+            </if>
+            <if test="workCertificate != null" >
+                work_certificate,
+            </if>
+            <if test="wages != null" >
+                wages,
+            </if>
+            <if test="otherWorkInfo != null" >
+                other_work_info,
+            </if>
+            <if test="workFinishNum != null" >
+                work_finish_num,
+            </if>
+            <if test="workTotalNum != null" >
+                work_total_num,
+            </if>
+            <if test="habitation != null" >
+                habitation,
+            </if>
+            <if test="isTownSatisfy != null" >
+                is_town_satisfy,
+            </if>
+            <if test="residencePermit != null" >
+                residence_permit,
+            </if>
+            <if test="landExpropriation != null" >
+                land_expropriation,
+            </if>
+            <if test="otherLive != null" >
+                other_live,
+            </if>
+            <if test="liveFinishNum != null" >
+                live_finish_num,
+            </if>
+            <if test="liveTotalNum != null" >
+                live_total_num,
+            </if>
+            <if test="accidentType != null" >
+                accident_type,
+            </if>
+            <if test="isMotorVehicle != null" >
+                is_motor_vehicle,
+            </if>
+            <if test="isHumanInjury != null" >
+                is_human_injury,
+            </if>
+            <if test="isVehicleDamage != null" >
+                is_vehicle_damage,
+            </if>
+            <if test="ourResponsibilities != null" >
+                our_responsibilities,
+            </if>
+            <if test="ourTransportation != null" >
+                our_transportation,
+            </if>
+            <if test="policeTeam != null" >
+                police_team,
+            </if>
+            <if test="otherAccidentLiability != null" >
+                other_accident_liability,
+            </if>
+            <if test="accidentFinishNum != null" >
+                accident_finish_num,
+            </if>
+            <if test="accidentTotalNum != null" >
+                accident_total_num,
+            </if>
+            <if test="acceptInsurance != null" >
+                accept_insurance,
+            </if>
+            <if test="insuranceCompanyId != null" >
+                insurance_company_id,
+            </if>
+            <if test="insuranceCompany != null" >
+                insurance_company,
+            </if>
+            <if test="insuranceCompany2Id != null" >
+                insurance_company2_id,
+            </if>
+            <if test="insuranceCompany2 != null" >
+                insurance_company2,
+            </if>
+            <if test="underwritingPlaceId != null" >
+                underwriting_place_id,
+            </if>
+            <if test="underwritingPlace != null" >
+                underwriting_place,
+            </if>
+            <if test="underwritingPlace2Id != null" >
+                underwriting_place2_id,
+            </if>
+            <if test="underwritingPlace2 != null" >
+                underwriting_place2,
+            </if>
+            <if test="commercialInsurance != null" >
+                commercial_insurance,
+            </if>
+            <if test="excludingDeductible != null" >
+                excluding_deductible,
+            </if>
+            <if test="underwritingFinishNum != null" >
+                underwriting_finish_num,
+            </if>
+            <if test="underwritingTotalNum != null" >
+                underwriting_total_num,
+            </if>
+            <if test="visitingHospital != null" >
+                visiting_hospital,
+            </if>
+            <if test="injuryDiagnosis != null" >
+                Injury_diagnosis,
+            </if>
+            <if test="isAgreeAppraisal != null" >
+                is_agree_appraisal,
+            </if>
+            <if test="isAgreeLitigation != null" >
+                is_agree_litigation,
+            </if>
+            <if test="customerIntention != null" >
+                customer_intention,
+            </if>
+            <if test="otherFinishNum != null" >
+                other_finish_num,
+            </if>
+            <if test="otherTotalNum != null" >
+                other_total_num,
+            </if>
+            <if test="totalNum != null" >
+                total_num,
+            </if>
+            <if test="finishNum != null" >
+                finish_num,
+            </if>
+            <if test="processState != null" >
+                process_state,
+            </if>
+            <if test="userPromotedName != null" >
+                user_promoted_name,
+            </if>
+            <if test="userPromontedPhone != null" >
+                user_promonted_phone,
+            </if>
+            <if test="isFined != null" >
+                is_fined,
+            </if>
+            <if test="idCard != null" >
+                id_card,
+            </if>
+            <if test="workUnit != null" >
+                work_unit,
+            </if>
+            <if test="entryTime != null" >
+                entry_time,
+            </if>
+            <if test="paySocialSecurity != null" >
+                pay_social_security,
+            </if>
+            <if test="unitProvince != null" >
+                unit_province,
+            </if>
+            <if test="unitProvinceId != null" >
+                unit_province_id,
+            </if>
+            <if test="unitCity != null" >
+                unit_city,
+            </if>
+            <if test="unitCityId != null" >
+                unit_city_id,
+            </if>
+            <if test="unitDistrict != null" >
+                unit_district,
+            </if>
+            <if test="unitDistrictId != null" >
+                unit_district_id,
+            </if>
+            <if test="unitAddress != null" >
+                unit_address,
+            </if>
+            <if test="liveProvince != null" >
+                live_province,
+            </if>
+            <if test="liveProvinceId != null" >
+                live_province_id,
+            </if>
+            <if test="liveCity != null" >
+                live_city,
+            </if>
+            <if test="liveCityId != null" >
+                live_city_id,
+            </if>
+            <if test="liveDistrict != null" >
+                live_district,
+            </if>
+            <if test="liveDistrictId != null" >
+                live_district_id,
+            </if>
+            <if test="liveAddress != null" >
+                live_address,
+            </if>
+            <if test="liveTime != null" >
+                live_time,
+            </if>
+            <if test="liveTimeType != null" >
+                live_time_type,
+            </if>
+            <if test="responsiblePartyPayRatio != null" >
+                responsible_party_pay_ratio,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="caseId != null" >
+                #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null" >
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="maritalStatus != null" >
+                #{maritalStatus,jdbcType=INTEGER},
+            </if>
+            <if test="basicFinishNum != null" >
+                #{basicFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="basicTotalNum != null" >
+                #{basicTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="domicile != null" >
+                #{domicile,jdbcType=VARCHAR},
+            </if>
+            <if test="domicileProvinceId != null" >
+                #{domicileProvinceId,jdbcType=BIGINT},
+            </if>
+            <if test="domicileProvince != null" >
+                #{domicileProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="domicileCityId != null" >
+                #{domicileCityId,jdbcType=BIGINT},
+            </if>
+            <if test="domicileCity != null" >
+                #{domicileCity,jdbcType=VARCHAR},
+            </if>
+            <if test="domicileDistrictId != null" >
+                #{domicileDistrictId,jdbcType=BIGINT},
+            </if>
+            <if test="domicileDistrict != null" >
+                #{domicileDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="domicileAddress != null" >
+                #{domicileAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="domicileFinishNum != null" >
+                #{domicileFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="domicileTotalNum != null" >
+                #{domicileTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="isJobSatisfy != null" >
+                #{isJobSatisfy,jdbcType=INTEGER},
+            </if>
+            <if test="isServant != null" >
+                #{isServant,jdbcType=INTEGER},
+            </if>
+            <if test="laborContract != null" >
+                #{laborContract,jdbcType=INTEGER},
+            </if>
+            <if test="bankInfo != null" >
+                #{bankInfo,jdbcType=INTEGER},
+            </if>
+            <if test="taxCertificate != null" >
+                #{taxCertificate,jdbcType=INTEGER},
+            </if>
+            <if test="workCertificate != null" >
+                #{workCertificate,jdbcType=INTEGER},
+            </if>
+            <if test="wages != null" >
+                #{wages,jdbcType=DOUBLE},
+            </if>
+            <if test="otherWorkInfo != null" >
+                #{otherWorkInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="workFinishNum != null" >
+                #{workFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="workTotalNum != null" >
+                #{workTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="habitation != null" >
+                #{habitation,jdbcType=VARCHAR},
+            </if>
+            <if test="isTownSatisfy != null" >
+                #{isTownSatisfy,jdbcType=INTEGER},
+            </if>
+            <if test="residencePermit != null" >
+                #{residencePermit,jdbcType=INTEGER},
+            </if>
+            <if test="landExpropriation != null" >
+                #{landExpropriation,jdbcType=INTEGER},
+            </if>
+            <if test="otherLive != null" >
+                #{otherLive,jdbcType=VARCHAR},
+            </if>
+            <if test="liveFinishNum != null" >
+                #{liveFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="liveTotalNum != null" >
+                #{liveTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="accidentType != null" >
+                #{accidentType,jdbcType=INTEGER},
+            </if>
+            <if test="isMotorVehicle != null" >
+                #{isMotorVehicle,jdbcType=INTEGER},
+            </if>
+            <if test="isHumanInjury != null" >
+                #{isHumanInjury,jdbcType=INTEGER},
+            </if>
+            <if test="isVehicleDamage != null" >
+                #{isVehicleDamage,jdbcType=INTEGER},
+            </if>
+            <if test="ourResponsibilities != null" >
+                #{ourResponsibilities,jdbcType=INTEGER},
+            </if>
+            <if test="ourTransportation != null" >
+                #{ourTransportation,jdbcType=INTEGER},
+            </if>
+            <if test="policeTeam != null" >
+                #{policeTeam,jdbcType=VARCHAR},
+            </if>
+            <if test="otherAccidentLiability != null" >
+                #{otherAccidentLiability,jdbcType=VARCHAR},
+            </if>
+            <if test="accidentFinishNum != null" >
+                #{accidentFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="accidentTotalNum != null" >
+                #{accidentTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="acceptInsurance != null" >
+                #{acceptInsurance,jdbcType=INTEGER},
+            </if>
+            <if test="insuranceCompanyId != null" >
+                #{insuranceCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="insuranceCompany != null" >
+                #{insuranceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="insuranceCompany2Id != null" >
+                #{insuranceCompany2Id,jdbcType=BIGINT},
+            </if>
+            <if test="insuranceCompany2 != null" >
+                #{insuranceCompany2,jdbcType=VARCHAR},
+            </if>
+            <if test="underwritingPlaceId != null" >
+                #{underwritingPlaceId,jdbcType=BIGINT},
+            </if>
+            <if test="underwritingPlace != null" >
+                #{underwritingPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="underwritingPlace2Id != null" >
+                #{underwritingPlace2Id,jdbcType=BIGINT},
+            </if>
+            <if test="underwritingPlace2 != null" >
+                #{underwritingPlace2,jdbcType=VARCHAR},
+            </if>
+            <if test="commercialInsurance != null" >
+                #{commercialInsurance,jdbcType=DOUBLE},
+            </if>
+            <if test="excludingDeductible != null" >
+                #{excludingDeductible,jdbcType=INTEGER},
+            </if>
+            <if test="underwritingFinishNum != null" >
+                #{underwritingFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="underwritingTotalNum != null" >
+                #{underwritingTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="visitingHospital != null" >
+                #{visitingHospital,jdbcType=VARCHAR},
+            </if>
+            <if test="injuryDiagnosis != null" >
+                #{injuryDiagnosis,jdbcType=VARCHAR},
+            </if>
+            <if test="isAgreeAppraisal != null" >
+                #{isAgreeAppraisal,jdbcType=INTEGER},
+            </if>
+            <if test="isAgreeLitigation != null" >
+                #{isAgreeLitigation,jdbcType=INTEGER},
+            </if>
+            <if test="customerIntention != null" >
+                #{customerIntention,jdbcType=VARCHAR},
+            </if>
+            <if test="otherFinishNum != null" >
+                #{otherFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="otherTotalNum != null" >
+                #{otherTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="totalNum != null" >
+                #{totalNum,jdbcType=INTEGER},
+            </if>
+            <if test="finishNum != null" >
+                #{finishNum,jdbcType=INTEGER},
+            </if>
+            <if test="processState != null" >
+                #{processState,jdbcType=INTEGER},
+            </if>
+            <if test="userPromotedName != null" >
+                #{userPromotedName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPromontedPhone != null" >
+                #{userPromontedPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="isFined != null" >
+                #{isFined,jdbcType=INTEGER},
+            </if>
+            <if test="idCard != null" >
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="workUnit != null" >
+                #{workUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="entryTime != null" >
+                #{entryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="paySocialSecurity != null" >
+                #{paySocialSecurity,jdbcType=INTEGER},
+            </if>
+            <if test="unitProvince != null" >
+                #{unitProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="unitProvinceId != null" >
+                #{unitProvinceId,jdbcType=BIGINT},
+            </if>
+            <if test="unitCity != null" >
+                #{unitCity,jdbcType=VARCHAR},
+            </if>
+            <if test="unitCityId != null" >
+                #{unitCityId,jdbcType=BIGINT},
+            </if>
+            <if test="unitDistrict != null" >
+                #{unitDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="unitDistrictId != null" >
+                #{unitDistrictId,jdbcType=BIGINT},
+            </if>
+            <if test="unitAddress != null" >
+                #{unitAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="liveProvince != null" >
+                #{liveProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="liveProvinceId != null" >
+                #{liveProvinceId,jdbcType=BIGINT},
+            </if>
+            <if test="liveCity != null" >
+                #{liveCity,jdbcType=VARCHAR},
+            </if>
+            <if test="liveCityId != null" >
+                #{liveCityId,jdbcType=BIGINT},
+            </if>
+            <if test="liveDistrict != null" >
+                #{liveDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="liveDistrictId != null" >
+                #{liveDistrictId,jdbcType=BIGINT},
+            </if>
+            <if test="liveAddress != null" >
+                #{liveAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="liveTime != null" >
+                #{liveTime,jdbcType=VARCHAR},
+            </if>
+            <if test="liveTimeType != null" >
+                #{liveTimeType,jdbcType=INTEGER},
+            </if>
+            <if test="responsiblePartyPayRatio != null" >
+                #{responsiblePartyPayRatio,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseCenterInfoExtend2" >
+        update case_center_info_extend2
+        <set >
+            <if test="caseId != null" >
+                case_id = #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                case_no = #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null" >
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="maritalStatus != null" >
+                marital_status = #{maritalStatus,jdbcType=INTEGER},
+            </if>
+            <if test="basicFinishNum != null" >
+                basic_finish_num = #{basicFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="basicTotalNum != null" >
+                basic_total_num = #{basicTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="domicile != null" >
+                domicile = #{domicile,jdbcType=VARCHAR},
+            </if>
+            <if test="domicileProvinceId != null" >
+                domicile_province_id = #{domicileProvinceId,jdbcType=BIGINT},
+            </if>
+            <if test="domicileProvince != null" >
+                domicile_province = #{domicileProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="domicileCityId != null" >
+                domicile_city_id = #{domicileCityId,jdbcType=BIGINT},
+            </if>
+            <if test="domicileCity != null" >
+                domicile_city = #{domicileCity,jdbcType=VARCHAR},
+            </if>
+            <if test="domicileDistrictId != null" >
+                domicile_district_id = #{domicileDistrictId,jdbcType=BIGINT},
+            </if>
+            <if test="domicileDistrict != null" >
+                domicile_district = #{domicileDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="domicileAddress != null" >
+                domicile_address = #{domicileAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="domicileFinishNum != null" >
+                domicile_finish_num = #{domicileFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="domicileTotalNum != null" >
+                domicile_total_num = #{domicileTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="isJobSatisfy != null" >
+                is_job_satisfy = #{isJobSatisfy,jdbcType=INTEGER},
+            </if>
+            <if test="isServant != null" >
+                is_servant = #{isServant,jdbcType=INTEGER},
+            </if>
+            <if test="laborContract != null" >
+                labor_contract = #{laborContract,jdbcType=INTEGER},
+            </if>
+            <if test="bankInfo != null" >
+                bank_info = #{bankInfo,jdbcType=INTEGER},
+            </if>
+            <if test="taxCertificate != null" >
+                tax_certificate = #{taxCertificate,jdbcType=INTEGER},
+            </if>
+            <if test="workCertificate != null" >
+                work_certificate = #{workCertificate,jdbcType=INTEGER},
+            </if>
+            <if test="wages != null" >
+                wages = #{wages,jdbcType=DOUBLE},
+            </if>
+            <if test="otherWorkInfo != null" >
+                other_work_info = #{otherWorkInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="workFinishNum != null" >
+                work_finish_num = #{workFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="workTotalNum != null" >
+                work_total_num = #{workTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="habitation != null" >
+                habitation = #{habitation,jdbcType=VARCHAR},
+            </if>
+            <if test="isTownSatisfy != null" >
+                is_town_satisfy = #{isTownSatisfy,jdbcType=INTEGER},
+            </if>
+            <if test="residencePermit != null" >
+                residence_permit = #{residencePermit,jdbcType=INTEGER},
+            </if>
+            <if test="landExpropriation != null" >
+                land_expropriation = #{landExpropriation,jdbcType=INTEGER},
+            </if>
+            <if test="otherLive != null" >
+                other_live = #{otherLive,jdbcType=VARCHAR},
+            </if>
+            <if test="liveFinishNum != null" >
+                live_finish_num = #{liveFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="liveTotalNum != null" >
+                live_total_num = #{liveTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="accidentType != null" >
+                accident_type = #{accidentType,jdbcType=INTEGER},
+            </if>
+            <if test="isMotorVehicle != null" >
+                is_motor_vehicle = #{isMotorVehicle,jdbcType=INTEGER},
+            </if>
+            <if test="isHumanInjury != null" >
+                is_human_injury = #{isHumanInjury,jdbcType=INTEGER},
+            </if>
+            <if test="isVehicleDamage != null" >
+                is_vehicle_damage = #{isVehicleDamage,jdbcType=INTEGER},
+            </if>
+            <if test="ourResponsibilities != null" >
+                our_responsibilities = #{ourResponsibilities,jdbcType=INTEGER},
+            </if>
+            <if test="ourTransportation != null" >
+                our_transportation = #{ourTransportation,jdbcType=INTEGER},
+            </if>
+            <if test="policeTeam != null" >
+                police_team = #{policeTeam,jdbcType=VARCHAR},
+            </if>
+            <if test="otherAccidentLiability != null" >
+                other_accident_liability = #{otherAccidentLiability,jdbcType=VARCHAR},
+            </if>
+            <if test="accidentFinishNum != null" >
+                accident_finish_num = #{accidentFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="accidentTotalNum != null" >
+                accident_total_num = #{accidentTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="acceptInsurance != null" >
+                accept_insurance = #{acceptInsurance,jdbcType=INTEGER},
+            </if>
+            <if test="insuranceCompanyId != null" >
+                insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="insuranceCompany != null" >
+                insurance_company = #{insuranceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="insuranceCompany2Id != null" >
+                insurance_company2_id = #{insuranceCompany2Id,jdbcType=BIGINT},
+            </if>
+            <if test="insuranceCompany2 != null" >
+                insurance_company2 = #{insuranceCompany2,jdbcType=VARCHAR},
+            </if>
+            <if test="underwritingPlaceId != null" >
+                underwriting_place_id = #{underwritingPlaceId,jdbcType=BIGINT},
+            </if>
+            <if test="underwritingPlace != null" >
+                underwriting_place = #{underwritingPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="underwritingPlace2Id != null" >
+                underwriting_place2_id = #{underwritingPlace2Id,jdbcType=BIGINT},
+            </if>
+            <if test="underwritingPlace2 != null" >
+                underwriting_place2 = #{underwritingPlace2,jdbcType=VARCHAR},
+            </if>
+            <if test="commercialInsurance != null" >
+                commercial_insurance = #{commercialInsurance,jdbcType=DOUBLE},
+            </if>
+            <if test="excludingDeductible != null" >
+                excluding_deductible = #{excludingDeductible,jdbcType=INTEGER},
+            </if>
+            <if test="underwritingFinishNum != null" >
+                underwriting_finish_num = #{underwritingFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="underwritingTotalNum != null" >
+                underwriting_total_num = #{underwritingTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="visitingHospital != null" >
+                visiting_hospital = #{visitingHospital,jdbcType=VARCHAR},
+            </if>
+            <if test="injuryDiagnosis != null" >
+                Injury_diagnosis = #{injuryDiagnosis,jdbcType=VARCHAR},
+            </if>
+            <if test="isAgreeAppraisal != null" >
+                is_agree_appraisal = #{isAgreeAppraisal,jdbcType=INTEGER},
+            </if>
+            <if test="isAgreeLitigation != null" >
+                is_agree_litigation = #{isAgreeLitigation,jdbcType=INTEGER},
+            </if>
+            <if test="customerIntention != null" >
+                customer_intention = #{customerIntention,jdbcType=VARCHAR},
+            </if>
+            <if test="otherFinishNum != null" >
+                other_finish_num = #{otherFinishNum,jdbcType=INTEGER},
+            </if>
+            <if test="otherTotalNum != null" >
+                other_total_num = #{otherTotalNum,jdbcType=INTEGER},
+            </if>
+            <if test="totalNum != null" >
+                total_num = #{totalNum,jdbcType=INTEGER},
+            </if>
+            <if test="finishNum != null" >
+                finish_num = #{finishNum,jdbcType=INTEGER},
+            </if>
+            <if test="processState != null" >
+                process_state = #{processState,jdbcType=INTEGER},
+            </if>
+            <if test="userPromotedName != null" >
+                user_promoted_name = #{userPromotedName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPromontedPhone != null" >
+                user_promonted_phone = #{userPromontedPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="isFined != null" >
+                is_fined = #{isFined,jdbcType=INTEGER},
+            </if>
+            <if test="idCard != null" >
+                id_card = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="workUnit != null" >
+                work_unit = #{workUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="entryTime != null" >
+                entry_time = #{entryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="paySocialSecurity != null" >
+                pay_social_security = #{paySocialSecurity,jdbcType=INTEGER},
+            </if>
+            <if test="unitProvince != null" >
+                unit_province = #{unitProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="unitProvinceId != null" >
+                unit_province_id = #{unitProvinceId,jdbcType=BIGINT},
+            </if>
+            <if test="unitCity != null" >
+                unit_city = #{unitCity,jdbcType=VARCHAR},
+            </if>
+            <if test="unitCityId != null" >
+                unit_city_id = #{unitCityId,jdbcType=BIGINT},
+            </if>
+            <if test="unitDistrict != null" >
+                unit_district = #{unitDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="unitDistrictId != null" >
+                unit_district_id = #{unitDistrictId,jdbcType=BIGINT},
+            </if>
+            <if test="unitAddress != null" >
+                unit_address = #{unitAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="liveProvince != null" >
+                live_province = #{liveProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="liveProvinceId != null" >
+                live_province_id = #{liveProvinceId,jdbcType=BIGINT},
+            </if>
+            <if test="liveCity != null" >
+                live_city = #{liveCity,jdbcType=VARCHAR},
+            </if>
+            <if test="liveCityId != null" >
+                live_city_id = #{liveCityId,jdbcType=BIGINT},
+            </if>
+            <if test="liveDistrict != null" >
+                live_district = #{liveDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="liveDistrictId != null" >
+                live_district_id = #{liveDistrictId,jdbcType=BIGINT},
+            </if>
+            <if test="liveAddress != null" >
+                live_address = #{liveAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="liveTime != null" >
+                live_time = #{liveTime,jdbcType=VARCHAR},
+            </if>
+            <if test="liveTimeType != null" >
+                live_time_type = #{liveTimeType,jdbcType=INTEGER},
+            </if>
+            <if test="responsiblePartyPayRatio != null" >
+                responsible_party_pay_ratio = #{responsiblePartyPayRatio,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseCenterInfoExtend2" >
+        update case_center_info_extend2
+        set case_id = #{caseId,jdbcType=BIGINT},
+        case_no = #{caseNo,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=INTEGER},
+        age = #{age,jdbcType=INTEGER},
+        marital_status = #{maritalStatus,jdbcType=INTEGER},
+        basic_finish_num = #{basicFinishNum,jdbcType=INTEGER},
+        basic_total_num = #{basicTotalNum,jdbcType=INTEGER},
+        domicile = #{domicile,jdbcType=VARCHAR},
+        domicile_province_id = #{domicileProvinceId,jdbcType=BIGINT},
+        domicile_province = #{domicileProvince,jdbcType=VARCHAR},
+        domicile_city_id = #{domicileCityId,jdbcType=BIGINT},
+        domicile_city = #{domicileCity,jdbcType=VARCHAR},
+        domicile_district_id = #{domicileDistrictId,jdbcType=BIGINT},
+        domicile_district = #{domicileDistrict,jdbcType=VARCHAR},
+        domicile_address = #{domicileAddress,jdbcType=VARCHAR},
+        domicile_finish_num = #{domicileFinishNum,jdbcType=INTEGER},
+        domicile_total_num = #{domicileTotalNum,jdbcType=INTEGER},
+        is_job_satisfy = #{isJobSatisfy,jdbcType=INTEGER},
+        is_servant = #{isServant,jdbcType=INTEGER},
+        labor_contract = #{laborContract,jdbcType=INTEGER},
+        bank_info = #{bankInfo,jdbcType=INTEGER},
+        tax_certificate = #{taxCertificate,jdbcType=INTEGER},
+        work_certificate = #{workCertificate,jdbcType=INTEGER},
+        wages = #{wages,jdbcType=DOUBLE},
+        other_work_info = #{otherWorkInfo,jdbcType=VARCHAR},
+        work_finish_num = #{workFinishNum,jdbcType=INTEGER},
+        work_total_num = #{workTotalNum,jdbcType=INTEGER},
+        habitation = #{habitation,jdbcType=VARCHAR},
+        is_town_satisfy = #{isTownSatisfy,jdbcType=INTEGER},
+        residence_permit = #{residencePermit,jdbcType=INTEGER},
+        land_expropriation = #{landExpropriation,jdbcType=INTEGER},
+        other_live = #{otherLive,jdbcType=VARCHAR},
+        live_finish_num = #{liveFinishNum,jdbcType=INTEGER},
+        live_total_num = #{liveTotalNum,jdbcType=INTEGER},
+        accident_type = #{accidentType,jdbcType=INTEGER},
+        is_motor_vehicle = #{isMotorVehicle,jdbcType=INTEGER},
+        is_human_injury = #{isHumanInjury,jdbcType=INTEGER},
+        is_vehicle_damage = #{isVehicleDamage,jdbcType=INTEGER},
+        our_responsibilities = #{ourResponsibilities,jdbcType=INTEGER},
+        our_transportation = #{ourTransportation,jdbcType=INTEGER},
+        police_team = #{policeTeam,jdbcType=VARCHAR},
+        other_accident_liability = #{otherAccidentLiability,jdbcType=VARCHAR},
+        accident_finish_num = #{accidentFinishNum,jdbcType=INTEGER},
+        accident_total_num = #{accidentTotalNum,jdbcType=INTEGER},
+        accept_insurance = #{acceptInsurance,jdbcType=INTEGER},
+        insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT},
+        insurance_company = #{insuranceCompany,jdbcType=VARCHAR},
+        insurance_company2_id = #{insuranceCompany2Id,jdbcType=BIGINT},
+        insurance_company2 = #{insuranceCompany2,jdbcType=VARCHAR},
+        underwriting_place_id = #{underwritingPlaceId,jdbcType=BIGINT},
+        underwriting_place = #{underwritingPlace,jdbcType=VARCHAR},
+        underwriting_place2_id = #{underwritingPlace2Id,jdbcType=BIGINT},
+        underwriting_place2 = #{underwritingPlace2,jdbcType=VARCHAR},
+        commercial_insurance = #{commercialInsurance,jdbcType=DOUBLE},
+        excluding_deductible = #{excludingDeductible,jdbcType=INTEGER},
+        underwriting_finish_num = #{underwritingFinishNum,jdbcType=INTEGER},
+        underwriting_total_num = #{underwritingTotalNum,jdbcType=INTEGER},
+        visiting_hospital = #{visitingHospital,jdbcType=VARCHAR},
+        Injury_diagnosis = #{injuryDiagnosis,jdbcType=VARCHAR},
+        is_agree_appraisal = #{isAgreeAppraisal,jdbcType=INTEGER},
+        is_agree_litigation = #{isAgreeLitigation,jdbcType=INTEGER},
+        customer_intention = #{customerIntention,jdbcType=VARCHAR},
+        other_finish_num = #{otherFinishNum,jdbcType=INTEGER},
+        other_total_num = #{otherTotalNum,jdbcType=INTEGER},
+        total_num = #{totalNum,jdbcType=INTEGER},
+        finish_num = #{finishNum,jdbcType=INTEGER},
+        process_state = #{processState,jdbcType=INTEGER},
+        user_promoted_name = #{userPromotedName,jdbcType=VARCHAR},
+        user_promonted_phone = #{userPromontedPhone,jdbcType=VARCHAR},
+        is_fined = #{isFined,jdbcType=INTEGER},
+        id_card = #{idCard,jdbcType=VARCHAR},
+        work_unit = #{workUnit,jdbcType=VARCHAR},
+        entry_time = #{entryTime,jdbcType=TIMESTAMP},
+        pay_social_security = #{paySocialSecurity,jdbcType=INTEGER},
+        unit_province = #{unitProvince,jdbcType=VARCHAR},
+        unit_province_id = #{unitProvinceId,jdbcType=BIGINT},
+        unit_city = #{unitCity,jdbcType=VARCHAR},
+        unit_city_id = #{unitCityId,jdbcType=BIGINT},
+        unit_district = #{unitDistrict,jdbcType=VARCHAR},
+        unit_district_id = #{unitDistrictId,jdbcType=BIGINT},
+        unit_address = #{unitAddress,jdbcType=VARCHAR},
+        live_province = #{liveProvince,jdbcType=VARCHAR},
+        live_province_id = #{liveProvinceId,jdbcType=BIGINT},
+        live_city = #{liveCity,jdbcType=VARCHAR},
+        live_city_id = #{liveCityId,jdbcType=BIGINT},
+        live_district = #{liveDistrict,jdbcType=VARCHAR},
+        live_district_id = #{liveDistrictId,jdbcType=BIGINT},
+        live_address = #{liveAddress,jdbcType=VARCHAR},
+        live_time = #{liveTime,jdbcType=VARCHAR},
+        live_time_type = #{liveTimeType,jdbcType=VARCHAR},
+        responsible_party_pay_ratio = #{responsiblePartyPayRatio,jdbcType=DOUBLE}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

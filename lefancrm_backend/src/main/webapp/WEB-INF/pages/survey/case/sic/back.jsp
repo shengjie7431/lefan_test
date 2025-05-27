@@ -1,0 +1,97 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/pages/common/taglibs.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <%@ include file="/WEB-INF/pages/common/mainCss.jsp" %>
+    <link rel="stylesheet" href="${ctx}/js/jQueryFileUpload/jquery.fileupload.css">
+</head>
+<body>
+<div class="container">
+    <form id="editForm" role="form" action="${ctx}/survey/case/sic/operate" method="post">
+        <div class="form-group">
+            <table class="table">
+                <tbody>
+                <input type="hidden" id="id" name="id" value="${id}">
+                <input type="hidden" id="btnCode" name="btnCode" value="${btnCode}">
+                <input type="hidden" id="signType" name="signType" value="${signType}">
+                <tr>
+                    <th width="20%" class="active">
+                        <c:if test="${btnCode == 'appHelpCase'}">
+                            描述
+                        </c:if>
+                        <c:if test="${btnCode == 'orgReturn'}">
+                            退回原因
+                        </c:if>
+                        <c:if test="${btnCode != 'appHelpCase' && btnCode != 'orgReturn'}">
+                            原因
+                        </c:if>
+                    </th>
+                    <td width="80%">
+                        <textarea rows="4" required="required" name="oprRemark" class="form-control"></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="submit"  class="btn btn-success loading-btn" data-loading-text="Loading..." autocomplete="off"><span class="glyphicon glyphicon-ok"></span> 确认</button>
+        </div>
+    </form>
+</div>
+
+
+<div id="dialogId"></div>
+<script src="${ctx}/js/jquery.min.js" type="text/javascript"></script>
+<script src="${ctx}/js/jQueryFileUpload/jquery.ui.widget.js" type="text/javascript"></script>
+<script src="${ctx}/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${ctx}/js/common.js" type="text/javascript"></script>
+<script src="${ctx}/js/dialog.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var ctx="${ctx}";
+</script>
+<script src="${ctx}/js/jQueryFileUpload/jquery.fileupload.js" type="text/javascript"></script>
+<script src="${ctx}/js/jQueryFileUpload/jquery.iframe-transport.js" type="text/javascript"></script>
+
+
+<script src="${ctx}/js/kindeditor-4.1.10/kindeditor-all-min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var editor1;
+    KindEditor.ready(function(K) {
+         editor1 = K.create('textarea[name="content"]', {
+            cssPath : '${ctx}/js/jQueryFileUpload/plugins/code/prettify.css',
+            uploadJson : '${ctx}/uploadFileForKindEditor'
+        });
+    });
+
+    $("#editForm").bind('submit', function(event) {
+        //$("#content").text(editor1.html());
+        $(this).find(":submit").attr("disabled","true");
+        ajaxFormSubmit(this,returnCallback,null,null,returnCallback);
+        event.preventDefault();
+    });
+
+    function returnCallback(event,param){
+        var btnCode = $("#btnCode").val();
+        var apiRsp=getApiJson(param.data);
+        if(apiRsp && apiRsp.isSuccess){
+
+        }else{
+            alert(apiRsp.msg);return;
+        }
+
+        if(btnCode=='sign'){
+            var closeBtn = $("#diglog_close_btn",window.parent.parent.parent.document);
+            closeBtn.click();
+        }
+        else{
+            reloadParent();
+        }
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.PositionLevelMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.PositionLevel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="level_code" property="levelCode" jdbcType="VARCHAR" />
+    <result column="level_desc" property="levelDesc" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="base_wages" property="baseWages" jdbcType="DOUBLE" />
+    <result column="eva_wages" property="evaWages" jdbcType="DOUBLE" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="manager_comrate_id" property="managerComrateId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, level_code, level_desc, create_time, update_time, base_wages, eva_wages, parent_id, 
+    manager_comrate_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from position_level
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from position_level
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.PositionLevel" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into position_level (level_code, level_desc, create_time, 
+      update_time, base_wages, eva_wages, 
+      parent_id, manager_comrate_id)
+    values (#{levelCode,jdbcType=VARCHAR}, #{levelDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{baseWages,jdbcType=DOUBLE}, #{evaWages,jdbcType=DOUBLE}, 
+      #{parentId,jdbcType=BIGINT}, #{managerComrateId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.PositionLevel" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into position_level
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="levelCode != null" >
+        level_code,
+      </if>
+      <if test="levelDesc != null" >
+        level_desc,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="baseWages != null" >
+        base_wages,
+      </if>
+      <if test="evaWages != null" >
+        eva_wages,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="managerComrateId != null" >
+        manager_comrate_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="levelCode != null" >
+        #{levelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="levelDesc != null" >
+        #{levelDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="baseWages != null" >
+        #{baseWages,jdbcType=DOUBLE},
+      </if>
+      <if test="evaWages != null" >
+        #{evaWages,jdbcType=DOUBLE},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="managerComrateId != null" >
+        #{managerComrateId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.PositionLevel" >
+    update position_level
+    <set >
+      <if test="levelCode != null" >
+        level_code = #{levelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="levelDesc != null" >
+        level_desc = #{levelDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="baseWages != null" >
+        base_wages = #{baseWages,jdbcType=DOUBLE},
+      </if>
+      <if test="evaWages != null" >
+        eva_wages = #{evaWages,jdbcType=DOUBLE},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="managerComrateId != null" >
+        manager_comrate_id = #{managerComrateId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.PositionLevel" >
+    update position_level
+    set level_code = #{levelCode,jdbcType=VARCHAR},
+      level_desc = #{levelDesc,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      base_wages = #{baseWages,jdbcType=DOUBLE},
+      eva_wages = #{evaWages,jdbcType=DOUBLE},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      manager_comrate_id = #{managerComrateId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectCountPositionLevel" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select
+        count(1)
+        from position_level
+        where 1=1
+        <if test="levelCode !=null">
+            and level_code  like  CONCAT(CONCAT('%',#{levelCode,jdbcType=VARCHAR}), '%')
+        </if>
+    </select>
+
+    <select id="selectPositionLevelList" resultType="com.lefancrm.apicenter.dto.PositionLevelDto" parameterType="java.util.Map" >
+        select
+        pla.id AS id,
+        pla.level_code AS levelCode,
+        pla.level_desc AS levelDesc,
+        pla.create_time AS createTime,
+        pla.base_wages AS baseWages,
+        pla.eva_wages AS evaWages,
+        pla.parent_id AS parentId,
+        pla.manager_comrate_id AS managerComrateId,
+        plb.level_code AS parentName
+        from position_level AS pla
+
+        left join position_level AS plb on pla.parent_id = plb.id
+        where 1= 1
+        <if test="levelCode !=null">
+            and pla.level_code  like  CONCAT(CONCAT('%',#{levelCode,jdbcType=VARCHAR}), '%')
+        </if>
+        limit #{pageIndex}, #{pageSize}
+
+    </select>
+
+    <select id="selectDtoByPrimaryKey" resultType="com.lefancrm.apicenter.dto.PositionLevelDto" parameterType="java.lang.Long" >
+        select
+        pla.id AS id,
+        pla.level_code AS levelCode,
+        pla.level_desc AS levelDesc,
+        pla.create_time AS createTime,
+        pla.base_wages AS baseWages,
+        pla.eva_wages AS evaWages,
+        pla.parent_id AS parentId,
+        pla.manager_comrate_id AS managerComrateId,
+        plb.level_code AS parentName
+        from position_level AS pla
+
+        left join position_level AS plb on pla.parent_id = plb.id
+        where pla.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="searchListByParentId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.* from position_level a
+        where
+        a.parent_id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="searchListByManagerComrateId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.* from position_level a
+        where
+        a.manager_comrate_id = #{id,jdbcType=BIGINT}
+    </select>
+</mapper>

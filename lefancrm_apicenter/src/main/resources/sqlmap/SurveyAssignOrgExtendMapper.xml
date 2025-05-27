@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyAssignOrgExtendMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyAssignOrgExtend" >
+    <id column="survey_assign_org_id" property="surveyAssignOrgId" jdbcType="BIGINT" />
+    <result column="aging_check" property="agingCheck" jdbcType="DOUBLE" />
+    <result column="aging_real" property="agingReal" jdbcType="DOUBLE" />
+    <result column="aging_over" property="agingOver" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    survey_assign_org_id, aging_check, aging_real, aging_over
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_assign_org_extend
+    where survey_assign_org_id = #{surveyAssignOrgId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_assign_org_extend
+    where survey_assign_org_id = #{surveyAssignOrgId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyAssignOrgExtend" >
+    insert into survey_assign_org_extend (survey_assign_org_id, aging_check, aging_real, 
+      aging_over)
+    values (#{surveyAssignOrgId,jdbcType=BIGINT}, #{agingCheck,jdbcType=DOUBLE}, #{agingReal,jdbcType=DOUBLE}, 
+      #{agingOver,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyAssignOrgExtend" >
+    insert into survey_assign_org_extend
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyAssignOrgId != null" >
+        survey_assign_org_id,
+      </if>
+      <if test="agingCheck != null" >
+        aging_check,
+      </if>
+      <if test="agingReal != null" >
+        aging_real,
+      </if>
+      <if test="agingOver != null" >
+        aging_over,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyAssignOrgId != null" >
+        #{surveyAssignOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="agingCheck != null" >
+        #{agingCheck,jdbcType=DOUBLE},
+      </if>
+      <if test="agingReal != null" >
+        #{agingReal,jdbcType=DOUBLE},
+      </if>
+      <if test="agingOver != null" >
+        #{agingOver,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyAssignOrgExtend" >
+    update survey_assign_org_extend
+    <set >
+      <if test="agingCheck != null" >
+        aging_check = #{agingCheck,jdbcType=DOUBLE},
+      </if>
+      <if test="agingReal != null" >
+        aging_real = #{agingReal,jdbcType=DOUBLE},
+      </if>
+      <if test="agingOver != null" >
+        aging_over = #{agingOver,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where survey_assign_org_id = #{surveyAssignOrgId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyAssignOrgExtend" >
+    update survey_assign_org_extend
+    set aging_check = #{agingCheck,jdbcType=DOUBLE},
+      aging_real = #{agingReal,jdbcType=DOUBLE},
+      aging_over = #{agingOver,jdbcType=DOUBLE}
+    where survey_assign_org_id = #{surveyAssignOrgId,jdbcType=BIGINT}
+  </update>
+</mapper>

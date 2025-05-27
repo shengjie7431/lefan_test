@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.HbUserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.HbUserInfo" >
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="hb_org_id" property="hbOrgId" jdbcType="BIGINT" />
+    <result column="hb_org_name" property="hbOrgName" jdbcType="VARCHAR" />
+    <result column="hb_user_status" property="hbUserStatus" jdbcType="INTEGER" />
+    <result column="hb_user_code" property="hbUserCode" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="hb_user_name" property="hbUserName" jdbcType="VARCHAR" />
+    <result column="hb_user_tel" property="hbUserTel" jdbcType="VARCHAR" />
+    <result column="hb_open_id" property="hbOpenId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, hb_org_id, hb_org_name, hb_user_status, hb_user_code, create_time, create_by, 
+    hb_user_name, hb_user_tel, hb_open_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hb_user_info
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hb_user_info
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.HbUserInfo" >
+    insert into hb_user_info (user_id, hb_org_id, hb_org_name, 
+      hb_user_status, hb_user_code, create_time, 
+      create_by, hb_user_name, hb_user_tel, 
+      hb_open_id)
+    values (#{userId,jdbcType=BIGINT}, #{hbOrgId,jdbcType=BIGINT}, #{hbOrgName,jdbcType=VARCHAR}, 
+      #{hbUserStatus,jdbcType=INTEGER}, #{hbUserCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{hbUserName,jdbcType=VARCHAR}, #{hbUserTel,jdbcType=VARCHAR}, 
+      #{hbOpenId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.HbUserInfo" >
+    insert into hb_user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="hbOrgId != null" >
+        hb_org_id,
+      </if>
+      <if test="hbOrgName != null" >
+        hb_org_name,
+      </if>
+      <if test="hbUserStatus != null" >
+        hb_user_status,
+      </if>
+      <if test="hbUserCode != null" >
+        hb_user_code,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="hbUserName != null" >
+        hb_user_name,
+      </if>
+      <if test="hbUserTel != null" >
+        hb_user_tel,
+      </if>
+      <if test="hbOpenId != null" >
+        hb_open_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="hbOrgId != null" >
+        #{hbOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="hbOrgName != null" >
+        #{hbOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="hbUserStatus != null" >
+        #{hbUserStatus,jdbcType=INTEGER},
+      </if>
+      <if test="hbUserCode != null" >
+        #{hbUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="hbUserName != null" >
+        #{hbUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="hbUserTel != null" >
+        #{hbUserTel,jdbcType=VARCHAR},
+      </if>
+      <if test="hbOpenId != null" >
+        #{hbOpenId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.HbUserInfo" >
+    update hb_user_info
+    <set >
+      <if test="hbOrgId != null" >
+        hb_org_id = #{hbOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="hbOrgName != null" >
+        hb_org_name = #{hbOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="hbUserStatus != null" >
+        hb_user_status = #{hbUserStatus,jdbcType=INTEGER},
+      </if>
+      <if test="hbUserCode != null" >
+        hb_user_code = #{hbUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="hbUserName != null" >
+        hb_user_name = #{hbUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="hbUserTel != null" >
+        hb_user_tel = #{hbUserTel,jdbcType=VARCHAR},
+      </if>
+      <if test="hbOpenId != null" >
+        hb_open_id = #{hbOpenId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.HbUserInfo" >
+    update hb_user_info
+    set hb_org_id = #{hbOrgId,jdbcType=BIGINT},
+      hb_org_name = #{hbOrgName,jdbcType=VARCHAR},
+      hb_user_status = #{hbUserStatus,jdbcType=INTEGER},
+      hb_user_code = #{hbUserCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      hb_user_name = #{hbUserName,jdbcType=VARCHAR},
+      hb_user_tel = #{hbUserTel,jdbcType=VARCHAR},
+      hb_open_id = #{hbOpenId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from hb_user_info
+    <where>
+      <if test="hbUserStatus!=null">
+        and hb_user_status = #{hbUserStatus,jdbcType=INTEGER}
+      </if>
+      <if test="hbUserName!=null">
+        and hb_user_name = #{hbUserName,jdbcType=VARCHAR}
+      </if>
+      <if test="hbUserTel!=null">
+        and hb_user_tel = #{hbUserTel,jdbcType=VARCHAR}
+      </if>
+      <if test="hbOrgId!=null">
+        and hb_org_id = #{hbOrgId,jdbcType=BIGINT}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectListSize" resultType="int" parameterType="java.util.Map" >
+    select count(1)
+    from hb_user_info
+    <where>
+      <if test="productName!=null">
+        and hb_user_status = #{hbUserStatus,jdbcType=INTEGER}
+      </if>
+      <if test="hbUserName!=null">
+        and hb_user_name = #{hbUserName,jdbcType=VARCHAR}
+      </if>
+      <if test="hbUserTel!=null">
+        and hb_user_tel = #{hbUserTel,jdbcType=VARCHAR}
+      </if>
+      <if test="hbOrgId!=null">
+        and hb_org_id = #{hbOrgId,jdbcType=BIGINT}
+      </if>
+    </where>
+  </select>
+</mapper>

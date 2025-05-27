@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseEstimateInfoMapper" >
+
+    <select id="selectCaseEstimateInfoList" resultType="com.lefancrm.apicenter.dto.CaseEstimateInfoDto" parameterType="java.util.Map" >
+        select estimateId,userId,userName,userPhone,type,createTime,createBy,accidentProvinceId,accidentProvince,
+            accidentCityId,accidentCity,accidentDistrictId,accidentDistrict,accidentAddress,turnStatus,turnStatusName
+        from
+            (
+            <if test="type == null">
+                select id as estimateId,user_id as userId, user_name as userName, user_Phone as userPhone,1 as type,
+                create_time as createTime,create_by as createBy,accident_province_id as accidentProvinceId,
+                accident_province as accidentProvince,accident_city_id as accidentCityId,accident_city as accidentCity,
+                accident_district_id as accidentDistrictId,accident_district  as accidentDistrict,accident_address as accidentAddress,
+                turn_status as turnStatus,
+                (case when turn_status = 0 then '未转办' when turn_status = 1 then'已转办' ELSE '' end) as turnStatusName
+                from invalidism_estimate where state= 2
+                <if test="userName !=null">
+                    and user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="userPhone !=null">
+                    and user_Phone like CONCAT(CONCAT('%',#{userPhone,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="turnStatus != null">
+                    <if test="mStatus == 1">
+                        and turn_status = 0
+                    </if>
+                    <if test="mStatus == 2">
+                        and turn_status = 1
+                    </if>
+                </if>
+                union all
+                select id as estimateId,user_id as userId, user_name as userName, user_Phone as userPhone,2 as type,
+                create_time as createTime,create_by as createBy,accident_province_id as accidentProvinceId,
+                accident_province as accidentProvince,accident_city_id as accidentCityId,accident_city as accidentCity,
+                accident_district_id as accidentDistrictId,accident_district  as accidentDistrict,accident_address as accidentAddress,
+                turn_status as turnStatus,
+                (case when turn_status = 0 and case_id is null then '未转办' else '已转办' end) as turnStatusName
+                from payment_estimate_apply where 1 = 1
+                <if test="userName !=null">
+                    and user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="userPhone !=null">
+                    and user_Phone like CONCAT(CONCAT('%',#{userPhone,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="turnStatus != null">
+                    <if test="mStatus == 1">
+                        and turn_status = 0 and case_id is null
+                    </if>
+                    <if test="mStatus == 2">
+                        and turn_status = 1
+                    </if>
+                </if>
+            </if>
+            <if test="type == 1">
+                select id as estimateId,user_id as userId, user_name as userName, user_Phone as userPhone,1 as type,
+                create_time as createTime,create_by as createBy,accident_province_id as accidentProvinceId,
+                accident_province as accidentProvince,accident_city_id as accidentCityId,accident_city as accidentCity,
+                accident_district_id as accidentDistrictId,accident_district  as accidentDistrict,accident_address as accidentAddress,
+                turn_status as turnStatus,
+                (case when turn_status = 0 then '未转办' when turn_status = 1 then'已转办' ELSE '' end) as turnStatusName
+                from invalidism_estimate where state= 2
+                <if test="userName !=null">
+                    and user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="userPhone !=null">
+                    and user_Phone like CONCAT(CONCAT('%',#{userPhone,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="turnStatus != null">
+                    <if test="mStatus == 1">
+                        and turn_status = 0
+                    </if>
+                    <if test="mStatus == 2">
+                        and turn_status = 1
+                    </if>
+                </if>
+            </if>
+            <if test="type == 2">
+                select id as estimateId,user_id as userId, user_name as userName, user_Phone as userPhone,2 as type,
+                create_time as createTime,create_by as createBy,accident_province_id as accidentProvinceId,
+                accident_province as accidentProvince,accident_city_id as accidentCityId,accident_city as accidentCity,
+                accident_district_id as accidentDistrictId,accident_district  as accidentDistrict,accident_address as accidentAddress,
+                turn_status as turnStatus,
+                (case when turn_status = 0 and case_id is null then '未转办' else '已转办' end) as turnStatusName
+                from payment_estimate_apply where 1 = 1
+                <if test="userName !=null">
+                    and user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="userPhone !=null">
+                    and user_Phone like CONCAT(CONCAT('%',#{userPhone,jdbcType=VARCHAR}), '%')
+                </if>
+                <if test="turnStatus != null">
+                    <if test="mStatus == 1">
+                        and turn_status = 0 and case_id is null
+                    </if>
+                    <if test="mStatus == 2">
+                        and turn_status = 1
+                    </if>
+                </if>
+            </if>
+            ) a
+        ORDER BY createTime DESC
+        limit #{pageIndex}, #{pageSize};
+    </select>
+
+    <select id="selectCountCaseEstimateInfo" resultType="int" parameterType="java.util.Map" >
+        select count(1) from
+        (
+        <if test="type == null">
+            select id as estimateId,user_id as userId, user_name as userName, user_Phone as userPhone,1 as type,
+            create_time as createTime,create_by as createBy,accident_province_id as accidentProvinceId,
+            accident_province as accidentProvince,accident_city_id as accidentCityId,accident_city as accidentCity,
+            accident_district_id as accidentDistrictId,accident_district  as accidentDistrict,accident_address as accidentAddress,
+            turn_status as turnStatus,
+            (case when turn_status = 0 then '未转办' when turn_status = 1 then'已转办' ELSE '' end) as turnStatusName
+            from invalidism_estimate where state= 2
+            <if test="userName !=null">
+                and user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="userPhone !=null">
+                and user_Phone like CONCAT(CONCAT('%',#{userPhone,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="turnStatus != null">
+                <if test="mStatus == 1">
+                    and turn_status = 0
+                </if>
+                <if test="mStatus == 2">
+                    and turn_status = 1
+                </if>
+            </if>
+            union all
+            select id as estimateId,user_id as userId, user_name as userName, user_Phone as userPhone,2 as type,
+            create_time as createTime,create_by as createBy,accident_province_id as accidentProvinceId,
+            accident_province as accidentProvince,accident_city_id as accidentCityId,accident_city as accidentCity,
+            accident_district_id as accidentDistrictId,accident_district  as accidentDistrict,accident_address as accidentAddress,
+            turn_status as turnStatus,
+            (case when turn_status = 0 and case_id is null then '未转办' else '已转办' end) as turnStatusName
+            from payment_estimate_apply where 1 = 1
+            <if test="userName !=null">
+                and user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="userPhone !=null">
+                and user_Phone like CONCAT(CONCAT('%',#{userPhone,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="turnStatus != null">
+                <if test="mStatus == 1">
+                    and turn_status = 0 and case_id is null
+                </if>
+                <if test="mStatus == 2">
+                    and turn_status = 1
+                </if>
+            </if>
+        </if>
+        <if test="type == 1">
+            select id as estimateId,user_id as userId, user_name as userName, user_Phone as userPhone,1 as type,
+            create_time as createTime,create_by as createBy,accident_province_id as accidentProvinceId,
+            accident_province as accidentProvince,accident_city_id as accidentCityId,accident_city as accidentCity,
+            accident_district_id as accidentDistrictId,accident_district  as accidentDistrict,accident_address as accidentAddress,
+            turn_status as turnStatus,
+            (case when turn_status = 0 then '未转办' when turn_status = 1 then'已转办' ELSE '' end) as turnStatusName
+            from invalidism_estimate where state= 2
+            <if test="userName !=null">
+                and user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="userPhone !=null">
+                and user_Phone like CONCAT(CONCAT('%',#{userPhone,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="turnStatus != null">
+                <if test="mStatus == 1">
+                    and turn_status = 0
+                </if>
+                <if test="mStatus == 2">
+                    and turn_status = 1
+                </if>
+            </if>
+        </if>
+        <if test="type == 2">
+            select id as estimateId,user_id as userId, user_name as userName, user_Phone as userPhone,2 as type,
+            create_time as createTime,create_by as createBy,accident_province_id as accidentProvinceId,
+            accident_province as accidentProvince,accident_city_id as accidentCityId,accident_city as accidentCity,
+            accident_district_id as accidentDistrictId,accident_district  as accidentDistrict,accident_address as accidentAddress,
+            turn_status as turnStatus,
+            (case when turn_status = 0 and case_id is null then '未转办' else '已转办' end) as turnStatusName
+            from payment_estimate_apply where 1 = 1
+            <if test="userName !=null">
+                and user_name like CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="userPhone !=null">
+                and user_Phone like CONCAT(CONCAT('%',#{userPhone,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="turnStatus != null">
+                <if test="mStatus == 1">
+                    and turn_status = 0 and case_id is null
+                </if>
+                <if test="mStatus == 2">
+                    and turn_status = 1
+                </if>
+            </if>
+        </if>
+        ) a
+    </select>
+
+</mapper>

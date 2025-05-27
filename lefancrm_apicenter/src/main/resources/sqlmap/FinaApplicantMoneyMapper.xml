@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaApplicantMoneyMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaApplicantMoney" >
+        <id column="fina_info_id" property="finaInfoId" jdbcType="BIGINT" />
+        <result column="estimate_money" property="estimateMoney" jdbcType="DOUBLE" />
+        <result column="proposal_money" property="proposalMoney" jdbcType="DOUBLE" />
+        <result column="actual_money" property="actualMoney" jdbcType="DOUBLE" />
+        <result column="risk_level" property="riskLevel" jdbcType="INTEGER" />
+        <result column="real_loan_time" property="realLoanTime" jdbcType="TIMESTAMP" />
+        <result column="confirm_type" property="confirmType" jdbcType="INTEGER" />
+        <result column="check_man_id" property="checkManId" jdbcType="BIGINT" />
+        <result column="check_man_name" property="checkManName" jdbcType="VARCHAR" />
+        <result column="double_check_man_id" property="doubleCheckManId" jdbcType="BIGINT" />
+        <result column="double_check_man_name" property="doubleCheckManName" jdbcType="VARCHAR" />
+        <result column="check_time" property="checkTime" jdbcType="TIMESTAMP" />
+        <result column="double_check_time" property="doubleCheckTime" jdbcType="TIMESTAMP" />
+        <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+        <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+        <result column="customer_check_time" property="customerCheckTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        fina_info_id, estimate_money, proposal_money, actual_money, risk_level, real_loan_time,
+        confirm_type, check_man_id, check_man_name, double_check_man_id, double_check_man_name,
+        check_time, double_check_time, customer_id, customer_name, customer_check_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from fina_applicant_money
+        where fina_info_id = #{finaInfoId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from fina_applicant_money
+        where fina_info_id = #{finaInfoId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantMoney" >
+        insert into fina_applicant_money (fina_info_id, estimate_money, proposal_money,
+        actual_money, risk_level, real_loan_time,
+        confirm_type, check_man_id, check_man_name,
+        double_check_man_id, double_check_man_name, check_time,
+        double_check_time, customer_id, customer_name,
+        customer_check_time)
+        values (#{finaInfoId,jdbcType=BIGINT}, #{estimateMoney,jdbcType=DOUBLE}, #{proposalMoney,jdbcType=DOUBLE},
+        #{actualMoney,jdbcType=DOUBLE}, #{riskLevel,jdbcType=INTEGER}, #{realLoanTime,jdbcType=TIMESTAMP},
+        #{confirmType,jdbcType=INTEGER}, #{checkManId,jdbcType=BIGINT}, #{checkManName,jdbcType=VARCHAR},
+        #{doubleCheckManId,jdbcType=BIGINT}, #{doubleCheckManName,jdbcType=VARCHAR}, #{checkTime,jdbcType=TIMESTAMP},
+        #{doubleCheckTime,jdbcType=TIMESTAMP}, #{customerId,jdbcType=BIGINT}, #{customerName,jdbcType=VARCHAR},
+        #{customerCheckTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantMoney" >
+        insert into fina_applicant_money
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="finaInfoId != null" >
+                fina_info_id,
+            </if>
+            <if test="estimateMoney != null" >
+                estimate_money,
+            </if>
+            <if test="proposalMoney != null" >
+                proposal_money,
+            </if>
+            <if test="actualMoney != null" >
+                actual_money,
+            </if>
+            <if test="riskLevel != null" >
+                risk_level,
+            </if>
+            <if test="realLoanTime != null" >
+                real_loan_time,
+            </if>
+            <if test="confirmType != null" >
+                confirm_type,
+            </if>
+            <if test="checkManId != null" >
+                check_man_id,
+            </if>
+            <if test="checkManName != null" >
+                check_man_name,
+            </if>
+            <if test="doubleCheckManId != null" >
+                double_check_man_id,
+            </if>
+            <if test="doubleCheckManName != null" >
+                double_check_man_name,
+            </if>
+            <if test="checkTime != null" >
+                check_time,
+            </if>
+            <if test="doubleCheckTime != null" >
+                double_check_time,
+            </if>
+            <if test="customerId != null" >
+                customer_id,
+            </if>
+            <if test="customerName != null" >
+                customer_name,
+            </if>
+            <if test="customerCheckTime != null" >
+                customer_check_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="finaInfoId != null" >
+                #{finaInfoId,jdbcType=BIGINT},
+            </if>
+            <if test="estimateMoney != null" >
+                #{estimateMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="proposalMoney != null" >
+                #{proposalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="actualMoney != null" >
+                #{actualMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="riskLevel != null" >
+                #{riskLevel,jdbcType=INTEGER},
+            </if>
+            <if test="realLoanTime != null" >
+                #{realLoanTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="confirmType != null" >
+                #{confirmType,jdbcType=INTEGER},
+            </if>
+            <if test="checkManId != null" >
+                #{checkManId,jdbcType=BIGINT},
+            </if>
+            <if test="checkManName != null" >
+                #{checkManName,jdbcType=VARCHAR},
+            </if>
+            <if test="doubleCheckManId != null" >
+                #{doubleCheckManId,jdbcType=BIGINT},
+            </if>
+            <if test="doubleCheckManName != null" >
+                #{doubleCheckManName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkTime != null" >
+                #{checkTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="doubleCheckTime != null" >
+                #{doubleCheckTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="customerId != null" >
+                #{customerId,jdbcType=BIGINT},
+            </if>
+            <if test="customerName != null" >
+                #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerCheckTime != null" >
+                #{customerCheckTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantMoney" >
+        update fina_applicant_money
+        <set >
+            <if test="estimateMoney != null" >
+                estimate_money = #{estimateMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="proposalMoney != null" >
+                proposal_money = #{proposalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="actualMoney != null" >
+                actual_money = #{actualMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="riskLevel != null" >
+                risk_level = #{riskLevel,jdbcType=INTEGER},
+            </if>
+            <if test="realLoanTime != null" >
+                real_loan_time = #{realLoanTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="confirmType != null" >
+                confirm_type = #{confirmType,jdbcType=INTEGER},
+            </if>
+            <if test="checkManId != null" >
+                check_man_id = #{checkManId,jdbcType=BIGINT},
+            </if>
+            <if test="checkManName != null" >
+                check_man_name = #{checkManName,jdbcType=VARCHAR},
+            </if>
+            <if test="doubleCheckManId != null" >
+                double_check_man_id = #{doubleCheckManId,jdbcType=BIGINT},
+            </if>
+            <if test="doubleCheckManName != null" >
+                double_check_man_name = #{doubleCheckManName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkTime != null" >
+                check_time = #{checkTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="doubleCheckTime != null" >
+                double_check_time = #{doubleCheckTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="customerId != null" >
+                customer_id = #{customerId,jdbcType=BIGINT},
+            </if>
+            <if test="customerName != null" >
+                customer_name = #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerCheckTime != null" >
+                customer_check_time = #{customerCheckTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where fina_info_id = #{finaInfoId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantMoney" >
+    update fina_applicant_money
+    set estimate_money = #{estimateMoney,jdbcType=DOUBLE},
+      proposal_money = #{proposalMoney,jdbcType=DOUBLE},
+      actual_money = #{actualMoney,jdbcType=DOUBLE},
+      risk_level = #{riskLevel,jdbcType=INTEGER},
+      real_loan_time = #{realLoanTime,jdbcType=TIMESTAMP},
+      confirm_type = #{confirmType,jdbcType=INTEGER},
+      check_man_id = #{checkManId,jdbcType=BIGINT},
+      check_man_name = #{checkManName,jdbcType=VARCHAR},
+      double_check_man_id = #{doubleCheckManId,jdbcType=BIGINT},
+      double_check_man_name = #{doubleCheckManName,jdbcType=VARCHAR},
+      check_time = #{checkTime,jdbcType=TIMESTAMP},
+      double_check_time = #{doubleCheckTime,jdbcType=TIMESTAMP},
+      customer_id = #{customerId,jdbcType=BIGINT},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      customer_check_time = #{customerCheckTime,jdbcType=TIMESTAMP}
+    where fina_info_id = #{finaInfoId,jdbcType=BIGINT}
+  </update>
+</mapper>

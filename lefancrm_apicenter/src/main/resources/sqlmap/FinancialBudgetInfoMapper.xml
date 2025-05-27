@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.FinancialBudgetInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.FinancialBudgetInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="budget_id" property="budgetId" jdbcType="BIGINT" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="year_money" property="yearMoney" jdbcType="DOUBLE" />
+    <result column="ascription_company" property="ascriptionCompany" jdbcType="VARCHAR" />
+    <result column="ascription_company_id" property="ascriptionCompanyId" jdbcType="BIGINT" />
+    <result column="ascription_department" property="ascriptionDepartment" jdbcType="VARCHAR" />
+    <result column="ascription_department_id" property="ascriptionDepartmentId" jdbcType="BIGINT" />
+    <result column="ascription_organ" property="ascriptionOrgan" jdbcType="VARCHAR" />
+    <result column="ascription_organ_id" property="ascriptionOrganId" jdbcType="BIGINT" />
+    <result column="cost_type_id" property="costTypeId" jdbcType="BIGINT" />
+    <result column="cost_type_name" property="costTypeName" jdbcType="VARCHAR" />
+    <result column="january" property="january" jdbcType="DOUBLE" />
+    <result column="february" property="february" jdbcType="DOUBLE" />
+    <result column="march" property="march" jdbcType="DOUBLE" />
+    <result column="april" property="april" jdbcType="DOUBLE" />
+    <result column="may" property="may" jdbcType="DOUBLE" />
+    <result column="june" property="june" jdbcType="DOUBLE" />
+    <result column="july" property="july" jdbcType="DOUBLE" />
+    <result column="august" property="august" jdbcType="DOUBLE" />
+    <result column="september" property="september" jdbcType="DOUBLE" />
+    <result column="october" property="october" jdbcType="DOUBLE" />
+    <result column="november" property="november" jdbcType="DOUBLE" />
+    <result column="december" property="december" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, budget_id, year, year_money, ascription_company, ascription_company_id, ascription_department,
+    ascription_department_id, ascription_organ, ascription_organ_id, cost_type_id, cost_type_name,
+    january, february, march, april, may, june, july, august, september, october, november,
+    december, create_time, create_by, update_time, update_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from financial_budget_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from financial_budget_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.FinancialBudgetInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into financial_budget_info (budget_id, year, year_money,
+    ascription_company, ascription_company_id,
+    ascription_department, ascription_department_id,
+    ascription_organ, ascription_organ_id, cost_type_id,
+    cost_type_name, january, february,
+    march, april, may, june,
+    july, august, september,
+    october, november, december,
+    create_time, create_by, update_time,
+    update_by)
+    values (#{budgetId,jdbcType=BIGINT}, #{year,jdbcType=VARCHAR}, #{yearMoney,jdbcType=DOUBLE},
+    #{ascriptionCompany,jdbcType=VARCHAR}, #{ascriptionCompanyId,jdbcType=BIGINT},
+    #{ascriptionDepartment,jdbcType=VARCHAR}, #{ascriptionDepartmentId,jdbcType=BIGINT},
+    #{ascriptionOrgan,jdbcType=VARCHAR}, #{ascriptionOrganId,jdbcType=BIGINT}, #{costTypeId,jdbcType=BIGINT},
+    #{costTypeName,jdbcType=VARCHAR}, #{january,jdbcType=DOUBLE}, #{february,jdbcType=DOUBLE},
+    #{march,jdbcType=DOUBLE}, #{april,jdbcType=DOUBLE}, #{may,jdbcType=DOUBLE}, #{june,jdbcType=DOUBLE},
+    #{july,jdbcType=DOUBLE}, #{august,jdbcType=DOUBLE}, #{september,jdbcType=DOUBLE},
+    #{october,jdbcType=DOUBLE}, #{november,jdbcType=DOUBLE}, #{december,jdbcType=DOUBLE},
+    #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+    #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.FinancialBudgetInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into financial_budget_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="budgetId != null" >
+        budget_id,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="yearMoney != null" >
+        year_money,
+      </if>
+      <if test="ascriptionCompany != null" >
+        ascription_company,
+      </if>
+      <if test="ascriptionCompanyId != null" >
+        ascription_company_id,
+      </if>
+      <if test="ascriptionDepartment != null" >
+        ascription_department,
+      </if>
+      <if test="ascriptionDepartmentId != null" >
+        ascription_department_id,
+      </if>
+      <if test="ascriptionOrgan != null" >
+        ascription_organ,
+      </if>
+      <if test="ascriptionOrganId != null" >
+        ascription_organ_id,
+      </if>
+      <if test="costTypeId != null" >
+        cost_type_id,
+      </if>
+      <if test="costTypeName != null" >
+        cost_type_name,
+      </if>
+      <if test="january != null" >
+        january,
+      </if>
+      <if test="february != null" >
+        february,
+      </if>
+      <if test="march != null" >
+        march,
+      </if>
+      <if test="april != null" >
+        april,
+      </if>
+      <if test="may != null" >
+        may,
+      </if>
+      <if test="june != null" >
+        june,
+      </if>
+      <if test="july != null" >
+        july,
+      </if>
+      <if test="august != null" >
+        august,
+      </if>
+      <if test="september != null" >
+        september,
+      </if>
+      <if test="october != null" >
+        october,
+      </if>
+      <if test="november != null" >
+        november,
+      </if>
+      <if test="december != null" >
+        december,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="budgetId != null" >
+        #{budgetId,jdbcType=BIGINT},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="yearMoney != null" >
+        #{yearMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="ascriptionCompany != null" >
+        #{ascriptionCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="ascriptionCompanyId != null" >
+        #{ascriptionCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="ascriptionDepartment != null" >
+        #{ascriptionDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="ascriptionDepartmentId != null" >
+        #{ascriptionDepartmentId,jdbcType=BIGINT},
+      </if>
+      <if test="ascriptionOrgan != null" >
+        #{ascriptionOrgan,jdbcType=VARCHAR},
+      </if>
+      <if test="ascriptionOrganId != null" >
+        #{ascriptionOrganId,jdbcType=BIGINT},
+      </if>
+      <if test="costTypeId != null" >
+        #{costTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="costTypeName != null" >
+        #{costTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="january != null" >
+        #{january,jdbcType=DOUBLE},
+      </if>
+      <if test="february != null" >
+        #{february,jdbcType=DOUBLE},
+      </if>
+      <if test="march != null" >
+        #{march,jdbcType=DOUBLE},
+      </if>
+      <if test="april != null" >
+        #{april,jdbcType=DOUBLE},
+      </if>
+      <if test="may != null" >
+        #{may,jdbcType=DOUBLE},
+      </if>
+      <if test="june != null" >
+        #{june,jdbcType=DOUBLE},
+      </if>
+      <if test="july != null" >
+        #{july,jdbcType=DOUBLE},
+      </if>
+      <if test="august != null" >
+        #{august,jdbcType=DOUBLE},
+      </if>
+      <if test="september != null" >
+        #{september,jdbcType=DOUBLE},
+      </if>
+      <if test="october != null" >
+        #{october,jdbcType=DOUBLE},
+      </if>
+      <if test="november != null" >
+        #{november,jdbcType=DOUBLE},
+      </if>
+      <if test="december != null" >
+        #{december,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <insert id="insertBatchData">
+    INSERT INTO financial_budget_info  (budget_id,YEAR,ascription_company,ascription_company_id,ascription_organ,ascription_organ_id,cost_type_id,cost_type_name,create_time,create_by,update_by,update_time) values
+    <foreach item="item" collection="list" separator=",">
+      (#{item.budgetId}, #{item.year}, #{item.ascriptionCompany}, #{item.ascriptionCompanyId}, #{item.ascriptionOrgan}, #{item.ascriptionOrganId}, #{item.costTypeId}, #{item.costTypeName},now(),#{user.userName},#{user.userName},now())
+    </foreach>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.FinancialBudgetInfo" >
+    update financial_budget_info
+    <set >
+      <if test="budgetId != null" >
+        budget_id = #{budgetId,jdbcType=BIGINT},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="yearMoney != null" >
+        year_money = #{yearMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="ascriptionCompany != null" >
+        ascription_company = #{ascriptionCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="ascriptionCompanyId != null" >
+        ascription_company_id = #{ascriptionCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="ascriptionDepartment != null" >
+        ascription_department = #{ascriptionDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="ascriptionDepartmentId != null" >
+        ascription_department_id = #{ascriptionDepartmentId,jdbcType=BIGINT},
+      </if>
+      <if test="ascriptionOrgan != null" >
+        ascription_organ = #{ascriptionOrgan,jdbcType=VARCHAR},
+      </if>
+      <if test="ascriptionOrganId != null" >
+        ascription_organ_id = #{ascriptionOrganId,jdbcType=BIGINT},
+      </if>
+      <if test="costTypeId != null" >
+        cost_type_id = #{costTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="costTypeName != null" >
+        cost_type_name = #{costTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="january != null" >
+        january = #{january,jdbcType=DOUBLE},
+      </if>
+      <if test="february != null" >
+        february = #{february,jdbcType=DOUBLE},
+      </if>
+      <if test="march != null" >
+        march = #{march,jdbcType=DOUBLE},
+      </if>
+      <if test="april != null" >
+        april = #{april,jdbcType=DOUBLE},
+      </if>
+      <if test="may != null" >
+        may = #{may,jdbcType=DOUBLE},
+      </if>
+      <if test="june != null" >
+        june = #{june,jdbcType=DOUBLE},
+      </if>
+      <if test="july != null" >
+        july = #{july,jdbcType=DOUBLE},
+      </if>
+      <if test="august != null" >
+        august = #{august,jdbcType=DOUBLE},
+      </if>
+      <if test="september != null" >
+        september = #{september,jdbcType=DOUBLE},
+      </if>
+      <if test="october != null" >
+        october = #{october,jdbcType=DOUBLE},
+      </if>
+      <if test="november != null" >
+        november = #{november,jdbcType=DOUBLE},
+      </if>
+      <if test="december != null" >
+        december = #{december,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.FinancialBudgetInfo" >
+    update financial_budget_info
+    set budget_id = #{budgetId,jdbcType=BIGINT},
+      year = #{year,jdbcType=VARCHAR},
+      year_money = #{yearMoney,jdbcType=DOUBLE},
+      ascription_company = #{ascriptionCompany,jdbcType=VARCHAR},
+      ascription_company_id = #{ascriptionCompanyId,jdbcType=BIGINT},
+      ascription_department = #{ascriptionDepartment,jdbcType=VARCHAR},
+      ascription_department_id = #{ascriptionDepartmentId,jdbcType=BIGINT},
+      ascription_organ = #{ascriptionOrgan,jdbcType=VARCHAR},
+      ascription_organ_id = #{ascriptionOrganId,jdbcType=BIGINT},
+      cost_type_id = #{costTypeId,jdbcType=BIGINT},
+      cost_type_name = #{costTypeName,jdbcType=VARCHAR},
+      january = #{january,jdbcType=DOUBLE},
+      february = #{february,jdbcType=DOUBLE},
+      march = #{march,jdbcType=DOUBLE},
+      april = #{april,jdbcType=DOUBLE},
+      may = #{may,jdbcType=DOUBLE},
+      june = #{june,jdbcType=DOUBLE},
+      july = #{july,jdbcType=DOUBLE},
+      august = #{august,jdbcType=DOUBLE},
+      september = #{september,jdbcType=DOUBLE},
+      october = #{october,jdbcType=DOUBLE},
+      november = #{november,jdbcType=DOUBLE},
+      december = #{december,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByBudgetId" resultMap="BaseResultMap">
+    select  i.*,t.source costTypeSource from   financial_budget_info i left join  financial_cost_type t on  i.cost_type_id = t.id
+    <where>
+      <if test="budgetId != null">
+        i.budget_id = #{budgetId}
+      </if>
+      <if test="ascriptionCompanyId != null and ascriptionCompanyId != ''">
+        AND FIND_IN_SET(i.ascription_company_id,#{ascriptionCompanyId})
+      </if>
+      <if test="ascriptionOrganId != null">
+        AND FIND_IN_SET(i.ascription_organ_id,#{ascriptionOrganId})
+      </if>
+      <if test="costTypeId != null">
+        AND FIND_IN_SET(i.cost_type_id,#{costTypeId})
+      </if>
+    </where>
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+
+  <select id="selectByBudgetIdSize" resultType="Integer">
+    select  count(1) from   financial_budget_info
+    <where>
+      <if test="budgetId != null">
+        budget_id = #{budgetId}
+      </if>
+      <if test="ascriptionCompanyId != null and ascriptionCompanyId != ''">
+        AND FIND_IN_SET(ascription_company_id,#{ascriptionCompanyId})
+      </if>
+      <if test="ascriptionOrganId != null">
+        AND FIND_IN_SET(ascription_organ_id,#{ascriptionOrganId})
+      </if>
+      <if test="costTypeId != null">
+        AND FIND_IN_SET(cost_type_id,#{costTypeId})
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByBudgetId">
+    delete from financial_budget_info where budget_id = #{budgetId}
+  </delete>
+
+  <select id="selectData" resultMap="BaseResultMap">
+        SELECT
+	a.sId ascriptionOrganId,
+	a.NAME ascriptionOrgan,
+	a.tId costTypeId,
+	a.cost_name costTypeName,
+	b.company_name ascriptionCompany,
+	b.company_id ascriptionCompanyId
+FROM
+	( SELECT s.id sId, s.NAME, t.id tId, t.cost_name FROM staff_organ s, financial_cost_type t ) a
+	LEFT JOIN staff_budget_company_organ b ON a.sId = b.organ_id
+  </select>
+
+  <select id="selectNoInsertDataByBudgetId" resultMap="BaseResultMap">
+    SELECT a.ascriptionOrganId,a.ascriptionOrgan,a.costTypeId,a.costTypeName,c.company_id ascriptionCompanyId,c.company_name ascriptionCompany FROM (        SELECT
+	a.sId ascriptionOrganId,
+	a.NAME ascriptionOrgan,
+	a.tId costTypeId,
+	a.cost_name costTypeName,
+	b.company_name ascriptionCompany,
+	b.company_id ascriptionCompanyId
+FROM
+	( SELECT s.id sId, s.NAME, t.id tId, t.cost_name FROM staff_organ s, financial_cost_type t) a
+	LEFT JOIN staff_budget_company_organ b ON a.sId = b.organ_id)  a
+	LEFT JOIN (SELECT ascription_organ_id,cost_type_id FROM financial_budget_info WHERE budget_id = #{budgetId} ) b ON a.ascriptionOrganId = b.ascription_organ_id AND a.costTypeId = b.cost_type_id
+	LEFT JOIN staff_budget_company_organ c ON a.ascriptionOrganId = c.organ_id
+	WHERE b.ascription_organ_id IS NULL
+	ORDER BY a.ascriptionOrganId DESC
+	;
+  </select>
+
+  <select id="list" resultMap="BaseResultMap">
+    select  i.*,t.source costTypeSource from financial_budget_info i left join  financial_cost_type t on  i.cost_type_id = t.id
+    <where>
+      <if test="costTypeId != null">
+        i.cost_type_id = #{costTypeId}
+      </if>
+    </where>
+  </select>
+  <select id="selectDataByGroup" resultMap="BaseResultMap">
+        SELECT
+    id,
+    budget_id budgetId,
+    ascription_company ascriptionCompany,
+    ascription_organ ascriptionOrgan,
+    ascription_organ_id ascriptionOrganId,
+    cost_type_name costTypeName,
+    `year`,
+    <if test="ascriptionOrganId == null">
+      SUM(IFNULL( year_money, 0 )) yearMoney,
+    </if>
+    <if test="ascriptionOrganId != null">
+      year_money yearMoney,
+    </if>
+	SUM(IFNULL( january, 0 )) january,
+	SUM(IFNULL( february, 0 )) february,
+	SUM(IFNULL( march, 0 )) march,
+	SUM(IFNULL( april, 0 )) april,
+	SUM(IFNULL( may, 0 )) may,
+	SUM(IFNULL( june, 0 )) june,
+	SUM(IFNULL( july, 0 )) july,
+	SUM(IFNULL( august, 0 )) august,
+	SUM(IFNULL( september, 0 )) september,
+	SUM(IFNULL( october, 0 )) october,
+	SUM(IFNULL( november, 0 )) november,
+	SUM(IFNULL( december, 0 )) december
+FROM
+	financial_budget_info
+    <where>
+      <if test="budgetId != null">
+        budget_id = #{budgetId}
+      </if>
+      <if test="ascriptionCompanyId != null and ascriptionCompanyId != ''">
+        AND FIND_IN_SET(ascription_company_id,#{ascriptionCompanyId})
+      </if>
+      <if test="ascriptionOrganId != null">
+        AND FIND_IN_SET(ascription_organ_id,#{ascriptionOrganId})
+      </if>
+      <if test="costTypeId != null">
+        AND FIND_IN_SET(cost_type_id,#{costTypeId})
+      </if>
+    </where>
+GROUP BY
+	ascription_organ_id
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="selectDataByGroupCount" resultType="java.lang.Integer">
+        select count(1) from
+        (  SELECT
+    id,
+    budget_id budgetId,
+    ascription_company ascriptionCompany,
+    ascription_organ ascriptionOrgan,
+    ascription_organ_id ascriptionOrganId,
+    cost_type_name costTypeName,
+    `year`,
+    <if test="ascriptionOrganId == null">
+      SUM(IFNULL( year_money, 0 )) yearMoney,
+    </if>
+    <if test="ascriptionOrganId != null">
+      year_money yearMoney,
+    </if>
+    SUM(IFNULL( january, 0 )) january,
+    SUM(IFNULL( february, 0 )) february,
+    SUM(IFNULL( march, 0 )) march,
+    SUM(IFNULL( april, 0 )) april,
+    SUM(IFNULL( may, 0 )) may,
+    SUM(IFNULL( june, 0 )) june,
+    SUM(IFNULL( july, 0 )) july,
+    SUM(IFNULL( august, 0 )) august,
+    SUM(IFNULL( september, 0 )) september,
+    SUM(IFNULL( october, 0 )) october,
+    SUM(IFNULL( november, 0 )) november,
+    SUM(IFNULL( december, 0 )) december
+    FROM
+    financial_budget_info
+    <where>
+      <if test="budgetId != null">
+        budget_id = #{budgetId}
+      </if>
+      <if test="ascriptionCompanyId != null and ascriptionCompanyId != ''">
+        AND FIND_IN_SET(ascription_company_id,#{ascriptionCompanyId})
+      </if>
+      <if test="ascriptionOrganId != null">
+        AND FIND_IN_SET(ascription_organ_id,#{ascriptionOrganId})
+      </if>
+      <if test="costTypeId != null">
+        AND FIND_IN_SET(cost_type_id,#{costTypeId})
+      </if>
+    </where>
+    GROUP BY
+    ascription_organ_id) t
+  </select>
+</mapper>

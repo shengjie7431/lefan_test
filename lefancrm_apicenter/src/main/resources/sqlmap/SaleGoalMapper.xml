@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SaleGoalMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SaleGoal" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+    <result column="sale_goal" property="saleGoal" jdbcType="DOUBLE" />
+    <result column="object_type" property="objectType" jdbcType="INTEGER" />
+    <result column="object_id" property="objectId" jdbcType="BIGINT" />
+    <result column="object_name" property="objectName" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, year, month, sale_goal, object_type, object_id, object_name, parent_id, create_time, 
+    create_by, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sale_goal
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sale_goal
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SaleGoal" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sale_goal (year, month, sale_goal, 
+      object_type, object_id, object_name, 
+      parent_id, create_time, create_by, 
+      update_time)
+    values (#{year,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR}, #{saleGoal,jdbcType=DOUBLE}, 
+      #{objectType,jdbcType=INTEGER}, #{objectId,jdbcType=BIGINT}, #{objectName,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SaleGoal" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sale_goal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="saleGoal != null" >
+        sale_goal,
+      </if>
+      <if test="objectType != null" >
+        object_type,
+      </if>
+      <if test="objectId != null" >
+        object_id,
+      </if>
+      <if test="objectName != null" >
+        object_name,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="saleGoal != null" >
+        #{saleGoal,jdbcType=DOUBLE},
+      </if>
+      <if test="objectType != null" >
+        #{objectType,jdbcType=INTEGER},
+      </if>
+      <if test="objectId != null" >
+        #{objectId,jdbcType=BIGINT},
+      </if>
+      <if test="objectName != null" >
+        #{objectName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SaleGoal" >
+    update sale_goal
+    <set >
+      <if test="year != null" >
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="saleGoal != null" >
+        sale_goal = #{saleGoal,jdbcType=DOUBLE},
+      </if>
+      <if test="objectType != null" >
+        object_type = #{objectType,jdbcType=INTEGER},
+      </if>
+      <if test="objectId != null" >
+        object_id = #{objectId,jdbcType=BIGINT},
+      </if>
+      <if test="objectName != null" >
+        object_name = #{objectName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SaleGoal" >
+    update sale_goal
+    set year = #{year,jdbcType=VARCHAR},
+      month = #{month,jdbcType=VARCHAR},
+      sale_goal = #{saleGoal,jdbcType=DOUBLE},
+      object_type = #{objectType,jdbcType=INTEGER},
+      object_id = #{objectId,jdbcType=BIGINT},
+      object_name = #{objectName,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="querySaleGoalGold" parameterType="java.util.Map" resultType="java.lang.Integer">
+       select IFNULL(sum(a.sale_goal),0) from sale_goal a where a.object_id = #{objectId,jdbcType=BIGINT}
+       and a.object_type = #{objectType,jdbcType=INTEGER}
+       and a.month = #{month,jdbcType=VARCHAR}
+       and a.year = #{year,jdbcType=VARCHAR}
+    </select>
+
+    <select id="querySaleGoalGoldDate" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select IFNULL(sum(a.sale_goal),0) from sale_goal a where a.object_id = #{objectId,jdbcType=BIGINT}
+        and a.object_type = #{objectType,jdbcType=INTEGER}
+        <if test="date == 1">
+            <!--本月-->
+            and DATE_FORMAT( create_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+        </if>
+        <if test="date == 2">
+            <!--上一月-->
+            and PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( create_time, '%Y%m' ) ) =1
+      </if>
+      <if test="date == 3">
+            <!--查询本季度数据-->
+          and QUARTER(create_time)=QUARTER(NOW()) and DATE_FORMAT( create_time, '%Y' ) = DATE_FORMAT(NOW() , '%Y' )
+      </if>
+      <if test="date == 4">
+            <!--查询上季度数据-->
+          and  QUARTER(create_time)=QUARTER(DATE_SUB(now(),interval 1 QUARTER));
+      </if>
+      <if test="date == 5">
+            <!--查询本年数据-->
+          and YEAR(create_time)=YEAR(NOW());
+      </if>
+  </select>
+
+    <select id="list" parameterType="map" resultType="map">
+        SELECT
+        a.userId objectId,
+        a.userName objectName,
+        SUM(a.sale_goal) total,
+        GROUP_CONCAT(
+        a.sale_goal
+        ORDER BY
+        a.`month`
+        ) saleGoal,
+        GROUP_CONCAT(a.`month` ORDER BY a.`month`) month,
+        a.year
+        FROM
+        (
+        SELECT
+        u.user_id userId,
+        u.user_name userName,
+        s.*
+        FROM
+        user_info u
+        LEFT JOIN sale_goal s ON u.user_id = s.object_id
+        AND s.object_type = 2 AND s.`year`=#{year}
+        WHERE
+        u.user_name IS NOT NULL
+        AND u.org_id = #{orgId}
+        ) a
+        WHERE
+        a.object_type = 2
+        OR a.object_type IS NULL
+        GROUP BY
+        a.userId;
+    </select>
+
+
+    <select id="saleGoalList" resultMap="BaseResultMap">
+        SELECT `year`,SUM(sale_goal) sale_goal,create_time,update_time FROM sale_goal WHERE object_id=1 and object_type=1 GROUP BY `year`
+    </select>
+
+
+    <select id="selectIsSaleGoalByUser" parameterType="map" resultMap="BaseResultMap">
+      SELECT
+        <include refid="Base_Column_List" />
+       FROM sale_goal WHERE `year`=#{year} AND `month`=#{month} AND object_id=#{objectId} AND object_type=#{objectType} AND parent_id=#{parentId} limit 1;
+    </select>
+
+    <select id="getOrgRootList" parameterType="long" resultType="string">
+        SELECT getOrgRootList(#{orgId})
+    </select>
+
+
+    <update id="updateSaleGoalById" parameterType="map">
+        update sale_goal
+        <set >
+            <if test="addOrReduce==0">
+                sale_goal = sale_goal+#{saleGoal}
+            </if>
+            <if test="addOrReduce==1">
+                sale_goal = sale_goal-#{saleGoal}
+            </if>
+        </set>
+        ,update_time = now()
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectOrgNameByOrgId" parameterType="long" resultType="string">
+        SELECT org_name FROM org_info WHERE id=#{orgId}
+    </select>
+</mapper>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.FrontRoleMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.FrontRoleMenu" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="front_role_id" property="frontRoleId" jdbcType="BIGINT" />
+    <result column="front_menu_id" property="frontMenuId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, front_role_id, front_menu_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from front_role_menu
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from front_role_menu
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.FrontRoleMenu" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into front_role_menu (front_role_id, front_menu_id, create_time, 
+      update_time)
+    values (#{frontRoleId,jdbcType=BIGINT}, #{frontMenuId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.FrontRoleMenu" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into front_role_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="frontRoleId != null" >
+        front_role_id,
+      </if>
+      <if test="frontMenuId != null" >
+        front_menu_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="frontRoleId != null" >
+        #{frontRoleId,jdbcType=BIGINT},
+      </if>
+      <if test="frontMenuId != null" >
+        #{frontMenuId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.FrontRoleMenu" >
+    update front_role_menu
+    <set >
+      <if test="frontRoleId != null" >
+        front_role_id = #{frontRoleId,jdbcType=BIGINT},
+      </if>
+      <if test="frontMenuId != null" >
+        front_menu_id = #{frontMenuId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.FrontRoleMenu" >
+    update front_role_menu
+    set front_role_id = #{frontRoleId,jdbcType=BIGINT},
+      front_menu_id = #{frontMenuId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT
+        fr.id,
+        fr.front_role_id,
+        fr.front_menu_id,
+        fr.create_time,
+        fr.update_time
+        FROM
+        front_role_menu AS fr
+        JOIN bus_user_role AS bu ON fr.front_role_id = bu.role_id
+        WHERE
+        bu.user_id = #{userId,jdbcType=BIGINT}
+    </select>
+
+</mapper>

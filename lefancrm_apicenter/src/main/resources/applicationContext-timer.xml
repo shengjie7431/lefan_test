@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+    <!-- 要调用的工作类 -->
+    <bean id="surveyCaseTask" class="com.lefancrm.apicenter.task.SurveyCaseTask"></bean>
+    <!-- 定义调用对象和调用对象的方法 -->
+    <bean id="surveyCaseTaskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 调用的类 -->
+        <property name="targetObject">
+            <ref bean="surveyCaseTask"/>
+        </property>
+        <!-- 调用类中的方法 -->
+        <property name="targetMethod">
+            <value>surveyCaseTaskTimer</value>
+        </property>
+        <property name="concurrent" value="false"/>
+    </bean>
+    <!-- 定义触发时间 -->
+    <bean id="surveyCaseTaskTime" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail">
+            <ref bean="surveyCaseTaskJob"/>
+        </property>
+        <!-- cron表达式 -->
+        <property name="cronExpression">
+            <value>0 5 0/1 * * ?</value>
+        </property>
+    </bean>
+    <!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序  -->
+    <bean id="startQuartz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean = "surveyCaseTaskTime"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>

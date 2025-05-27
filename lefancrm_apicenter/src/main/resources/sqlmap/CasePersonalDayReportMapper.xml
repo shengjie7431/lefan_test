@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CasePersonalDayReportMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CasePersonalDayReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="director_id" property="directorId" jdbcType="BIGINT" />
+    <result column="director_name" property="directorName" jdbcType="VARCHAR" />
+    <result column="salesman_id" property="salesmanId" jdbcType="BIGINT" />
+    <result column="salesman_name" property="salesmanName" jdbcType="VARCHAR" />
+    <result column="is_disability" property="isDisability" jdbcType="INTEGER" />
+    <result column="agent_sign_num" property="agentSignNum" jdbcType="INTEGER" />
+    <result column="agent_service_money" property="agentServiceMoney" jdbcType="DOUBLE" />
+    <result column="advance_agent_service_money" property="advanceAgentServiceMoney" jdbcType="DOUBLE" />
+    <result column="ok_agent_service_money" property="okAgentServiceMoney" jdbcType="DOUBLE" />
+    <result column="loan_sign_num" property="loanSignNum" jdbcType="INTEGER" />
+    <result column="loan_service_money" property="loanServiceMoney" jdbcType="DOUBLE" />
+    <result column="loan_channel_money" property="loanChannelMoney" jdbcType="DOUBLE" />
+    <result column="advance_loan_service_money" property="advanceLoanServiceMoney" jdbcType="DOUBLE" />
+    <result column="ok_loan_service_money" property="okLoanServiceMoney" jdbcType="DOUBLE" />
+    <result column="destroy_case_num" property="destroyCaseNum" jdbcType="INTEGER" />
+    <result column="new_case_num" property="newCaseNum" jdbcType="INTEGER" />
+    <result column="new_service_money" property="newServiceMoney" jdbcType="DOUBLE" />
+    <result column="total_sign_num" property="totalSignNum" jdbcType="INTEGER" />
+    <result column="total_service_money" property="totalServiceMoney" jdbcType="DOUBLE" />
+      <result column="total_ok_service_money" property="totalOkServiceMoney" jdbcType="DOUBLE" />
+    <result column="total_ad_service_money" property="totalAdServiceMoney" jdbcType="DOUBLE" />
+    <result column="case_input_num" property="caseInputNum" jdbcType="INTEGER" />
+    <result column="case_target_num" property="caseTargetNum" jdbcType="INTEGER" />
+    <result column="case_potential_num" property="casePotentialNum" jdbcType="INTEGER" />
+    <result column="case_intention_num" property="caseIntentionNum" jdbcType="INTEGER" />
+    <result column="case_sign_num" property="caseSignNum" jdbcType="INTEGER" />
+    <result column="target_to_pot_rate" property="targetToPotRate" jdbcType="DOUBLE" />
+    <result column="pot_to_inte_rate" property="potToInteRate" jdbcType="DOUBLE" />
+    <result column="inte_to_sign_rate" property="inteToSignRate" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, org_id, org_name, date, director_id, director_name, salesman_id, salesman_name, 
+    is_disability, agent_sign_num, agent_service_money, advance_agent_service_money, ok_agent_service_money,
+    loan_sign_num, loan_service_money, loan_channel_money, advance_loan_service_money, ok_loan_service_money,
+    destroy_case_num, new_case_num, new_service_money, total_sign_num, total_service_money, total_ok_service_money
+    total_ad_service_money, case_input_num, case_target_num, case_potential_num, case_intention_num, 
+    case_sign_num, target_to_pot_rate, pot_to_inte_rate, inte_to_sign_rate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_personal_day_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from case_personal_day_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CasePersonalDayReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_personal_day_report (org_id, org_name, date, 
+      director_id, director_name, salesman_id, 
+      salesman_name, is_disability, agent_sign_num, 
+      agent_service_money, advance_agent_service_money, ok_agent_service_money,
+      loan_sign_num, loan_service_money, loan_channel_money, 
+      advance_loan_service_money, ok_loan_service_money, destroy_case_num,
+      new_case_num, new_service_money, total_sign_num, 
+      total_service_money, total_ok_service_money,total_ad_service_money, case_input_num,
+      case_target_num, case_potential_num, case_intention_num, 
+      case_sign_num, target_to_pot_rate, pot_to_inte_rate, 
+      inte_to_sign_rate)
+    values (#{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, 
+      #{directorId,jdbcType=BIGINT}, #{directorName,jdbcType=VARCHAR}, #{salesmanId,jdbcType=BIGINT}, 
+      #{salesmanName,jdbcType=VARCHAR}, #{isDisability,jdbcType=INTEGER}, #{agentSignNum,jdbcType=INTEGER}, 
+      #{agentServiceMoney,jdbcType=DOUBLE}, #{advanceAgentServiceMoney,jdbcType=DOUBLE}, #{okAgentServiceMoney,jdbcType=DOUBLE},
+      #{loanSignNum,jdbcType=INTEGER}, #{loanServiceMoney,jdbcType=DOUBLE}, #{loanChannelMoney,jdbcType=DOUBLE}, 
+      #{advanceLoanServiceMoney,jdbcType=DOUBLE},#{okLoanServiceMoney,jdbcType=DOUBLE}, #{destroyCaseNum,jdbcType=INTEGER},
+      #{newCaseNum,jdbcType=INTEGER}, #{newServiceMoney,jdbcType=DOUBLE}, #{totalSignNum,jdbcType=INTEGER}, 
+      #{totalServiceMoney,jdbcType=DOUBLE}, #{totalOkServiceMoney,jdbcType=DOUBLE},#{totalAdServiceMoney,jdbcType=DOUBLE}, #{caseInputNum,jdbcType=INTEGER},
+      #{caseTargetNum,jdbcType=INTEGER}, #{casePotentialNum,jdbcType=INTEGER}, #{caseIntentionNum,jdbcType=INTEGER}, 
+      #{caseSignNum,jdbcType=INTEGER}, #{targetToPotRate,jdbcType=DOUBLE}, #{potToInteRate,jdbcType=DOUBLE}, 
+      #{inteToSignRate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CasePersonalDayReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_personal_day_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="directorId != null" >
+        director_id,
+      </if>
+      <if test="directorName != null" >
+        director_name,
+      </if>
+      <if test="salesmanId != null" >
+        salesman_id,
+      </if>
+      <if test="salesmanName != null" >
+        salesman_name,
+      </if>
+      <if test="isDisability != null" >
+        is_disability,
+      </if>
+      <if test="agentSignNum != null" >
+        agent_sign_num,
+      </if>
+      <if test="agentServiceMoney != null" >
+        agent_service_money,
+      </if>
+      <if test="advanceAgentServiceMoney != null" >
+        advance_agent_service_money,
+      </if>
+      <if test="okAgentServiceMoney != null" >
+        ok_agent_service_money,
+      </if>
+      <if test="loanSignNum != null" >
+        loan_sign_num,
+      </if>
+      <if test="loanServiceMoney != null" >
+        loan_service_money,
+      </if>
+      <if test="loanChannelMoney != null" >
+        loan_channel_money,
+      </if>
+      <if test="advanceLoanServiceMoney != null" >
+        advance_loan_service_money,
+      </if>
+      <if test="okLoanServiceMoney != null" >
+        ok_loan_service_money,
+      </if>
+      <if test="destroyCaseNum != null" >
+        destroy_case_num,
+      </if>
+      <if test="newCaseNum != null" >
+        new_case_num,
+      </if>
+      <if test="newServiceMoney != null" >
+        new_service_money,
+      </if>
+      <if test="totalSignNum != null" >
+        total_sign_num,
+      </if>
+      <if test="totalServiceMoney != null" >
+        total_service_money,
+      </if>
+        <if test="totalOkServiceMoney != null" >
+            total_ok_service_money,
+        </if>
+      <if test="totalAdServiceMoney != null" >
+        total_ad_service_money,
+      </if>
+      <if test="caseInputNum != null" >
+        case_input_num,
+      </if>
+      <if test="caseTargetNum != null" >
+        case_target_num,
+      </if>
+      <if test="casePotentialNum != null" >
+        case_potential_num,
+      </if>
+      <if test="caseIntentionNum != null" >
+        case_intention_num,
+      </if>
+      <if test="caseSignNum != null" >
+        case_sign_num,
+      </if>
+      <if test="targetToPotRate != null" >
+        target_to_pot_rate,
+      </if>
+      <if test="potToInteRate != null" >
+        pot_to_inte_rate,
+      </if>
+      <if test="inteToSignRate != null" >
+        inte_to_sign_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="directorId != null" >
+        #{directorId,jdbcType=BIGINT},
+      </if>
+      <if test="directorName != null" >
+        #{directorName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesmanId != null" >
+        #{salesmanId,jdbcType=BIGINT},
+      </if>
+      <if test="salesmanName != null" >
+        #{salesmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisability != null" >
+        #{isDisability,jdbcType=INTEGER},
+      </if>
+      <if test="agentSignNum != null" >
+        #{agentSignNum,jdbcType=INTEGER},
+      </if>
+      <if test="agentServiceMoney != null" >
+        #{agentServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="advanceAgentServiceMoney != null" >
+        #{advanceAgentServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="okAgentServiceMoney != null" >
+        #{okAgentServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="loanSignNum != null" >
+        #{loanSignNum,jdbcType=INTEGER},
+      </if>
+      <if test="loanServiceMoney != null" >
+        #{loanServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="loanChannelMoney != null" >
+        #{loanChannelMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="advanceLoanServiceMoney != null" >
+        #{advanceLoanServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="okLoanServiceMoney != null" >
+        #{okLoanServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="destroyCaseNum != null" >
+        #{destroyCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="newCaseNum != null" >
+        #{newCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="newServiceMoney != null" >
+        #{newServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="totalSignNum != null" >
+        #{totalSignNum,jdbcType=INTEGER},
+      </if>
+      <if test="totalServiceMoney != null" >
+        #{totalServiceMoney,jdbcType=DOUBLE},
+      </if>
+        <if test="totalOkServiceMoney != null" >
+            #{totalOkServiceMoney,jdbcType=DOUBLE},
+        </if>
+      <if test="totalAdServiceMoney != null" >
+        #{totalAdServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="caseInputNum != null" >
+        #{caseInputNum,jdbcType=INTEGER},
+      </if>
+      <if test="caseTargetNum != null" >
+        #{caseTargetNum,jdbcType=INTEGER},
+      </if>
+      <if test="casePotentialNum != null" >
+        #{casePotentialNum,jdbcType=INTEGER},
+      </if>
+      <if test="caseIntentionNum != null" >
+        #{caseIntentionNum,jdbcType=INTEGER},
+      </if>
+      <if test="caseSignNum != null" >
+        #{caseSignNum,jdbcType=INTEGER},
+      </if>
+      <if test="targetToPotRate != null" >
+        #{targetToPotRate,jdbcType=DOUBLE},
+      </if>
+      <if test="potToInteRate != null" >
+        #{potToInteRate,jdbcType=DOUBLE},
+      </if>
+      <if test="inteToSignRate != null" >
+        #{inteToSignRate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CasePersonalDayReport" >
+    update case_personal_day_report
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="directorId != null" >
+        director_id = #{directorId,jdbcType=BIGINT},
+      </if>
+      <if test="directorName != null" >
+        director_name = #{directorName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesmanId != null" >
+        salesman_id = #{salesmanId,jdbcType=BIGINT},
+      </if>
+      <if test="salesmanName != null" >
+        salesman_name = #{salesmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisability != null" >
+        is_disability = #{isDisability,jdbcType=INTEGER},
+      </if>
+      <if test="agentSignNum != null" >
+        agent_sign_num = #{agentSignNum,jdbcType=INTEGER},
+      </if>
+      <if test="agentServiceMoney != null" >
+        agent_service_money = #{agentServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="advanceAgentServiceMoney != null" >
+        advance_agent_service_money = #{advanceAgentServiceMoney,jdbcType=DOUBLE},
+      </if>
+        <if test="okAgentServiceMoney != null" >
+            ok_agent_service_money = #{okAgentServiceMoney,jdbcType=DOUBLE},
+        </if>
+      <if test="loanSignNum != null" >
+        loan_sign_num = #{loanSignNum,jdbcType=INTEGER},
+      </if>
+      <if test="loanServiceMoney != null" >
+        loan_service_money = #{loanServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="loanChannelMoney != null" >
+        loan_channel_money = #{loanChannelMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="advanceLoanServiceMoney != null" >
+        advance_loan_service_money = #{advanceLoanServiceMoney,jdbcType=DOUBLE},
+      </if>
+        <if test="okLoanServiceMoney != null" >
+            ok_loan_service_money = #{okLoanServiceMoney,jdbcType=DOUBLE},
+        </if>
+      <if test="destroyCaseNum != null" >
+        destroy_case_num = #{destroyCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="newCaseNum != null" >
+        new_case_num = #{newCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="newServiceMoney != null" >
+        new_service_money = #{newServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="totalSignNum != null" >
+        total_sign_num = #{totalSignNum,jdbcType=INTEGER},
+      </if>
+      <if test="totalServiceMoney != null" >
+        total_service_money = #{totalServiceMoney,jdbcType=DOUBLE},
+      </if>
+        <if test="totalOkServiceMoney != null" >
+            total_ok_service_money = #{totalOkServiceMoney,jdbcType=DOUBLE},
+        </if>
+      <if test="totalAdServiceMoney != null" >
+        total_ad_service_money = #{totalAdServiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="caseInputNum != null" >
+        case_input_num = #{caseInputNum,jdbcType=INTEGER},
+      </if>
+      <if test="caseTargetNum != null" >
+        case_target_num = #{caseTargetNum,jdbcType=INTEGER},
+      </if>
+      <if test="casePotentialNum != null" >
+        case_potential_num = #{casePotentialNum,jdbcType=INTEGER},
+      </if>
+      <if test="caseIntentionNum != null" >
+        case_intention_num = #{caseIntentionNum,jdbcType=INTEGER},
+      </if>
+      <if test="caseSignNum != null" >
+        case_sign_num = #{caseSignNum,jdbcType=INTEGER},
+      </if>
+      <if test="targetToPotRate != null" >
+        target_to_pot_rate = #{targetToPotRate,jdbcType=DOUBLE},
+      </if>
+      <if test="potToInteRate != null" >
+        pot_to_inte_rate = #{potToInteRate,jdbcType=DOUBLE},
+      </if>
+      <if test="inteToSignRate != null" >
+        inte_to_sign_rate = #{inteToSignRate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CasePersonalDayReport" >
+    update case_personal_day_report
+    set org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      director_id = #{directorId,jdbcType=BIGINT},
+      director_name = #{directorName,jdbcType=VARCHAR},
+      salesman_id = #{salesmanId,jdbcType=BIGINT},
+      salesman_name = #{salesmanName,jdbcType=VARCHAR},
+      is_disability = #{isDisability,jdbcType=INTEGER},
+      agent_sign_num = #{agentSignNum,jdbcType=INTEGER},
+      agent_service_money = #{agentServiceMoney,jdbcType=DOUBLE},
+      advance_agent_service_money = #{advanceAgentServiceMoney,jdbcType=DOUBLE},
+      ok_agent_service_money = #{okAgentServiceMoney,jdbcType=DOUBLE},
+      loan_sign_num = #{loanSignNum,jdbcType=INTEGER},
+      loan_service_money = #{loanServiceMoney,jdbcType=DOUBLE},
+      loan_channel_money = #{loanChannelMoney,jdbcType=DOUBLE},
+      advance_loan_service_money = #{advanceLoanServiceMoney,jdbcType=DOUBLE},
+      ok_loan_service_money = #{okLoanServiceMoney,jdbcType=DOUBLE},
+      destroy_case_num = #{destroyCaseNum,jdbcType=INTEGER},
+      new_case_num = #{newCaseNum,jdbcType=INTEGER},
+      new_service_money = #{newServiceMoney,jdbcType=DOUBLE},
+      total_sign_num = #{totalSignNum,jdbcType=INTEGER},
+      total_service_money = #{totalServiceMoney,jdbcType=DOUBLE},
+      total_ok_service_money = #{totalOkServiceMoney,jdbcType=DOUBLE},
+      total_ad_service_money = #{totalAdServiceMoney,jdbcType=DOUBLE},
+      case_input_num = #{caseInputNum,jdbcType=INTEGER},
+      case_target_num = #{caseTargetNum,jdbcType=INTEGER},
+      case_potential_num = #{casePotentialNum,jdbcType=INTEGER},
+      case_intention_num = #{caseIntentionNum,jdbcType=INTEGER},
+      case_sign_num = #{caseSignNum,jdbcType=INTEGER},
+      target_to_pot_rate = #{targetToPotRate,jdbcType=DOUBLE},
+      pot_to_inte_rate = #{potToInteRate,jdbcType=DOUBLE},
+      inte_to_sign_rate = #{inteToSignRate,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        b.org_id, b.org_name, b.date,b.is_disability,b.director_id, b.director_name,b.salesman_id,b.salesman_name,
+        sum(b.agent_sign_num) as agent_sign_num, sum(b.agent_service_money) as agent_service_money,
+        sum(b.advance_agent_service_money) as advance_agent_service_money,
+        sum(b.ok_agent_service_money) as ok_agent_service_money, sum(b.loan_sign_num) as loan_sign_num,
+        sum(b.loan_service_money) as loan_service_money, sum(b.loan_channel_money) as loan_channel_money,
+        sum(b.advance_loan_service_money) as advance_loan_service_money,
+        sum(b.ok_loan_service_money) as ok_loan_service_money,sum(b.destroy_case_num) as destroy_case_num,
+        sum(b.new_case_num) as new_case_num, sum(b.new_service_money) as new_service_money,
+        (ifnull(sum(b.agent_sign_num),0) + ifnull(sum(b.loan_sign_num),0)) as total_sign_num,
+        (ifnull(sum(b.agent_service_money),0) + ifnull(sum(b.loan_service_money),0)) as total_service_money,
+        (ifnull(sum(b.ok_agent_service_money),0) + ifnull(sum(b.ok_loan_service_money),0)) as total_ok_service_money,
+        (ifnull(sum(b.advance_agent_service_money),0) + ifnull(sum(b.advance_loan_service_money),0)) as total_ad_service_money,
+        sum(b.case_input_num) as case_input_num, sum(b.case_target_num) as case_target_num, sum(b.case_potential_num) as case_potential_num,
+        sum(b.case_intention_num) as case_intention_num, sum(b.case_sign_num) as  case_sign_num,
+        ROUND((sum(b.case_potential_num) / (case when sum(b.case_target_num)=0 then 1 else sum(b.case_target_num) end))*100 , 2) as target_to_pot_rate,
+        ROUND((sum(b.case_sign_num) / (case when sum(b.case_potential_num)=0 then 1 else sum(b.case_potential_num) end))*100 , 2) as inte_to_sign_rate
+        from case_personal_day_report b
+        <if test="isDisability ==null">
+            left join case_personal_day_report r1 on DATE_FORMAT(r1.date,'%Y-%m-%d') = DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d') and r1.is_disability = 0 and b.salesman_id = r1.salesman_id
+            left join case_personal_day_report r2 on DATE_FORMAT(r2.date,'%Y-%m-%d') = DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d') and r2.is_disability = 1 and b.salesman_id = r2.salesman_id
+        </if>
+        <where>
+            <if test="orgId != null" >
+                and b.org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="directorName != null" >
+                and b.director_name like concat('%',#{directorName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and b.salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="today == 1" >
+                and date_format(b.date,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
+            </if>
+            <if test="timeType == 1" >
+                <if test="startDate != null" >
+                    and DATE_FORMAT(b.date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="endDate != null" >
+                    and DATE_FORMAT(b.date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+            </if>
+            <if test="timeType == 30" >
+                <if test="month != null" >
+                    and b.date like concat('%',#{month,jdbcType=VARCHAR},'%')
+                </if>
+                <if test="month == null" >
+                    and date_format(b.date,'%Y-%m') = date_format(now(),'%Y-%m')
+                </if>
+            </if>
+            <if test="isDisability !=null">
+                and b.is_disability = #{isDisability,jdbcType=BIGINT}
+            </if>
+        </where>
+        group by b.org_id,b.director_id, b.salesman_id
+        <if test="export != 1">
+          order by b.org_name desc
+        </if>
+    </select>
+
+    <select id="selectCountList" resultType="int" parameterType="java.util.Map" >
+        select count(1) from
+        (select org_id from case_personal_day_report b
+        <where>
+            <if test="orgId != null" >
+                and org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="directorName != null" >
+                and director_name like concat('%',#{directorName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="salesmanName != null" >
+                and salesman_name like concat('%',#{salesmanName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="today == 1" >
+                and date_format(date,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
+            </if>
+            <if test="timeType == 1" >
+                <if test="startDate != null" >
+                    and DATE_FORMAT(date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+                <if test="endDate != null" >
+                    and DATE_FORMAT(date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                </if>
+            </if>
+            <if test="timeType == 30" >
+                <if test="month != null" >
+                    and date like concat('%',#{month,jdbcType=VARCHAR},'%')
+                </if>
+                <if test="month == null" >
+                    and date_format(date,'%Y-%m') = date_format(now(),'%Y-%m')
+                </if>
+            </if>
+            <if test="isDisability !=null">
+                and b.is_disability = #{isDisability,jdbcType=BIGINT}
+            </if>
+        </where>
+        group by org_id,director_id, salesman_id) a
+    </select>
+</mapper>

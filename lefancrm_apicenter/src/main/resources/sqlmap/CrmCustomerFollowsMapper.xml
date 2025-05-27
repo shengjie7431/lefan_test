@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CrmCustomerFollowsMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CrmCustomerFollows" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="follow_time" property="followTime" jdbcType="TIMESTAMP" />
+    <result column="follow_address" property="followAddress" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DOUBLE" />
+    <result column="latitude" property="latitude" jdbcType="DOUBLE" />
+    <result column="follow_state" property="followState" jdbcType="INTEGER" />
+    <result column="next_follow_time" property="nextFollowTime" jdbcType="TIMESTAMP" />
+    <result column="follow_desc" property="followDesc" jdbcType="VARCHAR" />
+    <result column="follow_type" property="followType" jdbcType="INTEGER"/>
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, customer_id, customer_name, follow_time, follow_address, longitude, latitude, 
+    follow_state, next_follow_time, follow_desc,follow_type,create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_customer_follows
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectByPrimaryCustomerId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from crm_customer_follows
+        where customer_id = #{customerId,jdbcType=BIGINT} ORDER BY create_time DESC LIMIT 1
+    </select>
+    <select id="selectFollowsByCustomerId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from crm_customer_follows
+        where customer_id = #{customerId,jdbcType=BIGINT} ORDER BY create_time DESC
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from crm_customer_follows
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CrmCustomerFollows" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crm_customer_follows (customer_id, customer_name, follow_time, 
+      follow_address, longitude, latitude, 
+      follow_state, next_follow_time, follow_desc,follow_type,create_time
+      )
+    values (#{customerId,jdbcType=BIGINT}, #{customerName,jdbcType=VARCHAR}, #{followTime,jdbcType=TIMESTAMP},
+      #{followAddress,jdbcType=VARCHAR}, #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}, 
+      #{followState,jdbcType=INTEGER}, #{nextFollowTime,jdbcType=TIMESTAMP}, #{followDesc,jdbcType=VARCHAR},
+      #{followType,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CrmCustomerFollows" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crm_customer_follows
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="followTime != null" >
+        follow_time,
+      </if>
+      <if test="followAddress != null" >
+        follow_address,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="followState != null" >
+        follow_state,
+      </if>
+      <if test="nextFollowTime != null" >
+        next_follow_time,
+      </if>
+      <if test="followDesc != null" >
+        follow_desc,
+      </if>
+      <if test="followType != null">
+        follow_type,
+      </if>
+        <if test="createTime != null">
+            create_time,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null" >
+        #{followTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followAddress != null" >
+        #{followAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="followState != null" >
+        #{followState,jdbcType=INTEGER},
+      </if>
+      <if test="nextFollowTime != null" >
+        #{nextFollowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followDesc != null" >
+        #{followDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="followType != null">
+        #{followType,jdbcType=INTEGER},
+      </if>
+        <if test="createTime != null">
+            #{createTime,jdbcType=TIMESTAMP},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CrmCustomerFollows" >
+    update crm_customer_follows
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null" >
+        follow_time = #{followTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followAddress != null" >
+        follow_address = #{followAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="followState != null" >
+        follow_state = #{followState,jdbcType=INTEGER},
+      </if>
+      <if test="nextFollowTime != null" >
+        next_follow_time = #{nextFollowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followDesc != null" >
+        follow_desc = #{followDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="followType != null" >
+          follow_type = #{followType,jdbcType=VARCHAR},
+      </if>
+        <if test="createTime != null">
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CrmCustomerFollows" >
+    update crm_customer_follows
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      follow_time = #{followTime,jdbcType=TIMESTAMP},
+      follow_address = #{followAddress,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      follow_state = #{followState,jdbcType=INTEGER},
+      next_follow_time = #{nextFollowTime,jdbcType=TIMESTAMP},
+      follow_desc = #{followDesc,jdbcType=VARCHAR},
+      follow_type = #{followType,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="countToFollowToday" parameterType="java.util.Map" resultType="java.lang.Integer">
+     SELECT
+     count(0)
+     FROM
+     crm_customer_follows AS f
+     WHERE
+     f.next_follow_time = #{nowDate} AND
+     f.follow_state IN (${followState}) AND f.customer_id IN ( SELECT c.id FROM crm_customer_info c WHERE c.cc_id = #{ccId,jdbcType=BIGINT} )
+   </select>
+    <select id="countToFollowOverTime" parameterType="java.util.Map" resultType="java.lang.Integer">
+       SELECT
+       count(0)
+       FROM
+       crm_customer_follows AS f
+       WHERE
+       f.follow_state IN (${followState}) AND
+       f.next_follow_time &lt; #{nowDate}  AND f.customer_id IN ( SELECT c.id FROM crm_customer_info c WHERE c.cc_id = #{ccId,jdbcType=BIGINT} )
+   </select>
+   <select id="countForFollowStatus" parameterType="java.util.Map" resultType="java.lang.Integer">
+     SELECT
+     count(0)
+     FROM
+     crm_customer_follows AS f
+     WHERE
+     f.follow_state = #{followState,jdbcType=INTEGER} AND
+     f.customer_id IN ( SELECT c.id FROM crm_customer_info c WHERE c.cc_id = #{ccId,jdbcType=BIGINT} )
+   </select>
+   <select id="countForGiveupFollowStatus" parameterType="java.util.Map" resultType="java.lang.Integer">
+      SELECT
+       count(0)
+     FROM
+     crm_customer_follows AS f
+     WHERE
+     f.follow_state = #{followState,jdbcType=INTEGER} AND
+     f.customer_id IN ( SELECT c.id FROM crm_customer_info c WHERE c.cc_id = #{ccId,jdbcType=BIGINT} )
+   </select>
+</mapper>

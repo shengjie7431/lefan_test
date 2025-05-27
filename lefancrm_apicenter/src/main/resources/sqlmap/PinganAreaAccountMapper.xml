@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.PinganAreaAccountMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.PinganAreaAccount" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="case_id" property="caseId" jdbcType="BIGINT" />
+        <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+        <result column="service_code" property="serviceCode" jdbcType="VARCHAR" />
+        <result column="system_id" property="systemId" jdbcType="VARCHAR" />
+        <result column="channel" property="channel" jdbcType="VARCHAR" />
+        <result column="system" property="system" jdbcType="VARCHAR" />
+        <result column="pc_ip" property="pcIp" jdbcType="VARCHAR" />
+        <result column="device_num" property="deviceNum" jdbcType="VARCHAR" />
+        <result column="device_message" property="deviceMessage" jdbcType="VARCHAR" />
+        <result column="co_oper_code" property="coOperCode" jdbcType="VARCHAR" />
+        <result column="merchant_no" property="merchantNo" jdbcType="VARCHAR" />
+        <result column="partner_id" property="partnerId" jdbcType="VARCHAR" />
+        <result column="bind_mobile" property="bindMobile" jdbcType="VARCHAR" />
+        <result column="real_name" property="realName" jdbcType="VARCHAR" />
+        <result column="birth_date" property="birthDate" jdbcType="TIMESTAMP" />
+        <result column="identity_type" property="identityType" jdbcType="VARCHAR" />
+        <result column="identity_number" property="identityNumber" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="INTEGER" />
+        <result column="hash_func" property="hashFunc" jdbcType="VARCHAR" />
+        <result column="salt" property="salt" jdbcType="VARCHAR" />
+        <result column="encrypt" property="encrypt" jdbcType="VARCHAR" />
+        <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="is_success" property="isSuccess" jdbcType="INTEGER" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, case_id, case_no, service_code, system_id, channel, system, pc_ip, device_num,
+        device_message, co_oper_code, merchant_no, partner_id, bind_mobile, real_name, birth_date,
+        identity_type, identity_number, sex, hash_func, salt, encrypt, customer_id, create_time,
+        is_success, remark
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from pingan_area_account
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByCaseId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from pingan_area_account
+        where case_id = #{caseId,jdbcType=BIGINT} order by id desc limit 1
+    </select>
+    <select id="selectByCustomerId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from pingan_area_account
+        where customer_id = #{customerId,jdbcType=VARCHAR} order by id desc limit 1
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from pingan_area_account
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.PinganAreaAccount" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into pingan_area_account (case_id, case_no, service_code,
+        system_id, channel, system,
+        pc_ip, device_num, device_message,
+        co_oper_code, merchant_no, partner_id,
+        bind_mobile, real_name, birth_date,
+        identity_type, identity_number, sex,
+        hash_func, salt, encrypt,
+        customer_id, create_time, is_success,
+        remark)
+        values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{serviceCode,jdbcType=VARCHAR},
+        #{systemId,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, #{system,jdbcType=VARCHAR},
+        #{pcIp,jdbcType=VARCHAR}, #{deviceNum,jdbcType=VARCHAR}, #{deviceMessage,jdbcType=VARCHAR},
+        #{coOperCode,jdbcType=VARCHAR}, #{merchantNo,jdbcType=VARCHAR}, #{partnerId,jdbcType=VARCHAR},
+        #{bindMobile,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{birthDate,jdbcType=TIMESTAMP},
+        #{identityType,jdbcType=VARCHAR}, #{identityNumber,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER},
+        #{hashFunc,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{encrypt,jdbcType=VARCHAR},
+        #{customerId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{isSuccess,jdbcType=INTEGER},
+        #{remark,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.PinganAreaAccount" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into pingan_area_account
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="caseId != null" >
+                case_id,
+            </if>
+            <if test="caseNo != null" >
+                case_no,
+            </if>
+            <if test="serviceCode != null" >
+                service_code,
+            </if>
+            <if test="systemId != null" >
+                system_id,
+            </if>
+            <if test="channel != null" >
+                channel,
+            </if>
+            <if test="system != null" >
+                system,
+            </if>
+            <if test="pcIp != null" >
+                pc_ip,
+            </if>
+            <if test="deviceNum != null" >
+                device_num,
+            </if>
+            <if test="deviceMessage != null" >
+                device_message,
+            </if>
+            <if test="coOperCode != null" >
+                co_oper_code,
+            </if>
+            <if test="merchantNo != null" >
+                merchant_no,
+            </if>
+            <if test="partnerId != null" >
+                partner_id,
+            </if>
+            <if test="bindMobile != null" >
+                bind_mobile,
+            </if>
+            <if test="realName != null" >
+                real_name,
+            </if>
+            <if test="birthDate != null" >
+                birth_date,
+            </if>
+            <if test="identityType != null" >
+                identity_type,
+            </if>
+            <if test="identityNumber != null" >
+                identity_number,
+            </if>
+            <if test="sex != null" >
+                sex,
+            </if>
+            <if test="hashFunc != null" >
+                hash_func,
+            </if>
+            <if test="salt != null" >
+                salt,
+            </if>
+            <if test="encrypt != null" >
+                encrypt,
+            </if>
+            <if test="customerId != null" >
+                customer_id,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="isSuccess != null" >
+                is_success,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="caseId != null" >
+                #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceCode != null" >
+                #{serviceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="systemId != null" >
+                #{systemId,jdbcType=VARCHAR},
+            </if>
+            <if test="channel != null" >
+                #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="system != null" >
+                #{system,jdbcType=VARCHAR},
+            </if>
+            <if test="pcIp != null" >
+                #{pcIp,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceNum != null" >
+                #{deviceNum,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceMessage != null" >
+                #{deviceMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="coOperCode != null" >
+                #{coOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantNo != null" >
+                #{merchantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="partnerId != null" >
+                #{partnerId,jdbcType=VARCHAR},
+            </if>
+            <if test="bindMobile != null" >
+                #{bindMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null" >
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="birthDate != null" >
+                #{birthDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="identityType != null" >
+                #{identityType,jdbcType=VARCHAR},
+            </if>
+            <if test="identityNumber != null" >
+                #{identityNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="hashFunc != null" >
+                #{hashFunc,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null" >
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="encrypt != null" >
+                #{encrypt,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null" >
+                #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isSuccess != null" >
+                #{isSuccess,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.PinganAreaAccount" >
+        update pingan_area_account
+        <set >
+            <if test="caseId != null" >
+                case_id = #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                case_no = #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceCode != null" >
+                service_code = #{serviceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="systemId != null" >
+                system_id = #{systemId,jdbcType=VARCHAR},
+            </if>
+            <if test="channel != null" >
+                channel = #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="system != null" >
+                system = #{system,jdbcType=VARCHAR},
+            </if>
+            <if test="pcIp != null" >
+                pc_ip = #{pcIp,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceNum != null" >
+                device_num = #{deviceNum,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceMessage != null" >
+                device_message = #{deviceMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="coOperCode != null" >
+                co_oper_code = #{coOperCode,jdbcType=VARCHAR},
+            </if>
+            <if test="merchantNo != null" >
+                merchant_no = #{merchantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="partnerId != null" >
+                partner_id = #{partnerId,jdbcType=VARCHAR},
+            </if>
+            <if test="bindMobile != null" >
+                bind_mobile = #{bindMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null" >
+                real_name = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="birthDate != null" >
+                birth_date = #{birthDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="identityType != null" >
+                identity_type = #{identityType,jdbcType=VARCHAR},
+            </if>
+            <if test="identityNumber != null" >
+                identity_number = #{identityNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="hashFunc != null" >
+                hash_func = #{hashFunc,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null" >
+                salt = #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="encrypt != null" >
+                encrypt = #{encrypt,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null" >
+                customer_id = #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isSuccess != null" >
+                is_success = #{isSuccess,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.PinganAreaAccount" >
+        update pingan_area_account
+        set case_id = #{caseId,jdbcType=BIGINT},
+        case_no = #{caseNo,jdbcType=VARCHAR},
+        service_code = #{serviceCode,jdbcType=VARCHAR},
+        system_id = #{systemId,jdbcType=VARCHAR},
+        channel = #{channel,jdbcType=VARCHAR},
+        system = #{system,jdbcType=VARCHAR},
+        pc_ip = #{pcIp,jdbcType=VARCHAR},
+        device_num = #{deviceNum,jdbcType=VARCHAR},
+        device_message = #{deviceMessage,jdbcType=VARCHAR},
+        co_oper_code = #{coOperCode,jdbcType=VARCHAR},
+        merchant_no = #{merchantNo,jdbcType=VARCHAR},
+        partner_id = #{partnerId,jdbcType=VARCHAR},
+        bind_mobile = #{bindMobile,jdbcType=VARCHAR},
+        real_name = #{realName,jdbcType=VARCHAR},
+        birth_date = #{birthDate,jdbcType=TIMESTAMP},
+        identity_type = #{identityType,jdbcType=VARCHAR},
+        identity_number = #{identityNumber,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=INTEGER},
+        hash_func = #{hashFunc,jdbcType=VARCHAR},
+        salt = #{salt,jdbcType=VARCHAR},
+        encrypt = #{encrypt,jdbcType=VARCHAR},
+        customer_id = #{customerId,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        is_success = #{isSuccess,jdbcType=INTEGER},
+        remark = #{remark,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

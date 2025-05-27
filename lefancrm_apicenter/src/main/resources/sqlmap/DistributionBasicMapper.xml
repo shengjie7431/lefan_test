@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.DistributionBasicMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.DistributionBasic" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="foregift_money" property="foregiftMoney" jdbcType="DOUBLE" />
+        <result column="one_level_money" property="oneLevelMoney" jdbcType="DOUBLE" />
+        <result column="two_level_money" property="twoLevelMoney" jdbcType="DOUBLE" />
+        <result column="three_level_money" property="threeLevelMoney" jdbcType="DOUBLE" />
+        <result column="case_money" property="caseMoney" jdbcType="DOUBLE" />
+        <result column="withdrawals_money" property="withdrawalsMoney" jdbcType="DOUBLE" />
+        <result column="one_case_money" property="oneCaseMoney" jdbcType="DOUBLE" />
+        <result column="two_case_money" property="twoCaseMoney" jdbcType="DOUBLE" />
+        <result column="three_case_money" property="threeCaseMoney" jdbcType="DOUBLE" />
+        <result column="loan_interest_rate" property="loanInterestRate" jdbcType="DOUBLE" />
+        <result column="loan_rate" property="loanRate" jdbcType="DOUBLE" />
+        <result column="one_company_money" property="oneCompanyMoney" jdbcType="DOUBLE" />
+        <result column="two_company_money" property="twoCompanyMoney" jdbcType="DOUBLE" />
+        <result column="three_company_money" property="threeCompanyMoney" jdbcType="DOUBLE" />
+        <result column="down_money" property="downMoney" jdbcType="DOUBLE" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, foregift_money, one_level_money, two_level_money, three_level_money, case_money,
+        withdrawals_money, one_case_money, two_case_money, three_case_money, loan_interest_rate,
+        loan_rate, one_company_money, two_company_money, three_company_money, down_money
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from distribution_basic
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from distribution_basic
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.DistributionBasic" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into distribution_basic (foregift_money, one_level_money, two_level_money,
+        three_level_money, case_money, withdrawals_money,
+        one_case_money, two_case_money, three_case_money,
+        loan_interest_rate, loan_rate, one_company_money,
+        two_company_money, three_company_money, down_money
+        )
+        values (#{foregiftMoney,jdbcType=DOUBLE}, #{oneLevelMoney,jdbcType=DOUBLE}, #{twoLevelMoney,jdbcType=DOUBLE},
+        #{threeLevelMoney,jdbcType=DOUBLE}, #{caseMoney,jdbcType=DOUBLE}, #{withdrawalsMoney,jdbcType=DOUBLE},
+        #{oneCaseMoney,jdbcType=DOUBLE}, #{twoCaseMoney,jdbcType=DOUBLE}, #{threeCaseMoney,jdbcType=DOUBLE},
+        #{loanInterestRate,jdbcType=DOUBLE}, #{loanRate,jdbcType=DOUBLE}, #{oneCompanyMoney,jdbcType=DOUBLE},
+        #{twoCompanyMoney,jdbcType=DOUBLE}, #{threeCompanyMoney,jdbcType=DOUBLE}, #{downMoney,jdbcType=DOUBLE}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.DistributionBasic" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into distribution_basic
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="foregiftMoney != null" >
+                foregift_money,
+            </if>
+            <if test="oneLevelMoney != null" >
+                one_level_money,
+            </if>
+            <if test="twoLevelMoney != null" >
+                two_level_money,
+            </if>
+            <if test="threeLevelMoney != null" >
+                three_level_money,
+            </if>
+            <if test="caseMoney != null" >
+                case_money,
+            </if>
+            <if test="withdrawalsMoney != null" >
+                withdrawals_money,
+            </if>
+            <if test="oneCaseMoney != null" >
+                one_case_money,
+            </if>
+            <if test="twoCaseMoney != null" >
+                two_case_money,
+            </if>
+            <if test="threeCaseMoney != null" >
+                three_case_money,
+            </if>
+            <if test="loanInterestRate != null" >
+                loan_interest_rate,
+            </if>
+            <if test="loanRate != null" >
+                loan_rate,
+            </if>
+            <if test="oneCompanyMoney != null" >
+                one_company_money,
+            </if>
+            <if test="twoCompanyMoney != null" >
+                two_company_money,
+            </if>
+            <if test="threeCompanyMoney != null" >
+                three_company_money,
+            </if>
+            <if test="downMoney != null" >
+                down_money,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="foregiftMoney != null" >
+                #{foregiftMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="oneLevelMoney != null" >
+                #{oneLevelMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="twoLevelMoney != null" >
+                #{twoLevelMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="threeLevelMoney != null" >
+                #{threeLevelMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="caseMoney != null" >
+                #{caseMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="withdrawalsMoney != null" >
+                #{withdrawalsMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="oneCaseMoney != null" >
+                #{oneCaseMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="twoCaseMoney != null" >
+                #{twoCaseMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="threeCaseMoney != null" >
+                #{threeCaseMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="loanInterestRate != null" >
+                #{loanInterestRate,jdbcType=DOUBLE},
+            </if>
+            <if test="loanRate != null" >
+                #{loanRate,jdbcType=DOUBLE},
+            </if>
+            <if test="oneCompanyMoney != null" >
+                #{oneCompanyMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="twoCompanyMoney != null" >
+                #{twoCompanyMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="threeCompanyMoney != null" >
+                #{threeCompanyMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="downMoney != null" >
+                #{downMoney,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.DistributionBasic" >
+        update distribution_basic
+        <set >
+            <if test="foregiftMoney != null" >
+                foregift_money = #{foregiftMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="oneLevelMoney != null" >
+                one_level_money = #{oneLevelMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="twoLevelMoney != null" >
+                two_level_money = #{twoLevelMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="threeLevelMoney != null" >
+                three_level_money = #{threeLevelMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="caseMoney != null" >
+                case_money = #{caseMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="withdrawalsMoney != null" >
+                withdrawals_money = #{withdrawalsMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="oneCaseMoney != null" >
+                one_case_money = #{oneCaseMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="twoCaseMoney != null" >
+                two_case_money = #{twoCaseMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="threeCaseMoney != null" >
+                three_case_money = #{threeCaseMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="loanInterestRate != null" >
+                loan_interest_rate = #{loanInterestRate,jdbcType=DOUBLE},
+            </if>
+            <if test="loanRate != null" >
+                loan_rate = #{loanRate,jdbcType=DOUBLE},
+            </if>
+            <if test="oneCompanyMoney != null" >
+                one_company_money = #{oneCompanyMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="twoCompanyMoney != null" >
+                two_company_money = #{twoCompanyMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="threeCompanyMoney != null" >
+                three_company_money = #{threeCompanyMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="downMoney != null" >
+                down_money = #{downMoney,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.DistributionBasic" >
+        update distribution_basic
+        set foregift_money = #{foregiftMoney,jdbcType=DOUBLE},
+        one_level_money = #{oneLevelMoney,jdbcType=DOUBLE},
+        two_level_money = #{twoLevelMoney,jdbcType=DOUBLE},
+        three_level_money = #{threeLevelMoney,jdbcType=DOUBLE},
+        case_money = #{caseMoney,jdbcType=DOUBLE},
+        withdrawals_money = #{withdrawalsMoney,jdbcType=DOUBLE},
+        one_case_money = #{oneCaseMoney,jdbcType=DOUBLE},
+        two_case_money = #{twoCaseMoney,jdbcType=DOUBLE},
+        three_case_money = #{threeCaseMoney,jdbcType=DOUBLE},
+        loan_interest_rate = #{loanInterestRate,jdbcType=DOUBLE},
+        loan_rate = #{loanRate,jdbcType=DOUBLE},
+        one_company_money = #{oneCompanyMoney,jdbcType=DOUBLE},
+        two_company_money = #{twoCompanyMoney,jdbcType=DOUBLE},
+        three_company_money = #{threeCompanyMoney,jdbcType=DOUBLE},
+        down_money = #{downMoney,jdbcType=DOUBLE}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectDistributionBasic" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from distribution_basic
+        limit  1
+    </select>
+</mapper>

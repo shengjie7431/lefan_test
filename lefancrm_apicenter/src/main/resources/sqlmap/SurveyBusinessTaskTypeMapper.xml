@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyBusinessTaskTypeMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyBusinessTaskType" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="business_type_id" property="businessTypeId" jdbcType="BIGINT" />
+        <result column="business_type_name" property="businessTypeName" jdbcType="VARCHAR" />
+        <result column="task_info_id" property="taskInfoId" jdbcType="BIGINT" />
+        <result column="task_info_name" property="taskInfoName" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, business_type_id, business_type_name, task_info_id, task_info_name
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_business_task_type
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from survey_business_task_type
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyBusinessTaskType" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_business_task_type (business_type_id, business_type_name,
+        task_info_id, task_info_name)
+        values (#{businessTypeId,jdbcType=BIGINT}, #{businessTypeName,jdbcType=VARCHAR},
+        #{taskInfoId,jdbcType=BIGINT}, #{taskInfoName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyBusinessTaskType" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_business_task_type
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="businessTypeId != null" >
+                business_type_id,
+            </if>
+            <if test="businessTypeName != null" >
+                business_type_name,
+            </if>
+            <if test="taskInfoId != null" >
+                task_info_id,
+            </if>
+            <if test="taskInfoName != null" >
+                task_info_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="businessTypeId != null" >
+                #{businessTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="businessTypeName != null" >
+                #{businessTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="taskInfoId != null" >
+                #{taskInfoId,jdbcType=BIGINT},
+            </if>
+            <if test="taskInfoName != null" >
+                #{taskInfoName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyBusinessTaskType" >
+        update survey_business_task_type
+        <set >
+            <if test="businessTypeId != null" >
+                business_type_id = #{businessTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="businessTypeName != null" >
+                business_type_name = #{businessTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="taskInfoId != null" >
+                task_info_id = #{taskInfoId,jdbcType=BIGINT},
+            </if>
+            <if test="taskInfoName != null" >
+                task_info_name = #{taskInfoName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyBusinessTaskType" >
+    update survey_business_task_type
+    set business_type_id = #{businessTypeId,jdbcType=BIGINT},
+      business_type_name = #{businessTypeName,jdbcType=VARCHAR},
+      task_info_id = #{taskInfoId,jdbcType=BIGINT},
+      task_info_name = #{taskInfoName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="businessTypeId != null" >
+            and business_type_id = #{businessTypeId,jdbcType=BIGINT}
+        </if>
+        <if test="taskInfoId != null" >
+            and task_info_id = #{taskInfoId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_business_task_type
+        <include refid="joins" />
+        where 1 = 1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_business_task_type
+        <include refid="joins" />
+        where 1 = 1
+        <include refid="wheres" />
+    </select>
+</mapper>

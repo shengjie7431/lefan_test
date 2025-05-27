@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyAttrUpdRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyAttrUpdRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="upd_attr" property="updAttr" jdbcType="VARCHAR" />
+    <result column="upd_before_value" property="updBeforeValue" jdbcType="VARCHAR" />
+    <result column="upd_after_value" property="updAfterValue" jdbcType="VARCHAR" />
+    <result column="upd_time" property="updTime" jdbcType="TIMESTAMP" />
+    <result column="upd_remark" property="updRemark" jdbcType="VARCHAR" />
+    <result column="upd_user_name" property="updUserName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_info_id, upd_attr, upd_before_value, upd_after_value, upd_time, upd_remark, 
+    upd_user_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_attr_upd_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_attr_upd_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyAttrUpdRecord" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_attr_upd_record (survey_info_id, upd_attr, upd_before_value, 
+      upd_after_value, upd_time, upd_remark, 
+      upd_user_name)
+    values (#{surveyInfoId,jdbcType=BIGINT}, #{updAttr,jdbcType=VARCHAR}, #{updBeforeValue,jdbcType=VARCHAR}, 
+      #{updAfterValue,jdbcType=VARCHAR}, #{updTime,jdbcType=TIMESTAMP}, #{updRemark,jdbcType=VARCHAR}, 
+      #{updUserName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyAttrUpdRecord" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_attr_upd_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="updAttr != null" >
+        upd_attr,
+      </if>
+      <if test="updBeforeValue != null" >
+        upd_before_value,
+      </if>
+      <if test="updAfterValue != null" >
+        upd_after_value,
+      </if>
+      <if test="updTime != null" >
+        upd_time,
+      </if>
+      <if test="updRemark != null" >
+        upd_remark,
+      </if>
+      <if test="updUserName != null" >
+        upd_user_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="updAttr != null" >
+        #{updAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="updBeforeValue != null" >
+        #{updBeforeValue,jdbcType=VARCHAR},
+      </if>
+      <if test="updAfterValue != null" >
+        #{updAfterValue,jdbcType=VARCHAR},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updRemark != null" >
+        #{updRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="updUserName != null" >
+        #{updUserName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyAttrUpdRecord" >
+    update survey_attr_upd_record
+    <set >
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="updAttr != null" >
+        upd_attr = #{updAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="updBeforeValue != null" >
+        upd_before_value = #{updBeforeValue,jdbcType=VARCHAR},
+      </if>
+      <if test="updAfterValue != null" >
+        upd_after_value = #{updAfterValue,jdbcType=VARCHAR},
+      </if>
+      <if test="updTime != null" >
+        upd_time = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updRemark != null" >
+        upd_remark = #{updRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="updUserName != null" >
+        upd_user_name = #{updUserName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyAttrUpdRecord" >
+    update survey_attr_upd_record
+    set survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      upd_attr = #{updAttr,jdbcType=VARCHAR},
+      upd_before_value = #{updBeforeValue,jdbcType=VARCHAR},
+      upd_after_value = #{updAfterValue,jdbcType=VARCHAR},
+      upd_time = #{updTime,jdbcType=TIMESTAMP},
+      upd_remark = #{updRemark,jdbcType=VARCHAR},
+      upd_user_name = #{updUserName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_attr_upd_record
+    where survey_info_id = #{surveyInfoId,jdbcType=BIGINT}
+    <if test="updAttr != null">
+      and upd_attr = #{updAttr,jdbcType=VARCHAR}
+    </if>
+    order by upd_time desc
+  </select>
+</mapper>

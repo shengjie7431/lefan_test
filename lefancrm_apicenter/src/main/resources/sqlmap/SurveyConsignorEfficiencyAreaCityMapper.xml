@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyConsignorEfficiencyAreaCityMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyConsignorEfficiencyAreaCity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="model_id" property="modelId" jdbcType="BIGINT" />
+    <result column="model_name" property="modelName" jdbcType="VARCHAR" />
+    <result column="area_categories_id" property="areaCategoriesId" jdbcType="BIGINT" />
+    <result column="area_categories_name" property="areaCategoriesName" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="BIGINT" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="area_longname" property="areaLongname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, model_id, model_name, area_categories_id, area_categories_name, area_id, area_name, 
+    area_longname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_consignor_efficiency_area_city
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_consignor_efficiency_area_city
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyConsignorEfficiencyAreaCity" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_consignor_efficiency_area_city (model_id, model_name, area_categories_id, 
+      area_categories_name, area_id, area_name, 
+      area_longname)
+    values (#{modelId,jdbcType=BIGINT}, #{modelName,jdbcType=VARCHAR}, #{areaCategoriesId,jdbcType=BIGINT}, 
+      #{areaCategoriesName,jdbcType=VARCHAR}, #{areaId,jdbcType=BIGINT}, #{areaName,jdbcType=VARCHAR}, 
+      #{areaLongname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignorEfficiencyAreaCity" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_consignor_efficiency_area_city
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="modelName != null" >
+        model_name,
+      </if>
+      <if test="areaCategoriesId != null" >
+        area_categories_id,
+      </if>
+      <if test="areaCategoriesName != null" >
+        area_categories_name,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="areaLongname != null" >
+        area_longname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="modelName != null" >
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCategoriesId != null" >
+        #{areaCategoriesId,jdbcType=BIGINT},
+      </if>
+      <if test="areaCategoriesName != null" >
+        #{areaCategoriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaLongname != null" >
+        #{areaLongname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignorEfficiencyAreaCity" >
+    update survey_consignor_efficiency_area_city
+    <set >
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="modelName != null" >
+        model_name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCategoriesId != null" >
+        area_categories_id = #{areaCategoriesId,jdbcType=BIGINT},
+      </if>
+      <if test="areaCategoriesName != null" >
+        area_categories_name = #{areaCategoriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaLongname != null" >
+        area_longname = #{areaLongname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyConsignorEfficiencyAreaCity" >
+    update survey_consignor_efficiency_area_city
+    set model_id = #{modelId,jdbcType=BIGINT},
+      model_name = #{modelName,jdbcType=VARCHAR},
+      area_categories_id = #{areaCategoriesId,jdbcType=BIGINT},
+      area_categories_name = #{areaCategoriesName,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=BIGINT},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      area_longname = #{areaLongname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <sql id="joins">
+
+  </sql>
+  <sql id="wheres">
+    <if test="modelId != null" >
+      and model_id = #{modelId,jdbcType=BIGINT}
+    </if>
+    <if test="areaCategoriesId != null" >
+      and area_categories_id = #{areaCategoriesId,jdbcType=BIGINT}
+    </if>
+    <if test="areaId != null" >
+      and area_id = #{areaId,jdbcType=BIGINT}
+    </if>
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_consignor_efficiency_area_city
+    <include refid="joins" />
+    where 1=1
+    <include refid="wheres" />
+    order by id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from survey_consignor_efficiency_area_city
+    <include refid="joins" />
+    where 1=1
+    <include refid="wheres" />
+  </select>
+
+
+
+  <select id="selectAllSelectedCount" resultType="java.lang.Integer">
+      	SELECT COUNT(1) FROM survey_consignor_efficiency_area_city WHERE FIND_IN_SET( area_id,#{parentIds}) and  area_categories_id= #{areaCategoriesId}
+    </select>
+
+  <delete id="deleteByAreaCategoriesId" parameterType="java.lang.Long" >
+        delete from survey_consignor_efficiency_area_city
+        where area_categories_id = #{areaCategoriesId,jdbcType=BIGINT} AND model_id = #{modelId}
+    </delete>
+  <delete id="deleteByAreaId">
+     delete from survey_consignor_efficiency_area_city
+        where area_id = #{areaId,jdbcType=BIGINT} and model_id = #{modelId}
+  </delete>
+
+  <insert id="copyPirce" parameterType="java.util.Map">
+    insert into survey_consignor_efficiency_area_city(model_id, model_name, area_categories_id,area_categories_name, area_id, area_name,area_longname)
+    select #{modelId,jdbcType=BIGINT},#{modelName,jdbcType=VARCHAR},a.id,a.`name`,c.area_id,c.area_name,c.area_longname from survey_consignor_efficiency_model_area a
+      left join survey_area_categories_area_city c on a.`name` = c.area_categories_name and c.price_model_id = #{selPriceModelId,jdbcType=BIGINT}
+    where a.model_id = #{modelId,jdbcType=BIGINT}
+  </insert>
+</mapper>

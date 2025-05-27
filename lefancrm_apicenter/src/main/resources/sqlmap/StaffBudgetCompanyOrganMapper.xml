@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.StaffBudgetCompanyOrganMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.StaffBudgetCompanyOrgan" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="company_id" property="companyId" jdbcType="BIGINT" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="organ_id" property="organId" jdbcType="BIGINT" />
+    <result column="organ_name" property="organName" jdbcType="VARCHAR" />
+    <result column="business_unit_id" property="businessUnitId" jdbcType="BIGINT" />
+    <result column="business_unit_name" property="businessUnitName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, company_id, company_name, organ_id, organ_name, business_unit_id, business_unit_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from staff_budget_company_organ
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from staff_budget_company_organ
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.StaffBudgetCompanyOrgan" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_budget_company_organ (company_id, company_name, organ_id, 
+      organ_name, business_unit_id, business_unit_name
+      )
+    values (#{companyId,jdbcType=BIGINT}, #{companyName,jdbcType=VARCHAR}, #{organId,jdbcType=BIGINT}, 
+      #{organName,jdbcType=VARCHAR}, #{businessUnitId,jdbcType=BIGINT}, #{businessUnitName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.StaffBudgetCompanyOrgan" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_budget_company_organ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="organId != null" >
+        organ_id,
+      </if>
+      <if test="organName != null" >
+        organ_name,
+      </if>
+      <if test="businessUnitId != null" >
+        business_unit_id,
+      </if>
+      <if test="businessUnitName != null" >
+        business_unit_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="organId != null" >
+        #{organId,jdbcType=BIGINT},
+      </if>
+      <if test="organName != null" >
+        #{organName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessUnitId != null" >
+        #{businessUnitId,jdbcType=BIGINT},
+      </if>
+      <if test="businessUnitName != null" >
+        #{businessUnitName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.StaffBudgetCompanyOrgan" >
+    update staff_budget_company_organ
+    <set >
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="organId != null" >
+        organ_id = #{organId,jdbcType=BIGINT},
+      </if>
+      <if test="organName != null" >
+        organ_name = #{organName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessUnitId != null" >
+        business_unit_id = #{businessUnitId,jdbcType=BIGINT},
+      </if>
+      <if test="businessUnitName != null" >
+        business_unit_name = #{businessUnitName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.StaffBudgetCompanyOrgan" >
+    update staff_budget_company_organ
+    set company_id = #{companyId,jdbcType=BIGINT},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      organ_id = #{organId,jdbcType=BIGINT},
+      organ_name = #{organName,jdbcType=VARCHAR},
+      business_unit_id = #{businessUnitId,jdbcType=BIGINT},
+      business_unit_name = #{businessUnitName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="joins">
+
+  </sql>
+  <sql id="wheres">
+    <if test="companyId != null" >
+      and company_id = #{companyId,jdbcType=BIGINT}
+    </if>
+    <if test="organId != null" >
+      and  organ_id = #{organId,jdbcType=BIGINT}
+    </if>
+    <if test="businessUnitId != null" >
+      and  business_unit_id = #{businessUnitId,jdbcType=BIGINT}
+    </if>
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from staff_budget_company_organ
+    <include refid="joins" />
+    where 1=1
+    <include refid="wheres" />
+    order by id desc
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from staff_budget_company_organ
+    <include refid="joins" />
+    where 1=1
+    <include refid="wheres" />
+  </select>
+
+  <delete id="deleteByInfo" parameterType="map" >
+    delete from staff_budget_company_organ
+    where 1 = 1
+    <include refid="wheres" />
+  </delete>
+
+  <select id="selectByOrganId" resultMap="BaseResultMap">
+    select * from staff_budget_company_organ where organ_id = #{id} limit 1
+  </select>
+  
+  
+  <select id="selectOrgans" parameterType="map" resultMap="BaseResultMap">
+    select
+    s.id organId,s.`name` organName,o.company_id companyId,o.company_name companyName
+     from staff_organ s
+    left join staff_budget_company_organ o on s.id = o.organ_id
+    where s.state = 0 and s.delete_flag = 0
+  </select>
+</mapper>

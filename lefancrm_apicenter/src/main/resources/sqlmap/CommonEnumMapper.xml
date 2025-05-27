@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CommonEnumMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CommonEnum" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="enum_code" property="enumCode" jdbcType="VARCHAR" />
+        <result column="enum_name" property="enumName" jdbcType="VARCHAR" />
+        <result column="enum_text" property="enumText" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, enum_code, enum_name, enum_text, parent_id, create_time, create_by
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from common_enum
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from common_enum
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.CommonEnum" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into common_enum (enum_code, enum_name, enum_text,
+        parent_id, create_time, create_by
+        )
+        values (#{enumCode,jdbcType=VARCHAR}, #{enumName,jdbcType=VARCHAR}, #{enumText,jdbcType=VARCHAR},
+        #{parentId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CommonEnum" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into common_enum
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="enumCode != null" >
+                enum_code,
+            </if>
+            <if test="enumName != null" >
+                enum_name,
+            </if>
+            <if test="enumText != null" >
+                enum_text,
+            </if>
+            <if test="parentId != null" >
+                parent_id,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="enumCode != null" >
+                #{enumCode,jdbcType=VARCHAR},
+            </if>
+            <if test="enumName != null" >
+                #{enumName,jdbcType=VARCHAR},
+            </if>
+            <if test="enumText != null" >
+                #{enumText,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null" >
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CommonEnum" >
+        update common_enum
+        <set >
+            <if test="enumCode != null" >
+                enum_code = #{enumCode,jdbcType=VARCHAR},
+            </if>
+            <if test="enumName != null" >
+                enum_name = #{enumName,jdbcType=VARCHAR},
+            </if>
+            <if test="enumText != null" >
+                enum_text = #{enumText,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null" >
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CommonEnum" >
+    update common_enum
+    set enum_code = #{enumCode,jdbcType=VARCHAR},
+      enum_name = #{enumName,jdbcType=VARCHAR},
+      enum_text = #{enumText,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectEnumTreeList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select id, enum_code, enum_name, enum_text, parent_id, create_time, create_by
+        from common_enum
+        order by parent_id
+    </select>
+    <select id="selectAssessState" resultMap="BaseResultMap">
+        SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id =(SELECT a.id from common_enum a where a.enum_code='assess')
+    </select>
+    <select id="selectClaimantState" resultMap="BaseResultMap">
+        SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id =(SELECT a.id from common_enum a where a.enum_code='claimant')
+    </select>
+    <select id="selectFileCatelogState" resultMap="BaseResultMap">
+        SELECT b.id,b.enum_code,b.enum_name from common_enum b where b.parent_id =(SELECT a.id from common_enum a where a.enum_code='fileCatelog')
+    </select>
+    <select id="selectOrgState" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT b.id,b.enum_code,b.enum_name,b.enum_text from common_enum b where b.parent_id =(SELECT a.id from common_enum a where a.enum_code='org')
+        and b.enum_code = #{enumCode,jdbcType=VARCHAR}
+    </select>
+    <select id="selectListByParentEnumCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT b.id,b.enum_code,b.enum_name,b.enum_text,b.create_time,b.create_by,b.parent_id from common_enum b where b.parent_id =
+        (SELECT a.id from common_enum a where a.enum_code = #{enumCode,jdbcType=VARCHAR})
+    </select>
+
+    <select id="selectListByParentEnumCodeAndMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT b.id,b.enum_code,b.enum_name,b.enum_text,b.create_time,b.create_by,b.parent_id from common_enum b where b.parent_id =
+        (SELECT a.id from common_enum a where a.enum_code = #{enumCode,jdbcType=VARCHAR})
+        <if test="proIds != null">
+            and find_in_set(b.id, #{proIds,jdbcType=VARCHAR})
+        </if>
+    </select>
+    <select id="selectBill" resultMap="BaseResultMap" parameterType="map">
+        SELECT b.id,b.enum_code,b.enum_name,b.enum_text from common_enum b where b.parent_id =(SELECT a.id from common_enum a where a.enum_code = #{parentEnumCode,jdbcType=VARCHAR})
+        and b.enum_code = #{enumCode,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="getEnumDtos" resultType="com.lefancrm.apicenter.dto.CommonEnumDto" parameterType="java.lang.String">
+        SELECT b.id,b.enum_code as enumCode,b.enum_name as enumName,(case when r.id is null then 0 else 1 end) as selected
+        from common_enum b
+        left join bus_apply_enum_role r on b.enum_code = r.enum_id and r.role_id = #{roleId,jdbcType=BIGINT}
+        where b.parent_id in
+        (SELECT a.id from common_enum a where a.enum_code = #{enumCode,jdbcType=VARCHAR})
+        order by b.enum_code
+    </select>
+    <select id="getItemDtos" resultType="com.lefancrm.apicenter.dto.CommonEnumDto" parameterType="java.lang.String">
+        SELECT b.id,b.enum_code as enumCode,b.enum_name as enumName,(case when r.id is null then 0 else 1 end) as selected
+        from common_enum b
+        left join bus_apply_item_role r on b.enum_code = r.item_id and r.role_id = #{roleId,jdbcType=BIGINT}
+        where b.parent_id in
+        (SELECT a.id from common_enum a where a.enum_code = #{enumCode,jdbcType=VARCHAR})
+        order by b.enum_code
+    </select>
+
+    <select id="selectListByParentEnumCodePage" resultMap="BaseResultMap" parameterType="map">
+        SELECT b.id,b.enum_code,b.enum_name,b.enum_text,b.create_time,b.create_by,b.parent_id from common_enum b where b.parent_id =
+        (SELECT a.id from common_enum a where a.enum_code = #{enumCode,jdbcType=VARCHAR})
+        <if test="enumName != null" >
+            and enum_name like concat('%',#{enumName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectListByParentEnumCodePageCount" parameterType="map" resultType="int">
+        SELECT
+        count(1)
+        from common_enum b where b.parent_id =
+        (SELECT a.id from common_enum a where a.enum_code = #{enumCode,jdbcType=VARCHAR})
+        <if test="enumName != null" >
+            and enum_name like concat('%',#{enumName,jdbcType=VARCHAR},'%')
+        </if>
+    </select>
+</mapper>

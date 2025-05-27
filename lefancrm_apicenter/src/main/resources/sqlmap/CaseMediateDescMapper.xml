@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseMediateDescMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseMediateDesc" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="case_type" property="caseType" jdbcType="INTEGER" />
+    <result column="main_dispute" property="mainDispute" jdbcType="VARCHAR" />
+    <result column="mediate_desc" property="mediateDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseMediateDesc" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_mediate_desc (case_id, case_type, main_dispute, 
+      mediate_desc)
+    values (#{caseId,jdbcType=BIGINT}, #{caseType,jdbcType=INTEGER}, #{mainDispute,jdbcType=VARCHAR}, 
+      #{mediateDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseMediateDesc" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_mediate_desc
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseType != null" >
+        case_type,
+      </if>
+      <if test="mainDispute != null" >
+        main_dispute,
+      </if>
+      <if test="mediateDesc != null" >
+        mediate_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseType != null" >
+        #{caseType,jdbcType=INTEGER},
+      </if>
+      <if test="mainDispute != null" >
+        #{mainDispute,jdbcType=VARCHAR},
+      </if>
+      <if test="mediateDesc != null" >
+        #{mediateDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+    <insert id="insertCaseMediateDesc" parameterType="map" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_mediate_desc
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="caseId != null" >
+                case_id,
+            </if>
+            <if test="caseType != null" >
+                case_type,
+            </if>
+            <if test="mainDispute != null" >
+                main_dispute,
+            </if>
+            <if test="mediateDesc != null" >
+                mediate_desc,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="caseId != null" >
+                #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseType != null" >
+                #{caseType,jdbcType=INTEGER},
+            </if>
+            <if test="mainDispute != null" >
+                #{mainDispute,jdbcType=VARCHAR},
+            </if>
+            <if test="mediateDesc != null" >
+                #{mediateDesc,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectWhetherCaseMediateDesc" parameterType="map" resultType="int">
+        select count(1) from case_mediate_desc where
+        case_id = #{caseId,jdbcType=BIGINT} and
+        case_type = #{caseType,jdbcType=INTEGER}
+    </select>
+    <update id="updateCaseMediateDesc" parameterType="map">
+        update case_mediate_desc
+        <set>
+            <if test="mainDispute != null">
+                main_dispute = #{mainDispute,jdbcType=VARCHAR},
+            </if>
+            <if test="mediateDesc != null">
+                mediate_desc = #{mediateDesc,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where
+        case_id = #{caseId,jdbcType=BIGINT} and
+        case_type = #{caseType,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectCaseMediateDesc" parameterType="map" resultMap="BaseResultMap">
+        select * from case_mediate_desc where
+        case_id = #{caseId,jdbcType=BIGINT} and
+        case_type = #{caseType,jdbcType=INTEGER}
+    </select>
+</mapper>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyEmailInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyEmailInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="email_user_name" property="emailUserName" jdbcType="VARCHAR" />
+    <result column="email_address" property="emailAddress" jdbcType="VARCHAR" />
+    <result column="email_auth_password" property="emailAuthPassword" jdbcType="VARCHAR" />
+    <result column="email_password" property="emailPassword" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="TIMESTAMP" />
+    <result column="uodate_time" property="uodateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, email_user_name, email_address, email_auth_password, email_password, create_by, 
+    create_time, update_by, uodate_time, delete_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_email_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_email_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyEmailInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_email_info (email_user_name, email_address, email_auth_password, 
+      email_password, create_by, create_time, 
+      update_by, uodate_time, delete_flag
+      )
+    values (#{emailUserName,jdbcType=VARCHAR}, #{emailAddress,jdbcType=VARCHAR}, #{emailAuthPassword,jdbcType=VARCHAR}, 
+      #{emailPassword,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=TIMESTAMP}, #{uodateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyEmailInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_email_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="emailUserName != null" >
+        email_user_name,
+      </if>
+      <if test="emailAddress != null" >
+        email_address,
+      </if>
+      <if test="emailAuthPassword != null" >
+        email_auth_password,
+      </if>
+      <if test="emailPassword != null" >
+        email_password,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="uodateTime != null" >
+        uodate_time,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="emailUserName != null" >
+        #{emailUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAddress != null" >
+        #{emailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAuthPassword != null" >
+        #{emailAuthPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="emailPassword != null" >
+        #{emailPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uodateTime != null" >
+        #{uodateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyEmailInfo" >
+    update survey_email_info
+    <set >
+      <if test="emailUserName != null" >
+        email_user_name = #{emailUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAddress != null" >
+        email_address = #{emailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAuthPassword != null" >
+        email_auth_password = #{emailAuthPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="emailPassword != null" >
+        email_password = #{emailPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uodateTime != null" >
+        uodate_time = #{uodateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyEmailInfo" >
+    update survey_email_info
+    set email_user_name = #{emailUserName,jdbcType=VARCHAR},
+      email_address = #{emailAddress,jdbcType=VARCHAR},
+      email_auth_password = #{emailAuthPassword,jdbcType=VARCHAR},
+      email_password = #{emailPassword,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=TIMESTAMP},
+      uodate_time = #{uodateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="emailUserName!=null">
+            and email_user_name like CONCAT(CONCAT('%',#{emailUserName,jdbcType=VARCHAR}), '%')
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_email_info
+        <include refid="joins" />
+        where delete_flag =0
+        <include refid="wheres" />
+        order by id asc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_email_info
+        <include refid="joins" />
+        where  delete_flag =0
+        <include refid="wheres" />
+    </select>
+</mapper>

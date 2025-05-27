@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyChannelCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyChannelCase" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="survey_direction_id" property="surveyDirectionId" jdbcType="BIGINT" />
+    <result column="survey_channel_id" property="surveyChannelId" jdbcType="BIGINT" />
+    <result column="survey_no" property="surveyNo" jdbcType="VARCHAR" />
+    <result column="survey_direction_name" property="surveyDirectionName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_info_id, survey_direction_id, survey_channel_id, survey_no, survey_direction_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_channel_case
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_channel_case
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyChannelCase" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_channel_case (survey_info_id, survey_direction_id, survey_channel_id, 
+      survey_no, survey_direction_name)
+    values (#{surveyInfoId,jdbcType=BIGINT}, #{surveyDirectionId,jdbcType=BIGINT}, #{surveyChannelId,jdbcType=BIGINT}, 
+      #{surveyNo,jdbcType=VARCHAR}, #{surveyDirectionName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyChannelCase" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_channel_case
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="surveyDirectionId != null" >
+        survey_direction_id,
+      </if>
+      <if test="surveyChannelId != null" >
+        survey_channel_id,
+      </if>
+      <if test="surveyNo != null" >
+        survey_no,
+      </if>
+      <if test="surveyDirectionName != null" >
+        survey_direction_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyDirectionId != null" >
+        #{surveyDirectionId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyChannelId != null" >
+        #{surveyChannelId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyNo != null" >
+        #{surveyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyDirectionName != null" >
+        #{surveyDirectionName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyChannelCase" >
+    update survey_channel_case
+    <set >
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyDirectionId != null" >
+        survey_direction_id = #{surveyDirectionId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyChannelId != null" >
+        survey_channel_id = #{surveyChannelId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyNo != null" >
+        survey_no = #{surveyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyDirectionName != null" >
+        survey_direction_name = #{surveyDirectionName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyChannelCase" >
+    update survey_channel_case
+    set survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      survey_direction_id = #{surveyDirectionId,jdbcType=BIGINT},
+      survey_channel_id = #{surveyChannelId,jdbcType=BIGINT},
+      survey_no = #{surveyNo,jdbcType=VARCHAR},
+      survey_direction_name = #{surveyDirectionName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <delete id="deleteBySurveyChannelId" parameterType="java.lang.Long" >
+    delete from survey_channel_case
+    where survey_channel_id = #{surveyChannelId,jdbcType=BIGINT}
+  </delete>
+
+  <select id="selectBySurveyChannelId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from survey_channel_case
+    where survey_channel_id = #{surveyChannelId,jdbcType=BIGINT} order by id asc
+  </select>
+
+  <select id="selectBySurveyChannelIdGroupBySurveyInfoId" resultType="com.lefancrm.apicenter.model.SurveyChannelCase" parameterType="java.lang.Long">
+            select c.survey_channel_id surveyChannelId,c.survey_info_id surveyInfoId,c.survey_no as surveyNo,GROUP_CONCAT(c.survey_direction_id) directionsStr from
+             survey_channel_case c where c.survey_channel_id = #{surveyChannelId,jdbcType=BIGINT}
+            group by c.survey_info_id
+            order by id asc
+  </select>
+
+  <select id="selectChannelNotOpr" resultType="int" parameterType="java.util.Map">
+    select count(1) from survey_channel_case a
+    left join survey_channel_cost s on a.survey_channel_id = s.id
+    where s.delete_flag = 0 and a.survey_info_id = #{surveyInfoId,jdbcType=BIGINT} and s.state != 3
+  </select>
+</mapper>

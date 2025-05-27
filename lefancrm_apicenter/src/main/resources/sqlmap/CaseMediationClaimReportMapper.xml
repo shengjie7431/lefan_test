@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseMediationClaimReportMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseMediationClaimReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="case_type" property="caseType" jdbcType="INTEGER" />
+    <result column="project_name" property="projectName" jdbcType="VARCHAR" />
+    <result column="opinion_money" property="opinionMoney" jdbcType="DOUBLE" />
+    <result column="auditing_money" property="auditingMoney" jdbcType="DOUBLE" />
+    <result column="ic_auditing_money" property="icAuditingMoney" jdbcType="DOUBLE" />
+      <result column="commer_money" property="commerMoney" jdbcType="DOUBLE" />
+      <result column="compul_money" property="compulMoney" jdbcType="DOUBLE" />
+      <result column="check_basis" property="checkBasis" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_id, case_type, project_name, opinion_money, auditing_money, ic_auditing_money,commer_money,compul_money,check_basis
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_mediation_claim_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from case_mediation_claim_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseMediationClaimReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_mediation_claim_report (case_id, case_type, project_name, 
+      opinion_money, auditing_money, ic_auditing_money,commer_money,compul_money,check_basis
+      )
+    values (#{caseId,jdbcType=BIGINT}, #{caseType,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, 
+      #{opinionMoney,jdbcType=DOUBLE}, #{auditingMoney,jdbcType=DOUBLE}, #{icAuditingMoney,jdbcType=DOUBLE},
+      #{commerMoney,jdbcType=DOUBLE},#{compulMoney,jdbcType=DOUBLE},#{checkBasis,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseMediationClaimReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_mediation_claim_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseType != null" >
+        case_type,
+      </if>
+      <if test="projectName != null" >
+        project_name,
+      </if>
+      <if test="opinionMoney != null" >
+        opinion_money,
+      </if>
+      <if test="auditingMoney != null" >
+        auditing_money,
+      </if>
+      <if test="icAuditingMoney != null" >
+        ic_auditing_money,
+      </if>
+        <if test="commerMoney != null" >
+            commer_money,
+        </if>
+        <if test="compulMoney != null" >
+            compul_money,
+        </if>
+        <if test="checkBasis != null" >
+            check_basis,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseType != null" >
+        #{caseType,jdbcType=INTEGER},
+      </if>
+      <if test="projectName != null" >
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="opinionMoney != null" >
+        #{opinionMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="auditingMoney != null" >
+        #{auditingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="icAuditingMoney != null" >
+        #{icAuditingMoney,jdbcType=DOUBLE},
+      </if>
+        <if test="commerMoney != null" >
+            #{commerMoney,jdbcType=DOUBLE},
+        </if>
+        <if test="compulMoney != null" >
+            #{compulMoney,jdbcType=DOUBLE},
+        </if>
+        <if test="checkBasis != null" >
+            #{checkBasis,jdbcType=VARCHAR},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseMediationClaimReport" >
+    update case_mediation_claim_report
+    <set >
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="caseType != null" >
+        case_type = #{caseType,jdbcType=INTEGER},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="opinionMoney != null" >
+        opinion_money = #{opinionMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="auditingMoney != null" >
+        auditing_money = #{auditingMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="icAuditingMoney != null" >
+        ic_auditing_money = #{icAuditingMoney,jdbcType=DOUBLE},
+      </if>
+        <if test="commerMoney != null" >
+            commer_money = #{commerMoney,jdbcType=DOUBLE},
+        </if>
+        <if test="compulMoney != null" >
+            compul_money = #{compulMoney,jdbcType=DOUBLE},
+        </if>
+        <if test="checkBasis != null" >
+            check_basis = #{checkBasis,jdbcType=VARCHAR},
+        </if>
+    </set>
+    where  id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseMediationClaimReport" >
+    update case_mediation_claim_report
+    set case_id = #{caseId,jdbcType=BIGINT},
+      case_type = #{caseType,jdbcType=INTEGER},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      opinion_money = #{opinionMoney,jdbcType=DOUBLE},
+      auditing_money = #{auditingMoney,jdbcType=DOUBLE},
+      ic_auditing_money = #{icAuditingMoney,jdbcType=DOUBLE},
+      commer_money = #{commerMoney,jdbcType=DOUBLE},
+      compul_money = #{compulMoney,jdbcType=DOUBLE},
+      check_basis = #{checkBasis,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByCaseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+         from case_mediation_claim_report where  case_id = #{caseId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByCaseIdOrProjectName" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from case_mediation_claim_report
+        where case_id = #{caseId,jdbcType=BIGINT} and project_name = #{projectName,jdbcType=VARCHAR} order by id asc limit 1
+    </select>
+
+</mapper>

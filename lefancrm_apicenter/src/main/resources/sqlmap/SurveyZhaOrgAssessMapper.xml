@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyZhaOrgAssessMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyZhaOrgAssess" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="zha_assess_id" property="zhaAssessId" jdbcType="BIGINT" />
+    <result column="survey_org_id" property="surveyOrgId" jdbcType="BIGINT" />
+    <result column="survey_org_name" property="surveyOrgName" jdbcType="VARCHAR" />
+    <result column="derogation_money" property="derogationMoney" jdbcType="DOUBLE" />
+    <result column="is_sun" property="isSun" jdbcType="INTEGER" />
+    <result column="cae_eff" property="caeEff" jdbcType="DOUBLE" />
+    <result column="entrust_submit_money" property="entrustSubmitMoney" jdbcType="DOUBLE" />
+    <result column="survey_no" property="surveyNo" jdbcType="VARCHAR" />
+    <result column="claims_no" property="claimsNo" jdbcType="VARCHAR" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="survey_person" property="surveyPerson" jdbcType="VARCHAR" />
+      <result column="survey_submit_money" property="surveySubmitMoney" jdbcType="DOUBLE" />
+      <result column="pf_amt" property="pfAmt" jdbcType="DOUBLE" />
+      <result column="js_amt" property="jsAmt" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, zha_assess_id, survey_org_id, survey_org_name, derogation_money, is_sun, cae_eff, 
+    entrust_submit_money, survey_no, claims_no, survey_info_id, survey_person,survey_submit_money,pf_amt,js_amt
+  </sql>
+  <sql id="Base_Column_List1" >
+    a.id, a.zha_assess_id, a.survey_org_id, a.survey_org_name, a.derogation_money, a.is_sun, a.cae_eff,
+    a.entrust_submit_money, a.survey_no, a.claims_no, a.survey_info_id, a.survey_person,a.survey_submit_money,a.pf_amt,a.js_amt
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_zha_org_assess
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_zha_org_assess
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyZhaOrgAssess" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_zha_org_assess (zha_assess_id, survey_org_id, survey_org_name, 
+      derogation_money, is_sun, cae_eff, 
+      entrust_submit_money, survey_no, claims_no, 
+      survey_info_id, survey_person)
+    values (#{zhaAssessId,jdbcType=BIGINT}, #{surveyOrgId,jdbcType=BIGINT}, #{surveyOrgName,jdbcType=VARCHAR}, 
+      #{derogationMoney,jdbcType=DOUBLE}, #{isSun,jdbcType=INTEGER}, #{caeEff,jdbcType=DOUBLE}, 
+      #{entrustSubmitMoney,jdbcType=DOUBLE}, #{surveyNo,jdbcType=VARCHAR}, #{claimsNo,jdbcType=VARCHAR}, 
+      #{surveyInfoId,jdbcType=BIGINT}, #{surveyPerson,jdbcType=VARCHAR},#{surveySubmitMoney,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyZhaOrgAssess" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_zha_org_assess
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zhaAssessId != null" >
+        zha_assess_id,
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id,
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name,
+      </if>
+      <if test="derogationMoney != null" >
+        derogation_money,
+      </if>
+      <if test="isSun != null" >
+        is_sun,
+      </if>
+      <if test="caeEff != null" >
+        cae_eff,
+      </if>
+      <if test="entrustSubmitMoney != null" >
+        entrust_submit_money,
+      </if>
+      <if test="surveyNo != null" >
+        survey_no,
+      </if>
+      <if test="claimsNo != null" >
+        claims_no,
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="surveyPerson != null" >
+        survey_person,
+      </if>
+        <if test="surveySubmitMoney != null" >
+            survey_submit_money,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zhaAssessId != null" >
+        #{zhaAssessId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgId != null" >
+        #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="derogationMoney != null" >
+        #{derogationMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="isSun != null" >
+        #{isSun,jdbcType=INTEGER},
+      </if>
+      <if test="caeEff != null" >
+        #{caeEff,jdbcType=DOUBLE},
+      </if>
+      <if test="entrustSubmitMoney != null" >
+        #{entrustSubmitMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="surveyNo != null" >
+        #{surveyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="claimsNo != null" >
+        #{claimsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyPerson != null" >
+        #{surveyPerson,jdbcType=VARCHAR},
+      </if>
+        <if test="surveySubmitMoney != null" >
+            #{surveySubmitMoney,jdbcType=DOUBLE},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyZhaOrgAssess" >
+    update survey_zha_org_assess
+    <set >
+      <if test="zhaAssessId != null" >
+        zha_assess_id = #{zhaAssessId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="derogationMoney != null" >
+        derogation_money = #{derogationMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="isSun != null" >
+        is_sun = #{isSun,jdbcType=INTEGER},
+      </if>
+      <if test="caeEff != null" >
+        cae_eff = #{caeEff,jdbcType=DOUBLE},
+      </if>
+      <if test="entrustSubmitMoney != null" >
+        entrust_submit_money = #{entrustSubmitMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="surveyNo != null" >
+        survey_no = #{surveyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="claimsNo != null" >
+        claims_no = #{claimsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyPerson != null" >
+        survey_person = #{surveyPerson,jdbcType=VARCHAR},
+      </if>
+        <if test="surveySubmitMoney != null" >
+            survey_submit_money = #{surveySubmitMoney,jdbcType=DOUBLE},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyZhaOrgAssess" >
+    update survey_zha_org_assess
+    set zha_assess_id = #{zhaAssessId,jdbcType=BIGINT},
+      survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      derogation_money = #{derogationMoney,jdbcType=DOUBLE},
+      is_sun = #{isSun,jdbcType=INTEGER},
+      cae_eff = #{caeEff,jdbcType=DOUBLE},
+      entrust_submit_money = #{entrustSubmitMoney,jdbcType=DOUBLE},
+      survey_no = #{surveyNo,jdbcType=VARCHAR},
+      claims_no = #{claimsNo,jdbcType=VARCHAR},
+      survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      survey_person = #{surveyPerson,jdbcType=VARCHAR},
+      survey_submit_money = #{surveySubmitMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <insert id="insertCreate" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+    insert into survey_zha_org_assess(zha_assess_id,claims_no,derogation_money,is_sun,cae_eff,entrust_submit_money,pf_amt,js_amt)
+    values
+    <foreach collection="data" item="item" separator=",">
+        (
+            #{zhaAssessId,jdbcType=BIGINT},
+            #{item.claimsNo,jdbcType=VARCHAR},
+            #{item.derogationMoney,jdbcType=DOUBLE},
+            #{item.isSun,jdbcType=INTEGER},
+            #{item.caeEff,jdbcType=DOUBLE},
+            #{item.entrustSubmitMoney,jdbcType=DOUBLE},
+            #{item.pfAmt,jdbcType=DOUBLE},
+            #{item.jsAmt,jdbcType=DOUBLE}
+        )
+    </foreach>
+  </insert>
+
+  <select id="selectNotFindCases" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List1" />
+     from survey_zha_org_assess a
+    left join survey_zha_assess z on a.zha_assess_id = z.id
+    left join
+    (
+          select t.id,t.claims_no,t.survey_case_no,t.survey_person from survey_risk_case t
+          left join survey_risk_case_info r on t.id = r.survey_id and r.delete_flag = 0
+          where t.entrust_org_id = 94 and t.delete_flag = 0 and r.id is not null group by t.claims_no
+    ) r on a.claims_no = r.claims_no
+    where z.id = #{zhaAssessId,jdbcType=BIGINT} and r.id is null
+  </select>
+
+  <select id="selectFindCases" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List1" />
+    from survey_zha_org_assess a
+    left join survey_zha_assess z on a.zha_assess_id = z.id
+      left join
+      (
+              select t.id,t.claims_no,t.survey_case_no,t.survey_person from survey_risk_case t
+              left join survey_risk_case_info r on t.id = r.survey_id and r.delete_flag = 0
+              where t.entrust_org_id = 94 and t.delete_flag = 0 and r.id is not null group by t.claims_no
+      ) r on a.claims_no = r.claims_no
+    where z.id = #{zhaAssessId,jdbcType=BIGINT} and r.id is not null
+  </select>
+
+  <delete id="delNotFindCases" parameterType="java.lang.String">
+    delete from survey_zha_org_assess where find_in_set(id,#{ids,jdbcType=VARCHAR})
+  </delete>
+
+
+  <select id="selectZhaAssessDTOs" parameterType="java.lang.Long" resultType="com.lefancrm.apicenter.dto.zhaAssess.ZhaAssessDTO">
+    select o.claims_no claimNo,r.entrust_org_id entrustOrgId,t.org_id orgId,t.org_name orgName,t.report_date reportDate,t.survey_info_id surveyInfoId,(case o.is_sun when 1 then t.survey_info_id_sun else null end) surveyInfoIdSun,t.num num,
+        ifnull(t.surveySubmitMoney,0) as surveySubmitMoney,t.yb,
+        s.survey_case_no as surveyCaseNo,(ifnull(entrust_ok_price_1,0) + ifnull(entrust_ok_price_2,0)) as entrustSubmitMoney,s.survey_person as surveyPerson
+     from
+      survey_zha_org_assess o
+      left join survey_zha_assess z on o.zha_assess_id = z.id
+      left join
+      (
+        select t.id,t.claims_no,t.survey_case_no,t.survey_person from survey_risk_case t
+            left join survey_risk_case_info r on t.id = r.survey_id and r.delete_flag = 0
+            where t.entrust_org_id = 94 and t.delete_flag = 0 and r.id is not null group by t.claims_no
+      ) s on o.claims_no = s.claims_no
+      left join survey_risk_case_info r on s.id = r.survey_id
+      left join (
+                      select a.survey_no,a.org_id,a.org_name,a.report_date,a.survey_info_id,b.survey_info_id as survey_info_id_sun,ifnull(c.num,0) num,(case when c.yb > 0 then 1 else 0 end) yb,a.surveySubmitMoney from (
+                              select a.survey_no,a.org_id,a.org_name,a.survey_info_id,max(a.report_date) report_date,sum(ifnull(a.survey_money_submit,0) + ifnull(a.survery_re_losses_submit,0)) as surveySubmitMoney from
+                                                          (
+                                                          select r.survey_no,o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                                                                                  (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id,o.report_date,
+                                                                            o.survey_money_submit,o.survery_re_losses_submit
+                                                           from survey_assign_org o
+                                                          left join survey_franchisee f on o.survey_org_id = f.id
+                                                          left join survey_risk_case_info r on o.survey_info_id = r.id
+                                                          left join survey_consignor n on r.entrust_org_id = n.id
+                                                          where o.delete_flag = 0 and r.delete_flag = 0 and r.entrust_org_id = 94
+                                                          )
+                                  a group by a.org_id,a.survey_info_id
+                      ) a
+                      left join (
+                              select a.org_id,a.org_name,a.survey_info_id from
+                                          (
+                                          select o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                                                                  (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id
+                                           from survey_assign_org o
+                                          left join survey_investigator_case c on c.survey_assorg_case_id = o.id
+                                          left join survey_franchisee f on o.survey_org_id = f.id
+                                          left join survey_risk_case_info r on o.survey_info_id = r.id
+                                          left join survey_consignor n on r.entrust_org_id = n.id
+                                          where o.delete_flag = 0 and r.delete_flag = 0 and r.entrust_org_id = 94
+                                          and c.is_sun = 1
+                                          )
+                              a group by a.org_id,a.survey_info_id
+                      ) b on a.org_id = b.org_id and a.survey_info_id = b.survey_info_id
+                      left join (
+                              select a.org_id,a.survey_no,a.org_name,a.survey_info_id,count(1) num,max(yb) yb from
+                                      (
+                                          select r.survey_no,o.survey_org_id,o.survey_org_name,(case f.parent_id when 0 then f.id else f.parent_id end) as org_id,
+                                                                  (case f.parent_id when 0 then f.`name` else f.parent_name end) as org_name,o.survey_info_id,d.id,
+                                                 INSTR(d.direction_name,'医保') yb
+                                           from survey_assign_org o
+                                          left join survey_case_direction d on o.id = d.survey_assorg_case_id and d.delete_flag = 0 and d.invalid_state = 0
+                                          left join survey_franchisee f on o.survey_org_id = f.id
+                                          left join survey_risk_case_info r on o.survey_info_id = r.id
+                                          left join survey_consignor n on r.entrust_org_id = n.id
+                                          where o.delete_flag = 0 and r.delete_flag = 0 and d.id is not null and r.entrust_org_id = 94
+                                      )a group by a.org_id,a.survey_info_id
+                      ) c on a.org_id = c.org_id and a.survey_info_id = c.survey_info_id
+
+      ) t on r.id = t.survey_info_id
+      where z.delete_flag = 0 and r.entrust_org_id = 94 and z.id = #{zhaAssessId,jdbcType=BIGINT}
+      order by t.survey_info_id,t.num desc,t.yb desc,t.report_date desc
+  </select>
+
+    <select id="selectZhaOrgs" parameterType="java.lang.Long" resultType="com.lefancrm.apicenter.dto.zhaAssess.ZhaOrgDTO">
+        select o.zha_assess_id zhaAssessId,o.survey_org_id surveyOrgId,o.survey_org_name surveyOrgName,ifnull(count(1),0) caseNum,
+               sum(ifnull(o.derogation_money,0)) money1,sum(ifnull(o.entrust_submit_money,0)) money2,sum(ifnull(o.pf_amt,0)) pfAmt,sum(ifnull(o.js_amt,0)) jsAmt,
+        ifnull(t.sunNum,0) sunCaseNum,avg(o.cae_eff) eff,sum(ifnull(o.survey_submit_money,0)) as surveySubmitMoney
+            from survey_zha_org_assess o
+            left join survey_zha_assess z on o.zha_assess_id = z.id
+            left join
+            (
+                select a.zha_assess_id,a.survey_org_id,count(1) sunNum from survey_zha_org_assess a
+                left join survey_zha_assess s on a.zha_assess_id = s.id where s.delete_flag = 0 and a.is_sun = 1
+                group by a.zha_assess_id,a.survey_org_id
+            ) t on o.zha_assess_id = t.zha_assess_id and o.survey_org_id = t.survey_org_id
+            where z.delete_flag = 0 and z.id = #{zhaAssessId,jdbcType=BIGINT}
+            group by o.survey_org_id
+    </select>
+
+    <select id="select" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List1" />
+         from survey_zha_org_assess a
+         where a.zha_assess_id = #{zhaAssessId,jdbcType=BIGINT}
+         <if test="surveyOrgId != null">
+             and a.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+         </if>
+         <if test="isSun != null">
+            and a.is_sun = #{isSun,jdbcType=INTEGER}
+         </if>
+         order by a.survey_org_id
+    </select>
+
+    <update id="updateData">
+        <foreach collection="data" item="item" separator=";" open="" close="">
+            update survey_zha_org_assess
+            <set>
+                survey_org_id = #{item.surveyOrgId},
+                survey_org_name = #{item.surveyOrgName},
+                survey_no = #{item.surveyNo},
+                survey_info_id = #{item.surveyInfoId},
+                survey_person = #{item.surveyPerson},
+                survey_submit_money = #{item.surveySubmitMoney},
+                is_sun = #{item.isSun}
+            </set>
+            where id = #{item.id}
+        </foreach>
+    </update>
+
+</mapper>

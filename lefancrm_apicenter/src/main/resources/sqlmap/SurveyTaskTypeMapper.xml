@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyTaskTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyTaskType" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_id" property="surveyId" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="task_id" property="taskId" jdbcType="BIGINT" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_id, survey_info_id, task_id, task_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_task_type
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_task_type
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyTaskType" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_task_type (survey_id, survey_info_id, task_id, 
+      task_name)
+    values (#{surveyId,jdbcType=BIGINT}, #{surveyInfoId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, 
+      #{taskName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyTaskType" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_task_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        survey_id,
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="taskName != null" >
+        task_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyTaskType" >
+    update survey_task_type
+    <set >
+      <if test="surveyId != null" >
+        survey_id = #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyTaskType" >
+    update survey_task_type
+    set survey_id = #{surveyId,jdbcType=BIGINT},
+      survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      task_id = #{taskId,jdbcType=BIGINT},
+      task_name = #{taskName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getSurveyTaskTypeBySurveyInfoIdCount" resultType="java.lang.Integer" parameterType="java.lang.Long" >
+    select
+    count(1)
+    from survey_task_type
+    where survey_info_id = #{surveyInfoId,jdbcType=BIGINT}
+  </select>
+    <select id="getSurveyTaskTypeBySurveyInfoId" resultType="com.lefancrm.apicenter.model.SurveyTaskType" parameterType="java.lang.Long" >
+        select
+        a.id as id, a.survey_id as surveyId, a.survey_info_id as surveyInfoId, a.task_id as taskId,
+        a.task_name as taskName,b.color as taskColor
+        from survey_task_type a
+        left join survey_task_info b  on a.task_id = b.id
+        where a.survey_info_id = #{surveyInfoId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectInfoForAssign" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        SELECT stt.task_id, stt.task_name FROM survey_task_type stt
+          where stt.task_id in
+            (
+                SELECT sict.task_id FROM survey_investigator_case_type sict
+                LEFT JOIN survey_investigator_case sic on sict.survey_user_case_id = sic.id
+                where sic.survey_info_id = #{surveyInfoId,jdbcType=BIGINT} and sic.survey_user_id = #{surveyUserId,jdbcType=BIGINT}
+            )
+          and stt.survey_info_id = #{surveyInfoId,jdbcType=BIGINT};
+    </select>
+
+</mapper>

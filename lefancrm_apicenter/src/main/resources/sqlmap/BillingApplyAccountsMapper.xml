@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BillingApplyAccountsMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BillingApplyAccounts" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bill_id" property="billId" jdbcType="BIGINT" />
+    <result column="money" property="money" jdbcType="DOUBLE" />
+    <result column="imgs" property="imgs" jdbcType="VARCHAR" />
+    <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="account_time" property="accountTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bill_id, money, imgs, create_by_id, create_by, create_time, state,remark,account_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from billing_apply_accounts
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from billing_apply_accounts
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.BillingApplyAccounts" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into billing_apply_accounts (bill_id, money, imgs, 
+      create_by_id, create_by, create_time, account_time
+      state)
+    values (#{billId,jdbcType=BIGINT}, #{money,jdbcType=DOUBLE}, #{imgs,jdbcType=VARCHAR}, 
+      #{createById,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.BillingApplyAccounts" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into billing_apply_accounts
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="billId != null" >
+        bill_id,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="imgs != null" >
+        imgs,
+      </if>
+      <if test="createById != null" >
+        create_by_id,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="billImgsId != null" >
+        bill_imgs_id,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="accountTime != null" >
+        account_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="billId != null" >
+        #{billId,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="imgs != null" >
+        #{imgs,jdbcType=VARCHAR},
+      </if>
+      <if test="createById != null" >
+        #{createById,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="billImgsId != null" >
+        #{billImgsId,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark},
+      </if>
+      <if test="accountTime != null" >
+        #{accountTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.BillingApplyAccounts" >
+    update billing_apply_accounts
+    <set >
+      <if test="billId != null" >
+        bill_id = #{billId,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="imgs != null" >
+        imgs = #{imgs,jdbcType=VARCHAR},
+      </if>
+      <if test="createById != null" >
+        create_by_id = #{createById,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.BillingApplyAccounts" >
+    update billing_apply_accounts
+    set bill_id = #{billId,jdbcType=BIGINT},
+      money = #{money,jdbcType=DOUBLE},
+      imgs = #{imgs,jdbcType=VARCHAR},
+      create_by_id = #{createById,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectListByBillId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply_accounts
+        where bill_id = #{id,jdbcType=BIGINT}
+        and state = 1
+    </select>
+  <select id="selectListByImgsId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from billing_apply_accounts
+    where bill_imgs_id = #{billImgsId}
+    and state = 1
+  </select>
+</mapper>

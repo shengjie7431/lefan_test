@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyAccountLogMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyAccountLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="code_type" property="codeType" jdbcType="BIGINT" />
+    <result column="old_basic_price" property="oldBasicPrice" jdbcType="DOUBLE" />
+    <result column="new_basic_price" property="newBasicPrice" jdbcType="DOUBLE" />
+    <result column="old_de_price" property="oldDePrice" jdbcType="DOUBLE" />
+    <result column="new_de_price" property="newDePrice" jdbcType="DOUBLE" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="up_desc" property="upDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_info_id, code_type, old_basic_price, new_basic_price, old_de_price, new_de_price, 
+    update_time, update_by, up_desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_account_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_account_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyAccountLog" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_account_log (survey_info_id, code_type, old_basic_price, 
+      new_basic_price, old_de_price, new_de_price, 
+      update_time, update_by, up_desc
+      )
+    values (#{surveyInfoId,jdbcType=BIGINT}, #{codeType,jdbcType=BIGINT}, #{oldBasicPrice,jdbcType=DOUBLE}, 
+      #{newBasicPrice,jdbcType=DOUBLE}, #{oldDePrice,jdbcType=DOUBLE}, #{newDePrice,jdbcType=DOUBLE}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{upDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyAccountLog" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_account_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="codeType != null" >
+        code_type,
+      </if>
+      <if test="oldBasicPrice != null" >
+        old_basic_price,
+      </if>
+      <if test="newBasicPrice != null" >
+        new_basic_price,
+      </if>
+      <if test="oldDePrice != null" >
+        old_de_price,
+      </if>
+      <if test="newDePrice != null" >
+        new_de_price,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="upDesc != null" >
+        up_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="codeType != null" >
+        #{codeType,jdbcType=BIGINT},
+      </if>
+      <if test="oldBasicPrice != null" >
+        #{oldBasicPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="newBasicPrice != null" >
+        #{newBasicPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="oldDePrice != null" >
+        #{oldDePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="newDePrice != null" >
+        #{newDePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="upDesc != null" >
+        #{upDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyAccountLog" >
+    update survey_account_log
+    <set >
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="codeType != null" >
+        code_type = #{codeType,jdbcType=BIGINT},
+      </if>
+      <if test="oldBasicPrice != null" >
+        old_basic_price = #{oldBasicPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="newBasicPrice != null" >
+        new_basic_price = #{newBasicPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="oldDePrice != null" >
+        old_de_price = #{oldDePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="newDePrice != null" >
+        new_de_price = #{newDePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="upDesc != null" >
+        up_desc = #{upDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyAccountLog" >
+    update survey_account_log
+    set survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      code_type = #{codeType,jdbcType=BIGINT},
+      old_basic_price = #{oldBasicPrice,jdbcType=DOUBLE},
+      new_basic_price = #{newBasicPrice,jdbcType=DOUBLE},
+      old_de_price = #{oldDePrice,jdbcType=DOUBLE},
+      new_de_price = #{newDePrice,jdbcType=DOUBLE},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      up_desc = #{upDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_account_log
+    <where>
+      <if test="id != null ">
+        and id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="surveyInfoId != null" >
+        and survey_info_id = #{surveyInfoId,jdbcType=BIGINT}
+      </if>
+      <if test="codeType != null" >
+        and code_type = #{codeType,jdbcType=BIGINT}
+      </if>
+      <if test="oldBasicPrice != null" >
+        and old_basic_price = #{oldBasicPrice,jdbcType=DOUBLE}
+      </if>
+      <if test="newBasicPrice != null" >
+        and new_basic_price = #{newBasicPrice,jdbcType=DOUBLE}
+      </if>
+      <if test="oldDePrice != null" >
+        and old_de_price = #{oldDePrice,jdbcType=DOUBLE}
+      </if>
+      <if test="newDePrice != null" >
+        and new_de_price = #{newDePrice,jdbcType=DOUBLE}
+      </if>
+      <if test="updateTime != null" >
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateBy != null" >
+        and update_by = #{updateBy,jdbcType=VARCHAR}
+      </if>
+      <if test="upDesc != null" >
+        and up_desc = #{upDesc,jdbcType=VARCHAR}
+      </if>
+    </where>
+    <if test="dataTimeDesc != null ">
+      ORDER BY update_time desc
+    </if>
+  </select>
+</mapper>

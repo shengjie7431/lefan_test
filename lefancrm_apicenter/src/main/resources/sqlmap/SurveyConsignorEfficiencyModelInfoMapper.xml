@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyConsignorEfficiencyModelInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyConsignorEfficiencyModelInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="efficiency_model_id" property="efficiencyModelId" jdbcType="BIGINT" />
+        <result column="efficiency_model_name" property="efficiencyModelName" jdbcType="VARCHAR" />
+        <result column="service_id" property="serviceId" jdbcType="BIGINT" />
+        <result column="service_name" property="serviceName" jdbcType="VARCHAR" />
+        <result column="city_type" property="cityType" jdbcType="INTEGER" />
+        <result column="days" property="days" jdbcType="INTEGER" />
+        <result column="sub_service_id" property="subServiceId" jdbcType="BIGINT" />
+        <result column="sub_service_name" property="subServiceName" jdbcType="VARCHAR" />
+        <result column="area_categories_id" property="areaCategoriesId" jdbcType="BIGINT" />
+        <result column="area_categories_name" property="areaCategoriesName" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, efficiency_model_id, efficiency_model_name, service_id, service_name, city_type,
+    days, sub_service_id, sub_service_name, area_categories_id, area_categories_name
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_consignor_efficiency_model_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_consignor_efficiency_model_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyConsignorEfficiencyModelInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_consignor_efficiency_model_info (efficiency_model_id, efficiency_model_name,
+        service_id, service_name, city_type,
+        days, sub_service_id, sub_service_name,
+        area_categories_id, area_categories_name)
+        values (#{efficiencyModelId,jdbcType=BIGINT}, #{efficiencyModelName,jdbcType=VARCHAR},
+        #{serviceId,jdbcType=BIGINT}, #{serviceName,jdbcType=VARCHAR}, #{cityType,jdbcType=INTEGER},
+        #{days,jdbcType=INTEGER}, #{subServiceId,jdbcType=BIGINT}, #{subServiceName,jdbcType=VARCHAR},
+        #{areaCategoriesId,jdbcType=BIGINT}, #{areaCategoriesName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignorEfficiencyModelInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_consignor_efficiency_model_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="efficiencyModelId != null" >
+                efficiency_model_id,
+            </if>
+            <if test="efficiencyModelName != null" >
+                efficiency_model_name,
+            </if>
+            <if test="serviceId != null" >
+                service_id,
+            </if>
+            <if test="serviceName != null" >
+                service_name,
+            </if>
+            <if test="cityType != null" >
+                city_type,
+            </if>
+            <if test="days != null" >
+                days,
+            </if>
+            <if test="subServiceId != null" >
+                sub_service_id,
+            </if>
+            <if test="subServiceName != null" >
+                sub_service_name,
+            </if>
+            <if test="areaCategoriesId != null" >
+                area_categories_id,
+            </if>
+            <if test="areaCategoriesName != null" >
+                area_categories_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="efficiencyModelId != null" >
+                #{efficiencyModelId,jdbcType=BIGINT},
+            </if>
+            <if test="efficiencyModelName != null" >
+                #{efficiencyModelName,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceId != null" >
+                #{serviceId,jdbcType=BIGINT},
+            </if>
+            <if test="serviceName != null" >
+                #{serviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityType != null" >
+                #{cityType,jdbcType=INTEGER},
+            </if>
+            <if test="days != null" >
+                #{days,jdbcType=INTEGER},
+            </if>
+            <if test="subServiceId != null" >
+                #{subServiceId,jdbcType=BIGINT},
+            </if>
+            <if test="subServiceName != null" >
+                #{subServiceName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCategoriesId != null" >
+                #{areaCategoriesId,jdbcType=BIGINT},
+            </if>
+            <if test="areaCategoriesName != null" >
+                #{areaCategoriesName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignorEfficiencyModelInfo" >
+        update survey_consignor_efficiency_model_info
+        <set >
+            <if test="efficiencyModelId != null" >
+                efficiency_model_id = #{efficiencyModelId,jdbcType=BIGINT},
+            </if>
+            <if test="efficiencyModelName != null" >
+                efficiency_model_name = #{efficiencyModelName,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceId != null" >
+                service_id = #{serviceId,jdbcType=BIGINT},
+            </if>
+            <if test="serviceName != null" >
+                service_name = #{serviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityType != null" >
+                city_type = #{cityType,jdbcType=INTEGER},
+            </if>
+            <if test="days != null" >
+                days = #{days,jdbcType=INTEGER},
+            </if>
+            <if test="subServiceId != null" >
+                sub_service_id = #{subServiceId,jdbcType=BIGINT},
+            </if>
+            <if test="subServiceName != null" >
+                sub_service_name = #{subServiceName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCategoriesId != null" >
+                area_categories_id = #{areaCategoriesId,jdbcType=BIGINT},
+            </if>
+            <if test="areaCategoriesName != null" >
+                area_categories_name = #{areaCategoriesName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyConsignorEfficiencyModelInfo" >
+    update survey_consignor_efficiency_model_info
+    set efficiency_model_id = #{efficiencyModelId,jdbcType=BIGINT},
+      efficiency_model_name = #{efficiencyModelName,jdbcType=VARCHAR},
+      service_id = #{serviceId,jdbcType=BIGINT},
+      service_name = #{serviceName,jdbcType=VARCHAR},
+      city_type = #{cityType,jdbcType=INTEGER},
+      days = #{days,jdbcType=INTEGER},
+      sub_service_id = #{subServiceId,jdbcType=BIGINT},
+      sub_service_name = #{subServiceName,jdbcType=VARCHAR},
+      area_categories_id = #{areaCategoriesId,jdbcType=BIGINT},
+      area_categories_name = #{areaCategoriesName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="efficiencyModelId != null" >
+            and efficiency_model_id = #{efficiencyModelId,jdbcType=BIGINT}
+        </if>
+        <if test="serviceId != null" >
+            and service_id = #{serviceId,jdbcType=BIGINT}
+        </if>
+        <if test="areaCategoriesId != null" >
+            and area_categories_id = #{areaCategoriesId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_consignor_efficiency_model_info
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_consignor_efficiency_model_info
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectOne" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_consignor_efficiency_model_info
+        where  efficiency_model_id = #{efficiencyModelId,jdbcType=BIGINT}
+        <if test="subServiceId != null">
+            and sub_service_id = #{subServiceId,jdbcType=BIGINT}
+        </if>
+        <if test="subServiceId == null">
+            and service_id = #{serviceId,jdbcType=BIGINT}
+        </if>
+        and area_categories_id = #{areaCategoriesId,jdbcType=INTEGER}
+        limit 1;
+    </select>
+
+    <delete id="deleteByModelId" parameterType="java.lang.Long" >
+        delete from survey_consignor_efficiency_model_info
+        where efficiency_model_id = #{efficiencyModelId,jdbcType=BIGINT}
+    </delete>
+
+    <select id="selectMaxDay" parameterType="map" resultType="int">
+        SELECT ifnull(MAX(a.days),0) FROM survey_consignor_efficiency_model_info a
+          where 1=1
+            <if test="efficiencyModelId != null" >
+                and a.efficiency_model_id = #{efficiencyModelId,jdbcType=BIGINT}
+            </if>
+            <if test="serviceId != null" >
+                and a.service_id = #{serviceId,jdbcType=BIGINT}
+            </if>
+    </select>
+    <select id="getZaAgingDay" resultType="java.lang.Integer">
+                SELECT
+            i.days
+        FROM survey_consignor_efficiency_model_org o
+        LEFT JOIN survey_consignor_efficiency_model_info i ON o.efficiency_model_id = i.efficiency_model_id
+        LEFT JOIN survey_consignor_efficiency_model m ON i.efficiency_model_id = m.id
+        WHERE o.org_id = #{param4}
+        AND m.type = 1
+        <if test="param1 != null">
+            AND i.sub_service_id = #{param1} and i.city_type = #{param3}
+        </if>
+        <if test="param2 != null">
+            AND i.service_id = #{param2} and i.city_type = #{param3}
+        </if>
+        LIMIT 1
+    </select>
+    <select id="getAgingDay" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select ifnull(t.days,0) from survey_consignor_efficiency_model_info t where
+            t.area_categories_id = #{areaCategoriesId,jdbcType=BIGINT}
+            <if test="entrustOrgId == 94">
+                and t.sub_service_id = #{subServiceId,jdbcType=BIGINT}
+            </if>
+            <if test="entrustOrgId != 94">
+                and t.service_id = #{serviceId,jdbcType=BIGINT}
+            </if>
+            and t.efficiency_model_id = (
+                select s.efficiency_model_id from survey_consignor_efficiency_model_org s where s.org_id = #{entrustOrgId,jdbcType=BIGINT} limit 1
+            ) limit 1;
+    </select>
+
+    <select id="selectSurveyDaysByMap" resultType="java.lang.Long" parameterType="java.util.Map">
+        select m.days from (
+        select d.id,r.entrust_org_id,(case d.area_type when 2 then d.city_id when 3 then d.city_id else d.district_id end) as areaId from survey_case_direction d
+        left join survey_risk_case_info r on d.survey_info_id = r.id
+        left join survey_assign_org o on d.survey_assorg_case_id = o.id
+        where d.survey_assorg_case_id = #{surveyAssorgCaseId,jdbcType=BIGINT} and d.delete_flag = 0
+        ) t
+        left join survey_consignor_efficiency_model_org o on t.entrust_org_id = o.org_id
+        left join survey_consignor_efficiency_area_city c on t.areaId = c.area_id and c.model_id = o.efficiency_model_id
+        left join survey_consignor_efficiency_model_info m on o.efficiency_model_id = m.efficiency_model_id and c.area_categories_id = m.area_categories_id
+        where 1 = 1
+        <if test="serviceId != null">
+            and m.service_id = #{serviceId, jdbcType=BIGINT}
+        </if>
+        <if test="subServiceId != null">
+            and m.sub_service_id = #{subServiceId, jdbcType=BIGINT}
+        </if>
+        order by m.days desc limit 1
+    </select>
+</mapper>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BlameQuotietyMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BlameQuotiety" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="accident_blame" property="accidentBlame" jdbcType="VARCHAR" />
+    <result column="vehicle_to_vehicle" property="vehicleToVehicle" jdbcType="DOUBLE" />
+    <result column="vehicle_to_unvehicle" property="vehicleToUnvehicle" jdbcType="DOUBLE" />
+    <result column="hvehicle_to_vehicle" property="hvehicleToVehicle" jdbcType="DOUBLE" />
+    <result column="hvehicle_to_unvehicle" property="hvehicleToUnvehicle" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, accident_blame, vehicle_to_vehicle, vehicle_to_unvehicle,hvehicle_to_vehicle, hvehicle_to_unvehicle
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from blame_quotiety
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from blame_quotiety
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.BlameQuotiety" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blame_quotiety (accident_blame, vehicle_to_vehicle, vehicle_to_unvehicle,hvehicle_to_vehicle, hvehicle_to_unvehicle
+      )
+    values (#{accidentBlame,jdbcType=VARCHAR}, #{vehicleToVehicle,jdbcType=DOUBLE}, #{vehicleToUnvehicle,jdbcType=DOUBLE}, #{hvehicleToVehicle,jdbcType=DOUBLE}, #{hvehicleToUnvehicle,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.BlameQuotiety" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into blame_quotiety
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accidentBlame != null" >
+        accident_blame,
+      </if>
+      <if test="vehicleToVehicle != null" >
+        vehicle_to_vehicle,
+      </if>
+      <if test="vehicleToUnvehicle != null" >
+        vehicle_to_unvehicle,
+      </if>
+        <if test="hvehicleToVehicle != null" >
+            hvehicle_to_vehicle,
+        </if>
+        <if test="hvehicleToUnvehicle != null" >
+            hvehicle_to_unvehicle,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accidentBlame != null" >
+        #{accidentBlame,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleToVehicle != null" >
+        #{vehicleToVehicle,jdbcType=DOUBLE},
+      </if>
+      <if test="vehicleToUnvehicle != null" >
+        #{vehicleToUnvehicle,jdbcType=DOUBLE},
+      </if>
+        <if test="hvehicleToVehicle != null" >
+            #{hvehicleToVehicle,jdbcType=DOUBLE},
+        </if>
+        <if test="hvehicleToUnvehicle != null" >
+            #{hvehicleToUnvehicle,jdbcType=DOUBLE},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.BlameQuotiety" >
+    update blame_quotiety
+    <set >
+      <if test="accidentBlame != null" >
+        accident_blame = #{accidentBlame,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleToVehicle != null" >
+        vehicle_to_vehicle = #{vehicleToVehicle,jdbcType=DOUBLE},
+      </if>
+      <if test="vehicleToUnvehicle != null" >
+        vehicle_to_unvehicle = #{vehicleToUnvehicle,jdbcType=DOUBLE},
+      </if>
+        <if test="hvehicleToVehicle != null" >
+            hvehicle_to_vehicle = #{hvehicleToVehicle,jdbcType=DOUBLE},
+        </if>
+        <if test="hvehicleToUnvehicle != null" >
+            hvehicle_to_unvehicle = #{hvehicleToUnvehicle,jdbcType=DOUBLE},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.BlameQuotiety" >
+    update blame_quotiety
+    set accident_blame = #{accidentBlame,jdbcType=VARCHAR},
+      vehicle_to_vehicle = #{vehicleToVehicle,jdbcType=DOUBLE},
+      vehicle_to_unvehicle = #{vehicleToUnvehicle,jdbcType=DOUBLE},
+      hvehicle_to_vehicle = #{hvehicleToVehicle,jdbcType=DOUBLE},
+      hvehicle_to_unvehicle = #{hvehicleToUnvehicle,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectBlameQuotiety" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from blame_quotiety
+    </select>
+</mapper>

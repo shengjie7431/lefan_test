@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseStepsMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseSteps" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_center_id" property="caseCenterId" jdbcType="BIGINT" />
+    <result column="step_code" property="stepCode" jdbcType="VARCHAR" />
+    <result column="step_name" property="stepName" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="cur_state" property="curState" jdbcType="INTEGER" />
+    <result column="cur_state_step" property="curStateStep" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_center_id, step_code, step_name, start_time, end_time, create_by, update_by, 
+    delete_flag, cur_state, cur_state_step
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_steps
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from case_steps
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseSteps" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_steps (case_center_id, step_code, step_name, 
+      start_time, end_time, create_by, 
+      update_by, delete_flag, cur_state, 
+      cur_state_step)
+    values (#{caseCenterId,jdbcType=BIGINT}, #{stepCode,jdbcType=VARCHAR}, #{stepName,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, #{curState,jdbcType=INTEGER}, 
+      #{curStateStep,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseSteps" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_steps
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseCenterId != null" >
+        case_center_id,
+      </if>
+      <if test="stepCode != null" >
+        step_code,
+      </if>
+      <if test="stepName != null" >
+        step_name,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="curState != null" >
+        cur_state,
+      </if>
+      <if test="curStateStep != null" >
+        cur_state_step,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseCenterId != null" >
+        #{caseCenterId,jdbcType=BIGINT},
+      </if>
+      <if test="stepCode != null" >
+        #{stepCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stepName != null" >
+        #{stepName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="curState != null" >
+        #{curState,jdbcType=INTEGER},
+      </if>
+      <if test="curStateStep != null" >
+        #{curStateStep,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseSteps" >
+    update case_steps
+    <set >
+      <if test="caseCenterId != null" >
+        case_center_id = #{caseCenterId,jdbcType=BIGINT},
+      </if>
+      <if test="stepCode != null" >
+        step_code = #{stepCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stepName != null" >
+        step_name = #{stepName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="curState != null" >
+        cur_state = #{curState,jdbcType=INTEGER},
+      </if>
+      <if test="curStateStep != null" >
+        cur_state_step = #{curStateStep,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseSteps" >
+    update case_steps
+    set case_center_id = #{caseCenterId,jdbcType=BIGINT},
+      step_code = #{stepCode,jdbcType=VARCHAR},
+      step_name = #{stepName,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      cur_state = #{curState,jdbcType=INTEGER},
+      cur_state_step = #{curStateStep,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectByCaseCenterIdToUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from case_steps
+    where case_center_id = #{caseCenterId,jdbcType=BIGINT}
+    order by id desc limit 1
+  </select>
+  <select id="selectByCaseCenterIdToList" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from case_steps
+    where case_center_id = #{caseCenterId,jdbcType=BIGINT}
+    order by id asc
+  </select>
+</mapper>

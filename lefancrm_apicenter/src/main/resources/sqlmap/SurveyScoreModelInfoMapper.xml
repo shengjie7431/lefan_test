@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyScoreModelInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyScoreModelInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="model_id" property="modelId" jdbcType="BIGINT" />
+    <result column="model_name" property="modelName" jdbcType="VARCHAR" />
+    <result column="area_categories_id" property="areaCategoriesId" jdbcType="BIGINT" />
+    <result column="area_categories_name" property="areaCategoriesName" jdbcType="VARCHAR" />
+    <result column="score_rate" property="scoreRate" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, model_id, model_name, area_categories_id, area_categories_name, score_rate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_score_model_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_score_model_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyScoreModelInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_score_model_info (model_id, model_name, area_categories_id, 
+      area_categories_name, score_rate)
+    values (#{modelId,jdbcType=BIGINT}, #{modelName,jdbcType=VARCHAR}, #{areaCategoriesId,jdbcType=BIGINT}, 
+      #{areaCategoriesName,jdbcType=VARCHAR}, #{scoreRate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyScoreModelInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_score_model_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="modelName != null" >
+        model_name,
+      </if>
+      <if test="areaCategoriesId != null" >
+        area_categories_id,
+      </if>
+      <if test="areaCategoriesName != null" >
+        area_categories_name,
+      </if>
+      <if test="scoreRate != null" >
+        score_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="modelName != null" >
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCategoriesId != null" >
+        #{areaCategoriesId,jdbcType=BIGINT},
+      </if>
+      <if test="areaCategoriesName != null" >
+        #{areaCategoriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreRate != null" >
+        #{scoreRate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyScoreModelInfo" >
+    update survey_score_model_info
+    <set >
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="modelName != null" >
+        model_name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCategoriesId != null" >
+        area_categories_id = #{areaCategoriesId,jdbcType=BIGINT},
+      </if>
+      <if test="areaCategoriesName != null" >
+        area_categories_name = #{areaCategoriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreRate != null" >
+        score_rate = #{scoreRate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyScoreModelInfo" >
+    update survey_score_model_info
+    set model_id = #{modelId,jdbcType=BIGINT},
+      model_name = #{modelName,jdbcType=VARCHAR},
+      area_categories_id = #{areaCategoriesId,jdbcType=BIGINT},
+      area_categories_name = #{areaCategoriesName,jdbcType=VARCHAR},
+      score_rate = #{scoreRate,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+
+  <sql id="joins">
+
+  </sql>
+  <sql id="wheres">
+    <if test="modelId != null" >
+      and model_id = #{modelId,jdbcType=BIGINT}
+    </if>
+    <if test="areaCategoriesId != null" >
+      and area_categories_id = #{areaCategoriesId,jdbcType=BIGINT}
+    </if>
+
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_score_model_info
+    <include refid="joins" />
+    where 1=1
+    <include refid="wheres" />
+    order by id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from survey_score_model_info
+    <include refid="joins" />
+    where 1=1
+    <include refid="wheres" />
+  </select>
+
+  <delete id="deleteByParam" parameterType="java.util.Map">
+    delete from survey_score_model_info
+    where model_id = #{modelId,jdbcType=BIGINT} and area_categories_id = #{areaCategoriesId,jdbcType=BIGINT}
+  </delete>
+
+  <select id="selectByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from survey_score_model_info m
+    where m.model_id = #{modelId,jdbcType=BIGINT}
+    and m.area_categories_id = (
+    select c.area_categories_id from survey_score_model_area_city c where c.area_id = #{areaId,jdbcType=BIGINT} and c.model_id = #{modelId,jdbcType=BIGINT} limit 1
+    )
+  </select>
+</mapper>

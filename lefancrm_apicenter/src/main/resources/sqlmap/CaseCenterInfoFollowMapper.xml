@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lefancrm.apicenter.dao.CaseCenterInfoFollowMapper">
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseCenterInfoFollow">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="case_id" jdbcType="BIGINT" property="caseId" />
+    <result column="case_no" jdbcType="VARCHAR" property="caseNo" />
+    <result column="case_type" jdbcType="INTEGER" property="caseType" />
+    <result column="gradation_state" jdbcType="INTEGER" property="gradationState" />
+    <result column="case_state" jdbcType="INTEGER" property="caseState" />
+    <result column="case_title" jdbcType="VARCHAR" property="caseTitle" />
+    <result column="case_name" jdbcType="VARCHAR" property="caseName" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="org_id" jdbcType="BIGINT" property="orgId" />
+    <result column="follow_type" jdbcType="INTEGER" property="followType" />
+    <result column="follow_desc" jdbcType="VARCHAR" property="followDesc" />
+    <result column="follow_by_id" jdbcType="BIGINT" property="followById" />
+    <result column="follow_by" jdbcType="VARCHAR" property="followBy" />
+    <result column="follow_time" jdbcType="TIMESTAMP" property="followTime" />
+    <result column="next_follow_time" jdbcType="TIMESTAMP" property="nextFollowTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, case_id, case_no, case_type, gradation_state, case_state, case_title, case_name, 
+    org_name, org_id, follow_type, follow_desc, follow_by_id, follow_by, follow_time, next_follow_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from case_center_info_follow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from case_center_info_follow
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseCenterInfoFollow">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_center_info_follow (case_id, case_no, case_type, 
+      gradation_state, case_state, case_title, 
+      case_name, org_name, org_id, 
+      follow_type, follow_desc, follow_by_id, 
+      follow_by, follow_time, next_follow_time)
+    values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{caseType,jdbcType=INTEGER}, 
+      #{gradationState,jdbcType=INTEGER}, #{caseState,jdbcType=INTEGER}, #{caseTitle,jdbcType=VARCHAR}, 
+      #{caseName,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, 
+      #{followType,jdbcType=INTEGER}, #{followDesc,jdbcType=VARCHAR}, #{followById,jdbcType=BIGINT}, 
+      #{followBy,jdbcType=VARCHAR}, #{followTime,jdbcType=TIMESTAMP}, #{nextFollowTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseCenterInfoFollow">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_center_info_follow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="caseId != null">
+        case_id,
+      </if>
+      <if test="caseNo != null">
+        case_no,
+      </if>
+      <if test="caseType != null">
+        case_type,
+      </if>
+      <if test="gradationState != null">
+        gradation_state,
+      </if>
+      <if test="caseState != null">
+        case_state,
+      </if>
+      <if test="caseTitle != null">
+        case_title,
+      </if>
+      <if test="caseName != null">
+        case_name,
+      </if>
+      <if test="orgName != null">
+        org_name,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="followType != null">
+        follow_type,
+      </if>
+      <if test="followDesc != null">
+        follow_desc,
+      </if>
+      <if test="followById != null">
+        follow_by_id,
+      </if>
+      <if test="followBy != null">
+        follow_by,
+      </if>
+      <if test="followTime != null">
+        follow_time,
+      </if>
+      <if test="nextFollowTime != null">
+        next_follow_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="caseId != null">
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null">
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseType != null">
+        #{caseType,jdbcType=INTEGER},
+      </if>
+      <if test="gradationState != null">
+        #{gradationState,jdbcType=INTEGER},
+      </if>
+      <if test="caseState != null">
+        #{caseState,jdbcType=INTEGER},
+      </if>
+      <if test="caseTitle != null">
+        #{caseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="caseName != null">
+        #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="followType != null">
+        #{followType,jdbcType=INTEGER},
+      </if>
+      <if test="followDesc != null">
+        #{followDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="followById != null">
+        #{followById,jdbcType=BIGINT},
+      </if>
+      <if test="followBy != null">
+        #{followBy,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null">
+        #{followTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextFollowTime != null">
+        #{nextFollowTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseCenterInfoFollow">
+    update case_center_info_follow
+    <set>
+      <if test="caseId != null">
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null">
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseType != null">
+        case_type = #{caseType,jdbcType=INTEGER},
+      </if>
+      <if test="gradationState != null">
+        gradation_state = #{gradationState,jdbcType=INTEGER},
+      </if>
+      <if test="caseState != null">
+        case_state = #{caseState,jdbcType=INTEGER},
+      </if>
+      <if test="caseTitle != null">
+        case_title = #{caseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="caseName != null">
+        case_name = #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null">
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="followType != null">
+        follow_type = #{followType,jdbcType=INTEGER},
+      </if>
+      <if test="followDesc != null">
+        follow_desc = #{followDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="followById != null">
+        follow_by_id = #{followById,jdbcType=BIGINT},
+      </if>
+      <if test="followBy != null">
+        follow_by = #{followBy,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null">
+        follow_time = #{followTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextFollowTime != null">
+        next_follow_time = #{nextFollowTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseCenterInfoFollow">
+    update case_center_info_follow
+    set case_id = #{caseId,jdbcType=BIGINT},
+      case_no = #{caseNo,jdbcType=VARCHAR},
+      case_type = #{caseType,jdbcType=INTEGER},
+      gradation_state = #{gradationState,jdbcType=INTEGER},
+      case_state = #{caseState,jdbcType=INTEGER},
+      case_title = #{caseTitle,jdbcType=VARCHAR},
+      case_name = #{caseName,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      follow_type = #{followType,jdbcType=INTEGER},
+      follow_desc = #{followDesc,jdbcType=VARCHAR},
+      follow_by_id = #{followById,jdbcType=BIGINT},
+      follow_by = #{followBy,jdbcType=VARCHAR},
+      follow_time = #{followTime,jdbcType=TIMESTAMP},
+      next_follow_time = #{nextFollowTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectCaseCenterInfoFollowList" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from
+        case_center_info_follow
+        where 1=1
+        <if test="caseName !=null">
+            and case_name like CONCAT('%',#{caseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseNo !=null">
+            and case_no like CONCAT('%',#{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="gradationState !=null">
+            and gradation_state = #{gradationState,jdbcType=INTEGER}
+        </if>
+        <if test="caseState !=null">
+            and case_state = #{caseState,jdbcType=INTEGER}
+        </if>
+        <if test="followType !=null">
+            and follow_type = #{followType,jdbcType=INTEGER}
+        </if>
+
+        order by follow_time desc limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="searchCaseCenterInfoFollowByCaseId" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from
+        case_center_info_follow
+        where
+        case_id = #{caseId,jdbcType=BIGINT}
+        order by follow_time desc
+    </select>
+
+    <update id="updateListByGradationStateAndCaseId" parameterType="com.lefancrm.apicenter.model.CaseCenterInfoFollow">
+        update case_center_info_follow set follow_type = #{followType,jdbcType=INTEGER}
+        where case_id = #{caseId,jdbcType=BIGINT} and gradation_state = #{gradationState,jdbcType=INTEGER}
+    </update>
+    <select id="searchCaseCenterInfoFollowByInfo" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from
+        case_center_info_follow
+        where
+        case_id = #{caseId,jdbcType=BIGINT} and gradation_state = #{gradationState,jdbcType=INTEGER} and follow_type = #{followType,jdbcType=INTEGER}
+        order by follow_time desc limit 1
+    </select>
+
+    <select id="searchCaseCenterInfoFollowSizeByCaseId" parameterType="map" resultType="int">
+        select
+        count(1)
+        from
+        case_center_info_follow
+        where
+        case_id = #{caseId,jdbcType=BIGINT}
+        order by follow_time desc
+    </select>
+</mapper>

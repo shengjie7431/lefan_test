@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaSurveyConsignorEfficiencyModelOrgMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaSurveyConsignorEfficiencyModelOrg" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="efficiency_model_id" property="efficiencyModelId" jdbcType="BIGINT" />
+    <result column="efficiency_model_name" property="efficiencyModelName" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, efficiency_model_id, efficiency_model_name, org_id, org_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_survey_consignor_efficiency_model_org
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_survey_consignor_efficiency_model_org
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyConsignorEfficiencyModelOrg" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_survey_consignor_efficiency_model_org (efficiency_model_id, efficiency_model_name, 
+      org_id, org_name)
+    values (#{efficiencyModelId,jdbcType=BIGINT}, #{efficiencyModelName,jdbcType=VARCHAR}, 
+      #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyConsignorEfficiencyModelOrg" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_survey_consignor_efficiency_model_org
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="efficiencyModelId != null" >
+        efficiency_model_id,
+      </if>
+      <if test="efficiencyModelName != null" >
+        efficiency_model_name,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="efficiencyModelId != null" >
+        #{efficiencyModelId,jdbcType=BIGINT},
+      </if>
+      <if test="efficiencyModelName != null" >
+        #{efficiencyModelName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyConsignorEfficiencyModelOrg" >
+    update fina_survey_consignor_efficiency_model_org
+    <set >
+      <if test="efficiencyModelId != null" >
+        efficiency_model_id = #{efficiencyModelId,jdbcType=BIGINT},
+      </if>
+      <if test="efficiencyModelName != null" >
+        efficiency_model_name = #{efficiencyModelName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaSurveyConsignorEfficiencyModelOrg" >
+    update fina_survey_consignor_efficiency_model_org
+    set efficiency_model_id = #{efficiencyModelId,jdbcType=BIGINT},
+      efficiency_model_name = #{efficiencyModelName,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="efficiencyModelId != null" >
+            and efficiency_model_id = #{efficiencyModelId,jdbcType=BIGINT}
+        </if>
+        <if test="orgId != null" >
+            and org_id = #{orgId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from fina_survey_consignor_efficiency_model_org
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from fina_survey_consignor_efficiency_model_org
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+
+    <delete id="deleteByModelId" parameterType="java.lang.Long" >
+        delete from fina_survey_consignor_efficiency_model_org
+        where efficiency_model_id = #{efficiencyModelId,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByOrgId">
+         delete from fina_survey_consignor_efficiency_model_org
+        where org_id = #{orgId,jdbcType=BIGINT}
+    </delete>
+
+    <select id="selectOne" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from fina_survey_consignor_efficiency_model_org
+        where  org_id = #{orgId,jdbcType=BIGINT}
+        limit 1;
+    </select>
+</mapper>

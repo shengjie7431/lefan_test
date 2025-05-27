@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.StaffPostAppellationMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.StaffPostAppellation" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="appellation_name" property="appellationName" jdbcType="VARCHAR" />
+    <result column="appellation_desc" property="appellationDesc" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, appellation_name, appellation_desc, delete_flag, create_time, create_by,state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from staff_post_appellation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from staff_post_appellation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.StaffPostAppellation" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_post_appellation (appellation_name, appellation_desc, 
+      delete_flag, create_time, create_by,state
+      )
+    values (#{appellationName,jdbcType=VARCHAR}, #{appellationDesc,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},#{state,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.StaffPostAppellation" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_post_appellation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="appellationName != null" >
+        appellation_name,
+      </if>
+      <if test="appellationDesc != null" >
+        appellation_desc,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="appellationName != null" >
+        #{appellationName,jdbcType=VARCHAR},
+      </if>
+      <if test="appellationDesc != null" >
+        #{appellationDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.StaffPostAppellation" >
+    update staff_post_appellation
+    <set >
+      <if test="appellationName != null" >
+        appellation_name = #{appellationName,jdbcType=VARCHAR},
+      </if>
+      <if test="appellationDesc != null" >
+        appellation_desc = #{appellationDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.StaffPostAppellation" >
+    update staff_post_appellation
+    set appellation_name = #{appellationName,jdbcType=VARCHAR},
+      appellation_desc = #{appellationDesc,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <sql id="wheres">
+    <if test="appellationName!= null" >
+      and appellation_name like CONCAT(CONCAT('%',#{appellationName,jdbcType=VARCHAR}), '%')
+    </if>
+    <if test="state!= null" >
+      and state = #{state,jdbcType=INTEGER}
+    </if>
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from staff_post_appellation
+    where   delete_flag =0
+    <include refid="wheres" />
+    order by id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+  <select id="listSize" parameterType="map" resultType="int">
+    select
+    count(1)
+    from staff_post_appellation
+    where  delete_flag =0
+    <include refid="wheres" />
+  </select>
+
+  <select id="listAll" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from staff_post_appellation
+    where  delete_flag =0 and state =0
+    order by id desc
+  </select>
+
+  <select id="selectByOne" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from staff_post_appellation
+    where appellation_name = #{appellationName,jdbcType=VARCHAR} limit 1;
+  </select>
+</mapper>

@@ -1,0 +1,1271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.LawCaseInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.dto.LawCaseInfoDto" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+        <result column="pub_case_no" property="pubCaseNo" jdbcType="VARCHAR" />
+        <result column="org_id" property="orgId" jdbcType="BIGINT" />
+        <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+        <result column="assess_id" property="assessId" jdbcType="BIGINT" />
+        <result column="assess_name" property="assessName" jdbcType="VARCHAR" />
+        <result column="assess_tel" property="assessTel" jdbcType="VARCHAR" />
+        <result column="accept_time" property="acceptTime" jdbcType="TIMESTAMP" />
+        <result column="app_user_id" property="appUserId" jdbcType="BIGINT" />
+        <result column="app_user_name" property="appUserName" jdbcType="VARCHAR" />
+        <result column="app_user_tel" property="appUserTel" jdbcType="VARCHAR" />
+        <result column="entrust_user_id" property="entrustUserId" jdbcType="BIGINT" />
+        <result column="entrust_user_name" property="entrustUserName" jdbcType="VARCHAR" />
+        <result column="entrust_user_tel" property="entrustUserTel" jdbcType="VARCHAR" />
+        <result column="case_type" property="caseType" jdbcType="INTEGER" />
+        <result column="entrust_time" property="entrustTime" jdbcType="TIMESTAMP" />
+        <result column="target_amount" property="targetAmount" jdbcType="DOUBLE" />
+        <result column="target_province" property="targetProvince" jdbcType="VARCHAR" />
+        <result column="target_city" property="targetCity" jdbcType="VARCHAR" />
+        <result column="target_district" property="targetDistrict" jdbcType="VARCHAR" />
+        <result column="target_province_id" property="targetProvinceId" jdbcType="INTEGER" />
+        <result column="target_city_id" property="targetCityId" jdbcType="INTEGER" />
+        <result column="target_district_id" property="targetDistrictId" jdbcType="INTEGER" />
+        <result column="target_address" property="targetAddress" jdbcType="VARCHAR" />
+        <result column="link_name" property="linkName" jdbcType="VARCHAR" />
+        <result column="link_tel" property="linkTel" jdbcType="VARCHAR" />
+        <result column="assess_remark" property="assessRemark" jdbcType="VARCHAR" />
+        <result column="assess_fee" property="assessFee" jdbcType="DOUBLE" />
+        <result column="check_assess_fee" property="checkAssessFee" jdbcType="DOUBLE" />
+        <result column="final_assess_amount" property="finalAssessAmount" jdbcType="DOUBLE" />
+        <result column="final_assess_fee" property="finalAssessFee" jdbcType="DOUBLE" />
+        <result column="assess_rec_time" property="assessRecTime" jdbcType="TIMESTAMP" />
+        <result column="travel_fee" property="travelFee" jdbcType="DOUBLE" />
+        <result column="entrust_desc" property="entrustDesc" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="one_check_opinion" property="oneCheckOpinion" jdbcType="INTEGER" />
+        <result column="one_check_opinion_remark" property="oneCheckOpinionRemark" jdbcType="VARCHAR" />
+        <result column="two_check_opinion" property="twoCheckOpinion" jdbcType="INTEGER" />
+        <result column="two_check_opinion_remark" property="twoCheckOpinionRemark" jdbcType="VARCHAR" />
+        <result column="lssuer_check_opinion" property="lssuerCheckOpinion" jdbcType="INTEGER" />
+        <result column="lssuer_check_opinion_remark" property="lssuerCheckOpinionRemark" jdbcType="VARCHAR" />
+        <result column="flow_state" property="flowState" jdbcType="INTEGER" />
+        <result column="flow_state_name" property="flowStateName" jdbcType="VARCHAR" />
+        <result column="refund_type" property="refundType" jdbcType="INTEGER" />
+        <result column="stage_state" property="stageState" jdbcType="INTEGER" />
+        <result column="retreat_state" property="retreatState" jdbcType="INTEGER" />
+        <result column="retreat_time" property="retreatTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="BIGINT" />
+        <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+        <result column="is_cursupplement" property="isCursupplement" jdbcType="INTEGER" />
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+        <result column="is_upload_assess_plan" property="isUploadAssessPlan" jdbcType="INTEGER" />
+        <result column="is_upload_reqmoney_letter" property="isUploadReqmoneyLetter" jdbcType="INTEGER" />
+        <result column="is_send_report" property="isSendReport" jdbcType="INTEGER" />
+        <result column="is_arr_ass_fee" property="isArrAssFee" jdbcType="INTEGER" />
+        <result column="is_express" property="isExpress" jdbcType="INTEGER" />
+        <result column="send_report_time" property="sendReportTime" jdbcType="TIMESTAMP" />
+        <result column="express_time" property="expressTime" jdbcType="TIMESTAMP" />
+        <result column="is_draft" property="isDraft" jdbcType="INTEGER" />
+        <result column="is_arr_refund" property="isArrRefund" jdbcType="INTEGER" />
+        <result column="arr_refund_time" property="arrRefundTime" jdbcType="TIMESTAMP" />
+        <result column="refound_remark" property="refoundRemark" jdbcType="VARCHAR" />
+        <result column="is_sue" property="isSue" jdbcType="INTEGER" />
+        <result column="is_bill" property="isBill" jdbcType="INTEGER" />
+        <result column="to_name" property="toName" jdbcType="VARCHAR" />
+        <result column="to_tel" property="toTel" jdbcType="VARCHAR" />
+        <result column="to_org" property="toOrg" jdbcType="VARCHAR" />
+        <result column="to_address" property="toAddress" jdbcType="VARCHAR" />
+        <result column="is_ok_info" property="isOkInfo" jdbcType="INTEGER" />
+        <result column="collection_remarks" property="collectionRemarks" jdbcType="VARCHAR" />
+        <result column="pay_type" property="payType" jdbcType="INTEGER" />
+        <result column="is_ok_info2" property="isOkInfo2" jdbcType="INTEGER" />
+        <result column="refund_fee" property="refundFee" jdbcType="DOUBLE" />
+        <result column="is_report" property="isReport" jdbcType="INTEGER" />
+        <result column="to_province" jdbcType="VARCHAR" property="toProvince" />
+        <result column="to_city" jdbcType="VARCHAR" property="toCity" />
+        <result column="to_district" jdbcType="VARCHAR" property="toDistrict" />
+        <result column="to_province_id" jdbcType="INTEGER" property="toProvinceId" />
+        <result column="to_city_id" jdbcType="INTEGER" property="toCityId" />
+        <result column="to_district_id" jdbcType="INTEGER" property="toDistrictId" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, case_no, pub_case_no, org_id, org_name, assess_id, assess_name, assess_tel, accept_time,
+        app_user_id, app_user_name, app_user_tel, entrust_user_id, entrust_user_name, entrust_user_tel,
+        case_type, entrust_time, target_amount, target_province, target_city, target_district,
+        target_province_id, target_city_id, target_district_id, target_address, link_name,
+        link_tel, assess_remark, assess_fee, check_assess_fee, final_assess_amount, final_assess_fee,
+        assess_rec_time, travel_fee, entrust_desc, remark, one_check_opinion, one_check_opinion_remark,
+        two_check_opinion, two_check_opinion_remark, lssuer_check_opinion, lssuer_check_opinion_remark,
+        flow_state, flow_state_name, refund_type, stage_state, retreat_state, retreat_time,
+        create_by, create_by_name, create_time, update_time, update_by, is_cursupplement,
+        is_delete, is_upload_assess_plan, is_upload_reqmoney_letter, is_send_report, is_arr_ass_fee,
+        is_express, send_report_time, express_time, is_draft, is_arr_refund, arr_refund_time,
+        refound_remark, is_sue, is_bill, to_name, to_tel, to_org, to_address, is_ok_info,
+        collection_remarks, pay_type, is_ok_info2, refund_fee, is_report, to_province, to_city,
+        to_district, to_province_id, to_city_id, to_district_id
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from law_case_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from law_case_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.LawCaseInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into law_case_info (case_no, pub_case_no, org_id,
+        org_name, assess_id, assess_name,
+        assess_tel, accept_time, app_user_id,
+        app_user_name, app_user_tel, entrust_user_id,
+        entrust_user_name, entrust_user_tel, case_type,
+        entrust_time, target_amount, target_province,
+        target_city, target_district, target_province_id,
+        target_city_id, target_district_id, target_address,
+        link_name, link_tel, assess_remark,
+        assess_fee, check_assess_fee, final_assess_amount,
+        final_assess_fee, assess_rec_time, travel_fee,
+        entrust_desc, remark, one_check_opinion,
+        one_check_opinion_remark, two_check_opinion,
+        two_check_opinion_remark, lssuer_check_opinion,
+        lssuer_check_opinion_remark, flow_state, flow_state_name,
+        refund_type, stage_state, retreat_state,
+        retreat_time, create_by, create_by_name,
+        create_time, update_time, update_by,
+        is_cursupplement, is_delete, is_upload_assess_plan,
+        is_upload_reqmoney_letter, is_send_report, is_arr_ass_fee,
+        is_express, send_report_time, express_time,
+        is_draft, is_arr_refund, arr_refund_time,
+        refound_remark, is_sue, is_bill,
+        to_name, to_tel, to_org,
+        to_address, is_ok_info, collection_remarks,
+        pay_type, is_ok_info2, refund_fee,
+        is_report, to_province, to_city,
+        to_district, to_province_id, to_city_id,
+        to_district_id)
+        values (#{caseNo,jdbcType=VARCHAR}, #{pubCaseNo,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT},
+        #{orgName,jdbcType=VARCHAR}, #{assessId,jdbcType=BIGINT}, #{assessName,jdbcType=VARCHAR},
+        #{assessTel,jdbcType=VARCHAR}, #{acceptTime,jdbcType=TIMESTAMP}, #{appUserId,jdbcType=BIGINT},
+        #{appUserName,jdbcType=VARCHAR}, #{appUserTel,jdbcType=VARCHAR}, #{entrustUserId,jdbcType=BIGINT},
+        #{entrustUserName,jdbcType=VARCHAR}, #{entrustUserTel,jdbcType=VARCHAR}, #{caseType,jdbcType=INTEGER},
+        #{entrustTime,jdbcType=TIMESTAMP}, #{targetAmount,jdbcType=DOUBLE}, #{targetProvince,jdbcType=VARCHAR},
+        #{targetCity,jdbcType=VARCHAR}, #{targetDistrict,jdbcType=VARCHAR}, #{targetProvinceId,jdbcType=INTEGER},
+        #{targetCityId,jdbcType=INTEGER}, #{targetDistrictId,jdbcType=INTEGER}, #{targetAddress,jdbcType=VARCHAR},
+        #{linkName,jdbcType=VARCHAR}, #{linkTel,jdbcType=VARCHAR}, #{assessRemark,jdbcType=VARCHAR},
+        #{assessFee,jdbcType=DOUBLE}, #{checkAssessFee,jdbcType=DOUBLE}, #{finalAssessAmount,jdbcType=DOUBLE},
+        #{finalAssessFee,jdbcType=DOUBLE}, #{assessRecTime,jdbcType=TIMESTAMP}, #{travelFee,jdbcType=DOUBLE},
+        #{entrustDesc,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{oneCheckOpinion,jdbcType=INTEGER},
+        #{oneCheckOpinionRemark,jdbcType=VARCHAR}, #{twoCheckOpinion,jdbcType=INTEGER},
+        #{twoCheckOpinionRemark,jdbcType=VARCHAR}, #{lssuerCheckOpinion,jdbcType=INTEGER},
+        #{lssuerCheckOpinionRemark,jdbcType=VARCHAR}, #{flowState,jdbcType=INTEGER}, #{flowStateName,jdbcType=VARCHAR},
+        #{refundType,jdbcType=INTEGER}, #{stageState,jdbcType=INTEGER}, #{retreatState,jdbcType=INTEGER},
+        #{retreatTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{createByName,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT},
+        #{isCursupplement,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, #{isUploadAssessPlan,jdbcType=INTEGER},
+        #{isUploadReqmoneyLetter,jdbcType=INTEGER}, #{isSendReport,jdbcType=INTEGER}, #{isArrAssFee,jdbcType=INTEGER},
+        #{isExpress,jdbcType=INTEGER}, #{sendReportTime,jdbcType=TIMESTAMP}, #{expressTime,jdbcType=TIMESTAMP},
+        #{isDraft,jdbcType=INTEGER}, #{isArrRefund,jdbcType=INTEGER}, #{arrRefundTime,jdbcType=TIMESTAMP},
+        #{refoundRemark,jdbcType=VARCHAR}, #{isSue,jdbcType=INTEGER}, #{isBill,jdbcType=INTEGER},
+        #{toName,jdbcType=VARCHAR}, #{toTel,jdbcType=VARCHAR}, #{toOrg,jdbcType=VARCHAR},
+        #{toAddress,jdbcType=VARCHAR}, #{isOkInfo,jdbcType=INTEGER}, #{collectionRemarks,jdbcType=VARCHAR},
+        #{payType,jdbcType=INTEGER}, #{isOkInfo2,jdbcType=INTEGER}, #{refundFee,jdbcType=DOUBLE},
+        #{isReport,jdbcType=INTEGER}, #{toProvince,jdbcType=VARCHAR}, #{toCity,jdbcType=VARCHAR},
+        #{toDistrict,jdbcType=VARCHAR}, #{toProvinceId,jdbcType=INTEGER}, #{toCityId,jdbcType=INTEGER},
+        #{toDistrictId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.LawCaseInfo" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into law_case_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="caseNo != null" >
+                case_no,
+            </if>
+            <if test="pubCaseNo != null" >
+                pub_case_no,
+            </if>
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="orgName != null" >
+                org_name,
+            </if>
+            <if test="assessId != null" >
+                assess_id,
+            </if>
+            <if test="assessName != null" >
+                assess_name,
+            </if>
+            <if test="assessTel != null" >
+                assess_tel,
+            </if>
+            <if test="acceptTime != null" >
+                accept_time,
+            </if>
+            <if test="appUserId != null" >
+                app_user_id,
+            </if>
+            <if test="appUserName != null" >
+                app_user_name,
+            </if>
+            <if test="appUserTel != null" >
+                app_user_tel,
+            </if>
+            <if test="entrustUserId != null" >
+                entrust_user_id,
+            </if>
+            <if test="entrustUserName != null" >
+                entrust_user_name,
+            </if>
+            <if test="entrustUserTel != null" >
+                entrust_user_tel,
+            </if>
+            <if test="caseType != null" >
+                case_type,
+            </if>
+            <if test="entrustTime != null" >
+                entrust_time,
+            </if>
+            <if test="targetAmount != null" >
+                target_amount,
+            </if>
+            <if test="targetProvince != null" >
+                target_province,
+            </if>
+            <if test="targetCity != null" >
+                target_city,
+            </if>
+            <if test="targetDistrict != null" >
+                target_district,
+            </if>
+            <if test="targetProvinceId != null" >
+                target_province_id,
+            </if>
+            <if test="targetCityId != null" >
+                target_city_id,
+            </if>
+            <if test="targetDistrictId != null" >
+                target_district_id,
+            </if>
+            <if test="targetAddress != null" >
+                target_address,
+            </if>
+            <if test="linkName != null" >
+                link_name,
+            </if>
+            <if test="linkTel != null" >
+                link_tel,
+            </if>
+            <if test="assessRemark != null" >
+                assess_remark,
+            </if>
+            <if test="assessFee != null" >
+                assess_fee,
+            </if>
+            <if test="checkAssessFee != null" >
+                check_assess_fee,
+            </if>
+            <if test="finalAssessAmount != null" >
+                final_assess_amount,
+            </if>
+            <if test="finalAssessFee != null" >
+                final_assess_fee,
+            </if>
+            <if test="assessRecTime != null" >
+                assess_rec_time,
+            </if>
+            <if test="travelFee != null" >
+                travel_fee,
+            </if>
+            <if test="entrustDesc != null" >
+                entrust_desc,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="oneCheckOpinion != null" >
+                one_check_opinion,
+            </if>
+            <if test="oneCheckOpinionRemark != null" >
+                one_check_opinion_remark,
+            </if>
+            <if test="twoCheckOpinion != null" >
+                two_check_opinion,
+            </if>
+            <if test="twoCheckOpinionRemark != null" >
+                two_check_opinion_remark,
+            </if>
+            <if test="lssuerCheckOpinion != null" >
+                lssuer_check_opinion,
+            </if>
+            <if test="lssuerCheckOpinionRemark != null" >
+                lssuer_check_opinion_remark,
+            </if>
+            <if test="flowState != null" >
+                flow_state,
+            </if>
+            <if test="flowStateName != null" >
+                flow_state_name,
+            </if>
+            <if test="refundType != null" >
+                refund_type,
+            </if>
+            <if test="stageState != null" >
+                stage_state,
+            </if>
+            <if test="retreatState != null" >
+                retreat_state,
+            </if>
+            <if test="retreatTime != null" >
+                retreat_time,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createByName != null" >
+                create_by_name,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="isCursupplement != null" >
+                is_cursupplement,
+            </if>
+            <if test="isDelete != null" >
+                is_delete,
+            </if>
+            <if test="isUploadAssessPlan != null" >
+                is_upload_assess_plan,
+            </if>
+            <if test="isUploadReqmoneyLetter != null" >
+                is_upload_reqmoney_letter,
+            </if>
+            <if test="isSendReport != null" >
+                is_send_report,
+            </if>
+            <if test="isArrAssFee != null" >
+                is_arr_ass_fee,
+            </if>
+            <if test="isExpress != null" >
+                is_express,
+            </if>
+            <if test="sendReportTime != null" >
+                send_report_time,
+            </if>
+            <if test="expressTime != null" >
+                express_time,
+            </if>
+            <if test="isDraft != null" >
+                is_draft,
+            </if>
+            <if test="isArrRefund != null" >
+                is_arr_refund,
+            </if>
+            <if test="arrRefundTime != null" >
+                arr_refund_time,
+            </if>
+            <if test="refoundRemark != null" >
+                refound_remark,
+            </if>
+            <if test="isSue != null" >
+                is_sue,
+            </if>
+            <if test="isBill != null" >
+                is_bill,
+            </if>
+            <if test="toName != null" >
+                to_name,
+            </if>
+            <if test="toTel != null" >
+                to_tel,
+            </if>
+            <if test="toOrg != null" >
+                to_org,
+            </if>
+            <if test="toAddress != null" >
+                to_address,
+            </if>
+            <if test="isOkInfo != null" >
+                is_ok_info,
+            </if>
+            <if test="collectionRemarks != null" >
+                collection_remarks,
+            </if>
+            <if test="payType != null" >
+                pay_type,
+            </if>
+            <if test="isOkInfo2 != null" >
+                is_ok_info2,
+            </if>
+            <if test="refundFee != null" >
+                refund_fee,
+            </if>
+            <if test="isReport != null" >
+                is_report,
+            </if>
+            <if test="toProvince != null">
+                to_province,
+            </if>
+            <if test="toCity != null">
+                to_city,
+            </if>
+            <if test="toDistrict != null">
+                to_district,
+            </if>
+            <if test="toProvinceId != null">
+                to_province_id,
+            </if>
+            <if test="toCityId != null">
+                to_city_id,
+            </if>
+            <if test="toDistrictId != null">
+                to_district_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="caseNo != null" >
+                #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="pubCaseNo != null" >
+                #{pubCaseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="assessId != null" >
+                #{assessId,jdbcType=BIGINT},
+            </if>
+            <if test="assessName != null" >
+                #{assessName,jdbcType=VARCHAR},
+            </if>
+            <if test="assessTel != null" >
+                #{assessTel,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptTime != null" >
+                #{acceptTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appUserId != null" >
+                #{appUserId,jdbcType=BIGINT},
+            </if>
+            <if test="appUserName != null" >
+                #{appUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="appUserTel != null" >
+                #{appUserTel,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustUserId != null" >
+                #{entrustUserId,jdbcType=BIGINT},
+            </if>
+            <if test="entrustUserName != null" >
+                #{entrustUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustUserTel != null" >
+                #{entrustUserTel,jdbcType=VARCHAR},
+            </if>
+            <if test="caseType != null" >
+                #{caseType,jdbcType=INTEGER},
+            </if>
+            <if test="entrustTime != null" >
+                #{entrustTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="targetAmount != null" >
+                #{targetAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="targetProvince != null" >
+                #{targetProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="targetCity != null" >
+                #{targetCity,jdbcType=VARCHAR},
+            </if>
+            <if test="targetDistrict != null" >
+                #{targetDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="targetProvinceId != null" >
+                #{targetProvinceId,jdbcType=INTEGER},
+            </if>
+            <if test="targetCityId != null" >
+                #{targetCityId,jdbcType=INTEGER},
+            </if>
+            <if test="targetDistrictId != null" >
+                #{targetDistrictId,jdbcType=INTEGER},
+            </if>
+            <if test="targetAddress != null" >
+                #{targetAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="linkName != null" >
+                #{linkName,jdbcType=VARCHAR},
+            </if>
+            <if test="linkTel != null" >
+                #{linkTel,jdbcType=VARCHAR},
+            </if>
+            <if test="assessRemark != null" >
+                #{assessRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="assessFee != null" >
+                #{assessFee,jdbcType=DOUBLE},
+            </if>
+            <if test="checkAssessFee != null" >
+                #{checkAssessFee,jdbcType=DOUBLE},
+            </if>
+            <if test="finalAssessAmount != null" >
+                #{finalAssessAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="finalAssessFee != null" >
+                #{finalAssessFee,jdbcType=DOUBLE},
+            </if>
+            <if test="assessRecTime != null" >
+                #{assessRecTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="travelFee != null" >
+                #{travelFee,jdbcType=DOUBLE},
+            </if>
+            <if test="entrustDesc != null" >
+                #{entrustDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="oneCheckOpinion != null" >
+                #{oneCheckOpinion,jdbcType=INTEGER},
+            </if>
+            <if test="oneCheckOpinionRemark != null" >
+                #{oneCheckOpinionRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="twoCheckOpinion != null" >
+                #{twoCheckOpinion,jdbcType=INTEGER},
+            </if>
+            <if test="twoCheckOpinionRemark != null" >
+                #{twoCheckOpinionRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="lssuerCheckOpinion != null" >
+                #{lssuerCheckOpinion,jdbcType=INTEGER},
+            </if>
+            <if test="lssuerCheckOpinionRemark != null" >
+                #{lssuerCheckOpinionRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="flowState != null" >
+                #{flowState,jdbcType=INTEGER},
+            </if>
+            <if test="flowStateName != null" >
+                #{flowStateName,jdbcType=VARCHAR},
+            </if>
+            <if test="refundType != null" >
+                #{refundType,jdbcType=INTEGER},
+            </if>
+            <if test="stageState != null" >
+                #{stageState,jdbcType=INTEGER},
+            </if>
+            <if test="retreatState != null" >
+                #{retreatState,jdbcType=INTEGER},
+            </if>
+            <if test="retreatTime != null" >
+                #{retreatTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createByName != null" >
+                #{createByName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="isCursupplement != null" >
+                #{isCursupplement,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="isUploadAssessPlan != null" >
+                #{isUploadAssessPlan,jdbcType=INTEGER},
+            </if>
+            <if test="isUploadReqmoneyLetter != null" >
+                #{isUploadReqmoneyLetter,jdbcType=INTEGER},
+            </if>
+            <if test="isSendReport != null" >
+                #{isSendReport,jdbcType=INTEGER},
+            </if>
+            <if test="isArrAssFee != null" >
+                #{isArrAssFee,jdbcType=INTEGER},
+            </if>
+            <if test="isExpress != null" >
+                #{isExpress,jdbcType=INTEGER},
+            </if>
+            <if test="sendReportTime != null" >
+                #{sendReportTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expressTime != null" >
+                #{expressTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDraft != null" >
+                #{isDraft,jdbcType=INTEGER},
+            </if>
+            <if test="isArrRefund != null" >
+                #{isArrRefund,jdbcType=INTEGER},
+            </if>
+            <if test="arrRefundTime != null" >
+                #{arrRefundTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="refoundRemark != null" >
+                #{refoundRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="isSue != null" >
+                #{isSue,jdbcType=INTEGER},
+            </if>
+            <if test="isBill != null" >
+                #{isBill,jdbcType=INTEGER},
+            </if>
+            <if test="toName != null" >
+                #{toName,jdbcType=VARCHAR},
+            </if>
+            <if test="toTel != null" >
+                #{toTel,jdbcType=VARCHAR},
+            </if>
+            <if test="toOrg != null" >
+                #{toOrg,jdbcType=VARCHAR},
+            </if>
+            <if test="toAddress != null" >
+                #{toAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="isOkInfo != null" >
+                #{isOkInfo,jdbcType=INTEGER},
+            </if>
+            <if test="collectionRemarks != null" >
+                #{collectionRemarks,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null" >
+                #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="isOkInfo2 != null" >
+                #{isOkInfo2,jdbcType=INTEGER},
+            </if>
+            <if test="refundFee != null" >
+                #{refundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="isReport != null" >
+                #{isReport,jdbcType=INTEGER},
+            </if>
+            <if test="toProvince != null">
+                #{toProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="toCity != null">
+                #{toCity,jdbcType=VARCHAR},
+            </if>
+            <if test="toDistrict != null">
+                #{toDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="toProvinceId != null">
+                #{toProvinceId,jdbcType=INTEGER},
+            </if>
+            <if test="toCityId != null">
+                #{toCityId,jdbcType=INTEGER},
+            </if>
+            <if test="toDistrictId != null">
+                #{toDistrictId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.LawCaseInfo" >
+        update law_case_info
+        <set >
+            <if test="caseNo != null" >
+                case_no = #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="pubCaseNo != null" >
+                pub_case_no = #{pubCaseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="assessId != null" >
+                assess_id = #{assessId,jdbcType=BIGINT},
+            </if>
+            <if test="assessName != null" >
+                assess_name = #{assessName,jdbcType=VARCHAR},
+            </if>
+            <if test="assessTel != null" >
+                assess_tel = #{assessTel,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptTime != null" >
+                accept_time = #{acceptTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appUserId != null" >
+                app_user_id = #{appUserId,jdbcType=BIGINT},
+            </if>
+            <if test="appUserName != null" >
+                app_user_name = #{appUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="appUserTel != null" >
+                app_user_tel = #{appUserTel,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustUserId != null" >
+                entrust_user_id = #{entrustUserId,jdbcType=BIGINT},
+            </if>
+            <if test="entrustUserName != null" >
+                entrust_user_name = #{entrustUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="entrustUserTel != null" >
+                entrust_user_tel = #{entrustUserTel,jdbcType=VARCHAR},
+            </if>
+            <if test="caseType != null" >
+                case_type = #{caseType,jdbcType=INTEGER},
+            </if>
+            <if test="entrustTime != null" >
+                entrust_time = #{entrustTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="targetAmount != null" >
+                target_amount = #{targetAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="targetProvince != null" >
+                target_province = #{targetProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="targetCity != null" >
+                target_city = #{targetCity,jdbcType=VARCHAR},
+            </if>
+            <if test="targetDistrict != null" >
+                target_district = #{targetDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="targetProvinceId != null" >
+                target_province_id = #{targetProvinceId,jdbcType=INTEGER},
+            </if>
+            <if test="targetCityId != null" >
+                target_city_id = #{targetCityId,jdbcType=INTEGER},
+            </if>
+            <if test="targetDistrictId != null" >
+                target_district_id = #{targetDistrictId,jdbcType=INTEGER},
+            </if>
+            <if test="targetAddress != null" >
+                target_address = #{targetAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="linkName != null" >
+                link_name = #{linkName,jdbcType=VARCHAR},
+            </if>
+            <if test="linkTel != null" >
+                link_tel = #{linkTel,jdbcType=VARCHAR},
+            </if>
+            <if test="assessRemark != null" >
+                assess_remark = #{assessRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="assessFee != null" >
+                assess_fee = #{assessFee,jdbcType=DOUBLE},
+            </if>
+            <if test="checkAssessFee != null" >
+                check_assess_fee = #{checkAssessFee,jdbcType=DOUBLE},
+            </if>
+            <if test="finalAssessAmount != null" >
+                final_assess_amount = #{finalAssessAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="finalAssessFee != null" >
+                final_assess_fee = #{finalAssessFee,jdbcType=DOUBLE},
+            </if>
+            <if test="assessRecTime != null" >
+                assess_rec_time = #{assessRecTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="travelFee != null" >
+                travel_fee = #{travelFee,jdbcType=DOUBLE},
+            </if>
+            <if test="entrustDesc != null" >
+                entrust_desc = #{entrustDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="oneCheckOpinion != null" >
+                one_check_opinion = #{oneCheckOpinion,jdbcType=INTEGER},
+            </if>
+            <if test="oneCheckOpinionRemark != null" >
+                one_check_opinion_remark = #{oneCheckOpinionRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="twoCheckOpinion != null" >
+                two_check_opinion = #{twoCheckOpinion,jdbcType=INTEGER},
+            </if>
+            <if test="twoCheckOpinionRemark != null" >
+                two_check_opinion_remark = #{twoCheckOpinionRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="lssuerCheckOpinion != null" >
+                lssuer_check_opinion = #{lssuerCheckOpinion,jdbcType=INTEGER},
+            </if>
+            <if test="lssuerCheckOpinionRemark != null" >
+                lssuer_check_opinion_remark = #{lssuerCheckOpinionRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="flowState != null" >
+                flow_state = #{flowState,jdbcType=INTEGER},
+            </if>
+            <if test="flowStateName != null" >
+                flow_state_name = #{flowStateName,jdbcType=VARCHAR},
+            </if>
+            <if test="refundType != null" >
+                refund_type = #{refundType,jdbcType=INTEGER},
+            </if>
+            <if test="stageState != null" >
+                stage_state = #{stageState,jdbcType=INTEGER},
+            </if>
+            <if test="retreatState != null" >
+                retreat_state = #{retreatState,jdbcType=INTEGER},
+            </if>
+            <if test="retreatTime != null" >
+                retreat_time = #{retreatTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createByName != null" >
+                create_by_name = #{createByName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="isCursupplement != null" >
+                is_cursupplement = #{isCursupplement,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null" >
+                is_delete = #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="isUploadAssessPlan != null" >
+                is_upload_assess_plan = #{isUploadAssessPlan,jdbcType=INTEGER},
+            </if>
+            <if test="isUploadReqmoneyLetter != null" >
+                is_upload_reqmoney_letter = #{isUploadReqmoneyLetter,jdbcType=INTEGER},
+            </if>
+            <if test="isSendReport != null" >
+                is_send_report = #{isSendReport,jdbcType=INTEGER},
+            </if>
+            <if test="isArrAssFee != null" >
+                is_arr_ass_fee = #{isArrAssFee,jdbcType=INTEGER},
+            </if>
+            <if test="isExpress != null" >
+                is_express = #{isExpress,jdbcType=INTEGER},
+            </if>
+            <if test="sendReportTime != null" >
+                send_report_time = #{sendReportTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expressTime != null" >
+                express_time = #{expressTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDraft != null" >
+                is_draft = #{isDraft,jdbcType=INTEGER},
+            </if>
+            <if test="isArrRefund != null" >
+                is_arr_refund = #{isArrRefund,jdbcType=INTEGER},
+            </if>
+            <if test="arrRefundTime != null" >
+                arr_refund_time = #{arrRefundTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="refoundRemark != null" >
+                refound_remark = #{refoundRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="isSue != null" >
+                is_sue = #{isSue,jdbcType=INTEGER},
+            </if>
+            <if test="isBill != null" >
+                is_bill = #{isBill,jdbcType=INTEGER},
+            </if>
+            <if test="toName != null" >
+                to_name = #{toName,jdbcType=VARCHAR},
+            </if>
+            <if test="toTel != null" >
+                to_tel = #{toTel,jdbcType=VARCHAR},
+            </if>
+            <if test="toOrg != null" >
+                to_org = #{toOrg,jdbcType=VARCHAR},
+            </if>
+            <if test="toAddress != null" >
+                to_address = #{toAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="isOkInfo != null" >
+                is_ok_info = #{isOkInfo,jdbcType=INTEGER},
+            </if>
+            <if test="collectionRemarks != null" >
+                collection_remarks = #{collectionRemarks,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null" >
+                pay_type = #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="isOkInfo2 != null" >
+                is_ok_info2 = #{isOkInfo2,jdbcType=INTEGER},
+            </if>
+            <if test="refundFee != null" >
+                refund_fee = #{refundFee,jdbcType=DOUBLE},
+            </if>
+            <if test="isReport != null" >
+                is_report = #{isReport,jdbcType=INTEGER},
+            </if>
+            <if test="toProvince != null">
+                to_province = #{toProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="toCity != null">
+                to_city = #{toCity,jdbcType=VARCHAR},
+            </if>
+            <if test="toDistrict != null">
+                to_district = #{toDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="toProvinceId != null">
+                to_province_id = #{toProvinceId,jdbcType=INTEGER},
+            </if>
+            <if test="toCityId != null">
+                to_city_id = #{toCityId,jdbcType=INTEGER},
+            </if>
+            <if test="toDistrictId != null">
+                to_district_id = #{toDistrictId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.LawCaseInfo" >
+        update law_case_info
+        set case_no = #{caseNo,jdbcType=VARCHAR},
+        pub_case_no = #{pubCaseNo,jdbcType=VARCHAR},
+        org_id = #{orgId,jdbcType=BIGINT},
+        org_name = #{orgName,jdbcType=VARCHAR},
+        assess_id = #{assessId,jdbcType=BIGINT},
+        assess_name = #{assessName,jdbcType=VARCHAR},
+        assess_tel = #{assessTel,jdbcType=VARCHAR},
+        accept_time = #{acceptTime,jdbcType=TIMESTAMP},
+        app_user_id = #{appUserId,jdbcType=BIGINT},
+        app_user_name = #{appUserName,jdbcType=VARCHAR},
+        app_user_tel = #{appUserTel,jdbcType=VARCHAR},
+        entrust_user_id = #{entrustUserId,jdbcType=BIGINT},
+        entrust_user_name = #{entrustUserName,jdbcType=VARCHAR},
+        entrust_user_tel = #{entrustUserTel,jdbcType=VARCHAR},
+        case_type = #{caseType,jdbcType=INTEGER},
+        entrust_time = #{entrustTime,jdbcType=TIMESTAMP},
+        target_amount = #{targetAmount,jdbcType=DOUBLE},
+        target_province = #{targetProvince,jdbcType=VARCHAR},
+        target_city = #{targetCity,jdbcType=VARCHAR},
+        target_district = #{targetDistrict,jdbcType=VARCHAR},
+        target_province_id = #{targetProvinceId,jdbcType=INTEGER},
+        target_city_id = #{targetCityId,jdbcType=INTEGER},
+        target_district_id = #{targetDistrictId,jdbcType=INTEGER},
+        target_address = #{targetAddress,jdbcType=VARCHAR},
+        link_name = #{linkName,jdbcType=VARCHAR},
+        link_tel = #{linkTel,jdbcType=VARCHAR},
+        assess_remark = #{assessRemark,jdbcType=VARCHAR},
+        assess_fee = #{assessFee,jdbcType=DOUBLE},
+        check_assess_fee = #{checkAssessFee,jdbcType=DOUBLE},
+        final_assess_amount = #{finalAssessAmount,jdbcType=DOUBLE},
+        final_assess_fee = #{finalAssessFee,jdbcType=DOUBLE},
+        assess_rec_time = #{assessRecTime,jdbcType=TIMESTAMP},
+        travel_fee = #{travelFee,jdbcType=DOUBLE},
+        entrust_desc = #{entrustDesc,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        one_check_opinion = #{oneCheckOpinion,jdbcType=INTEGER},
+        one_check_opinion_remark = #{oneCheckOpinionRemark,jdbcType=VARCHAR},
+        two_check_opinion = #{twoCheckOpinion,jdbcType=INTEGER},
+        two_check_opinion_remark = #{twoCheckOpinionRemark,jdbcType=VARCHAR},
+        lssuer_check_opinion = #{lssuerCheckOpinion,jdbcType=INTEGER},
+        lssuer_check_opinion_remark = #{lssuerCheckOpinionRemark,jdbcType=VARCHAR},
+        flow_state = #{flowState,jdbcType=INTEGER},
+        flow_state_name = #{flowStateName,jdbcType=VARCHAR},
+        refund_type = #{refundType,jdbcType=INTEGER},
+        stage_state = #{stageState,jdbcType=INTEGER},
+        retreat_state = #{retreatState,jdbcType=INTEGER},
+        retreat_time = #{retreatTime,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=BIGINT},
+        create_by_name = #{createByName,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_by = #{updateBy,jdbcType=BIGINT},
+        is_cursupplement = #{isCursupplement,jdbcType=INTEGER},
+        is_delete = #{isDelete,jdbcType=INTEGER},
+        is_upload_assess_plan = #{isUploadAssessPlan,jdbcType=INTEGER},
+        is_upload_reqmoney_letter = #{isUploadReqmoneyLetter,jdbcType=INTEGER},
+        is_send_report = #{isSendReport,jdbcType=INTEGER},
+        is_arr_ass_fee = #{isArrAssFee,jdbcType=INTEGER},
+        is_express = #{isExpress,jdbcType=INTEGER},
+        send_report_time = #{sendReportTime,jdbcType=TIMESTAMP},
+        express_time = #{expressTime,jdbcType=TIMESTAMP},
+        is_draft = #{isDraft,jdbcType=INTEGER},
+        is_arr_refund = #{isArrRefund,jdbcType=INTEGER},
+        arr_refund_time = #{arrRefundTime,jdbcType=TIMESTAMP},
+        refound_remark = #{refoundRemark,jdbcType=VARCHAR},
+        is_sue = #{isSue,jdbcType=INTEGER},
+        is_bill = #{isBill,jdbcType=INTEGER},
+        to_name = #{toName,jdbcType=VARCHAR},
+        to_tel = #{toTel,jdbcType=VARCHAR},
+        to_org = #{toOrg,jdbcType=VARCHAR},
+        to_address = #{toAddress,jdbcType=VARCHAR},
+        is_ok_info = #{isOkInfo,jdbcType=INTEGER},
+        collection_remarks = #{collectionRemarks,jdbcType=VARCHAR},
+        pay_type = #{payType,jdbcType=INTEGER},
+        is_ok_info2 = #{isOkInfo2,jdbcType=INTEGER},
+        refund_fee = #{refundFee,jdbcType=DOUBLE},
+        is_report = #{isReport,jdbcType=INTEGER},
+        to_province = #{toProvince,jdbcType=VARCHAR},
+        to_city = #{toCity,jdbcType=VARCHAR},
+        to_district = #{toDistrict,jdbcType=VARCHAR},
+        to_province_id = #{toProvinceId,jdbcType=INTEGER},
+        to_city_id = #{toCityId,jdbcType=INTEGER},
+        to_district_id = #{toDistrictId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="caseNo != null" >
+            and case_no like concat('%',#{caseNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pubCaseNo != null" >
+            and pub_case_no = #{pubCaseNo,jdbcType=VARCHAR}
+        </if>
+        <if test="orgId != null" >
+            and org_id = #{orgId,jdbcType=BIGINT}
+        </if>
+        <if test="orgName != null" >
+            and org_name = #{orgName,jdbcType=VARCHAR}
+        </if>
+        <if test="assessId != null" >
+            and assess_id = #{assessId,jdbcType=BIGINT}
+        </if>
+        <if test="assessName != null" >
+            and assess_name = #{assessName,jdbcType=VARCHAR}
+        </if>
+        <if test="assessTel != null" >
+            and assess_tel = #{assessTel,jdbcType=VARCHAR}
+        </if>
+        <if test="acceptTime != null" >
+            and accept_time = #{acceptTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="appUserId != null" >
+            and app_user_id = #{appUserId,jdbcType=BIGINT}
+        </if>
+        <if test="appUserName != null" >
+            and app_user_name = #{appUserName,jdbcType=VARCHAR}
+        </if>
+        <if test="appUserTel != null" >
+            and app_user_tel = #{appUserTel,jdbcType=VARCHAR}
+        </if>
+        <if test="entrustUserId != null" >
+            and entrust_user_id = #{entrustUserId,jdbcType=BIGINT}
+        </if>
+        <if test="entrustUserName != null" >
+            and entrust_user_name like concat('%',#{entrustUserName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="entrustUserTel != null" >
+            and entrust_user_tel like concat('%',#{entrustUserTel,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="caseType != null" >
+            and case_type = #{caseType,jdbcType=INTEGER}
+        </if>
+        <if test="entrustTime != null" >
+            and entrust_time = #{entrustTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="targetAmount != null" >
+            and target_amount = #{targetAmount,jdbcType=DOUBLE}
+        </if>
+        <if test="targetProvince != null" >
+            and target_province = #{targetProvince,jdbcType=VARCHAR}
+        </if>
+        <if test="targetCity != null" >
+            and target_city = #{targetCity,jdbcType=VARCHAR}
+        </if>
+        <if test="targetDistrict != null" >
+            and target_district = #{targetDistrict,jdbcType=VARCHAR}
+        </if>
+        <if test="targetProvinceId != null" >
+            and target_province_id = #{targetProvinceId,jdbcType=INTEGER}
+        </if>
+        <if test="targetCityId != null" >
+            and target_city_id = #{targetCityId,jdbcType=INTEGER}
+        </if>
+        <if test="targetDistrictId != null" >
+            and target_district_id = #{targetDistrictId,jdbcType=INTEGER}
+        </if>
+        <if test="targetAddress != null" >
+            and target_address = #{targetAddress,jdbcType=VARCHAR}
+        </if>
+        <if test="linkName != null" >
+            and link_name like concat('%',#{linkName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="linkTel != null" >
+            and link_tel like concat('%',#{linkTel,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="assessFee != null" >
+            and assess_fee = #{assessFee,jdbcType=DOUBLE}
+        </if>
+        <if test="checkAssessFee != null" >
+            and check_assess_fee = #{checkAssessFee,jdbcType=DOUBLE}
+        </if>
+        <if test="finalAssessAmount != null" >
+            and final_assess_amount = #{finalAssessAmount,jdbcType=DOUBLE}
+        </if>
+        <if test="finalAssessFee != null" >
+            and final_assess_fee = #{finalAssessFee,jdbcType=DOUBLE}
+        </if>
+        <if test="assessRecTime != null" >
+            and assess_rec_time = #{assessRecTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="travelFee != null" >
+            and travel_fee = #{travelFee,jdbcType=DOUBLE}
+        </if>
+        <if test="entrustDesc != null" >
+            and entrust_desc = #{entrustDesc,jdbcType=VARCHAR}
+        </if>
+        <if test="remark != null" >
+            and remark = #{remark,jdbcType=VARCHAR}
+        </if>
+        <if test="oneCheckOpinion != null" >
+            and one_check_opinion = #{oneCheckOpinion,jdbcType=INTEGER}
+        </if>
+        <if test="oneCheckOpinionRemark != null" >
+            and one_check_opinion_remark = #{oneCheckOpinionRemark,jdbcType=VARCHAR}
+        </if>
+        <if test="twoCheckOpinion != null" >
+            and two_check_opinion = #{twoCheckOpinion,jdbcType=INTEGER}
+        </if>
+        <if test="twoCheckOpinionRemark != null" >
+            and two_check_opinion_remark = #{twoCheckOpinionRemark,jdbcType=VARCHAR}
+        </if>
+        <if test="lssuerCheckOpinion != null" >
+            and lssuer_check_opinion = #{lssuerCheckOpinion,jdbcType=INTEGER}
+        </if>
+        <if test="lssuerCheckOpinionRemark != null" >
+            and lssuer_check_opinion_remark = #{lssuerCheckOpinionRemark,jdbcType=VARCHAR}
+        </if>
+        <if test="flowState != null" >
+            and flow_state = #{flowState,jdbcType=INTEGER}
+        </if>
+        <if test="flowStateName != null" >
+            and flow_state_name = #{flowStateName,jdbcType=VARCHAR}
+        </if>
+        <if test="refundType != null" >
+            and refund_type = #{refundType,jdbcType=INTEGER}
+        </if>
+        <if test="stageState != null" >
+            and stage_state = #{stageState,jdbcType=INTEGER}
+        </if>
+        <if test="retreatState != null" >
+            and retreat_state = #{retreatState,jdbcType=INTEGER}
+        </if>
+        <if test="retreatTime != null" >
+            and retreat_time = #{retreatTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createBy != null" >
+            and create_by = #{createBy,jdbcType=BIGINT}
+        </if>
+        <if test="createByName != null" >
+            and create_by_name = #{createByName,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null" >
+            and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime != null" >
+            and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateBy != null" >
+            and update_by = #{updateBy,jdbcType=BIGINT}
+        </if>
+        <if test="isCursupplement != null" >
+            and is_cursupplement = #{isCursupplement,jdbcType=INTEGER}
+        </if>
+        <if test="isDelete != null" >
+            and is_delete = #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="isUploadAssessPlan != null" >
+            and is_upload_assess_plan = #{isUploadAssessPlan,jdbcType=INTEGER}
+        </if>
+        <if test="isUploadReqmoneyLetter != null" >
+            and is_upload_reqmoney_letter = #{isUploadReqmoneyLetter,jdbcType=INTEGER}
+        </if>
+        <if test="isSendReport != null" >
+            and is_send_report = #{isSendReport,jdbcType=INTEGER}
+        </if>
+        <if test="isExpress != null" >
+            and is_express = #{isExpress,jdbcType=INTEGER}
+        </if>
+        <if test="sendReportTime != null" >
+            and send_report_time = #{sendReportTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="expressTime != null" >
+            and express_time = #{expressTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="isDraft != null" >
+            and is_draft = #{isDraft,jdbcType=INTEGER}
+        </if>
+        <if test="startDate != null" >
+            and DATE_FORMAT(entrust_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="endDate != null" >
+            and DATE_FORMAT(entrust_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+        </if>
+        <if test="isOkInfo != null" >
+            and is_ok_info = #{isOkInfo,jdbcType=INTEGER}
+        </if>
+        <if test="isOkInfo2 != null" >
+            and is_ok_info2 = #{isOkInfo2,jdbcType=INTEGER}
+        </if>
+        <if test="isReport != null" >
+            and is_report = #{isReport,jdbcType=INTEGER}
+        </if>
+        <if test="menuType == 20">
+            and flow_state in (8,12)
+        </if>
+        <if test="menuType == 25">
+            and stage_state in (1,2)
+            <if test="role == 1">
+                and (flow_state in (9,13) or retreat_state = 1)
+            </if>
+            <if test="role == 2">
+                and (flow_state = 10)
+            </if>
+            <if test="role == 3">
+                and (flow_state in (9,10,13) or retreat_state = 1)
+            </if>
+        </if>
+        <if test="condition ==1">
+            and (is_upload_assess_plan = 0 or is_upload_reqmoney_letter = 0)
+        </if>
+    </sql>
+    <select id="findListSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from law_case_info
+        <include refid="joins" />
+        where 1 = 1
+        <include refid="wheres" />
+    </select>
+    <select id="findList" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from law_case_info
+        <include refid="joins" />
+        where 1 = 1
+        <include refid="wheres" />
+        order by flow_state asc,update_time desc limit #{pageIndex}, #{pageSize}
+    </select>
+    <select id="selectByCaseNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from law_case_info
+        where case_no = #{caseNo,jdbcType=VARCHAR}
+    </select>
+</mapper>

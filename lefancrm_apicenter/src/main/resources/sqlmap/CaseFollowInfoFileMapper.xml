@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseFollowInfoFileMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseFollowInfoFile" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="follow_info_id" property="followInfoId" jdbcType="BIGINT" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, follow_info_id, file_path
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_follow_info_file
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from case_follow_info_file
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseFollowInfoFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_follow_info_file (follow_info_id, file_path)
+    values (#{followInfoId,jdbcType=BIGINT}, #{filePath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseFollowInfoFile" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_follow_info_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="followInfoId != null" >
+        follow_info_id,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="followInfoId != null" >
+        #{followInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseFollowInfoFile" >
+    update case_follow_info_file
+    <set >
+      <if test="followInfoId != null" >
+        follow_info_id = #{followInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseFollowInfoFile" >
+    update case_follow_info_file
+    set follow_info_id = #{followInfoId,jdbcType=BIGINT},
+      file_path = #{filePath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <insert id="inserts" parameterType="java.util.Map" >
+        insert into case_follow_info_file (follow_info_id, file_path)
+        values
+        <foreach collection="path" item="item" index="index" separator=",">
+        (#{id,jdbcType=BIGINT}, #{item,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <select id="selectByFollowInfoId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from case_follow_info_file
+        where follow_info_id = #{id,jdbcType=BIGINT}
+    </select>
+</mapper>

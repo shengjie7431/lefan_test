@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.StudioCommissionInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.StudioCommissionInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="level_id" property="levelId" jdbcType="BIGINT" />
+    <result column="level_code" property="levelCode" jdbcType="VARCHAR" />
+    <result column="comrate" property="comrate" jdbcType="DOUBLE" />
+    <result column="studio_comrate" property="studioComrate" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, level_id, level_code, comrate, studio_comrate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from studio_commission_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from studio_commission_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.StudioCommissionInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into studio_commission_info (level_id, level_code, comrate, 
+      studio_comrate)
+    values (#{levelId,jdbcType=BIGINT}, #{levelCode,jdbcType=VARCHAR}, #{comrate,jdbcType=DOUBLE}, 
+      #{studioComrate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.StudioCommissionInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into studio_commission_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="levelId != null" >
+        level_id,
+      </if>
+      <if test="levelCode != null" >
+        level_code,
+      </if>
+      <if test="comrate != null" >
+        comrate,
+      </if>
+      <if test="studioComrate != null" >
+        studio_comrate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="levelId != null" >
+        #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="levelCode != null" >
+        #{levelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="comrate != null" >
+        #{comrate,jdbcType=DOUBLE},
+      </if>
+      <if test="studioComrate != null" >
+        #{studioComrate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.StudioCommissionInfo" >
+    update studio_commission_info
+    <set >
+      <if test="levelId != null" >
+        level_id = #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="levelCode != null" >
+        level_code = #{levelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="comrate != null" >
+        comrate = #{comrate,jdbcType=DOUBLE},
+      </if>
+      <if test="studioComrate != null" >
+        studio_comrate = #{studioComrate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.StudioCommissionInfo" >
+    update studio_commission_info
+    set level_id = #{levelId,jdbcType=BIGINT},
+      level_code = #{levelCode,jdbcType=VARCHAR},
+      comrate = #{comrate,jdbcType=DOUBLE},
+      studio_comrate = #{studioComrate,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="queryByLevelId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from studio_commission_info
+        where level_id = #{levelId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectCountStudioCommissionInfo" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select
+        count(1)
+        from studio_commission_info
+        where 1=1
+        <if test="levelCode !=null">
+            and level_code  like  CONCAT(CONCAT('%',#{levelCode,jdbcType=VARCHAR}), '%')
+        </if>
+    </select>
+
+    <select id="selectStudioCommissionInfoList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.* from studio_commission_info a
+        where 1= 1
+        <if test="levelCode !=null">
+            and level_code  like  CONCAT(CONCAT('%',#{levelCode,jdbcType=VARCHAR}), '%')
+        </if>
+        limit #{pageIndex}, #{pageSize}
+    </select>
+
+    <select id="searchStudioCommissionInfoByLevelId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.* from studio_commission_info a
+        where
+        a.level_id = #{id,jdbcType=BIGINT}
+    </select>
+</mapper>

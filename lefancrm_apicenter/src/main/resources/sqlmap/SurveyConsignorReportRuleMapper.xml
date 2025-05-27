@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyConsignorReportRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyConsignorReportRule" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_consignor_id" property="surveyConsignorId" jdbcType="BIGINT" />
+    <result column="one_rule" property="oneRule" jdbcType="INTEGER" />
+    <result column="two_rule" property="twoRule" jdbcType="INTEGER" />
+    <result column="three_rule" property="threeRule" jdbcType="INTEGER" />
+    <result column="four_rule" property="fourRule" jdbcType="INTEGER" />
+    <result column="one_rule_str" property="oneRuleStr" jdbcType="VARCHAR" />
+    <result column="two_rule_str" property="twoRuleStr" jdbcType="VARCHAR" />
+    <result column="three_rule_str" property="threeRuleStr" jdbcType="VARCHAR" />
+    <result column="four_rule_str" property="fourRuleStr" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_consignor_id, one_rule, two_rule, three_rule, four_rule, one_rule_str, 
+    two_rule_str, three_rule_str, four_rule_str
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_consignor_report_rule
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_consignor_report_rule
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyConsignorReportRule" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_consignor_report_rule (survey_consignor_id, one_rule, two_rule, 
+      three_rule, four_rule, one_rule_str, 
+      two_rule_str, three_rule_str, four_rule_str
+      )
+    values (#{surveyConsignorId,jdbcType=BIGINT}, #{oneRule,jdbcType=INTEGER}, #{twoRule,jdbcType=INTEGER}, 
+      #{threeRule,jdbcType=INTEGER}, #{fourRule,jdbcType=INTEGER}, #{oneRuleStr,jdbcType=VARCHAR}, 
+      #{twoRuleStr,jdbcType=VARCHAR}, #{threeRuleStr,jdbcType=VARCHAR}, #{fourRuleStr,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignorReportRule" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_consignor_report_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyConsignorId != null" >
+        survey_consignor_id,
+      </if>
+      <if test="oneRule != null" >
+        one_rule,
+      </if>
+      <if test="twoRule != null" >
+        two_rule,
+      </if>
+      <if test="threeRule != null" >
+        three_rule,
+      </if>
+      <if test="fourRule != null" >
+        four_rule,
+      </if>
+      <if test="oneRuleStr != null" >
+        one_rule_str,
+      </if>
+      <if test="twoRuleStr != null" >
+        two_rule_str,
+      </if>
+      <if test="threeRuleStr != null" >
+        three_rule_str,
+      </if>
+      <if test="fourRuleStr != null" >
+        four_rule_str,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyConsignorId != null" >
+        #{surveyConsignorId,jdbcType=BIGINT},
+      </if>
+      <if test="oneRule != null" >
+        #{oneRule,jdbcType=INTEGER},
+      </if>
+      <if test="twoRule != null" >
+        #{twoRule,jdbcType=INTEGER},
+      </if>
+      <if test="threeRule != null" >
+        #{threeRule,jdbcType=INTEGER},
+      </if>
+      <if test="fourRule != null" >
+        #{fourRule,jdbcType=INTEGER},
+      </if>
+      <if test="oneRuleStr != null" >
+        #{oneRuleStr,jdbcType=VARCHAR},
+      </if>
+      <if test="twoRuleStr != null" >
+        #{twoRuleStr,jdbcType=VARCHAR},
+      </if>
+      <if test="threeRuleStr != null" >
+        #{threeRuleStr,jdbcType=VARCHAR},
+      </if>
+      <if test="fourRuleStr != null" >
+        #{fourRuleStr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignorReportRule" >
+    update survey_consignor_report_rule
+    <set >
+      <if test="surveyConsignorId != null" >
+        survey_consignor_id = #{surveyConsignorId,jdbcType=BIGINT},
+      </if>
+      <if test="oneRule != null" >
+        one_rule = #{oneRule,jdbcType=INTEGER},
+      </if>
+      <if test="twoRule != null" >
+        two_rule = #{twoRule,jdbcType=INTEGER},
+      </if>
+      <if test="threeRule != null" >
+        three_rule = #{threeRule,jdbcType=INTEGER},
+      </if>
+      <if test="fourRule != null" >
+        four_rule = #{fourRule,jdbcType=INTEGER},
+      </if>
+      <if test="oneRuleStr != null" >
+        one_rule_str = #{oneRuleStr,jdbcType=VARCHAR},
+      </if>
+      <if test="twoRuleStr != null" >
+        two_rule_str = #{twoRuleStr,jdbcType=VARCHAR},
+      </if>
+      <if test="threeRuleStr != null" >
+        three_rule_str = #{threeRuleStr,jdbcType=VARCHAR},
+      </if>
+      <if test="fourRuleStr != null" >
+        four_rule_str = #{fourRuleStr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyConsignorReportRule" >
+    update survey_consignor_report_rule
+    set survey_consignor_id = #{surveyConsignorId,jdbcType=BIGINT},
+      one_rule = #{oneRule,jdbcType=INTEGER},
+      two_rule = #{twoRule,jdbcType=INTEGER},
+      three_rule = #{threeRule,jdbcType=INTEGER},
+      four_rule = #{fourRule,jdbcType=INTEGER},
+      one_rule_str = #{oneRuleStr,jdbcType=VARCHAR},
+      two_rule_str = #{twoRuleStr,jdbcType=VARCHAR},
+      three_rule_str = #{threeRuleStr,jdbcType=VARCHAR},
+      four_rule_str = #{fourRuleStr,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByConsignorId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_consignor_report_rule
+        where survey_consignor_id = #{surveyConsignorId,jdbcType=BIGINT} limit 1 ;
+    </select>
+</mapper>

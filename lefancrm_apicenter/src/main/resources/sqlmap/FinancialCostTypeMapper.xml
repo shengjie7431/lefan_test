@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.FinancialCostTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.FinancialCostType" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="cost_name" property="costName" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+      <result column="type" property="type" jdbcType="INTEGER" />
+      <result column="cost_code" property="costCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cost_name, sort, type, cost_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from financial_cost_type
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from financial_cost_type
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.FinancialCostType" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into financial_cost_type (cost_name, sort, type, cost_code)
+    values (#{costName,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{type,jdbcType=INTEGER},
+      #{costCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.FinancialCostType" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into financial_cost_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="costName != null" >
+        cost_name,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+        <if test="type != null" >
+            type,
+        </if>
+        <if test="costCode != null" >
+            cost_code,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="costName != null" >
+        #{costName,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+        <if test="type != null" >
+            #{type,jdbcType=INTEGER},
+        </if>
+        <if test="costCode != null" >
+            #{costCode,jdbcType=VARCHAR},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.FinancialCostType" >
+    update financial_cost_type
+    <set >
+      <if test="costName != null" >
+        cost_name = #{costName,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+        <if test="type != null" >
+            type = #{type,jdbcType=INTEGER},
+        </if>
+        <if test="costCode != null" >
+            cost_code = #{costCode,jdbcType=VARCHAR},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.FinancialCostType" >
+    update financial_cost_type
+    set cost_name = #{costName,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      cost_code = #{costCode,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <sql id="wheres">
+        <if test="type != null" >
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="costCode != null" >
+            and cost_code = #{costCode,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from financial_cost_type
+        where 1=1
+        <include refid="wheres" />
+        order by sort
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select count(1)
+        from financial_cost_type
+        where 1=1
+        <include refid="wheres" />
+    </select>
+</mapper>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyServiceOrgReportMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyServiceOrgReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="report_date" property="reportDate" jdbcType="DATE" />
+    <result column="service_type_id" property="serviceTypeId" jdbcType="BIGINT" />
+    <result column="service_type_name" property="serviceTypeName" jdbcType="VARCHAR" />
+    <result column="entrust_case_num" property="entrustCaseNum" jdbcType="INTEGER" />
+    <result column="check_case_num" property="checkCaseNum" jdbcType="INTEGER" />
+    <result column="consignor_org_id" property="consignorOrgId" jdbcType="BIGINT" />
+    <result column="consignor_org_name" property="consignorOrgName" jdbcType="VARCHAR" />
+    <result column="survey_org_id" property="surveyOrgId" jdbcType="BIGINT" />
+    <result column="survey_org_name" property="surveyOrgName" jdbcType="VARCHAR" />
+      <result column="check_type" property="checkType" jdbcType="INTEGER" />
+      <result column="positive_num" property="positiveNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, report_date, service_type_id, service_type_name, entrust_case_num, check_case_num, 
+    consignor_org_id, consignor_org_name, survey_org_id, survey_org_name, check_type, positive_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_service_org_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_service_org_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyServiceOrgReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_service_org_report (report_date, service_type_id, service_type_name, 
+      entrust_case_num, check_case_num, consignor_org_id, 
+      consignor_org_name, survey_org_id, survey_org_name,check_type,positive_num
+      )
+    values (#{reportDate,jdbcType=DATE}, #{serviceTypeId,jdbcType=BIGINT}, #{serviceTypeName,jdbcType=VARCHAR}, 
+      #{entrustCaseNum,jdbcType=INTEGER}, #{checkCaseNum,jdbcType=INTEGER}, #{consignorOrgId,jdbcType=BIGINT}, 
+      #{consignorOrgName,jdbcType=VARCHAR}, #{surveyOrgId,jdbcType=BIGINT}, #{surveyOrgName,jdbcType=VARCHAR},
+      #{checkType,jdbcType=INTEGER}, #{positiveNum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyServiceOrgReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_service_org_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reportDate != null" >
+        report_date,
+      </if>
+      <if test="serviceTypeId != null" >
+        service_type_id,
+      </if>
+      <if test="serviceTypeName != null" >
+        service_type_name,
+      </if>
+      <if test="entrustCaseNum != null" >
+        entrust_case_num,
+      </if>
+      <if test="checkCaseNum != null" >
+        check_case_num,
+      </if>
+      <if test="consignorOrgId != null" >
+        consignor_org_id,
+      </if>
+      <if test="consignorOrgName != null" >
+        consignor_org_name,
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id,
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name,
+      </if>
+        <if test="checkType != null" >
+            check_type,
+        </if>
+        <if test="positiveNum != null" >
+            positive_num,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reportDate != null" >
+        #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="serviceTypeId != null" >
+        #{serviceTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="serviceTypeName != null" >
+        #{serviceTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="entrustCaseNum != null" >
+        #{entrustCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="checkCaseNum != null" >
+        #{checkCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="consignorOrgId != null" >
+        #{consignorOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorOrgName != null" >
+        #{consignorOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyOrgId != null" >
+        #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+        <if test="checkType != null" >
+            #{checkType,jdbcType=INTEGER},
+        </if>
+        <if test="positiveNum != null" >
+            #{positiveNum,jdbcType=INTEGER},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyServiceOrgReport" >
+    update survey_service_org_report
+    <set >
+      <if test="reportDate != null" >
+        report_date = #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="serviceTypeId != null" >
+        service_type_id = #{serviceTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="serviceTypeName != null" >
+        service_type_name = #{serviceTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="entrustCaseNum != null" >
+        entrust_case_num = #{entrustCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="checkCaseNum != null" >
+        check_case_num = #{checkCaseNum,jdbcType=INTEGER},
+      </if>
+      <if test="consignorOrgId != null" >
+        consignor_org_id = #{consignorOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorOrgName != null" >
+        consignor_org_name = #{consignorOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+        <if test="checkType != null" >
+            check_type = #{checkType,jdbcType=INTEGER},
+        </if>
+        <if test="positiveNum != null" >
+            positive_num = #{positiveNum,jdbcType=INTEGER},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyServiceOrgReport" >
+    update survey_service_org_report
+    set report_date = #{reportDate,jdbcType=DATE},
+      service_type_id = #{serviceTypeId,jdbcType=BIGINT},
+      service_type_name = #{serviceTypeName,jdbcType=VARCHAR},
+      entrust_case_num = #{entrustCaseNum,jdbcType=INTEGER},
+      check_case_num = #{checkCaseNum,jdbcType=INTEGER},
+      consignor_org_id = #{consignorOrgId,jdbcType=BIGINT},
+      consignor_org_name = #{consignorOrgName,jdbcType=VARCHAR},
+      survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      check_type = #{checkType,jdbcType=INTEGER},
+      positive_num = #{positiveNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="wheres">
+      <if test="startTime != null">
+        AND date_format(s.report_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+      <if test="endTime != null">
+        AND date_format(s.report_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+        <if test="surveyOrgId != null" >
+            and s.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+        </if>
+        <if test="entrustOrgId != null" >
+            and s.consignor_org_id = #{entrustOrgId,jdbcType=BIGINT}
+        </if>
+        <if test="checkType != null">
+            and s.check_type = #{checkType,jdbcType=BIGINT}
+        </if>
+    </sql>
+
+    <select id="selectAll" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyServiceOrgReport">
+        SELECT
+        s.service_type_id as serviceTypeId,
+        s.service_type_name as serviceTypeName,
+        sum(s.entrust_case_num) as entrustCaseNum,
+        sum(s.check_case_num) as checkCaseNum,
+        sum(s.positive_num) as positiveNum
+        FROM
+        survey_service_org_report s
+        WHERE 1 = 1
+        <include refid="wheres"/>
+        GROUP BY
+        s.service_type_id,
+        s.service_type_name
+    </select>
+
+
+    <select id="selectAllNew" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyServiceOrgReport">
+        select a.services_id serviceTypeId,a.services_name serviceTypeName,ifnull(count(1),0) as checkCaseNum from
+            (
+                select a.survey_info_id,a.services_id,a.services_name,a.org_id from (
+                      select o.survey_info_id,o.services_id,o.services_name,
+                          (case f.parent_id when 0 then f.id else f.parent_id end) as org_id
+                      from
+                          survey_assign_org o
+                          left join survey_franchisee f on o.survey_org_id = f.id
+                          left join survey_risk_case_info r on o.survey_info_id = r.id
+                      left join survey_consignor n on r.entrust_org_id = n.id
+                       where r.delete_flag = 0 and o.delete_flag = 0
+                       <include refid="newSqlWhere"/>
+                    ) a group by a.org_id,a.survey_info_id
+              ) a group by a.org_id,a.services_id
+        <if test="surveyOrgId != null">
+          having a.org_id = #{surveyOrgId,jdbcType=BIGINT}
+        </if>
+    </select>
+
+  <select id="selectAllNewSun" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.SurveyServiceOrgReport">
+      select a.services_id serviceTypeId,a.services_name serviceTypeName,ifnull(count(1),0) as positiveNum from
+      (
+          select a.survey_info_id,a.services_id,a.services_name,a.org_id from (
+              select o.survey_info_id,o.services_id,o.services_name,
+              (case f.parent_id when 0 then f.id else f.parent_id end) as org_id
+              from
+              survey_assign_org o
+              left join survey_franchisee f on o.survey_org_id = f.id
+              left join survey_risk_case_info r on o.survey_info_id = r.id
+              left join survey_consignor n on r.entrust_org_id = n.id
+              left join (
+                  select c.survey_assorg_case_id from survey_investigator_case c where c.delete_flag = 0 and c.is_sun  = 1 and c.survey_assorg_case_id is not null group by c.survey_assorg_case_id
+              ) t on o.id = t.survey_assorg_case_id
+              where r.delete_flag = 0 and o.delete_flag = 0 and t.survey_assorg_case_id is not null
+              <include refid="newSqlWhere"/>
+          ) a group by a.org_id,a.survey_info_id
+      ) a group by a.org_id,a.services_id
+      <if test="surveyOrgId != null">
+        having a.org_id = #{surveyOrgId,jdbcType=BIGINT}
+      </if>
+  </select>
+
+  <sql id="newSqlWhere">
+    <if test="orgAttr != null">
+      and n.org_attr = #{orgAttr,jdbcType=INTEGER}
+    </if>
+    <if test="entrustOrgId != null">
+      and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+    </if>
+    <if test="entrustOrgIds != null">
+      and r.entrust_org_id in (${entrustOrgIds})
+    </if>
+    <if test="searchType != 2">
+      <if test="startTime != null">
+        AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+      <if test="endTime != null">
+        AND date_format(r.entrust_report_end_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+    </if>
+    <if test="searchType == 2">
+      <if test="startTime != null">
+        AND date_format(r.entrust_report_start_date,'%Y-%m-%d') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+      <if test="endTime != null">
+        AND date_format(r.entrust_report_start_date,'%Y-%m-%d') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m-%d')
+      </if>
+    </if>
+  </sql>
+</mapper>

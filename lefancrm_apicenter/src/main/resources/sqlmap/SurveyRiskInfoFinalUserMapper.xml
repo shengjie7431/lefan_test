@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyRiskInfoFinalUserMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyRiskInfoFinalUser" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="franchisee_id" property="franchiseeId" jdbcType="BIGINT" />
+    <result column="franchisee_name" property="franchiseeName" jdbcType="VARCHAR" />
+    <result column="consignor_id" property="consignorId" jdbcType="BIGINT" />
+    <result column="consignor_name" property="consignorName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, franchisee_id, franchisee_name, consignor_id, consignor_name, user_id, user_name, 
+    delete_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_risk_info_final_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_risk_info_final_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyRiskInfoFinalUser" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_risk_info_final_user (franchisee_id, franchisee_name, consignor_id, 
+      consignor_name, user_id, user_name, 
+      delete_flag)
+    values (#{franchiseeId,jdbcType=BIGINT}, #{franchiseeName,jdbcType=VARCHAR}, #{consignorId,jdbcType=BIGINT}, 
+      #{consignorName,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyRiskInfoFinalUser" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_risk_info_final_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="franchiseeId != null" >
+        franchisee_id,
+      </if>
+      <if test="franchiseeName != null" >
+        franchisee_name,
+      </if>
+      <if test="consignorId != null" >
+        consignor_id,
+      </if>
+      <if test="consignorName != null" >
+        consignor_name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="franchiseeId != null" >
+        #{franchiseeId,jdbcType=BIGINT},
+      </if>
+      <if test="franchiseeName != null" >
+        #{franchiseeName,jdbcType=VARCHAR},
+      </if>
+      <if test="consignorId != null" >
+        #{consignorId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorName != null" >
+        #{consignorName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyRiskInfoFinalUser" >
+    update survey_risk_info_final_user
+    <set >
+      <if test="franchiseeId != null" >
+        franchisee_id = #{franchiseeId,jdbcType=BIGINT},
+      </if>
+      <if test="franchiseeName != null" >
+        franchisee_name = #{franchiseeName,jdbcType=VARCHAR},
+      </if>
+      <if test="consignorId != null" >
+        consignor_id = #{consignorId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorName != null" >
+        consignor_name = #{consignorName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyRiskInfoFinalUser" >
+    update survey_risk_info_final_user
+    set franchisee_id = #{franchiseeId,jdbcType=BIGINT},
+      franchisee_name = #{franchiseeName,jdbcType=VARCHAR},
+      consignor_id = #{consignorId,jdbcType=BIGINT},
+      consignor_name = #{consignorName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByInfo" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_risk_info_final_user
+        where delete_flag = 0
+        <if test="franchiseeId != null" >
+           and franchisee_id = #{franchiseeId,jdbcType=BIGINT}
+        </if>
+        <if test="consignorId != null" >
+           and consignor_id = #{consignorId,jdbcType=BIGINT}
+        </if>
+    </select>
+</mapper>

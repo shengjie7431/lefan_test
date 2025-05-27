@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.OrgAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.OrgAccount" >
+    <id column="org_id" property="orgId" jdbcType="BIGINT" />
+      <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_recharge" property="userRecharge" jdbcType="DOUBLE" />
+    <result column="user_usable" property="userUsable" jdbcType="DOUBLE" />
+    <result column="user_foregift" property="userForegift" jdbcType="DOUBLE" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+   org_id, user_id, user_recharge, user_usable,user_foregift
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from org_account
+    where org_id = #{orgId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from org_account
+    where org_id = #{orgId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.OrgAccount" >
+    insert into org_account (org_id,user_id, user_recharge, user_usable,user_foregift
+      )
+    values (#{orgId,jdbcType=BIGINT},#{userId,jdbcType=BIGINT}, #{userRecharge,jdbcType=DOUBLE}, #{userUsable,jdbcType=DOUBLE},#{userForegift,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.OrgAccount" >
+    insert into org_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userRecharge != null" >
+        user_recharge,
+      </if>
+      <if test="userUsable != null" >
+        user_usable,
+      </if>
+      <if test="userForegift != null" >
+        user_foregift,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userRecharge != null" >
+        #{userRecharge,jdbcType=DOUBLE},
+      </if>
+      <if test="userUsable != null" >
+        #{userUsable,jdbcType=DOUBLE},
+      </if>
+        <if test="userForegift != null" >
+            #{userForegift,jdbcType=DOUBLE},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.OrgAccount" >
+    update org_account
+    <set >
+      <if test="userId != null" >
+         user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userRecharge != null" >
+        user_recharge = #{userRecharge,jdbcType=DOUBLE},
+      </if>
+      <if test="userUsable != null" >
+        user_usable = #{userUsable,jdbcType=DOUBLE},
+      </if>
+      <if test="userForegift != null" >
+        user_foregift = #{userForegift,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where org_id = #{orgId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.OrgAccount" >
+    update org_account
+    set
+      user_id = #{userId,jdbcType=BIGINT},
+      user_recharge = #{userRecharge,jdbcType=DOUBLE},
+      user_usable = #{userUsable,jdbcType=DOUBLE},
+      user_foregift = #{userForegift,jdbcType=DOUBLE}
+    where org_id = #{orgId,jdbcType=BIGINT}
+  </update>
+    <update id="addMoneyOrgAccountByOrgId" parameterType="java.util.Map" >
+        update org_account
+        set user_recharge =user_recharge+ #{money,jdbcType=DOUBLE},
+        user_usable =user_usable+ #{usable,jdbcType=DOUBLE}
+        user_foregift =user_foregift+ #{userForegift,jdbcType=DOUBLE}
+        where org_id = #{orgId,jdbcType=BIGINT}
+    </update>
+    <update id="lessMoneyOrgAccountByOrgId" parameterType="java.util.Map" >
+        update org_account
+        set user_recharge =user_recharge-#{money,jdbcType=DOUBLE},
+        user_usable =user_usable-#{money,jdbcType=DOUBLE}
+        where org_id = #{orgId,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectOrgAccountByParam" resultType="com.lefancrm.apicenter.dto.OrgAccountDto" parameterType="java.util.Map" >
+        select o1.id orgId, o1.org_name orgName,o1.org_tel orgTel,o1.link_name linkName,o1.link_tel linkTel,o2.user_recharge userRecharge,o2.user_usable userUsable,o2.user_foregift userForegift
+        from org_info o1,org_account o2 where o1.id=o2.org_id
+        order by id desc
+        limit #{pageIndex} , #{pageSize}
+    </select>
+    <select id="selectCountOrgAccountByParam" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select
+        count(1)
+        from org_info o1,org_account o2 where o1.id=o2.org_id
+    </select>
+</mapper>

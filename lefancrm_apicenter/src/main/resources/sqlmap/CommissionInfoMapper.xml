@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CommissionInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CommissionInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="level_id" property="levelId" jdbcType="BIGINT" />
+    <result column="level_code" property="levelCode" jdbcType="VARCHAR" />
+    <result column="one_quota" property="oneQuota" jdbcType="DOUBLE" />
+    <result column="one_comrate" property="oneComrate" jdbcType="DOUBLE" />
+    <result column="two_quota" property="twoQuota" jdbcType="DOUBLE" />
+    <result column="two_comrate" property="twoComrate" jdbcType="DOUBLE" />
+    <result column="three_quota" property="threeQuota" jdbcType="DOUBLE" />
+    <result column="three_comrate" property="threeComrate" jdbcType="DOUBLE" />
+    <result column="four_quota" property="fourQuota" jdbcType="DOUBLE" />
+    <result column="four_comrate" property="fourComrate" jdbcType="DOUBLE" />
+    <result column="five_quota" property="fiveQuota" jdbcType="DOUBLE" />
+    <result column="five_comrate" property="fiveComrate" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, level_id, level_code, one_quota, one_comrate, two_quota, two_comrate, three_quota, 
+    three_comrate, four_quota, four_comrate, five_quota, five_comrate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from commission_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from commission_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CommissionInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into commission_info (level_id, level_code, one_quota, 
+      one_comrate, two_quota, two_comrate, 
+      three_quota, three_comrate, four_quota, 
+      four_comrate, five_quota, five_comrate
+      )
+    values (#{levelId,jdbcType=BIGINT}, #{levelCode,jdbcType=VARCHAR}, #{oneQuota,jdbcType=DOUBLE}, 
+      #{oneComrate,jdbcType=DOUBLE}, #{twoQuota,jdbcType=DOUBLE}, #{twoComrate,jdbcType=DOUBLE}, 
+      #{threeQuota,jdbcType=DOUBLE}, #{threeComrate,jdbcType=DOUBLE}, #{fourQuota,jdbcType=DOUBLE}, 
+      #{fourComrate,jdbcType=DOUBLE}, #{fiveQuota,jdbcType=DOUBLE}, #{fiveComrate,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CommissionInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into commission_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="levelId != null" >
+        level_id,
+      </if>
+      <if test="levelCode != null" >
+        level_code,
+      </if>
+      <if test="oneQuota != null" >
+        one_quota,
+      </if>
+      <if test="oneComrate != null" >
+        one_comrate,
+      </if>
+      <if test="twoQuota != null" >
+        two_quota,
+      </if>
+      <if test="twoComrate != null" >
+        two_comrate,
+      </if>
+      <if test="threeQuota != null" >
+        three_quota,
+      </if>
+      <if test="threeComrate != null" >
+        three_comrate,
+      </if>
+      <if test="fourQuota != null" >
+        four_quota,
+      </if>
+      <if test="fourComrate != null" >
+        four_comrate,
+      </if>
+      <if test="fiveQuota != null" >
+        five_quota,
+      </if>
+      <if test="fiveComrate != null" >
+        five_comrate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="levelId != null" >
+        #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="levelCode != null" >
+        #{levelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="oneQuota != null" >
+        #{oneQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="oneComrate != null" >
+        #{oneComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="twoQuota != null" >
+        #{twoQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="twoComrate != null" >
+        #{twoComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="threeQuota != null" >
+        #{threeQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="threeComrate != null" >
+        #{threeComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="fourQuota != null" >
+        #{fourQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="fourComrate != null" >
+        #{fourComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="fiveQuota != null" >
+        #{fiveQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="fiveComrate != null" >
+        #{fiveComrate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CommissionInfo" >
+    update commission_info
+    <set >
+      <if test="levelId != null" >
+        level_id = #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="levelCode != null" >
+        level_code = #{levelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="oneQuota != null" >
+        one_quota = #{oneQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="oneComrate != null" >
+        one_comrate = #{oneComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="twoQuota != null" >
+        two_quota = #{twoQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="twoComrate != null" >
+        two_comrate = #{twoComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="threeQuota != null" >
+        three_quota = #{threeQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="threeComrate != null" >
+        three_comrate = #{threeComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="fourQuota != null" >
+        four_quota = #{fourQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="fourComrate != null" >
+        four_comrate = #{fourComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="fiveQuota != null" >
+        five_quota = #{fiveQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="fiveComrate != null" >
+        five_comrate = #{fiveComrate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CommissionInfo" >
+    update commission_info
+    set level_id = #{levelId,jdbcType=BIGINT},
+      level_code = #{levelCode,jdbcType=VARCHAR},
+      one_quota = #{oneQuota,jdbcType=DOUBLE},
+      one_comrate = #{oneComrate,jdbcType=DOUBLE},
+      two_quota = #{twoQuota,jdbcType=DOUBLE},
+      two_comrate = #{twoComrate,jdbcType=DOUBLE},
+      three_quota = #{threeQuota,jdbcType=DOUBLE},
+      three_comrate = #{threeComrate,jdbcType=DOUBLE},
+      four_quota = #{fourQuota,jdbcType=DOUBLE},
+      four_comrate = #{fourComrate,jdbcType=DOUBLE},
+      five_quota = #{fiveQuota,jdbcType=DOUBLE},
+      five_comrate = #{fiveComrate,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByLevelId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from commission_info
+        where level_id = #{levelId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectCountCommissionInfo" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select
+        count(1)
+        from commission_info
+        where 1=1
+        <if test="levelCode !=null">
+            and level_code  like  CONCAT(CONCAT('%',#{levelCode,jdbcType=VARCHAR}), '%')
+        </if>
+    </select>
+
+    <select id="selectCommissionInfoList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.* from commission_info a
+        where 1= 1
+        <if test="levelCode !=null">
+            and level_code  like  CONCAT(CONCAT('%',#{levelCode,jdbcType=VARCHAR}), '%')
+        </if>
+        limit #{pageIndex}, #{pageSize}
+    </select>
+
+    <select id="searchCommissionInfoByLevelId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.* from commission_info a
+        where
+        a.level_id = #{id,jdbcType=BIGINT}
+    </select>
+</mapper>

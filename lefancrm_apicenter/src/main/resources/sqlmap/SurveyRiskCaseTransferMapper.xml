@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyRiskCaseTransferMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyRiskCaseTransfer" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_id" property="surveyId" jdbcType="BIGINT" />
+    <result column="survey_parent_id" property="surveyParentId" jdbcType="BIGINT" />
+    <result column="transfer_type" property="transferType" jdbcType="INTEGER" />
+    <result column="transfer_type_name" property="transferTypeName" jdbcType="VARCHAR" />
+      <result column="ids" property="ids" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_id, survey_parent_id, transfer_type, transfer_type_name, ids
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_risk_case_transfer
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_risk_case_transfer
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyRiskCaseTransfer" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_risk_case_transfer (survey_id, survey_parent_id, transfer_type, 
+      transfer_type_name, ids)
+    values (#{surveyId,jdbcType=BIGINT}, #{surveyParentId,jdbcType=BIGINT}, #{transferType,jdbcType=INTEGER},
+      #{transferTypeName,jdbcType=VARCHAR}, #{ids,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyRiskCaseTransfer" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_risk_case_transfer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        survey_id,
+      </if>
+      <if test="surveyParentId != null" >
+        survey_parent_id,
+      </if>
+      <if test="transferType != null" >
+        transfer_type,
+      </if>
+      <if test="transferTypeName != null" >
+        transfer_type_name,
+      </if>
+        <if test="ids != null" >
+            ids,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyParentId != null" >
+        #{surveyParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="transferType != null" >
+        #{transferType,jdbcType=INTEGER},
+      </if>
+      <if test="transferTypeName != null" >
+        #{transferTypeName,jdbcType=VARCHAR},
+      </if>
+        <if test="ids != null" >
+            #{ids,jdbcType=VARCHAR},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyRiskCaseTransfer" >
+    update survey_risk_case_transfer
+    <set >
+      <if test="surveyId != null" >
+        survey_id = #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyParentId != null" >
+        survey_parent_id = #{surveyParentId,jdbcType=BIGINT},
+      </if>
+      <if test="transferType != null" >
+        transfer_type = #{transferType,jdbcType=INTEGER},
+      </if>
+      <if test="transferTypeName != null" >
+        transfer_type_name = #{transferTypeName,jdbcType=VARCHAR},
+      </if>
+        <if test="ids != null" >
+            ids = #{ids,jdbcType=VARCHAR},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyRiskCaseTransfer" >
+    update survey_risk_case_transfer
+    set survey_id = #{surveyId,jdbcType=BIGINT},
+      survey_parent_id = #{surveyParentId,jdbcType=BIGINT},
+      transfer_type = #{transferType,jdbcType=INTEGER},
+      transfer_type_name = #{transferTypeName,jdbcType=VARCHAR},
+      ids = #{ids,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="surveyId != null" >
+            and survey_id = #{surveyId,jdbcType=BIGINT}
+        </if>
+        <if test="surveyParentId != null" >
+            and survey_parent_id = #{surveyParentId,jdbcType=BIGINT}
+        </if>
+        <if test="transferType != null" >
+            and transfer_type = #{transferType,jdbcType=INTEGER}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_risk_case_transfer
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectBySurveyId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_risk_case_transfer
+        where survey_id = #{surveyId,jdbcType=BIGINT} limit 1;
+    </select>
+</mapper>

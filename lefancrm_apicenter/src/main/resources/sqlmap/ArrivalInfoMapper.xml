@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.ArrivalInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.ArrivalInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+    <result column="case_title" property="caseTitle" jdbcType="VARCHAR" />
+    <result column="arrival_money" property="arrivalMoney" jdbcType="DOUBLE" />
+    <result column="arrival_time" property="arrivalTime" jdbcType="TIMESTAMP" />
+    <result column="user_commission_id" property="userCommissionId" jdbcType="BIGINT" />
+      <result column="loan_amount" property="loanAmount" jdbcType="DOUBLE" />
+      <result column="interest_amount" property="interestAmount" jdbcType="DOUBLE" />
+      <result column="still_amount" property="stillAmount" jdbcType="DOUBLE" />
+      <result column="insurance_amount" property="insuranceAmount" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_id, case_no, case_title, arrival_money, arrival_time, user_commission_id,loan_amount,interest_amount,still_amount,insurance_amount
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from arrival_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from arrival_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.ArrivalInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into arrival_info (case_id, case_no, case_title, 
+      arrival_money, arrival_time, user_commission_id,loan_amount,interest_amount,still_amount,insurance_amount
+      )
+    values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{caseTitle,jdbcType=VARCHAR}, 
+      #{arrivalMoney,jdbcType=DOUBLE}, #{arrivalTime,jdbcType=TIMESTAMP}, #{userCommissionId,jdbcType=BIGINT},#{loanAmount,jdbcType=DOUBLE}
+      ,#{interestAmount,jdbcType=DOUBLE},#{stillAmount,jdbcType=DOUBLE},#{insuranceAmount,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.ArrivalInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into arrival_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseNo != null" >
+        case_no,
+      </if>
+      <if test="caseTitle != null" >
+        case_title,
+      </if>
+      <if test="arrivalMoney != null" >
+        arrival_money,
+      </if>
+      <if test="arrivalTime != null" >
+        arrival_time,
+      </if>
+      <if test="userCommissionId != null" >
+        user_commission_id,
+      </if>
+        <if test="loanAmount != null" >
+            loan_amount,
+        </if>
+        <if test="interestAmount != null" >
+            interest_amount,
+        </if>
+        <if test="stillAmount != null" >
+            still_amount,
+        </if>
+        <if test="insuranceAmount != null" >
+            insurance_amount,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseTitle != null" >
+        #{caseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivalMoney != null" >
+        #{arrivalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="arrivalTime != null" >
+        #{arrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userCommissionId != null" >
+        #{userCommissionId,jdbcType=BIGINT},
+      </if>
+        <if test="loanAmount != null" >
+            #{loanAmount,jdbcType=DOUBLE},
+        </if>
+        <if test="interestAmount != null" >
+            #{interestAmount,jdbcType=DOUBLE},
+        </if>
+        <if test="stillAmount != null" >
+            #{stillAmount,jdbcType=DOUBLE},
+        </if>
+        <if test="insuranceAmount != null" >
+            #{insuranceAmount,jdbcType=DOUBLE},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.ArrivalInfo" >
+    update arrival_info
+    <set >
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="caseTitle != null" >
+        case_title = #{caseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivalMoney != null" >
+        arrival_money = #{arrivalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="arrivalTime != null" >
+        arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userCommissionId != null" >
+        user_commission_id = #{userCommissionId,jdbcType=BIGINT},
+      </if>
+        <if test="loanAmount != null" >
+            loan_amount = #{loanAmount,jdbcType=DOUBLE},
+        </if>
+        <if test="interestAmount != null" >
+            interest_amount = #{interestAmount,jdbcType=DOUBLE},
+        </if>
+        <if test="stillAmount != null" >
+            still_amount =  #{stillAmount,jdbcType=DOUBLE},
+        </if>
+        <if test="insuranceAmount != null" >
+            insurance_amount = #{insuranceAmount,jdbcType=DOUBLE},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.ArrivalInfo" >
+    update arrival_info
+    set case_id = #{caseId,jdbcType=BIGINT},
+      case_no = #{caseNo,jdbcType=VARCHAR},
+      case_title = #{caseTitle,jdbcType=VARCHAR},
+      arrival_money = #{arrivalMoney,jdbcType=DOUBLE},
+      arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+      user_commission_id = #{userCommissionId,jdbcType=BIGINT},
+      loan_amount = #{loanAmount,jdbcType=DOUBLE},
+      interest_amount = #{interestAmount,jdbcType=DOUBLE},
+      still_amount = #{stillAmount,jdbcType=DOUBLE},
+      insurance_amount = #{insuranceAmount,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <select id="selectListSize" resultType="int" parameterType="java.util.Map" >
+        select
+        count(1)
+        from arrival_info
+        <where>
+            <if test="caseId != null" >
+                and case_id = #{caseId,jdbcType=BIGINT}
+            </if>
+            <if test="caseNo != null" >
+                and case_no = #{caseNo,jdbcType=VARCHAR}
+            </if>
+            <if test="caseTitle != null" >
+                and case_title = #{caseTitle,jdbcType=VARCHAR}
+            </if>
+            <if test="arrivalMoney != null" >
+                and arrival_money = #{arrivalMoney,jdbcType=DOUBLE}
+            </if>
+            <if test="arrivalTime != null" >
+                and arrival_time = #{arrivalTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="userCommissionId != null" >
+                and user_commission_id = #{userCommissionId,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+    <select id="selectList" resultType="com.lefancrm.apicenter.dto.ArrivalInfoDto" parameterType="java.util.Map" >
+        select
+        a.id as id,
+        a.case_id as caseId,
+        a.case_no as caseNo,
+        a.case_title as caseTitle,
+        a.arrival_money as arrivalMoney,
+        a.arrival_time as arrivalTime,
+        a.user_commission_id as userCommissionId,
+        u.user_name as userCommissionName
+        from arrival_info a
+        left join user_info u on a.user_commission_id = u.user_id
+        <where>
+            <if test="caseId != null" >
+                and case_id = #{caseId,jdbcType=BIGINT}
+            </if>
+            <if test="caseNo != null" >
+                and case_no = #{caseNo,jdbcType=VARCHAR}
+            </if>
+            <if test="caseTitle != null" >
+                and case_title = #{caseTitle,jdbcType=VARCHAR}
+            </if>
+            <if test="arrivalMoney != null" >
+                and arrival_money = #{arrivalMoney,jdbcType=DOUBLE}
+            </if>
+            <if test="arrivalTime != null" >
+                and arrival_time = #{arrivalTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="userCommissionId != null" >
+                and user_commission_id = #{userCommissionId,jdbcType=BIGINT}
+            </if>
+        </where>
+        order by id desc limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="selectByInfo" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        a.id as id,
+        a.case_id as caseId,
+        a.case_no as caseNo,
+        a.case_title as caseTitle,
+        a.arrival_money as arrivalMoney,
+        a.arrival_time as arrivalTime,
+        a.user_commission_id as userCommissionId,
+        u.user_name as userCommissionName
+        from arrival_info a
+        left join user_info u on a.user_commission_id = u.user_id
+        <where>
+            <if test="caseNo != null" >
+                and case_no = #{caseNo,jdbcType=VARCHAR}
+            </if>
+            <if test="closeFlag == 99">
+                and a.loan_amount > 0
+            </if>
+        </where>
+    </select>
+</mapper>

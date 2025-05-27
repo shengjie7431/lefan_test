@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyFollowMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.dto.SurveyFollowDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_id" property="surveyId" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="follow_user_id" property="followUserId" jdbcType="BIGINT" />
+    <result column="follow_user_name" property="followUserName" jdbcType="VARCHAR" />
+    <result column="follow_time" property="followTime" jdbcType="TIMESTAMP" />
+    <result column="next_follow_time" property="nextFollowTime" jdbcType="TIMESTAMP" />
+    <result column="contents" property="contents" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_id, survey_info_id, follow_user_id, follow_user_name, follow_time, next_follow_time, 
+    contents
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_follow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_follow
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyFollow" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_follow (survey_id, survey_info_id, follow_user_id, 
+      follow_user_name, follow_time, next_follow_time, 
+      contents)
+    values (#{surveyId,jdbcType=BIGINT}, #{surveyInfoId,jdbcType=BIGINT}, #{followUserId,jdbcType=BIGINT}, 
+      #{followUserName,jdbcType=VARCHAR}, #{followTime,jdbcType=TIMESTAMP}, #{nextFollowTime,jdbcType=TIMESTAMP}, 
+      #{contents,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyFollow" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_follow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        survey_id,
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="followUserId != null" >
+        follow_user_id,
+      </if>
+      <if test="followUserName != null" >
+        follow_user_name,
+      </if>
+      <if test="followTime != null" >
+        follow_time,
+      </if>
+      <if test="nextFollowTime != null" >
+        next_follow_time,
+      </if>
+      <if test="contents != null" >
+        contents,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="followUserId != null" >
+        #{followUserId,jdbcType=BIGINT},
+      </if>
+      <if test="followUserName != null" >
+        #{followUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null" >
+        #{followTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextFollowTime != null" >
+        #{nextFollowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contents != null" >
+        #{contents,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyFollow" >
+    update survey_follow
+    <set >
+      <if test="surveyId != null" >
+        survey_id = #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="followUserId != null" >
+        follow_user_id = #{followUserId,jdbcType=BIGINT},
+      </if>
+      <if test="followUserName != null" >
+        follow_user_name = #{followUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null" >
+        follow_time = #{followTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextFollowTime != null" >
+        next_follow_time = #{nextFollowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contents != null" >
+        contents = #{contents,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyFollow" >
+    update survey_follow
+    set survey_id = #{surveyId,jdbcType=BIGINT},
+      survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      follow_user_id = #{followUserId,jdbcType=BIGINT},
+      follow_user_name = #{followUserName,jdbcType=VARCHAR},
+      follow_time = #{followTime,jdbcType=TIMESTAMP},
+      next_follow_time = #{nextFollowTime,jdbcType=TIMESTAMP},
+      contents = #{contents,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="getSurveyFollowsBySurveyInfoId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_follow
+        where survey_info_id = #{surveyInfoId,jdbcType=BIGINT}
+    </select>
+
+</mapper>

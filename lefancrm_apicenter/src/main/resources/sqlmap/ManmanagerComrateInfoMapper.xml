@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.ManmanagerComrateInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.ManmanagerComrateInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="one_per_quota" property="onePerQuota" jdbcType="DOUBLE" />
+    <result column="one_per_comrate" property="onePerComrate" jdbcType="DOUBLE" />
+    <result column="two_per_quota" property="twoPerQuota" jdbcType="DOUBLE" />
+    <result column="two_per_comrate" property="twoPerComrate" jdbcType="DOUBLE" />
+    <result column="three_per_quota" property="threePerQuota" jdbcType="DOUBLE" />
+    <result column="three_per_comrate" property="threePerComrate" jdbcType="DOUBLE" />
+    <result column="four_per_quota" property="fourPerQuota" jdbcType="DOUBLE" />
+    <result column="four_per_comrate" property="fourPerComrate" jdbcType="DOUBLE" />
+    <result column="five_per_quota" property="fivePerQuota" jdbcType="DOUBLE" />
+    <result column="five_per_comrate" property="fivePerComrate" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, one_per_quota, one_per_comrate, two_per_quota, two_per_comrate, three_per_quota, 
+    three_per_comrate, four_per_quota, four_per_comrate, five_per_quota, five_per_comrate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from manager_comrate_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from manager_comrate_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.ManmanagerComrateInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into manager_comrate_info (one_per_quota, one_per_comrate, two_per_quota, 
+      two_per_comrate, three_per_quota, three_per_comrate, 
+      four_per_quota, four_per_comrate, five_per_quota, 
+      five_per_comrate)
+    values (#{onePerQuota,jdbcType=DOUBLE}, #{onePerComrate,jdbcType=DOUBLE}, #{twoPerQuota,jdbcType=DOUBLE}, 
+      #{twoPerComrate,jdbcType=DOUBLE}, #{threePerQuota,jdbcType=DOUBLE}, #{threePerComrate,jdbcType=DOUBLE}, 
+      #{fourPerQuota,jdbcType=DOUBLE}, #{fourPerComrate,jdbcType=DOUBLE}, #{fivePerQuota,jdbcType=DOUBLE}, 
+      #{fivePerComrate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.ManmanagerComrateInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into manager_comrate_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="onePerQuota != null" >
+        one_per_quota,
+      </if>
+      <if test="onePerComrate != null" >
+        one_per_comrate,
+      </if>
+      <if test="twoPerQuota != null" >
+        two_per_quota,
+      </if>
+      <if test="twoPerComrate != null" >
+        two_per_comrate,
+      </if>
+      <if test="threePerQuota != null" >
+        three_per_quota,
+      </if>
+      <if test="threePerComrate != null" >
+        three_per_comrate,
+      </if>
+      <if test="fourPerQuota != null" >
+        four_per_quota,
+      </if>
+      <if test="fourPerComrate != null" >
+        four_per_comrate,
+      </if>
+      <if test="fivePerQuota != null" >
+        five_per_quota,
+      </if>
+      <if test="fivePerComrate != null" >
+        five_per_comrate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="onePerQuota != null" >
+        #{onePerQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="onePerComrate != null" >
+        #{onePerComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="twoPerQuota != null" >
+        #{twoPerQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="twoPerComrate != null" >
+        #{twoPerComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="threePerQuota != null" >
+        #{threePerQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="threePerComrate != null" >
+        #{threePerComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="fourPerQuota != null" >
+        #{fourPerQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="fourPerComrate != null" >
+        #{fourPerComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="fivePerQuota != null" >
+        #{fivePerQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="fivePerComrate != null" >
+        #{fivePerComrate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.ManmanagerComrateInfo" >
+    update manager_comrate_info
+    <set >
+      <if test="onePerQuota != null" >
+        one_per_quota = #{onePerQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="onePerComrate != null" >
+        one_per_comrate = #{onePerComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="twoPerQuota != null" >
+        two_per_quota = #{twoPerQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="twoPerComrate != null" >
+        two_per_comrate = #{twoPerComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="threePerQuota != null" >
+        three_per_quota = #{threePerQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="threePerComrate != null" >
+        three_per_comrate = #{threePerComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="fourPerQuota != null" >
+        four_per_quota = #{fourPerQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="fourPerComrate != null" >
+        four_per_comrate = #{fourPerComrate,jdbcType=DOUBLE},
+      </if>
+      <if test="fivePerQuota != null" >
+        five_per_quota = #{fivePerQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="fivePerComrate != null" >
+        five_per_comrate = #{fivePerComrate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.ManmanagerComrateInfo" >
+    update manager_comrate_info
+    set one_per_quota = #{onePerQuota,jdbcType=DOUBLE},
+      one_per_comrate = #{onePerComrate,jdbcType=DOUBLE},
+      two_per_quota = #{twoPerQuota,jdbcType=DOUBLE},
+      two_per_comrate = #{twoPerComrate,jdbcType=DOUBLE},
+      three_per_quota = #{threePerQuota,jdbcType=DOUBLE},
+      three_per_comrate = #{threePerComrate,jdbcType=DOUBLE},
+      four_per_quota = #{fourPerQuota,jdbcType=DOUBLE},
+      four_per_comrate = #{fourPerComrate,jdbcType=DOUBLE},
+      five_per_quota = #{fivePerQuota,jdbcType=DOUBLE},
+      five_per_comrate = #{fivePerComrate,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

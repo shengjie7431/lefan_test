@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyAssignOrgReplyMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyAssignOrgReply" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_assorg_case_id" property="surveyAssorgCaseId" jdbcType="BIGINT" />
+    <result column="reply_content" property="replyContent" jdbcType="VARCHAR" />
+    <result column="reply_files" property="replyFiles" jdbcType="VARCHAR" />
+    <result column="reply_time" property="replyTime" jdbcType="TIMESTAMP" />
+    <result column="reply_type" property="replyType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_assorg_case_id, reply_content, reply_files, reply_time,reply_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_assign_org_reply
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectInvPreByOrgCaseId" resultType="java.util.Map">
+        SELECT
+	MAX(r.extension_time) maxTime,GROUP_CONCAT(r.reply_content) replyContent,GROUP_CONCAT(r.reply_files) files
+FROM
+	survey_investigator_case c
+	LEFT JOIN survey_investigator_case_reply r ON c.id = r.survey_investigator_case_id
+WHERE
+	c.survey_assorg_case_id = #{id}
+	AND c.delete_flag = 0
+	AND r.reply_type = #{type}
+
+  </select>
+  <select id="selectInvReplyInfo" resultType="java.util.Map">
+    SELECT reply_content replyContent,reply_files files,extension_time maxTime,reply_type replyType FROM `survey_investigator_case_reply` WHERE id = #{replyId} and reply_type = #{type}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_assign_org_reply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyAssignOrgReply" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_assign_org_reply (survey_assorg_case_id, reply_content, 
+      reply_files, reply_time,reply_type)
+    values (#{surveyAssorgCaseId,jdbcType=BIGINT}, #{replyContent,jdbcType=VARCHAR}, 
+      #{replyFiles,jdbcType=VARCHAR}, #{replyTime,jdbcType=TIMESTAMP},#{replyType})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyAssignOrgReply" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_assign_org_reply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyAssorgCaseId != null" >
+        survey_assorg_case_id,
+      </if>
+      <if test="replyContent != null" >
+        reply_content,
+      </if>
+      <if test="replyFiles != null" >
+        reply_files,
+      </if>
+      <if test="replyTime != null" >
+        reply_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyAssorgCaseId != null" >
+        #{surveyAssorgCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="replyContent != null" >
+        #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyFiles != null" >
+        #{replyFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null" >
+        #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyAssignOrgReply" >
+    update survey_assign_org_reply
+    <set >
+      <if test="surveyAssorgCaseId != null" >
+        survey_assorg_case_id = #{surveyAssorgCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="replyContent != null" >
+        reply_content = #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyFiles != null" >
+        reply_files = #{replyFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null" >
+        reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyAssignOrgReply" >
+    update survey_assign_org_reply
+    set survey_assorg_case_id = #{surveyAssorgCaseId,jdbcType=BIGINT},
+      reply_content = #{replyContent,jdbcType=VARCHAR},
+      reply_files = #{replyFiles,jdbcType=VARCHAR},
+      reply_time = #{replyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

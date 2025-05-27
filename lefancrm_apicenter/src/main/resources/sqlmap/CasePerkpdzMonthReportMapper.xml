@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CasePerkpdzMonthReportMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CasePerkpdzMonthReport" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="org_id" property="orgId" jdbcType="BIGINT" />
+        <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+        <result column="date" property="date" jdbcType="DATE" />
+        <result column="qct_invoice_money" property="qctInvoiceMoney" jdbcType="DOUBLE" />
+        <result column="fxdc_invoice_money" property="fxdcInvoiceMoney" jdbcType="DOUBLE" />
+        <result column="jj_invoice_money" property="jjInvoiceMoney" jdbcType="DOUBLE" />
+        <result column="fy_invoice_money" property="fyInvoiceMoney" jdbcType="DOUBLE" />
+        <result column="ccx_invoice_money" property="ccxInvoiceMoney" jdbcType="DOUBLE" />
+        <result column="ggpg_invoice_money" property="ggpgInvoiceMoney" jdbcType="DOUBLE" />
+        <result column="other_invoice_money" property="otherInvoiceMoney" jdbcType="DOUBLE" />
+        <result column="qct_received_money" property="qctReceivedMoney" jdbcType="DOUBLE" />
+        <result column="fxdc_received_money" property="fxdcReceivedMoney" jdbcType="DOUBLE" />
+        <result column="jj_received_money" property="jjReceivedMoney" jdbcType="DOUBLE" />
+        <result column="fy_received_money" property="fyReceivedMoney" jdbcType="DOUBLE" />
+        <result column="ccx_received_money" property="ccxReceivedMoney" jdbcType="DOUBLE" />
+        <result column="ggpg_received_money" property="ggpgReceivedMoney" jdbcType="DOUBLE" />
+        <result column="other_received_money" property="otherReceivedMoney" jdbcType="DOUBLE" />
+        <result column="pb_invoice_money" property="pbInvoiceMoney" jdbcType="DOUBLE" />
+        <result column="pb_received_money" property="pbReceivedMoney" jdbcType="DOUBLE" />
+        <result column="qct_invalid_money" property="qctInvalidMoney" jdbcType="DOUBLE" />
+        <result column="fxdc_invalid_money" property="fxdcInvalidMoney" jdbcType="DOUBLE" />
+        <result column="jj_invalid_money" property="jjInvalidMoney" jdbcType="DOUBLE" />
+        <result column="fy_invalid_money" property="fyInvalidMoney" jdbcType="DOUBLE" />
+        <result column="ccx_invalid_money" property="ccxInvalidMoney" jdbcType="DOUBLE" />
+        <result column="ggpg_invalid_money" property="ggpgInvalidMoney" jdbcType="DOUBLE" />
+        <result column="other_invalid_money" property="otherInvalidMoney" jdbcType="DOUBLE" />
+        <result column="pb_invalid_money" property="pbInvalidMoney" jdbcType="DOUBLE" />
+        <result column="qct_redrush_money" property="qctRedrushMoney" jdbcType="DOUBLE" />
+        <result column="fxdc_redrush_money" property="fxdcRedrushMoney" jdbcType="DOUBLE" />
+        <result column="jj_redrush_money" property="jjRedrushMoney" jdbcType="DOUBLE" />
+        <result column="fy_redrush_money" property="fyRedrushMoney" jdbcType="DOUBLE" />
+        <result column="ccx_redrush_money" property="ccxRedrushMoney" jdbcType="DOUBLE" />
+        <result column="ggpg_redrush_money" property="ggpgRedrushMoney" jdbcType="DOUBLE" />
+        <result column="other_redrush_money" property="otherRedrushMoney" jdbcType="DOUBLE" />
+        <result column="pb_redrush_money" property="pbRedrushMoney" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, org_id, org_name, date, qct_invoice_money, fxdc_invoice_money, jj_invoice_money,
+        fy_invoice_money, ccx_invoice_money, ggpg_invoice_money, other_invoice_money, qct_received_money,
+        fxdc_received_money, jj_received_money, fy_received_money, ccx_received_money, ggpg_received_money,
+        other_received_money, pb_invoice_money, pb_received_money, qct_invalid_money, fxdc_invalid_money,
+        jj_invalid_money, fy_invalid_money, ccx_invalid_money, ggpg_invalid_money, other_invalid_money,
+        pb_invalid_money, qct_redrush_money, fxdc_redrush_money, jj_redrush_money, fy_redrush_money,
+        ccx_redrush_money, ggpg_redrush_money, other_redrush_money, pb_redrush_money
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from case_perkpdz_month_report
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from case_perkpdz_month_report
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.CasePerkpdzMonthReport" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_perkpdz_month_report (org_id, org_name, date,
+        qct_invoice_money, fxdc_invoice_money, jj_invoice_money,
+        fy_invoice_money, ccx_invoice_money, ggpg_invoice_money,
+        other_invoice_money, qct_received_money, fxdc_received_money,
+        jj_received_money, fy_received_money, ccx_received_money,
+        ggpg_received_money, other_received_money, pb_invoice_money,
+        pb_received_money, qct_invalid_money, fxdc_invalid_money,
+        jj_invalid_money, fy_invalid_money, ccx_invalid_money,
+        ggpg_invalid_money, other_invalid_money, pb_invalid_money,
+        qct_redrush_money, fxdc_redrush_money, jj_redrush_money,
+        fy_redrush_money, ccx_redrush_money, ggpg_redrush_money,
+        other_redrush_money, pb_redrush_money)
+        values (#{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, #{date,jdbcType=DATE},
+        #{qctInvoiceMoney,jdbcType=DOUBLE}, #{fxdcInvoiceMoney,jdbcType=DOUBLE}, #{jjInvoiceMoney,jdbcType=DOUBLE},
+        #{fyInvoiceMoney,jdbcType=DOUBLE}, #{ccxInvoiceMoney,jdbcType=DOUBLE}, #{ggpgInvoiceMoney,jdbcType=DOUBLE},
+        #{otherInvoiceMoney,jdbcType=DOUBLE}, #{qctReceivedMoney,jdbcType=DOUBLE}, #{fxdcReceivedMoney,jdbcType=DOUBLE},
+        #{jjReceivedMoney,jdbcType=DOUBLE}, #{fyReceivedMoney,jdbcType=DOUBLE}, #{ccxReceivedMoney,jdbcType=DOUBLE},
+        #{ggpgReceivedMoney,jdbcType=DOUBLE}, #{otherReceivedMoney,jdbcType=DOUBLE}, #{pbInvoiceMoney,jdbcType=DOUBLE},
+        #{pbReceivedMoney,jdbcType=DOUBLE}, #{qctInvalidMoney,jdbcType=DOUBLE}, #{fxdcInvalidMoney,jdbcType=DOUBLE},
+        #{jjInvalidMoney,jdbcType=DOUBLE}, #{fyInvalidMoney,jdbcType=DOUBLE}, #{ccxInvalidMoney,jdbcType=DOUBLE},
+        #{ggpgInvalidMoney,jdbcType=DOUBLE}, #{otherInvalidMoney,jdbcType=DOUBLE}, #{pbInvalidMoney,jdbcType=DOUBLE},
+        #{qctRedrushMoney,jdbcType=DOUBLE}, #{fxdcRedrushMoney,jdbcType=DOUBLE}, #{jjRedrushMoney,jdbcType=DOUBLE},
+        #{fyRedrushMoney,jdbcType=DOUBLE}, #{ccxRedrushMoney,jdbcType=DOUBLE}, #{ggpgRedrushMoney,jdbcType=DOUBLE},
+        #{otherRedrushMoney,jdbcType=DOUBLE}, #{pbRedrushMoney,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CasePerkpdzMonthReport" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_perkpdz_month_report
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="orgName != null" >
+                org_name,
+            </if>
+            <if test="date != null" >
+                date,
+            </if>
+            <if test="qctInvoiceMoney != null" >
+                qct_invoice_money,
+            </if>
+            <if test="fxdcInvoiceMoney != null" >
+                fxdc_invoice_money,
+            </if>
+            <if test="jjInvoiceMoney != null" >
+                jj_invoice_money,
+            </if>
+            <if test="fyInvoiceMoney != null" >
+                fy_invoice_money,
+            </if>
+            <if test="ccxInvoiceMoney != null" >
+                ccx_invoice_money,
+            </if>
+            <if test="ggpgInvoiceMoney != null" >
+                ggpg_invoice_money,
+            </if>
+            <if test="otherInvoiceMoney != null" >
+                other_invoice_money,
+            </if>
+            <if test="qctReceivedMoney != null" >
+                qct_received_money,
+            </if>
+            <if test="fxdcReceivedMoney != null" >
+                fxdc_received_money,
+            </if>
+            <if test="jjReceivedMoney != null" >
+                jj_received_money,
+            </if>
+            <if test="fyReceivedMoney != null" >
+                fy_received_money,
+            </if>
+            <if test="ccxReceivedMoney != null" >
+                ccx_received_money,
+            </if>
+            <if test="ggpgReceivedMoney != null" >
+                ggpg_received_money,
+            </if>
+            <if test="otherReceivedMoney != null" >
+                other_received_money,
+            </if>
+            <if test="pbInvoiceMoney != null" >
+                pb_invoice_money,
+            </if>
+            <if test="pbReceivedMoney != null" >
+                pb_received_money,
+            </if>
+            <if test="qctInvalidMoney != null" >
+                qct_invalid_money,
+            </if>
+            <if test="fxdcInvalidMoney != null" >
+                fxdc_invalid_money,
+            </if>
+            <if test="jjInvalidMoney != null" >
+                jj_invalid_money,
+            </if>
+            <if test="fyInvalidMoney != null" >
+                fy_invalid_money,
+            </if>
+            <if test="ccxInvalidMoney != null" >
+                ccx_invalid_money,
+            </if>
+            <if test="ggpgInvalidMoney != null" >
+                ggpg_invalid_money,
+            </if>
+            <if test="otherInvalidMoney != null" >
+                other_invalid_money,
+            </if>
+            <if test="pbInvalidMoney != null" >
+                pb_invalid_money,
+            </if>
+            <if test="qctRedrushMoney != null" >
+                qct_redrush_money,
+            </if>
+            <if test="fxdcRedrushMoney != null" >
+                fxdc_redrush_money,
+            </if>
+            <if test="jjRedrushMoney != null" >
+                jj_redrush_money,
+            </if>
+            <if test="fyRedrushMoney != null" >
+                fy_redrush_money,
+            </if>
+            <if test="ccxRedrushMoney != null" >
+                ccx_redrush_money,
+            </if>
+            <if test="ggpgRedrushMoney != null" >
+                ggpg_redrush_money,
+            </if>
+            <if test="otherRedrushMoney != null" >
+                other_redrush_money,
+            </if>
+            <if test="pbRedrushMoney != null" >
+                pb_redrush_money,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="orgId != null" >
+                #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="date != null" >
+                #{date,jdbcType=DATE},
+            </if>
+            <if test="qctInvoiceMoney != null" >
+                #{qctInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fxdcInvoiceMoney != null" >
+                #{fxdcInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="jjInvoiceMoney != null" >
+                #{jjInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fyInvoiceMoney != null" >
+                #{fyInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ccxInvoiceMoney != null" >
+                #{ccxInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ggpgInvoiceMoney != null" >
+                #{ggpgInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherInvoiceMoney != null" >
+                #{otherInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="qctReceivedMoney != null" >
+                #{qctReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fxdcReceivedMoney != null" >
+                #{fxdcReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="jjReceivedMoney != null" >
+                #{jjReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fyReceivedMoney != null" >
+                #{fyReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ccxReceivedMoney != null" >
+                #{ccxReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ggpgReceivedMoney != null" >
+                #{ggpgReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherReceivedMoney != null" >
+                #{otherReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="pbInvoiceMoney != null" >
+                #{pbInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="pbReceivedMoney != null" >
+                #{pbReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="qctInvalidMoney != null" >
+                #{qctInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fxdcInvalidMoney != null" >
+                #{fxdcInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="jjInvalidMoney != null" >
+                #{jjInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fyInvalidMoney != null" >
+                #{fyInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ccxInvalidMoney != null" >
+                #{ccxInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ggpgInvalidMoney != null" >
+                #{ggpgInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherInvalidMoney != null" >
+                #{otherInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="pbInvalidMoney != null" >
+                #{pbInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="qctRedrushMoney != null" >
+                #{qctRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fxdcRedrushMoney != null" >
+                #{fxdcRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="jjRedrushMoney != null" >
+                #{jjRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fyRedrushMoney != null" >
+                #{fyRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ccxRedrushMoney != null" >
+                #{ccxRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ggpgRedrushMoney != null" >
+                #{ggpgRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherRedrushMoney != null" >
+                #{otherRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="pbRedrushMoney != null" >
+                #{pbRedrushMoney,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CasePerkpdzMonthReport" >
+        update case_perkpdz_month_report
+        <set >
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=BIGINT},
+            </if>
+            <if test="orgName != null" >
+                org_name = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="date != null" >
+                date = #{date,jdbcType=DATE},
+            </if>
+            <if test="qctInvoiceMoney != null" >
+                qct_invoice_money = #{qctInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fxdcInvoiceMoney != null" >
+                fxdc_invoice_money = #{fxdcInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="jjInvoiceMoney != null" >
+                jj_invoice_money = #{jjInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fyInvoiceMoney != null" >
+                fy_invoice_money = #{fyInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ccxInvoiceMoney != null" >
+                ccx_invoice_money = #{ccxInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ggpgInvoiceMoney != null" >
+                ggpg_invoice_money = #{ggpgInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherInvoiceMoney != null" >
+                other_invoice_money = #{otherInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="qctReceivedMoney != null" >
+                qct_received_money = #{qctReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fxdcReceivedMoney != null" >
+                fxdc_received_money = #{fxdcReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="jjReceivedMoney != null" >
+                jj_received_money = #{jjReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fyReceivedMoney != null" >
+                fy_received_money = #{fyReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ccxReceivedMoney != null" >
+                ccx_received_money = #{ccxReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ggpgReceivedMoney != null" >
+                ggpg_received_money = #{ggpgReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherReceivedMoney != null" >
+                other_received_money = #{otherReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="pbInvoiceMoney != null" >
+                pb_invoice_money = #{pbInvoiceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="pbReceivedMoney != null" >
+                pb_received_money = #{pbReceivedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="qctInvalidMoney != null" >
+                qct_invalid_money = #{qctInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fxdcInvalidMoney != null" >
+                fxdc_invalid_money = #{fxdcInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="jjInvalidMoney != null" >
+                jj_invalid_money = #{jjInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fyInvalidMoney != null" >
+                fy_invalid_money = #{fyInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ccxInvalidMoney != null" >
+                ccx_invalid_money = #{ccxInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ggpgInvalidMoney != null" >
+                ggpg_invalid_money = #{ggpgInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherInvalidMoney != null" >
+                other_invalid_money = #{otherInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="pbInvalidMoney != null" >
+                pb_invalid_money = #{pbInvalidMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="qctRedrushMoney != null" >
+                qct_redrush_money = #{qctRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fxdcRedrushMoney != null" >
+                fxdc_redrush_money = #{fxdcRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="jjRedrushMoney != null" >
+                jj_redrush_money = #{jjRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="fyRedrushMoney != null" >
+                fy_redrush_money = #{fyRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ccxRedrushMoney != null" >
+                ccx_redrush_money = #{ccxRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ggpgRedrushMoney != null" >
+                ggpg_redrush_money = #{ggpgRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="otherRedrushMoney != null" >
+                other_redrush_money = #{otherRedrushMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="pbRedrushMoney != null" >
+                pb_redrush_money = #{pbRedrushMoney,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CasePerkpdzMonthReport" >
+        update case_perkpdz_month_report
+        set org_id = #{orgId,jdbcType=BIGINT},
+        org_name = #{orgName,jdbcType=VARCHAR},
+        date = #{date,jdbcType=DATE},
+        qct_invoice_money = #{qctInvoiceMoney,jdbcType=DOUBLE},
+        fxdc_invoice_money = #{fxdcInvoiceMoney,jdbcType=DOUBLE},
+        jj_invoice_money = #{jjInvoiceMoney,jdbcType=DOUBLE},
+        fy_invoice_money = #{fyInvoiceMoney,jdbcType=DOUBLE},
+        ccx_invoice_money = #{ccxInvoiceMoney,jdbcType=DOUBLE},
+        ggpg_invoice_money = #{ggpgInvoiceMoney,jdbcType=DOUBLE},
+        other_invoice_money = #{otherInvoiceMoney,jdbcType=DOUBLE},
+        qct_received_money = #{qctReceivedMoney,jdbcType=DOUBLE},
+        fxdc_received_money = #{fxdcReceivedMoney,jdbcType=DOUBLE},
+        jj_received_money = #{jjReceivedMoney,jdbcType=DOUBLE},
+        fy_received_money = #{fyReceivedMoney,jdbcType=DOUBLE},
+        ccx_received_money = #{ccxReceivedMoney,jdbcType=DOUBLE},
+        ggpg_received_money = #{ggpgReceivedMoney,jdbcType=DOUBLE},
+        other_received_money = #{otherReceivedMoney,jdbcType=DOUBLE},
+        pb_invoice_money = #{pbInvoiceMoney,jdbcType=DOUBLE},
+        pb_received_money = #{pbReceivedMoney,jdbcType=DOUBLE},
+        qct_invalid_money = #{qctInvalidMoney,jdbcType=DOUBLE},
+        fxdc_invalid_money = #{fxdcInvalidMoney,jdbcType=DOUBLE},
+        jj_invalid_money = #{jjInvalidMoney,jdbcType=DOUBLE},
+        fy_invalid_money = #{fyInvalidMoney,jdbcType=DOUBLE},
+        ccx_invalid_money = #{ccxInvalidMoney,jdbcType=DOUBLE},
+        ggpg_invalid_money = #{ggpgInvalidMoney,jdbcType=DOUBLE},
+        other_invalid_money = #{otherInvalidMoney,jdbcType=DOUBLE},
+        pb_invalid_money = #{pbInvalidMoney,jdbcType=DOUBLE},
+        qct_redrush_money = #{qctRedrushMoney,jdbcType=DOUBLE},
+        fxdc_redrush_money = #{fxdcRedrushMoney,jdbcType=DOUBLE},
+        jj_redrush_money = #{jjRedrushMoney,jdbcType=DOUBLE},
+        fy_redrush_money = #{fyRedrushMoney,jdbcType=DOUBLE},
+        ccx_redrush_money = #{ccxRedrushMoney,jdbcType=DOUBLE},
+        ggpg_redrush_money = #{ggpgRedrushMoney,jdbcType=DOUBLE},
+        other_redrush_money = #{otherRedrushMoney,jdbcType=DOUBLE},
+        pb_redrush_money = #{pbRedrushMoney,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectList" resultType="com.lefancrm.apicenter.dto.CasePerkpdzMonthReportDto" parameterType="java.util.Map" >
+        select
+        id as id, org_id as orgId, org_name as orgName, date as date,
+        sum(qct_invoice_money) as qctInvoiceMoney, sum(fxdc_invoice_money) as fxdcInvoiceMoney,
+        sum(jj_invoice_money) as jjInvoiceMoney, sum(fy_invoice_money) as fyInvoiceMoney,
+        sum(ccx_invoice_money) as ccxInvoiceMoney, sum(ggpg_invoice_money) as ggpgInvoiceMoney,
+        sum(other_invoice_money) as otherInvoiceMoney, sum(pb_invoice_money) as pbInvoiceMoney,
+        (ifnull(sum(qct_invoice_money),0) + ifnull(sum(fxdc_invoice_money),0) + ifnull(sum(jj_invoice_money),0) +
+        ifnull(sum(fy_invoice_money),0) + ifnull(sum(ccx_invoice_money),0) + ifnull(sum(ggpg_invoice_money),0) +
+        ifnull(sum(other_invoice_money),0) + ifnull(sum(pb_invoice_money),0)) as invoiceTitle,
+
+        sum(qct_received_money) as qctReceivedMoney, sum(fxdc_received_money) as fxdcReceivedMoney,
+        sum(jj_received_money) as jjReceivedMoney, sum(fy_received_money) as fyReceivedMoney,
+        sum(ccx_received_money) as ccxReceivedMoney, sum(ggpg_received_money) as ggpgReceivedMoney,
+        sum(other_received_money) as otherReceivedMoney,  sum(pb_received_money) as pbReceivedMoney,
+        (ifnull(sum(qct_received_money),0) + ifnull(sum(fxdc_received_money),0) + ifnull(sum(jj_received_money),0) +
+        ifnull(sum(fy_received_money),0) + ifnull(sum(ccx_received_money),0) + ifnull(sum(ggpg_received_money),0) +
+        ifnull(sum(other_received_money),0) + ifnull(sum(pb_received_money),0)) as receivedTitle,
+
+        sum(qct_invalid_money) as qctInvalidMoney, sum(fxdc_invalid_money) as fxdcInvalidMoney,
+        sum(jj_invalid_money) as jjInvalidMoney, sum(fy_invalid_money) as fyInvalidMoney,
+        sum(ccx_invalid_money) as ccxInvalidMoney, sum(ggpg_invalid_money) as ggpgInvalidMoney,
+        sum(other_invalid_money) as otherInvalidMoney,  sum(pb_invalid_money) as pbInvalidMoney,
+        (ifnull(sum(qct_invalid_money),0) + ifnull(sum(fxdc_invalid_money),0) + ifnull(sum(jj_invalid_money),0) +
+        ifnull(sum(fy_invalid_money),0) + ifnull(sum(ccx_invalid_money),0) + ifnull(sum(ggpg_invalid_money),0) +
+        ifnull(sum(other_invalid_money),0) + ifnull(sum(pb_invalid_money),0)) as invalidTitle,
+
+        sum(qct_redrush_money) as qctRedrushMoney, sum(fxdc_redrush_money) as fxdcRedrushMoney,
+        sum(jj_redrush_money) as jjRedrushMoney, sum(fy_redrush_money) as fyRedrushMoney,
+        sum(ccx_redrush_money) as ccxRedrushMoney, sum(ggpg_redrush_money) as ggpgRedrushMoney,
+        sum(other_redrush_money) as otherRedrushMoney,  sum(pb_redrush_money) as pbRedrushMoney,
+        (ifnull(sum(qct_redrush_money),0) + ifnull(sum(fxdc_redrush_money),0) + ifnull(sum(jj_redrush_money),0) +
+        ifnull(sum(fy_redrush_money),0) + ifnull(sum(ccx_redrush_money),0) + ifnull(sum(ggpg_redrush_money),0) +
+        ifnull(sum(other_redrush_money),0) + ifnull(sum(pb_redrush_money),0)) as redrushTitle
+
+        from case_perkpdz_month_report b
+        <where>
+            <if test="orgId != null" >
+                and org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="date != null" >
+                and date like concat('%',#{date,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="month == 1" >
+                and date_format(date,'%Y-%m') = date_format(now(),'%Y-%m')
+            </if>
+        </where>
+        group by org_id
+        <if test="export != 1">
+            order by org_name desc limit #{pageIndex} , #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectCountList" resultType="int" parameterType="java.util.Map" >
+        select count(1) from
+        (select org_id from case_perkpdz_month_report b
+        <where>
+            <if test="orgId != null" >
+                and org_id = #{orgId,jdbcType=BIGINT}
+            </if>
+            <if test="date != null" >
+                and date like concat('%',#{date,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="month == 1" >
+                and date_format(date,'%Y-%m') = date_format(now(),'%Y-%m')
+            </if>
+        </where>
+        group by org_id) a
+
+    </select>
+</mapper>

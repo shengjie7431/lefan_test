@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseMediationClaimLegalMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseMediationClaimLegal" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="case_id" property="caseId" jdbcType="BIGINT" />
+        <result column="claimer_id" property="claimerId" jdbcType="BIGINT" />
+        <result column="claimer_name" property="claimerName" jdbcType="VARCHAR" />
+        <result column="card_number" property="cardNumber" jdbcType="VARCHAR" />
+        <result column="insurance_company_id" property="insuranceCompanyId" jdbcType="BIGINT" />
+        <result column="insurance_company" property="insuranceCompany" jdbcType="VARCHAR" />
+        <result column="ins_officer_id" property="insOfficerId" jdbcType="BIGINT" />
+        <result column="ins_officer_tel" property="insOfficerTel" jdbcType="VARCHAR" />
+        <result column="ins_officer_name" property="insOfficerName" jdbcType="VARCHAR" />
+        <result column="mediate_date" property="mediateDate" jdbcType="DATE" />
+        <result column="loan_money" property="loanMoney" jdbcType="DOUBLE" />
+        <result column="claim_time" property="claimTime" jdbcType="TIMESTAMP" />
+        <result column="out_insurance_time" property="outInsuranceTime" jdbcType="TIMESTAMP" />
+        <result column="liability_ratio" property="liabilityRatio" jdbcType="DOUBLE" />
+        <result column="arrival_time" property="arrivalTime" jdbcType="TIMESTAMP" />
+        <result column="cpt_money" property="cptMoney" jdbcType="DOUBLE" />
+        <result column="cps_money" property="cpsMoney" jdbcType="DOUBLE" />
+        <result column="coc_money" property="cocMoney" jdbcType="DOUBLE" />
+        <result column="final_loan_money" property="finalLoanMoney" jdbcType="DOUBLE" />
+        <result column="repayment_money" property="repaymentMoney" jdbcType="DOUBLE" />
+        <result column="service_money" property="serviceMoney" jdbcType="DOUBLE" />
+        <result column="mediate_desc" property="mediateDesc" jdbcType="VARCHAR" />
+        <result column="mediate_fail_desc" property="mediateFailDesc" jdbcType="VARCHAR" />
+        <result column="party_name" property="partyName" jdbcType="VARCHAR" />
+        <result column="party_tel" property="partyTel" jdbcType="VARCHAR" />
+        <result column="app_stand_type" property="appStandType" jdbcType="VARCHAR" />
+        <result column="accident_duty_type" property="accidentDutyType" jdbcType="VARCHAR" />
+        <result column="determine_type" property="determineType" jdbcType="VARCHAR" />
+        <result column="invalidism_grade" property="invalidismGrade" jdbcType="VARCHAR" />
+        <result column="hurt_traffic_type" property="hurtTrafficType" jdbcType="VARCHAR" />
+        <result column="party_traffice_type" property="partyTrafficeType" jdbcType="VARCHAR" />
+        <result column="pay_insurance_type" property="payInsuranceType" jdbcType="VARCHAR" />
+        <result column="trade_amount" property="tradeAmount" jdbcType="DOUBLE" />
+        <result column="some_car_type" property="someCarType" jdbcType="VARCHAR" />
+        <result column="car_desc" property="carDesc" jdbcType="VARCHAR" />
+        <result column="disclaimer_type" property="disclaimerType" jdbcType="VARCHAR" />
+        <result column="disclaimer_desc" property="disclaimerDesc" jdbcType="VARCHAR" />
+        <result column="case_desc" property="caseDesc" jdbcType="VARCHAR" />
+        <result column="case_commit_time" property="caseCommitTime" jdbcType="TIMESTAMP" />
+        <result column="plan_review_desc" property="planReviewDesc" jdbcType="VARCHAR" />
+        <result column="plan_review_person" property="planReviewPerson" jdbcType="VARCHAR" />
+        <result column="plan_review_time" property="planReviewTime" jdbcType="TIMESTAMP" />
+        <result column="insurer_review_desc" property="insurerReviewDesc" jdbcType="VARCHAR" />
+        <result column="insurer_review_person" property="insurerReviewPerson" jdbcType="VARCHAR" />
+        <result column="insurer_review_time" property="insurerReviewTime" jdbcType="TIMESTAMP" />
+        <result column="pay_wounded_money" property="payWoundedMoney" jdbcType="DOUBLE" />
+        <result column="pay_driver_money" property="payDriverMoney" jdbcType="DOUBLE" />
+        <result column="pay_safe_money" property="paySafeMoney" jdbcType="DOUBLE" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, user_id, user_name, case_id, claimer_id, claimer_name, card_number, insurance_company_id,
+        insurance_company, ins_officer_id, ins_officer_tel, ins_officer_name, mediate_date,
+        loan_money, claim_time, out_insurance_time, liability_ratio, arrival_time, cpt_money,
+        cps_money, coc_money, final_loan_money, repayment_money, service_money, mediate_desc,
+        mediate_fail_desc, party_name, party_tel, app_stand_type, accident_duty_type, determine_type,
+        invalidism_grade, hurt_traffic_type, party_traffice_type, pay_insurance_type, trade_amount,
+        some_car_type, car_desc, disclaimer_type, disclaimer_desc, case_desc, case_commit_time,
+        plan_review_desc, plan_review_person, plan_review_time, insurer_review_desc, insurer_review_person,
+        insurer_review_time,pay_wounded_money,pay_driver_money,pay_safe_money
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from case_mediation_claim_legal
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from case_mediation_claim_legal
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseMediationClaimLegal" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_mediation_claim_legal (user_id, user_name, case_id,
+        claimer_id, claimer_name, card_number,
+        insurance_company_id, insurance_company, ins_officer_id,
+        ins_officer_tel, ins_officer_name, mediate_date,
+        loan_money, claim_time, out_insurance_time,
+        liability_ratio, arrival_time, cpt_money,
+        cps_money, coc_money, final_loan_money,
+        repayment_money, service_money, mediate_desc,
+        mediate_fail_desc, party_name, party_tel,
+        app_stand_type, accident_duty_type, determine_type,
+        invalidism_grade, hurt_traffic_type, party_traffice_type,
+        pay_insurance_type, trade_amount, some_car_type,
+        car_desc, disclaimer_type, disclaimer_desc,
+        case_desc, case_commit_time, plan_review_desc,
+        plan_review_person, plan_review_time, insurer_review_desc,
+        insurer_review_person, insurer_review_time,pay_wounded_money,pay_driver_money,pay_safe_money
+        )
+        values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{caseId,jdbcType=BIGINT},
+        #{claimerId,jdbcType=BIGINT}, #{claimerName,jdbcType=VARCHAR}, #{cardNumber,jdbcType=VARCHAR},
+        #{insuranceCompanyId,jdbcType=BIGINT}, #{insuranceCompany,jdbcType=VARCHAR}, #{insOfficerId,jdbcType=BIGINT},
+        #{insOfficerTel,jdbcType=VARCHAR}, #{insOfficerName,jdbcType=VARCHAR}, #{mediateDate,jdbcType=DATE},
+        #{loanMoney,jdbcType=DOUBLE}, #{claimTime,jdbcType=TIMESTAMP}, #{outInsuranceTime,jdbcType=TIMESTAMP},
+        #{liabilityRatio,jdbcType=DOUBLE}, #{arrivalTime,jdbcType=TIMESTAMP}, #{cptMoney,jdbcType=DOUBLE},
+        #{cpsMoney,jdbcType=DOUBLE}, #{cocMoney,jdbcType=DOUBLE}, #{finalLoanMoney,jdbcType=DOUBLE},
+        #{repaymentMoney,jdbcType=DOUBLE}, #{serviceMoney,jdbcType=DOUBLE}, #{mediateDesc,jdbcType=VARCHAR},
+        #{mediateFailDesc,jdbcType=VARCHAR}, #{partyName,jdbcType=VARCHAR}, #{partyTel,jdbcType=VARCHAR},
+        #{appStandType,jdbcType=VARCHAR}, #{accidentDutyType,jdbcType=VARCHAR}, #{determineType,jdbcType=VARCHAR},
+        #{invalidismGrade,jdbcType=VARCHAR}, #{hurtTrafficType,jdbcType=VARCHAR}, #{partyTrafficeType,jdbcType=VARCHAR},
+        #{payInsuranceType,jdbcType=VARCHAR}, #{tradeAmount,jdbcType=DOUBLE}, #{someCarType,jdbcType=VARCHAR},
+        #{carDesc,jdbcType=VARCHAR}, #{disclaimerType,jdbcType=VARCHAR}, #{disclaimerDesc,jdbcType=VARCHAR},
+        #{caseDesc,jdbcType=VARCHAR}, #{caseCommitTime,jdbcType=TIMESTAMP}, #{planReviewDesc,jdbcType=VARCHAR},
+        #{planReviewPerson,jdbcType=VARCHAR}, #{planReviewTime,jdbcType=TIMESTAMP}, #{insurerReviewDesc,jdbcType=VARCHAR},
+        #{insurerReviewPerson,jdbcType=VARCHAR}, #{insurerReviewTime,jdbcType=TIMESTAMP},
+        #{payWoundedMoney,jdbcType=DOUBLE},#{payDriverMoney,jdbcType=DOUBLE},#{paySafeMoney,jdbcType=DOUBLE}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseMediationClaimLegal" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into case_mediation_claim_legal
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="userName != null" >
+                user_name,
+            </if>
+            <if test="caseId != null" >
+                case_id,
+            </if>
+            <if test="claimerId != null" >
+                claimer_id,
+            </if>
+            <if test="claimerName != null" >
+                claimer_name,
+            </if>
+            <if test="cardNumber != null" >
+                card_number,
+            </if>
+            <if test="insuranceCompanyId != null" >
+                insurance_company_id,
+            </if>
+            <if test="insuranceCompany != null" >
+                insurance_company,
+            </if>
+            <if test="insOfficerId != null" >
+                ins_officer_id,
+            </if>
+            <if test="insOfficerTel != null" >
+                ins_officer_tel,
+            </if>
+            <if test="insOfficerName != null" >
+                ins_officer_name,
+            </if>
+            <if test="mediateDate != null" >
+                mediate_date,
+            </if>
+            <if test="loanMoney != null" >
+                loan_money,
+            </if>
+            <if test="claimTime != null" >
+                claim_time,
+            </if>
+            <if test="outInsuranceTime != null" >
+                out_insurance_time,
+            </if>
+            <if test="liabilityRatio != null" >
+                liability_ratio,
+            </if>
+            <if test="arrivalTime != null" >
+                arrival_time,
+            </if>
+            <if test="cptMoney != null" >
+                cpt_money,
+            </if>
+            <if test="cpsMoney != null" >
+                cps_money,
+            </if>
+            <if test="cocMoney != null" >
+                coc_money,
+            </if>
+            <if test="finalLoanMoney != null" >
+                final_loan_money,
+            </if>
+            <if test="repaymentMoney != null" >
+                repayment_money,
+            </if>
+            <if test="serviceMoney != null" >
+                service_money,
+            </if>
+            <if test="mediateDesc != null" >
+                mediate_desc,
+            </if>
+            <if test="mediateFailDesc != null" >
+                mediate_fail_desc,
+            </if>
+            <if test="partyName != null" >
+                party_name,
+            </if>
+            <if test="partyTel != null" >
+                party_tel,
+            </if>
+            <if test="appStandType != null" >
+                app_stand_type,
+            </if>
+            <if test="accidentDutyType != null" >
+                accident_duty_type,
+            </if>
+            <if test="determineType != null" >
+                determine_type,
+            </if>
+            <if test="invalidismGrade != null" >
+                invalidism_grade,
+            </if>
+            <if test="hurtTrafficType != null" >
+                hurt_traffic_type,
+            </if>
+            <if test="partyTrafficeType != null" >
+                party_traffice_type,
+            </if>
+            <if test="payInsuranceType != null" >
+                pay_insurance_type,
+            </if>
+            <if test="tradeAmount != null" >
+                trade_amount,
+            </if>
+            <if test="someCarType != null" >
+                some_car_type,
+            </if>
+            <if test="carDesc != null" >
+                car_desc,
+            </if>
+            <if test="disclaimerType != null" >
+                disclaimer_type,
+            </if>
+            <if test="disclaimerDesc != null" >
+                disclaimer_desc,
+            </if>
+            <if test="caseDesc != null" >
+                case_desc,
+            </if>
+            <if test="caseCommitTime != null" >
+                case_commit_time,
+            </if>
+            <if test="planReviewDesc != null" >
+                plan_review_desc,
+            </if>
+            <if test="planReviewPerson != null" >
+                plan_review_person,
+            </if>
+            <if test="planReviewTime != null" >
+                plan_review_time,
+            </if>
+            <if test="insurerReviewDesc != null" >
+                insurer_review_desc,
+            </if>
+            <if test="insurerReviewPerson != null" >
+                insurer_review_person,
+            </if>
+            <if test="insurerReviewTime != null" >
+                insurer_review_time,
+            </if>
+            <if test="payWoundedMoney != null" >
+                pay_wounded_money,
+            </if>
+            <if test="payDriverMoney != null" >
+                pay_driver_money,
+            </if>
+            <if test="paySafeMoney != null" >
+                pay_safe_money,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null" >
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="caseId != null" >
+                #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="claimerId != null" >
+                #{claimerId,jdbcType=BIGINT},
+            </if>
+            <if test="claimerName != null" >
+                #{claimerName,jdbcType=VARCHAR},
+            </if>
+            <if test="cardNumber != null" >
+                #{cardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="insuranceCompanyId != null" >
+                #{insuranceCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="insuranceCompany != null" >
+                #{insuranceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="insOfficerId != null" >
+                #{insOfficerId,jdbcType=BIGINT},
+            </if>
+            <if test="insOfficerTel != null" >
+                #{insOfficerTel,jdbcType=VARCHAR},
+            </if>
+            <if test="insOfficerName != null" >
+                #{insOfficerName,jdbcType=VARCHAR},
+            </if>
+            <if test="mediateDate != null" >
+                #{mediateDate,jdbcType=DATE},
+            </if>
+            <if test="loanMoney != null" >
+                #{loanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="claimTime != null" >
+                #{claimTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="outInsuranceTime != null" >
+                #{outInsuranceTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="liabilityRatio != null" >
+                #{liabilityRatio,jdbcType=DOUBLE},
+            </if>
+            <if test="arrivalTime != null" >
+                #{arrivalTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cptMoney != null" >
+                #{cptMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="cpsMoney != null" >
+                #{cpsMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="cocMoney != null" >
+                #{cocMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="finalLoanMoney != null" >
+                #{finalLoanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="repaymentMoney != null" >
+                #{repaymentMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="serviceMoney != null" >
+                #{serviceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="mediateDesc != null" >
+                #{mediateDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="mediateFailDesc != null" >
+                #{mediateFailDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="partyName != null" >
+                #{partyName,jdbcType=VARCHAR},
+            </if>
+            <if test="partyTel != null" >
+                #{partyTel,jdbcType=VARCHAR},
+            </if>
+            <if test="appStandType != null" >
+                #{appStandType,jdbcType=VARCHAR},
+            </if>
+            <if test="accidentDutyType != null" >
+                #{accidentDutyType,jdbcType=VARCHAR},
+            </if>
+            <if test="determineType != null" >
+                #{determineType,jdbcType=VARCHAR},
+            </if>
+            <if test="invalidismGrade != null" >
+                #{invalidismGrade,jdbcType=VARCHAR},
+            </if>
+            <if test="hurtTrafficType != null" >
+                #{hurtTrafficType,jdbcType=VARCHAR},
+            </if>
+            <if test="partyTrafficeType != null" >
+                #{partyTrafficeType,jdbcType=VARCHAR},
+            </if>
+            <if test="payInsuranceType != null" >
+                #{payInsuranceType,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeAmount != null" >
+                #{tradeAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="someCarType != null" >
+                #{someCarType,jdbcType=VARCHAR},
+            </if>
+            <if test="carDesc != null" >
+                #{carDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="disclaimerType != null" >
+                #{disclaimerType,jdbcType=VARCHAR},
+            </if>
+            <if test="disclaimerDesc != null" >
+                #{disclaimerDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="caseDesc != null" >
+                #{caseDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="caseCommitTime != null" >
+                #{caseCommitTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="planReviewDesc != null" >
+                #{planReviewDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="planReviewPerson != null" >
+                #{planReviewPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="planReviewTime != null" >
+                #{planReviewTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insurerReviewDesc != null" >
+                #{insurerReviewDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="insurerReviewPerson != null" >
+                #{insurerReviewPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="insurerReviewTime != null" >
+                #{insurerReviewTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payWoundedMoney != null" >
+                #{payWoundedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="payDriverMoney != null" >
+                #{payDriverMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="paySafeMoney != null" >
+                #{paySafeMoney,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseMediationClaimLegal" >
+        update case_mediation_claim_legal
+        <set >
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null" >
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="caseId != null" >
+                case_id = #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="claimerId != null" >
+                claimer_id = #{claimerId,jdbcType=BIGINT},
+            </if>
+            <if test="claimerName != null" >
+                claimer_name = #{claimerName,jdbcType=VARCHAR},
+            </if>
+            <if test="cardNumber != null" >
+                card_number = #{cardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="insuranceCompanyId != null" >
+                insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="insuranceCompany != null" >
+                insurance_company = #{insuranceCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="insOfficerId != null" >
+                ins_officer_id = #{insOfficerId,jdbcType=BIGINT},
+            </if>
+            <if test="insOfficerTel != null" >
+                ins_officer_tel = #{insOfficerTel,jdbcType=VARCHAR},
+            </if>
+            <if test="insOfficerName != null" >
+                ins_officer_name = #{insOfficerName,jdbcType=VARCHAR},
+            </if>
+            <if test="mediateDate != null" >
+                mediate_date = #{mediateDate,jdbcType=DATE},
+            </if>
+            <if test="loanMoney != null" >
+                loan_money = #{loanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="claimTime != null" >
+                claim_time = #{claimTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="outInsuranceTime != null" >
+                out_insurance_time = #{outInsuranceTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="liabilityRatio != null" >
+                liability_ratio = #{liabilityRatio,jdbcType=DOUBLE},
+            </if>
+            <if test="arrivalTime != null" >
+                arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cptMoney != null" >
+                cpt_money = #{cptMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="cpsMoney != null" >
+                cps_money = #{cpsMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="cocMoney != null" >
+                coc_money = #{cocMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="finalLoanMoney != null" >
+                final_loan_money = #{finalLoanMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="repaymentMoney != null" >
+                repayment_money = #{repaymentMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="serviceMoney != null" >
+                service_money = #{serviceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="mediateDesc != null" >
+                mediate_desc = #{mediateDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="mediateFailDesc != null" >
+                mediate_fail_desc = #{mediateFailDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="partyName != null" >
+                party_name = #{partyName,jdbcType=VARCHAR},
+            </if>
+            <if test="partyTel != null" >
+                party_tel = #{partyTel,jdbcType=VARCHAR},
+            </if>
+            <if test="appStandType != null" >
+                app_stand_type = #{appStandType,jdbcType=VARCHAR},
+            </if>
+            <if test="accidentDutyType != null" >
+                accident_duty_type = #{accidentDutyType,jdbcType=VARCHAR},
+            </if>
+            <if test="determineType != null" >
+                determine_type = #{determineType,jdbcType=VARCHAR},
+            </if>
+            <if test="invalidismGrade != null" >
+                invalidism_grade = #{invalidismGrade,jdbcType=VARCHAR},
+            </if>
+            <if test="hurtTrafficType != null" >
+                hurt_traffic_type = #{hurtTrafficType,jdbcType=VARCHAR},
+            </if>
+            <if test="partyTrafficeType != null" >
+                party_traffice_type = #{partyTrafficeType,jdbcType=VARCHAR},
+            </if>
+            <if test="payInsuranceType != null" >
+                pay_insurance_type = #{payInsuranceType,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeAmount != null" >
+                trade_amount = #{tradeAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="someCarType != null" >
+                some_car_type = #{someCarType,jdbcType=VARCHAR},
+            </if>
+            <if test="carDesc != null" >
+                car_desc = #{carDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="disclaimerType != null" >
+                disclaimer_type = #{disclaimerType,jdbcType=VARCHAR},
+            </if>
+            <if test="disclaimerDesc != null" >
+                disclaimer_desc = #{disclaimerDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="caseDesc != null" >
+                case_desc = #{caseDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="caseCommitTime != null" >
+                case_commit_time = #{caseCommitTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="planReviewDesc != null" >
+                plan_review_desc = #{planReviewDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="planReviewPerson != null" >
+                plan_review_person = #{planReviewPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="planReviewTime != null" >
+                plan_review_time = #{planReviewTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insurerReviewDesc != null" >
+                insurer_review_desc = #{insurerReviewDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="insurerReviewPerson != null" >
+                insurer_review_person = #{insurerReviewPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="insurerReviewTime != null" >
+                insurer_review_time = #{insurerReviewTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payWoundedMoney != null" >
+                pay_wounded_money = #{payWoundedMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="payDriverMoney != null" >
+                pay_driver_money = #{payDriverMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="paySafeMoney != null" >
+                pay_safe_money = #{paySafeMoney,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseMediationClaimLegal" >
+        update case_mediation_claim_legal
+        set user_id = #{userId,jdbcType=BIGINT},
+        user_name = #{userName,jdbcType=VARCHAR},
+        case_id = #{caseId,jdbcType=BIGINT},
+        claimer_id = #{claimerId,jdbcType=BIGINT},
+        claimer_name = #{claimerName,jdbcType=VARCHAR},
+        card_number = #{cardNumber,jdbcType=VARCHAR},
+        insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT},
+        insurance_company = #{insuranceCompany,jdbcType=VARCHAR},
+        ins_officer_id = #{insOfficerId,jdbcType=BIGINT},
+        ins_officer_tel = #{insOfficerTel,jdbcType=VARCHAR},
+        ins_officer_name = #{insOfficerName,jdbcType=VARCHAR},
+        mediate_date = #{mediateDate,jdbcType=DATE},
+        loan_money = #{loanMoney,jdbcType=DOUBLE},
+        claim_time = #{claimTime,jdbcType=TIMESTAMP},
+        out_insurance_time = #{outInsuranceTime,jdbcType=TIMESTAMP},
+        liability_ratio = #{liabilityRatio,jdbcType=DOUBLE},
+        arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+        cpt_money = #{cptMoney,jdbcType=DOUBLE},
+        cps_money = #{cpsMoney,jdbcType=DOUBLE},
+        coc_money = #{cocMoney,jdbcType=DOUBLE},
+        final_loan_money = #{finalLoanMoney,jdbcType=DOUBLE},
+        repayment_money = #{repaymentMoney,jdbcType=DOUBLE},
+        service_money = #{serviceMoney,jdbcType=DOUBLE},
+        mediate_desc = #{mediateDesc,jdbcType=VARCHAR},
+        mediate_fail_desc = #{mediateFailDesc,jdbcType=VARCHAR},
+        party_name = #{partyName,jdbcType=VARCHAR},
+        party_tel = #{partyTel,jdbcType=VARCHAR},
+        app_stand_type = #{appStandType,jdbcType=VARCHAR},
+        accident_duty_type = #{accidentDutyType,jdbcType=VARCHAR},
+        determine_type = #{determineType,jdbcType=VARCHAR},
+        invalidism_grade = #{invalidismGrade,jdbcType=VARCHAR},
+        hurt_traffic_type = #{hurtTrafficType,jdbcType=VARCHAR},
+        party_traffice_type = #{partyTrafficeType,jdbcType=VARCHAR},
+        pay_insurance_type = #{payInsuranceType,jdbcType=VARCHAR},
+        trade_amount = #{tradeAmount,jdbcType=DOUBLE},
+        some_car_type = #{someCarType,jdbcType=VARCHAR},
+        car_desc = #{carDesc,jdbcType=VARCHAR},
+        disclaimer_type = #{disclaimerType,jdbcType=VARCHAR},
+        disclaimer_desc = #{disclaimerDesc,jdbcType=VARCHAR},
+        case_desc = #{caseDesc,jdbcType=VARCHAR},
+        case_commit_time = #{caseCommitTime,jdbcType=TIMESTAMP},
+        plan_review_desc = #{planReviewDesc,jdbcType=VARCHAR},
+        plan_review_person = #{planReviewPerson,jdbcType=VARCHAR},
+        plan_review_time = #{planReviewTime,jdbcType=TIMESTAMP},
+        insurer_review_desc = #{insurerReviewDesc,jdbcType=VARCHAR},
+        insurer_review_person = #{insurerReviewPerson,jdbcType=VARCHAR},
+        insurer_review_time = #{insurerReviewTime,jdbcType=TIMESTAMP},
+        pay_wounded_money = #{payWoundedMoney,jdbcType=DOUBLE},
+        pay_driver_money = #{payDriverMoney,jdbcType=DOUBLE},
+        pay_safe_money = #{paySafeMoney,jdbcType=DOUBLE}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="queryByCaseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from case_mediation_claim_legal where  case_id = #{caseId,jdbcType=BIGINT} order by id asc limit 1
+    </select>
+</mapper>

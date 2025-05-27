@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyReInfoMapper">
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyReInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="re_name" property="reName" jdbcType="VARCHAR"/>
+        <result column="re_state" property="reState" jdbcType="INTEGER"/>
+        <result column="down_time" property="downTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="BaseResultMap2" type="com.lefancrm.apicenter.dto.SurveyReInfoDto">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="re_name" property="reName" jdbcType="VARCHAR"/>
+        <result column="re_state" property="reState" jdbcType="INTEGER"/>
+        <result column="down_time" property="downTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, re_name, re_state, down_time, create_time, create_by
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from survey_re_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectAllListByParam" resultMap="BaseResultMap2">
+        select
+        <include refid="Base_Column_List"/>
+        from survey_re_info
+        <where>
+            <if test="reName != null and reName != ''">
+                re_name like CONCAT('%',#{reName},'%')
+            </if>
+            <if test="reState != null">
+                and re_state = #{reState}
+            </if>
+        </where>
+        <if test="sortField !=null and sortField =='createTime'">
+            order by create_time
+            <if test="sortType =='down'">
+                desc
+            </if>
+            <if test="sortType =='up'">
+                asc
+            </if>
+        </if>
+        <if test="sortField == null">
+            order by id desc
+        </if>
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="selectReInfo" resultType="com.lefancrm.apicenter.dto.SurveyReInfoDto">
+        SELECT * FROM (
+        SELECT COUNT(DISTINCT c.survey_info_id) caseCount,COUNT(DISTINCT u.survey_user_id)
+        reSurveyInvCount,ifnull(SUM(c.re_total_money),0) reTotalMoney FROM
+        survey_user_clock u
+        LEFT JOIN survey_clock_case c ON u.id = c.clock_id
+        WHERE u.re_id = #{reId} <if test="orgRole">AND u.survey_org_id IN (	SELECT id FROM survey_franchisee WHERE id = #{orgId} OR parent_id = #{orgId}) </if> )
+        a,
+
+        (SELECT COUNT(i.id) waitSubmitInvoice FROM survey_re_info r
+        LEFT JOIN survey_investigator_re_info i ON r.id = i.re_id
+        WHERE (i.re_state = 1 or i.re_state = 8 or i.re_state = 9) AND r.id = #{reId} <if test="orgRole">AND i.survey_org_id IN ( SELECT id FROM survey_franchisee WHERE id = #{orgId} OR parent_id = #{orgId}) </if> )
+        b,
+
+        (SELECT COUNT(i.id) waitOrgCheck FROM survey_re_info r
+        LEFT JOIN survey_investigator_re_info i ON r.id = i.re_id
+        WHERE i.re_state = 2 AND r.id = #{reId} <if test="orgRole">AND i.survey_org_id IN ( SELECT id FROM survey_franchisee WHERE id = #{orgId} OR parent_id = #{orgId}) </if> )
+        c,
+
+        (SELECT COUNT(i.id) waitFanceCheck FROM survey_re_info r
+        LEFT JOIN survey_investigator_re_info i ON r.id = i.re_id
+        WHERE i.re_state = 3 AND r.id = #{reId} <if test="orgRole">AND i.survey_org_id IN ( SELECT id FROM survey_franchisee WHERE id = #{orgId} OR parent_id = #{orgId}) </if> ) d,
+
+        (SELECT COUNT(i.id) paying FROM survey_re_info r
+        LEFT JOIN survey_investigator_re_info i ON r.id = i.re_id
+        WHERE i.re_state = 5 AND r.id = #{reId} <if test="orgRole">AND i.survey_org_id IN ( SELECT id FROM survey_franchisee WHERE id = #{orgId} OR parent_id = #{orgId}) </if> ) e,
+
+        (SELECT COUNT(i.id) waitOkAccount FROM survey_re_info r
+        LEFT JOIN survey_investigator_re_info i ON r.id = i.re_id
+        WHERE i.re_state = 6 AND r.id = #{reId} <if test="orgRole">AND i.survey_org_id IN ( SELECT id FROM survey_franchisee WHERE id = #{orgId} OR parent_id = #{orgId}) </if> ) f,
+
+        (SELECT COUNT(i.id) reOk FROM survey_re_info r
+        LEFT JOIN survey_investigator_re_info i ON r.id = i.re_id
+        WHERE i.re_state = 7 AND r.id = #{reId} <if test="orgRole">AND i.survey_org_id IN ( SELECT id FROM survey_franchisee WHERE id = #{orgId} OR parent_id = #{orgId}) </if> )g
+    </select>
+    <select id="selectCountAllListByParam" resultType="java.lang.Integer">
+        select
+        count(1)
+        from survey_re_info
+        <where>
+            <if test="reName != null and reName != ''">
+                re_name like CONCAT('%',#{reName},'%')
+            </if>
+            <if test="reState != null">
+                and re_state = #{reState}
+            </if>
+        </where>
+        <if test="sortField !=null and sortField =='createTime'">
+            order by create_time
+            <if test="sortType =='down'">
+                desc
+            </if>
+            <if test="sortType =='up'">
+                asc
+            </if>
+        </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from survey_re_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyReInfo">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_re_info (re_name, re_state, down_time,
+        create_time, create_by)
+        values (#{reName,jdbcType=VARCHAR}, #{reState,jdbcType=INTEGER}, #{downTime,jdbcType=TIMESTAMP},
+        #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyReInfo">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_re_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reName != null">
+                re_name,
+            </if>
+            <if test="reState != null">
+                re_state,
+            </if>
+            <if test="downTime != null">
+                down_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="reName != null">
+                #{reName,jdbcType=VARCHAR},
+            </if>
+            <if test="reState != null">
+                #{reState,jdbcType=INTEGER},
+            </if>
+            <if test="downTime != null">
+                #{downTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyReInfo">
+        update survey_re_info
+        <set>
+            <if test="reName != null">
+                re_name = #{reName,jdbcType=VARCHAR},
+            </if>
+            <if test="reState != null">
+                re_state = #{reState,jdbcType=INTEGER},
+            </if>
+            <if test="downTime != null">
+                down_time = #{downTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyReInfo">
+    update survey_re_info
+    set re_name = #{reName,jdbcType=VARCHAR},
+      re_state = #{reState,jdbcType=INTEGER},
+      down_time = #{downTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyBackCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.dto.SurveyBackCaseDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_id" property="surveyId" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+    <result column="survey_case_id" property="surveyCaseId" jdbcType="BIGINT" />
+    <result column="ass_org_id" property="assOrgId" jdbcType="BIGINT" />
+    <result column="ass_org_name" property="assOrgName" jdbcType="VARCHAR" />
+    <result column="ass_survey_user_id" property="assSurveyUserId" jdbcType="BIGINT" />
+    <result column="ass_survey_user_name" property="assSurveyUserName" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="survey_user_id" property="surveyUserId" jdbcType="BIGINT" />
+    <result column="survey_user_name" property="surveyUserName" jdbcType="VARCHAR" />
+    <result column="back_state" property="backState" jdbcType="INTEGER" />
+    <result column="back_state_name" property="backStateName" jdbcType="VARCHAR" />
+    <result column="back_remark" property="backRemark" jdbcType="VARCHAR" />
+    <result column="opinion" property="opinion" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    a.id, a.survey_id, a.survey_info_id, a.survey_case_id, a.ass_org_id, a.ass_org_name, a.ass_survey_user_id,
+    a.ass_survey_user_name, a.org_id, a.org_name, a.survey_user_id, a.survey_user_name, a.back_state, a.back_state_name,
+    a.back_remark, a.opinion, a.create_by, a.create_time, a.update_by, a.update_time, a.delete_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_back_case a
+    where a.id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_back_case
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyBackCase" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_back_case (survey_id, survey_info_id, survey_case_id, 
+      ass_org_id, ass_org_name, ass_survey_user_id, 
+      ass_survey_user_name, org_id, org_name, 
+      survey_user_id, survey_user_name, back_state, 
+      back_state_name, back_remark, opinion, 
+      create_by, create_time, update_by, 
+      update_time, delete_flag)
+    values (#{surveyId,jdbcType=BIGINT}, #{surveyInfoId,jdbcType=BIGINT}, #{surveyCaseId,jdbcType=BIGINT}, 
+      #{assOrgId,jdbcType=BIGINT}, #{assOrgName,jdbcType=VARCHAR}, #{assSurveyUserId,jdbcType=BIGINT}, 
+      #{assSurveyUserName,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, #{orgName,jdbcType=VARCHAR}, 
+      #{surveyUserId,jdbcType=BIGINT}, #{surveyUserName,jdbcType=VARCHAR}, #{backState,jdbcType=INTEGER}, 
+      #{backStateName,jdbcType=VARCHAR}, #{backRemark,jdbcType=VARCHAR}, #{opinion,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyBackCase" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_back_case
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        survey_id,
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+      <if test="surveyCaseId != null" >
+        survey_case_id,
+      </if>
+      <if test="assOrgId != null" >
+        ass_org_id,
+      </if>
+      <if test="assOrgName != null" >
+        ass_org_name,
+      </if>
+      <if test="assSurveyUserId != null" >
+        ass_survey_user_id,
+      </if>
+      <if test="assSurveyUserName != null" >
+        ass_survey_user_name,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id,
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name,
+      </if>
+      <if test="backState != null" >
+        back_state,
+      </if>
+      <if test="backStateName != null" >
+        back_state_name,
+      </if>
+      <if test="backRemark != null" >
+        back_remark,
+      </if>
+      <if test="opinion != null" >
+        opinion,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyId != null" >
+        #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyCaseId != null" >
+        #{surveyCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="assOrgId != null" >
+        #{assOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="assOrgName != null" >
+        #{assOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="assSurveyUserId != null" >
+        #{assSurveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="assSurveyUserName != null" >
+        #{assSurveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyUserId != null" >
+        #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="backState != null" >
+        #{backState,jdbcType=INTEGER},
+      </if>
+      <if test="backStateName != null" >
+        #{backStateName,jdbcType=VARCHAR},
+      </if>
+      <if test="backRemark != null" >
+        #{backRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="opinion != null" >
+        #{opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyBackCase" >
+    update survey_back_case
+    <set >
+      <if test="surveyId != null" >
+        survey_id = #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyCaseId != null" >
+        survey_case_id = #{surveyCaseId,jdbcType=BIGINT},
+      </if>
+      <if test="assOrgId != null" >
+        ass_org_id = #{assOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="assOrgName != null" >
+        ass_org_name = #{assOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="assSurveyUserId != null" >
+        ass_survey_user_id = #{assSurveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="assSurveyUserName != null" >
+        ass_survey_user_name = #{assSurveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="backState != null" >
+        back_state = #{backState,jdbcType=INTEGER},
+      </if>
+      <if test="backStateName != null" >
+        back_state_name = #{backStateName,jdbcType=VARCHAR},
+      </if>
+      <if test="backRemark != null" >
+        back_remark = #{backRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="opinion != null" >
+        opinion = #{opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyBackCase" >
+    update survey_back_case
+    set survey_id = #{surveyId,jdbcType=BIGINT},
+      survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      survey_case_id = #{surveyCaseId,jdbcType=BIGINT},
+      ass_org_id = #{assOrgId,jdbcType=BIGINT},
+      ass_org_name = #{assOrgName,jdbcType=VARCHAR},
+      ass_survey_user_id = #{assSurveyUserId,jdbcType=BIGINT},
+      ass_survey_user_name = #{assSurveyUserName,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      back_state = #{backState,jdbcType=INTEGER},
+      back_state_name = #{backStateName,jdbcType=VARCHAR},
+      back_remark = #{backRemark,jdbcType=VARCHAR},
+      opinion = #{opinion,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+        left join survey_risk_case s on a.survey_id = s.id
+    </sql>
+    <sql id="wheres">
+        <if test="surveyId != null" >
+            and a.survey_id = #{surveyId,jdbcType=BIGINT}
+        </if>
+        <if test="surveyInfoId != null" >
+            and a.survey_info_id = #{surveyInfoId,jdbcType=BIGINT}
+        </if>
+        <if test="surveyCaseId != null" >
+            and a.survey_case_id = #{surveyCaseId,jdbcType=BIGINT}
+        </if>
+        <if test="assOrgId != null" >
+            and a.ass_org_id = #{assOrgId,jdbcType=BIGINT}
+        </if>
+        <if test="assOrgName != null" >
+            and a.ass_org_name = #{assOrgName,jdbcType=VARCHAR}
+        </if>
+        <if test="assSurveyUserId != null" >
+            and a.ass_survey_user_id = #{assSurveyUserId,jdbcType=BIGINT}
+        </if>
+        <if test="assSurveyUserName != null" >
+            and a.ass_survey_user_name = #{assSurveyUserName,jdbcType=VARCHAR}
+        </if>
+        <if test="orgId != null" >
+            and a.org_id = #{orgId,jdbcType=BIGINT}
+        </if>
+        <if test="orgName != null" >
+            and a.org_name = #{orgName,jdbcType=VARCHAR}
+        </if>
+        <if test="surveyUserId != null" >
+            and a.survey_user_id = #{surveyUserId,jdbcType=BIGINT}
+        </if>
+        <if test="surveyUserName != null" >
+            and a.survey_user_name = #{surveyUserName,jdbcType=VARCHAR}
+        </if>
+        <if test="backState != null" >
+            and a.back_state = #{backState,jdbcType=INTEGER}
+        </if>
+        <if test="backStateName != null" >
+            and a.back_state_name = #{backStateName,jdbcType=VARCHAR}
+        </if>
+        <if test="backRemark != null" >
+            and a.back_remark = #{backRemark,jdbcType=VARCHAR}
+        </if>
+        <if test="opinion != null" >
+            and a.opinion = #{opinion,jdbcType=VARCHAR}
+        </if>
+        <if test="createBy != null" >
+            and a.create_by = #{createBy,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null" >
+            and a.create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateBy != null" >
+            and a.update_by = #{updateBy,jdbcType=VARCHAR}
+        </if>
+        <if test="updateTime != null" >
+            and a.update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="deleteFlag != null" >
+            and a.delete_flag = #{deleteFlag,jdbcType=INTEGER}
+        </if>
+        <if test="search == 1">
+            and a.back_state = 4
+        </if>
+        <if test="search == 2">
+            and ((a.back_state in (1,6) and a.org_id = #{currentOrgId,jdbcType=BIGINT}) or (a.back_state = 5 and a.ass_org_id = #{currentOrgId,jdbcType=BIGINT}))
+        </if>
+        <if test="search == 3">
+            and (((a.back_state in (1,6) and a.org_id = #{currentOrgId,jdbcType=BIGINT}) or (a.back_state = 5 and a.ass_org_id = #{currentOrgId,jdbcType=BIGINT})) or (a.back_state = 4))
+        </if>
+        <if test="surveyNo != null" >
+            and s.survey_no like CONCAT(CONCAT('%',#{surveyNo,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="surveyPerson != null" >
+            and s.survey_person like CONCAT(CONCAT('%',#{surveyPerson,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="surveryPersonTel != null" >
+            and s.survery_person_tel like CONCAT(CONCAT('%',#{surveryPersonTel,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="policyNo != null" >
+            and s.policy_no like concat('%',#{policyNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="entrustOrgName != null" >
+            and s.entrust_org_name like concat('%',#{entrustOrgName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="surveyCaseNo != null" >
+            and s.survey_case_no like CONCAT(CONCAT('%',#{surveyCaseNo,jdbcType=VARCHAR}), '%')
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_back_case a
+        <include refid="joins" />
+        where 1 = 1 and a.delete_flag = 0 and s.delete_flag = 0
+        <include refid="wheres" />
+        order by
+        <if test="sortField !=null and sortField =='createTime'">
+            a.create_time
+            <if test="sortType =='down'">
+                desc,
+            </if>
+            <if test="sortType =='up'">
+                asc,
+            </if>
+        </if>
+         a.id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_back_case a
+        <include refid="joins" />
+        where 1 = 1 and a.delete_flag = 0 and s.delete_flag = 0
+        <include refid="wheres" />
+    </select>
+</mapper>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaSignSupplementMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaSignSupplement" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="fina_id" property="finaId" jdbcType="BIGINT" />
+    <result column="fina_info_id" property="finaInfoId" jdbcType="BIGINT" />
+    <result column="fina_mail" property="finaMail" jdbcType="VARCHAR" />
+    <result column="attending_doctor" property="attendingDoctor" jdbcType="VARCHAR" />
+    <result column="estimate_money" property="estimateMoney" jdbcType="DOUBLE" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="invoice_num" property="invoiceNum" jdbcType="INTEGER" />
+    <result column="invoice_money" property="invoiceMoney" jdbcType="DOUBLE" />
+    <result column="idcard_end_date" property="idcardEndDate" jdbcType="DATE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fina_id, fina_info_id, fina_mail, attending_doctor, estimate_money, type, invoice_num, 
+    invoice_money, idcard_end_date, create_time, create_by, update_time, update_by, delete_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_sign_supplement
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_sign_supplement
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaSignSupplement" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_sign_supplement (fina_id, fina_info_id, fina_mail, 
+      attending_doctor, estimate_money, type, 
+      invoice_num, invoice_money, idcard_end_date, 
+      create_time, create_by, update_time, 
+      update_by, delete_flag)
+    values (#{finaId,jdbcType=BIGINT}, #{finaInfoId,jdbcType=BIGINT}, #{finaMail,jdbcType=VARCHAR}, 
+      #{attendingDoctor,jdbcType=VARCHAR}, #{estimateMoney,jdbcType=DOUBLE}, #{type,jdbcType=INTEGER}, 
+      #{invoiceNum,jdbcType=INTEGER}, #{invoiceMoney,jdbcType=DOUBLE}, #{idcardEndDate,jdbcType=DATE}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSignSupplement" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_sign_supplement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        fina_id,
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id,
+      </if>
+      <if test="finaMail != null" >
+        fina_mail,
+      </if>
+      <if test="attendingDoctor != null" >
+        attending_doctor,
+      </if>
+      <if test="estimateMoney != null" >
+        estimate_money,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="invoiceNum != null" >
+        invoice_num,
+      </if>
+      <if test="invoiceMoney != null" >
+        invoice_money,
+      </if>
+      <if test="idcardEndDate != null" >
+        idcard_end_date,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="finaMail != null" >
+        #{finaMail,jdbcType=VARCHAR},
+      </if>
+      <if test="attendingDoctor != null" >
+        #{attendingDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateMoney != null" >
+        #{estimateMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNum != null" >
+        #{invoiceNum,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceMoney != null" >
+        #{invoiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="idcardEndDate != null" >
+        #{idcardEndDate,jdbcType=DATE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSignSupplement" >
+    update fina_sign_supplement
+    <set >
+      <if test="finaId != null" >
+        fina_id = #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="finaMail != null" >
+        fina_mail = #{finaMail,jdbcType=VARCHAR},
+      </if>
+      <if test="attendingDoctor != null" >
+        attending_doctor = #{attendingDoctor,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateMoney != null" >
+        estimate_money = #{estimateMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNum != null" >
+        invoice_num = #{invoiceNum,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceMoney != null" >
+        invoice_money = #{invoiceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="idcardEndDate != null" >
+        idcard_end_date = #{idcardEndDate,jdbcType=DATE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaSignSupplement" >
+    update fina_sign_supplement
+    set fina_id = #{finaId,jdbcType=BIGINT},
+      fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      fina_mail = #{finaMail,jdbcType=VARCHAR},
+      attending_doctor = #{attendingDoctor,jdbcType=VARCHAR},
+      estimate_money = #{estimateMoney,jdbcType=DOUBLE},
+      type = #{type,jdbcType=INTEGER},
+      invoice_num = #{invoiceNum,jdbcType=INTEGER},
+      invoice_money = #{invoiceMoney,jdbcType=DOUBLE},
+      idcard_end_date = #{idcardEndDate,jdbcType=DATE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

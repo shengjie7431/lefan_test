@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BillingRefundInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BillingRefundInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="billing_match_id" property="billingMatchId" jdbcType="BIGINT" />
+    <result column="refund_money" property="refundMoney" jdbcType="DOUBLE" />
+    <result column="refund_user_id" property="refundUserId" jdbcType="BIGINT" />
+    <result column="refund_user_name" property="refundUserName" jdbcType="VARCHAR" />
+    <result column="refund_type" property="refundType" jdbcType="INTEGER" />
+    <result column="refund_status" property="refundStatus" jdbcType="INTEGER" />
+    <result column="refund_reason" property="refundReason" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="payee" property="payee" jdbcType="VARCHAR" />
+    <result column="bank_car_no" property="bankCarNo" jdbcType="VARCHAR" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="bank_branch" property="bankBranch" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, billing_match_id, refund_money, refund_user_id, refund_user_name, refund_type, 
+    refund_status, refund_reason, create_time, payee, bank_car_no, bank_name, bank_branch
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from billing_refund_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByMatchId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from billing_refund_info
+    where billing_match_id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAllRefundMoneyByMatchId" resultType="java.lang.Double">
+    SELECT SUM(refund_money) FROM billing_refund_info WHERE billing_match_id = #{id} AND ((refund_status = 2 AND refund_type = 2) OR refund_type = 1)
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from billing_refund_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.BillingRefundInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into billing_refund_info (billing_match_id, refund_money, refund_user_id, 
+      refund_user_name, refund_type, refund_status, 
+      refund_reason, create_time, payee, 
+      bank_car_no, bank_name, bank_branch
+      )
+    values (#{billingMatchId,jdbcType=BIGINT}, #{refundMoney,jdbcType=DOUBLE}, #{refundUserId,jdbcType=BIGINT}, 
+      #{refundUserName,jdbcType=VARCHAR}, #{refundType,jdbcType=INTEGER}, #{refundStatus,jdbcType=INTEGER}, 
+      #{refundReason,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{payee,jdbcType=VARCHAR}, 
+      #{bankCarNo,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{bankBranch,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.BillingRefundInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into billing_refund_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="billingMatchId != null" >
+        billing_match_id,
+      </if>
+      <if test="refundMoney != null" >
+        refund_money,
+      </if>
+      <if test="refundUserId != null" >
+        refund_user_id,
+      </if>
+      <if test="refundUserName != null" >
+        refund_user_name,
+      </if>
+      <if test="refundType != null" >
+        refund_type,
+      </if>
+      <if test="refundStatus != null" >
+        refund_status,
+      </if>
+      <if test="refundReason != null" >
+        refund_reason,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="payee != null" >
+        payee,
+      </if>
+      <if test="bankCarNo != null" >
+        bank_car_no,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+      <if test="bankBranch != null" >
+        bank_branch,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="billingMatchId != null" >
+        #{billingMatchId,jdbcType=BIGINT},
+      </if>
+      <if test="refundMoney != null" >
+        #{refundMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="refundUserId != null" >
+        #{refundUserId,jdbcType=BIGINT},
+      </if>
+      <if test="refundUserName != null" >
+        #{refundUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="refundType != null" >
+        #{refundType,jdbcType=INTEGER},
+      </if>
+      <if test="refundStatus != null" >
+        #{refundStatus,jdbcType=INTEGER},
+      </if>
+      <if test="refundReason != null" >
+        #{refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payee != null" >
+        #{payee,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCarNo != null" >
+        #{bankCarNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankBranch != null" >
+        #{bankBranch,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.BillingRefundInfo" >
+    update billing_refund_info
+    <set >
+      <if test="billingMatchId != null" >
+        billing_match_id = #{billingMatchId,jdbcType=BIGINT},
+      </if>
+      <if test="refundMoney != null" >
+        refund_money = #{refundMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="refundUserId != null" >
+        refund_user_id = #{refundUserId,jdbcType=BIGINT},
+      </if>
+      <if test="refundUserName != null" >
+        refund_user_name = #{refundUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="refundType != null" >
+        refund_type = #{refundType,jdbcType=INTEGER},
+      </if>
+      <if test="refundStatus != null" >
+        refund_status = #{refundStatus,jdbcType=INTEGER},
+      </if>
+      <if test="refundReason != null" >
+        refund_reason = #{refundReason,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payee != null" >
+        payee = #{payee,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCarNo != null" >
+        bank_car_no = #{bankCarNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankBranch != null" >
+        bank_branch = #{bankBranch,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.BillingRefundInfo" >
+    update billing_refund_info
+    set billing_match_id = #{billingMatchId,jdbcType=BIGINT},
+      refund_money = #{refundMoney,jdbcType=DOUBLE},
+      refund_user_id = #{refundUserId,jdbcType=BIGINT},
+      refund_user_name = #{refundUserName,jdbcType=VARCHAR},
+      refund_type = #{refundType,jdbcType=INTEGER},
+      refund_status = #{refundStatus,jdbcType=INTEGER},
+      refund_reason = #{refundReason,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      payee = #{payee,jdbcType=VARCHAR},
+      bank_car_no = #{bankCarNo,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_branch = #{bankBranch,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByMatchIds" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from billing_refund_info
+    where
+     find_in_set(billing_match_id,#{matchIds,jdbcType=VARCHAR})
+  </select>
+</mapper>

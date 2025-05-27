@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CrmInjuryInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CrmInjuryInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="injury_name" property="injuryName" jdbcType="VARCHAR" />
+    <result column="used_medical_fee" property="usedMedicalFee" jdbcType="DOUBLE" />
+    <result column="owe_medical_fee" property="oweMedicalFee" jdbcType="DOUBLE" />
+    <result column="needed_medical_fee" property="neededMedicalFee" jdbcType="DOUBLE" />
+    <result column="financing_type" property="financingType" jdbcType="INTEGER" />
+    <result column="vis_hospital" property="visHospital" jdbcType="VARCHAR" />
+    <result column="is_inhospital" property="isInhospital" jdbcType="INTEGER" />
+    <result column="is_operation" property="isOperation" jdbcType="INTEGER" />
+    <result column="hospital_departments" property="hospitalDepartments" jdbcType="VARCHAR" />
+    <result column="bed_number" property="bedNumber" jdbcType="INTEGER" />
+    <result column="hospital_number" property="hospitalNumber" jdbcType="INTEGER" />
+    <result column="doctor" property="doctor" jdbcType="VARCHAR" />
+    <result column="doctor_tel" property="doctorTel" jdbcType="VARCHAR" />
+    <result column="nurse" property="nurse" jdbcType="VARCHAR" />
+    <result column="nurse_tel" property="nurseTel" jdbcType="VARCHAR" />
+    <result column="other_desc" property="otherDesc" jdbcType="VARCHAR" />
+    <result column="data_rate" property="dataRate" jdbcType="DOUBLE" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, customer_id, injury_name, used_medical_fee, owe_medical_fee, needed_medical_fee, 
+    financing_type, vis_hospital, is_inhospital, is_operation, hospital_departments, 
+    bed_number, hospital_number, doctor, doctor_tel, nurse, nurse_tel, other_desc, data_rate,create_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_injury_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectByPrimaryCustomerId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from crm_injury_info
+        where customer_id = #{customerId,jdbcType=BIGINT}
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from crm_injury_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CrmInjuryInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crm_injury_info (customer_id, injury_name, used_medical_fee, 
+      owe_medical_fee, needed_medical_fee, financing_type, 
+      vis_hospital, is_inhospital, is_operation, 
+      hospital_departments, bed_number, hospital_number, 
+      doctor, doctor_tel, nurse, 
+      nurse_tel, other_desc, data_rate,create_date
+      )
+    values (#{customerId,jdbcType=BIGINT}, #{injuryName,jdbcType=VARCHAR}, #{usedMedicalFee,jdbcType=DOUBLE}, 
+      #{oweMedicalFee,jdbcType=DOUBLE}, #{neededMedicalFee,jdbcType=DOUBLE}, #{financingType,jdbcType=INTEGER}, 
+      #{visHospital,jdbcType=VARCHAR}, #{isInhospital,jdbcType=INTEGER}, #{isOperation,jdbcType=INTEGER}, 
+      #{hospitalDepartments,jdbcType=VARCHAR}, #{bedNumber,jdbcType=INTEGER}, #{hospitalNumber,jdbcType=INTEGER}, 
+      #{doctor,jdbcType=VARCHAR}, #{doctorTel,jdbcType=VARCHAR}, #{nurse,jdbcType=VARCHAR}, 
+      #{nurseTel,jdbcType=VARCHAR}, #{otherDesc,jdbcType=VARCHAR}, #{dataRate,jdbcType=DOUBLE},#{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CrmInjuryInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crm_injury_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="injuryName != null" >
+        injury_name,
+      </if>
+      <if test="usedMedicalFee != null" >
+        used_medical_fee,
+      </if>
+      <if test="oweMedicalFee != null" >
+        owe_medical_fee,
+      </if>
+      <if test="neededMedicalFee != null" >
+        needed_medical_fee,
+      </if>
+      <if test="financingType != null" >
+        financing_type,
+      </if>
+      <if test="visHospital != null" >
+        vis_hospital,
+      </if>
+      <if test="isInhospital != null" >
+        is_inhospital,
+      </if>
+      <if test="isOperation != null" >
+        is_operation,
+      </if>
+      <if test="hospitalDepartments != null" >
+        hospital_departments,
+      </if>
+      <if test="bedNumber != null" >
+        bed_number,
+      </if>
+      <if test="hospitalNumber != null" >
+        hospital_number,
+      </if>
+      <if test="doctor != null" >
+        doctor,
+      </if>
+      <if test="doctorTel != null" >
+        doctor_tel,
+      </if>
+      <if test="nurse != null" >
+        nurse,
+      </if>
+      <if test="nurseTel != null" >
+        nurse_tel,
+      </if>
+      <if test="otherDesc != null" >
+        other_desc,
+      </if>
+      <if test="dataRate != null" >
+        data_rate,
+      </if>
+        <if test="createDate != null" >
+            create_date,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="injuryName != null" >
+        #{injuryName,jdbcType=VARCHAR},
+      </if>
+      <if test="usedMedicalFee != null" >
+        #{usedMedicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="oweMedicalFee != null" >
+        #{oweMedicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="neededMedicalFee != null" >
+        #{neededMedicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="financingType != null" >
+        #{financingType,jdbcType=INTEGER},
+      </if>
+      <if test="visHospital != null" >
+        #{visHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="isInhospital != null" >
+        #{isInhospital,jdbcType=INTEGER},
+      </if>
+      <if test="isOperation != null" >
+        #{isOperation,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalDepartments != null" >
+        #{hospitalDepartments,jdbcType=VARCHAR},
+      </if>
+      <if test="bedNumber != null" >
+        #{bedNumber,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalNumber != null" >
+        #{hospitalNumber,jdbcType=INTEGER},
+      </if>
+      <if test="doctor != null" >
+        #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorTel != null" >
+        #{doctorTel,jdbcType=VARCHAR},
+      </if>
+      <if test="nurse != null" >
+        #{nurse,jdbcType=VARCHAR},
+      </if>
+      <if test="nurseTel != null" >
+        #{nurseTel,jdbcType=VARCHAR},
+      </if>
+      <if test="otherDesc != null" >
+        #{otherDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="dataRate != null" >
+        #{dataRate,jdbcType=DOUBLE},
+      </if>
+        <if test="createDate != null" >
+            #{createDate,jdbcType=TIMESTAMP},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CrmInjuryInfo" >
+    update crm_injury_info
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="injuryName != null" >
+        injury_name = #{injuryName,jdbcType=VARCHAR},
+      </if>
+      <if test="usedMedicalFee != null" >
+        used_medical_fee = #{usedMedicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="oweMedicalFee != null" >
+        owe_medical_fee = #{oweMedicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="neededMedicalFee != null" >
+        needed_medical_fee = #{neededMedicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="financingType != null" >
+        financing_type = #{financingType,jdbcType=INTEGER},
+      </if>
+      <if test="visHospital != null" >
+        vis_hospital = #{visHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="isInhospital != null" >
+        is_inhospital = #{isInhospital,jdbcType=INTEGER},
+      </if>
+      <if test="isOperation != null" >
+        is_operation = #{isOperation,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalDepartments != null" >
+        hospital_departments = #{hospitalDepartments,jdbcType=VARCHAR},
+      </if>
+      <if test="bedNumber != null" >
+        bed_number = #{bedNumber,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalNumber != null" >
+        hospital_number = #{hospitalNumber,jdbcType=INTEGER},
+      </if>
+      <if test="doctor != null" >
+        doctor = #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorTel != null" >
+        doctor_tel = #{doctorTel,jdbcType=VARCHAR},
+      </if>
+      <if test="nurse != null" >
+        nurse = #{nurse,jdbcType=VARCHAR},
+      </if>
+      <if test="nurseTel != null" >
+        nurse_tel = #{nurseTel,jdbcType=VARCHAR},
+      </if>
+      <if test="otherDesc != null" >
+        other_desc = #{otherDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="dataRate != null" >
+        data_rate = #{dataRate,jdbcType=DOUBLE},
+      </if>
+        <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateByPrimaryCustomerIdSelective" parameterType="com.lefancrm.apicenter.model.CrmInjuryInfo" >
+        update crm_injury_info
+        <set >
+            <if test="injuryName != null" >
+                injury_name = #{injuryName,jdbcType=VARCHAR},
+            </if>
+            <if test="usedMedicalFee != null" >
+                used_medical_fee = #{usedMedicalFee,jdbcType=DOUBLE},
+            </if>
+            <if test="oweMedicalFee != null" >
+                owe_medical_fee = #{oweMedicalFee,jdbcType=DOUBLE},
+            </if>
+            <if test="neededMedicalFee != null" >
+                needed_medical_fee = #{neededMedicalFee,jdbcType=DOUBLE},
+            </if>
+            <if test="financingType != null" >
+                financing_type = #{financingType,jdbcType=INTEGER},
+            </if>
+            <if test="visHospital != null" >
+                vis_hospital = #{visHospital,jdbcType=VARCHAR},
+            </if>
+            <if test="isInhospital != null" >
+                is_inhospital = #{isInhospital,jdbcType=INTEGER},
+            </if>
+            <if test="isOperation != null" >
+                is_operation = #{isOperation,jdbcType=INTEGER},
+            </if>
+            <if test="hospitalDepartments != null" >
+                hospital_departments = #{hospitalDepartments,jdbcType=VARCHAR},
+            </if>
+            <if test="bedNumber != null" >
+                bed_number = #{bedNumber,jdbcType=INTEGER},
+            </if>
+            <if test="hospitalNumber != null" >
+                hospital_number = #{hospitalNumber,jdbcType=INTEGER},
+            </if>
+            <if test="doctor != null" >
+                doctor = #{doctor,jdbcType=VARCHAR},
+            </if>
+            <if test="doctorTel != null" >
+                doctor_tel = #{doctorTel,jdbcType=VARCHAR},
+            </if>
+            <if test="nurse != null" >
+                nurse = #{nurse,jdbcType=VARCHAR},
+            </if>
+            <if test="nurseTel != null" >
+                nurse_tel = #{nurseTel,jdbcType=VARCHAR},
+            </if>
+            <if test="otherDesc != null" >
+                other_desc = #{otherDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="dataRate != null" >
+                data_rate = #{dataRate,jdbcType=DOUBLE},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where customer_id = #{customerId,jdbcType=BIGINT}
+    </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CrmInjuryInfo" >
+    update crm_injury_info
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      injury_name = #{injuryName,jdbcType=VARCHAR},
+      used_medical_fee = #{usedMedicalFee,jdbcType=DOUBLE},
+      owe_medical_fee = #{oweMedicalFee,jdbcType=DOUBLE},
+      needed_medical_fee = #{neededMedicalFee,jdbcType=DOUBLE},
+      financing_type = #{financingType,jdbcType=INTEGER},
+      vis_hospital = #{visHospital,jdbcType=VARCHAR},
+      is_inhospital = #{isInhospital,jdbcType=INTEGER},
+      is_operation = #{isOperation,jdbcType=INTEGER},
+      hospital_departments = #{hospitalDepartments,jdbcType=VARCHAR},
+      bed_number = #{bedNumber,jdbcType=INTEGER},
+      hospital_number = #{hospitalNumber,jdbcType=INTEGER},
+      doctor = #{doctor,jdbcType=VARCHAR},
+      doctor_tel = #{doctorTel,jdbcType=VARCHAR},
+      nurse = #{nurse,jdbcType=VARCHAR},
+      nurse_tel = #{nurseTel,jdbcType=VARCHAR},
+      other_desc = #{otherDesc,jdbcType=VARCHAR},
+      data_rate = #{dataRate,jdbcType=DOUBLE},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

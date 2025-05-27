@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.PositionInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.PositionInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="position_name" property="positionName" jdbcType="VARCHAR" />
+    <result column="position_desc" property="positionDesc" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="position_level_id" property="positionLevelId" jdbcType="BIGINT" />
+    <result column="position_level_name" property="positionLevelName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, position_name, position_desc, create_time, update_time, position_level_id, position_level_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from position_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from position_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.PositionInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into position_info (position_name, position_desc, create_time, 
+      update_time, position_level_id, position_level_name
+      )
+    values (#{positionName,jdbcType=VARCHAR}, #{positionDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{positionLevelId,jdbcType=BIGINT}, #{positionLevelName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.PositionInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into position_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="positionName != null" >
+        position_name,
+      </if>
+      <if test="positionDesc != null" >
+        position_desc,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="positionLevelId != null" >
+        position_level_id,
+      </if>
+      <if test="positionLevelName != null" >
+        position_level_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="positionName != null" >
+        #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="positionDesc != null" >
+        #{positionDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positionLevelId != null" >
+        #{positionLevelId,jdbcType=BIGINT},
+      </if>
+      <if test="positionLevelName != null" >
+        #{positionLevelName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.PositionInfo" >
+    update position_info
+    <set >
+      <if test="positionName != null" >
+        position_name = #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="positionDesc != null" >
+        position_desc = #{positionDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positionLevelId != null" >
+        position_level_id = #{positionLevelId,jdbcType=BIGINT},
+      </if>
+      <if test="positionLevelName != null" >
+        position_level_name = #{positionLevelName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.PositionInfo" >
+    update position_info
+    set position_name = #{positionName,jdbcType=VARCHAR},
+      position_desc = #{positionDesc,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      position_level_id = #{positionLevelId,jdbcType=BIGINT},
+      position_level_name = #{positionLevelName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectCountPositionInfo" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select
+        count(1)
+        from position_info
+        where 1=1
+        <if test="positionName !=null">
+            and position_name  like  CONCAT(CONCAT('%',#{positionName,jdbcType=VARCHAR}), '%')
+        </if>
+    </select>
+
+    <select id="selectPositionInfoList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.* from position_info a
+        where 1= 1
+        <if test="positionName !=null">
+            and position_name  like  CONCAT(CONCAT('%',#{positionName,jdbcType=VARCHAR}), '%')
+        </if>
+        limit #{pageIndex}, #{pageSize}
+
+    </select>
+
+    <select id="searchPositionInfoByLevelId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.* from position_info a
+        where
+        a.position_level_id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByPositionIdAndLevelId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select a.*
+        from position_info a
+        where 1=1
+        <if test="id != null" >
+            and a.id = #{id,jdbcType=BIGINT}
+        </if>
+        <if test="positionLevelId != null" >
+            and a.position_level_id = #{positionLevelId,jdbcType=BIGINT}
+        </if>
+    </select>
+</mapper>

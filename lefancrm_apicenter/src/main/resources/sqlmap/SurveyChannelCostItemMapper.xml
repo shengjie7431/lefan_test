@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyChannelCostItemMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyChannelCostItem" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="survey_channel_id" property="surveyChannelId" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, survey_channel_id, survey_info_id
+  </sql>
+  <sql id="Base_Column_List1" >
+    t.id, t.survey_channel_id, t.survey_info_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_channel_cost_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_channel_cost_item
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyChannelCostItem" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_channel_cost_item (survey_channel_id, survey_info_id)
+    values (#{surveyChannelId,jdbcType=BIGINT}, #{surveyInfoId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyChannelCostItem" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_channel_cost_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="surveyChannelId != null" >
+        survey_channel_id,
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="surveyChannelId != null" >
+        #{surveyChannelId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyChannelCostItem" >
+    update survey_channel_cost_item
+    <set >
+      <if test="surveyChannelId != null" >
+        survey_channel_id = #{surveyChannelId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyChannelCostItem" >
+    update survey_channel_cost_item
+    set survey_channel_id = #{surveyChannelId,jdbcType=BIGINT},
+      survey_info_id = #{surveyInfoId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <delete id="deleteBySurveyChannelId" parameterType="java.lang.Long" >
+    delete from survey_channel_cost_item
+    where survey_channel_id = #{surveyChannelId,jdbcType=BIGINT}
+  </delete>
+
+  <select id="selectBySurveyChannelId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List1" />
+    ,s.survey_case_no as surveyCaseNo
+    from survey_channel_cost_item t
+    left join survey_risk_case_info r on t.survey_info_id = r.id
+    left join survey_risk_case s on r.survey_id = s.id
+    where survey_channel_id = #{surveyChannelId,jdbcType=BIGINT}
+  </select>
+</mapper>

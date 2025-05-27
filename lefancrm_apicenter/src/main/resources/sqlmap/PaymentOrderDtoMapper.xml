@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.PaymentOrderDtoMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.PaymentOrderDto" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="merchant_no" property="merchantNo" jdbcType="VARCHAR" />
+        <result column="public_key_index" property="publicKeyIndex" jdbcType="VARCHAR" />
+        <result column="version" property="version" jdbcType="VARCHAR" />
+        <result column="sign_algorithm" property="signAlgorithm" jdbcType="VARCHAR" />
+        <result column="input_charset" property="inputCharset" jdbcType="VARCHAR" />
+        <result column="submit_time" property="submitTime" jdbcType="VARCHAR" />
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR" />
+        <result column="card_type" property="cardType" jdbcType="VARCHAR" />
+        <result column="card_info" property="cardInfo" jdbcType="VARCHAR" />
+        <result column="out_order_no" property="outOrderNo" jdbcType="VARCHAR" />
+        <result column="order_type" property="orderType" jdbcType="VARCHAR" />
+        <result column="order_amount" property="orderAmount" jdbcType="VARCHAR" />
+        <result column="order_time" property="orderTime" jdbcType="VARCHAR" />
+        <result column="currency" property="currency" jdbcType="VARCHAR" />
+        <result column="saler_merchant_no" property="salerMerchantNo" jdbcType="VARCHAR" />
+        <result column="goods_type" property="goodsType" jdbcType="VARCHAR" />
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+        <result column="royalty_parameters" property="royaltyParameters" jdbcType="VARCHAR" />
+        <result column="pay_timeout" property="payTimeout" jdbcType="VARCHAR" />
+        <result column="tunnel_data" property="tunnelData" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="case_id" property="caseId" jdbcType="BIGINT" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, merchant_no, public_key_index, version, sign_algorithm, input_charset, submit_time,
+        bank_code, card_type, card_info, out_order_no, order_type, order_amount, order_time,
+        currency, saler_merchant_no, goods_type, goods_name, royalty_parameters, pay_timeout,
+        tunnel_data, remark,case_id,create_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from payment_order_dto
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from payment_order_dto
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.PaymentOrderDto" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into payment_order_dto (merchant_no, public_key_index, version,
+        sign_algorithm, input_charset, submit_time,
+        bank_code, card_type, card_info,
+        out_order_no, order_type, order_amount,
+        order_time, currency, saler_merchant_no,
+        goods_type, goods_name, royalty_parameters,
+        pay_timeout, tunnel_data, remark,case_id,create_time
+        )
+        values (#{merchantNo,jdbcType=VARCHAR}, #{publicKeyIndex,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR},
+        #{signAlgorithm,jdbcType=VARCHAR}, #{inputCharset,jdbcType=VARCHAR}, #{submitTime,jdbcType=VARCHAR},
+        #{bankCode,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, #{cardInfo,jdbcType=VARCHAR},
+        #{outOrderNo,jdbcType=VARCHAR}, #{orderType,jdbcType=VARCHAR}, #{orderAmount,jdbcType=VARCHAR},
+        #{orderTime,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, #{salerMerchantNo,jdbcType=VARCHAR},
+        #{goodsType,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, #{royaltyParameters,jdbcType=VARCHAR},
+        #{payTimeout,jdbcType=VARCHAR}, #{tunnelData,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},#{caseId,jdbcType=BIGINT},#{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.PaymentOrderDto" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into payment_order_dto
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="merchantNo != null" >
+                merchant_no,
+            </if>
+            <if test="publicKeyIndex != null" >
+                public_key_index,
+            </if>
+            <if test="version != null" >
+                version,
+            </if>
+            <if test="signAlgorithm != null" >
+                sign_algorithm,
+            </if>
+            <if test="inputCharset != null" >
+                input_charset,
+            </if>
+            <if test="submitTime != null" >
+                submit_time,
+            </if>
+            <if test="bankCode != null" >
+                bank_code,
+            </if>
+            <if test="cardType != null" >
+                card_type,
+            </if>
+            <if test="cardInfo != null" >
+                card_info,
+            </if>
+            <if test="outOrderNo != null" >
+                out_order_no,
+            </if>
+            <if test="orderType != null" >
+                order_type,
+            </if>
+            <if test="orderAmount != null" >
+                order_amount,
+            </if>
+            <if test="orderTime != null" >
+                order_time,
+            </if>
+            <if test="currency != null" >
+                currency,
+            </if>
+            <if test="salerMerchantNo != null" >
+                saler_merchant_no,
+            </if>
+            <if test="goodsType != null" >
+                goods_type,
+            </if>
+            <if test="goodsName != null" >
+                goods_name,
+            </if>
+            <if test="royaltyParameters != null" >
+                royalty_parameters,
+            </if>
+            <if test="payTimeout != null" >
+                pay_timeout,
+            </if>
+            <if test="tunnelData != null" >
+                tunnel_data,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="caseId != null" >
+                case_id,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="merchantNo != null" >
+                #{merchantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="publicKeyIndex != null" >
+                #{publicKeyIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=VARCHAR},
+            </if>
+            <if test="signAlgorithm != null" >
+                #{signAlgorithm,jdbcType=VARCHAR},
+            </if>
+            <if test="inputCharset != null" >
+                #{inputCharset,jdbcType=VARCHAR},
+            </if>
+            <if test="submitTime != null" >
+                #{submitTime,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCode != null" >
+                #{bankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cardType != null" >
+                #{cardType,jdbcType=VARCHAR},
+            </if>
+            <if test="cardInfo != null" >
+                #{cardInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="outOrderNo != null" >
+                #{outOrderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderType != null" >
+                #{orderType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderAmount != null" >
+                #{orderAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="orderTime != null" >
+                #{orderTime,jdbcType=VARCHAR},
+            </if>
+            <if test="currency != null" >
+                #{currency,jdbcType=VARCHAR},
+            </if>
+            <if test="salerMerchantNo != null" >
+                #{salerMerchantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsType != null" >
+                #{goodsType,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsName != null" >
+                #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="royaltyParameters != null" >
+                #{royaltyParameters,jdbcType=VARCHAR},
+            </if>
+            <if test="payTimeout != null" >
+                #{payTimeout,jdbcType=VARCHAR},
+            </if>
+            <if test="tunnelData != null" >
+                #{tunnelData,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="caseId != null" >
+                #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.PaymentOrderDto" >
+        update payment_order_dto
+        <set >
+            <if test="merchantNo != null" >
+                merchant_no = #{merchantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="publicKeyIndex != null" >
+                public_key_index = #{publicKeyIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null" >
+                version = #{version,jdbcType=VARCHAR},
+            </if>
+            <if test="signAlgorithm != null" >
+                sign_algorithm = #{signAlgorithm,jdbcType=VARCHAR},
+            </if>
+            <if test="inputCharset != null" >
+                input_charset = #{inputCharset,jdbcType=VARCHAR},
+            </if>
+            <if test="submitTime != null" >
+                submit_time = #{submitTime,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCode != null" >
+                bank_code = #{bankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cardType != null" >
+                card_type = #{cardType,jdbcType=VARCHAR},
+            </if>
+            <if test="cardInfo != null" >
+                card_info = #{cardInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="outOrderNo != null" >
+                out_order_no = #{outOrderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orderType != null" >
+                order_type = #{orderType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderAmount != null" >
+                order_amount = #{orderAmount,jdbcType=VARCHAR},
+            </if>
+            <if test="orderTime != null" >
+                order_time = #{orderTime,jdbcType=VARCHAR},
+            </if>
+            <if test="currency != null" >
+                currency = #{currency,jdbcType=VARCHAR},
+            </if>
+            <if test="salerMerchantNo != null" >
+                saler_merchant_no = #{salerMerchantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsType != null" >
+                goods_type = #{goodsType,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsName != null" >
+                goods_name = #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="royaltyParameters != null" >
+                royalty_parameters = #{royaltyParameters,jdbcType=VARCHAR},
+            </if>
+            <if test="payTimeout != null" >
+                pay_timeout = #{payTimeout,jdbcType=VARCHAR},
+            </if>
+            <if test="tunnelData != null" >
+                tunnel_data = #{tunnelData,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="caseId != null" >
+                case_id = #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.PaymentOrderDto" >
+        update payment_order_dto
+        set merchant_no = #{merchantNo,jdbcType=VARCHAR},
+        public_key_index = #{publicKeyIndex,jdbcType=VARCHAR},
+        version = #{version,jdbcType=VARCHAR},
+        sign_algorithm = #{signAlgorithm,jdbcType=VARCHAR},
+        input_charset = #{inputCharset,jdbcType=VARCHAR},
+        submit_time = #{submitTime,jdbcType=VARCHAR},
+        bank_code = #{bankCode,jdbcType=VARCHAR},
+        card_type = #{cardType,jdbcType=VARCHAR},
+        card_info = #{cardInfo,jdbcType=VARCHAR},
+        out_order_no = #{outOrderNo,jdbcType=VARCHAR},
+        order_type = #{orderType,jdbcType=VARCHAR},
+        order_amount = #{orderAmount,jdbcType=VARCHAR},
+        order_time = #{orderTime,jdbcType=VARCHAR},
+        currency = #{currency,jdbcType=VARCHAR},
+        saler_merchant_no = #{salerMerchantNo,jdbcType=VARCHAR},
+        goods_type = #{goodsType,jdbcType=VARCHAR},
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+        royalty_parameters = #{royaltyParameters,jdbcType=VARCHAR},
+        pay_timeout = #{payTimeout,jdbcType=VARCHAR},
+        tunnel_data = #{tunnelData,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        case_id = #{caseId,jdbcType=BIGINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

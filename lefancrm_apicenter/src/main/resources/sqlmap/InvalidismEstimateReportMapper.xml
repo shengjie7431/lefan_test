@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.InvalidismEstimateReportMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.InvalidismEstimateReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="accident_address" property="accidentAddress" jdbcType="VARCHAR" />
+    <result column="injury_diagnose" property="injuryDiagnose" jdbcType="VARCHAR" />
+    <result column="is_operation" property="isOperation" jdbcType="INTEGER" />
+    <result column="report_basis" property="reportBasis" jdbcType="VARCHAR" />
+    <result column="invalidism_grade" property="invalidismGrade" jdbcType="VARCHAR" />
+    <result column="report_desc" property="reportDesc" jdbcType="VARCHAR" />
+    <result column="estimate_id" property="estimateId" jdbcType="BIGINT" />
+    <result column="apply_time" property="applyTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_name, accident_address, injury_diagnose, is_operation, report_basis, invalidism_grade, 
+    report_desc, estimate_id, apply_time, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from invalidism_estimate_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from invalidism_estimate_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.InvalidismEstimateReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into invalidism_estimate_report (user_name, accident_address, injury_diagnose, 
+      is_operation, report_basis, invalidism_grade, 
+      report_desc, estimate_id, apply_time, 
+      create_time)
+    values (#{userName,jdbcType=VARCHAR}, #{accidentAddress,jdbcType=VARCHAR}, #{injuryDiagnose,jdbcType=VARCHAR}, 
+      #{isOperation,jdbcType=INTEGER}, #{reportBasis,jdbcType=VARCHAR}, #{invalidismGrade,jdbcType=VARCHAR}, 
+      #{reportDesc,jdbcType=VARCHAR}, #{estimateId,jdbcType=BIGINT}, #{applyTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.InvalidismEstimateReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into invalidism_estimate_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address,
+      </if>
+      <if test="injuryDiagnose != null" >
+        injury_diagnose,
+      </if>
+      <if test="isOperation != null" >
+        is_operation,
+      </if>
+      <if test="reportBasis != null" >
+        report_basis,
+      </if>
+      <if test="invalidismGrade != null" >
+        invalidism_grade,
+      </if>
+      <if test="reportDesc != null" >
+        report_desc,
+      </if>
+      <if test="estimateId != null" >
+        estimate_id,
+      </if>
+      <if test="applyTime != null" >
+        apply_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentAddress != null" >
+        #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="injuryDiagnose != null" >
+        #{injuryDiagnose,jdbcType=VARCHAR},
+      </if>
+      <if test="isOperation != null" >
+        #{isOperation,jdbcType=INTEGER},
+      </if>
+      <if test="reportBasis != null" >
+        #{reportBasis,jdbcType=VARCHAR},
+      </if>
+      <if test="invalidismGrade != null" >
+        #{invalidismGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDesc != null" >
+        #{reportDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateId != null" >
+        #{estimateId,jdbcType=BIGINT},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.InvalidismEstimateReport" >
+    update invalidism_estimate_report
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="injuryDiagnose != null" >
+        injury_diagnose = #{injuryDiagnose,jdbcType=VARCHAR},
+      </if>
+      <if test="isOperation != null" >
+        is_operation = #{isOperation,jdbcType=INTEGER},
+      </if>
+      <if test="reportBasis != null" >
+        report_basis = #{reportBasis,jdbcType=VARCHAR},
+      </if>
+      <if test="invalidismGrade != null" >
+        invalidism_grade = #{invalidismGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDesc != null" >
+        report_desc = #{reportDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateId != null" >
+        estimate_id = #{estimateId,jdbcType=BIGINT},
+      </if>
+      <if test="applyTime != null" >
+        apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.InvalidismEstimateReport" >
+    update invalidism_estimate_report
+    set user_name = #{userName,jdbcType=VARCHAR},
+      accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      injury_diagnose = #{injuryDiagnose,jdbcType=VARCHAR},
+      is_operation = #{isOperation,jdbcType=INTEGER},
+      report_basis = #{reportBasis,jdbcType=VARCHAR},
+      invalidism_grade = #{invalidismGrade,jdbcType=VARCHAR},
+      report_desc = #{reportDesc,jdbcType=VARCHAR},
+      estimate_id = #{estimateId,jdbcType=BIGINT},
+      apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="queryApplyByEstimateId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select * from invalidism_estimate_report where 1 = 1 and estimate_id = #{estimateId,jdbcType=BIGINT}
+    </select>
+</mapper>

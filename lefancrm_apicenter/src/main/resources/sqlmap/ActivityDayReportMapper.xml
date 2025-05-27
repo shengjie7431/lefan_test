@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.ActivityDayReportMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.ActivityDayReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="sale_amount" property="saleAmount" jdbcType="DOUBLE" />
+    <result column="sale_goal" property="saleGoal" jdbcType="DOUBLE" />
+    <result column="completion_rate" property="completionRate" jdbcType="INTEGER" />
+    <result column="visit_num" property="visitNum" jdbcType="INTEGER" />
+    <result column="target_num" property="targetNum" jdbcType="INTEGER" />
+    <result column="intention_num" property="intentionNum" jdbcType="INTEGER" />
+    <result column="sign_num" property="signNum" jdbcType="INTEGER" />
+    <result column="closed_num" property="closedNum" jdbcType="INTEGER" />
+    <result column="sales_date" property="salesDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, user_name, org_id, org_name, sale_amount, sale_goal, completion_rate, 
+    visit_num, target_num, intention_num, sign_num, closed_num, sales_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from activity_day_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from activity_day_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.ActivityDayReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into activity_day_report (user_id, user_name, org_id, 
+      org_name, sale_amount, sale_goal, 
+      completion_rate, visit_num, target_num, 
+      intention_num, sign_num, closed_num, 
+      sales_date)
+    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{orgId,jdbcType=BIGINT}, 
+      #{orgName,jdbcType=VARCHAR}, #{saleAmount,jdbcType=DOUBLE}, #{saleGoal,jdbcType=DOUBLE}, 
+      #{completionRate,jdbcType=INTEGER}, #{visitNum,jdbcType=INTEGER}, #{targetNum,jdbcType=INTEGER}, 
+      #{intentionNum,jdbcType=INTEGER}, #{signNum,jdbcType=INTEGER}, #{closedNum,jdbcType=INTEGER}, 
+      #{salesDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.ActivityDayReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into activity_day_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="saleAmount != null" >
+        sale_amount,
+      </if>
+      <if test="saleGoal != null" >
+        sale_goal,
+      </if>
+      <if test="completionRate != null" >
+        completion_rate,
+      </if>
+      <if test="visitNum != null" >
+        visit_num,
+      </if>
+      <if test="targetNum != null" >
+        target_num,
+      </if>
+      <if test="intentionNum != null" >
+        intention_num,
+      </if>
+      <if test="signNum != null" >
+        sign_num,
+      </if>
+      <if test="closedNum != null" >
+        closed_num,
+      </if>
+      <if test="salesDate != null" >
+        sales_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="saleAmount != null" >
+        #{saleAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="saleGoal != null" >
+        #{saleGoal,jdbcType=DOUBLE},
+      </if>
+      <if test="completionRate != null" >
+        #{completionRate,jdbcType=INTEGER},
+      </if>
+      <if test="visitNum != null" >
+        #{visitNum,jdbcType=INTEGER},
+      </if>
+      <if test="targetNum != null" >
+        #{targetNum,jdbcType=INTEGER},
+      </if>
+      <if test="intentionNum != null" >
+        #{intentionNum,jdbcType=INTEGER},
+      </if>
+      <if test="signNum != null" >
+        #{signNum,jdbcType=INTEGER},
+      </if>
+      <if test="closedNum != null" >
+        #{closedNum,jdbcType=INTEGER},
+      </if>
+      <if test="salesDate != null" >
+        #{salesDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.ActivityDayReport" >
+    update activity_day_report
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="saleAmount != null" >
+        sale_amount = #{saleAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="saleGoal != null" >
+        sale_goal = #{saleGoal,jdbcType=DOUBLE},
+      </if>
+      <if test="completionRate != null" >
+        completion_rate = #{completionRate,jdbcType=INTEGER},
+      </if>
+      <if test="visitNum != null" >
+        visit_num = #{visitNum,jdbcType=INTEGER},
+      </if>
+      <if test="targetNum != null" >
+        target_num = #{targetNum,jdbcType=INTEGER},
+      </if>
+      <if test="intentionNum != null" >
+        intention_num = #{intentionNum,jdbcType=INTEGER},
+      </if>
+      <if test="signNum != null" >
+        sign_num = #{signNum,jdbcType=INTEGER},
+      </if>
+      <if test="closedNum != null" >
+        closed_num = #{closedNum,jdbcType=INTEGER},
+      </if>
+      <if test="salesDate != null" >
+        sales_date = #{salesDate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.ActivityDayReport" >
+    update activity_day_report
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=BIGINT},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      sale_amount = #{saleAmount,jdbcType=DOUBLE},
+      sale_goal = #{saleGoal,jdbcType=DOUBLE},
+      completion_rate = #{completionRate,jdbcType=INTEGER},
+      visit_num = #{visitNum,jdbcType=INTEGER},
+      target_num = #{targetNum,jdbcType=INTEGER},
+      intention_num = #{intentionNum,jdbcType=INTEGER},
+      sign_num = #{signNum,jdbcType=INTEGER},
+      closed_num = #{closedNum,jdbcType=INTEGER},
+      sales_date = #{salesDate,jdbcType=DATE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!--完成金额 -->
+    <select id="querySaleAmountGold" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select IFNULL(sum(sale_amount),0) from activity_day_report where find_in_set(org_id,SUBSTR((select getOrgList(#{orgParentid,jdbcType=BIGINT})) FROM 3 FOR 10000))
+        and DATE_FORMAT(sales_date,'%Y-%m')  = DATE_FORMAT( #{salesDate,jdbcType=DATE},'%Y-%m')
+    </select>
+
+    <select id="queryMeSaleAmountGold" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select IFNULL(sum(sale_amount),0) from activity_day_report where user_id = #{userId,jdbcType=BIGINT}
+        and DATE_FORMAT(sales_date,'%Y-%m')  = DATE_FORMAT( #{salesDate,jdbcType=DATE},'%Y-%m')
+    </select>
+    <!--完成金额 （周期）-->
+    <select id="querySaleAmountGoldDate" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select IFNULL(sum(sale_amount),0) from activity_day_report where find_in_set(org_id,SUBSTR((select getOrgList(#{orgParentid,jdbcType=BIGINT})) FROM 3 FOR 10000))
+        <if test="date == 1">
+            <!--本月-->
+            and DATE_FORMAT( sales_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+        </if>
+        <if test="date == 2">
+            <!--上一月-->
+            and PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( sales_date, '%Y%m' ) ) =1
+        </if>
+        <if test="date == 3">
+            <!--查询本季度数据-->
+            and QUARTER(sales_date)=QUARTER(NOW()) and DATE_FORMAT( sales_date, '%Y' ) = DATE_FORMAT(NOW() , '%Y' )
+        </if>
+        <if test="date == 4">
+            <!--查询上季度数据-->
+            and  QUARTER(sales_date)=QUARTER(DATE_SUB(now(),interval 1 QUARTER))
+        </if>
+        <if test="date == 5">
+            <!--查询本年数据-->
+            and YEAR(sales_date)=YEAR(NOW())
+        </if>
+    </select>
+
+    <select id="queryMeSaleAmountGoldDate" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select IFNULL(sum(sale_amount),0) from activity_day_report where user_id = #{userId,jdbcType=BIGINT}
+        <if test="date == 1">
+            <!--本月-->
+            and DATE_FORMAT( sales_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+        </if>
+        <if test="date == 2">
+            <!--上一月-->
+            and PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( sales_date, '%Y%m' ) ) =1
+        </if>
+        <if test="date == 3">
+            <!--查询本季度数据-->
+            and QUARTER(sales_date)=QUARTER(NOW()) and DATE_FORMAT( sales_date, '%Y' ) = DATE_FORMAT(NOW() , '%Y' )
+        </if>
+        <if test="date == 4">
+            <!--查询上季度数据-->
+            and  QUARTER(sales_date)=QUARTER(DATE_SUB(now(),interval 1 QUARTER))
+        </if>
+        <if test="date == 5">
+            <!--查询本年数据-->
+            and YEAR(sales_date)=YEAR(NOW())
+        </if>
+    </select>
+
+    <!-- 业绩排行榜 -->
+    <select id="queryAchievementRank" parameterType="java.util.Map" resultMap="BaseResultMap">
+      SELECT id,user_id,user_name,org_id,org_name,sales_date,SUM(completion_rate)as completion_rate,SUM(sale_amount) as sale_amount, sale_goal FROM activity_day_report
+      WHERE DATE_FORMAT(sales_date,'%Y-%m') = DATE_FORMAT(#{salesDate,jdbcType=DATE},'%Y-%m') GROUP BY user_id ORDER BY completion_rate desc
+       limit #{pageIndex} , #{pageSize}
+    </select>
+    <select id="queryAchievementRankCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+       select count(1) FROM ( SELECT SUM(completion_rate)as completion_rate FROM activity_day_report
+        WHERE DATE_FORMAT(sales_date,'%Y-%m') = DATE_FORMAT(#{salesDate,jdbcType=DATE},'%Y-%m') GROUP BY user_id) adr
+    </select>
+
+    <!-- 业绩排行榜（周期） -->
+    <select id="queryAchievementRankDate" parameterType="java.util.Map" resultMap="BaseResultMap">
+       select id,user_id,user_name,org_id,org_name,sales_date,SUM(completion_rate)as completion_rate,SUM(sale_amount) as sale_amount, sale_goal
+        from activity_day_report where find_in_set(org_id,SUBSTR((select getOrgList(#{orgParentid,jdbcType=BIGINT})) FROM 3 FOR 10000))
+        <if test="date == 1">
+            <!--本月-->
+            and DATE_FORMAT( sales_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+        </if>
+        <if test="date == 2">
+            <!--上一月-->
+            and PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( sales_date, '%Y%m' ) ) =1
+        </if>
+        <if test="date == 3">
+            <!--查询本季度数据-->
+            and QUARTER(sales_date)=QUARTER(NOW()) and DATE_FORMAT( sales_date, '%Y' ) = DATE_FORMAT(NOW() , '%Y' )
+        </if>
+        <if test="date == 4">
+            <!--查询上季度数据-->
+            and  QUARTER(sales_date)=QUARTER(DATE_SUB(now(),interval 1 QUARTER))
+        </if>
+        <if test="date == 5">
+            <!--查询本年数据-->
+            and YEAR(sales_date)=YEAR(NOW())
+        </if>
+          GROUP BY user_id ORDER BY completion_rate desc
+    </select>
+
+    <select id="queryMeAchievementRankDate" parameterType="java.util.Map" resultMap="BaseResultMap">
+      select id,user_id,user_name,org_id,org_name,sales_date,SUM(completion_rate)as completion_rate,SUM(sale_amount) as sale_amount, sale_goal from activity_day_report
+      where user_id = #{userId,jdbcType=BIGINT}
+        <if test="date == 1">
+            <!--本月-->
+            and DATE_FORMAT( sales_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+        </if>
+        <if test="date == 2">
+            <!--上一月-->
+            and PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( sales_date, '%Y%m' ) ) =1
+        </if>
+        <if test="date == 3">
+            <!--查询本季度数据-->
+            and QUARTER(sales_date)=QUARTER(NOW()) and DATE_FORMAT( sales_date, '%Y' ) = DATE_FORMAT(NOW() , '%Y' )
+        </if>
+        <if test="date == 4">
+            <!--查询上季度数据-->
+            and  QUARTER(sales_date)=QUARTER(DATE_SUB(now(),interval 1 QUARTER))
+        </if>
+        <if test="date == 5">
+            <!--查询本年数据-->
+            and YEAR(sales_date)=YEAR(NOW())
+        </if>
+    </select>
+
+    <!-- 案件完成排行榜 -->
+    <select id="querySignCaseDayRank"  resultMap="BaseResultMap"  parameterType="java.util.Map">
+        SELECT id,user_id,user_name,org_id,org_name,sales_date,sign_num  FROM activity_day_report
+        where  DATE_FORMAT(sales_date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') ORDER BY sign_num desc
+        limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="querySignCaseDayRankCount"   resultType="java.lang.Integer">
+        SELECT count(1) FROM activity_day_report
+        where  DATE_FORMAT(sales_date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')
+    </select>
+
+    <select id="querySignCaseWeekRank"  resultMap="BaseResultMap"  parameterType="java.util.Map">
+        SELECT id,user_id,user_name,org_id,org_name,sales_date,SUM(sign_num)as sign_num FROM activity_day_report
+        WHERE sales_date&gt;=  date_sub(curdate(),INTERVAL WEEKDAY(curdate()) DAY)  and sales_date &lt;= date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -6 DAY)
+         GROUP BY user_id  ORDER BY sign_num desc
+        limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="querySignCaseWeekRankCount"   resultType="java.lang.Integer">
+        SELECT count(1) FROM ( SELECT SUM(sign_num) FROM activity_day_report
+        WHERE sales_date&gt;=  date_sub(curdate(),INTERVAL WEEKDAY(curdate()) DAY)  and sales_date &lt;= date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -6 DAY)
+         GROUP BY user_id)adr
+    </select>
+
+    <select id="querySignCaseLastWeekRank"   resultMap="BaseResultMap"  parameterType="java.util.Map">
+        SELECT id,user_id,user_name,org_id,org_name,sales_date,SUM(sign_num)as sign_num FROM activity_day_report
+        WHERE sales_date &gt;= date_sub(curdate(),INTERVAL WEEKDAY(curdate()) + 7 DAY)  and sales_date &lt;= date_sub(curdate(),INTERVAL WEEKDAY(curdate()) + 1 DAY)
+        GROUP BY user_id  ORDER BY sign_num desc
+        limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="querySignCaseLastWeekRankCount"   resultType="java.lang.Integer">
+        SELECT count(1) FROM ( SELECT SUM(sign_num) FROM activity_day_report
+       WHERE sales_date &gt;= date_sub(curdate(),INTERVAL WEEKDAY(curdate()) + 7 DAY)  and sales_date &lt;= date_sub(curdate(),INTERVAL WEEKDAY(curdate()) + 1 DAY)
+        GROUP BY user_id)adr
+    </select>
+
+    <select id="querySignCaseMonthRank"  resultMap="BaseResultMap"  parameterType="java.util.Map">
+         SELECT id,user_id,user_name,org_id,org_name,sales_date,SUM(sign_num)as sign_num FROM activity_day_report
+         WHERE DATE_FORMAT(sales_date,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m') GROUP BY user_id  ORDER BY sign_num desc
+         limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="querySignCaseMonthRankCount"   resultType="java.lang.Integer">
+        SELECT count(1) FROM ( SELECT SUM(sign_num) FROM activity_day_report
+        WHERE DATE_FORMAT(sales_date,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')
+        GROUP BY user_id)adr
+    </select>
+
+    <select id="querySignCaseLastMonthRank"  resultMap="BaseResultMap"  parameterType="java.util.Map">
+       SELECT id,user_id,user_name,org_id,org_name,sales_date,SUM(sign_num)as sign_num FROM activity_day_report
+       WHERE DATE_FORMAT(sales_date,'%Y-%m')=DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH),'%Y-%m')  GROUP BY user_id  ORDER BY sign_num desc
+       limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="querySignCaseLastMonthRankCount"   resultType="java.lang.Integer">
+        SELECT count(1) FROM ( SELECT SUM(sign_num) FROM activity_day_report
+         WHERE DATE_FORMAT(sales_date,'%Y-%m')=DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH),'%Y-%m')
+        GROUP BY user_id)adr
+    </select>
+
+    <!-- 拜访客户排行榜 -->
+    <select id="queryVisitCustomerDayRank"  resultMap="BaseResultMap"  parameterType="java.util.Map">
+        SELECT id,user_id,user_name,org_id,org_name,sales_date,visit_num  FROM activity_day_report
+        where  DATE_FORMAT(sales_date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') ORDER BY visit_num desc
+        limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="queryVisitCustomerDayRankCount"   resultType="java.lang.Integer">
+        SELECT count(1) FROM activity_day_report
+        where  DATE_FORMAT(sales_date,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')
+    </select>
+
+    <select id="queryVisitCustomerWeekRank"  resultMap="BaseResultMap"  parameterType="java.util.Map">
+        SELECT id,user_id,user_name,org_id,org_name,sales_date,SUM(visit_num)as visit_num FROM activity_day_report
+        WHERE sales_date&gt;=  date_sub(curdate(),INTERVAL WEEKDAY(curdate()) DAY)  and sales_date &lt;= date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -6 DAY)
+        GROUP BY user_id  ORDER BY visit_num desc
+        limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="queryVisitCustomerWeekRankCount"   resultType="java.lang.Integer">
+        SELECT count(1) FROM ( SELECT SUM(visit_num) FROM activity_day_report
+        WHERE sales_date&gt;=  date_sub(curdate(),INTERVAL WEEKDAY(curdate()) DAY)  and sales_date &lt;= date_sub(curdate(),INTERVAL WEEKDAY(curdate()) -6 DAY)
+        GROUP BY user_id)adr
+    </select>
+
+    <select id="queryVisitCustomerLastWeekRank"   resultMap="BaseResultMap"  parameterType="java.util.Map">
+        SELECT id,user_id,user_name,org_id,org_name,sales_date,SUM(visit_num)as visit_num FROM activity_day_report
+        WHERE sales_date &gt;= date_sub(curdate(),INTERVAL WEEKDAY(curdate()) + 7 DAY)  and sales_date &lt;= date_sub(curdate(),INTERVAL WEEKDAY(curdate()) + 1 DAY)
+        GROUP BY user_id  ORDER BY visit_num desc
+        limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="queryVisitCustomerLastWeekRankCount"   resultType="java.lang.Integer">
+        SELECT count(1) FROM ( SELECT SUM(visit_num) FROM activity_day_report
+        WHERE sales_date &gt;= date_sub(curdate(),INTERVAL WEEKDAY(curdate()) + 7 DAY)
+        and sales_date &lt;= date_sub(curdate(),INTERVAL WEEKDAY(curdate()) + 1 DAY)
+        GROUP BY user_id)adr
+    </select>
+
+    <select id="queryVisitCustomerMonthRank"  resultMap="BaseResultMap"  parameterType="java.util.Map">
+        SELECT id,user_id,user_name,org_id,org_name,sales_date,SUM(visit_num)as visit_num FROM activity_day_report
+        WHERE DATE_FORMAT(sales_date,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m') GROUP BY user_id  ORDER BY visit_num desc
+        limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="queryVisitCustomerMonthRankCount"   resultType="java.lang.Integer">
+        SELECT count(1) FROM ( SELECT SUM(visit_num) FROM activity_day_report
+        WHERE DATE_FORMAT(sales_date,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')
+        GROUP BY user_id)adr
+    </select>
+
+    <select id="queryVisitCustomerLastMonthRank"  resultMap="BaseResultMap"  parameterType="java.util.Map">
+        SELECT id,user_id,user_name,org_id,org_name,sales_date,SUM(visit_num)as visit_num FROM activity_day_report
+        WHERE DATE_FORMAT(sales_date,'%Y-%m')=DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH),'%Y-%m')
+        GROUP BY user_id  ORDER BY visit_num desc
+        limit #{pageIndex} , #{pageSize}
+    </select>
+
+    <select id="queryVisitCustomerLastMonthRankCount"   resultType="java.lang.Integer">
+        SELECT count(1) FROM ( SELECT SUM(visit_num) FROM activity_day_report
+        WHERE DATE_FORMAT(sales_date,'%Y-%m')=DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH),'%Y-%m')
+        GROUP BY user_id)adr
+    </select>
+
+    <!-- 销售漏斗 -->
+    <select id="querySaleFunnel" resultMap="BaseResultMap" parameterType="java.util.Map">
+      SELECT  IFNULL(SUM(visit_num),0) as visit_num,
+ 				IFNULL(SUM(target_num),0) as target_num,
+ 				IFNULL(SUM(intention_num),0) as intention_num,
+ 				IFNULL(SUM(sign_num),0) as sign_num,
+				IFNULL(SUM(closed_num),0) as closed_num
+        FROM activity_day_report
+        WHERE find_in_set(org_id,SUBSTR((select getOrgList(#{orgParentid,jdbcType=BIGINT})) FROM 3 FOR 10000))
+        and DATE_FORMAT(sales_date,'%Y-%m')  = DATE_FORMAT(#{salesDate,jdbcType=DATE},'%Y-%m')
+    </select>
+
+    <select id="queryMeSaleFunnel" resultMap="BaseResultMap" parameterType="java.util.Map">
+      select IFNULL(SUM(visit_num),0) as visit_num,
+ 				IFNULL(SUM(target_num),0) as target_num,
+ 				IFNULL(SUM(intention_num),0) as intention_num,
+ 				IFNULL(SUM(sign_num),0) as sign_num,
+				IFNULL(SUM(closed_num),0) as closed_num
+	from activity_day_report where user_id  = #{userId,jdbcType=BIGINT}
+        and DATE_FORMAT(sales_date,'%Y-%m')  = DATE_FORMAT(#{salesDate,jdbcType=DATE},'%Y-%m')
+    </select>
+    <!-- 销售漏斗 周期-->
+    <select id="querySaleFunnelDate" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT  IFNULL(SUM(visit_num),0) as visit_num,
+        IFNULL(SUM(target_num),0) as target_num,
+        IFNULL(SUM(intention_num),0) as intention_num,
+        IFNULL(SUM(sign_num),0) as sign_num,
+        IFNULL(SUM(closed_num),0) as closed_num
+        FROM activity_day_report
+        WHERE find_in_set(org_id,SUBSTR((select getOrgList(#{orgParentid,jdbcType=BIGINT})) FROM 3 FOR 10000))
+        <if test="date == 1">
+            <!--本月-->
+            and DATE_FORMAT( sales_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+        </if>
+        <if test="date == 2">
+            <!--上一月-->
+            and PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( sales_date, '%Y%m' ) ) =1
+        </if>
+        <if test="date == 3">
+            <!--查询本季度数据-->
+            and QUARTER(sales_date)=QUARTER(NOW()) and DATE_FORMAT( sales_date, '%Y' ) = DATE_FORMAT(NOW() , '%Y' )
+        </if>
+        <if test="date == 4">
+            <!--查询上季度数据-->
+            and  QUARTER(sales_date)=QUARTER(DATE_SUB(now(),interval 1 QUARTER))
+        </if>
+        <if test="date == 5">
+            <!--查询本年数据-->
+            and YEAR(sales_date)=YEAR(NOW())
+        </if>
+    </select>
+
+    <select id="queryMeSaleFunnelDate" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select IFNULL(SUM(visit_num),0) as visit_num,
+        IFNULL(SUM(target_num),0) as target_num,
+        IFNULL(SUM(intention_num),0) as intention_num,
+        IFNULL(SUM(sign_num),0) as sign_num,
+        IFNULL(SUM(closed_num),0) as closed_num
+        from activity_day_report where user_id  = #{userId,jdbcType=BIGINT}
+        <if test="date == 1">
+            <!--本月-->
+            and DATE_FORMAT( sales_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+        </if>
+        <if test="date == 2">
+            <!--上一月-->
+            and PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( sales_date, '%Y%m' ) ) =1
+        </if>
+        <if test="date == 3">
+            <!--查询本季度数据-->
+            and QUARTER(sales_date)=QUARTER(NOW()) and DATE_FORMAT( sales_date, '%Y' ) = DATE_FORMAT(NOW() , '%Y' )
+        </if>
+        <if test="date == 4">
+            <!--查询上季度数据-->
+            and  QUARTER(sales_date)=QUARTER(DATE_SUB(now(),interval 1 QUARTER))
+        </if>
+        <if test="date == 5">
+            <!--查询本年数据-->
+            and YEAR(sales_date)=YEAR(NOW())
+        </if>
+    </select>
+
+    <!-- 案件汇总-->
+    <select id="queryCaseDataNum" resultType="com.lefancrm.apicenter.dto.CaseSumDataDto" parameterType="java.util.Map">
+       select case_type as caseType,COUNT(case_type) as caseCount, SUM(service_fee) as serviceFee  from crm_case_info
+       where customer_id in ((select id from crm_customer_info where find_in_set(org_id,SUBSTR((select getOrgList(#{orgParentid,jdbcType=BIGINT})) FROM 3 FOR 10000))))
+      and case_progress = 4  and DATE_FORMAT(update_time,'%Y-%m')  = DATE_FORMAT(#{salesDate,jdbcType=DATE},'%Y-%m') GROUP BY case_type
+    </select>
+
+    <select id="queryMeCaseDataNum" resultType="com.lefancrm.apicenter.dto.CaseSumDataDto" parameterType="java.util.Map">
+       select case_type as caseType,COUNT(case_type) as caseCount, SUM(service_fee) as serviceFee from crm_case_info
+       WHERE customer_id in (select id from crm_customer_info where cc_id = #{userId,jdbcType=BIGINT})
+        and case_progress = 4  and DATE_FORMAT(update_time,'%Y-%m')  = DATE_FORMAT(#{salesDate,jdbcType=DATE},'%Y-%m') GROUP BY case_type
+
+    </select>
+
+    <!-- 销售简报-->
+    <select id="queryCaseReportNum" resultType="com.lefancrm.apicenter.dto.CaseSumReportDto" parameterType="java.util.Map">
+           select SUM(service_fee) as serviceFee,SUM(loan_fee) as loanFee, count(1) as caseCount  from crm_case_info
+    where customer_id in ((select id from crm_customer_info where find_in_set(org_id,SUBSTR((select getOrgList(#{orgParentid,jdbcType=BIGINT})) FROM 3 FOR 10000))))
+    and case_progress = 4  and DATE_FORMAT(update_time,'%Y-%m')  = DATE_FORMAT(#{salesDate,jdbcType=DATE},'%Y-%m')
+    </select>
+
+    <select id="queryMeCaseReportNum" resultType="com.lefancrm.apicenter.dto.CaseSumReportDto" parameterType="java.util.Map">
+           select SUM(service_fee) as serviceFee,SUM(loan_fee) as loanFee, count(1) as caseCount  from crm_case_info
+        WHERE customer_id in (select id from crm_customer_info where cc_id = #{userId,jdbcType=BIGINT})
+        and case_progress = 4  and DATE_FORMAT(update_time,'%Y-%m')  = DATE_FORMAT(#{salesDate,jdbcType=DATE},'%Y-%m')
+
+    </select>
+
+
+    <select id="queryReportListByOrgId"  resultMap="BaseResultMap"  parameterType="java.util.Map">
+        SELECT
+        id,
+        user_id,
+        user_name,
+        org_id,
+        org_name,
+        IFNULL(sum(sale_amount), 0) as sale_amount,
+        IFNULL(sum(visit_num), 0) as visit_num,
+        IFNULL(sum(target_num), 0) as target_num,
+        IFNULL(sum(intention_num), 0) as intention_num,
+        IFNULL(sum(sign_num), 0) as sign_num,
+        IFNULL(sum(sale_goal), 0) as sale_goal,
+        completion_rate,
+        closed_num,
+        sales_date
+        FROM
+        activity_day_report
+        WHERE
+        org_id =  #{orgId,jdbcType=BIGINT} AND
+        DATE_FORMAT(sales_date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{sDate,jdbcType=DATE},'%Y-%m-%d') AND
+        DATE_FORMAT(sales_date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{eDate,jdbcType=DATE},'%Y-%m-%d')
+        <if test="userName != null" >
+            AND user_name = #{userName,jdbcType=VARCHAR}
+        </if>
+        GROUP BY
+        user_id
+        ORDER BY
+        <if test="orderByVisitNum == 1" >
+            visit_num DESC,
+        </if>
+        <if test="orderByVisitNum == 2" >
+            visit_num ASC,
+        </if>
+        <if test="orderBySignNum == 1" >
+            sign_num DESC,
+        </if>
+        <if test="orderBySignNum == 2" >
+            sign_num ASC,
+        </if>
+        sale_amount DESC
+    </select>
+    <select id="queryCountReportByOrgId"  resultType="com.lefancrm.apicenter.dto.OrgActivityCountReportDto"  parameterType="java.util.Map">
+        SELECT
+        a.org_id as orgId,
+        a.org_name as orgName,
+        IFNULL(sum(a.sale_amount), 0) as saleAmount,
+        IFNULL(sum(a.visit_num), 0) as visitNum,
+        IFNULL(sum(a.target_num), 0) as targetNum,
+        IFNULL(sum(a.intention_num), 0) as intentionNum,
+        IFNULL(sum(a.sign_num), 0) as signNum
+        FROM
+        activity_day_report AS a
+        WHERE
+        <if test="orgId != null" >
+          a.org_id = #{orgId,jdbcType=BIGINT} AND
+        </if>
+        DATE_FORMAT(a.sales_date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{sDate,jdbcType=DATE},'%Y-%m-%d') AND
+        DATE_FORMAT(a.sales_date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{eDate,jdbcType=DATE},'%Y-%m-%d')
+        GROUP BY
+        a.org_id
+        ORDER BY
+        <if test="orderByVisitNum == 1" >
+            visitNum DESC,
+        </if>
+        <if test="orderByVisitNum == 2" >
+            visitNum ASC,
+        </if>
+        <if test="orderBySignNum == 1" >
+            signNum DESC,
+        </if>
+        <if test="orderBySignNum == 2" >
+            signNum ASC,
+        </if>
+        saleAmount DESC
+    </select>
+
+    <select id="queryOrgMoneyListById"  resultMap="BaseResultMap"  parameterType="java.util.Map">
+        SELECT
+        org_name,
+        org_id,
+        IFNULL(sum(sale_amount), 0) as sale_amount,
+        IFNULL(sum(sale_goal), 0) as sale_goal,
+        IFNULL(sum(closed_num), 0) as closed_num,
+        IFNULL(sum(sign_num), 0) as sign_num,
+        completion_rate
+        FROM
+        activity_day_report
+        WHERE
+        <if test="nMonth != null" >
+            DATE_FORMAT(sales_date,'%Y-%m') = DATE_FORMAT(#{nMonth,jdbcType=DATE},'%Y-%m') AND
+        </if>
+        <if test="sMonth != null" >
+            DATE_FORMAT(sales_date,'%Y-%m') &gt;= DATE_FORMAT(#{sMonth,jdbcType=DATE},'%Y-%m') AND
+        </if>
+        <if test="eMonth != null" >
+            DATE_FORMAT(sales_date,'%Y-%m') &lt;= DATE_FORMAT(#{eMonth,jdbcType=DATE},'%Y-%m') AND
+        </if>
+        <if test="orgId != null" >
+            org_id = #{orgId,jdbcType=BIGINT} AND
+        </if>
+        1=1
+        GROUP BY
+        org_id
+        ORDER BY
+        <if test="orderByResultPercent == 1" >
+            completion_rate DESC,
+        </if>
+        <if test="orderByResultPercent == 2" >
+            completion_rate ASC ,
+        </if>
+        sale_amount DESC
+    </select>
+
+    <select id="queryOrgCCMoneyListById"  resultMap="BaseResultMap"  parameterType="java.util.Map">
+        SELECT
+        user_name,
+        org_id,
+        org_name,
+        IFNULL(sum(sale_amount), 0) as sale_amount,
+        IFNULL(sum(sale_goal), 0) as sale_goal,
+        completion_rate,
+        IFNULL(sum(visit_num), 0) as visit_num,
+        IFNULL(sum(target_num), 0) as target_num,
+        IFNULL(sum(intention_num), 0) as intention_num,
+        IFNULL(sum(sign_num), 0) as sign_num,
+        IFNULL(sum(closed_num), 0) as closed_num,
+        sales_date,
+        id,
+        user_id
+        FROM activity_day_report
+        WHERE
+        <if test="nMonth != null" >
+            DATE_FORMAT(sales_date,'%Y-%m') = DATE_FORMAT(#{nMonth,jdbcType=DATE},'%Y-%m') AND
+        </if>
+        <if test="sMonth != null" >
+            DATE_FORMAT(sales_date,'%Y-%m') &gt;= DATE_FORMAT(#{sMonth,jdbcType=DATE},'%Y-%m') AND
+        </if>
+        <if test="eMonth != null" >
+            DATE_FORMAT(sales_date,'%Y-%m') &lt;= DATE_FORMAT(#{eMonth,jdbcType=DATE},'%Y-%m') AND
+        </if>
+        <if test="orgId != null" >
+            org_id = #{orgId,jdbcType=BIGINT} AND
+        </if>
+        <if test="userName != null" >
+            user_name = #{userName,jdbcType=VARCHAR} AND
+        </if>
+        1=1
+        GROUP BY
+        user_id
+        ORDER BY
+        <if test="orderByResultPercent == 1" >
+            completion_rate DESC,
+        </if>
+        <if test="orderByResultPercent == 2" >
+            completion_rate ASC ,
+        </if>
+        sale_amount DESC
+    </select>
+    <select id="queryOutNumberByUserId" parameterType="java.util.Map" resultType="java.lang.Integer">
+       select COUNT(0) from (SELECT
+        IFNULL(SUM(a.sale_amount),0) as sale_amount
+        FROM
+        activity_day_report a
+        WHERE
+        a.org_id = (
+        SELECT
+        user_info.org_id
+        FROM
+
+        `user_info`
+        WHERE
+        user_info.user_id = #{objectId,jdbcType=BIGINT}
+        )
+        AND DATE_FORMAT(sales_date, '%Y-%m') =  DATE_FORMAT(#{salesDate,jdbcType=DATE},'%Y-%m')
+        GROUP BY
+        a.user_id ) as temp  where temp.sale_amount &lt; (
+        SELECT
+        IFNULL(SUM(activity_day_report.sale_amount),0)
+        FROM
+        `activity_day_report`
+        WHERE
+        activity_day_report.user_id = #{objectId,jdbcType=BIGINT}
+        AND DATE_FORMAT(sales_date,'%Y-%m')  = DATE_FORMAT(#{salesDate,jdbcType=DATE},'%Y-%m')
+        )
+    </select>
+</mapper>

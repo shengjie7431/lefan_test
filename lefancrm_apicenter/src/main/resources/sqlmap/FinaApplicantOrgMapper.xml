@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaApplicantOrgMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaApplicantOrg" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="fina_id" property="finaId" jdbcType="BIGINT" />
+    <result column="fina_info_id" property="finaInfoId" jdbcType="BIGINT" />
+    <result column="survey_org_id" property="surveyOrgId" jdbcType="BIGINT" />
+    <result column="survey_org_name" property="surveyOrgName" jdbcType="VARCHAR" />
+    <result column="fina_org_state" property="finaOrgState" jdbcType="INTEGER" />
+    <result column="org_assign_time" property="orgAssignTime" jdbcType="TIMESTAMP" />
+    <result column="org_submit_time" property="orgSubmitTime" jdbcType="TIMESTAMP" />
+    <result column="org_end_time" property="orgEndTime" jdbcType="TIMESTAMP" />
+    <result column="org_aging" property="orgAging" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="org_task_type" property="orgTaskType" jdbcType="INTEGER" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="over_aging" property="overAging" jdbcType="DOUBLE" />
+    <result column="finsh_aging" property="finshAging" jdbcType="DOUBLE" />
+    <result column="service_money" property="serviceMoney" jdbcType="DOUBLE" />
+    <result column="score" property="score" jdbcType="DOUBLE" />
+    <result column="task_desc" property="taskDesc" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fina_id, fina_info_id, survey_org_id, survey_org_name, fina_org_state, org_assign_time, 
+    org_submit_time, org_end_time, org_aging, create_time, create_by, org_task_type, 
+    delete_flag, over_aging, finsh_aging, service_money, score, task_desc, update_time, 
+    update_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_applicant_org
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_applicant_org
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantOrg" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_applicant_org (fina_id, fina_info_id, survey_org_id, 
+      survey_org_name, fina_org_state, org_assign_time, 
+      org_submit_time, org_end_time, org_aging, 
+      create_time, create_by, org_task_type, 
+      delete_flag, over_aging, finsh_aging, 
+      service_money, score, task_desc, 
+      update_time, update_by)
+    values (#{finaId,jdbcType=BIGINT}, #{finaInfoId,jdbcType=BIGINT}, #{surveyOrgId,jdbcType=BIGINT}, 
+      #{surveyOrgName,jdbcType=VARCHAR}, #{finaOrgState,jdbcType=INTEGER}, #{orgAssignTime,jdbcType=TIMESTAMP}, 
+      #{orgSubmitTime,jdbcType=TIMESTAMP}, #{orgEndTime,jdbcType=TIMESTAMP}, #{orgAging,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{orgTaskType,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=INTEGER}, #{overAging,jdbcType=DOUBLE}, #{finshAging,jdbcType=DOUBLE}, 
+      #{serviceMoney,jdbcType=DOUBLE}, #{score,jdbcType=DOUBLE}, #{taskDesc,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantOrg" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_applicant_org
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        fina_id,
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id,
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id,
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name,
+      </if>
+      <if test="finaOrgState != null" >
+        fina_org_state,
+      </if>
+      <if test="orgAssignTime != null" >
+        org_assign_time,
+      </if>
+      <if test="orgSubmitTime != null" >
+        org_submit_time,
+      </if>
+      <if test="orgEndTime != null" >
+        org_end_time,
+      </if>
+      <if test="orgAging != null" >
+        org_aging,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="orgTaskType != null" >
+        org_task_type,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="overAging != null" >
+        over_aging,
+      </if>
+      <if test="finshAging != null" >
+        finsh_aging,
+      </if>
+      <if test="serviceMoney != null" >
+        service_money,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="taskDesc != null" >
+        task_desc,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgId != null" >
+        #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="finaOrgState != null" >
+        #{finaOrgState,jdbcType=INTEGER},
+      </if>
+      <if test="orgAssignTime != null" >
+        #{orgAssignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgSubmitTime != null" >
+        #{orgSubmitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgEndTime != null" >
+        #{orgEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgAging != null" >
+        #{orgAging,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="orgTaskType != null" >
+        #{orgTaskType,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="overAging != null" >
+        #{overAging,jdbcType=DOUBLE},
+      </if>
+      <if test="finshAging != null" >
+        #{finshAging,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceMoney != null" >
+        #{serviceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="taskDesc != null" >
+        #{taskDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantOrg" >
+    update fina_applicant_org
+    <set >
+      <if test="finaId != null" >
+        fina_id = #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgId != null" >
+        survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyOrgName != null" >
+        survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="finaOrgState != null" >
+        fina_org_state = #{finaOrgState,jdbcType=INTEGER},
+      </if>
+      <if test="orgAssignTime != null" >
+        org_assign_time = #{orgAssignTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgSubmitTime != null" >
+        org_submit_time = #{orgSubmitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgEndTime != null" >
+        org_end_time = #{orgEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgAging != null" >
+        org_aging = #{orgAging,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="orgTaskType != null" >
+        org_task_type = #{orgTaskType,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="overAging != null" >
+        over_aging = #{overAging,jdbcType=DOUBLE},
+      </if>
+      <if test="finshAging != null" >
+        finsh_aging = #{finshAging,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceMoney != null" >
+        service_money = #{serviceMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="taskDesc != null" >
+        task_desc = #{taskDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaApplicantOrg" >
+    update fina_applicant_org
+    set fina_id = #{finaId,jdbcType=BIGINT},
+      fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      survey_org_id = #{surveyOrgId,jdbcType=BIGINT},
+      survey_org_name = #{surveyOrgName,jdbcType=VARCHAR},
+      fina_org_state = #{finaOrgState,jdbcType=INTEGER},
+      org_assign_time = #{orgAssignTime,jdbcType=TIMESTAMP},
+      org_submit_time = #{orgSubmitTime,jdbcType=TIMESTAMP},
+      org_end_time = #{orgEndTime,jdbcType=TIMESTAMP},
+      org_aging = #{orgAging,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      org_task_type = #{orgTaskType,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      over_aging = #{overAging,jdbcType=DOUBLE},
+      finsh_aging = #{finshAging,jdbcType=DOUBLE},
+      service_money = #{serviceMoney,jdbcType=DOUBLE},
+      score = #{score,jdbcType=DOUBLE},
+      task_desc = #{taskDesc,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="surveyOrgId != null" >
+            and a.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+        </if>
+        <if test="finaInfoId != null" >
+            and a.fina_info_id = #{finaInfoId,jdbcType=BIGINT}
+        </if>
+        <if test="orgTaskType != null" >
+            and a.org_task_type = #{orgTaskType,jdbcType=INTEGER}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        a.*
+        from fina_applicant_org a
+        <include refid="joins" />
+        where a.delete_flag =0
+        <include refid="wheres" />
+        order by a.id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from fina_applicant_org a
+        <include refid="joins" />
+        where a.delete_flag =0
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectByOne" parameterType="map" resultMap="BaseResultMap">
+        select a.*
+        from fina_applicant_org a
+        <include refid="joins" />
+        where a.delete_flag =0
+        <if test="surveyOrgId != null" >
+            and a.survey_org_id = #{surveyOrgId,jdbcType=BIGINT}
+        </if>
+        <if test="finaInfoId != null" >
+            and a.fina_info_id = #{finaInfoId,jdbcType=BIGINT}
+        </if>
+        <if test="orgTaskType != null" >
+            and a.org_task_type = #{orgTaskType,jdbcType=INTEGER}
+        </if>
+        order by a.id desc limit 1;
+    </select>
+
+
+  <select id="serviceMoneyBySettlementId" parameterType="java.util.Map" resultType="java.lang.Double">
+    select sum(ifnull(o.service_money,0)) from fina_applicant_org o
+    left join fina_settlement_applicant a on o.fina_info_id = a.fina_info_id
+    where a.settlement_info_id = #{settlementId,jdbcType=BIGINT} and o.delete_flag = 0
+  </select>
+</mapper>

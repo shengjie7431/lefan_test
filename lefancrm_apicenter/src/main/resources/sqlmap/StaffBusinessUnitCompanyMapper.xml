@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.StaffBusinessUnitCompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.StaffBusinessUnitCompany" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="business_unit_id" property="businessUnitId" jdbcType="BIGINT" />
+    <result column="business_unit_name" property="businessUnitName" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="BIGINT" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, business_unit_id, business_unit_name, company_id, company_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from staff_business_unit_company
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from staff_business_unit_company
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.StaffBusinessUnitCompany" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_business_unit_company (business_unit_id, business_unit_name, 
+      company_id, company_name)
+    values (#{businessUnitId,jdbcType=BIGINT}, #{businessUnitName,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=BIGINT}, #{companyName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.StaffBusinessUnitCompany" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_business_unit_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="businessUnitId != null" >
+        business_unit_id,
+      </if>
+      <if test="businessUnitName != null" >
+        business_unit_name,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="businessUnitId != null" >
+        #{businessUnitId,jdbcType=BIGINT},
+      </if>
+      <if test="businessUnitName != null" >
+        #{businessUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.StaffBusinessUnitCompany" >
+    update staff_business_unit_company
+    <set >
+      <if test="businessUnitId != null" >
+        business_unit_id = #{businessUnitId,jdbcType=BIGINT},
+      </if>
+      <if test="businessUnitName != null" >
+        business_unit_name = #{businessUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.StaffBusinessUnitCompany" >
+    update staff_business_unit_company
+    set business_unit_id = #{businessUnitId,jdbcType=BIGINT},
+      business_unit_name = #{businessUnitName,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=BIGINT},
+      company_name = #{companyName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="businessUnitId != null" >
+            and business_unit_id = #{businessUnitId,jdbcType=BIGINT}
+        </if>
+        <if test="companyId != null" >
+            and company_id = #{companyId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from staff_business_unit_company
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from staff_business_unit_company
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+
+
+    <delete id="deleteByInfo" parameterType="map" >
+        delete from staff_business_unit_company
+        where 1=1
+        <include refid="wheres" />
+    </delete>
+</mapper>

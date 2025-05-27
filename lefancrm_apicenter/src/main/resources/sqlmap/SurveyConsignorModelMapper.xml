@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyConsignorModelMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyConsignorModel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="model_id" property="modelId" jdbcType="BIGINT" />
+    <result column="model_name" property="modelName" jdbcType="VARCHAR" />
+    <result column="consignor_id" property="consignorId" jdbcType="BIGINT" />
+    <result column="consignor_name" property="consignorName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, model_id, model_name, consignor_id, consignor_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_consignor_model
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_consignor_model
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyConsignorModel" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_consignor_model (model_id, model_name, consignor_id, 
+      consignor_name)
+    values (#{modelId,jdbcType=BIGINT}, #{modelName,jdbcType=VARCHAR}, #{consignorId,jdbcType=BIGINT}, 
+      #{consignorName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignorModel" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_consignor_model
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="modelName != null" >
+        model_name,
+      </if>
+      <if test="consignorId != null" >
+        consignor_id,
+      </if>
+      <if test="consignorName != null" >
+        consignor_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modelId != null" >
+        #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="modelName != null" >
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="consignorId != null" >
+        #{consignorId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorName != null" >
+        #{consignorName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignorModel" >
+    update survey_consignor_model
+    <set >
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="modelName != null" >
+        model_name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="consignorId != null" >
+        consignor_id = #{consignorId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorName != null" >
+        consignor_name = #{consignorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyConsignorModel" >
+    update survey_consignor_model
+    set model_id = #{modelId,jdbcType=BIGINT},
+      model_name = #{modelName,jdbcType=VARCHAR},
+      consignor_id = #{consignorId,jdbcType=BIGINT},
+      consignor_name = #{consignorName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="modelId != null" >
+            and model_id = #{modelId,jdbcType=BIGINT}
+        </if>
+        <if test="consignorId != null" >
+            and consignor_id = #{consignorId,jdbcType=BIGINT}
+        </if>
+        <if test="consignorName != null" >
+            and consignor_name like CONCAT(CONCAT('%',#{consignorName,jdbcType=VARCHAR}), '%')
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_consignor_model
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_consignor_model
+        <include refid="joins" />
+        where  1=1
+        <include refid="wheres" />
+    </select>
+
+    <delete id="deleteByInfo" parameterType="map" >
+        delete from survey_consignor_model
+        where model_id = #{modelId,jdbcType=BIGINT}
+    </delete>
+
+    <select id="selectByConsignorId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_consignor_model
+        where consignor_id = #{consignorId,jdbcType=BIGINT} limit 1
+    </select>
+</mapper>

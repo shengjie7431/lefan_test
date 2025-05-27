@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.StaffOrganProductMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.StaffOrganProduct" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="organ_id" property="organId" jdbcType="BIGINT" />
+    <result column="organ_name" property="organName" jdbcType="VARCHAR" />
+    <result column="product_enum_id" property="productEnumId" jdbcType="BIGINT" />
+    <result column="product_enum_name" property="productEnumName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, organ_id, organ_name, product_enum_id, product_enum_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from staff_organ_product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from staff_organ_product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.StaffOrganProduct" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_organ_product (organ_id, organ_name, product_enum_id, 
+      product_enum_name)
+    values (#{organId,jdbcType=BIGINT}, #{organName,jdbcType=VARCHAR}, #{productEnumId,jdbcType=BIGINT}, 
+      #{productEnumName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.StaffOrganProduct" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into staff_organ_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="organId != null" >
+        organ_id,
+      </if>
+      <if test="organName != null" >
+        organ_name,
+      </if>
+      <if test="productEnumId != null" >
+        product_enum_id,
+      </if>
+      <if test="productEnumName != null" >
+        product_enum_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="organId != null" >
+        #{organId,jdbcType=BIGINT},
+      </if>
+      <if test="organName != null" >
+        #{organName,jdbcType=VARCHAR},
+      </if>
+      <if test="productEnumId != null" >
+        #{productEnumId,jdbcType=BIGINT},
+      </if>
+      <if test="productEnumName != null" >
+        #{productEnumName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.StaffOrganProduct" >
+    update staff_organ_product
+    <set >
+      <if test="organId != null" >
+        organ_id = #{organId,jdbcType=BIGINT},
+      </if>
+      <if test="organName != null" >
+        organ_name = #{organName,jdbcType=VARCHAR},
+      </if>
+      <if test="productEnumId != null" >
+        product_enum_id = #{productEnumId,jdbcType=BIGINT},
+      </if>
+      <if test="productEnumName != null" >
+        product_enum_name = #{productEnumName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.StaffOrganProduct" >
+    update staff_organ_product
+    set organ_id = #{organId,jdbcType=BIGINT},
+      organ_name = #{organName,jdbcType=VARCHAR},
+      product_enum_id = #{productEnumId,jdbcType=BIGINT},
+      product_enum_name = #{productEnumName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+     p.*,
+     o.acc_out_equal accOutEqual
+     from staff_organ_product p
+     left join staff_organ o on p.organ_id = o.id
+     where o.delete_flag = 0 and o.state = 0
+     <if test="staffOrgId != null">
+        and o.id = #{staffOrgId,jdbcType=BIGINT}
+     </if>
+     <if test="organAttribute != null">
+       and o.organ_attribute = #{organAttribute,jdbcType=INTEGER}
+     </if>
+     <if test="orgIds != null">
+       and find_in_set(o.id, #{orgIds,jdbcType=VARCHAR})
+     </if>
+     order by p.organ_id,p.product_enum_id
+  </select>
+
+  <select id="ywData" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.think.YWDTO">
+    select f.department_id orgId,f.department_name orgName,d.survey_info_id surveyInfoId,
+    (case o.services_id when 13 then 1 else 2 end) as serviceType,
+    n.org_attr orgAttr,n.sharp sharp,d.acc_score accScore,
+    (case n.org_attr when 1 then o.inscompany_money else o.inscompany_submit_money end) as entrustMoney,
+    ifnull(o.survey_money,0) accMoney
+    from survey_case_direction d
+    left join survey_assign_org o on d.survey_assorg_case_id = o.id
+    left join survey_franchisee f on o.survey_org_id = f.id
+    left join survey_risk_case_info r on d.survey_info_id = r.id
+    left join survey_consignor n on r.entrust_org_id = n.id
+    where d.delete_flag = 0 and o.delete_flag = 0 and r.delete_flag = 0
+    and f.department_id is not null
+    <if test="staffOrgId != null">
+      and f.department_id = #{staffOrgId}
+    </if>
+    <if test="searchTimeType == 1">
+      and r.entrust_report_start_date is not null
+      <if test="startTime != null">
+        and date_format(r.entrust_report_start_date,'%Y-%m') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+      </if>
+      <if test="endTime != null">
+        and date_format(r.entrust_report_start_date,'%Y-%m') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+      </if>
+    </if>
+    <if test="searchTimeType == 2">
+      and r.entrust_report_end_date is not null
+      <if test="startTime != null">
+        and date_format(r.entrust_report_end_date,'%Y-%m') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+      </if>
+      <if test="endTime != null">
+        and date_format(r.entrust_report_end_date,'%Y-%m') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+      </if>
+    </if>
+  </select>
+  
+  <select id="srBillData" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.think.SRDTO">
+    select i.billing_money billMoney,(i.billing_money - i.billing_money / b.tax_rate) billMoneyTax,e.enum_code proId,e.enum_name proName,b.staff_org_id orgId,b.staff_org_name orgName
+    from billing_apply_imgs i
+    left join billing_apply b on i.bill_id = b.id
+    left join common_enum e on b.billing_enum = e.enum_code and e.parent_id = 76
+    where i.state in (1,3) and i.create_time is not null and b.staff_org_id is not null
+    <if test="startTime != null">
+      and date_format(i.create_time,'%Y-%m') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="endTime != null">
+      and date_format(i.create_time,'%Y-%m') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="staffOrgId != null">
+      and b.staff_org_id = #{staffOrgId}
+    </if>
+  </select>
+  <select id="srAccData" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.think.SRDTO">
+    select a.money accMoney,a.money * b.tax_rate accMoneyTax,e.enum_code proId,e.enum_name proName,b.staff_org_id orgId,b.staff_org_name orgName
+    from billing_apply_accounts a
+    left join billing_apply b on a.bill_id = b.id
+    left join common_enum e on b.billing_enum = e.enum_code and e.parent_id = 76
+    where a.state = 1 and a.create_time is not null and b.staff_org_id is not null
+    <if test="startTime != null">
+      and date_format(a.account_time,'%Y-%m') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="endTime != null">
+      and date_format(a.account_time,'%Y-%m') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="staffOrgId != null">
+      and b.staff_org_id = #{staffOrgId}
+    </if>
+  </select>
+
+  <select id="zc1Data" resultType="com.lefancrm.apicenter.dto.think.DetailDTO" parameterType="java.util.Map">
+    select c.company_id companyId,a.user_id userId,a.real_name userName,a.staff_state staffState,o.id orgId,o.name orgName,o.organ_attribute organAttribute,p.cost_type costType,
+    m.gz1,m.gz2,m.gz3,m.gz4,
+    n.jx1,n.jx2,n.jx3,n.jx4,n.jx5,n.jx6,n.jx7,n.jx8,n.jx9,
+    p.qdMoney,
+    u.dk1,u.dk2,u.dk3,u.dk4,u.dk5,u.dk6,u.dk7,u.dk8
+    from staff_personnel_info a
+    left join staff_organ o on a.organ_id = o.id
+    left join staff_job_post p on a.job_post_id = p.id
+    left join staff_budget_company_organ c on c.organ_id = o.id
+    left join (
+        select s.staff_personnel_id,sum(s.real_wages) gz1,sum(s.company_money_sub) gz2,sum(s.personal_money_sub) gz3,sum(s.individual_tax_change) gz4
+        from staff_pay_personnel_slip s
+        left join staff_pay_slip p on s.staff_pay_slip_id = p.id
+        where p.delete_flag = 0
+        <if test="startTime != null">
+          AND p.work_time &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+        </if>
+        <if test="endTime != null">
+          AND p.work_time &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+        </if>
+        group by s.staff_personnel_id
+    ) m on a.id = m.staff_personnel_id
+    left join (
+          select s.staff_personnel_id,sum(s.fixed_perf_pay) jx1,sum(s.travel_allowance_pay) jx2,sum(s.manage_perf_pay) jx3,
+          sum(s.real_assess_kpi) jx4,sum(s.integral_pay) jx5,sum(s.examine_pay) jx6,
+          sum(s.late_early_money + s.absenteeism_money + s.leave_money + s.sick_leave_money) jx7,
+          sum(s.other_pay + s.other_cut_pay) jx8,
+          sum(s.case_sub_money) jx9
+          from staff_performance_personnel s
+          left join staff_performance p on s.staff_performance_id = p.id
+          where p.delete_flag = 0 and p.work_time is not null
+          <if test="startTime != null">
+            AND p.work_time &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+          </if>
+          <if test="endTime != null">
+            AND p.work_time &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+          </if>
+        group by s.staff_personnel_id
+    ) n on a.id = n.staff_personnel_id
+    left join (
+          select n.survey_user_id,sum(IFNULL(n.chnannel_money,0)) qdMoney from survey_channel_cost_new n
+          where n.delete_flag = 0
+          <if test="startTime != null">
+            AND date_format(n.operation_time,'%Y-%m') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+          </if>
+          <if test="endTime != null">
+            AND date_format(n.operation_time,'%Y-%m') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+          </if>
+          group by n.survey_user_id
+    ) p on a.user_id = p.survey_user_id
+    left join (
+          select s.survey_user_id,sum(ifnull(r.medical_history_money + r.other_money,0)) dk1,sum(r.troubleshooting_money) dk2,sum(r.opc_troubleshooting_money) dk3,
+          sum(r.printing_money) dk4,sum(r.cross_driving_money) dk5,sum(r.self_driving_money) dk6,sum(r.cityin_driving_money) dk7,sum(r.accommodatio_money) dk8
+          from survey_clock_re_info r
+          left join survey_user_clock c on r.clock_id = c.id
+          left join survey_investigator_re_info s on c.re_info_id = s.id
+          where 1 = 1
+          <if test="startTime != null">
+            AND date_format(c.clock_time,'%Y-%m') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+          </if>
+          <if test="endTime != null">
+            AND date_format(c.clock_time,'%Y-%m') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+          </if>
+          group by s.survey_user_id
+    ) u on a.user_id = u.survey_user_id
+    where a.delete_flag = 0
+  </select>
+  <select id="zc1CompanyData" resultType="com.lefancrm.apicenter.dto.think.DetailDTO" parameterType="java.util.Map">
+    select a.user_id userId,a.real_name userName,a.staff_state staffState,o.id orgId,o.name orgName,co.company_id companyId, co.company_name companyName,o.organ_attribute organAttribute,p.cost_type costType,
+    m.gz1,m.gz2,m.gz3,m.gz4,
+    n.jx1,n.jx2,n.jx3,n.jx4,n.jx5,n.jx6,n.jx7,n.jx8,n.jx9,
+    p.qdMoney,
+    u.dk1,u.dk2,u.dk3,u.dk4,u.dk5,u.dk6,u.dk7,u.dk8
+    from staff_personnel_info a
+    left join staff_organ o on a.organ_id = o.id
+    left join staff_budget_company_organ co on co.organ_id=o.id
+    left join staff_job_post p on a.job_post_id = p.id
+    left join (
+    select s.staff_personnel_id,sum(s.real_wages) gz1,sum(s.company_money_sub) gz2,sum(s.personal_money_sub) gz3,sum(s.individual_tax_change) gz4
+    from staff_pay_personnel_slip s
+    left join staff_pay_slip p on s.staff_pay_slip_id = p.id
+    where p.delete_flag = 0
+    <if test="startTime != null">
+      AND p.work_time &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="endTime != null">
+      AND p.work_time &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    group by s.staff_personnel_id
+    ) m on a.id = m.staff_personnel_id
+    left join (
+    select s.staff_personnel_id,sum(s.fixed_perf_pay) jx1,sum(s.travel_allowance_pay) jx2,sum(s.manage_perf_pay) jx3,
+    sum(s.real_assess_kpi) jx4,sum(s.integral_pay) jx5,sum(s.examine_pay) jx6,
+    sum(s.late_early_money + s.absenteeism_money + s.leave_money + s.sick_leave_money) jx7,
+    sum(s.other_pay + s.other_cut_pay) jx8,
+    sum(s.case_sub_money) jx9
+    from staff_performance_personnel s
+    left join staff_performance p on s.staff_performance_id = p.id
+    where p.delete_flag = 0 and p.work_time is not null
+    <if test="startTime != null">
+      AND p.work_time &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="endTime != null">
+      AND p.work_time &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    group by s.staff_personnel_id
+    ) n on a.id = n.staff_personnel_id
+    left join (
+    select n.survey_user_id,sum(IFNULL(n.chnannel_money,0)) qdMoney from survey_channel_cost_new n
+    where n.delete_flag = 0
+    <if test="startTime != null">
+      AND date_format(n.operation_time,'%Y-%m') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="endTime != null">
+      AND date_format(n.operation_time,'%Y-%m') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    group by n.survey_user_id
+    ) p on a.user_id = p.survey_user_id
+    left join (
+    select s.survey_user_id,sum(ifnull(r.medical_history_money + r.other_money,0)) dk1,sum(r.troubleshooting_money) dk2,sum(r.opc_troubleshooting_money) dk3,
+    sum(r.printing_money) dk4,sum(r.cross_driving_money) dk5,sum(r.self_driving_money) dk6,sum(r.cityin_driving_money) dk7,sum(r.accommodatio_money) dk8
+    from survey_clock_re_info r
+    left join survey_user_clock c on r.clock_id = c.id
+    left join survey_investigator_re_info s on c.re_info_id = s.id
+    where 1 = 1
+    <if test="startTime != null">
+      AND date_format(c.clock_time,'%Y-%m') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="endTime != null">
+      AND date_format(c.clock_time,'%Y-%m') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    group by s.survey_user_id
+    ) u on a.user_id = u.survey_user_id
+    where a.delete_flag = 0
+  </select>
+  <select id="zc2Data" resultType="com.lefancrm.apicenter.dto.think.DetailDTO" parameterType="java.util.Map">
+    select t.department_id orgId,o.name orgName,o.organ_attribute organAttribute,p.cost_type costType,
+    max(case t.cost_type_id when 56 then t.cost_money end) bxCb1,
+    max(case t.cost_type_id when 16 then t.cost_money end) bxGl1,
+    max(case t.cost_type_id when 22 then t.cost_money end) bxGl2,
+    max(case t.cost_type_id when 40 then t.cost_money end) bxGl3,
+    max(case t.cost_type_id when 24 then t.cost_money end) bxGl4,
+    max(case t.cost_type_id when 28 then t.cost_money end) bxGl5,
+    max(case t.cost_type_id when 29 then t.cost_money end) bxGl6,
+    max(case t.cost_type_id when 30 then t.cost_money end) bxGl7,
+    max(case t.cost_type_id when 31 then t.cost_money end) bxGl8,
+    max(case t.cost_type_id when 54 then t.cost_money end) bxGl9,
+    max(case t.cost_type_id when 57 then t.cost_money end) bxGl10,
+    max(case t.cost_type_id when 58 then t.cost_money end) bxGl11,
+    max(case t.cost_type_id when 52 then t.cost_money end) bxGl12,
+    max(case t.cost_type_id when 53 then t.cost_money end) bxGl13,
+    max(case t.cost_type_id when 32 then t.cost_money end) bxGl14,
+    max(case t.cost_type_id when 33 then t.cost_money end) bxGl15,
+    max(case t.cost_type_id when 34 then t.cost_money end) bxGl16,
+    max(case t.cost_type_id when 35 then t.cost_money end) bxGl17,
+    max(case t.cost_type_id when 36 then t.cost_money end) bxGl18,
+    max(case t.cost_type_id when 37 then t.cost_money end) bxGl19,
+    max(case t.cost_type_id when 38 then t.cost_money end) bxGl20,
+    max(case t.cost_type_id when 39 then t.cost_money end) bxGl21,
+    max(case t.cost_type_id when 41 then t.cost_money end) bxGl22,
+    max(case t.cost_type_id when 42 then t.cost_money end) bxGl23,
+    max(case t.cost_type_id when 43 then t.cost_money end) bxGl24,
+    max(case t.cost_type_id when 45 then t.cost_money end) bxGl25,
+    max(case t.cost_type_id when 46 then t.cost_money end) bxGl26,
+    max(case t.cost_type_id when 47 then t.cost_money end) bxGl27,
+    max(case t.cost_type_id when 48 then t.cost_money end) bxGl28,
+    max(case t.cost_type_id when 49 then t.cost_money end) bxGl29,
+    max(case t.cost_type_id when 51 then t.cost_money end) bxGl30,
+    max(case t.cost_type_id when 55 then t.cost_money when 70 then t.cost_money end) bxGl31,
+    max(case t.cost_type_id when 59 then t.cost_money end) bxGl32,
+    max(case t.cost_type_id when 60 then t.cost_money end) bxGl33,
+    max(case t.cost_type_id when 61 then t.cost_money end) bxGl34,
+    max(case t.cost_type_id when 26 then t.cost_money end) bxGl35,
+
+    max(case t.cost_type_id when 62 then t.cost_money end) bxXs1,
+    max(case t.cost_type_id when 63 then t.cost_money end) bxXs2,
+    max(case t.cost_type_id when 50 then t.cost_money end) bxXs3,
+    max(case t.cost_type_id when 44 then t.cost_money end) bxXs4,
+    max(case t.cost_type_id when 64 then t.cost_money end) bxXs5,
+    max(case t.cost_type_id when 65 then t.cost_money end) bxXs6,
+    max(case t.cost_type_id when 66 then t.cost_money end) bxXs7,
+    max(case t.cost_type_id when 67 then t.cost_money end) bxXs8,
+    max(case t.cost_type_id when 68 then t.cost_money end) bxXs9,
+    max(case t.cost_type_id when 69 then t.cost_money end) bxXs10
+    from (
+      select
+      d.department_id,d.cost_type_id,sum(d.cost_money) cost_money
+      from financial_cost_org_details d
+      left join financial_re_apply a on d.financial_re_apply_id = a.id
+      where a.delete_flag = 0 and a.pay_time is not null
+      <if test="startTime != null">
+        AND date_format(a.pay_time,'%Y-%m') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+      </if>
+      <if test="endTime != null">
+        AND date_format(a.pay_time,'%Y-%m') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+      </if>
+      group by d.department_id,d.cost_type_id
+    ) t
+    left join staff_organ o on t.department_id = o.id
+    left join staff_personnel_info i on o.organ_manager_user_id = i.user_id
+    left join staff_job_post p on i.job_post_id = p.id
+    where t.department_id is not null
+    group  by t.department_id
+  </select>
+  <select id="zc2CompanyData" resultType="com.lefancrm.apicenter.dto.think.DetailDTO" parameterType="java.util.Map">
+    select t.department_id orgId,o.name orgName,co.company_id companyId, co.company_name companyName,o.organ_attribute organAttribute,p.cost_type costType,
+    max(case t.cost_type_id when 56 then t.cost_money end) bxCb1,
+    max(case t.cost_type_id when 16 then t.cost_money end) bxGl1,
+    max(case t.cost_type_id when 22 then t.cost_money end) bxGl2,
+    max(case t.cost_type_id when 40 then t.cost_money end) bxGl3,
+    max(case t.cost_type_id when 24 then t.cost_money end) bxGl4,
+    max(case t.cost_type_id when 28 then t.cost_money end) bxGl5,
+    max(case t.cost_type_id when 29 then t.cost_money end) bxGl6,
+    max(case t.cost_type_id when 30 then t.cost_money end) bxGl7,
+    max(case t.cost_type_id when 31 then t.cost_money end) bxGl8,
+    max(case t.cost_type_id when 54 then t.cost_money end) bxGl9,
+    max(case t.cost_type_id when 57 then t.cost_money end) bxGl10,
+    max(case t.cost_type_id when 58 then t.cost_money end) bxGl11,
+    max(case t.cost_type_id when 52 then t.cost_money end) bxGl12,
+    max(case t.cost_type_id when 53 then t.cost_money end) bxGl13,
+    max(case t.cost_type_id when 32 then t.cost_money end) bxGl14,
+    max(case t.cost_type_id when 33 then t.cost_money end) bxGl15,
+    max(case t.cost_type_id when 34 then t.cost_money end) bxGl16,
+    max(case t.cost_type_id when 35 then t.cost_money end) bxGl17,
+    max(case t.cost_type_id when 36 then t.cost_money end) bxGl18,
+    max(case t.cost_type_id when 37 then t.cost_money end) bxGl19,
+    max(case t.cost_type_id when 38 then t.cost_money end) bxGl20,
+    max(case t.cost_type_id when 39 then t.cost_money end) bxGl21,
+    max(case t.cost_type_id when 41 then t.cost_money end) bxGl22,
+    max(case t.cost_type_id when 42 then t.cost_money end) bxGl23,
+    max(case t.cost_type_id when 43 then t.cost_money end) bxGl24,
+    max(case t.cost_type_id when 45 then t.cost_money end) bxGl25,
+    max(case t.cost_type_id when 46 then t.cost_money end) bxGl26,
+    max(case t.cost_type_id when 47 then t.cost_money end) bxGl27,
+    max(case t.cost_type_id when 48 then t.cost_money end) bxGl28,
+    max(case t.cost_type_id when 49 then t.cost_money end) bxGl29,
+    max(case t.cost_type_id when 51 then t.cost_money end) bxGl30,
+    max(case t.cost_type_id when 55 then t.cost_money when 70 then t.cost_money end) bxGl31,
+    max(case t.cost_type_id when 59 then t.cost_money end) bxGl32,
+    max(case t.cost_type_id when 60 then t.cost_money end) bxGl33,
+    max(case t.cost_type_id when 61 then t.cost_money end) bxGl34,
+    max(case t.cost_type_id when 26 then t.cost_money end) bxGl35,
+
+    max(case t.cost_type_id when 62 then t.cost_money end) bxXs1,
+    max(case t.cost_type_id when 63 then t.cost_money end) bxXs2,
+    max(case t.cost_type_id when 50 then t.cost_money end) bxXs3,
+    max(case t.cost_type_id when 44 then t.cost_money end) bxXs4,
+    max(case t.cost_type_id when 64 then t.cost_money end) bxXs5,
+    max(case t.cost_type_id when 65 then t.cost_money end) bxXs6,
+    max(case t.cost_type_id when 66 then t.cost_money end) bxXs7,
+    max(case t.cost_type_id when 67 then t.cost_money end) bxXs8,
+    max(case t.cost_type_id when 68 then t.cost_money end) bxXs9,
+    max(case t.cost_type_id when 69 then t.cost_money end) bxXs10
+    from (
+    select
+    d.department_id,d.cost_type_id,sum(d.cost_money) cost_money
+    from financial_cost_org_details d
+    left join financial_re_apply a on d.financial_re_apply_id = a.id
+    where a.delete_flag = 0 and a.pay_time is not null
+    <if test="startTime != null">
+      AND date_format(a.pay_time,'%Y-%m') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="endTime != null">
+      AND date_format(a.pay_time,'%Y-%m') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    group by d.department_id,d.cost_type_id
+    ) t
+    left join staff_organ o on t.department_id = o.id
+    left join staff_budget_company_organ co on co.organ_id=o.id
+    left join staff_personnel_info i on o.organ_manager_user_id = i.user_id
+    left join staff_job_post p on i.job_post_id = p.id
+    where t.department_id is not null
+    group  by t.department_id
+  </select>
+
+  <select id="selectOrganProByParam" parameterType="map" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from staff_organ_product
+    where organ_id = #{organId,jdbcType=BIGINT} and product_enum_id = #{productEnumId,jdbcType=BIGINT} limit 1
+  </select>
+  <select id="listByParam" parameterType="map" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from staff_organ_product
+    where 1=1
+    <if test="organId != null">
+     and  organ_id = #{organId,jdbcType=BIGINT}
+    </if>
+    <if test="productEnumId != null">
+      and product_enum_id = #{productEnumId,jdbcType=BIGINT}
+    </if>
+  </select>
+  <delete id="deleteByParam" parameterType="map" >
+    delete from staff_organ_product
+    where  organ_id = #{organId,jdbcType=BIGINT}
+  </delete>
+</mapper>

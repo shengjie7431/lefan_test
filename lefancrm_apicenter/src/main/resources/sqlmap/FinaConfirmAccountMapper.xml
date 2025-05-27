@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaConfirmAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaConfirmAccount" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="fina_id" property="finaId" jdbcType="BIGINT" />
+    <result column="fina_info_id" property="finaInfoId" jdbcType="BIGINT" />
+    <result column="confirm_type" property="confirmType" jdbcType="INTEGER" />
+    <result column="account_money" property="accountMoney" jdbcType="DOUBLE" />
+    <result column="account_time" property="accountTime" jdbcType="TIMESTAMP" />
+    <result column="survey_user_id" property="surveyUserId" jdbcType="BIGINT" />
+    <result column="survey_user_name" property="surveyUserName" jdbcType="VARCHAR" />
+    <result column="sign_file_path" property="signFilePath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fina_id, fina_info_id, confirm_type, account_money, account_time, survey_user_id, 
+    survey_user_name, sign_file_path
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_confirm_account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_confirm_account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaConfirmAccount" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_confirm_account (fina_id, fina_info_id, confirm_type, 
+      account_money, account_time, survey_user_id, 
+      survey_user_name, sign_file_path)
+    values (#{finaId,jdbcType=BIGINT}, #{finaInfoId,jdbcType=BIGINT}, #{confirmType,jdbcType=INTEGER}, 
+      #{accountMoney,jdbcType=DOUBLE}, #{accountTime,jdbcType=TIMESTAMP}, #{surveyUserId,jdbcType=BIGINT}, 
+      #{surveyUserName,jdbcType=VARCHAR}, #{signFilePath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaConfirmAccount" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_confirm_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        fina_id,
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id,
+      </if>
+      <if test="confirmType != null" >
+        confirm_type,
+      </if>
+      <if test="accountMoney != null" >
+        account_money,
+      </if>
+      <if test="accountTime != null" >
+        account_time,
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id,
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name,
+      </if>
+      <if test="signFilePath != null" >
+        sign_file_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="confirmType != null" >
+        #{confirmType,jdbcType=INTEGER},
+      </if>
+      <if test="accountMoney != null" >
+        #{accountMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="accountTime != null" >
+        #{accountTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="surveyUserId != null" >
+        #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="signFilePath != null" >
+        #{signFilePath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaConfirmAccount" >
+    update fina_confirm_account
+    <set >
+      <if test="finaId != null" >
+        fina_id = #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="confirmType != null" >
+        confirm_type = #{confirmType,jdbcType=INTEGER},
+      </if>
+      <if test="accountMoney != null" >
+        account_money = #{accountMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="accountTime != null" >
+        account_time = #{accountTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="surveyUserId != null" >
+        survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyUserName != null" >
+        survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="signFilePath != null" >
+        sign_file_path = #{signFilePath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaConfirmAccount" >
+    update fina_confirm_account
+    set fina_id = #{finaId,jdbcType=BIGINT},
+      fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      confirm_type = #{confirmType,jdbcType=INTEGER},
+      account_money = #{accountMoney,jdbcType=DOUBLE},
+      account_time = #{accountTime,jdbcType=TIMESTAMP},
+      survey_user_id = #{surveyUserId,jdbcType=BIGINT},
+      survey_user_name = #{surveyUserName,jdbcType=VARCHAR},
+      sign_file_path = #{signFilePath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectOne" parameterType="map" resultMap="BaseResultMap">
+        select a.*
+        from fina_confirm_account a
+        where 1 = 1
+        <if test="finaInfoId != null" >
+            and a.fina_info_id = #{finaInfoId,jdbcType=BIGINT}
+        </if>
+        <if test="accountTime != null" >
+            and a.account_time is not null
+        </if>
+        order by a.id desc limit 1;
+    </select>
+</mapper>

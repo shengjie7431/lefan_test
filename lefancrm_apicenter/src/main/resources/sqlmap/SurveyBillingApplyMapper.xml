@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyBillingApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyBillingApply" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bill_id" property="billId" jdbcType="BIGINT" />
+    <result column="risk_case_info_id" property="riskCaseInfoId" jdbcType="BIGINT" />
+    <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bill_id, risk_case_info_id, create_by_id, create_by, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_billing_apply
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_billing_apply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyBillingApply" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_billing_apply (bill_id, risk_case_info_id, create_by_id, 
+      create_by, create_time)
+    values (#{billId,jdbcType=BIGINT}, #{riskCaseInfoId,jdbcType=BIGINT}, #{createById,jdbcType=BIGINT}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyBillingApply" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_billing_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="billId != null" >
+        bill_id,
+      </if>
+      <if test="riskCaseInfoId != null" >
+        risk_case_info_id,
+      </if>
+      <if test="createById != null" >
+        create_by_id,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="billId != null" >
+        #{billId,jdbcType=BIGINT},
+      </if>
+      <if test="riskCaseInfoId != null" >
+        #{riskCaseInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="createById != null" >
+        #{createById,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyBillingApply" >
+    update survey_billing_apply
+    <set >
+      <if test="billId != null" >
+        bill_id = #{billId,jdbcType=BIGINT},
+      </if>
+      <if test="riskCaseInfoId != null" >
+        risk_case_info_id = #{riskCaseInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="createById != null" >
+        create_by_id = #{createById,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyBillingApply" >
+    update survey_billing_apply
+    set bill_id = #{billId,jdbcType=BIGINT},
+      risk_case_info_id = #{riskCaseInfoId,jdbcType=BIGINT},
+      create_by_id = #{createById,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByInfo" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_billing_apply
+        <where>
+            <if test="billId != null" >
+                and bill_id = #{billId,jdbcType=BIGINT}
+            </if>
+            <if test="riskCaseInfoId != null" >
+                and risk_case_info_id = #{riskCaseInfoId,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+
+
+  <insert id="insertItems" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+    insert into survey_billing_apply(bill_id,risk_case_info_id,create_by_id,create_by,create_time)
+    values
+    <foreach collection="ids" item="id" separator=",">
+      (
+      #{billId,jdbcType=BIGINT},
+      #{id,jdbcType=BIGINT},
+      #{createById,jdbcType=BIGINT},
+      #{createBy,jdbcType=VARCHAR},
+      now()
+      )
+    </foreach>
+  </insert>
+</mapper>

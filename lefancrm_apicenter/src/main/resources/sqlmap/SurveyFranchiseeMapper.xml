@@ -1,0 +1,1038 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyFranchiseeMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyFranchisee" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="level" property="level" jdbcType="INTEGER" />
+        <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+        <result column="parent_name" property="parentName" jdbcType="VARCHAR" />
+        <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+        <result column="area_type_id" property="areaTypeId" jdbcType="BIGINT" />
+        <result column="area_type" property="areaType" jdbcType="INTEGER" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="create_by" property="createBy" jdbcType="BIGINT" />
+        <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="district" property="district" jdbcType="VARCHAR" />
+        <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+        <result column="city_id" property="cityId" jdbcType="INTEGER" />
+        <result column="district_id" property="districtId" jdbcType="INTEGER" />
+        <result column="is_special" property="isSpecial" jdbcType="INTEGER" />
+        <result column="balance_amount" property="balanceAmount" jdbcType="DOUBLE" />
+        <result column="accumulated_amount" property="accumulatedAmount" jdbcType="DOUBLE" />
+        <result column="app_user" property="appUser" jdbcType="VARCHAR" />
+        <result column="apv_user" property="apvUser" jdbcType="VARCHAR" />
+        <result column="medical_money" property="medicalMoney" jdbcType="DOUBLE" />
+        <result column="pay_state_ok" property="payStateOk" jdbcType="INTEGER" />
+        <result column="alone_bill" property="aloneBill" jdbcType="INTEGER" />
+        <result column="accept_user" property="acceptUser" jdbcType="VARCHAR" />
+        <result column="accept_user_idcard" property="acceptUserIdcard" jdbcType="VARCHAR" />
+        <result column="accept_user_idcard_url" property="acceptUserIdcardUrl" jdbcType="VARCHAR" />
+        <result column="bank_card" property="bankCard" jdbcType="VARCHAR" />
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+        <result column="bank_url" property="bankUrl" jdbcType="VARCHAR" />
+        <result column="main_province_money" property="mainProvinceMoney" jdbcType="DOUBLE" />
+        <result column="vice_province_money" property="viceProvinceMoney" jdbcType="DOUBLE" />
+        <result column="bus_type" property="busType" jdbcType="INTEGER" />
+        <result column="insurance_type" property="insuranceType" jdbcType="INTEGER" />
+        <result column="org_state" property="orgState" jdbcType="BIGINT" />
+        <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+        <result column="his_owe_money" property="hisOweMoney" jdbcType="DOUBLE" />
+        <result column="deep_cases_price" property="deepCasesPrice" jdbcType="DOUBLE" />
+        <result column="service_type" property="serviceType" jdbcType="INTEGER" />
+        <result column="max_medical_money" property="maxMedicalMoney" jdbcType="DOUBLE" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, name, code, level, parent_id, parent_name, area_name, area_type_id, area_type,
+    type, create_by, create_by_name, create_time, update_by, update_time, delete_flag,
+    province, city, district, province_id, city_id, district_id, is_special, balance_amount,
+    accumulated_amount, app_user, apv_user, medical_money, pay_state_ok, alone_bill,
+    accept_user, accept_user_idcard, accept_user_idcard_url, bank_card, bank_name, bank_url,
+    main_province_money, vice_province_money, bus_type, insurance_type, org_state, department_id,
+    department_name, his_owe_money, deep_cases_price, service_type, max_medical_money
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_franchisee
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_franchisee
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyFranchisee" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_franchisee (name, code, level,
+        parent_id, parent_name, area_name,
+        area_type_id, area_type, type,
+        create_by, create_by_name, create_time,
+        update_by, update_time, delete_flag,
+        province, city, district,
+        province_id, city_id, district_id,
+        is_special, balance_amount, accumulated_amount,
+        app_user, apv_user, medical_money,
+        pay_state_ok, alone_bill, accept_user,
+        accept_user_idcard, accept_user_idcard_url,
+        bank_card, bank_name, bank_url,
+        main_province_money, vice_province_money, bus_type,
+        insurance_type, org_state, department_id,
+        department_name, his_owe_money, deep_cases_price,
+        service_type, max_medical_money)
+        values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER},
+        #{parentId,jdbcType=BIGINT}, #{parentName,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR},
+        #{areaTypeId,jdbcType=BIGINT}, #{areaType,jdbcType=INTEGER}, #{type,jdbcType=INTEGER},
+        #{createBy,jdbcType=BIGINT}, #{createByName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER},
+        #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR},
+        #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, #{districtId,jdbcType=INTEGER},
+        #{isSpecial,jdbcType=INTEGER}, #{balanceAmount,jdbcType=DOUBLE}, #{accumulatedAmount,jdbcType=DOUBLE},
+        #{appUser,jdbcType=VARCHAR}, #{apvUser,jdbcType=VARCHAR}, #{medicalMoney,jdbcType=DOUBLE},
+        #{payStateOk,jdbcType=INTEGER}, #{aloneBill,jdbcType=INTEGER}, #{acceptUser,jdbcType=VARCHAR},
+        #{acceptUserIdcard,jdbcType=VARCHAR}, #{acceptUserIdcardUrl,jdbcType=VARCHAR},
+        #{bankCard,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{bankUrl,jdbcType=VARCHAR},
+        #{mainProvinceMoney,jdbcType=DOUBLE}, #{viceProvinceMoney,jdbcType=DOUBLE}, #{busType,jdbcType=INTEGER},
+        #{insuranceType,jdbcType=INTEGER}, #{orgState,jdbcType=BIGINT}, #{departmentId,jdbcType=INTEGER},
+        #{departmentName,jdbcType=VARCHAR}, #{hisOweMoney,jdbcType=DOUBLE}, #{deepCasesPrice,jdbcType=DOUBLE},
+        #{serviceType,jdbcType=INTEGER}, #{maxMedicalMoney,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyFranchisee" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into survey_franchisee
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="code != null" >
+                code,
+            </if>
+            <if test="level != null" >
+                level,
+            </if>
+            <if test="parentId != null" >
+                parent_id,
+            </if>
+            <if test="parentName != null" >
+                parent_name,
+            </if>
+            <if test="areaName != null" >
+                area_name,
+            </if>
+            <if test="areaTypeId != null" >
+                area_type_id,
+            </if>
+            <if test="areaType != null" >
+                area_type,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createByName != null" >
+                create_by_name,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateBy != null" >
+                update_by,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+            <if test="province != null" >
+                province,
+            </if>
+            <if test="city != null" >
+                city,
+            </if>
+            <if test="district != null" >
+                district,
+            </if>
+            <if test="provinceId != null" >
+                province_id,
+            </if>
+            <if test="cityId != null" >
+                city_id,
+            </if>
+            <if test="districtId != null" >
+                district_id,
+            </if>
+            <if test="isSpecial != null" >
+                is_special,
+            </if>
+            <if test="balanceAmount != null" >
+                balance_amount,
+            </if>
+            <if test="accumulatedAmount != null" >
+                accumulated_amount,
+            </if>
+            <if test="appUser != null" >
+                app_user,
+            </if>
+            <if test="apvUser != null" >
+                apv_user,
+            </if>
+            <if test="medicalMoney != null" >
+                medical_money,
+            </if>
+            <if test="payStateOk != null" >
+                pay_state_ok,
+            </if>
+            <if test="aloneBill != null" >
+                alone_bill,
+            </if>
+            <if test="acceptUser != null" >
+                accept_user,
+            </if>
+            <if test="acceptUserIdcard != null" >
+                accept_user_idcard,
+            </if>
+            <if test="acceptUserIdcardUrl != null" >
+                accept_user_idcard_url,
+            </if>
+            <if test="bankCard != null" >
+                bank_card,
+            </if>
+            <if test="bankName != null" >
+                bank_name,
+            </if>
+            <if test="bankUrl != null" >
+                bank_url,
+            </if>
+            <if test="mainProvinceMoney != null" >
+                main_province_money,
+            </if>
+            <if test="viceProvinceMoney != null" >
+                vice_province_money,
+            </if>
+            <if test="busType != null" >
+                bus_type,
+            </if>
+            <if test="insuranceType != null" >
+                insurance_type,
+            </if>
+            <if test="orgState != null" >
+                org_state,
+            </if>
+            <if test="departmentId != null" >
+                department_id,
+            </if>
+            <if test="departmentName != null" >
+                department_name,
+            </if>
+            <if test="hisOweMoney != null" >
+                his_owe_money,
+            </if>
+            <if test="deepCasesPrice != null" >
+                deep_cases_price,
+            </if>
+            <if test="serviceType != null" >
+                service_type,
+            </if>
+            <if test="maxMedicalMoney != null" >
+                max_medical_money,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null" >
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null" >
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null" >
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="parentName != null" >
+                #{parentName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaName != null" >
+                #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaTypeId != null" >
+                #{areaTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="areaType != null" >
+                #{areaType,jdbcType=INTEGER},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createByName != null" >
+                #{createByName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="province != null" >
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null" >
+                #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="districtId != null" >
+                #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="isSpecial != null" >
+                #{isSpecial,jdbcType=INTEGER},
+            </if>
+            <if test="balanceAmount != null" >
+                #{balanceAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="accumulatedAmount != null" >
+                #{accumulatedAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="appUser != null" >
+                #{appUser,jdbcType=VARCHAR},
+            </if>
+            <if test="apvUser != null" >
+                #{apvUser,jdbcType=VARCHAR},
+            </if>
+            <if test="medicalMoney != null" >
+                #{medicalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="payStateOk != null" >
+                #{payStateOk,jdbcType=INTEGER},
+            </if>
+            <if test="aloneBill != null" >
+                #{aloneBill,jdbcType=INTEGER},
+            </if>
+            <if test="acceptUser != null" >
+                #{acceptUser,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptUserIdcard != null" >
+                #{acceptUserIdcard,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptUserIdcardUrl != null" >
+                #{acceptUserIdcardUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCard != null" >
+                #{bankCard,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null" >
+                #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankUrl != null" >
+                #{bankUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="mainProvinceMoney != null" >
+                #{mainProvinceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="viceProvinceMoney != null" >
+                #{viceProvinceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="busType != null" >
+                #{busType,jdbcType=INTEGER},
+            </if>
+            <if test="insuranceType != null" >
+                #{insuranceType,jdbcType=INTEGER},
+            </if>
+            <if test="orgState != null" >
+                #{orgState,jdbcType=BIGINT},
+            </if>
+            <if test="departmentId != null" >
+                #{departmentId,jdbcType=INTEGER},
+            </if>
+            <if test="departmentName != null" >
+                #{departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="hisOweMoney != null" >
+                #{hisOweMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="deepCasesPrice != null" >
+                #{deepCasesPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="serviceType != null" >
+                #{serviceType,jdbcType=INTEGER},
+            </if>
+            <if test="maxMedicalMoney != null" >
+                #{maxMedicalMoney,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyFranchisee" >
+        update survey_franchisee
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null" >
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null" >
+                level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null" >
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="parentName != null" >
+                parent_name = #{parentName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaName != null" >
+                area_name = #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaTypeId != null" >
+                area_type_id = #{areaTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="areaType != null" >
+                area_type = #{areaType,jdbcType=INTEGER},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="createByName != null" >
+                create_by_name = #{createByName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null" >
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="province != null" >
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                district = #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                province_id = #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null" >
+                city_id = #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="districtId != null" >
+                district_id = #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="isSpecial != null" >
+                is_special = #{isSpecial,jdbcType=INTEGER},
+            </if>
+            <if test="balanceAmount != null" >
+                balance_amount = #{balanceAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="accumulatedAmount != null" >
+                accumulated_amount = #{accumulatedAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="appUser != null" >
+                app_user = #{appUser,jdbcType=VARCHAR},
+            </if>
+            <if test="apvUser != null" >
+                apv_user = #{apvUser,jdbcType=VARCHAR},
+            </if>
+            <if test="medicalMoney != null" >
+                medical_money = #{medicalMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="payStateOk != null" >
+                pay_state_ok = #{payStateOk,jdbcType=INTEGER},
+            </if>
+            <if test="aloneBill != null" >
+                alone_bill = #{aloneBill,jdbcType=INTEGER},
+            </if>
+            <if test="acceptUser != null" >
+                accept_user = #{acceptUser,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptUserIdcard != null" >
+                accept_user_idcard = #{acceptUserIdcard,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptUserIdcardUrl != null" >
+                accept_user_idcard_url = #{acceptUserIdcardUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCard != null" >
+                bank_card = #{bankCard,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null" >
+                bank_name = #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankUrl != null" >
+                bank_url = #{bankUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="mainProvinceMoney != null" >
+                main_province_money = #{mainProvinceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="viceProvinceMoney != null" >
+                vice_province_money = #{viceProvinceMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="busType != null" >
+                bus_type = #{busType,jdbcType=INTEGER},
+            </if>
+            <if test="insuranceType != null" >
+                insurance_type = #{insuranceType,jdbcType=INTEGER},
+            </if>
+            <if test="orgState != null" >
+                org_state = #{orgState,jdbcType=BIGINT},
+            </if>
+            <if test="departmentId != null" >
+                department_id = #{departmentId,jdbcType=INTEGER},
+            </if>
+            <if test="departmentName != null" >
+                department_name = #{departmentName,jdbcType=VARCHAR},
+            </if>
+            <if test="hisOweMoney != null" >
+                his_owe_money = #{hisOweMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="deepCasesPrice != null" >
+                deep_cases_price = #{deepCasesPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="serviceType != null" >
+                service_type = #{serviceType,jdbcType=INTEGER},
+            </if>
+            <if test="maxMedicalMoney != null" >
+                max_medical_money = #{maxMedicalMoney,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyFranchisee" >
+    update survey_franchisee
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      parent_name = #{parentName,jdbcType=VARCHAR},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      area_type_id = #{areaTypeId,jdbcType=BIGINT},
+      area_type = #{areaType,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=BIGINT},
+      create_by_name = #{createByName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      district_id = #{districtId,jdbcType=INTEGER},
+      is_special = #{isSpecial,jdbcType=INTEGER},
+      balance_amount = #{balanceAmount,jdbcType=DOUBLE},
+      accumulated_amount = #{accumulatedAmount,jdbcType=DOUBLE},
+      app_user = #{appUser,jdbcType=VARCHAR},
+      apv_user = #{apvUser,jdbcType=VARCHAR},
+      medical_money = #{medicalMoney,jdbcType=DOUBLE},
+      pay_state_ok = #{payStateOk,jdbcType=INTEGER},
+      alone_bill = #{aloneBill,jdbcType=INTEGER},
+      accept_user = #{acceptUser,jdbcType=VARCHAR},
+      accept_user_idcard = #{acceptUserIdcard,jdbcType=VARCHAR},
+      accept_user_idcard_url = #{acceptUserIdcardUrl,jdbcType=VARCHAR},
+      bank_card = #{bankCard,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_url = #{bankUrl,jdbcType=VARCHAR},
+      main_province_money = #{mainProvinceMoney,jdbcType=DOUBLE},
+      vice_province_money = #{viceProvinceMoney,jdbcType=DOUBLE},
+      bus_type = #{busType,jdbcType=INTEGER},
+      insurance_type = #{insuranceType,jdbcType=INTEGER},
+      org_state = #{orgState,jdbcType=BIGINT},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      his_owe_money = #{hisOweMoney,jdbcType=DOUBLE},
+      deep_cases_price = #{deepCasesPrice,jdbcType=DOUBLE},
+      service_type = #{serviceType,jdbcType=INTEGER},
+      max_medical_money = #{maxMedicalMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="name != null" >
+            and name like CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="areaType != null" >
+            and area_type = #{areaType,jdbcType=INTEGER}
+        </if>
+        <if test="type != null" >
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="busType != null" >
+            and bus_type = #{busType,jdbcType=INTEGER}
+        </if>
+        <if test="condition != null" >
+            <if test="condition == 1" >
+                and id = #{franchiseeId,jdbcType=BIGINT}
+            </if>
+        </if>
+        <if test="level != null" >
+            and level = #{level,jdbcType=INTEGER}
+        </if>
+        <if test="parentId != null" >
+            and parent_id = #{parentId,jdbcType=BIGINT}
+        </if>
+<!--        <if test="surveyOrgIds!=null and surveyOrgIds !=''" >-->
+<!--            and FIND_IN_SET(id,#{surveyOrgIds})-->
+<!--        </if>-->
+        <if test="clientType == 1" >
+            and (bus_type = 2 or bus_type = 3)
+        </if>
+        <if test="clientType == 2" >
+            and (bus_type = 1 or bus_type = 3)
+        </if>
+        <if test="insuranceType != null ">
+            and insurance_type=#{insuranceType}
+        </if>
+        <if test="parentIdJudge != null ">
+            and parent_id = #{parentIdJudge}
+        </if>
+        <if test="category != null ">
+            AND (TYPE = 1 OR insurance_type = 1)
+        </if>
+        <if test="orgState != null ">
+            and org_state = #{orgState,jdbcType=INTEGER}
+        </if>
+        <if test="serviceType != null">
+            <if test="serviceType == 1">
+                and service_type in(1,3)
+            </if>
+        </if>
+    </sql>
+    <select id="listPage" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_franchisee
+        where delete_flag=0
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listPageSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_franchisee
+        where delete_flag=0
+        <include refid="wheres" />
+    </select>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_franchisee
+        <include refid="joins" />
+        where delete_flag=0
+            and org_state = 0
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_franchisee
+        <include refid="joins" />
+        where delete_flag=0
+            and org_state = 0
+        <include refid="wheres" />
+    </select>
+
+    <select id="selectByParentId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_franchisee
+        where delete_flag=0 and id = #{parentId,jdbcType=BIGINT} limit 1
+    </select>
+
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from survey_franchisee
+        where delete_flag=0 and name = #{name,jdbcType=VARCHAR} limit 1
+    </select>
+
+    <select id="selectFranchiseeListForFinalUser" parameterType="map" resultMap="BaseResultMap">
+        SELECT a.*,IFNULL(b.onum,0) surveyNum,IFNULL(c.onum,0) checkNum FROM  (
+            select
+              s.id,s.name
+            from survey_franchisee s
+            left join survey_user_franchisee uf on s.id = uf.franchisee_id
+            where  s.delete_flag =0 and uf.delete_flag =0 and s.org_state = 0
+            <if test="userId != null">
+                and uf.user_id = #{userId,jdbcType=BIGINT}
+            </if>
+            <if test="oprTypeValue eq  'safe' and oprTypeValue != null ">
+                and s.bus_type != 1
+            </if>
+            <if test="oprTypeValue == 'help' and oprTypeValue != null ">
+                and s.bus_type != 2
+            </if>
+        ) a
+        LEFT JOIN (
+                SELECT
+                o.survey_org_id,
+                COUNT( 1 ) onum
+                FROM
+                survey_assign_org o
+                LEFT JOIN survey_risk_case c ON o.survey_id = c.id
+                <if test="entrustOrgIds != null and entrustOrgIds != ''">
+                    AND FIND_IN_SET(c.entrust_org_id,#{entrustOrgIds})
+                </if>
+                LEFT JOIN survey_consignor n ON c.entrust_org_id = n.id
+                LEFT JOIN survey_risk_case_info i ON o.survey_info_id = i.id AND i.delete_flag = 0  AND  i.org_assign = 1
+                <if test="surveyStates != null and surveyStates != ''">
+                    AND find_in_set( i.survey_state, #{surveyStates} )
+                </if>
+                WHERE
+                o.delete_flag = 0
+                AND o.org_survey_state = 1
+                AND n.org_attr = 1
+                and i.id is not null and c.id is not null
+                <if test="startDate != null">
+                    <if test="dateItem != null">
+                        <if test="dateItem == 1">
+                            and DATE_FORMAT(c.entrust_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                        </if>
+                        <if test="dateItem == 2">
+                            and DATE_FORMAT(o.report_date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                        </if>
+                        <if test="dateItem == 3">
+                            and DATE_FORMAT(o.org_end_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                        </if>
+                        <if test="dateItem == 4">
+                            and DATE_FORMAT(o.review_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                        </if>
+                    </if>
+                </if>
+                <if test="endDate != null">
+                    <if test="dateItem != null">
+                        <if test="dateItem == 1">
+                            and DATE_FORMAT(c.entrust_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                        </if>
+                        <if test="dateItem == 2">
+                            and DATE_FORMAT(o.report_date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                        </if>
+                        <if test="dateItem == 3">
+                            and DATE_FORMAT(o.org_end_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                        </if>
+                        <if test="dateItem == 4">
+                            and DATE_FORMAT(o.review_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                        </if>
+                    </if>
+                </if>
+                <if test="searchStr != nul and searchStr != ''">
+                    and (
+                    c.survey_case_no like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+                    or c.survey_no like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+                    or c.survey_person like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+                    or c.survery_person_tel like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+                    or c.id_number like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+                    )
+                </if>
+                <if test="agingType != null and agingType != ''">
+                    <if test="agingType == 0">
+
+                    </if>
+                    <if test="agingType == 1">
+                        and o.aging_over = 0
+                    </if>
+
+                    <if test="agingType == 2">
+                        and (o.aging_check - o.aging_real ) &lt;= 3 and o.aging_over = 0 and o.report_date is null
+                    </if>
+                    <if test="agingType == 3">
+                        and o.aging_over &gt; 0
+                    </if>
+                    <if test="agingType == 4">
+                        and o.aging_over &gt; 0 and o.aging_over &lt;5
+                    </if>
+                    <if test="agingType == 5">
+                        and o.aging_over &gt; 5 and o.aging_over &lt;=10
+                    </if>
+                    <if test="agingType == 6">
+                        and o.aging_over &gt; 10 and o.aging_over &lt;=20
+                    </if>
+                    <if test="agingType == 7">
+                        and o.aging_over &gt;20
+                    </if>
+                </if>
+                 GROUP BY survey_org_id
+         ) b ON a.id = b.survey_org_id
+        LEFT JOIN (
+            SELECT
+            o.survey_org_id,
+            COUNT( 1 ) onum
+            FROM
+            survey_assign_org o
+            LEFT JOIN survey_risk_case c ON o.survey_id = c.id
+            <if test="entrustOrgIds != null and entrustOrgIds != ''">
+                AND FIND_IN_SET( c.entrust_org_id,#{entrustOrgIds})
+            </if>
+            LEFT JOIN survey_consignor n ON c.entrust_org_id = n.id
+            LEFT JOIN survey_risk_case_info i ON o.survey_info_id = i.id AND i.delete_flag = 0  AND  i.org_assign = 1
+            <if test="surveyStates != null and surveyStates != ''">
+                AND find_in_set( i.survey_state, #{surveyStates} )
+            </if>
+            WHERE
+            o.delete_flag = 0
+            AND o.org_survey_state = 2
+            AND n.org_attr = 1
+            and i.id is not null and c.id is not null
+            <if test="startDate != null">
+                <if test="dateItem != null">
+                    <if test="dateItem == 1">
+                        and DATE_FORMAT(c.entrust_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                    </if>
+                    <if test="dateItem == 2">
+                        and DATE_FORMAT(o.report_date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                    </if>
+                    <if test="dateItem == 3">
+                        and DATE_FORMAT(o.org_end_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                    </if>
+                    <if test="dateItem == 4">
+                        and DATE_FORMAT(o.review_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate,jdbcType=DATE},'%Y-%m-%d')
+                    </if>
+                </if>
+            </if>
+            <if test="endDate != null">
+                <if test="dateItem != null">
+                    <if test="dateItem == 1">
+                        and DATE_FORMAT(c.entrust_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                    </if>
+                    <if test="dateItem == 2">
+                        and DATE_FORMAT(o.report_date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                    </if>
+                    <if test="dateItem == 3">
+                        and DATE_FORMAT(o.org_end_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                    </if>
+                    <if test="dateItem == 4">
+                        and DATE_FORMAT(o.review_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=DATE},'%Y-%m-%d')
+                    </if>
+                </if>
+            </if>
+            <if test="searchStr != nul and searchStr != ''">
+                and (
+                c.survey_case_no like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+                or c.survey_no like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+                or c.survey_person like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+                or c.survery_person_tel like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+                or c.id_number like CONCAT(CONCAT('%',#{searchStr,jdbcType=VARCHAR}), '%')
+                )
+            </if>
+            <if test="agingType != null and agingType != ''">
+                <if test="agingType == 0">
+
+                </if>
+                <if test="agingType == 1">
+                    and o.aging_over = 0
+                </if>
+
+                <if test="agingType == 2">
+                    and (o.aging_check - o.aging_real ) &lt;= 3 and o.aging_over = 0 and o.report_date is null
+                </if>
+                <if test="agingType == 3">
+                    and o.aging_over &gt; 0
+                </if>
+                <if test="agingType == 4">
+                    and o.aging_over &gt; 0 and o.aging_over &lt;5
+                </if>
+                <if test="agingType == 5">
+                    and o.aging_over &gt; 5 and o.aging_over &lt;=10
+                </if>
+                <if test="agingType == 6">
+                    and o.aging_over &gt; 10 and o.aging_over &lt;=20
+                </if>
+                <if test="agingType == 7">
+                    and o.aging_over &gt;20
+                </if>
+            </if>
+            GROUP BY survey_org_id
+        ) c ON a.id = c.survey_org_id
+    </select>
+    <select id="selectFranchiseeListForFinalUserNew" parameterType="map" resultMap="BaseResultMap">
+        SELECT a.* FROM  (
+            select
+              s.id,s.name
+            from survey_franchisee s
+            left join survey_user_franchisee uf on s.id = uf.franchisee_id
+            where  s.delete_flag =0 and uf.delete_flag =0 and s.org_state = 0
+            <if test="userId != null">
+                and uf.user_id = #{userId,jdbcType=BIGINT}
+            </if>
+            <if test="oprTypeValue eq  'safe' and oprTypeValue != null ">
+                and s.bus_type != 1
+            </if>
+            <if test="oprTypeValue == 'help' and oprTypeValue != null ">
+                and s.bus_type != 2
+            </if>
+        ) a
+    </select>
+
+    <select id="selectChildrens" parameterType="java.lang.Long" resultType="java.lang.String">
+        select GROUP_CONCAT(s.id)
+        from survey_franchisee s
+        where  s.delete_flag =0 and parent_id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectChildrens2" resultType="java.lang.String">
+       	SELECT GROUP_CONCAT(id) FROM (
+	SELECT id FROM survey_franchisee f WHERE id = #{surveyOrgId}
+	<if test="num != 2">
+        UNION
+        SELECT id FROM survey_franchisee f WHERE parent_id = #{surveyOrgId}
+    </if>
+    ) b
+    </select>
+
+    <select id="selectParentOrgId" resultType="java.lang.String">
+        select (case s.parent_id when 0 then s.id else s.parent_id end) from survey_franchisee s where s.id = #{surveyOrgId}
+    </select>
+
+    <select id="selectManPowerList" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.dto.report.SurveyManpowerDTO">
+        select (case when a.survey_org_id is null then 0 else 1 end) as orgType,f.id as surveyOrgId,f.`name` as surveyOrgName,
+            1 as orgLevel
+            from survey_franchisee f
+            left join (
+                    select survey_org_id from survey_org_area area where state = 1 and delete_flag = 0  group by survey_org_id
+            ) a on f.id = a.survey_org_id
+            where f.delete_flag = 0 and f.org_state = 0
+             <if test="dataRoleOrgId != null">
+                 and f.id = #{dataRoleOrgId,jdbcType=BIGINT}
+             </if>
+            <if test="surveyOrgIds != null" >
+                and find_in_set(f.id,#{surveyOrgIds,jdbcType=VARCHAR})
+            </if>
+            <if test="orgDataType == 1">
+                and f.bus_type in (1,3)
+            </if>
+            <if test="orgDataType == 2">
+                and f.bus_type in (2,3)
+            </if>
+    </select>
+
+    <select id="relationships" parameterType="java.lang.Long" resultType="int">
+        select count(1) from survey_franchisee
+        where delete_flag=0
+        and ((parent_id = #{id,jdbcType=BIGINT}) or (id = #{id,jdbcType=BIGINT} and level = 2))
+    </select>
+
+    <select id="selectMechanism" parameterType="long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM survey_franchisee
+        WHERE id  =(SELECT org_id FROM survey_investigator  WHERE user_id = #{userId})
+    </select>
+    <select id="selectOrgAllPre" resultMap="BaseResultMap">
+        <if test="orgRole and !finance">
+            SELECT f.* FROM survey_pre_reimbursement r
+            LEFT JOIN survey_franchisee f ON r.survey_org_id = f.id
+            WHERE FIND_IN_SET(r.survey_org_id,(SELECT GROUP_CONCAT(id) FROM survey_franchisee WHERE id =  #{surveyInvestigator.orgId} OR parent_id = #{surveyInvestigator.orgId}))
+            GROUP BY f.id
+        </if>
+
+        <if test="finance">
+            SELECT f.* FROM survey_pre_reimbursement r
+            LEFT JOIN survey_franchisee f ON r.survey_org_id = f.id
+            WHERE (r.state = 2 or r.state = 3)
+            GROUP BY f.id
+        </if>
+    </select>
+
+    <select id="selectSurveyFranchisee" parameterType="map" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        FROM survey_franchisee
+        <where>
+            delete_flag = 0
+            <if test="orgId != null ">
+                and (id=#{orgId} or parent_id=#{orgId})
+            </if>
+            <if test="parentIdJudge != null ">
+                and parent_id = #{parentIdJudge}
+            </if>
+            <if test="category != null ">
+                AND (TYPE = 1 OR insurance_type = 1)
+            </if>
+        </where>
+    </select>
+
+    <select id="selectId" parameterType="long" resultType="long">
+        select (CASE parent_id WHEN 0 THEN id ELSE parent_id END) AS org_id
+        from survey_franchisee
+        where delete_flag = 0 and (id=#{orgId} OR parent_id = #{orgId} ) group by org_id
+    </select>
+
+
+    <select id="selectFranchiseeAndDataByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select f.*,ifnull(a.num,0) surveyNum,ifnull(b.num,0) checkNum from survey_franchisee f
+        left join (
+            select o.survey_org_id,count(1) as num from survey_assign_org o
+            left join survey_risk_case_info r on o.survey_info_id = r.id
+            where o.delete_flag = 0 and r.delete_flag = 0 and o.org_survey_state = 1
+            <if test="entrustOrgIds !=  null">
+                AND FIND_IN_SET(r.entrust_org_id,#{entrustOrgIds})
+            </if>
+            <if test="entrustOrgId != null">
+                and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+            </if>
+            group by o.survey_org_id
+        ) a on f.id = a.survey_org_id
+        left join (
+            select o.survey_org_id,count(1) as num from survey_assign_org o
+            left join survey_risk_case_info r on o.survey_info_id = r.id
+            where o.delete_flag = 0 and r.delete_flag = 0 and o.org_survey_state in (2,5)
+            <if test="entrustOrgIds !=  null">
+                AND FIND_IN_SET(r.entrust_org_id,#{entrustOrgIds})
+            </if>
+            <if test="entrustOrgId != null">
+                and r.entrust_org_id = #{entrustOrgId,jdbcType=BIGINT}
+            </if>
+            group by o.survey_org_id
+        ) b on f.id = b.survey_org_id
+        where f.delete_flag = 0 and f.bus_type in (2,3) and f.org_state = 0
+        order by ifnull(a.num,0) desc
+    </select>
+</mapper>

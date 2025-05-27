@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.StaffPersonnelCostAnalysisMapper" >
+
+
+    <select id="list" parameterType="map" resultType="com.lefancrm.apicenter.dto.staff.StaffPersonnelCostAnalysisDTO">
+        select slip.work_time as workTime,slip.social_security_company as socialSecurityCompany, slip.organ as organ,
+        slip.department as department, slip.team as team, slip.gz as wagesPaySub, slip.sbgjj as companyMoneySub,
+        slip.social_security_company_id as socialSecurityCompanyId, slip.organ_id as organId,
+        slip.department_id as departmentId, slip.team_id as teamId,
+
+        performance.gdjj as fixedPerfPay, performance.khjx as assesPerfPay, performance.zwbt as travelAllowancePay,
+        performance.jfjx as integralPay, performance.fl as welfarePay, performance.lzcb as quitCost,
+        (ifnull(slip.gz,0) + ifnull(performance.lzcb,0) + ifnull(performance.gdjj,0) + ifnull(performance.khjx,0) + ifnull(performance.zwbt,0)
+        + ifnull(performance.jfjx,0) + ifnull(performance.fl,0) - ifnull(slip.sbgjj,0) ) as personnelCostSub,
+        personnel.personnelNum as personnelNum, personnel.contidion as contidion
+        from
+        (
+            select team_id, team, work_time, department, organ, social_security_company,
+            round(sum(wages_pay_sub),2) as gz, round(sum(company_money_sub),2) as sbgjj, department_id,organ_id,social_security_company_id
+            from staff_pay_personnel_slip
+            where delete_flag = 0
+              <include refid="wheres" />
+              AND work_time &gt;= #{startTime,jdbcType=VARCHAR}
+              AND work_time &lt;= #{endTime,jdbcType=VARCHAR}
+            GROUP BY work_time,team_id,department_id,organ_id,social_security_company_id
+        ) slip
+
+        left join
+        (
+            select
+            team_id,team,work_time, department, organ, social_security_company,
+        round(sum(fixed_perf_pay),2) as gdjj, round(sum(manage_perf_pay),2) as gljs,
+        round(sum(asses_perf_pay),2) as khjx, round(sum(travel_allowance_pay),2) as zwbt,
+        round(sum(integral_pay),2) as jfjx, round(sum(welfare_pay),2) as fl, round(sum(quit_cost),2) as lzcb,
+            department_id,organ_id,social_security_company_id
+            from staff_performance_personnel
+            where delete_flag = 0
+              <include refid="wheres" />
+              AND work_time &gt;= #{startTime,jdbcType=VARCHAR}
+              AND work_time &lt;= #{endTime,jdbcType=VARCHAR}
+            GROUP BY work_time,team_id,department_id,organ_id,social_security_company_id
+        ) performance on slip.team_id = performance.team_id and slip.work_time = performance.work_time and slip.department_id = performance.department_id and slip.organ_id = performance.organ_id and slip.social_security_company_id = performance.social_security_company_id
+
+        left join
+        (
+            select work_time,team_id,department_id,organ_id,social_security_company_id,count(1) as personnelNum,
+              CONCAT(ifnull(t.social_security_company_id,''),'_',ifnull(t.organ_id,''),'_',ifnull(t.department_id,''),'_',ifnull(t.team_id,'')) as contidion
+            from (
+              select work_time,t.team_id,t.department_id,t.organ_id,t.social_security_company_id,t.staff_personnel_id
+              from (
+                select staff_personnel_id,real_name,work_time,team,team_id,department_id,organ_id,social_security_company_id,department,organ,social_security_company from staff_pay_personnel_slip where work_time &gt;= #{startTime,jdbcType=VARCHAR} AND work_time &lt;= #{endTime,jdbcType=VARCHAR} and delete_flag=0 <include refid="wheres" />
+                UNION all
+                select staff_personnel_id,real_name,work_time,team,team_id,department_id,organ_id,social_security_company_id,department,organ,social_security_company from staff_performance_personnel where work_time &gt;= #{startTime,jdbcType=VARCHAR} AND work_time &lt;= #{endTime,jdbcType=VARCHAR} and delete_flag=0 <include refid="wheres" />
+              ) t left join staff_personnel_info info on t.staff_personnel_id = info.id
+              group by work_time,team_id,department_id,organ_id,social_security_company_id,staff_personnel_id
+            ) t group by work_time,team_id,department_id,organ_id,social_security_company_id
+        ) personnel on slip.work_time = personnel.work_time and slip.department_id = personnel.department_id and slip.organ_id = personnel.organ_id and slip.social_security_company_id = personnel.social_security_company_id and slip.team_id = personnel.team_id
+
+    </select>
+
+
+    <sql id="wheres">
+        <if test="companyIds != null" >
+            and find_in_set(company_id,#{companyIds,jdbcType=VARCHAR})
+        </if>
+        <if test="organIds != null ">
+            and find_in_set(organ_id,#{organIds,jdbcType=VARCHAR})
+        </if>
+        <if test="departmentIds != null ">
+            and find_in_set(department_id,#{departmentIds,jdbcType=VARCHAR})
+        </if>
+        <if test="jobPostIds != null ">
+            and find_in_set(job_post_id,#{jobPostIds,jdbcType=VARCHAR})
+        </if>
+        <if test="teamIds != null ">
+            and find_in_set(team_id,#{teamIds,jdbcType=VARCHAR})
+        </if>
+        <if test="socialSecurityCompanyIds != null" >
+            and find_in_set(social_security_company_id,#{socialSecurityCompanyIds,jdbcType=VARCHAR})
+        </if>
+    </sql>
+
+
+
+    <select id="userList" parameterType="map" resultType="com.lefancrm.apicenter.dto.staff.StaffPersonnelCostAnalysisDTO">
+        select #{workTime,jdbcType=VARCHAR} as workTime,info.social_security_company as socialSecurityCompany, info.organ as organ,
+        info.department as department, info.team as team, ifnull(slip.gz,0) as wagesPaySub, ifnull(slip.sbgjj,0) as companyMoneySub,
+        info.social_security_company_id as socialSecurityCompanyId, info.organ_id as organId,
+        info.department_id as departmentId, info.team_id as teamId,
+        ifnull(performance.gdjj,0) as fixedPerfPay, ifnull(performance.khjx,0) as assesPerfPay,
+        ifnull(performance.zwbt,0) as travelAllowancePay, ifnull(performance.lzcb,0) as quitCost,
+        ifnull(performance.jfjx,0) as integralPay, ifnull(performance.fl,0) as welfarePay,
+        (ifnull(slip.gz,0) + ifnull(performance.lzcb,0) + ifnull(performance.gdjj,0) + ifnull(performance.khjx,0) + ifnull(performance.zwbt,0)
+        + ifnull(performance.jfjx,0) + ifnull(performance.fl,0) - ifnull(slip.sbgjj,0) ) as personnelCostSub,
+        info.real_name as userName
+        from
+        (
+            select work_time,team_id,department_id,organ_id,social_security_company_id,staff_personnel_id
+            from (
+                    select work_time,t.team_id,t.department_id,t.organ_id,t.social_security_company_id,t.staff_personnel_id,t.real_name
+                    from (
+                        select staff_personnel_id,real_name,work_time,team,team_id,department_id,organ_id,social_security_company_id,department,organ,social_security_company from staff_pay_personnel_slip where work_time = #{workTime,jdbcType=VARCHAR} and delete_flag=0 <include refid="wheres" />
+                        UNION all
+                        select staff_personnel_id,real_name,work_time,team,team_id,department_id,organ_id,social_security_company_id,department,organ,social_security_company from staff_performance_personnel where work_time = #{workTime,jdbcType=VARCHAR} and delete_flag=0 <include refid="wheres" />
+                    ) t left join staff_personnel_info info on t.staff_personnel_id = info.id
+                group by work_time,team_id,department_id,organ_id,social_security_company_id,staff_personnel_id
+            ) t group by work_time,team_id,department_id,organ_id,social_security_company_id,staff_personnel_id
+        ) personnel
+        left join staff_personnel_info info on personnel.staff_personnel_id = info.id
+        left join
+        (
+            select team_id, team, work_time, department, organ, social_security_company,staff_personnel_id,
+            round(sum(wages_pay_sub),2) as gz, round(sum(company_money_sub),2) as sbgjj, department_id,organ_id,social_security_company_id
+            from staff_pay_personnel_slip
+            where delete_flag = 0
+            <include refid="wheres" />
+            AND work_time = #{workTime,jdbcType=VARCHAR}
+            GROUP BY work_time,team_id,department_id,organ_id,social_security_company_id,staff_personnel_id
+        ) slip on slip.work_time = personnel.work_time and slip.department_id = personnel.department_id
+                and slip.organ_id = personnel.organ_id and slip.social_security_company_id = personnel.social_security_company_id
+                and slip.team_id = personnel.team_id and slip.staff_personnel_id = personnel.staff_personnel_id
+
+        left join
+        (
+            select
+                team_id,team,work_time, department, organ, social_security_company,staff_personnel_id,
+                round(sum(fixed_perf_pay),2) as gdjj, round(sum(manage_perf_pay),2) as gljs,
+                round(sum(asses_perf_pay),2) as khjx, round(sum(travel_allowance_pay),2) as zwbt,
+                round(sum(integral_pay),2) as jfjx, round(sum(welfare_pay),2) as fl, round(sum(quit_cost),2) as lzcb,
+                department_id,organ_id,social_security_company_id
+            from staff_performance_personnel
+            where delete_flag = 0
+                <include refid="wheres" />
+                AND work_time = #{workTime,jdbcType=VARCHAR}
+            GROUP BY work_time,team_id,department_id,organ_id,social_security_company_id,staff_personnel_id
+        ) performance on personnel.team_id = performance.team_id and personnel.work_time = performance.work_time
+                and personnel.department_id = performance.department_id and personnel.organ_id = performance.organ_id
+                and personnel.social_security_company_id = performance.social_security_company_id and performance.staff_personnel_id = personnel.staff_personnel_id
+
+        where
+        personnel.department_id = #{departmentId,jdbcType=BIGINT}
+        AND personnel.organ_id = #{organId,jdbcType=BIGINT}
+        AND personnel.social_security_company_id = #{socialSecurityCompanyId,jdbcType=BIGINT}
+        AND personnel.team_id = #{teamId,jdbcType=BIGINT}
+        AND personnel.work_time = #{workTime,jdbcType=VARCHAR}
+
+    </select>
+
+
+    <select id="selectPersonnelInfo" parameterType="map" resultType="com.lefancrm.apicenter.dto.staff.StaffPersonnelCostAnalysisDTO">
+        select
+        (
+            select count(1) as personnelNum
+            from (
+                select t.staff_personnel_id, t.user_id
+                from (
+                    select staff_personnel_id,real_name,user_id from staff_pay_personnel_slip where work_time &gt;= #{startTime,jdbcType=VARCHAR} AND work_time &lt;= #{endTime,jdbcType=VARCHAR} and delete_flag=0 <include refid="wheres" />
+                    UNION all
+                    select staff_personnel_id,real_name,user_id from staff_performance_personnel where work_time &gt;= #{startTime,jdbcType=VARCHAR} AND work_time &lt;= #{endTime,jdbcType=VARCHAR} and delete_flag=0 <include refid="wheres" />
+                ) t left join staff_personnel_info info on t.staff_personnel_id = info.id
+                group by t.user_id
+            ) c
+        )  as personnelNum
+,
+
+        (
+            select count(1) as personnelNum
+            from (
+                select t.staff_personnel_id, t.user_id
+                    from (
+                        select staff_personnel_id,real_name,user_id from staff_pay_personnel_slip where work_time &gt;= #{startTime,jdbcType=VARCHAR} AND work_time &lt;= #{endTime,jdbcType=VARCHAR} and delete_flag=0 <include refid="wheres" />
+                        UNION all
+                        select staff_personnel_id,real_name,user_id from staff_performance_personnel where work_time &gt;= #{startTime,jdbcType=VARCHAR} AND work_time &lt;= #{endTime,jdbcType=VARCHAR} and delete_flag=0 <include refid="wheres" />
+                    ) t
+                left join staff_personnel_info info on t.staff_personnel_id = info.id
+                where info.entry_time &lt;= #{startTime,jdbcType=VARCHAR}
+                and (info.quit_time is null or (info.quit_time is not null and info.staff_state!=6 and info.quit_time &lt;= #{startTime,jdbcType=VARCHAR}))
+                group by t.user_id
+            ) c
+        ) as monthBeginPersonnelNum
+,
+
+        (
+            select count(1) as personnelNum
+              from (
+                select t.staff_personnel_id, t.user_id
+                from (
+                select staff_personnel_id,real_name,user_id from staff_pay_personnel_slip where work_time &gt;= #{startTime,jdbcType=VARCHAR} AND work_time &lt;= #{endTime,jdbcType=VARCHAR} and delete_flag=0 <include refid="wheres" />
+                UNION all
+                select staff_personnel_id,real_name,user_id from staff_performance_personnel where work_time &gt;= #{startTime,jdbcType=VARCHAR} AND work_time &lt;= #{endTime,jdbcType=VARCHAR} and delete_flag=0 <include refid="wheres" />
+                ) t
+                left join staff_personnel_info info on t.staff_personnel_id = info.id
+                where info.entry_time &lt;= #{monthEndTime,jdbcType=VARCHAR} and info.quit_time is null
+                group by t.user_id
+            ) c
+        ) as monthEndPersonnelNum
+,
+        (
+            select count(1) as personnelNum
+            from (
+            select t.staff_personnel_id, t.user_id
+                from (
+                select staff_personnel_id,real_name,user_id from staff_pay_personnel_slip where work_time &gt;= #{startTime,jdbcType=VARCHAR} AND work_time &lt;= #{endTime,jdbcType=VARCHAR} and delete_flag=0 <include refid="wheres" />
+                UNION all
+                select staff_personnel_id,real_name,user_id from staff_performance_personnel where work_time &gt;= #{startTime,jdbcType=VARCHAR} AND work_time &lt;= #{endTime,jdbcType=VARCHAR} and delete_flag=0 <include refid="wheres" />
+                ) t
+            left join staff_personnel_info info on t.staff_personnel_id = info.id
+            where info.quit_time &gt;= #{startTime,jdbcType=VARCHAR} and info.quit_time &lt;= #{monthEndTime,jdbcType=VARCHAR}
+            group by t.user_id
+            ) c
+        ) as quitPersonnelNum
+    </select>
+</mapper>

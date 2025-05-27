@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.InvalidismEstimateMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.InvalidismEstimate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="accident_province" property="accidentProvince" jdbcType="VARCHAR" />
+    <result column="accident_city" property="accidentCity" jdbcType="VARCHAR" />
+    <result column="accident_district" property="accidentDistrict" jdbcType="VARCHAR" />
+    <result column="accident_address" property="accidentAddress" jdbcType="VARCHAR" />
+    <result column="accident_type" property="accidentType" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="accident_province_id" property="accidentProvinceId" jdbcType="BIGINT" />
+    <result column="accident_city_id" property="accidentCityId" jdbcType="BIGINT" />
+    <result column="accident_district_id" property="accidentDistrictId" jdbcType="BIGINT" />
+    <result column="turn_status" property="turnStatus" jdbcType="BIGINT" />
+      <result column="promoter_name" property="promoterName" jdbcType="VARCHAR" />
+      <result column="case_id" property="caseId" jdbcType="BIGINT" />
+      <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+  </resultMap>
+    <resultMap id="BaseResultWork" type="com.lefancrm.apicenter.model.WorkInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+        <result column="accident_province" property="accidentProvince" jdbcType="VARCHAR" />
+        <result column="accident_city" property="accidentCity" jdbcType="VARCHAR" />
+        <result column="accident_district" property="accidentDistrict" jdbcType="VARCHAR" />
+        <result column="accident_address" property="accidentAddress" jdbcType="VARCHAR" />
+        <result column="accident_type" property="accidentType" jdbcType="INTEGER" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="accident_province_id" property="accidentProvinceId" jdbcType="BIGINT" />
+        <result column="accident_city_id" property="accidentCityId" jdbcType="BIGINT" />
+        <result column="accident_district_id" property="accidentDistrictId" jdbcType="BIGINT" />
+        <result column="promoter_name" property="promoterName" jdbcType="VARCHAR" />
+    </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, user_name, user_phone, accident_province, accident_city, accident_district, 
+    accident_address, accident_type, state, create_time, create_by, update_time, update_by, 
+    delete_flag, accident_province_id, accident_city_id, accident_district_id,turn_status,case_id,case_no
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from invalidism_estimate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from invalidism_estimate
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.InvalidismEstimate" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into invalidism_estimate (user_id, user_name, user_phone, 
+      accident_province, accident_city, accident_district, 
+      accident_address, accident_type, state, 
+      create_time, create_by, update_time, 
+      update_by, delete_flag, accident_province_id, 
+      accident_city_id, accident_district_id,turn_status,case_id,case_no)
+    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{accidentProvince,jdbcType=VARCHAR}, #{accidentCity,jdbcType=VARCHAR}, #{accidentDistrict,jdbcType=VARCHAR}, 
+      #{accidentAddress,jdbcType=VARCHAR}, #{accidentType,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, #{accidentProvinceId,jdbcType=BIGINT}, 
+      #{accidentCityId,jdbcType=BIGINT}, #{accidentDistrictId,jdbcType=BIGINT},#{turnStatus,jdbcType=BIGINT},
+      #{caseId,jdbcType=BIGINT},#{caseNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.InvalidismEstimate" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into invalidism_estimate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="accidentProvince != null" >
+        accident_province,
+      </if>
+      <if test="accidentCity != null" >
+        accident_city,
+      </if>
+      <if test="accidentDistrict != null" >
+        accident_district,
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address,
+      </if>
+      <if test="accidentType != null" >
+        accident_type,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="accidentProvinceId != null" >
+        accident_province_id,
+      </if>
+      <if test="accidentCityId != null" >
+        accident_city_id,
+      </if>
+      <if test="accidentDistrictId != null" >
+        accident_district_id,
+      </if>
+        <if test="turnStatus != null" >
+            turn_status,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentProvince != null" >
+        #{accidentProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentCity != null" >
+        #{accidentCity,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentDistrict != null" >
+        #{accidentDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentAddress != null" >
+        #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentType != null" >
+        #{accidentType,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="accidentProvinceId != null" >
+        #{accidentProvinceId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentCityId != null" >
+        #{accidentCityId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentDistrictId != null" >
+        #{accidentDistrictId,jdbcType=BIGINT},
+      </if>
+        <if test="turnStatus != null" >
+            #{turnStatus,jdbcType=BIGINT},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.InvalidismEstimate" >
+    update invalidism_estimate
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentProvince != null" >
+        accident_province = #{accidentProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentCity != null" >
+        accident_city = #{accidentCity,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentDistrict != null" >
+        accident_district = #{accidentDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentType != null" >
+        accident_type = #{accidentType,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="accidentProvinceId != null" >
+        accident_province_id = #{accidentProvinceId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentCityId != null" >
+        accident_city_id = #{accidentCityId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentDistrictId != null" >
+        accident_district_id = #{accidentDistrictId,jdbcType=BIGINT},
+      </if>
+      <if test="turnStatus != null">
+        turn_status = #{turnStatus,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.InvalidismEstimate" >
+    update invalidism_estimate
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      accident_province = #{accidentProvince,jdbcType=VARCHAR},
+      accident_city = #{accidentCity,jdbcType=VARCHAR},
+      accident_district = #{accidentDistrict,jdbcType=VARCHAR},
+      accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      accident_type = #{accidentType,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      accident_province_id = #{accidentProvinceId,jdbcType=BIGINT},
+      accident_city_id = #{accidentCityId,jdbcType=BIGINT},
+      accident_district_id = #{accidentDistrictId,jdbcType=BIGINT},
+      turn_status = #{turnStatus,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="queryInvalidismEstimateList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select * from invalidism_estimate where user_id = #{userId, jdbcType=BIGINT} and delete_flag != 1
+    </select>
+
+    <select id="selectInvalidismEstimateList" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select IFNULL(p.promoter_name,'无')as promoter_name,a.* from invalidism_estimate a left JOIN promoted_info p on a.user_id = p.customer_id
+        where 1= 1 and delete_flag != 1
+--         select * from invalidism_estimate where 1= 1 and delete_flag != 1
+        <if test="userName != null">
+            and user_name  like  CONCAT(CONCAT('%',   #{userName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="accidentType != null and accidentType != 0">
+            and accident_type = #{accidentType,jdbcType=INTEGER}
+        </if>
+        <if test="state != null and state != 0">
+            and  state = #{state,jdbcType=INTEGER}
+        </if>
+        <if test="caseNo != null">
+            and case_no  like  CONCAT(CONCAT('%',   #{caseNo,jdbcType=VARCHAR}), '%')
+        </if>
+        ORDER BY create_time desc
+        limit #{pageIndex,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+
+    </select>
+    <select id="selectInvalidismEstimateListCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+--         select count(1) from invalidism_estimate where 1= 1 and delete_flag != 1
+        select count(1) from invalidism_estimate a left JOIN promoted_info p on a.user_id = p.customer_id
+        where 1= 1 and delete_flag != 1
+        <if test="userName != null">
+            and user_name  like  CONCAT(CONCAT('%',   #{userName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="accidentType != null and accidentType != 0">
+            and accident_type = #{accidentType,jdbcType=INTEGER}
+        </if>
+        <if test="state != null and state != 0">
+            and  state = #{state,jdbcType=INTEGER}
+        </if>
+        <if test="caseNo != null">
+            and case_no  like  CONCAT(CONCAT('%',   #{caseNo,jdbcType=VARCHAR}), '%')
+        </if>
+    </select>
+
+    <select id="selectInvalidismByParam" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * from invalidism_estimate where user_name = #{userName,jdbcType=VARCHAR} and user_phone = #{userPhone,jdbcType=VARCHAR}
+        <if test="accidentProvinceId != null">
+            and accident_province_id = #{accidentProvinceId,jdbcType=INTEGER}
+        </if>
+        <if test="accidentCityId != null">
+            and accident_city_id = #{accidentCityId,jdbcType=INTEGER}
+        </if>
+        <if test="accidentDistrictId != null">
+            and accident_district_id = #{accidentDistrictId,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="selectInvalidismEstimateByState" parameterType="java.util.Map" resultMap="BaseResultWork">
+        select IFNULL(p.promoter_name,'无')as promoter_name,a.* from invalidism_estimate a left JOIN promoted_info p on a.user_id = p.customer_id
+        where 1= 1 and delete_flag != 1
+        <if test="state != null and state != 0">
+            and  state = #{state,jdbcType=INTEGER}
+        </if>
+        ORDER BY create_time desc
+        limit #{pageIndex,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectInvalWorkCount" resultType="int"  parameterType="java.util.Map" >
+        select count(1) from invalidism_estimate where create_time >= #{createTime,jdbcType=TIMESTAMP} and state = 1 and delete_flag != 1
+    </select>
+
+    <select id="selectInvalidismEstimateByInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from invalidism_estimate where case_id = #{caseId,jdbcType=BIGINT} and case_no = #{caseNo,jdbcType=VARCHAR}
+        order by id desc limit 1
+    </select>
+</mapper>

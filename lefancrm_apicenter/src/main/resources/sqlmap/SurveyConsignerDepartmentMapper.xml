@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyConsignerDepartmentMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyConsignerDepartment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="consignor_org_id" property="consignorOrgId" jdbcType="BIGINT" />
+    <result column="consignor_department_id" property="consignorDepartmentId" jdbcType="BIGINT" />
+    <result column="consigner_user_id" property="consignerUserId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, consignor_org_id, consignor_department_id, consigner_user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_consigner_department
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_consigner_department
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyConsignerDepartment" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_consigner_department (consignor_org_id, consignor_department_id, 
+      consigner_user_id)
+    values (#{consignorOrgId,jdbcType=BIGINT}, #{consignorDepartmentId,jdbcType=BIGINT}, 
+      #{consignerUserId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignerDepartment" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_consigner_department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="consignorOrgId != null" >
+        consignor_org_id,
+      </if>
+      <if test="consignorDepartmentId != null" >
+        consignor_department_id,
+      </if>
+      <if test="consignerUserId != null" >
+        consigner_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="consignorOrgId != null" >
+        #{consignorOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorDepartmentId != null" >
+        #{consignorDepartmentId,jdbcType=BIGINT},
+      </if>
+      <if test="consignerUserId != null" >
+        #{consignerUserId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyConsignerDepartment" >
+    update survey_consigner_department
+    <set >
+      <if test="consignorOrgId != null" >
+        consignor_org_id = #{consignorOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="consignorDepartmentId != null" >
+        consignor_department_id = #{consignorDepartmentId,jdbcType=BIGINT},
+      </if>
+      <if test="consignerUserId != null" >
+        consigner_user_id = #{consignerUserId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyConsignerDepartment" >
+    update survey_consigner_department
+    set consignor_org_id = #{consignorOrgId,jdbcType=BIGINT},
+      consignor_department_id = #{consignorDepartmentId,jdbcType=BIGINT},
+      consigner_user_id = #{consignerUserId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectOne" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from survey_consigner_department
+    where consignor_org_id = #{consignorOrgId,jdbcType=BIGINT} and consignor_department_id = #{consignorDepartmentId,jdbcType=BIGINT} and consigner_user_id = #{consignerUserId,jdbcType=BIGINT}
+    limit 1
+  </select>
+
+  <delete id="delete" parameterType="java.util.Map">
+    delete from survey_consigner_department where consignor_org_id = #{consignorOrgId,jdbcType=BIGINT} and consignor_department_id = #{consignorDepartmentId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByUserAndDepartment" parameterType="java.util.Map">
+    delete from survey_consigner_department where consigner_user_id = #{consignerUserId,jdbcType=BIGINT} and consignor_department_id = #{consignorDepartmentId,jdbcType=BIGINT}
+  </delete>
+
+
+  <select id="list" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    a.*
+    ,d.name as consignorDepartmentName
+    from survey_consigner_department a
+    left join survey_consignor_department d on a.consignor_department_id = d.id
+    where 1 = 1
+    <if test="consignorOrgId != null">
+      and a.consignor_org_id = #{consignorOrgId,jdbcType=BIGINT}
+    </if>
+    <if test="consignorDepartmentId != null">
+      and a.consignor_department_id = #{consignorDepartmentId,jdbcType=BIGINT}
+    </if>
+    <if test="consignerUserId != null">
+      and a.consigner_user_id = #{consignerUserId,jdbcType=BIGINT}
+    </if>
+  </select>
+
+</mapper>

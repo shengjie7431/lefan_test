@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.ThinkDataOrgProductMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.ThinkDataOrgProduct" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="think_data_id" property="thinkDataId" jdbcType="BIGINT" />
+    <result column="think_data_detail_id" property="thinkDataDetailId" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="claim_sun_addmony" property="claimSunAddmony" jdbcType="DOUBLE" />
+    <result column="claim_sun_submoney" property="claimSunSubmoney" jdbcType="DOUBLE" />
+    <result column="bus_acc_mony" property="busAccMony" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, think_data_id, think_data_detail_id, product_id, product_name, claim_sun_addmony, 
+    claim_sun_submoney, bus_acc_mony
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from think_data_org_product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from think_data_org_product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.ThinkDataOrgProduct" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into think_data_org_product (think_data_id, think_data_detail_id, product_id, 
+      product_name, claim_sun_addmony, claim_sun_submoney, 
+      bus_acc_mony)
+    values (#{thinkDataId,jdbcType=BIGINT}, #{thinkDataDetailId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
+      #{productName,jdbcType=VARCHAR}, #{claimSunAddmony,jdbcType=DOUBLE}, #{claimSunSubmoney,jdbcType=DOUBLE}, 
+      #{busAccMony,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.ThinkDataOrgProduct" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into think_data_org_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="thinkDataId != null" >
+        think_data_id,
+      </if>
+      <if test="thinkDataDetailId != null" >
+        think_data_detail_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="claimSunAddmony != null" >
+        claim_sun_addmony,
+      </if>
+      <if test="claimSunSubmoney != null" >
+        claim_sun_submoney,
+      </if>
+      <if test="busAccMony != null" >
+        bus_acc_mony,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="thinkDataId != null" >
+        #{thinkDataId,jdbcType=BIGINT},
+      </if>
+      <if test="thinkDataDetailId != null" >
+        #{thinkDataDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="claimSunAddmony != null" >
+        #{claimSunAddmony,jdbcType=DOUBLE},
+      </if>
+      <if test="claimSunSubmoney != null" >
+        #{claimSunSubmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="busAccMony != null" >
+        #{busAccMony,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.ThinkDataOrgProduct" >
+    update think_data_org_product
+    <set >
+      <if test="thinkDataId != null" >
+        think_data_id = #{thinkDataId,jdbcType=BIGINT},
+      </if>
+      <if test="thinkDataDetailId != null" >
+        think_data_detail_id = #{thinkDataDetailId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="claimSunAddmony != null" >
+        claim_sun_addmony = #{claimSunAddmony,jdbcType=DOUBLE},
+      </if>
+      <if test="claimSunSubmoney != null" >
+        claim_sun_submoney = #{claimSunSubmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="busAccMony != null" >
+        bus_acc_mony = #{busAccMony,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.ThinkDataOrgProduct" >
+    update think_data_org_product
+    set think_data_id = #{thinkDataId,jdbcType=BIGINT},
+      think_data_detail_id = #{thinkDataDetailId,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      product_name = #{productName,jdbcType=VARCHAR},
+      claim_sun_addmony = #{claimSunAddmony,jdbcType=DOUBLE},
+      claim_sun_submoney = #{claimSunSubmoney,jdbcType=DOUBLE},
+      bus_acc_mony = #{busAccMony,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="insertOrgProduct" parameterType="java.util.Map">
+    insert into think_data_org_product(think_data_id,think_data_detail_id,product_id,product_name)
+    select
+     d.think_data_id,d.id,p.product_enum_id,p.product_enum_name
+     from think_data_detail d
+    left join staff_organ_product p on d.org_id = p.organ_id
+    where d.think_data_id = #{thinkDataId,jdbcType=BIGINT} and d.data_type in (1,2)
+  </insert>
+
+  <select id="list" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from think_data_org_product
+    where think_data_id = #{thinkDataId,jdbcType=BIGINT}
+  </select>
+
+  <select id="thinkData" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.ThinkDataOrgProduct">
+    select
+     p.product_id productId,
+     p.product_name productName,
+     p.claim_sun_addmony claimSunAddmony,
+     p.claim_sun_submoney claimSunSubmoney,
+     p.bus_acc_mony busAccMony,
+     d.org_id orgId,
+     d.data_type dataType
+     from think_data_org_product p
+    left join think_data_detail d on think_data_detail_id = d.id
+    left join think_data a on p.think_data_id = a.id
+    where 1 = 1 and a.delete_flag = 0 and p.product_id is not null and state = 3
+    <if test="startTime != null">
+      and date_format(a.think_time,'%Y-%m') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="endTime != null">
+      and date_format(a.think_time,'%Y-%m') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+    </if>
+  </select>
+
+  <select id="thinkDataDetail" parameterType="java.util.Map" resultType="com.lefancrm.apicenter.model.ThinkDataDetail">
+    select
+    d.dep_acc_mony depAccMony,
+    d.lefan_in_mony lefanInMony,
+    d.lefan_out_mony lefanOutMony,
+    d.lefan_tax_mony lefanTaxMony,
+    d.org_id orgId,
+    d.data_type dataType
+    from think_data_detail d
+    left join think_data a on d.think_data_id = a.id
+    left join staff_budget_company_organ c on d.org_id = c.organ_id
+    where 1 = 1 and a.delete_flag = 0 and state = 3
+    <if test="startTime != null">
+      and date_format(a.think_time,'%Y-%m') &gt;= date_format(#{startTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="endTime != null">
+      and date_format(a.think_time,'%Y-%m') &lt;= date_format(#{endTime,jdbcType=DATE},'%Y-%m')
+    </if>
+    <if test="dataType == 4">
+      and d.data_type = 4
+    </if>
+  </select>
+</mapper>

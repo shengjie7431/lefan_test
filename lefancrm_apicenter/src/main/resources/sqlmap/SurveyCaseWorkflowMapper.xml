@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.SurveyCaseWorkflowMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.SurveyCaseWorkflow" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="step_name" property="stepName" jdbcType="VARCHAR" />
+    <result column="deal_user_id" property="dealUserId" jdbcType="BIGINT" />
+    <result column="deal_user_name" property="dealUserName" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="hours" property="hours" jdbcType="BIGINT" />
+    <result column="survey_id" property="surveyId" jdbcType="BIGINT" />
+    <result column="survey_info_id" property="surveyInfoId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, step_name, deal_user_id, deal_user_name, start_time, end_time, hours, survey_id, 
+    survey_info_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey_case_workflow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from survey_case_workflow
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.SurveyCaseWorkflow" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_case_workflow (step_name, deal_user_id, deal_user_name, 
+      start_time, end_time, hours, 
+      survey_id, survey_info_id)
+    values (#{stepName,jdbcType=VARCHAR}, #{dealUserId,jdbcType=BIGINT}, #{dealUserName,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{hours,jdbcType=BIGINT}, 
+      #{surveyId,jdbcType=BIGINT}, #{surveyInfoId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyCaseWorkflow" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey_case_workflow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stepName != null" >
+        step_name,
+      </if>
+      <if test="dealUserId != null" >
+        deal_user_id,
+      </if>
+      <if test="dealUserName != null" >
+        deal_user_name,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="hours != null" >
+        hours,
+      </if>
+      <if test="surveyId != null" >
+        survey_id,
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stepName != null" >
+        #{stepName,jdbcType=VARCHAR},
+      </if>
+      <if test="dealUserId != null" >
+        #{dealUserId,jdbcType=BIGINT},
+      </if>
+      <if test="dealUserName != null" >
+        #{dealUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hours != null" >
+        #{hours,jdbcType=BIGINT},
+      </if>
+      <if test="surveyId != null" >
+        #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.SurveyCaseWorkflow" >
+    update survey_case_workflow
+    <set >
+      <if test="stepName != null" >
+        step_name = #{stepName,jdbcType=VARCHAR},
+      </if>
+      <if test="dealUserId != null" >
+        deal_user_id = #{dealUserId,jdbcType=BIGINT},
+      </if>
+      <if test="dealUserName != null" >
+        deal_user_name = #{dealUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hours != null" >
+        hours = #{hours,jdbcType=BIGINT},
+      </if>
+      <if test="surveyId != null" >
+        survey_id = #{surveyId,jdbcType=BIGINT},
+      </if>
+      <if test="surveyInfoId != null" >
+        survey_info_id = #{surveyInfoId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.SurveyCaseWorkflow" >
+    update survey_case_workflow
+    set step_name = #{stepName,jdbcType=VARCHAR},
+      deal_user_id = #{dealUserId,jdbcType=BIGINT},
+      deal_user_name = #{dealUserName,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      hours = #{hours,jdbcType=BIGINT},
+      survey_id = #{surveyId,jdbcType=BIGINT},
+      survey_info_id = #{surveyInfoId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="joins">
+
+    </sql>
+    <sql id="wheres">
+        <if test="surveyInfoId != null" >
+            and survey_info_id = #{surveyInfoId,jdbcType=BIGINT}
+        </if>
+    </sql>
+    <select id="list" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from survey_case_workflow
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+        order by id desc
+        <if test="pageIndex != null and pageSize != null">
+            limit #{pageIndex}, #{pageSize}
+        </if>
+    </select>
+    <select id="listSize" parameterType="map" resultType="int">
+        select
+        count(1)
+        from survey_case_workflow
+        <include refid="joins" />
+        where 1=1
+        <include refid="wheres" />
+    </select>
+
+
+    <insert id="insertByBsCaseList" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into survey_case_workflow(step_name, deal_user_id, deal_user_name,
+        start_time, end_time, hours, survey_id, survey_info_id)
+        values
+        <foreach collection="surveyRiskCaseInfos" item="item" separator=",">
+            (
+            #{item.stepName,jdbcType=VARCHAR},
+            #{item.dealUserId,jdbcType=BIGINT},
+            #{item.dealUserName,jdbcType=VARCHAR},
+            #{item.entrustReportStartDate,jdbcType=TIMESTAMP},
+            #{item.entrustReportEndDate,jdbcType=TIMESTAMP},
+            #{item.hours,jdbcType=BIGINT},
+            #{item.surveyId,jdbcType=BIGINT},
+            #{item.id,jdbcType=BIGINT}
+            )
+        </foreach>
+    </insert>
+</mapper>

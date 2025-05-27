@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.PaymentEstimateApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.PaymentEstimateApply" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="accident_province" property="accidentProvince" jdbcType="VARCHAR" />
+    <result column="accident_city" property="accidentCity" jdbcType="VARCHAR" />
+    <result column="accident_district" property="accidentDistrict" jdbcType="VARCHAR" />
+    <result column="accident_address" property="accidentAddress" jdbcType="VARCHAR" />
+    <result column="my_status" property="myStatus" jdbcType="INTEGER" />
+    <result column="other_tarffic_status" property="otherTarfficStatus" jdbcType="INTEGER" />
+    <result column="my_tarffic_status" property="myTarfficStatus" jdbcType="INTEGER" />
+    <result column="my_accident_liability" property="myAccidentLiability" jdbcType="INTEGER" />
+    <result column="injured_part" property="injuredPart" jdbcType="VARCHAR" />
+    <result column="injury_status" property="injuryStatus" jdbcType="VARCHAR" />
+    <result column="treatment_method" property="treatmentMethod" jdbcType="INTEGER" />
+    <result column="hospitalization_day" property="hospitalizationDay" jdbcType="INTEGER" />
+    <result column="is_operation" property="isOperation" jdbcType="INTEGER" />
+    <result column="operation_type" property="operationType" jdbcType="VARCHAR" />
+    <result column="invalidism_grade" property="invalidismGrade" jdbcType="VARCHAR" />
+    <result column="is_again_operation" property="isAgainOperation" jdbcType="INTEGER" />
+    <result column="medical_fee" property="medicalFee" jdbcType="DOUBLE" />
+    <result column="financial_loss_fee" property="financialLossFee" jdbcType="DOUBLE" />
+    <result column="irr_province" property="irrProvince" jdbcType="VARCHAR" />
+    <result column="irr_city" property="irrCity" jdbcType="VARCHAR" />
+    <result column="irr_district" property="irrDistrict" jdbcType="VARCHAR" />
+    <result column="irr_type" property="irrType" jdbcType="INTEGER" />
+    <result column="is_full_year" property="isFullYear" jdbcType="INTEGER" />
+    <result column="injured_wages" property="injuredWages" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="accident_province_id" property="accidentProvinceId" jdbcType="BIGINT" />
+    <result column="accident_city_id" property="accidentCityId" jdbcType="BIGINT" />
+    <result column="accident_district_id" property="accidentDistrictId" jdbcType="BIGINT" />
+    <result column="irr_province_id" property="irrProvinceId" jdbcType="BIGINT" />
+    <result column="irr_city_id" property="irrCityId" jdbcType="BIGINT" />
+    <result column="irr_district_id" property="irrDistrictId" jdbcType="BIGINT" />
+    <result column="turn_status" property="turnStatus" jdbcType="BIGINT"/>
+    <result column="promoter_name" property="promoterName" jdbcType="VARCHAR" />
+    <result column="is_student" property="isStudent" jdbcType="VARCHAR" />
+    <result column="accident_date" property="accidentDate" jdbcType="DATE" />
+    <result column="case_type" property="caseType" jdbcType="INTEGER" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT"/>
+      <result column="injured_desc" property="injuredDesc" jdbcType="VARCHAR"/>
+      <result column="loan_fund" property="loanFund" jdbcType="INTEGER" />
+      <result column="case_no" property="caseNo" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, user_name, user_phone, birthday, accident_province, accident_city, accident_district, 
+    accident_address, my_status, other_tarffic_status, my_tarffic_status, my_accident_liability, 
+    injured_part, injury_status, treatment_method, hospitalization_day, is_operation, 
+    operation_type, invalidism_grade, is_again_operation, medical_fee, financial_loss_fee, 
+    irr_province, irr_city, irr_district, irr_type, is_full_year, injured_wages, create_time, 
+    create_by, update_time, update_by, delete_flag, accident_province_id, accident_city_id, 
+    accident_district_id, irr_province_id, irr_city_id, irr_district_id,turn_status,is_student,accident_date,
+    case_type,case_id,injured_desc,loan_fund,case_no
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from payment_estimate_apply
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from payment_estimate_apply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.PaymentEstimateApply" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into payment_estimate_apply (user_id, user_name, user_phone, 
+      birthday, accident_province, accident_city, 
+      accident_district, accident_address, my_status, 
+      other_tarffic_status, my_tarffic_status, my_accident_liability, 
+      injured_part, injury_status, treatment_method, 
+      hospitalization_day, is_operation, operation_type, 
+      invalidism_grade, is_again_operation, medical_fee, 
+      financial_loss_fee, irr_province, irr_city, 
+      irr_district, irr_type, is_full_year, 
+      injured_wages, create_time, create_by, 
+      update_time, update_by, delete_flag, 
+      accident_province_id, accident_city_id, accident_district_id, 
+      irr_province_id, irr_city_id, irr_district_id,turn_status,is_student,accident_date,case_type,
+      case_id,injured_desc,loan_fund,case_no
+      )
+    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE}, #{accidentProvince,jdbcType=VARCHAR}, #{accidentCity,jdbcType=VARCHAR}, 
+      #{accidentDistrict,jdbcType=VARCHAR}, #{accidentAddress,jdbcType=VARCHAR}, #{myStatus,jdbcType=INTEGER}, 
+      #{otherTarfficStatus,jdbcType=INTEGER}, #{myTarfficStatus,jdbcType=INTEGER}, #{myAccidentLiability,jdbcType=INTEGER}, 
+      #{injuredPart,jdbcType=VARCHAR}, #{injuryStatus,jdbcType=VARCHAR}, #{treatmentMethod,jdbcType=INTEGER}, 
+      #{hospitalizationDay,jdbcType=INTEGER}, #{isOperation,jdbcType=INTEGER}, #{operationType,jdbcType=VARCHAR}, 
+      #{invalidismGrade,jdbcType=VARCHAR}, #{isAgainOperation,jdbcType=INTEGER}, #{medicalFee,jdbcType=DOUBLE}, 
+      #{financialLossFee,jdbcType=DOUBLE}, #{irrProvince,jdbcType=VARCHAR}, #{irrCity,jdbcType=VARCHAR}, 
+      #{irrDistrict,jdbcType=VARCHAR}, #{irrType,jdbcType=INTEGER}, #{isFullYear,jdbcType=INTEGER}, 
+      #{injuredWages,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, 
+      #{accidentProvinceId,jdbcType=BIGINT}, #{accidentCityId,jdbcType=BIGINT}, #{accidentDistrictId,jdbcType=BIGINT}, 
+      #{irrProvinceId,jdbcType=BIGINT}, #{irrCityId,jdbcType=BIGINT}, #{irrDistrictId,jdbcType=BIGINT},
+      #{turnStatus,jdbcType=BIGINT}, #{isStudent,jdbcType=INTEGER},#{accidentDate,jdbcType=DATE},#{caseType,jdbcType=INTEGER},#{caseId,jdbcType=INTEGER},
+      #{injuredDesc,jdbcType=VARCHAR},#{loanFund,jdbcType=INTEGER},#{caseNo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.PaymentEstimateApply" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into payment_estimate_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="accidentProvince != null" >
+        accident_province,
+      </if>
+      <if test="accidentCity != null" >
+        accident_city,
+      </if>
+      <if test="accidentDistrict != null" >
+        accident_district,
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address,
+      </if>
+      <if test="myStatus != null" >
+        my_status,
+      </if>
+      <if test="otherTarfficStatus != null" >
+        other_tarffic_status,
+      </if>
+      <if test="myTarfficStatus != null" >
+        my_tarffic_status,
+      </if>
+      <if test="myAccidentLiability != null" >
+        my_accident_liability,
+      </if>
+      <if test="injuredPart != null" >
+        injured_part,
+      </if>
+      <if test="injuryStatus != null" >
+        injury_status,
+      </if>
+      <if test="treatmentMethod != null" >
+        treatment_method,
+      </if>
+      <if test="hospitalizationDay != null" >
+        hospitalization_day,
+      </if>
+      <if test="isOperation != null" >
+        is_operation,
+      </if>
+      <if test="operationType != null" >
+        operation_type,
+      </if>
+      <if test="invalidismGrade != null" >
+        invalidism_grade,
+      </if>
+      <if test="isAgainOperation != null" >
+        is_again_operation,
+      </if>
+      <if test="medicalFee != null" >
+        medical_fee,
+      </if>
+      <if test="financialLossFee != null" >
+        financial_loss_fee,
+      </if>
+      <if test="irrProvince != null" >
+        irr_province,
+      </if>
+      <if test="irrCity != null" >
+        irr_city,
+      </if>
+      <if test="irrDistrict != null" >
+        irr_district,
+      </if>
+      <if test="irrType != null" >
+        irr_type,
+      </if>
+      <if test="isFullYear != null" >
+        is_full_year,
+      </if>
+      <if test="injuredWages != null" >
+        injured_wages,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="accidentProvinceId != null" >
+        accident_province_id,
+      </if>
+      <if test="accidentCityId != null" >
+        accident_city_id,
+      </if>
+      <if test="accidentDistrictId != null" >
+        accident_district_id,
+      </if>
+      <if test="irrProvinceId != null" >
+        irr_province_id,
+      </if>
+      <if test="irrCityId != null" >
+        irr_city_id,
+      </if>
+      <if test="irrDistrictId != null" >
+        irr_district_id,
+      </if>
+        <if test="turnStatus != null" >
+            turn_status,
+        </if>
+      <if test="isStudent != null" >
+        is_student,
+      </if>
+      <if test="accidentDate != null" >
+        accident_date,
+      </if>
+      <if test="caseType != null" >
+         case_type,
+      </if>
+      <if test="caseId != null" >
+         case_id,
+      </if>
+        <if test="injuredDesc != null" >
+            injured_desc,
+        </if>
+        <if test="loanFund != null" >
+            loan_fund,
+        </if>
+        <if test="caseNo != null" >
+            case_no,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="accidentProvince != null" >
+        #{accidentProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentCity != null" >
+        #{accidentCity,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentDistrict != null" >
+        #{accidentDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentAddress != null" >
+        #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="myStatus != null" >
+        #{myStatus,jdbcType=INTEGER},
+      </if>
+      <if test="otherTarfficStatus != null" >
+        #{otherTarfficStatus,jdbcType=INTEGER},
+      </if>
+      <if test="myTarfficStatus != null" >
+        #{myTarfficStatus,jdbcType=INTEGER},
+      </if>
+      <if test="myAccidentLiability != null" >
+        #{myAccidentLiability,jdbcType=INTEGER},
+      </if>
+      <if test="injuredPart != null" >
+        #{injuredPart,jdbcType=VARCHAR},
+      </if>
+      <if test="injuryStatus != null" >
+        #{injuryStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentMethod != null" >
+        #{treatmentMethod,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalizationDay != null" >
+        #{hospitalizationDay,jdbcType=INTEGER},
+      </if>
+      <if test="isOperation != null" >
+        #{isOperation,jdbcType=INTEGER},
+      </if>
+      <if test="operationType != null" >
+        #{operationType,jdbcType=VARCHAR},
+      </if>
+      <if test="invalidismGrade != null" >
+        #{invalidismGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgainOperation != null" >
+        #{isAgainOperation,jdbcType=INTEGER},
+      </if>
+      <if test="medicalFee != null" >
+        #{medicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="financialLossFee != null" >
+        #{financialLossFee,jdbcType=DOUBLE},
+      </if>
+      <if test="irrProvince != null" >
+        #{irrProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="irrCity != null" >
+        #{irrCity,jdbcType=VARCHAR},
+      </if>
+      <if test="irrDistrict != null" >
+        #{irrDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="irrType != null" >
+        #{irrType,jdbcType=INTEGER},
+      </if>
+      <if test="isFullYear != null" >
+        #{isFullYear,jdbcType=INTEGER},
+      </if>
+      <if test="injuredWages != null" >
+        #{injuredWages,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="accidentProvinceId != null" >
+        #{accidentProvinceId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentCityId != null" >
+        #{accidentCityId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentDistrictId != null" >
+        #{accidentDistrictId,jdbcType=BIGINT},
+      </if>
+      <if test="irrProvinceId != null" >
+        #{irrProvinceId,jdbcType=BIGINT},
+      </if>
+      <if test="irrCityId != null" >
+        #{irrCityId,jdbcType=BIGINT},
+      </if>
+      <if test="irrDistrictId != null" >
+        #{irrDistrictId,jdbcType=BIGINT},
+      </if>
+      <if test="turnStatus != null">
+        #{turnStatus,jdbcType=BIGINT},
+      </if>
+      <if test="isStudent != null" >
+        #{isStudent,jdbcType=INTEGER},
+      </if>
+      <if test="accidentDate != null" >
+        #{accidentDate,jdbcType=DATE},
+      </if>
+      <if test="caseType != null" >
+        #{caseType,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+        <if test="injuredDesc != null" >
+            #{injuredDesc,jdbcType=VARCHAR},
+        </if>
+        <if test="loanFund != null" >
+            #{loanFund,jdbcType=INTEGER},
+        </if>
+        <if test="caseNo != null" >
+            #{caseNo,jdbcType=VARCHAR},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.PaymentEstimateApply" >
+    update payment_estimate_apply
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="accidentProvince != null" >
+        accident_province = #{accidentProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentCity != null" >
+        accident_city = #{accidentCity,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentDistrict != null" >
+        accident_district = #{accidentDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="myStatus != null" >
+        my_status = #{myStatus,jdbcType=INTEGER},
+      </if>
+      <if test="otherTarfficStatus != null" >
+        other_tarffic_status = #{otherTarfficStatus,jdbcType=INTEGER},
+      </if>
+      <if test="myTarfficStatus != null" >
+        my_tarffic_status = #{myTarfficStatus,jdbcType=INTEGER},
+      </if>
+      <if test="myAccidentLiability != null" >
+        my_accident_liability = #{myAccidentLiability,jdbcType=INTEGER},
+      </if>
+      <if test="injuredPart != null" >
+        injured_part = #{injuredPart,jdbcType=VARCHAR},
+      </if>
+      <if test="injuryStatus != null" >
+        injury_status = #{injuryStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentMethod != null" >
+        treatment_method = #{treatmentMethod,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalizationDay != null" >
+        hospitalization_day = #{hospitalizationDay,jdbcType=INTEGER},
+      </if>
+      <if test="isOperation != null" >
+        is_operation = #{isOperation,jdbcType=INTEGER},
+      </if>
+      <if test="operationType != null" >
+        operation_type = #{operationType,jdbcType=VARCHAR},
+      </if>
+      <if test="invalidismGrade != null" >
+        invalidism_grade = #{invalidismGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgainOperation != null" >
+        is_again_operation = #{isAgainOperation,jdbcType=INTEGER},
+      </if>
+      <if test="medicalFee != null" >
+        medical_fee = #{medicalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="financialLossFee != null" >
+        financial_loss_fee = #{financialLossFee,jdbcType=DOUBLE},
+      </if>
+      <if test="irrProvince != null" >
+        irr_province = #{irrProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="irrCity != null" >
+        irr_city = #{irrCity,jdbcType=VARCHAR},
+      </if>
+      <if test="irrDistrict != null" >
+        irr_district = #{irrDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="irrType != null" >
+        irr_type = #{irrType,jdbcType=INTEGER},
+      </if>
+      <if test="isFullYear != null" >
+        is_full_year = #{isFullYear,jdbcType=INTEGER},
+      </if>
+      <if test="injuredWages != null" >
+        injured_wages = #{injuredWages,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="accidentProvinceId != null" >
+        accident_province_id = #{accidentProvinceId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentCityId != null" >
+        accident_city_id = #{accidentCityId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentDistrictId != null" >
+        accident_district_id = #{accidentDistrictId,jdbcType=BIGINT},
+      </if>
+      <if test="irrProvinceId != null" >
+        irr_province_id = #{irrProvinceId,jdbcType=BIGINT},
+      </if>
+      <if test="irrCityId != null" >
+        irr_city_id = #{irrCityId,jdbcType=BIGINT},
+      </if>
+      <if test="irrDistrictId != null" >
+        irr_district_id = #{irrDistrictId,jdbcType=BIGINT},
+      </if>
+      <if test="turnStatus != null">
+          turn_status = #{turnStatus,jdbcType=BIGINT},
+      </if>
+      <if test="isStudent != null" >
+        is_student = #{isStudent,jdbcType=INTEGER},
+      </if>
+      <if test="accidentDate != null" >
+        accident_date = #{accidentDate,jdbcType=DATE},
+      </if>
+      <if test="caseType != null" >
+        case_type = #{caseType,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+        <if test="injuredDesc != null" >
+            injured_desc = #{injuredDesc,jdbcType=VARCHAR},
+        </if>
+        <if test="loanFund != null" >
+            loan_fund = #{loanFund,jdbcType=INTEGER},
+        </if>
+        <if test="caseNo != null" >
+            case_no = #{caseNo,jdbcType=VARCHAR},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.PaymentEstimateApply" >
+    update payment_estimate_apply
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      accident_province = #{accidentProvince,jdbcType=VARCHAR},
+      accident_city = #{accidentCity,jdbcType=VARCHAR},
+      accident_district = #{accidentDistrict,jdbcType=VARCHAR},
+      accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      my_status = #{myStatus,jdbcType=INTEGER},
+      other_tarffic_status = #{otherTarfficStatus,jdbcType=INTEGER},
+      my_tarffic_status = #{myTarfficStatus,jdbcType=INTEGER},
+      my_accident_liability = #{myAccidentLiability,jdbcType=INTEGER},
+      injured_part = #{injuredPart,jdbcType=VARCHAR},
+      injury_status = #{injuryStatus,jdbcType=VARCHAR},
+      treatment_method = #{treatmentMethod,jdbcType=INTEGER},
+      hospitalization_day = #{hospitalizationDay,jdbcType=INTEGER},
+      is_operation = #{isOperation,jdbcType=INTEGER},
+      operation_type = #{operationType,jdbcType=VARCHAR},
+      invalidism_grade = #{invalidismGrade,jdbcType=VARCHAR},
+      is_again_operation = #{isAgainOperation,jdbcType=INTEGER},
+      medical_fee = #{medicalFee,jdbcType=DOUBLE},
+      financial_loss_fee = #{financialLossFee,jdbcType=DOUBLE},
+      irr_province = #{irrProvince,jdbcType=VARCHAR},
+      irr_city = #{irrCity,jdbcType=VARCHAR},
+      irr_district = #{irrDistrict,jdbcType=VARCHAR},
+      irr_type = #{irrType,jdbcType=INTEGER},
+      is_full_year = #{isFullYear,jdbcType=INTEGER},
+      injured_wages = #{injuredWages,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      accident_province_id = #{accidentProvinceId,jdbcType=BIGINT},
+      accident_city_id = #{accidentCityId,jdbcType=BIGINT},
+      accident_district_id = #{accidentDistrictId,jdbcType=BIGINT},
+      irr_province_id = #{irrProvinceId,jdbcType=BIGINT},
+      irr_city_id = #{irrCityId,jdbcType=BIGINT},
+      irr_district_id = #{irrDistrictId,jdbcType=BIGINT},
+      turn_status = #{turnStatus,jdbcType=BIGINT},
+      is_student = #{isStudent,jdbcType=INTEGER},
+      accident_date = #{accidentDate,jdbcType=DATE},
+      case_type = #{caseType,jdbcType=INTEGER},
+      case_id = #{caseId,jdbcType=BIGINT},
+      injured_desc = #{injuredDesc,jdbcType=VARCHAR},
+      loan_fund = #{loanFund,jdbcType=INTEGER},
+      case_no = #{caseNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectPaymentEstimateApplyList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        <!--select-->
+        <!--<include refid="Base_Column_List" />-->
+        <!--from payment_estimate_apply-->
+        <!--where 1=1-->
+        select IFNULL(p.promoter_name,'无')as promoter_name,a.* from payment_estimate_apply a left JOIN promoted_info p on a.user_id = p.customer_id
+        where 1= 1 and delete_flag != 1
+        <if test="userName != null" >
+           and user_name = #{userName,jdbcType=VARCHAR}
+        </if>
+        order by create_time desc
+        limit #{pageIndex}, #{pageSize}
+    </select>
+    <select id="selectCountPaymentEstimateApply" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select
+        count(1)
+        from payment_estimate_apply
+        where 1=1
+        <if test="userName != null" >
+            and user_name = #{userName,jdbcType=VARCHAR}
+        </if>
+        order by create_time desc
+    </select>
+    <select id="selectPEAByCaseIdNew" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        id, user_id, user_name, user_phone,case_type,case_id,accident_date
+        from payment_estimate_apply
+        where 1= 1 and delete_flag != 1
+        <if test="caseNo != null" >
+           and case_no = #{caseNo,jdbcType=VARCHAR}
+        </if>
+        order by create_time desc
+        limit #{pageIndex}, #{pageSize}
+    </select>
+    <select id="selectCountPEAByCaseIdNew" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select
+        count(1)
+        from payment_estimate_apply
+        where 1=1
+        <if test="caseNo != null" >
+            and case_no = #{caseNo,jdbcType=VARCHAR}
+        </if>
+        order by create_time desc
+    </select>
+
+    <select id="selectPaymentEstimateApplyByCaseIdNew" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from payment_estimate_apply
+        where  case_no = #{caseNo,jdbcType=VARCHAR}
+        <if test="userName !=null">
+            and user_name like  CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="userPhone !=null">
+            and user_phone like  CONCAT(CONCAT('%',#{userPhone,jdbcType=VARCHAR}), '%')
+        </if>
+        ORDER by create_time desc limit #{pageIndex} , #{pageSize}
+    </select>
+    <select id="selectCountPaymentEstimateApplyByCaseIdNew" resultType="java.lang.Integer" parameterType="java.util.Map" >
+        select
+        count(1)
+        from payment_estimate_apply
+        where case_no = #{caseNo,jdbcType=VARCHAR}
+        <if test="userName !=null">
+            and user_name like  CONCAT(CONCAT('%',#{userName,jdbcType=VARCHAR}), '%')
+        </if>
+        <if test="userPhone !=null">
+            and user_phone like  CONCAT(CONCAT('%',#{userPhone,jdbcType=VARCHAR}), '%')
+        </if>
+        order by create_time desc
+    </select>
+
+    <select id="selectPEAByCaseCenterInfoNew" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List" />
+        from payment_estimate_apply
+        where 1= 1 and delete_flag != 1
+        <if test="caseNo != null" >
+            and case_no = #{caseNo,jdbcType=VARCHAR}
+        </if>
+        order by id desc limit 1
+    </select>
+
+</mapper>

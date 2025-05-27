@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CrmAccidentInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CrmAccidentInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="accident_date" property="accidentDate" jdbcType="DATE" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="INTEGER" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="district_id" property="districtId" jdbcType="INTEGER" />
+    <result column="accident_address" property="accidentAddress" jdbcType="VARCHAR" />
+    <result column="accident_cognizance" property="accidentCognizance" jdbcType="INTEGER" />
+    <result column="police_team" property="policeTeam" jdbcType="VARCHAR" />
+    <result column="police_man" property="policeMan" jdbcType="VARCHAR" />
+    <result column="police_tel" property="policeTel" jdbcType="VARCHAR" />
+    <result column="ins_compulsory" property="insCompulsory" jdbcType="VARCHAR" />
+    <result column="ins_commercial" property="insCommercial" jdbcType="VARCHAR" />
+    <result column="three_quota" property="threeQuota" jdbcType="DOUBLE" />
+    <result column="is_deductibles" property="isDeductibles" jdbcType="INTEGER" />
+    <result column="driver_name" property="driverName" jdbcType="VARCHAR" />
+    <result column="driver_tel" property="driverTel" jdbcType="VARCHAR" />
+    <result column="is_multi" property="isMulti" jdbcType="INTEGER" />
+    <result column="is_relief" property="isRelief" jdbcType="INTEGER" />
+    <result column="other_desc" property="otherDesc" jdbcType="VARCHAR" />
+    <result column="data_rate" property="dataRate" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, customer_id, accident_date, province, province_id, city, city_id, district, district_id, 
+    accident_address, accident_cognizance, police_team, police_man, police_tel, ins_compulsory, 
+    ins_commercial, three_quota, is_deductibles, driver_name, driver_tel, is_multi, is_relief, 
+    other_desc, data_rate,create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from crm_accident_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectByPrimaryCustomerId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from crm_accident_info
+        where customer_id = #{customerId,jdbcType=BIGINT}
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from crm_accident_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CrmAccidentInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crm_accident_info (customer_id, accident_date, province, 
+      province_id, city, city_id, 
+      district, district_id, accident_address, 
+      accident_cognizance, police_team, police_man, 
+      police_tel, ins_compulsory, ins_commercial, 
+      three_quota, is_deductibles, driver_name, 
+      driver_tel, is_multi, is_relief, 
+      other_desc, data_rate,create_time)
+    values (#{customerId,jdbcType=BIGINT}, #{accidentDate,jdbcType=DATE}, #{province,jdbcType=VARCHAR}, 
+      #{provinceId,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, #{cityId,jdbcType=INTEGER}, 
+      #{district,jdbcType=VARCHAR}, #{districtId,jdbcType=INTEGER}, #{accidentAddress,jdbcType=VARCHAR}, 
+      #{accidentCognizance,jdbcType=INTEGER}, #{policeTeam,jdbcType=VARCHAR}, #{policeMan,jdbcType=VARCHAR}, 
+      #{policeTel,jdbcType=VARCHAR}, #{insCompulsory,jdbcType=VARCHAR}, #{insCommercial,jdbcType=VARCHAR}, 
+      #{threeQuota,jdbcType=DOUBLE}, #{isDeductibles,jdbcType=INTEGER}, #{driverName,jdbcType=VARCHAR}, 
+      #{driverTel,jdbcType=VARCHAR}, #{isMulti,jdbcType=INTEGER}, #{isRelief,jdbcType=INTEGER}, 
+      #{otherDesc,jdbcType=VARCHAR}, #{dataRate,jdbcType=DOUBLE},#{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CrmAccidentInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into crm_accident_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="accidentDate != null" >
+        accident_date,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="districtId != null" >
+        district_id,
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address,
+      </if>
+      <if test="accidentCognizance != null" >
+        accident_cognizance,
+      </if>
+      <if test="policeTeam != null" >
+        police_team,
+      </if>
+      <if test="policeMan != null" >
+        police_man,
+      </if>
+      <if test="policeTel != null" >
+        police_tel,
+      </if>
+      <if test="insCompulsory != null" >
+        ins_compulsory,
+      </if>
+      <if test="insCommercial != null" >
+        ins_commercial,
+      </if>
+      <if test="threeQuota != null" >
+        three_quota,
+      </if>
+      <if test="isDeductibles != null" >
+        is_deductibles,
+      </if>
+      <if test="driverName != null" >
+        driver_name,
+      </if>
+      <if test="driverTel != null" >
+        driver_tel,
+      </if>
+      <if test="isMulti != null" >
+        is_multi,
+      </if>
+      <if test="isRelief != null" >
+        is_relief,
+      </if>
+      <if test="otherDesc != null" >
+        other_desc,
+      </if>
+      <if test="dataRate != null" >
+        data_rate,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentDate != null" >
+        #{accidentDate,jdbcType=DATE},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="districtId != null" >
+        #{districtId,jdbcType=INTEGER},
+      </if>
+      <if test="accidentAddress != null" >
+        #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentCognizance != null" >
+        #{accidentCognizance,jdbcType=INTEGER},
+      </if>
+      <if test="policeTeam != null" >
+        #{policeTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="policeMan != null" >
+        #{policeMan,jdbcType=VARCHAR},
+      </if>
+      <if test="policeTel != null" >
+        #{policeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="insCompulsory != null" >
+        #{insCompulsory,jdbcType=VARCHAR},
+      </if>
+      <if test="insCommercial != null" >
+        #{insCommercial,jdbcType=VARCHAR},
+      </if>
+      <if test="threeQuota != null" >
+        #{threeQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="isDeductibles != null" >
+        #{isDeductibles,jdbcType=INTEGER},
+      </if>
+      <if test="driverName != null" >
+        #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverTel != null" >
+        #{driverTel,jdbcType=VARCHAR},
+      </if>
+      <if test="isMulti != null" >
+        #{isMulti,jdbcType=INTEGER},
+      </if>
+      <if test="isRelief != null" >
+        #{isRelief,jdbcType=INTEGER},
+      </if>
+      <if test="otherDesc != null" >
+        #{otherDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="dataRate != null" >
+        #{dataRate,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CrmAccidentInfo" >
+    update crm_accident_info
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="accidentDate != null" >
+        accident_date = #{accidentDate,jdbcType=DATE},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="districtId != null" >
+        district_id = #{districtId,jdbcType=INTEGER},
+      </if>
+      <if test="accidentAddress != null" >
+        accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentCognizance != null" >
+        accident_cognizance = #{accidentCognizance,jdbcType=INTEGER},
+      </if>
+      <if test="policeTeam != null" >
+        police_team = #{policeTeam,jdbcType=VARCHAR},
+      </if>
+      <if test="policeMan != null" >
+        police_man = #{policeMan,jdbcType=VARCHAR},
+      </if>
+      <if test="policeTel != null" >
+        police_tel = #{policeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="insCompulsory != null" >
+        ins_compulsory = #{insCompulsory,jdbcType=VARCHAR},
+      </if>
+      <if test="insCommercial != null" >
+        ins_commercial = #{insCommercial,jdbcType=VARCHAR},
+      </if>
+      <if test="threeQuota != null" >
+        three_quota = #{threeQuota,jdbcType=DOUBLE},
+      </if>
+      <if test="isDeductibles != null" >
+        is_deductibles = #{isDeductibles,jdbcType=INTEGER},
+      </if>
+      <if test="driverName != null" >
+        driver_name = #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverTel != null" >
+        driver_tel = #{driverTel,jdbcType=VARCHAR},
+      </if>
+      <if test="isMulti != null" >
+        is_multi = #{isMulti,jdbcType=INTEGER},
+      </if>
+      <if test="isRelief != null" >
+        is_relief = #{isRelief,jdbcType=INTEGER},
+      </if>
+      <if test="otherDesc != null" >
+        other_desc = #{otherDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="dataRate != null" >
+        data_rate = #{dataRate,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateByPrimaryCustomerIdSelective" parameterType="com.lefancrm.apicenter.model.CrmAccidentInfo" >
+        update crm_accident_info
+        <set >
+            <if test="accidentDate != null" >
+                accident_date = #{accidentDate,jdbcType=DATE},
+            </if>
+            <if test="province != null" >
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                province_id = #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="city != null" >
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null" >
+                city_id = #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="district != null" >
+                district = #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="districtId != null" >
+                district_id = #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="accidentAddress != null" >
+                accident_address = #{accidentAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="accidentCognizance != null" >
+                accident_cognizance = #{accidentCognizance,jdbcType=INTEGER},
+            </if>
+            <if test="policeTeam != null" >
+                police_team = #{policeTeam,jdbcType=VARCHAR},
+            </if>
+            <if test="policeMan != null" >
+                police_man = #{policeMan,jdbcType=VARCHAR},
+            </if>
+            <if test="policeTel != null" >
+                police_tel = #{policeTel,jdbcType=VARCHAR},
+            </if>
+            <if test="insCompulsory != null" >
+                ins_compulsory = #{insCompulsory,jdbcType=VARCHAR},
+            </if>
+            <if test="insCommercial != null" >
+                ins_commercial = #{insCommercial,jdbcType=VARCHAR},
+            </if>
+            <if test="threeQuota != null" >
+                three_quota = #{threeQuota,jdbcType=DOUBLE},
+            </if>
+            <if test="isDeductibles != null" >
+                is_deductibles = #{isDeductibles,jdbcType=INTEGER},
+            </if>
+            <if test="driverName != null" >
+                driver_name = #{driverName,jdbcType=VARCHAR},
+            </if>
+            <if test="driverTel != null" >
+                driver_tel = #{driverTel,jdbcType=VARCHAR},
+            </if>
+            <if test="isMulti != null" >
+                is_multi = #{isMulti,jdbcType=INTEGER},
+            </if>
+            <if test="isRelief != null" >
+                is_relief = #{isRelief,jdbcType=INTEGER},
+            </if>
+            <if test="otherDesc != null" >
+                other_desc = #{otherDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="dataRate != null" >
+                data_rate = #{dataRate,jdbcType=DOUBLE},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where customer_id = #{customerId,jdbcType=BIGINT}
+    </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CrmAccidentInfo" >
+    update crm_accident_info
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      accident_date = #{accidentDate,jdbcType=DATE},
+      province = #{province,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      city = #{city,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=INTEGER},
+      district = #{district,jdbcType=VARCHAR},
+      district_id = #{districtId,jdbcType=INTEGER},
+      accident_address = #{accidentAddress,jdbcType=VARCHAR},
+      accident_cognizance = #{accidentCognizance,jdbcType=INTEGER},
+      police_team = #{policeTeam,jdbcType=VARCHAR},
+      police_man = #{policeMan,jdbcType=VARCHAR},
+      police_tel = #{policeTel,jdbcType=VARCHAR},
+      ins_compulsory = #{insCompulsory,jdbcType=VARCHAR},
+      ins_commercial = #{insCommercial,jdbcType=VARCHAR},
+      three_quota = #{threeQuota,jdbcType=DOUBLE},
+      is_deductibles = #{isDeductibles,jdbcType=INTEGER},
+      driver_name = #{driverName,jdbcType=VARCHAR},
+      driver_tel = #{driverTel,jdbcType=VARCHAR},
+      is_multi = #{isMulti,jdbcType=INTEGER},
+      is_relief = #{isRelief,jdbcType=INTEGER},
+      other_desc = #{otherDesc,jdbcType=VARCHAR},
+      data_rate = #{dataRate,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

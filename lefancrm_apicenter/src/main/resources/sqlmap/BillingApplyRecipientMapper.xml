@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BillingApplyRecipientMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BillingApplyRecipient" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="recipients_name" property="recipientsName" jdbcType="VARCHAR" />
+        <result column="recipients_phone" property="recipientsPhone" jdbcType="VARCHAR" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="district" property="district" jdbcType="VARCHAR" />
+        <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+        <result column="city_id" property="cityId" jdbcType="INTEGER" />
+        <result column="district_id" property="districtId" jdbcType="INTEGER" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="staff_org_id" property="staffOrgId" jdbcType="BIGINT" />
+        <result column="staff_org_name" property="staffOrgName" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, recipients_name, recipients_phone, province, city, district, province_id, city_id,
+    district_id, address, create_by_id, create_by, staff_org_id, staff_org_name
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply_recipient
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from billing_apply_recipient
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.BillingApplyRecipient" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into billing_apply_recipient (recipients_name, recipients_phone,
+        province, city, district,
+        province_id, city_id, district_id,
+        address, create_by_id, create_by,
+        staff_org_id, staff_org_name)
+        values (#{recipientsName,jdbcType=VARCHAR}, #{recipientsPhone,jdbcType=VARCHAR},
+        #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR},
+        #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, #{districtId,jdbcType=INTEGER},
+        #{address,jdbcType=VARCHAR}, #{createById,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR},
+        #{staffOrgId,jdbcType=BIGINT}, #{staffOrgName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.BillingApplyRecipient" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into billing_apply_recipient
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="recipientsName != null" >
+                recipients_name,
+            </if>
+            <if test="recipientsPhone != null" >
+                recipients_phone,
+            </if>
+            <if test="province != null" >
+                province,
+            </if>
+            <if test="city != null" >
+                city,
+            </if>
+            <if test="district != null" >
+                district,
+            </if>
+            <if test="provinceId != null" >
+                province_id,
+            </if>
+            <if test="cityId != null" >
+                city_id,
+            </if>
+            <if test="districtId != null" >
+                district_id,
+            </if>
+            <if test="address != null" >
+                address,
+            </if>
+            <if test="createById != null" >
+                create_by_id,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="staffOrgId != null" >
+                staff_org_id,
+            </if>
+            <if test="staffOrgName != null" >
+                staff_org_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="recipientsName != null" >
+                #{recipientsName,jdbcType=VARCHAR},
+            </if>
+            <if test="recipientsPhone != null" >
+                #{recipientsPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null" >
+                #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="districtId != null" >
+                #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="createById != null" >
+                #{createById,jdbcType=BIGINT},
+            </if>
+            <if test="createBy != null" >
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="staffOrgId != null" >
+                #{staffOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="staffOrgName != null" >
+                #{staffOrgName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.BillingApplyRecipient" >
+        update billing_apply_recipient
+        <set >
+            <if test="recipientsName != null" >
+                recipients_name = #{recipientsName,jdbcType=VARCHAR},
+            </if>
+            <if test="recipientsPhone != null" >
+                recipients_phone = #{recipientsPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                district = #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null" >
+                province_id = #{provinceId,jdbcType=INTEGER},
+            </if>
+            <if test="cityId != null" >
+                city_id = #{cityId,jdbcType=INTEGER},
+            </if>
+            <if test="districtId != null" >
+                district_id = #{districtId,jdbcType=INTEGER},
+            </if>
+            <if test="address != null" >
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="createById != null" >
+                create_by_id = #{createById,jdbcType=BIGINT},
+            </if>
+            <if test="createBy != null" >
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="staffOrgId != null" >
+                staff_org_id = #{staffOrgId,jdbcType=BIGINT},
+            </if>
+            <if test="staffOrgName != null" >
+                staff_org_name = #{staffOrgName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.BillingApplyRecipient" >
+    update billing_apply_recipient
+    set recipients_name = #{recipientsName,jdbcType=VARCHAR},
+      recipients_phone = #{recipientsPhone,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      district_id = #{districtId,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      create_by_id = #{createById,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      staff_org_id = #{staffOrgId,jdbcType=BIGINT},
+      staff_org_name = #{staffOrgName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply_recipient b
+        <where>
+            <if test="recipientsName!=null">
+                and b.recipients_name like concat('%',#{recipientsName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="recipientsPhone!=null">
+                and b.recipients_phone like concat('%',#{recipientsPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="id!=null">
+                and b.id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="address!=null">
+                and b.address like concat('%',#{address,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+        order by id desc limit #{pageIndex}, #{pageSize}
+    </select>
+
+    <select id="selectListSize" resultType="int" parameterType="java.util.Map" >
+        select
+        count(1)
+        from billing_apply_recipient b
+        <where>
+            <if test="recipientsName!=null">
+                and b.recipients_name like concat('%',#{recipientsName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="recipientsPhone!=null">
+                and b.recipients_phone like concat('%',#{recipientsPhone,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="id!=null">
+                and b.id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="address!=null">
+                and b.address like concat('%',#{address,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByInfo" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List" />
+        from billing_apply_recipient b
+        where 1 = 1
+        <if test="recipientsName!=null">
+            and b.recipients_name = #{recipientsName,jdbcType=VARCHAR}
+        </if>
+        <if test="recipientsPhone!=null">
+            and b.recipients_phone = #{recipientsPhone,jdbcType=VARCHAR}
+        </if>
+        <if test="address!=null">
+            and b.address = #{address,jdbcType=VARCHAR}
+        </if>
+        <if test="curUserId != null">
+            and b.create_by_id = #{curUserId}
+        </if>
+        order by b.id desc
+        limit 1
+    </select>
+</mapper>

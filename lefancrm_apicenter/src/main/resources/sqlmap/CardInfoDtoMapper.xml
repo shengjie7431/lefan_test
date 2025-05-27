@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CardInfoDtoMapper" >
+    <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CardInfoDto" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="card_holder_name" property="cardHolderName" jdbcType="VARCHAR" />
+        <result column="cert_type" property="certType" jdbcType="VARCHAR" />
+        <result column="cert_no" property="certNo" jdbcType="VARCHAR" />
+        <result column="mobile_no" property="mobileNo" jdbcType="VARCHAR" />
+        <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+        <result column="exp_year" property="expYear" jdbcType="VARCHAR" />
+        <result column="exp_month" property="expMonth" jdbcType="VARCHAR" />
+        <result column="cvv" property="cvv" jdbcType="VARCHAR" />
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR" />
+        <result column="card_type" property="cardType" jdbcType="INTEGER" />
+        <result column="case_id" property="caseId" jdbcType="BIGINT" />
+        <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+        <result column="card_source" property="cardSource" jdbcType="INTEGER" />
+        <result column="card_index" property="cardIndex" jdbcType="VARCHAR" />
+        <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, user_id, user_name, card_holder_name, cert_type, cert_no, mobile_no, card_no,
+        exp_year, exp_month, cvv, bank_name, bank_code, card_type, case_id, case_no, card_source,
+        card_index, customer_id
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from card_info_dto
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByCaseId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from card_info_dto
+        where case_id = #{caseId,jdbcType=BIGINT} order by id desc limit 1
+    </select>
+    <select id="selectByCustomerId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from card_info_dto
+        where customer_id = #{customerId,jdbcType=VARCHAR} order by id desc limit 1
+    </select>
+    <select id="selectByInfo" resultMap="BaseResultMap" parameterType="com.lefancrm.apicenter.model.CardInfoDto" >
+        select
+        <include refid="Base_Column_List" />
+        from card_info_dto
+        where case_id = #{caseId,jdbcType=BIGINT}
+        <if test="cardSource != null" >
+             and card_source = #{cardSource,jdbcType=INTEGER}
+        </if>
+        order by id desc limit 1
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from card_info_dto
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.lefancrm.apicenter.model.CardInfoDto" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into card_info_dto (user_id, user_name, card_holder_name,
+        cert_type, cert_no, mobile_no,
+        card_no, exp_year, exp_month,
+        cvv, bank_name, bank_code,
+        card_type, case_id, case_no,
+        card_source, card_index, customer_id
+        )
+        values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{cardHolderName,jdbcType=VARCHAR},
+        #{certType,jdbcType=VARCHAR}, #{certNo,jdbcType=VARCHAR}, #{mobileNo,jdbcType=VARCHAR},
+        #{cardNo,jdbcType=VARCHAR}, #{expYear,jdbcType=VARCHAR}, #{expMonth,jdbcType=VARCHAR},
+        #{cvv,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{bankCode,jdbcType=VARCHAR},
+        #{cardType,jdbcType=INTEGER}, #{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR},
+        #{cardSource,jdbcType=INTEGER}, #{cardIndex,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CardInfoDto" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into card_info_dto
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="userName != null" >
+                user_name,
+            </if>
+            <if test="cardHolderName != null" >
+                card_holder_name,
+            </if>
+            <if test="certType != null" >
+                cert_type,
+            </if>
+            <if test="certNo != null" >
+                cert_no,
+            </if>
+            <if test="mobileNo != null" >
+                mobile_no,
+            </if>
+            <if test="cardNo != null" >
+                card_no,
+            </if>
+            <if test="expYear != null" >
+                exp_year,
+            </if>
+            <if test="expMonth != null" >
+                exp_month,
+            </if>
+            <if test="cvv != null" >
+                cvv,
+            </if>
+            <if test="bankName != null" >
+                bank_name,
+            </if>
+            <if test="bankCode != null" >
+                bank_code,
+            </if>
+            <if test="cardType != null" >
+                card_type,
+            </if>
+            <if test="caseId != null" >
+                case_id,
+            </if>
+            <if test="caseNo != null" >
+                case_no,
+            </if>
+            <if test="cardSource != null" >
+                card_source,
+            </if>
+            <if test="cardIndex != null" >
+                card_index,
+            </if>
+            <if test="customerId != null" >
+                customer_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null" >
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="cardHolderName != null" >
+                #{cardHolderName,jdbcType=VARCHAR},
+            </if>
+            <if test="certType != null" >
+                #{certType,jdbcType=VARCHAR},
+            </if>
+            <if test="certNo != null" >
+                #{certNo,jdbcType=VARCHAR},
+            </if>
+            <if test="mobileNo != null" >
+                #{mobileNo,jdbcType=VARCHAR},
+            </if>
+            <if test="cardNo != null" >
+                #{cardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="expYear != null" >
+                #{expYear,jdbcType=VARCHAR},
+            </if>
+            <if test="expMonth != null" >
+                #{expMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="cvv != null" >
+                #{cvv,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null" >
+                #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCode != null" >
+                #{bankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cardType != null" >
+                #{cardType,jdbcType=INTEGER},
+            </if>
+            <if test="caseId != null" >
+                #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="cardSource != null" >
+                #{cardSource,jdbcType=INTEGER},
+            </if>
+            <if test="cardIndex != null" >
+                #{cardIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null" >
+                #{customerId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CardInfoDto" >
+        update card_info_dto
+        <set >
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null" >
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="cardHolderName != null" >
+                card_holder_name = #{cardHolderName,jdbcType=VARCHAR},
+            </if>
+            <if test="certType != null" >
+                cert_type = #{certType,jdbcType=VARCHAR},
+            </if>
+            <if test="certNo != null" >
+                cert_no = #{certNo,jdbcType=VARCHAR},
+            </if>
+            <if test="mobileNo != null" >
+                mobile_no = #{mobileNo,jdbcType=VARCHAR},
+            </if>
+            <if test="cardNo != null" >
+                card_no = #{cardNo,jdbcType=VARCHAR},
+            </if>
+            <if test="expYear != null" >
+                exp_year = #{expYear,jdbcType=VARCHAR},
+            </if>
+            <if test="expMonth != null" >
+                exp_month = #{expMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="cvv != null" >
+                cvv = #{cvv,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null" >
+                bank_name = #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCode != null" >
+                bank_code = #{bankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cardType != null" >
+                card_type = #{cardType,jdbcType=INTEGER},
+            </if>
+            <if test="caseId != null" >
+                case_id = #{caseId,jdbcType=BIGINT},
+            </if>
+            <if test="caseNo != null" >
+                case_no = #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="cardSource != null" >
+                card_source = #{cardSource,jdbcType=INTEGER},
+            </if>
+            <if test="cardIndex != null" >
+                card_index = #{cardIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null" >
+                customer_id = #{customerId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CardInfoDto" >
+        update card_info_dto
+        set user_id = #{userId,jdbcType=BIGINT},
+        user_name = #{userName,jdbcType=VARCHAR},
+        card_holder_name = #{cardHolderName,jdbcType=VARCHAR},
+        cert_type = #{certType,jdbcType=VARCHAR},
+        cert_no = #{certNo,jdbcType=VARCHAR},
+        mobile_no = #{mobileNo,jdbcType=VARCHAR},
+        card_no = #{cardNo,jdbcType=VARCHAR},
+        exp_year = #{expYear,jdbcType=VARCHAR},
+        exp_month = #{expMonth,jdbcType=VARCHAR},
+        cvv = #{cvv,jdbcType=VARCHAR},
+        bank_name = #{bankName,jdbcType=VARCHAR},
+        bank_code = #{bankCode,jdbcType=VARCHAR},
+        card_type = #{cardType,jdbcType=INTEGER},
+        case_id = #{caseId,jdbcType=BIGINT},
+        case_no = #{caseNo,jdbcType=VARCHAR},
+        card_source = #{cardSource,jdbcType=INTEGER},
+        card_index = #{cardIndex,jdbcType=VARCHAR},
+        customer_id = #{customerId,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

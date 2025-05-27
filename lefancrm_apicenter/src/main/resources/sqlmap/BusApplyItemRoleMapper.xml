@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.BusApplyItemRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.BusApplyItemRole" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="item_id" property="itemId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_id, item_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bus_apply_item_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bus_apply_item_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.BusApplyItemRole" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bus_apply_item_role (role_id, item_id)
+    values (#{roleId,jdbcType=BIGINT}, #{itemId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.BusApplyItemRole" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bus_apply_item_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.BusApplyItemRole" >
+    update bus_apply_item_role
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.BusApplyItemRole" >
+    update bus_apply_item_role
+    set role_id = #{roleId,jdbcType=BIGINT},
+      item_id = #{itemId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="listByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from bus_apply_item_role
+    where role_id in (select b.role_id from bus_user_role b where b.user_id = #{userId,jdbcType=BIGINT})
+  </select>
+  <delete id="deleteByRoleId" parameterType="java.lang.Long">
+    delete from bus_apply_item_role where role_id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByLeftId" parameterType="java.lang.Long">
+    delete from bus_apply_item_role where item_id = #{leftId,jdbcType=BIGINT}
+  </delete>
+</mapper>

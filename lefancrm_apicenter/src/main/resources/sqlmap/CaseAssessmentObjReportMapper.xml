@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.dao.CaseAssessmentObjReportMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.model.CaseAssessmentObjReport" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="case_id" property="caseId" jdbcType="BIGINT" />
+    <result column="case_no" property="caseNo" jdbcType="VARCHAR" />
+    <result column="project_name" property="projectName" jdbcType="VARCHAR" />
+    <result column="check_amount" property="checkAmount" jdbcType="DOUBLE" />
+    <result column="check_basis" property="checkBasis" jdbcType="VARCHAR" />
+    <result column="commer_amount" property="commerAmount" jdbcType="DOUBLE" />
+    <result column="compul_amount" property="compulAmount" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, case_id, case_no, project_name, check_amount, check_basis, commer_amount, compul_amount
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from case_assessment_obj_report
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from case_assessment_obj_report
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.model.CaseAssessmentObjReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_assessment_obj_report (case_id, case_no, project_name, 
+      check_amount, check_basis, commer_amount, 
+      compul_amount)
+    values (#{caseId,jdbcType=BIGINT}, #{caseNo,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, 
+      #{checkAmount,jdbcType=DOUBLE}, #{checkBasis,jdbcType=VARCHAR}, #{commerAmount,jdbcType=DOUBLE}, 
+      #{compulAmount,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.CaseAssessmentObjReport" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_assessment_obj_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseNo != null" >
+        case_no,
+      </if>
+      <if test="projectName != null" >
+        project_name,
+      </if>
+      <if test="checkAmount != null" >
+        check_amount,
+      </if>
+      <if test="checkBasis != null" >
+        check_basis,
+      </if>
+      <if test="commerAmount != null" >
+        commer_amount,
+      </if>
+      <if test="compulAmount != null" >
+        compul_amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="caseId != null" >
+        #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="projectName != null" >
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkAmount != null" >
+        #{checkAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="checkBasis != null" >
+        #{checkBasis,jdbcType=VARCHAR},
+      </if>
+      <if test="commerAmount != null" >
+        #{commerAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="compulAmount != null" >
+        #{compulAmount,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.model.CaseAssessmentObjReport" >
+    update case_assessment_obj_report
+    <set >
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=BIGINT},
+      </if>
+      <if test="caseNo != null" >
+        case_no = #{caseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkAmount != null" >
+        check_amount = #{checkAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="checkBasis != null" >
+        check_basis = #{checkBasis,jdbcType=VARCHAR},
+      </if>
+      <if test="commerAmount != null" >
+        commer_amount = #{commerAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="compulAmount != null" >
+        compul_amount = #{compulAmount,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.model.CaseAssessmentObjReport" >
+    update case_assessment_obj_report
+    set case_id = #{caseId,jdbcType=BIGINT},
+      case_no = #{caseNo,jdbcType=VARCHAR},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      check_amount = #{checkAmount,jdbcType=DOUBLE},
+      check_basis = #{checkBasis,jdbcType=VARCHAR},
+      commer_amount = #{commerAmount,jdbcType=DOUBLE},
+      compul_amount = #{compulAmount,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectByCaseId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from case_assessment_obj_report where case_id = #{caseId,jdbcType=BIGINT}
+    </select>
+    <select id="selectByCaseIdOrProjectName" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from case_assessment_obj_report
+        where case_id = #{caseId,jdbcType=BIGINT} and project_name = #{projectName,jdbcType=VARCHAR} order by id asc limit 1
+    </select>
+</mapper>

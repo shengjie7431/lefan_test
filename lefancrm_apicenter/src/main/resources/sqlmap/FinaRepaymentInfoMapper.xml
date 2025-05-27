@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaRepaymentInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaRepaymentInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="settlement_info_id" property="settlementInfoId" jdbcType="BIGINT" />
+    <result column="repayment_no" property="repaymentNo" jdbcType="VARCHAR" />
+    <result column="repayment_money" property="repaymentMoney" jdbcType="DOUBLE" />
+    <result column="repayment_source" property="repaymentSource" jdbcType="INTEGER" />
+    <result column="repayment_type" property="repaymentType" jdbcType="INTEGER" />
+    <result column="repayment_path" property="repaymentPath" jdbcType="VARCHAR" />
+    <result column="repayment_time" property="repaymentTime" jdbcType="TIMESTAMP" />
+    <result column="apply_user_id" property="applyUserId" jdbcType="BIGINT" />
+    <result column="apply_user_name" property="applyUserName" jdbcType="VARCHAR" />
+    <result column="repayment_state" property="repaymentState" jdbcType="INTEGER" />
+    <result column="opr_remark" property="oprRemark" jdbcType="VARCHAR" />
+    <result column="finance_user_id" property="financeUserId" jdbcType="BIGINT" />
+    <result column="finance_user_name" property="financeUserName" jdbcType="VARCHAR" />
+    <result column="repayment_passed_time" property="repaymentPassedTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="urge_id" property="urgeId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, settlement_info_id, repayment_no, repayment_money, repayment_source, repayment_type,
+    repayment_path, repayment_time, apply_user_id, apply_user_name, repayment_state,
+    opr_remark, finance_user_id, finance_user_name, repayment_passed_time, create_time,
+    create_by, update_time, update_by, delete_flag, urge_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from fina_repayment_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_repayment_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaRepaymentInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_repayment_info (settlement_info_id, repayment_no, repayment_money,
+    repayment_source, repayment_type, repayment_path,
+    repayment_time, apply_user_id, apply_user_name,
+    repayment_state, opr_remark, finance_user_id,
+    finance_user_name, repayment_passed_time,
+    create_time, create_by, update_time,
+    update_by, delete_flag, urge_id
+    )
+    values (#{settlementInfoId,jdbcType=BIGINT}, #{repaymentNo,jdbcType=VARCHAR}, #{repaymentMoney,jdbcType=DOUBLE},
+    #{repaymentSource,jdbcType=INTEGER}, #{repaymentType,jdbcType=INTEGER}, #{repaymentPath,jdbcType=VARCHAR},
+    #{repaymentTime,jdbcType=TIMESTAMP}, #{applyUserId,jdbcType=BIGINT}, #{applyUserName,jdbcType=VARCHAR},
+    #{repaymentState,jdbcType=INTEGER}, #{oprRemark,jdbcType=VARCHAR}, #{financeUserId,jdbcType=BIGINT},
+    #{financeUserName,jdbcType=VARCHAR}, #{repaymentPassedTime,jdbcType=TIMESTAMP},
+    #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+    #{updateBy,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=INTEGER}, #{urgeId,jdbcType=BIGINT}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaRepaymentInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_repayment_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="settlementInfoId != null" >
+        settlement_info_id,
+      </if>
+      <if test="repaymentNo != null" >
+        repayment_no,
+      </if>
+      <if test="repaymentMoney != null" >
+        repayment_money,
+      </if>
+      <if test="repaymentSource != null" >
+        repayment_source,
+      </if>
+      <if test="repaymentType != null" >
+        repayment_type,
+      </if>
+      <if test="repaymentPath != null" >
+        repayment_path,
+      </if>
+      <if test="repaymentTime != null" >
+        repayment_time,
+      </if>
+      <if test="applyUserId != null" >
+        apply_user_id,
+      </if>
+      <if test="applyUserName != null" >
+        apply_user_name,
+      </if>
+      <if test="repaymentState != null" >
+        repayment_state,
+      </if>
+      <if test="oprRemark != null" >
+        opr_remark,
+      </if>
+      <if test="financeUserId != null" >
+        finance_user_id,
+      </if>
+      <if test="financeUserName != null" >
+        finance_user_name,
+      </if>
+      <if test="repaymentPassedTime != null" >
+        repayment_passed_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="urgeId != null" >
+        urge_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="settlementInfoId != null" >
+        #{settlementInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="repaymentNo != null" >
+        #{repaymentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentMoney != null" >
+        #{repaymentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="repaymentSource != null" >
+        #{repaymentSource,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentType != null" >
+        #{repaymentType,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentPath != null" >
+        #{repaymentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentTime != null" >
+        #{repaymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyUserId != null" >
+        #{applyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="applyUserName != null" >
+        #{applyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentState != null" >
+        #{repaymentState,jdbcType=INTEGER},
+      </if>
+      <if test="oprRemark != null" >
+        #{oprRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="financeUserId != null" >
+        #{financeUserId,jdbcType=BIGINT},
+      </if>
+      <if test="financeUserName != null" >
+        #{financeUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentPassedTime != null" >
+        #{repaymentPassedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="urgeId != null" >
+        #{urgeId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaRepaymentInfo" >
+    update fina_repayment_info
+    <set >
+      <if test="settlementInfoId != null" >
+        settlement_info_id = #{settlementInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="repaymentNo != null" >
+        repayment_no = #{repaymentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentMoney != null" >
+        repayment_money = #{repaymentMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="repaymentSource != null" >
+        repayment_source = #{repaymentSource,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentType != null" >
+        repayment_type = #{repaymentType,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentPath != null" >
+        repayment_path = #{repaymentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentTime != null" >
+        repayment_time = #{repaymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyUserId != null" >
+        apply_user_id = #{applyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="applyUserName != null" >
+        apply_user_name = #{applyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentState != null" >
+        repayment_state = #{repaymentState,jdbcType=INTEGER},
+      </if>
+      <if test="oprRemark != null" >
+        opr_remark = #{oprRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="financeUserId != null" >
+        finance_user_id = #{financeUserId,jdbcType=BIGINT},
+      </if>
+      <if test="financeUserName != null" >
+        finance_user_name = #{financeUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentPassedTime != null" >
+        repayment_passed_time = #{repaymentPassedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="urgeId != null" >
+        urge_id = #{urgeId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaRepaymentInfo" >
+    update fina_repayment_info
+    set settlement_info_id = #{settlementInfoId,jdbcType=BIGINT},
+      repayment_no = #{repaymentNo,jdbcType=VARCHAR},
+      repayment_money = #{repaymentMoney,jdbcType=DOUBLE},
+      repayment_source = #{repaymentSource,jdbcType=INTEGER},
+      repayment_type = #{repaymentType,jdbcType=INTEGER},
+      repayment_path = #{repaymentPath,jdbcType=VARCHAR},
+      repayment_time = #{repaymentTime,jdbcType=TIMESTAMP},
+      apply_user_id = #{applyUserId,jdbcType=BIGINT},
+      apply_user_name = #{applyUserName,jdbcType=VARCHAR},
+      repayment_state = #{repaymentState,jdbcType=INTEGER},
+      opr_remark = #{oprRemark,jdbcType=VARCHAR},
+      finance_user_id = #{financeUserId,jdbcType=BIGINT},
+      finance_user_name = #{financeUserName,jdbcType=VARCHAR},
+      repayment_passed_time = #{repaymentPassedTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      urge_id = #{urgeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <sql id="wheres">
+    <if test="settlementInfoId != null" >
+      and a.settlement_info_id = #{settlementInfoId,jdbcType=BIGINT}
+    </if>
+    <if test="searchData == 'opr-ing-or-yes'">
+      and a.repayment_state in (1,2)
+    </if>
+    <if test="searchData == 'opr-yes'">
+      and a.repayment_state in (2)
+    </if>
+  </sql>
+
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    a.*
+    from fina_repayment_info a
+    where a.delete_flag =0
+    <include refid="wheres" />
+    order by a.id desc
+    <if test="pageIndex != null and pageSize != null">
+      limit #{pageIndex}, #{pageSize}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefancrm.apicenter.fina.dao.FinaSettlementApplicantMapper" >
+  <resultMap id="BaseResultMap" type="com.lefancrm.apicenter.fina.model.FinaSettlementApplicant" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="fina_id" property="finaId" jdbcType="BIGINT" />
+    <result column="fina_info_id" property="finaInfoId" jdbcType="BIGINT" />
+    <result column="settlement_info_id" property="settlementInfoId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fina_id, fina_info_id, settlement_info_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fina_settlement_applicant
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fina_settlement_applicant
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lefancrm.apicenter.fina.model.FinaSettlementApplicant" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_settlement_applicant (fina_id, fina_info_id, settlement_info_id
+      )
+    values (#{finaId,jdbcType=BIGINT}, #{finaInfoId,jdbcType=BIGINT}, #{settlementInfoId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSettlementApplicant" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fina_settlement_applicant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        fina_id,
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id,
+      </if>
+      <if test="settlementInfoId != null" >
+        settlement_info_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="finaId != null" >
+        #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="settlementInfoId != null" >
+        #{settlementInfoId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefancrm.apicenter.fina.model.FinaSettlementApplicant" >
+    update fina_settlement_applicant
+    <set >
+      <if test="finaId != null" >
+        fina_id = #{finaId,jdbcType=BIGINT},
+      </if>
+      <if test="finaInfoId != null" >
+        fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="settlementInfoId != null" >
+        settlement_info_id = #{settlementInfoId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefancrm.apicenter.fina.model.FinaSettlementApplicant" >
+    update fina_settlement_applicant
+    set fina_id = #{finaId,jdbcType=BIGINT},
+      fina_info_id = #{finaInfoId,jdbcType=BIGINT},
+      settlement_info_id = #{settlementInfoId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="generate" parameterType="java.util.Map">
+    insert fina_settlement_applicant(fina_id,fina_info_id,settlement_info_id)
+    select t.fina_id,t.id,#{settlementId,jdbcType=BIGINT} from fina_applicant_info t
+    where find_in_set(t.id,#{ids,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updCaseType" parameterType="java.util.Map">
+    update fina_applicant_info f
+    left join fina_settlement_applicant t on f.id = t.fina_info_id
+    set f.case_type = #{caseType,jdbcType=INTEGER} where t.settlement_info_id = #{settlementId,jdbcType=BIGINT}
+  </update>
+
+  <update id="updCaseData" parameterType="java.util.Map">
+    update fina_applicant_info f
+    left join fina_settlement_applicant t on f.id = t.fina_info_id
+    set f.applicant_state = #{applicantState,jdbcType=INTEGER}
+    <if test="finshStatementTime != null">
+      ,f.finsh_statement_time = #{finshStatementTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="finshApplyclaimsTime != null">
+      ,f.finsh_applyclaims_time = #{finshApplyclaimsTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="finshRepaymentTime != null">
+      ,f.finsh_repayment_time = #{finshRepaymentTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="finalInsurancePassedTime != null">
+      ,f.final_insurance_passed_time = #{finalInsurancePassedTime,jdbcType=TIMESTAMP}
+    </if>
+    where t.settlement_info_id = #{settlementInfoId,jdbcType=BIGINT}
+  </update>
+
+
+  <sql id="wheres">
+
+  </sql>
+  <select id="list" parameterType="map" resultMap="BaseResultMap">
+    select
+    a.*
+    ,f.case_applicant_no as caseApplicantNo
+    ,f.fina_num as finaNum
+    from fina_settlement_applicant a
+    left join fina_applicant_info f on a.fina_info_id = f.id
+    where 1 = 1
+    <if test="finaInfoId != null" >
+      and a.fina_info_id = #{finaInfoId,jdbcType=BIGINT}
+    </if>
+    <if test="settlementInfoId != null" >
+      and a.settlement_info_id = #{settlementInfoId,jdbcType=BIGINT}
+    </if>
+    order by a.id desc
+  </select>
+
+  <select id="selectSettlementIdByApplicantId" resultType="java.lang.Long" parameterType="java.lang.Long">
+    select a.settlement_info_id from fina_settlement_applicant a where a.fina_info_id = #{finaInfoId,jdbcType=BIGINT} limit 1
+  </select>
+
+</mapper>

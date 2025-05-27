@@ -1,0 +1,169 @@
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/pages/common/taglibs.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>共享理赔案件开票列表</title>
+    <%@ include file="/WEB-INF/pages/common/mainCss.jsp" %>
+</head>
+<body>
+<div class="main administrator">
+    <div class="main-top">
+        <h3>共享理赔案件开票列表<small>共<span>${apiRsp.count}</span>个</small></h3>
+    </div><!--main-top-->
+
+    <div class="panel panel-info">
+
+        <div class="panel-heading">
+            <div class="pin">
+                <form class="form-inline" role="form" action="${ctx}/invocie/shareCaseInvoiceList" method="post">
+                    <div class="form-group">
+                        案件编号: <input name="caseCode" type="text"  value="${caseCode}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        提现状态:
+                        <select name="state" class="form-control">
+                            <option value="">全部</option>
+                            <option value="1">等待开票</option>
+                            <option value="2">已开票</option>
+                            <option value="3">已邮寄</option>
+                        </select>
+                    </div>
+                    <div class="btn-group">
+                    <button id="batchOperateBtn" type="submit" class="btn btn-default">查询</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th width="150">案件编号</th>
+                <th width="150">开票抬头</th>
+                <th width="150">业务类型</th>
+                <th width="150">基本费用</th>
+                <th width="150">其他费用</th>
+                <th width="150">车牌号</th>
+                <th width="150">发票类型</th>
+                <th width="150">发票邮寄地址</th>
+                <th width="150">开票金额</th>
+                <th width="150">开票机构</th>
+                <th width="150">发票备注</th>
+                <th width="150">联系人电话</th>
+                <th width="150">开票时间</th>
+                <th width="150">发票状态</th>
+                <th width="150">操作</th>
+            </tr>
+            </thead>
+            <tbody class="class-list">
+            <c:forEach items="${apiRsp.results}" var="item">
+                <tr>
+                    <td>${item.caseCode}</td>
+                    <td>${item.invoiceCompany}</td>
+                    <td>
+                        <c:if test="${item.businessType == 1}">服务费</c:if>
+                        <c:if test="${item.businessType == 2}">调查费</c:if>
+                        <c:if test="${item.businessType == 3}">咨询费</c:if>
+                        <c:if test="${item.businessType == 4}">代理费</c:if>
+                        <c:if test="${item.businessType == 5}">其他</c:if>
+                    </td>
+                    <td>${item.basicMoney}</td>
+                    <td>${item.otherMoney}</td>
+                    <td>${item.carNumber}</td>
+                    <td>
+                    <c:if test="${item.invoiceType == 1}">专票</c:if>
+                    <c:if test="${item.invoiceType == 2}">普票</c:if>
+                    <c:if test="${item.invoiceType == 3}">电子普票</c:if>
+                </td>
+                    <td>${item.invoiceAddress}</td>
+                    <td>${item.invoiceMoney}</td>
+                    <td>${item.invoiceOrg}</td>
+                    <td>${item.invoiceDesc}</td>
+                    <td>${item.linkTel}</td>
+                    <td><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                    <td>
+                        <c:if test="${item.state == 1}">等待开票</c:if>
+                        <c:if test="${item.state == 2}">等待邮寄</c:if>
+                        <c:if test="${item.state == 3}">已经邮寄</c:if>
+                    </td>
+                    <td>
+                        <c:if test="${item.state == 1}"><a href="javascript:doInvoice('${item.id}');">开票</a></c:if>
+                        <c:if test="${item.state == 2}"><a href="javascript:doSendInvoice('${item.id}');">邮寄发票</a></c:if>
+                        <a href="javascript:shareCaseDetails('${item.caseId}');">案件详情</a>
+                        <a href="javascript:fileMid('${item.caseId}');">资料查看</a>
+                        <a href="javascript:toUploadInvoice('${item.caseId}','${item.caseCode}');">上传票据</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div><!--panel-info-->
+
+    <div class="main-bottom">
+        <jsp:include page="/WEB-INF/pages/common/pagination.jsp" flush="true">
+            <jsp:param name="paginationObjectName" value="apiRsp" />
+            <jsp:param name="pageNoName" value="" />
+            <jsp:param name="requestUrl" value="${ctx}/invocie/shareCaseInvoiceList" />
+            <jsp:param name="refreshDiv" value="" />
+        </jsp:include>
+    </div><!--main-bottom-->
+
+</div><!--main end-->
+
+<%@ include file="/WEB-INF/pages/common/mainFooter.jsp" %>
+<script>
+
+    function doInvoice(id){
+        ajaxSubmit("${ctx}/invocie/shareCaseInvoiceStateEdit",{"id":id,state:2},reload,"开票成功","确认开票吗？");
+    }
+    function doSendInvoice(id){
+        ajaxSubmit("${ctx}/invocie/shareCaseInvoiceStateEdit",{"id":id,state:3},reload,"邮寄成功","确认邮寄吗？");
+    }
+    function reportList(id){
+        openDialog({
+            frame:true,
+            title:"共享理赔调解方案",
+            height:500,
+            width:1000,
+            url:"${ctx}/share/viewMediationProgram?caseId="+id
+        });
+    }
+    function toUploadInvoice(caseId,caseCode){
+        openDialog({
+            frame:true,
+            title:"票据上传",
+            height:500,
+            width:1000,
+            url:"${ctx}/invocie/toInvoiceUpload?caseId="+caseId+"&caseCode="+caseCode
+        });
+    }
+    function indemnity(id){
+        openDialog({
+            frame:true,
+            title:"共享理赔赔偿方案",
+            height:500,
+            width:1000,
+            url:"${ctx}/share/indemnityProgram?caseId="+id
+        });
+    }
+    function fileMid(id){
+        openDialog({
+            frame:true,
+            title:"资料查看",
+            height:500,
+            width:1000,
+            url:"${ctx}/share/shareDataView?id="+id
+        });
+    }
+    function shareCaseDetails(id){
+        openDialog({
+            frame:true,
+            title:"案件详情",
+            height:500,
+            width:1000,
+            url:"${ctx}/share/details?id="+id
+        });
+    }
+</script>
+</body>
+</html>
