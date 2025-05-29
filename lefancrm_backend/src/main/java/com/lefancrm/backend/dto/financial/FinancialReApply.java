@@ -108,6 +108,17 @@ public class FinancialReApply {
     private Integer isCanModify;//是否可以更改机构
 
     private Long payUserId;
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
 
     public Long getId() {
         return id;

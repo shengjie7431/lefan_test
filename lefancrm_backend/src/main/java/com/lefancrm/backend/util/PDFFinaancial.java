@@ -312,100 +312,105 @@ public class PDFFinaancial {
         return file;
     }
 
-//    public static File generates(String filePath, FinancialReApply data){
-//        File file = new File(filePath);
-//        if (!file.exists() && !file.isDirectory()){
-    
-//            file.mkdirs();
-//        }
-//        file = new File(filePath + File.separator + "每刻报销打印.pdf");
-//        try {
-//            file.createNewFile();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Document document = new Document();
-//        document.setPageSize(PageSize.A4);
-//        document.addTitle("Title@sample");
-//        document.addAuthor("Author@rensanning");
-//        document.addSubject("Subject@iText sample");
-//        document.addKeywords("Keywords@iText");
-//        document.addCreator("Creator@iText");
-//        document.setMargins(10, 20, 30, 40);
-//        PdfWriter writer = null;
-//        try {
-//            writer = PdfWriter.getInstance(document,new FileOutputStream(file));
-//        } catch (DocumentException e) {
-//            e.printStackTrace();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        writer.setPdfVersion(PdfWriter.PDF_VERSION_1_2);
-//        document.open();
-//        try {
-//            Font font1  = new Font(bfChinese, 16, Font.BOLD);//
-//            Font font2 = new Font(bfChinese, 10, Font.NORMAL);
-//            Font font3 = new Font(bfChinese,10,Font.BOLD);
-//            Paragraph paragraph = new Paragraph(data.getTitle(),font1);
-//            paragraph.setAlignment(Paragraph.ALIGN_CENTER);
-//            document.add(paragraph);
-//
-//            paragraph = new Paragraph(data.getLittleTitle() + "                     申请日期：" + data.getApplyTime(),font2);
-//            paragraph.setAlignment(Paragraph.ALIGN_LEFT);
-//            paragraph.setIndentationLeft(30);// 左缩进
-////            paragraph.setIndentationRight(6);// 右缩进
-////            paragraph.setFirstLineIndent(6);// 首行缩进
-////            paragraph.setSpacingBefore(5f);// 上留白
-////            paragraph.setSpacingAfter(5f);// 下留白
-////            paragraph.setLeading(5f);// 行间距
-//            document.add(paragraph);
-//
-//            PdfPTable table = new PdfPTable(3);
-//            table.setTotalWidth(510);
-//            int [] widths = {100,310,100};
-//            table.setWidths(widths);
-//            table.setLockedWidth(true);
-//            table.setHorizontalAlignment(Element.ALIGN_CENTER);
-//            table.getDefaultCell().setBorder(1);
-//            table.getDefaultCell().setPadding(5f);
-////            table.setWidthPercentage(100);
-//
-//            PdfPCell cell = new PdfPCell(new Phrase("编号",font2));
-//            table.addCell(cell);
-//            cell = new PdfPCell(new Phrase(data.getSno(),font2));
-//            cell.setColspan(2);
-//            table.addCell(cell);
-//
-//            cell = new PdfPCell(new Phrase("提单人/借单人",font2));
-//            table.addCell(cell);
-//            cell = new PdfPCell(new Phrase(data.getApplyUserName(),font2));
-//            cell.setColspan(2);
-//            table.addCell(cell);
-//
-//            cell = new PdfPCell(new Phrase("承担部门",font2));
-//            table.addCell(cell);
-//            cell = new PdfPCell(new Phrase(data.getDepartments(),font2));
-//            cell.setColspan(2);
-//            table.addCell(cell);
-//
-//            cell = new PdfPCell(new Phrase("事由",font2));
-//            table.addCell(cell);
-//            cell = new PdfPCell(new Phrase(data.getReason(),font2));
-//            cell.setColspan(2);
-//            table.addCell(cell);
-//
-//            cell = new PdfPCell(new Phrase("金额",font2));
-//            table.addCell(cell);
-//            cell = new PdfPCell(new Phrase(data.getMoney().toString(),font2));
-//            cell.setColspan(2);
-//            table.addCell(cell);
-//
-//            cell = new PdfPCell(new Phrase("付款时间",font2));
-//            table.addCell(cell);
-//            cell = new PdfPCell(new Phrase(data.getPayTime(),font2));
-//            cell.setColspan(2);
-//            table.addCell(cell);
-//
+    public static File generates(String filePath, FinancialReApply data){
+        File file = new File(filePath);
+        if (!file.exists() && !file.isDirectory()){
+
+            file.mkdirs();
+        }
+        file = new File(filePath + File.separator + "每刻报销打印.pdf");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Document document = new Document();
+        document.setPageSize(PageSize.A4);
+        document.addTitle("Title@sample");
+        document.addAuthor("Author@rensanning");
+        document.addSubject("Subject@iText sample");
+        document.addKeywords("Keywords@iText");
+        document.addCreator("Creator@iText");
+        document.setMargins(10, 20, 30, 40);
+        PdfWriter writer = null;
+        try {
+            writer = PdfWriter.getInstance(document,new FileOutputStream(file));
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        writer.setPdfVersion(PdfWriter.PDF_VERSION_1_2);
+        document.open();
+        try {
+            Font font1  = new Font(bfChinese, 16, Font.BOLD);//
+            Font font2 = new Font(bfChinese, 10, Font.NORMAL);
+            Font font3 = new Font(bfChinese,10,Font.BOLD);
+            Paragraph paragraph = new Paragraph(data.getTitle(),font1);
+            paragraph.setAlignment(Paragraph.ALIGN_CENTER);
+            document.add(paragraph);
+
+            paragraph = new Paragraph(data.getCompanyTitle() + "                     申请日期：" + data.getApplyTime(),font2);
+            paragraph.setAlignment(Paragraph.ALIGN_LEFT);
+            paragraph.setIndentationLeft(30);// 左缩进
+//            paragraph.setIndentationRight(6);// 右缩进
+//            paragraph.setFirstLineIndent(6);// 首行缩进
+//            paragraph.setSpacingBefore(5f);// 上留白
+//            paragraph.setSpacingAfter(5f);// 下留白
+//            paragraph.setLeading(5f);// 行间距
+            document.add(paragraph);
+
+            PdfPTable table = new PdfPTable(3);
+            table.setTotalWidth(510);
+            int [] widths = {100,310,100};
+            table.setWidths(widths);
+            table.setLockedWidth(true);
+            table.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.getDefaultCell().setBorder(1);
+            table.getDefaultCell().setPadding(5f);
+//            table.setWidthPercentage(100);
+            PdfPCell cell = new PdfPCell(new Phrase("编号",font2));
+            table.addCell(cell);
+            cell = new PdfPCell(new Phrase(data.getReNo(),font2));
+            cell.setColspan(2);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("事由",font2));
+            table.addCell(cell);
+            cell = new PdfPCell(new Phrase(data.getReReasons(),font2));
+            cell.setColspan(2);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("收款人",font2));
+            table.addCell(cell);
+            cell = new PdfPCell(new Phrase(data.getApplyUserName(),font2));
+            cell.setColspan(2);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("收款账户",font2));
+            table.addCell(cell);
+            cell = new PdfPCell(new Phrase(data.getPayeeNo(),font2));
+            cell.setColspan(2);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("银行",font2));
+            table.addCell(cell);
+            cell = new PdfPCell(new Phrase(data.getBankName(),font2));
+            cell.setColspan(2);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("支行",font2));
+            table.addCell(cell);
+            cell = new PdfPCell(new Phrase(data.getBranchBank().toString(),font2));
+            cell.setColspan(2);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("备注",font2));
+            table.addCell(cell);
+            cell = new PdfPCell(new Phrase(data.getApplyDesc(),font2));
+            cell.setColspan(2);
+            table.addCell(cell);
+
 //            cell = new PdfPCell(new Phrase("收款人",font2));
 //            table.addCell(cell);
 //            cell = new PdfPCell(new Phrase(data.getReceiveUserName(),font2));
@@ -430,10 +435,10 @@ public class PDFFinaancial {
 //            cell = new PdfPCell(new Phrase(fileNames,font2));
 //            cell.setColspan(2);
 //            table.addCell(cell);
-//
-//            cell = new PdfPCell(new Phrase("审批流程",font2));
-//            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-//            cell.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+
+            cell = new PdfPCell(new Phrase("审批流程",font2));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_MIDDLE);
 //            cell.setRowspan(data.getProgress().size());
 //            table.addCell(cell);
 //            for (FinancialReProgresDto progress : data.getProgress()) {
@@ -445,21 +450,21 @@ public class PDFFinaancial {
 //                cell.disableBorderSide(Rectangle.LEFT);
 //                table.addCell(cell);
 //            }
-//
-//            paragraph = new Paragraph();
-//            paragraph.add(table);
-//            paragraph.setIndentationLeft(6);// 左缩进
-//            paragraph.setIndentationRight(6);// 右缩进
-//            paragraph.setFirstLineIndent(6);// 首行缩进
-//            paragraph.setSpacingBefore(5f);// 上留白
-//            paragraph.setSpacingAfter(5f);// 下留白
-//            paragraph.setLeading(5f);// 行间距
-//            document.add(paragraph);
-//
-//            document.close();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return file;
-//    }
+
+            paragraph = new Paragraph();
+            paragraph.add(table);
+            paragraph.setIndentationLeft(6);// 左缩进
+            paragraph.setIndentationRight(6);// 右缩进
+            paragraph.setFirstLineIndent(6);// 首行缩进
+            paragraph.setSpacingBefore(5f);// 上留白
+            paragraph.setSpacingAfter(5f);// 下留白
+            paragraph.setLeading(5f);// 行间距
+            document.add(paragraph);
+
+            document.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return file;
+    }
 }

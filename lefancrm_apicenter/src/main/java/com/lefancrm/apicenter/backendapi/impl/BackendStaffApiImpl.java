@@ -132,7 +132,7 @@ public class BackendStaffApiImpl extends BaseServiceImpl implements BackendStaff
     @ApiMethod(descript = "人事管理list", value = "backend-staff-list", apiParams = { })
     @Override
     public ApiResponse list(ApiRequest apiReq) {
-        //不分页
+       //不分页
         if(apiReq.getString("havePage") == null){
             this.setBackendPageSize(apiReq);
         }
@@ -1693,11 +1693,11 @@ public class BackendStaffApiImpl extends BaseServiceImpl implements BackendStaff
                 String workTime = apiReq.getString("workTime");
                 Long id = apiReq.getLong("id");
                 StaffPaySlip newInfo = staffPaySlipMapper.selectByWorkTime(workTime);
-                if(newInfo != null){
-                    if(!(id !=null && id.equals(newInfo.getId()))){
-                        return new ApiResponse(ApiMsgEnum.StaffInfoRepeat);
-                    }
-                }
+//                if(newInfo != null){
+//                    if(!(id !=null && id.equals(newInfo.getId()))){
+//                        return new ApiResponse(ApiMsgEnum.StaffInfoRepeat);
+//                    }
+//                }
                 //必须创建“每月已上班天数”
                 StaffWorkingDaysInfo workingDaysInfo = staffWorkingDaysInfoMapper.selectByWorkTime(workTime);
                 if(workingDaysInfo == null){
