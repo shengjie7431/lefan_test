@@ -359,10 +359,8 @@ public class BackendSurveyReportController  extends BackendBaseController{
             return this.callApiAndOutput(BackendApiMethodEnum.SURVEY_GET_THINK_REPORT, param, req, rsp);
         }
         if (StringUtils.isEmpty(req.getParameter("requestExpenseReimbursementInfo"))){
-            System.out.println("456");
             return this.callApiAndOutput(BackendApiMethodEnum.BACKEND_SURVEY_GET_DATA, param, req, rsp);
         }else {
-            System.out.println("123");
             return this.callApiAndOutput(BackendApiMethodEnum.BACKEND_SURVEY_EXPENSE_REIMBURSE_INFO, param, req, rsp);
         }
     }

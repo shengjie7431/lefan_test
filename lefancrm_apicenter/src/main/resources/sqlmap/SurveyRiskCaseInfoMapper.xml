@@ -4084,32 +4084,7 @@
             </if>
         </where>
     </select>
-    <update id="updatePerformanceStatePerson" parameterType="map">
-        UPDATE survey_risk_case_info
-        SET
-        performance_state = #{newPerformanceState,jdbcType=INTEGER}
-        <if test="dateTime != null">
-            ,performance_date = #{dateTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="addStaffPerformanceId != null">
-            ,performance_id = #{addStaffPerformanceId,jdbcType=BIGINT}
-        </if>
-        <if test="delStaffPerformanceId != null">
-            ,performance_id = null
-        </if>
-        WHERE
-        performance_state = #{oldPerformanceState,jdbcType=INTEGER}
-        AND date_format(entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR}
-        AND id IN (
-        SELECT sic.survey_info_id
-        FROM survey_investigator_case sic
-        WHERE sic.survey_user_id = #{userId,jdbcType=BIGINT}
-        )
-        <if test="performanceId != null">
-            AND performance_id = #{performanceId,jdbcType=BIGINT}
-        </if>
-    </update>
-    
+
     <update id="updatePerformanceState" parameterType="map">
         update survey_risk_case_info set
         performance_state = #{newPerformanceState,jdbcType=INTEGER}
@@ -4184,7 +4159,6 @@
         ) t on r.id = t.survey_info_id
         set r.entrust_ok_price_1 = t.money,r.entrust_money = t.money where t.survey_info_id is not null
     </update>
-
 
 
     <select id="listByIds" resultMap="BaseResultMap" parameterType="java.util.List">

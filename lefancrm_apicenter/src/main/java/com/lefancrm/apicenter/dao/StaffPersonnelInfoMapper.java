@@ -46,6 +46,4 @@ public interface StaffPersonnelInfoMapper {
 
 
     void updateByOrganKey(Map objectObjectHashMap);
-
-    StaffPersonnelInfo detail(String applyUserName);
 }

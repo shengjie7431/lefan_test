@@ -1819,7 +1819,6 @@ public class BackendFinancialReApplyApiImpl extends BaseServiceImpl implements B
                     staffPersonnelInfo.setIsCanModify(staffOrgan.getIsCanModify() == null ? 0 : staffOrgan.getIsCanModify());
                     financialReApply.setIsCanModify(staffPersonnelInfo.getIsCanModify());
                 }
-                StaffPersonnelInfo data=staffPersonnelInfoMapper.detail(financialReApply.getApplyUserName());
                 return new ApiResponse(ApiMsgEnum.SUCCESS,1,financialReApply);
             }
             case "re-progres-list"://进度

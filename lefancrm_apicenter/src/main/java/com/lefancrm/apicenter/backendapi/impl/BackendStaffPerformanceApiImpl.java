@@ -911,14 +911,12 @@ public class BackendStaffPerformanceApiImpl extends BaseServiceImpl implements B
             map.put("oldPerformanceState",0);// 结算绩效的状态 （0、未结算；1、结算中；2、已结算）
             map.put("newPerformanceState",1);
             map.put("dateTime",new Date());
-            map.put("userId",staffPayPersonnelSlip.getUserId());
+            map.put("addStaffPerformanceId",staffPerformance.getId());//绩效id(此处为了录入绩效id)
 //            todo暂时不知道是否要
-            surveyRiskCaseInfoMapper.updatePerformanceStatePerson(map);
+//            surveyRiskCaseInfoMapper.updatePerformanceState(map);
             map.clear();
             map.put("staffPerformanceId",staffPerformance.getId());
             StaffPerformancePersonnel item = staffPerformancePersonnelMapper.listOne(newId);
-            item.setStaffPersonnelInfo(staffPersonnelInfoMapper.selectStaffPersonelInfoByJobNo(item.getJobNo()));
-            item.setSurveyInvestigator(surveyInvestigatorMapper.selectByUserId(item.getStaffPersonnelInfo().getUserId()));
                 item = convertPersonnel(item,staffWorkingDaysInfo.getWrokingDays(),"init",staffPerformance.getWorkTime());
                 staffPerformancePersonnelMapper.updateByPrimaryKey(item);
             return item;
@@ -1398,6 +1396,7 @@ public class BackendStaffPerformanceApiImpl extends BaseServiceImpl implements B
             }
         }
         Double A = item.getFixedPerfPay() + item.getManagePerfPay() + item.getTravelAllowancePay();
+
         Double money = A + item.getRealAssessKpi()
                 + item.getIntegralPay() + item.getLateEarlyMoney() + item.getAbsenteeismMoney()
                 + item.getLeaveMoney() + item.getSickLeaveMoney() + item.getOtherPay() + item.getOtherCutPay() +item.getExaminePay();

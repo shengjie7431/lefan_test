@@ -174,7 +174,6 @@ public class BackendFinancialReApplyController extends BackendBaseController{
             TypeToken typeToken = new TypeToken<ApiFinalResponse<FinancialReApply>>() {};
             ApiFinalResponse apiFinalResponse = this.callApi(typeToken, BackendApiMethodEnum.BACKEND_AJAX_DATA_FINANCIAL_RE_APPLY, null, req);
             FinancialReApply data = (FinancialReApply) apiFinalResponse.getResults();
-            data.setTitle("每刻报销");
 //            File file = PDFFinaancial.generates(realTempPath + File.separator + "pdf" + File.separator + System.currentTimeMillis(), data);
             System.out.println(data);
 

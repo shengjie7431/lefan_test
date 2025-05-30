@@ -1422,7 +1422,6 @@
         SELECT * FROM staff_personnel_info WHERE delete_flag = 0 AND organ_id = #{id}
     </select>
 
-
     <update id="updateStaffStateByPaySlip" parameterType="java.lang.Long" >
         update staff_personnel_info s
         left JOIN (select staff_personnel_id from staff_pay_personnel_slip where staff_pay_slip_id = #{staffPaySlipId,jdbcType=BIGINT}) a on s.id = a.staff_personnel_id
@@ -1434,8 +1433,5 @@
         SET performance = #{performance}
         WHERE organ_id = #{id}
     </update>
-    <select id="detail" resultType="com.lefancrm.apicenter.model.StaffPersonnelInfo">
-        select * from staff_personnel_info WHERE real_name = #{applyUserName}
-    </select>
 
 </mapper>

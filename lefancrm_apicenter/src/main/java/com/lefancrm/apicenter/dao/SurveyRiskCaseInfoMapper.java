@@ -115,5 +115,4 @@ public interface SurveyRiskCaseInfoMapper {
 
     List<SurveyRiskCaseInfoDto> listByIds(@Param("surveyInfoIds") List<Long> surveyInfoIds);
 
-    void updatePerformanceStatePerson(Map map);
 }
