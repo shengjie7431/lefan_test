@@ -31,6 +31,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Created by wangwei on 2020-03-19.
@@ -796,7 +797,7 @@ public class BackendStaffApiImpl extends BaseServiceImpl implements BackendStaff
                 StaffPostAppellation staffPostAppellation=staffPostAppellationMapper.selectByPrimaryKey(apiReq.getLong("postAppellationId"));
                 StaffBudgetCompanyOrgan staffBudgetCompanyOrgan = null;
                 if (staffOrgan != null){
-                     staffBudgetCompanyOrgan = staffBudgetCompanyOrganMapper.selectByOrganId(staffOrgan.getId());
+                    staffBudgetCompanyOrgan = staffBudgetCompanyOrganMapper.selectByOrganId(staffOrgan.getId());
                 }
 
                 String entryTime = apiReq.getString("entryTime");//入职时间
@@ -949,7 +950,7 @@ public class BackendStaffApiImpl extends BaseServiceImpl implements BackendStaff
                     staffPersonnelInfo.setHomeLbsY(apiReq.getDouble("homeLbsY"));
                     staffPersonnelInfo.setHomeAddress(apiReq.getString("homeAddress"));
                     staffPersonnelInfo.setHomeAddressName(apiReq.getString("homeAddressName"));
-                   //根据选择的机构的绩效方式，赋值给员工表
+                    //根据选择的机构的绩效方式，赋值给员工表
                     staffPersonnelInfo.setPerformance(staffOrgan.getPerformance());
                     staffPersonnelInfoMapper.insert(staffPersonnelInfo);
 
@@ -1744,41 +1745,44 @@ public class BackendStaffApiImpl extends BaseServiceImpl implements BackendStaff
                     map = new HashMap<>();
                     map.put("staffPaySlipId",staffPaySlip.getId());
                     List<StaffPayPersonnelSlip> staffPayPersonnelSlips = staffPayPersonnelSlipMapper.list(map);
+
                     //是调查员岗位，并且是“直营”，（办公补贴）
                     for (StaffPayPersonnelSlip staffPayPersonnelSlip : staffPayPersonnelSlips) {
 //                        staffPayPersonnelSlips.stream().forEach(staffPayPersonnelSlip -> {
                         StaffPersonnelInfo staffPersonnelInfo = staffPersonnelInfoMapper.selectByPrimaryKey(staffPayPersonnelSlip.getStaffPersonnelId());
-                        if(staffPersonnelInfo!=null && staffPersonnelInfo.getJobPostId().intValue() == 57){
-                            //2020年9月24日 机构为：“保险调查运营中心”的调查员，没有
-                            StaffOrgan staffOrgan = staffOrganMapper.selectByPrimaryKey(staffPersonnelInfo.getOrganId());
-                            Boolean needOfficeSubsidies = true;
-                            if(staffOrgan != null && "bxdcyyzx".equals(staffOrgan.getCode())){
-                                needOfficeSubsidies = false;
-                            }
-                            if(needOfficeSubsidies){
-                                map = new HashMap<>();
-                                map.put("userTelphone",staffPayPersonnelSlip.getUserTel());
-                                UserInfo user = userInfoMapper.selectUserInfoByPhone(map);
-                                if(user !=null){
-                                    SurveyInvestigator surveyInvestigator = surveyInvestigatorMapper.selectByUserId(user.getUserId());
-                                    if(surveyInvestigator!=null && surveyInvestigator.getType() ==1){
-                                        String entryTime = format.format(staffPersonnelInfo.getEntryTime());//员工入职时间
-                                        if(staffPersonnelInfo.getQuitTime() !=null){
-                                            String quitTime = format.format(staffPersonnelInfo.getQuitTime());//员工离职时间
-                                            if(workTime.compareTo(entryTime)>0 && quitTime.compareTo(workTime)>0){
-                                                staffPayPersonnelSlip.setOfficeSubsidies(100D);
-                                                staffPayPersonnelSlip.setRealWages(staffPayPersonnelSlip.getRealWages() + 100D);
-                                            }
-                                        }else{
-                                            if(workTime.compareTo(entryTime)>0){
-                                                staffPayPersonnelSlip.setOfficeSubsidies(100D);
-                                                staffPayPersonnelSlip.setRealWages(staffPayPersonnelSlip.getRealWages() + 100D);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        staffPayPersonnelSlip.setStaffPersonnelInfo(staffPersonnelInfo);
+                        StaffOrgan staffOrgan = staffOrganMapper.selectByPrimaryKey(staffPersonnelInfo.getOrganId());
+                        staffPayPersonnelSlip.setStaffOrgan(staffOrgan);
+                        //2020年9月24日 机构为：“保险调查运营中心”的调查员，没有
+//                        if(staffPersonnelInfo!=null && staffPersonnelInfo.getJobPostId().intValue() == 57){
+//                            Boolean needOfficeSubsidies = true;
+//                            if(staffOrgan != null && "bxdcyyzx".equals(staffOrgan.getCode())){
+//                                needOfficeSubsidies = false;
+//                            }
+//                            if(needOfficeSubsidies){
+//                                map = new HashMap<>();
+//                                map.put("userTelphone",staffPayPersonnelSlip.getUserTel());
+//                                UserInfo user = userInfoMapper.selectUserInfoByPhone(map);
+//                                if(user !=null){
+//                                    SurveyInvestigator surveyInvestigator = surveyInvestigatorMapper.selectByUserId(user.getUserId());
+//                                    if(surveyInvestigator!=null && surveyInvestigator.getType() ==1){
+//                                        String entryTime = format.format(staffPersonnelInfo.getEntryTime());//员工入职时间
+//                                        if(staffPersonnelInfo.getQuitTime() !=null){
+//                                            String quitTime = format.format(staffPersonnelInfo.getQuitTime());//员工离职时间
+//                                            if(workTime.compareTo(entryTime)>0 && quitTime.compareTo(workTime)>0){
+//                                                staffPayPersonnelSlip.setOfficeSubsidies(100D);
+//                                                staffPayPersonnelSlip.setRealWages(staffPayPersonnelSlip.getRealWages() + 100D);
+//                                            }
+//                                        }else{
+//                                            if(workTime.compareTo(entryTime)>0){
+//                                                staffPayPersonnelSlip.setOfficeSubsidies(100D);
+//                                                staffPayPersonnelSlip.setRealWages(staffPayPersonnelSlip.getRealWages() + 100D);
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
                         //计算“本人应出勤天数”
                         int year = Integer.valueOf(workTime.substring(0, 4));
                         int month = Integer.valueOf(workTime.substring(5, 7));
@@ -1813,9 +1817,15 @@ public class BackendStaffApiImpl extends BaseServiceImpl implements BackendStaff
                             }
 
                         }
-                        StaffOrgan staffOrgan=staffOrganMapper.selectByPrimaryKey(staffPersonnelInfo.getOrganId());
-                        //判断人员说在的部门机构是否是工资条发放0：绩效 ，1：工资条
-                        if(staffOrgan.getPerformance()==1){
+                        //各种计算
+                        staffPayPersonnelSlip = backendStaffPaySlipApiImpl.returnSlip(staffPersonnelInfo,staffPayPersonnelSlip,true);
+                        staffPayPersonnelSlipMapper.updateByPrimaryKey(staffPayPersonnelSlip);
+                    }
+
+
+                    if (true){//模拟生成绩效  取绩效里的实际考核绩效  ，生成之后删除掉
+                        List<StaffPayPersonnelSlip> collect = staffPayPersonnelSlips.stream().filter(e -> e.getStaffOrgan() != null && e.getStaffOrgan().getPerformance() == 1).collect(Collectors.toList());
+                        if (collect.size() > 0){
                             StaffPerformance staffPerformance = new StaffPerformance();
                             staffPerformance.setWorkTime(workTime);
                             staffPerformance.setPerformanceState(0); //0:待人事处理,1:待财务审核,2:待总经理审核,3:绩效工资完成
@@ -1827,26 +1837,36 @@ public class BackendStaffApiImpl extends BaseServiceImpl implements BackendStaff
                             staffPerformance.setDivsionOne("0");
                             staffPerformance.setDivsionTwo("0");
                             staffPerformance.setDivsionThree("0");
-                            //同步钉钉数据，并保存绩效详情
-                            StaffPerformancePersonnel staffPerformancePersonnel = backendStaffPerformanceApiImpl.generateAAAStaffPerformance(staffPerformance, userInfo, staffPaySlip, staffPayPersonnelSlip);
-                            //郑亚东1所算出的绩效加到郑亚东上
-                            Map<String,Double> res = new HashMap();
-                            if(staffPayPersonnelSlip.getRealName().equals("郑亚东1")){
-                                res.put("RealPay",staffPerformancePersonnel.getRealPay());
+                            staffPerformanceMapper.insert(staffPerformance);
+                            backendStaffPerformanceApiImpl.generateStaffPerformance(staffPerformance, userInfo, staffPaySlip,"payslip");//模拟生成发放方式为工资条发发放的员工绩效
+
+                            for (StaffPayPersonnelSlip staffPayPersonnelSlip : collect) {
+                                StaffPersonnelInfo staffPersonnelInfo = staffPayPersonnelSlip.getStaffPersonnelInfo();
+                                StaffOrgan staffOrgan = staffPayPersonnelSlip.getStaffOrgan();
+                                if (staffPersonnelInfo != null && staffOrgan != null){
+                                    map = new HashMap();
+                                    map.put("jobNo",staffPersonnelInfo.getJobNo());
+                                    map.put("staffPerformanceId",staffPerformance.getId());
+                                    StaffPerformancePersonnel staffPerformancePersonnel = staffPerformancePersonnelMapper.personnelItem(map);
+                                    if (staffPerformancePersonnel != null){
+                                        //  setWelfarePay取实际考核绩效  setWelfareRemark取（互助调查积分&互助阳性积分&保司调查积分&保司阳性积分&个案减损奖励&实际基础积分）名称+实际值拼接起来；
+                                        staffPayPersonnelSlip.setWelfarePay(staffPerformancePersonnel.getIntegralPay());
+                                        staffPayPersonnelSlip.setWelfareRemark(Dconvert("实际基础积分",staffPerformancePersonnel.getMonthBasicIntegral())
+                                                .concat(Dconvert("互助调查积分",staffPerformancePersonnel.getScoreHz()))
+                                                .concat(Dconvert("互助阳性积分",staffPerformancePersonnel.getSunScoreHz()))
+                                                .concat(Dconvert("保司调查积分",staffPerformancePersonnel.getScoreBs()))
+                                                .concat(Dconvert("保司阳性积分",staffPerformancePersonnel.getSunScoreBs()))
+                                                .concat(Dconvert("个案减损奖励",staffPerformancePersonnel.getCaseSubMoney())));
+                                        staffPayPersonnelSlip = backendStaffPaySlipApiImpl.returnSlip(staffPersonnelInfo,staffPayPersonnelSlip,true);
+                                        staffPayPersonnelSlipMapper.updateByPrimaryKey(staffPayPersonnelSlip);
+                                    }
+                                }
                             }
-                            if(staffPayPersonnelSlip.getRealName().equals("郑亚东")){
-                                Double realPay = res.get("RealPay");
-                                staffPerformancePersonnel.setRealPay(realPay+staffPerformancePersonnel.getRealPay());
-                            }
-                            staffPayPersonnelSlip.setWelfarePay(staffPerformancePersonnel.getRealPay());
-
-
-
-                         }
-                        //各种计算
-                        staffPayPersonnelSlip = backendStaffPaySlipApiImpl.returnSlip(staffPersonnelInfo,staffPayPersonnelSlip,true);
-                        staffPayPersonnelSlipMapper.updateByPrimaryKey(staffPayPersonnelSlip);
+                            staffPerformance.setDeleteFlag(1);
+                            staffPerformanceMapper.updateByPrimaryKey(staffPerformance);
+                        }
                     }
+
                 } else {
                     //修改
                     staffPaySlip.setWorkTime(apiReq.getString("workTime"));
@@ -1889,7 +1909,7 @@ public class BackendStaffApiImpl extends BaseServiceImpl implements BackendStaff
                     staffPerformanceMapper.insert(staffPerformance);
 
                     //同步钉钉数据，并保存绩效详情
-                    backendStaffPerformanceApiImpl.generateStaffPerformance(staffPerformance,userInfo,staffPaySlip);
+                    backendStaffPerformanceApiImpl.generateStaffPerformance(staffPerformance,userInfo,staffPaySlip,"performance");
 
                     Map map = new HashMap<>();
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
@@ -2632,5 +2652,12 @@ public class BackendStaffApiImpl extends BaseServiceImpl implements BackendStaff
             }
         }
         return remark;
+    }
+
+    public String Dconvert(String name,Double value){
+        if (value == null || value == 0D){
+            return "";
+        }
+        return String.format("%s:%s;",name,new BigDecimal(value).setScale(2));
     }
 }

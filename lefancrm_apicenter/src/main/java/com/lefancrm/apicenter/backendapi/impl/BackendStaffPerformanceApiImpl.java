@@ -838,7 +838,7 @@ public class BackendStaffPerformanceApiImpl extends BaseServiceImpl implements B
      * @param userInfo
      * @param staffPaySlip  工资单对象（关联钉钉数据）
      */
-    public void generateStaffPerformance(StaffPerformance staffPerformance, UserInfo userInfo, StaffPaySlip staffPaySlip){
+    public void generateStaffPerformance(StaffPerformance staffPerformance, UserInfo userInfo, StaffPaySlip staffPaySlip,String staffType){
         try {
             StaffWorkingDaysInfo staffWorkingDaysInfo = staffWorkingDaysInfoMapper.selectByWorkTime(staffPerformance.getWorkTime());;//根据workTime 查找出勤天数
 
@@ -856,6 +856,9 @@ public class BackendStaffPerformanceApiImpl extends BaseServiceImpl implements B
             map.put("entryTime",c.getTime());
             map.put("workingDays",staffWorkingDaysInfo.getWrokingDays());
             map.put("performance",0);
+            if ("payslip".equals(staffType)){
+                map.put("performance",1);
+            }
             staffPerformancePersonnelMapper.generate(map);// 插入绩效子表  insert into select  // 2、新需求：2020年5月25日15:18:19  创建绩效时，状态为合伙的员工不进入绩效
             // 同步 所有的案件(未标记结算，在此时间之前保司终审通过的案件)：1、是否结算绩效 2、绩效结算时间
             map = new HashMap<>();
@@ -864,6 +867,10 @@ public class BackendStaffPerformanceApiImpl extends BaseServiceImpl implements B
             map.put("newPerformanceState",1);
             map.put("dateTime",new Date());
             map.put("addStaffPerformanceId",staffPerformance.getId());//绩效id(此处为了录入绩效id)
+            if ("payslip".equals(staffType)){
+                map.put("addStaffPerformanceId",staffPaySlip.getId());
+            }
+            map.put("addStaffType",staffType);
             surveyRiskCaseInfoMapper.updatePerformanceState(map);
 
             map.clear();
@@ -912,12 +919,14 @@ public class BackendStaffPerformanceApiImpl extends BaseServiceImpl implements B
             map.put("newPerformanceState",1);
             map.put("dateTime",new Date());
             map.put("addStaffPerformanceId",staffPerformance.getId());//绩效id(此处为了录入绩效id)
-//            todo暂时不知道是否要
-//            surveyRiskCaseInfoMapper.updatePerformanceState(map);
+            map.put("userId",staffPayPersonnelSlip.getUserId());
+            surveyRiskCaseInfoMapper.updatePerformanceStatePerson(map);
             map.clear();
             map.put("staffPerformanceId",staffPerformance.getId());
             StaffPerformancePersonnel item = staffPerformancePersonnelMapper.listOne(newId);
-                item = convertPersonnel(item,staffWorkingDaysInfo.getWrokingDays(),"init",staffPerformance.getWorkTime());
+            item.setStaffPersonnelInfo(staffPersonnelInfoMapper.selectStaffPersonelInfoByJobNo(item.getJobNo()));
+            item.setSurveyInvestigator(surveyInvestigatorMapper.selectByUserId(item.getStaffPersonnelInfo().getUserId()));
+            item = convertPersonnel(item,staffWorkingDaysInfo.getWrokingDays(),"init",staffPerformance.getWorkTime());
                 staffPerformancePersonnelMapper.updateByPrimaryKey(item);
             return item;
         } catch (ParseException e) {

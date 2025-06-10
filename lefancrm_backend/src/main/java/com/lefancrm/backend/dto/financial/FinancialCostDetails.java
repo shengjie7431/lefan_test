@@ -1,7 +1,6 @@
 package com.lefancrm.backend.dto.financial;
 
 
-
 import java.util.Date;
 import java.util.List;
 

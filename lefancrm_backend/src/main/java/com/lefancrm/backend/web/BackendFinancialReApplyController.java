@@ -33,7 +33,6 @@ import org.slf4j.LoggerFactory;
 @RequestMapping(value = "/financial/reApply/")
 public class BackendFinancialReApplyController extends BackendBaseController{
 
-    private static final Logger log = LoggerFactory.getLogger(BackendFinancialReApplyController.class);
     @Value("${survey.file.path.sftp}")
     public String httpFilePath;
     @Value("${survey.file.source.sftp}")
@@ -174,9 +173,9 @@ public class BackendFinancialReApplyController extends BackendBaseController{
             TypeToken typeToken = new TypeToken<ApiFinalResponse<FinancialReApply>>() {};
             ApiFinalResponse apiFinalResponse = this.callApi(typeToken, BackendApiMethodEnum.BACKEND_AJAX_DATA_FINANCIAL_RE_APPLY, null, req);
             FinancialReApply data = (FinancialReApply) apiFinalResponse.getResults();
-//            File file = PDFFinaancial.generates(realTempPath + File.separator + "pdf" + File.separator + System.currentTimeMillis(), data);
-            System.out.println(data);
-
+            File file = PDFFinaancial.generates(realTempPath + File.separator + "pdf" + File.separator + System.currentTimeMillis(), data);
+//            System.out.println(data);
+            return ;
         }else{//导出
             String surveyCode = req.getParameter("surveyCode");
             //每刻报销导出

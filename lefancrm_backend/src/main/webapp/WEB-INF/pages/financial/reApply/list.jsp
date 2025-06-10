@@ -384,6 +384,23 @@
         tr.active td{
             background-color: rgba(236,128,126,0.4);
         }
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 9999;
+        }
+        .toast.show {
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -1250,6 +1267,7 @@
                             dataType:'get-info'
                         },
                         success: function(response) {
+                            showToast("打印成功");
                             console.log('打印接口调用成功', response);
                         },
                         error: function(error) {
@@ -1258,6 +1276,22 @@
                     });
                 }
             })
+
+            // 添加在layui.use的回调函数内部最上方
+            function showToast(message, duration = 3000) {
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = message;
+
+                document.body.appendChild(toast);
+                setTimeout(() => toast.classList.add('show'), 10);
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => toast.remove(), 300); // 等待过渡动画完成
+                }, duration);
+            }
+
 
             table.on('sort(test)', function(obj) { //注：sort 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
                 console.log(obj.field); //当前排序的字段名

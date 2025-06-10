@@ -41,6 +41,11 @@ public class FinancialCostBear {
 
     private Double warnMoney;
 
+
+
+    //    承担列表中承担部门
+    private String Underdepartment;
+
     public Long getId() {
         return id;
     }
@@ -191,5 +196,12 @@ public class FinancialCostBear {
 
     public void setWarnMoney(Double warnMoney) {
         this.warnMoney = warnMoney;
+    }
+    public String getUnderdepartment() {
+        return Underdepartment;
+    }
+
+    public void setUnderdepartment(String underdepartment) {
+        Underdepartment = underdepartment;
     }
 }

@@ -2,6 +2,7 @@ package com.lefancrm.backend.dto.financial;
 
 import java.util.Date;
 
+
 public class FinancialCostBear {
     private Long id;
 
@@ -40,6 +41,9 @@ public class FinancialCostBear {
     private String superiorManagerUserName;
 
     private Double warnMoney;
+
+    //    承担列表中承担部门
+    private String Underdepartment;
 
     public Long getId() {
         return id;
@@ -191,5 +195,13 @@ public class FinancialCostBear {
 
     public void setWarnMoney(Double warnMoney) {
         this.warnMoney = warnMoney;
+    }
+
+    public String getUnderdepartment() {
+        return Underdepartment;
+    }
+
+    public void setUnderdepartment(String underdepartment) {
+        Underdepartment = underdepartment;
     }
 }

@@ -859,4 +859,13 @@ public class StaffPayPersonnelSlip {
     public void setSurveyInvestigator(SurveyInvestigator surveyInvestigator) {
         this.surveyInvestigator = surveyInvestigator;
     }
+    private StaffOrgan staffOrgan;
+
+    public StaffOrgan getStaffOrgan() {
+        return staffOrgan;
+    }
+
+    public void setStaffOrgan(StaffOrgan staffOrgan) {
+        this.staffOrgan = staffOrgan;
+    }
 }

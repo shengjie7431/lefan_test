@@ -3,6 +3,7 @@ package com.lefancrm.backend.dto.financial;
 import java.util.Date;
 import java.util.List;
 
+
 public class FinancialReApply {
     private Long id;
 
@@ -108,6 +109,12 @@ public class FinancialReApply {
     private Integer isCanModify;//是否可以更改机构
 
     private Long payUserId;
+
+    private String socialSecurityCompany; //打印每刻报表的
+
+    private String organ;//打印每刻报表的
+
+    private String budgetCompanyName;//打印每刻报表的
 
     public Long getId() {
         return id;
@@ -555,5 +562,29 @@ public class FinancialReApply {
 
     public void setCwzjRole(Boolean cwzjRole) {
         this.cwzjRole = cwzjRole;
+    }
+
+    public String getSocialSecurityCompany() {
+        return socialSecurityCompany;
+    }
+
+    public void setSocialSecurityCompany(String socialSecurityCompany) {
+        this.socialSecurityCompany = socialSecurityCompany;
+    }
+
+    public String getOrgan() {
+        return organ;
+    }
+
+    public void setOrgan(String organ) {
+        this.organ = organ;
+    }
+
+    public String getBudgetCompanyName() {
+        return budgetCompanyName;
+    }
+
+    public void setBudgetCompanyName(String budgetCompanyName) {
+        this.budgetCompanyName = budgetCompanyName;
     }
 }

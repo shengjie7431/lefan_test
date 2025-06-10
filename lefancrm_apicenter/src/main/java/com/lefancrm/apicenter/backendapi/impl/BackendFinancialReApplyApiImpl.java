@@ -50,7 +50,7 @@ public class BackendFinancialReApplyApiImpl extends BaseServiceImpl implements B
     private BackendFinancialFileApiImpl backendFinancialFileApiImpl;
     @Autowired
     private StaffCompanyMapper staffCompanyMapper;
-//    @Autowired
+    //    @Autowired
 //    private StaffBudgetCompanyMapper staffBudgetCompanyMapper;
     @Autowired
     private BankInfoMapper bankInfoMapper;
@@ -1560,7 +1560,7 @@ public class BackendFinancialReApplyApiImpl extends BaseServiceImpl implements B
             curUserId = lastUsers.size() > 0 ? lastUsers.get(0) : curUserId;
         }
 
-        if (reMoney < 20000 && lastState == 55){//财务总监且小于2W
+        if (reMoney < 3000 && lastState == 55){//财务总监且小于2W  2025年4月14日  时间改成小于3000自动审核
             auto = true;
             curUserId = lastUsers.size() > 0 ? lastUsers.get(0) : curUserId;
         }
@@ -1613,7 +1613,11 @@ public class BackendFinancialReApplyApiImpl extends BaseServiceImpl implements B
 //                }
             }
 
-            setProgress(financialReApply,userInfoMapper.selectByPrimaryKey(curUserId),code,"yes","","", "自动审核", 1);
+            if (auto && lastState == 55){//如果是财务总监的自动审核 则不需要节点进度
+
+            }else{
+                setProgress(financialReApply,userInfoMapper.selectByPrimaryKey(curUserId),code,"yes","","", "自动审核", 1);
+            }
             return getLastStateCallBack(financialReApply,curUserId,nodeUsers,FinancialReApplyStateEnumDto.get(lastState),progressUserIds);
         }
         return lastState;
@@ -1818,6 +1822,17 @@ public class BackendFinancialReApplyApiImpl extends BaseServiceImpl implements B
                     StaffOrgan staffOrgan = staffOrganMapper.selectByPrimaryKey(staffPersonnelInfo.getOrganId());
                     staffPersonnelInfo.setIsCanModify(staffOrgan.getIsCanModify() == null ? 0 : staffOrgan.getIsCanModify());
                     financialReApply.setIsCanModify(staffPersonnelInfo.getIsCanModify());
+                }
+                StaffPersonnelInfo data=staffPersonnelInfoMapper.selectStaffPersonelInfoByUserId(financialReApply.getApplyUserId());
+                financialReApply.setSocialSecurityCompany(data.getSocialSecurityCompany());
+                financialReApply.setOrgan(data.getOrgan());
+                financialReApply.setBudgetCompanyName(data.getBudgetCompanyName());
+                if(financialReApply.getFinancialCostBearList()!=null){
+                    List<FinancialCostBear> costBearList = financialReApply.getFinancialCostBearList();
+                    for (FinancialCostBear item : costBearList) {
+                        StaffOrgan staffOrgan = staffOrganMapper.selectByPrimaryKey(item.getDepartmentId());
+                        item.setUnderdepartment(staffOrgan.getName());
+                    }
                 }
                 return new ApiResponse(ApiMsgEnum.SUCCESS,1,financialReApply);
             }
