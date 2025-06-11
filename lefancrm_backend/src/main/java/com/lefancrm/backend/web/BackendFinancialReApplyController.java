@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+
 /**
  * Created by wangwei on 2021/01/22.
  * 每刻报销
@@ -39,6 +40,8 @@ public class BackendFinancialReApplyController extends BackendBaseController{
     private String surveySource;
     @Value("${survey.temp.path}")
     private String realTempPath;
+
+
     /**
     *
      */
@@ -170,12 +173,16 @@ public class BackendFinancialReApplyController extends BackendBaseController{
     public void   downLoad(HttpServletRequest req, HttpServletResponse rsp) {
         String dataType = req.getParameter("dataType");
         if("get-info".equals(dataType)) { // 打印分支
+            Map<String,Object> jsonMap = new HashMap<>();
             TypeToken typeToken = new TypeToken<ApiFinalResponse<FinancialReApply>>() {};
             ApiFinalResponse apiFinalResponse = this.callApi(typeToken, BackendApiMethodEnum.BACKEND_AJAX_DATA_FINANCIAL_RE_APPLY, null, req);
             FinancialReApply data = (FinancialReApply) apiFinalResponse.getResults();
             File file = PDFFinaancial.generates(realTempPath + File.separator + "pdf" + File.separator + System.currentTimeMillis(), data);
-//            System.out.println(data);
-            return ;
+            jsonMap.put("fileUrl",file.getPath().replace("/mnt/sftp/files/",httpFilePath));
+            String json = sh.zj100.common.util.JsonUtil.objectToJson(jsonMap);
+            this.outputJson(json, rsp);
+            //            System.out.println(data);
+//            return ;
         }else{//导出
             String surveyCode = req.getParameter("surveyCode");
             //每刻报销导出

@@ -108,7 +108,7 @@ public class PDFFinaancial {
             document.setMargins(10, 20, 10, 10);
             // 写入PDF文档
             PdfWriter writer = null;
-            try {
+            try {    
                 writer = PdfWriter.getInstance(document,fos);
             } catch (DocumentException e) {
                 e.printStackTrace();

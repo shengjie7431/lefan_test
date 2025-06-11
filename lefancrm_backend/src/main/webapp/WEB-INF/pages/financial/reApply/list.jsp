@@ -1266,9 +1266,21 @@
                             copy: 'copy',
                             dataType:'get-info'
                         },
-                        success: function(response) {
-                            showToast("打印成功");
-                            console.log('打印接口调用成功', response);
+                        success: function(res) {
+                            // showToast("打印成功");
+                            // console.log('打印接口调用成功', response);
+                            console.log(res.fileUrl);
+                             return;
+                            res = JSON.parse(res)
+                            if (res){
+                                if (res.fileUrl){
+                                    var tempwindow = window.open('_blank');
+                                    tempwindow.location = res.fileUrl
+                                    // window.location.href = res.fileUrl;
+                                }
+                            }else{
+                                alert("下载失败");
+                            }
                         },
                         error: function(error) {
                             console.error('打印接口调用失败', error);
