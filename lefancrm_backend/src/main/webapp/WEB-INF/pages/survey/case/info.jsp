@@ -1957,6 +1957,7 @@
                                                 height="25px" width="25px" src="${ctx}/img/pen.png"></a></c:if>
                                     </c:if>
                                 </td>
+                                <td>主险代码：${dto.surveyRiskCase.mainInsurance}</td>
                                 <td>
                                     <c:if test="${dto.surveyRiskCase.modelId == 1 || dto.surveyRiskCase.modelId == 2 || dto.surveyRiskCase.modelId == 6 || dto.surveyRiskCase.modelId == 7}">
                                         理赔编号：
@@ -1976,6 +1977,7 @@
 
                             <c:if test="${dto.surveyRiskCase.modelId == 1 || dto.surveyRiskCase.modelId == 2 || dto.surveyRiskCase.modelId == 4 || dto.surveyRiskCase.modelId == 6 || dto.surveyRiskCase.modelId == 7}">
                                 <tr>
+
                                     <td>投保日期：
                                         <div id="div_insure_time_1">
                                             <fmt:formatDate value="${dto.surveyRiskCase.insureTime}"

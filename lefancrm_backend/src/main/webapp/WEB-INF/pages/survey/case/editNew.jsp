@@ -468,6 +468,16 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">主险代码<em style="color: red;">*</em></label>
+                <div class="col-sm-9 input-group">
+                    <input type="text" class="form-control" id="mainInsurance" name="mainInsurance" value="${dto.surveyRiskCase.mainInsurance}"
+                            placeholder="请输入主险代码" required="required">
+                </div>
+            </div>
+
+
             <div class="form-group company company_lf" data-type="1">
                 <label class="col-sm-3 control-label">理赔编号<em style="color: red;">*</em></label>
                 <div class="col-sm-3">

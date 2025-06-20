@@ -49,6 +49,7 @@
         <result column="hz_confirm_disease" property="hzConfirmDisease" jdbcType="VARCHAR"/>
         <result column="hz_follow_info" property="hzFollowInfo" jdbcType="VARCHAR"/>
         <result column="investigation_area" property="investigationArea" jdbcType="INTEGER"/>
+        <result column="main_insurance" property="mainInsurance" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
@@ -60,7 +61,7 @@
         delete_flag, survey_case_no, age, insure_type, entrust_time, insure_time, danger_time,
         danger_address, insure_take_time, department_id, department_name, transfer_type, transfer_type_name,
         insure_name, hz_contact_name, hz_contact_tel, hz_product, hz_wait_end_time,
-        hz_live_address, hz_confirm_disease, hz_follow_info, investigation_area,repetition
+        hz_live_address, hz_confirm_disease, hz_follow_info, investigation_area,repetition,main_insurance
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
@@ -99,7 +100,7 @@
         insure_time, danger_time, danger_address,
         insure_take_time, department_id, department_name,transfer_type, transfer_type_name,insure_name,
         hz_contact_name, hz_contact_tel, hz_product, hz_wait_end_time,
-        hz_live_address, hz_confirm_disease, hz_follow_info,investigation_area
+        hz_live_address, hz_confirm_disease, hz_follow_info,investigation_area,main_insurance
         )
         values (#{surveyNo,jdbcType=VARCHAR}, #{surveyPerson,jdbcType=VARCHAR}, #{surveryPersonTel,jdbcType=VARCHAR},
         #{sex,jdbcType=INTEGER},
@@ -121,7 +122,7 @@
         #{transferType,jdbcType=INTEGER}, #{transferTypeName,jdbcType=VARCHAR}, #{insureName,jdbcType=VARCHAR},
         #{hzContactName,jdbcType=VARCHAR}, #{hzContactTel,jdbcType=VARCHAR}, #{hzProduct,jdbcType=INTEGER},
         #{hzWaitEndTime,jdbcType=TIMESTAMP}, #{hzLiveAddress,jdbcType=VARCHAR}, #{hzConfirmDisease,jdbcType=VARCHAR},
-        #{hzFollowInfo,jdbcType=VARCHAR},#{investigationArea,jdbcType=INTEGER})
+        #{hzFollowInfo,jdbcType=VARCHAR},#{investigationArea,jdbcType=INTEGER},#{mainInsurance,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyRiskCase">
         <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">

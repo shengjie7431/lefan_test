@@ -565,4 +565,17 @@ public class SurveyRiskCase {
     public void setCooperativeCompany(String cooperativeCompany) {
         this.cooperativeCompany = cooperativeCompany;
     }
+
+
+    //    主险代码
+    private String mainInsurance;
+
+    public String getMainInsurance() {
+        return mainInsurance;
+    }
+    public void setMainInsurance(String mainInsurance) {
+        this.mainInsurance = mainInsurance;
+    }
+
+
 }

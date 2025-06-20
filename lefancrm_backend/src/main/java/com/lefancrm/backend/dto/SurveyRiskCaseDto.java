@@ -548,4 +548,16 @@ public class SurveyRiskCaseDto {
     public void setDelegationMode(Integer delegationMode) {
         this.delegationMode = delegationMode;
     }
+
+
+    //    主险代码
+    private String mainInsurance;
+
+    public String getMainInsurance() {
+        return mainInsurance;
+    }
+    public void setMainInsurance(String mainInsurance) {
+        this.mainInsurance = mainInsurance;
+    }
+    
 }
