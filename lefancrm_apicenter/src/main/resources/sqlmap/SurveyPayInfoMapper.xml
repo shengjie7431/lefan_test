@@ -49,6 +49,8 @@
       <result column="job_post" property="jobPost" jdbcType="VARCHAR" />
       <result column="short_url" property="shortUrl" jdbcType="VARCHAR" />
       <result column="real_income_money" property="realIncomeMoney" jdbcType="DOUBLE" />
+      <result column="company_id" property="companyId" jdbcType="BIGINT" />
+      <result column="company_name" property="companyName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, pay_no, org_id, org_name, source_support_type, app_pay_money, real_pay_money,
@@ -57,7 +59,7 @@
     create_by, update_time, update_by, delete_flag,pay_type,pay_survey_user_id,pay_survey_user_name,pay_key_id,
     user_id, real_name, staff_personnel_id, social_security_company_id, social_security_company,
     organ_id, organ, department_id, department, team_id, team, pay_rate, pay_tax, pay_tax_rate,
-    job_post_id, job_post, short_url,real_income_money
+    job_post_id, job_post, short_url,real_income_money,company_id,company_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
@@ -668,6 +670,9 @@
       <if test="companyIds != null" >
           and find_in_set(social_security_company_id,#{companyIds,jdbcType=VARCHAR})
       </if>
+    <if test="budCompanyIds != null" >
+      and find_in_set(company_id,#{budCompanyIds,jdbcType=VARCHAR})
+    </if>
       <if test="organIds != null" >
           and find_in_set(organ_id,#{organIds,jdbcType=VARCHAR})
       </if>

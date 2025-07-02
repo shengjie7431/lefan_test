@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.stream.Collectors;
 
@@ -348,7 +350,7 @@ public class PDFFinaancial {
             paragraph.setAlignment(Paragraph.ALIGN_CENTER);
             document.add(paragraph);
 
-            paragraph = new Paragraph(data.getCompanyTitle() ,font2);
+            paragraph = new Paragraph(data.getCompanyTitle()+"                         "+new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(data.getApplyTime()),font2);
             paragraph.setAlignment(Paragraph.ALIGN_LEFT);
             paragraph.setIndentationLeft(30);// 左缩进
 //            paragraph.setIndentationRight(6);// 右缩进
@@ -536,10 +538,12 @@ public class PDFFinaancial {
             paragraph.setLeading(5f);// 行间距
             document.add(paragraph);
 
-            double totalAmount = data.getFinancialCostDetails().stream()
-                    .mapToDouble(FinancialCostDetails::getCostMoney)
-                    .sum();
-
+            double totalAmount = BigDecimal.valueOf(
+                   data.getFinancialCostDetails().stream()
+                   .mapToDouble(FinancialCostDetails::getCostMoney)
+                   .sum())
+                   .setScale(2, RoundingMode.HALF_UP)
+                   .doubleValue();
 
             // 将数字金额转换为中文大写
             String amountInChinese = convertToChineseAmount(totalAmount);

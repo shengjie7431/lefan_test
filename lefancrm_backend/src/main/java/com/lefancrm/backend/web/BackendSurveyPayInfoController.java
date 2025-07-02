@@ -10,10 +10,7 @@ import com.lefancrm.backend.dto.financial.FinancialCostBearDto;
 import com.lefancrm.backend.dto.financial.FinancialCostDetailsDto;
 import com.lefancrm.backend.dto.financial.FinancialFileDto;
 import com.lefancrm.backend.dto.financial.FinancialReApplyDto;
-import com.lefancrm.backend.dto.staff.StaffCompanyDto;
-import com.lefancrm.backend.dto.staff.StaffDepartmentDto;
-import com.lefancrm.backend.dto.staff.StaffJobPostDto;
-import com.lefancrm.backend.dto.staff.StaffTeamDto;
+import com.lefancrm.backend.dto.staff.*;
 import com.lefancrm.backend.util.FileUtils;
 import com.lefancrm.backend.util.PDFFinaancial;
 import com.lefancrm.base.dto.ApiFinalResponse;
@@ -86,7 +83,7 @@ public class BackendSurveyPayInfoController  extends BackendBaseController{
         model.put("franchisees",franchisees);
 
         Map params=new HashMap();
-        //公司信息
+        //社保缴纳公司
         appendMap = new HashMap<String, Object>();
         appendMap.put("surveyCode","company");
         appendMap.put("havePage","no");//不分页
@@ -95,6 +92,14 @@ public class BackendSurveyPayInfoController  extends BackendBaseController{
         List<StaffCompanyDto> companys = (List<StaffCompanyDto>)apiFinalResponse.getResults();
         model.put("companys", companys);
         params.put("companysJson", JsonUtil.objectToJson(companys));
+        //成本归属公司
+        typeToken = new TypeToken<ApiFinalResponse<List<StaffBudgetCompanyDto>>>() {};
+        appendMap.put("surveyCode","budgetCompany");
+        appendMap.put("havePage","no");//不分页
+        apiFinalResponse= this.callApi(typeToken, BackendApiMethodEnum.BACKEND_STAFF_LIST, appendMap, null);
+        List<StaffBudgetCompanyDto> budCompanys = (List<StaffBudgetCompanyDto>) apiFinalResponse.getResults();
+        model.put("budCompanys", budCompanys);
+        params.put("budCompanysJson", JsonUtil.objectToJson(budCompanys));
         //机构/部门 信息
         appendMap = new HashMap<String, Object>();
         appendMap.put("surveyCode","organ");
@@ -140,6 +145,7 @@ public class BackendSurveyPayInfoController  extends BackendBaseController{
         model.put("surveyOrgIds",req.getParameter("surveyOrgIds")==null?"":req.getParameter("surveyOrgIds"));
         model.put("sourceSupportTypes",req.getParameter("sourceSupportTypes")==null?"":req.getParameter("sourceSupportTypes"));
         model.put("companyIds",req.getParameter("companyIds")==null?"":req.getParameter("companyIds"));
+        model.put("budCompanyIds",req.getParameter("budCompanyIds")==null?"":req.getParameter("budCompanyIds"));
         model.put("organIds",req.getParameter("organIds")==null?"":req.getParameter("organIds"));
         model.put("departmentIds",req.getParameter("departmentIds")==null?"":req.getParameter("departmentIds"));
         model.put("teamIds",req.getParameter("teamIds")==null?"":req.getParameter("teamIds"));
@@ -222,6 +228,7 @@ public class BackendSurveyPayInfoController  extends BackendBaseController{
             map.put("sourceSupportTypes",req.getParameter("sourceSupportTypes")==null?"":req.getParameter("sourceSupportTypes"));
             map.put("payStates",req.getParameter("payStates")==null?"":req.getParameter("payStates"));
             map.put("companyIds",req.getParameter("companyIds")==null?"":req.getParameter("companyIds"));
+            map.put("budCompanyIds",req.getParameter("budCompanyIds")==null?"":req.getParameter("budCompanyIds"));
             map.put("organIds",req.getParameter("organIds")==null?"":req.getParameter("organIds"));
             map.put("departmentIds",req.getParameter("departmentIds")==null?"":req.getParameter("departmentIds"));
             map.put("teamIds",req.getParameter("teamIds")==null?"":req.getParameter("teamIds"));
@@ -621,7 +628,8 @@ public class BackendSurveyPayInfoController  extends BackendBaseController{
         int index = -1;
         cell_row_0.createCell(++index).setCellValue("付款编号");
         cell_row_0.createCell(++index).setCellValue("付款类型");
-        cell_row_0.createCell(++index).setCellValue("公司");
+        cell_row_0.createCell(++index).setCellValue("社保缴纳公司");
+        cell_row_0.createCell(++index).setCellValue("成本归属公司");
         cell_row_0.createCell(++index).setCellValue("机构/部门");
         cell_row_0.createCell(++index).setCellValue("科室");
         cell_row_0.createCell(++index).setCellValue("小组");
@@ -661,6 +669,7 @@ public class BackendSurveyPayInfoController  extends BackendBaseController{
             }else{cell_row_i.createCell(++index).setCellValue("");}
 
             cell_row_i.createCell(++index).setCellValue(surveyPayInfo.getSocialSecurityCompany()==null?"":surveyPayInfo.getSocialSecurityCompany());
+            cell_row_i.createCell(++index).setCellValue(surveyPayInfo.getCompanyName()==null?"":surveyPayInfo.getCompanyName());
             cell_row_i.createCell(++index).setCellValue(surveyPayInfo.getOrgan()==null?"":surveyPayInfo.getOrgan());
             cell_row_i.createCell(++index).setCellValue(surveyPayInfo.getDepartment()==null?"":surveyPayInfo.getDepartment());
             cell_row_i.createCell(++index).setCellValue(surveyPayInfo.getTeam()==null?"":surveyPayInfo.getTeam());

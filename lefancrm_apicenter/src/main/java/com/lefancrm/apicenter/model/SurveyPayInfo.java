@@ -462,4 +462,25 @@ public class SurveyPayInfo {
     public void setRealIncomeMoney(Double realIncomeMoney) {
         this.realIncomeMoney = realIncomeMoney;
     }
+
+    private Long CompanyId;
+
+    public Long getCompanyId() {
+        return CompanyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.CompanyId = companyId;
+    }
+
+    private String CompanyName;
+
+
+    public String getCompanyName() {
+        return CompanyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.CompanyName = companyName;
+    }
 }
