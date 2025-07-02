@@ -23,8 +23,13 @@ public class GetWorkDay {
     }
 
     public static void main(String[] args) throws Exception{
-        System.out.println(GetWorkDay.getDays(1));
-
+//        System.out.println(GetWorkDay.getDays(1));
+        try {
+            Date date = calLeaveEndDate(new SimpleDateFormat("yyyy-MM-dd").parse("2025-05-25"), null, 3, 1);
+            System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(date));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
 //        Date date = new SimpleDateFormat("yyyy-MM-dd").parse("2020-11-08");
 //        Date nextNotWorkTime = getNextNotWorkTime(date, 1);

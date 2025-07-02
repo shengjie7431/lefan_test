@@ -12,7 +12,6 @@ import com.lefancrm.backend.util.FileZipUtil;
 import com.lefancrm.backend.util.StaffExcel;
 import com.lefancrm.base.dto.ApiFinalResponse;
 import com.lefancrm.base.enums.BackendApiMethodEnum;
-import com.lefancrm.base.utils.HttpClientUtil;
 import com.lefancrm.base.utils.JsonUtil;
 import jxl.Workbook;
 import jxl.write.*;
@@ -312,6 +311,7 @@ public class BackendStaffController extends BackendBaseController{
             model.put("organManager", organManager);
             model.put("hrManager", hrManager);
             model.put("superManager",superManager);
+
             Boolean showPassWord = false;
             if (list.get(0).getUserId() == 2411) { //周军的账号，特殊显示密码
                 model.put("showPassWord", true);

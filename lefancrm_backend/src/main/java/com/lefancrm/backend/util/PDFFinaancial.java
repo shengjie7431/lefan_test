@@ -1,23 +1,22 @@
 package com.lefancrm.backend.util;
 
 import com.aspose.words.BreakType;
-import com.lefancrm.backend.dto.StaffOrganDto;
-import com.lefancrm.backend.dto.financial.*;
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.pdf.*;
 import com.lefancrm.backend.dto.SurveyPayInfoAjaxFinancialData;
-
+import com.lefancrm.backend.dto.financial.FinancialFileDto;
+import com.lefancrm.backend.dto.financial.FinancialReProgresDto;
+import com.lefancrm.backend.dto.financial.FinancialReApply;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.stream.Collectors;
+import com.lefancrm.backend.dto.financial.*;
 
 public class PDFFinaancial {
     private static Font headfont ;// 设置字体大小
@@ -110,7 +109,7 @@ public class PDFFinaancial {
             document.setMargins(10, 20, 10, 10);
             // 写入PDF文档
             PdfWriter writer = null;
-            try {    
+            try {
                 writer = PdfWriter.getInstance(document,fos);
             } catch (DocumentException e) {
                 e.printStackTrace();
@@ -313,6 +312,7 @@ public class PDFFinaancial {
         return file;
     }
 
+
     public static File generates(String filePath, FinancialReApply data){
         File file = new File(filePath);
         if (!file.exists() && !file.isDirectory()){
@@ -350,7 +350,7 @@ public class PDFFinaancial {
             paragraph.setAlignment(Paragraph.ALIGN_CENTER);
             document.add(paragraph);
 
-            paragraph = new Paragraph(data.getCompanyTitle()+"                         "+new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(data.getApplyTime()),font2);
+            paragraph = new Paragraph(data.getCompanyTitle() ,font2);
             paragraph.setAlignment(Paragraph.ALIGN_LEFT);
             paragraph.setIndentationLeft(30);// 左缩进
 //            paragraph.setIndentationRight(6);// 右缩进
@@ -482,7 +482,7 @@ public class PDFFinaancial {
                  if(progress.getCostDesc()==null){
                      progress.setCostDesc("");
                  }
-                 String progressDesc = progress.getCostTypeName()+"(备注:"+progress.getCostDesc()+")";
+                 String progressDesc = progress.getCostTypeName();
                  cell = new PdfPCell(new Phrase(progressDesc,font2));
                  table.addCell(cell);
                  String costMoney = String.valueOf(progress.getCostMoney());
@@ -538,12 +538,10 @@ public class PDFFinaancial {
             paragraph.setLeading(5f);// 行间距
             document.add(paragraph);
 
-            double totalAmount = BigDecimal.valueOf(
-                   data.getFinancialCostDetails().stream()
-                   .mapToDouble(FinancialCostDetails::getCostMoney)
-                   .sum())
-                   .setScale(2, RoundingMode.HALF_UP)
-                   .doubleValue();
+            double totalAmount = data.getFinancialCostDetails().stream()
+                    .mapToDouble(FinancialCostDetails::getCostMoney)
+                    .sum();
+
 
             // 将数字金额转换为中文大写
             String amountInChinese = convertToChineseAmount(totalAmount);
@@ -595,5 +593,4 @@ public class PDFFinaancial {
 
         return result.toString();
     }
-
 }

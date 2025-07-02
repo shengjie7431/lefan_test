@@ -1957,7 +1957,6 @@
                                                 height="25px" width="25px" src="${ctx}/img/pen.png"></a></c:if>
                                     </c:if>
                                 </td>
-                                <td>主险代码：${dto.surveyRiskCase.mainInsurance}</td>
                                 <td>
                                     <c:if test="${dto.surveyRiskCase.modelId == 1 || dto.surveyRiskCase.modelId == 2 || dto.surveyRiskCase.modelId == 6 || dto.surveyRiskCase.modelId == 7}">
                                         理赔编号：
@@ -1977,7 +1976,6 @@
 
                             <c:if test="${dto.surveyRiskCase.modelId == 1 || dto.surveyRiskCase.modelId == 2 || dto.surveyRiskCase.modelId == 4 || dto.surveyRiskCase.modelId == 6 || dto.surveyRiskCase.modelId == 7}">
                                 <tr>
-
                                     <td>投保日期：
                                         <div id="div_insure_time_1">
                                             <fmt:formatDate value="${dto.surveyRiskCase.insureTime}"
@@ -2126,6 +2124,23 @@
                                             <input type="text" class="input-2" style="width: 180px;" name="insureName"
                                                    value="${dto.surveyRiskCase.insureName}"/>
                                             <input type="submit" value="确定" onclick="oprOK(${dto.id},'updInsureName')"
+                                                   class="btn" style="display: inline-flex"/>
+                                        </div>
+                                    </td>
+                                    <td>主险代码：
+                                        <div id="div_main_insurance_1">${dto.surveyRiskCase.mainInsurance}
+                                            <c:if test="${menuCode == 'all-list' && dto.surveyPhase != 3 || maxRole || menuCode == 'org-review-list' || menuCode == 'survey-list'}">
+                                                <a onclick="cliUpdPrice('updMainInsurance')"><img height="25px"
+                                                                                                  width="25px"
+                                                                                                  src="${ctx}/img/pen.png"></a>
+                                                <div class="record" data-attr="survey_risk_case_main_insurance"><span
+                                                        class="icon-history"></span><span class="num"></span></div>
+                                            </c:if>
+                                        </div>
+                                        <div id="div_main_insurance_2" style="display: none">
+                                            <input type="text" class="input-2" style="width: 180px;" name="mainInsurance"
+                                                   value="${dto.surveyRiskCase.mainInsurance}"/>
+                                            <input type="submit" value="确定" onclick="oprOK(${dto.id},'updMainInsurance')"
                                                    class="btn" style="display: inline-flex"/>
                                         </div>
                                     </td>
@@ -3928,7 +3943,7 @@
                                                        onclick="downFileDirectionFile('${item.id}','${item.directionName}','${dto.surveyCno}')">下载</a>
                                             </c:if>
                                             <br/> <c:if test="${item.materRaw == 1}"><span
-                                                style="color: #ff0000">有原件</span></c:if>
+                                                style="color: #ff0000">有原件(${item.materRawNumber}页)</span></c:if>
                                         </td>
                                         <td>
                                             <c:if test="${menuCode == 'org-review-list' || (menuCode == 'survey-list' && menuCode2 != 'agent-entrust-list') || menuCode == 'help-review'}">
@@ -5800,6 +5815,9 @@
         } else if (type == 'updInsureName') {
             $("#div_insure_name_1").hide();
             $("#div_insure_name_2").show();
+        } else if (type == 'updMainInsurance') {
+            $("#div_main_insurance_1").hide();
+            $("#div_main_insurance_2").show();
         } else if (type == 'updHandleId') {
             $("#div_handle_id_1").hide();
             $("#div_handle_id_2").show();

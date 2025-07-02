@@ -1421,6 +1421,7 @@
     <select id="selectListByOrgId" resultMap="BaseResultMap">
         SELECT * FROM staff_personnel_info WHERE delete_flag = 0 AND organ_id = #{id}
     </select>
+
     <select id="detail" resultMap="BaseResultMap">
         select
             <include refid="Base_Column_List" />

@@ -119,6 +119,8 @@ public class SurveyRiskCaseInfoExportDto {
 
     private String insureName;
 
+    private String mainInsurance;//主险代码
+
     public String getTransferTypeName() {
         return transferTypeName;
     }
@@ -669,5 +671,23 @@ public class SurveyRiskCaseInfoExportDto {
 
     public void setInsureName(String insureName) {
         this.insureName = insureName;
+    }
+
+    private String departmentNameCopy;
+
+    public String getDepartmentNameCopy() {
+        return departmentNameCopy;
+    }
+
+    public void setDepartmentNameCopy(String departmentNameCopy) {
+        this.departmentNameCopy = departmentNameCopy;
+    }
+
+    public String getMainInsurance() {
+        return mainInsurance;
+    }
+
+    public void setMainInsurance(String mainInsurance) {
+        this.mainInsurance = mainInsurance;
     }
 }

@@ -358,6 +358,13 @@ public class SFTPUtils {
                     e.printStackTrace();
                 }
             }
+            if (sftp != null){
+                try {
+                    sftp.disconnect();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return false;
     }

@@ -437,6 +437,7 @@
                                 <div class="icon-add v-p-upload"></div>
                             </div>
                         </div>
+                        <span style="color: red;">注：请把出差申请/工作请示附在此处</span>
                     </div>
                 </div>
             </div>
@@ -470,6 +471,7 @@
             <div class="i-tbody">
 
             </div>
+            <div style="color: red;">按发票选费用类型</div>
         </div>
     </div>
     <div class="content-bar" style="margin-left: 100px;"><span style="font-weight: bold">合计大写：<span id="sumMoneyBlock">零元</span></span></div>

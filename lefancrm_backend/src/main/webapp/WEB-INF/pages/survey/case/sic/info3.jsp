@@ -1010,7 +1010,7 @@
                         </c:if>
                         <td ><pre style="background-color:rgba(0, 0, 0, 0);border:dashed 0px #fff; font-size: 14px;white-space: pre-wrap; word-wrap: break-word;">${item.directionText}</pre></td>
                         <td align="center"><a href="javascript:void(0);" onclick="directionFiles(${item.id},'directionFiles','${dto.surveyRiskCaseInfo.surveyCno}')">查看附件(${item.directionFilesSize})</a>
-                            <br/> <c:if test="${item.materRaw == 1}"><span style="color: #ff0000">有原件</span></c:if>
+                            <br/> <c:if test="${item.materRaw == 1}"><span style="color: #ff0000">有原件(${item.materRawNumber}页)</span></c:if>
                         </td>
 <%--                        <c:if test="${dto.showExpenseReimbursementValue || dto.showBaoSi}">--%>
 <%--                            <td align="center">${item.expenseReimbursementValue==null?0: item.expenseReimbursementValue}</td>--%>

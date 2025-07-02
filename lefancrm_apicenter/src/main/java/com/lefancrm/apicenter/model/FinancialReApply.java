@@ -109,13 +109,12 @@ public class FinancialReApply {
 
     private Long payUserId;
 
+
     private String socialSecurityCompany; //打印每刻报表的
 
     private String organ;//打印每刻报表的
 
     private String budgetCompanyName;//打印每刻报表的
-
-
 
     public Long getId() {
         return id;
@@ -565,6 +564,7 @@ public class FinancialReApply {
         this.cwzjRole = cwzjRole;
     }
 
+
     public String getSocialSecurityCompany() {
         return socialSecurityCompany;
     }
@@ -576,6 +576,7 @@ public class FinancialReApply {
     public String getOrgan() {
         return organ;
     }
+
 
     public void setOrgan(String organ) {
         this.organ = organ;

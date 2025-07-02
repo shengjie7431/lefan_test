@@ -148,6 +148,8 @@ public class SurveyCaseDirection {
 
     private Integer materRaw;
 
+    private Integer materRawNumber;
+
     public Long getId() {
         return id;
     }
@@ -770,5 +772,13 @@ public class SurveyCaseDirection {
 
     public void setMaterRaw(Integer materRaw) {
         this.materRaw = materRaw;
+    }
+
+    public Integer getMaterRawNumber() {
+        return materRawNumber;
+    }
+
+    public void setMaterRawNumber(Integer materRawNumber) {
+        this.materRawNumber = materRawNumber;
     }
 }

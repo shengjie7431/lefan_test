@@ -76,6 +76,7 @@
         <result column="org_point" property="orgPoint" jdbcType="INTEGER" />
         <result column="evaluate" property="evaluate" jdbcType="INTEGER" />
         <result column="mater_raw" property="materRaw" jdbcType="INTEGER" />
+        <result column="mater_raw_number" property="materRawNumber" jdbcType="INTEGER" />
     </resultMap>
     <sql id="Base_Column_List" >
     id, direction_name, direction_text, survey_investigator_case_id, task_id, task_name,
@@ -89,7 +90,7 @@
     attr3_obj, attr4_name1, attr4_remark1, attr4_name2, attr4_remark2, sun, sun_remark,
     have_reimbursement, survey_assorg_case_id, have_file, have_sound, his_score, channel_fee_cur,
     channel_fee_sent, sort, invalid_state, channel_type, acc_money, acc_score, score_rate,
-    clock_id, address_x, address_y, org_point, evaluate, mater_raw
+    clock_id, address_x, address_y, org_point, evaluate, mater_raw,mater_raw_number
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
         select
@@ -130,7 +131,7 @@
         invalid_state, channel_type, acc_money,
         acc_score, score_rate, clock_id,
         address_x, address_y, org_point,
-        evaluate, mater_raw)
+        evaluate, mater_raw,mater_raw_number)
         values (#{directionName,jdbcType=VARCHAR}, #{directionText,jdbcType=VARCHAR}, #{surveyInvestigatorCaseId,jdbcType=BIGINT},
         #{taskId,jdbcType=BIGINT}, #{taskName,jdbcType=VARCHAR}, #{surveyId,jdbcType=BIGINT},
         #{surveyInfoId,jdbcType=BIGINT}, #{surveyMoney,jdbcType=DOUBLE}, #{entrustMoney,jdbcType=DOUBLE},
@@ -156,7 +157,7 @@
         #{invalidState,jdbcType=INTEGER}, #{channelType,jdbcType=INTEGER}, #{accMoney,jdbcType=DOUBLE},
         #{accScore,jdbcType=DOUBLE}, #{scoreRate,jdbcType=DOUBLE}, #{clockId,jdbcType=BIGINT},
         #{addressX,jdbcType=BIGINT}, #{addressY,jdbcType=BIGINT}, #{orgPoint,jdbcType=INTEGER},
-        #{evaluate,jdbcType=INTEGER}, #{materRaw,jdbcType=INTEGER})
+        #{evaluate,jdbcType=INTEGER}, #{materRaw,jdbcType=INTEGER}, #{materRawNumber,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyCaseDirection" >
         <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -383,6 +384,9 @@
             <if test="materRaw != null" >
                 mater_raw,
             </if>
+            <if test="materRawNumber != null" >
+                mater_raw_number,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="directionName != null" >
@@ -603,6 +607,9 @@
             </if>
             <if test="materRaw != null" >
                 #{materRaw,jdbcType=INTEGER},
+            </if>
+            <if test="materRawNumber != null" >
+                #{materRawNumber,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -828,6 +835,9 @@
             <if test="materRaw != null" >
                 mater_raw = #{materRaw,jdbcType=INTEGER},
             </if>
+            <if test="materRawNumber != null" >
+                mater_raw = #{materRawNumber,jdbcType=INTEGER},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -905,7 +915,8 @@
       address_y = #{addressY,jdbcType=BIGINT},
       org_point = #{orgPoint,jdbcType=INTEGER},
       evaluate = #{evaluate,jdbcType=INTEGER},
-      mater_raw = #{materRaw,jdbcType=INTEGER}
+      mater_raw = #{materRaw,jdbcType=INTEGER},
+      mater_raw_number = #{materRawNumber,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
@@ -921,7 +932,7 @@
     d.attr3_obj, d.attr4_name1, d.attr4_remark1, d.attr4_name2, d.attr4_remark2, d.sun, d.sun_remark,
     d.have_reimbursement, d.survey_assorg_case_id, d.have_file, d.have_sound, d.his_score, d.channel_fee_cur,
     d.channel_fee_sent, d.sort, d.invalid_state,d.channel_type,d.acc_money,d.acc_score,d.score_rate,d.clock_id,
-    d.address_x, d.address_y, d.org_point, d.evaluate,d.mater_raw
+    d.address_x, d.address_y, d.org_point, d.evaluate,d.mater_raw,d.mater_raw_number
   </sql>
     <sql id="joins">
 
@@ -1894,7 +1905,7 @@
         select
         a.direction_name as directionName,a.entrust_money as EntrustMoney, a.survey_info_id as surveyInfoId, a.province as province,
         (CASE a.area_type WHEN 1 THEN (CASE a.region_type WHEN 5 THEN 0 ELSE 1 END) ELSE a.area_type END) areaType,
-        a.direction_result_type_name directionResultTypeName,a.medical_number medicalNumber
+        a.direction_result_type_name directionResultTypeName,a.medical_number medicalNumber,a.mater_raw materRaw,a.mater_raw_number materRawNumber
         from survey_case_direction a
         where a.delete_flag = 0 and a.invalid_state = 0 and a.survey_info_id in
         <foreach item="item" index="index" collection="list" open="(" separator="," close=")">

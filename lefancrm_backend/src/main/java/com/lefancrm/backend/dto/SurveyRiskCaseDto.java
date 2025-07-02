@@ -550,7 +550,8 @@ public class SurveyRiskCaseDto {
     }
 
 
-    //    主险代码
+
+      //    主险代码
     private String mainInsurance;
 
     public String getMainInsurance() {
@@ -559,5 +560,4 @@ public class SurveyRiskCaseDto {
     public void setMainInsurance(String mainInsurance) {
         this.mainInsurance = mainInsurance;
     }
-    
 }

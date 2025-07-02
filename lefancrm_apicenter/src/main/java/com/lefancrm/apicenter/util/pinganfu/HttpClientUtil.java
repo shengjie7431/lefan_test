@@ -3,7 +3,6 @@ package com.lefancrm.apicenter.util.pinganfu;
 import org.apache.http.Consts;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -37,6 +36,7 @@ import java.util.Map;
  * @date 2017年12月6日上午10:38:24
  */
 public class HttpClientUtil {
+
     private static final Logger logger = LoggerFactory.getLogger(HttpClientUtil.class);
 
     public static final Charset CHARSET_ISO8859_1 = Charset

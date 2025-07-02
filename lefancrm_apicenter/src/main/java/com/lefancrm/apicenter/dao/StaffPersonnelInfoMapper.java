@@ -43,9 +43,9 @@ public interface StaffPersonnelInfoMapper {
     int updateStaffStateByPaySlip(Long staffPaySlipId);
 
     List<StaffPersonnelInfo> selectListByOrgId(Long id);
-
-
+    // 在更新机构的绩效发放类型时将用户表中绩效发放数据一起更改
     void updateByOrganKey(Map objectObjectHashMap);
 
     StaffPersonnelInfo detail(String applyUserName);
+
 }

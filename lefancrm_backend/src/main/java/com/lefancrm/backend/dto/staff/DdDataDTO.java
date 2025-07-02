@@ -35,6 +35,8 @@ public class DdDataDTO {
     private String companyBirthInsurance;
     private String companyInjuryInsurance;
 
+    private String butie;
+
     public String getJobNo() {
         return jobNo;
     }
@@ -267,6 +269,14 @@ public class DdDataDTO {
         this.otherCutPay = otherCutPay;
     }
 
+    public String getButie() {
+        return butie;
+    }
+
+    public void setButie(String butie) {
+        this.butie = butie;
+    }
+
     @Override
     public String toString() {
         return "DdDataDTO{" +
@@ -281,14 +291,25 @@ public class DdDataDTO {
                 ", individualTaxChange='" + individualTaxChange + '\'' +
                 ", remarks='" + remarks + '\'' +
                 ", companySickSubsidy='" + companySickSubsidy + '\'' +
-                ", socialRemark='" + socialRemark + '\'' +
-                ", serviceFee='" + serviceFee + '\'' +
-                ", disabilityInsurance='" + disabilityInsurance + '\'' +
                 ", personalSickSubsidy='" + personalSickSubsidy + '\'' +
+                ", disabilityInsurance='" + disabilityInsurance + '\'' +
+                ", serviceFee='" + serviceFee + '\'' +
+                ", socialRemark='" + socialRemark + '\'' +
                 ", welfarePay='" + welfarePay + '\'' +
                 ", welfareRemark='" + welfareRemark + '\'' +
                 ", otherCutPay='" + otherCutPay + '\'' +
                 ", otherCutRemarks='" + otherCutRemarks + '\'' +
+                ", conpanyFundMoney='" + conpanyFundMoney + '\'' +
+                ", personalFundMoney='" + personalFundMoney + '\'' +
+                ", companyPensionBenefits='" + companyPensionBenefits + '\'' +
+                ", personalPensionBenefits='" + personalPensionBenefits + '\'' +
+                ", companyMedicalInsurance='" + companyMedicalInsurance + '\'' +
+                ", personalMedicalInsurance='" + personalMedicalInsurance + '\'' +
+                ", companyUnemploymentInsurance='" + companyUnemploymentInsurance + '\'' +
+                ", personalUnemploymentInsurance='" + personalUnemploymentInsurance + '\'' +
+                ", companyBirthInsurance='" + companyBirthInsurance + '\'' +
+                ", companyInjuryInsurance='" + companyInjuryInsurance + '\'' +
+                ", butie='" + butie + '\'' +
                 '}';
     }
 }

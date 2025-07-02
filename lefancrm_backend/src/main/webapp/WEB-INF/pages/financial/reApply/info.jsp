@@ -901,7 +901,8 @@
                 if(_this.attr("data-id") == '5'){
                     Object.assign(params,{
                         zhuan: 'commit',
-                        btnCode : state == 2 ? 'organManager-step' : state == 3 ? "superiorManager-step" : state == 4 ? 'finance-step' : state == 5 ? "financeManage-step" : state == 6 ? 'ceo-step' : state == 66 ? "lefan-step" : ""
+                        btnCode : state == 2 ? 'organManager-step' : state == 3 ? "superiorManager-step" : state == 4 ?
+                            'finance-step' : state == 5 ? "financeManage-step" : state == 6 ? 'ceo-step' : state == 66 ? "lefan-step" : state == 55 ? "cwzj-step" : ""
                     })
                 }
                 var params = {

@@ -87,8 +87,6 @@ public class SurveyPayInfoDto {
 
     private String socialSecurityCompany;
 
-
-
     private Long organId;
 
     private String organ;
@@ -560,27 +558,4 @@ public class SurveyPayInfoDto {
     public void setCostBears(List<FinancialCostBearDto> costBears) {
         this.costBears = costBears;
     }
-
-    private Long CompanyId;
-
-    public Long getCompanyId() {
-        return CompanyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        CompanyId = companyId;
-    }
-
-    private String CompanyName;
-
-
-    public String getCompanyName() {
-        return CompanyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        CompanyName = companyName;
-    }
-
-
 }

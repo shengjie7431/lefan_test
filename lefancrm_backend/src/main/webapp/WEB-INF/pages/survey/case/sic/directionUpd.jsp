@@ -657,6 +657,13 @@
                         <div class="label-bar <c:if test="${direction.materRaw ==0}">active</c:if>" data-id="0">无</div>
                     </div>
                 </div>
+
+            </div>
+            <div class="cell">
+                <div class="label">材料页数</div>
+                <div class="value">
+                    <input  type="number" id="materRawNumber" name="materRawNumber" value="${direction.materRawNumber}"/>
+                </div>
             </div>
             <div class="cell">
                 <div class="label">是否阳性</div>
@@ -943,6 +950,13 @@ $(document).ready(function(){
 
                 if (!$("#surveyReason").val() || $("#surveyReason").val() == $("#directionName").val()) {
                     alert("调查依据不可和方向名称相同且调查依据必填");return false;
+                }
+                var materRaw = $("#materRaw").attr("data-value");
+                if (materRaw == 1){
+                    //
+                    if($("#materRawNumber").val() <= 0){
+                        alert("材料原件不能为0");return false;
+                    }
                 }
 
                 if(btnCode == 'upload' || btnCode == 'primary'){

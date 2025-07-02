@@ -48,6 +48,7 @@
                 <th width="100">机构经理</th>
                 <th width="100">上级分管总</th>
                 <th width="100">机构属性</th>
+                <th width="100">绩效发放方式</th>
                 <th width="100">状态</th>
                 <th width="150">操作</th>
             </tr>
@@ -63,6 +64,10 @@
                         <c:if test="${item.organAttribute == 2}">后援管理</c:if>
                         <c:if test="${item.organAttribute == 3}">业务管理部门</c:if>
                         <c:if test="${item.organAttribute == 4}">业务销售</c:if>
+                    </td>
+                    <td>
+                        <c:if test="${item.performance == 0}">绩效发放</c:if>
+                        <c:if test="${item.performance == 1}">工资条发放</c:if>
                     </td>
                    <%-- <td>${item.organProductName}</td>--%>
                     <c:if test="${item.state==0}">

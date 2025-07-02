@@ -114,6 +114,7 @@ public interface SurveyRiskCaseInfoMapper {
     int updateEntrustMoney(@Param("successData") List<SurveyCaseXHB> successData);
 
     List<SurveyRiskCaseInfoDto> listByIds(@Param("surveyInfoIds") List<Long> surveyInfoIds);
+    
+    void updatePerformanceStatePerson(Map map);
 
-    void updatePerformanceStatePerson(Map<String, Object> map);
 }

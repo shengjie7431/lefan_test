@@ -84,7 +84,6 @@
             <input type="hidden" name="sourceSupportTypes" id="sourceSupportTypes" />
             <input type="hidden" name="payStates" id="payStates" />
             <input type="hidden" name="companyIds" id="companyIds" />
-            <input type="hidden" name="budCompanyIds" id="budCompanyIds" />
             <input type="hidden" name="organIds" id="organIds" />
             <input type="hidden" name="departmentIds" id="departmentIds" />
             <input type="hidden" name="teamIds" id="teamIds" />
@@ -111,20 +110,10 @@
                 </div>
             </div>--%>
             <div class="form-group">
-                社保缴纳公司:
+                公司:
                 <div>
                     <select class="select form-control select-checkbox" name="companyIdsChk" data-select-name="companyIds" data-select-values="${companyIds}" multiple >
                         <c:forEach items="${companys}" var="item">
-                            <option value="${item.id}" >${item.name}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                成本归属公司:
-                <div>
-                    <select class="select form-control select-checkbox" name="budCompanyIdsChk" data-select-name="budCompanyIds" data-select-values="${budCompanyIds}" multiple >
-                        <c:forEach items="${budCompanys}" var="item">
                             <option value="${item.id}" >${item.name}</option>
                         </c:forEach>
                     </select>
@@ -245,9 +234,9 @@
             <div class="btn-group">
                 <button id="batchOperateBtn" type="submit" class="btn btn-default">查询</button>&nbsp; &nbsp;
                 <button id="payMore" type="button" class="btn btn-default">批量付款</button>&nbsp; &nbsp;
-                <button class="btn btn-default"><a class="exportUrl" href="${ctx}/survey/pay/export?payNo=${payNo}&realName=${realName}&orgId=${orgId}&payState=${payState}&sourceSupportType=${sourceSupportType}&startCreateDate=${startCreateDate}&endCreateDate=${endCreateDate}&startPayTime=${startPayTime}&endPayTime=${endPayTime}&menuCode=${menuCode}&surveyOrgIds=${surveyOrgIds}&sourceSupportTypes=${sourceSupportTypes}&payStates=${payStates}&companyIds=${companyIds}&organIds=${organIds}&departmentIds=${departmentIds}&teamIds=${teamIds}&jobPostIds=${jobPostIds}&payTypes=${payTypes}&budCompanyIds=${budCompanyIds}">导出</a></button>
-                <button class="btn btn-default"><a class="exportUrl" href="${ctx}/survey/pay/export?payNo=${payNo}&realName=${realName}&orgId=${orgId}&payState=${payState}&sourceSupportType=${sourceSupportType}&startCreateDate=${startCreateDate}&endCreateDate=${endCreateDate}&startPayTime=${startPayTime}&endPayTime=${endPayTime}&menuCode=${menuCode}&surveyOrgIds=${surveyOrgIds}&sourceSupportTypes=${sourceSupportTypes}&payStates=${payStates}&companyIds=${companyIds}&organIds=${organIds}&departmentIds=${departmentIds}&teamIds=${teamIds}&jobPostIds=${jobPostIds}&payTypes=${payTypes}&exportNew=yes&budCompanyIds=${budCompanyIds}">导出(新)</a></button>
-                <button class="btn btn-default"><a class="exportUrl" href="${ctx}/survey/pay/export?payNo=${payNo}&realName=${realName}&orgId=${orgId}&payState=${payState}&sourceSupportType=${sourceSupportType}&startCreateDate=${startCreateDate}&endCreateDate=${endCreateDate}&startPayTime=${startPayTime}&endPayTime=${endPayTime}&menuCode=${menuCode}&surveyOrgIds=${surveyOrgIds}&sourceSupportTypes=${sourceSupportTypes}&payStates=${payStates}&companyIds=${companyIds}&organIds=${organIds}&departmentIds=${departmentIds}&teamIds=${teamIds}&jobPostIds=${jobPostIds}&payTypes=${payTypes}&exportNew=yesPrint&budCompanyIds=${budCompanyIds}">批量打印</a></button>
+                <button class="btn btn-default"><a class="exportUrl" href="${ctx}/survey/pay/export?payNo=${payNo}&realName=${realName}&orgId=${orgId}&payState=${payState}&sourceSupportType=${sourceSupportType}&startCreateDate=${startCreateDate}&endCreateDate=${endCreateDate}&startPayTime=${startPayTime}&endPayTime=${endPayTime}&menuCode=${menuCode}&surveyOrgIds=${surveyOrgIds}&sourceSupportTypes=${sourceSupportTypes}&payStates=${payStates}&companyIds=${companyIds}&organIds=${organIds}&departmentIds=${departmentIds}&teamIds=${teamIds}&jobPostIds=${jobPostIds}&payTypes=${payTypes}">导出</a></button>
+                <button class="btn btn-default"><a class="exportUrl" href="${ctx}/survey/pay/export?payNo=${payNo}&realName=${realName}&orgId=${orgId}&payState=${payState}&sourceSupportType=${sourceSupportType}&startCreateDate=${startCreateDate}&endCreateDate=${endCreateDate}&startPayTime=${startPayTime}&endPayTime=${endPayTime}&menuCode=${menuCode}&surveyOrgIds=${surveyOrgIds}&sourceSupportTypes=${sourceSupportTypes}&payStates=${payStates}&companyIds=${companyIds}&organIds=${organIds}&departmentIds=${departmentIds}&teamIds=${teamIds}&jobPostIds=${jobPostIds}&payTypes=${payTypes}&exportNew=yes">导出(新)</a></button>
+                <button class="btn btn-default"><a class="exportUrl" href="${ctx}/survey/pay/export?payNo=${payNo}&realName=${realName}&orgId=${orgId}&payState=${payState}&sourceSupportType=${sourceSupportType}&startCreateDate=${startCreateDate}&endCreateDate=${endCreateDate}&startPayTime=${startPayTime}&endPayTime=${endPayTime}&menuCode=${menuCode}&surveyOrgIds=${surveyOrgIds}&sourceSupportTypes=${sourceSupportTypes}&payStates=${payStates}&companyIds=${companyIds}&organIds=${organIds}&departmentIds=${departmentIds}&teamIds=${teamIds}&jobPostIds=${jobPostIds}&payTypes=${payTypes}&exportNew=yesPrint">批量打印</a></button>
 
             </div>
         </form>
@@ -266,8 +255,7 @@
             <%--<th style="min-width:200px">调查机构</th>
             <th style="min-width:120px">调查员</th>--%>
 <%--            <th style="min-width:100px">案源机构</th>--%>
-            <th style="min-width:120px">社保缴纳公司</th>
-            <th style="min-width:120px">成本归属公司</th>
+            <th style="min-width:120px">公司</th>
             <th style="min-width:120px">机构/部门</th>
             <th style="min-width:100px">收款人姓名</th>
             <th style="min-width:100px">银行名称</th>
@@ -340,7 +328,6 @@
 <%--                <c:if test="${item.sourceSupportType == 4}">正言</c:if>--%>
 <%--            </td>--%>
             <td>${item.socialSecurityCompany}</td>
-            <td>${item.companyName != null ? item.companyName : ''}</td>
             <td>${item.organ}</td>
             <td>
                 <c:if test="${item.payType==null || item.payType==1}">${item.surveyFranchisee.acceptUser}</c:if>
@@ -413,7 +400,7 @@
     <jsp:include page="/WEB-INF/pages/common/pagination.jsp" flush="true">
         <jsp:param name="paginationObjectName" value="apiRsp" />
         <jsp:param name="pageNoName" value="" />
-        <jsp:param name="requestUrl" value="${ctx}/survey/pay/list?payNo=${payNo}&orgId=${orgId}&payState=${payState}&sourceSupportType=${sourceSupportType}&startCreateDate=${startCreateDate}&endCreateDate=${endCreateDate}&startPayTime=${startPayTime}&endPayTime=${endPayTime}&menuCode=${menuCode}&surveyOrgIds=${surveyOrgIds}&sourceSupportTypes=${sourceSupportTypes}&payStates=${payStates}&companyIds=${companyIds}&organIds=${organIds}&departmentIds=${departmentIds}&teamIds=${teamIds}&jobPostIds=${jobPostIds}&payTypes=${payTypes}&realName=${realName}&budCompanyIds=${budCompanyIds}" />
+        <jsp:param name="requestUrl" value="${ctx}/survey/pay/list?payNo=${payNo}&orgId=${orgId}&payState=${payState}&sourceSupportType=${sourceSupportType}&startCreateDate=${startCreateDate}&endCreateDate=${endCreateDate}&startPayTime=${startPayTime}&endPayTime=${endPayTime}&menuCode=${menuCode}&surveyOrgIds=${surveyOrgIds}&sourceSupportTypes=${sourceSupportTypes}&payStates=${payStates}&companyIds=${companyIds}&organIds=${organIds}&departmentIds=${departmentIds}&teamIds=${teamIds}&jobPostIds=${jobPostIds}&payTypes=${payTypes}&realName=${realName}" />
         <jsp:param name="refreshDiv" value="" />
     </jsp:include>
 </div><!--main-bottom-->
@@ -538,7 +525,7 @@ layui.use(['layer','laydate','jquery'],function () {
                         }else {
                             layer.msg(res.msg,{icon: 2});
                         }
-                        location.href='${ctx}/survey/pay/list?payNo=${payNo}&orgId=${orgId}&payState=${payState}&sourceSupportType=${sourceSupportType}&startCreateDate=${startCreateDate}&endCreateDate=${endCreateDate}&startPayTime=${startPayTime}&endPayTime=${endPayTime}&menuCode=${menuCode}&surveyOrgIds=${surveyOrgIds}&sourceSupportTypes=${sourceSupportTypes}&payStates=${payStates}&companyIds=${companyIds}&organIds=${organIds}&departmentIds=${departmentIds}&teamIds=${teamIds}&jobPostIds=${jobPostIds}&payTypes=${payTypes}&budCompanyIds=${budCompanyIds}';
+                        location.href='${ctx}/survey/pay/list?payNo=${payNo}&orgId=${orgId}&payState=${payState}&sourceSupportType=${sourceSupportType}&startCreateDate=${startCreateDate}&endCreateDate=${endCreateDate}&startPayTime=${startPayTime}&endPayTime=${endPayTime}&menuCode=${menuCode}&surveyOrgIds=${surveyOrgIds}&sourceSupportTypes=${sourceSupportTypes}&payStates=${payStates}&companyIds=${companyIds}&organIds=${organIds}&departmentIds=${departmentIds}&teamIds=${teamIds}&jobPostIds=${jobPostIds}&payTypes=${payTypes}';
                     }
 
                 })

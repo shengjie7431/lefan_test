@@ -2,7 +2,6 @@ package com.lefancrm.backend.web;
 
 import com.google.gson.reflect.TypeToken;
 import com.lefancrm.backend.dto.BusUserRoleDto;
-import com.lefancrm.backend.dto.SurveyPayInfoDto;
 import com.lefancrm.backend.dto.UserInfo;
 import com.lefancrm.base.constants.Constant;
 import com.lefancrm.base.dto.ApiFinalResponse;
@@ -190,7 +189,4 @@ public class BackendBaseController {
 		}
 		return false;
 	}
-
-
-
 }

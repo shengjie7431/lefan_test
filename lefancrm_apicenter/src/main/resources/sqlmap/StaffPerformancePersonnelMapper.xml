@@ -1172,7 +1172,7 @@
       where
       DATE_FORMAT(p.entry_time,'%Y-%m') &lt; DATE_FORMAT(#{entryTime,jdbcType=DATE},'%Y-%m')
       and p.staff_state != 6 and p.delete_flag = 0 and p.relation != 5 and p.relation != 6
-      and p.performance=0
+      and p.performance = #{performance,jdbcType=BIGINT}
       group by p.id
     ) a
   </insert>
@@ -1643,12 +1643,12 @@
         insert into survey_pay_info (pay_no, app_pay_money, app_start_date, app_end_date,
             pay_state, create_user_id, create_time, create_by,
             delete_flag, pay_type, user_id, real_name, staff_personnel_id, social_security_company_id, social_security_company,
-            organ_id, organ, department_id, department, team_id, team, pay_key_id, job_post_id,job_post,company_id,company_name)
+            organ_id, organ, department_id, department, team_id, team, pay_key_id, job_post_id,job_post)
         select * from (
             select CONCAT('JX',(NOW() + (@a :=@a + 1))), p.real_pay,  now() as startDate, now() as endDate, 1 as payState,
                 #{currUserId,jdbcType=BIGINT} as createUserId, now() as createTime, #{currUserName,jdbcType=VARCHAR} as createBy, 0 as deleteFlag, 5 as payType,
                 p.user_id as userId, p.real_name as realName, p.staff_personnel_id, p.social_security_company_id, p.social_security_company,
-                p.organ_id, p.organ, p.department_id, p.department, p.team_id, p.team, p.id, p.job_post_id, p.job_post,p.company_id,p.company
+                p.organ_id, p.organ, p.department_id, p.department, p.team_id, p.team, p.id, p.job_post_id, p.job_post
             from staff_performance_personnel p,(SELECT @a := 0) a
             where p.staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT} and p.delete_flag = 0
         ) a

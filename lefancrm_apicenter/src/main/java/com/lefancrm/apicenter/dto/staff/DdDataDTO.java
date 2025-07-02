@@ -266,4 +266,14 @@ public class DdDataDTO {
     public void setWelfareRemark(String welfareRemark) {
         this.welfareRemark = welfareRemark;
     }
+
+    private String butie;
+
+    public String getButie() {
+        return butie;
+    }
+
+    public void setButie(String butie) {
+        this.butie = butie;
+    }
 }

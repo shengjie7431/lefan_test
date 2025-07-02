@@ -107,6 +107,9 @@ public class BackendStaffPaySlipApiImpl  extends BaseServiceImpl implements Back
     @Autowired
     private StaffAuthOrgMapper staffAuthOrgMapper;
 
+    @Autowired
+    private SurveyRiskCaseInfoMapper surveyRiskCaseInfoMapper;
+
     @ApiMethod(descript = "工资列表",value = "staff-pay-slip-list")
     @Override
     public ApiResponse list(ApiRequest apiRequest) {
@@ -579,6 +582,15 @@ public class BackendStaffPaySlipApiImpl  extends BaseServiceImpl implements Back
 
                     //条件1、离职待结算；条件2、合伙的 ，这些人员工资条完成之后 自动更新为已离职
                     staffPersonnelInfoMapper.updateStaffStateByPaySlip(staffPaySlip.getId());
+
+                    //更新案件的结算绩效状态
+                    map = new HashMap<>();
+                    map.put("workTime",staffPaySlip.getWorkTime());
+                    map.put("oldPerformanceState",1);// 结算绩效的状态 （0、未结算；1、结算中；2、已结算）
+                    map.put("newPerformanceState",2);
+                    map.put("performanceId",staffPaySlip.getId());//工资ID
+                    map.put("staffType","payslip");//绩效id
+                    surveyRiskCaseInfoMapper.updatePerformanceState(map);
                     break;
                 case "no" :
                     staffPaySlip.setSlipState(3);
@@ -713,6 +725,16 @@ public class BackendStaffPaySlipApiImpl  extends BaseServiceImpl implements Back
             staffPaySlipMapper.updateByPrimaryKey(staffPaySlip);
             //同步删除明细
             staffPayPersonnelSlipMapper.deleteByStaffPaySlipId(staffPaySlip.getId());
+
+            //同时释放案件状态
+            Map map = new HashMap<>();
+            map.put("workTime",staffPaySlip.getWorkTime());
+            map.put("oldPerformanceState",1);// 结算绩效的状态 （0、未结算；1、结算中；2、已结算）
+            map.put("newPerformanceState",0);
+            map.put("performanceId",staffPaySlip.getId());//绩效id
+            map.put("delStaffPerformanceId",1);//删除绩效id
+            map.put("staffType","payslip");//绩效id
+            surveyRiskCaseInfoMapper.updatePerformanceState(map);
         }else if("passWord".equals(btnCode)){ //校准密码
             String passWord = apiRequest.getString("queryPassword");
             if(passWord.equals(staffPaySlip.getQueryPassword())){
@@ -1265,6 +1287,15 @@ public class BackendStaffPaySlipApiImpl  extends BaseServiceImpl implements Back
             errorMessage = errorMessage + "员工福利有误；";isReturn = true;
         }
         slip.setWelfareRemark(data.getWelfareRemark());//员工福利备注
+
+
+        isNumber = pattern.matcher(data.getButie()).matches(); //补贴
+        if(isNumber){
+            money= Math.abs(convertDouble(data.getButie()));
+            slip.setOfficeSubsidies(money);
+        }else{
+            errorMessage = errorMessage + "补贴有误；";isReturn = true;
+        }
 
         //各种计算在内
         slip = returnSlip(staffPersonnelInfo, slip,true);
@@ -2106,7 +2137,8 @@ public class BackendStaffPaySlipApiImpl  extends BaseServiceImpl implements Back
             });
             slips = slips.stream().filter(p -> !p.getWorkTime().equals(nowYearMonth)).collect(Collectors.toList());//不包括本月
             Double totalGrossPay = 0D, totalIndividual = 0D,totalIndividualChange = 0D;//累计税前工资 or  累计个税合计 累计个税调整
-            totalGrossPay = slips.stream().mapToDouble(StaffPayPersonnelSlip :: getGrossPay).sum() + slip.getGrossPay();//累计税前工资（含当月）
+//            Integer totalMonth = slips.stream().filter(e -> staffPersonnelInfo.getSocialSecurityCompanyId().toString().equals(e.getSocialSecurityCompanyId().toString())).collect(Collectors.toList()).size() + 1;
+            totalGrossPay = slips.stream().filter(e -> staffPersonnelInfo.getSocialSecurityCompanyId().toString().equals(e.getSocialSecurityCompanyId().toString())).mapToDouble(StaffPayPersonnelSlip :: getGrossPay).sum() + slip.getGrossPay();//累计税前工资（含当月）
             totalIndividual = slips.stream().mapToDouble(StaffPayPersonnelSlip :: getTotalIndividual).sum();
             totalIndividualChange = slips.stream().mapToDouble(StaffPayPersonnelSlip :: getTotalIndividualChange).sum();
 
@@ -2118,6 +2150,7 @@ public class BackendStaffPaySlipApiImpl  extends BaseServiceImpl implements Back
             if (slipDate.getYear() == year){//说明是本年度入职  本年度入职取的累计月份含当月
                 totalMonth = totalMonth - tempEntryTime.getMonthValue() + 1;
             }
+            //totalMonth 等于累计税前工资计算的月份；
             slip.setIndividualTax(getIndividualTax(totalGrossPay,totalIndividual,totalIndividualChange,totalMonth));//获取个人所得税
             if (slip.getIndividualTax() < 0){
                 slip.setIndividualTax(0D);

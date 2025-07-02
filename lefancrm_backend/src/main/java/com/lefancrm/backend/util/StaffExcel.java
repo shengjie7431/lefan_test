@@ -52,7 +52,9 @@ public class StaffExcel {
                 Double num1 = Double.parseDouble(excel.convert(row.getCell(2)));//迟到
                 Double num2 = Double.parseDouble(excel.convert(row.getCell(3)));//早退
                 ddDataDTO.setLateDays(new DecimalFormat("0").format(num1 + num2));//迟到 + 早退
-                ddDataDTO.setAbsentDays(excel.convert(row.getCell(4))); //旷工天数
+                ddDataDTO.setAbsentDays("0"); //旷工天数
+                //2025年6月5日   矿工天数改成了补贴
+                ddDataDTO.setButie(excel.convert(row.getCell(4)));
                 ddDataDTO.setLeaveDays(excel.convert(row.getCell(5)));  //事假
                 ddDataDTO.setSickTIme(excel.convert(row.getCell(6)));   //病假
                 ddDataDTO.setOvertimePay(excel.convert(row.getCell(7)));//加班工资
@@ -459,7 +461,7 @@ public class StaffExcel {
                     case "合伙+兼职" : infoDTO.setRelation(6); break;
                     case "合伙（发固定绩效）" :
                     case "合伙(发固定绩效)":
-                             infoDTO.setRelation(7); break;
+                        infoDTO.setRelation(7); break;
                 }
 
                 String staffStateName = excel.convert(row.getCell(22));

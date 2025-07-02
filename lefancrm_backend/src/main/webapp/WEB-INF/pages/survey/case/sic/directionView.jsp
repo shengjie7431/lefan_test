@@ -659,6 +659,12 @@
                 </div>
             </div>
             <div class="cell">
+                <div class="label">材料份数</div>
+                <div class="value">
+                    <input  type="number" id="materRawNumber" name="materRawNumber" value="${direction.materRawNumber}"/>
+                </div>
+            </div>
+            <div class="cell">
                 <div class="label">是否阳性</div>
                 <div class="value">
                     <input type="hidden" name="isSun"/>

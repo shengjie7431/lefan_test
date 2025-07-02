@@ -102,6 +102,8 @@
         <result column="performance_date" property="performanceDate" jdbcType="TIMESTAMP"/>
         <result column="performance_id" property="performanceId" jdbcType="BIGINT"/>
         <result column="handle_id" property="handleId" jdbcType="BIGINT"/>
+
+        <result column="staff_type" property="staffType" jdbcType="VARCHAR"/>
         <!--<result column="riskCaseId" property="riskCaseId" jdbcType="BIGINT" />-->
         <!--<result column="riskCaseSurveyNo" property="riskCaseSurveyNo" jdbcType="VARCHAR" />-->
         <!--<result column="riskCaseSurveyPerson" property="riskCaseSurveyPerson" jdbcType="VARCHAR" />-->
@@ -137,7 +139,7 @@
     a.source_org_id, a.source_org_name, a.source_support_type,a.org_assign,
     a.send_report_state,a.send_report_user_id,a.send_report_user_name,a.belong_user_id,a.belong_user_name,
     a.report_completion,a.use_letter_info,a.org_opr_opinion,a.org_return,a.guide,a.guide_state, a.reim_state,
-    a.case_state,a.aging_day,a.sub_service_id, a.performance_state, a.performance_date, a.performance_id,a.handle_id
+    a.case_state,a.aging_day,a.sub_service_id, a.performance_state, a.performance_date, a.performance_id,a.handle_id,a.staff_type
     </sql>
     <sql id="Base_Column_List_Join">
         a
@@ -165,7 +167,7 @@
         s.entrust_user_id as riskCaseEntrustUserId,s.entrust_user_name as riskCaseEntrustUserName,
         s.entrust_org_id as riskCaseEntrustOrgId,s.entrust_org_name as riskCaseEntrustOrgName,s.survey_case_no as surveyCaseNo,
         s.entrust_time as riskCaseEntrustTime, a.sub_service_id as subServiceId, a.performance_state as performanceState,
-        a.performance_date as performanceDate, a.performance_id as performanceId,
+        a.performance_date as performanceDate, a.performance_id as performanceId,a.staff_type staffType,
         s.department_name departmentName
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
@@ -212,7 +214,7 @@
         source_support_type, org_assign, send_report_state,
         send_report_user_id, send_report_user_name,belong_user_id,belong_user_name,
         report_completion,use_letter_info,org_opr_opinion,org_return,guide,guide_state,
-        reim_state,case_state,aging_day,sub_service_id, performance_state, performance_date, performance_id,handle_id)
+        reim_state,case_state,aging_day,sub_service_id, performance_state, performance_date, performance_id,handle_id,staff_type)
         values (#{surveyCno,jdbcType=VARCHAR}, #{surveyNo,jdbcType=VARCHAR}, #{surveyId,jdbcType=BIGINT},
         #{surveyBusId,jdbcType=BIGINT}, #{surveyBusName,jdbcType=VARCHAR}, #{servicesId,jdbcType=BIGINT},
         #{servicesName,jdbcType=VARCHAR}, #{surveyMoney,jdbcType=DOUBLE}, #{entrustMoney,jdbcType=DOUBLE},
@@ -249,7 +251,7 @@
         #{useLetterInfo,jdbcType=INTEGER},#{orgOprOpinion,jdbcType=VARCHAR}, #{orgReturn,jdbcType=INTEGER},
         #{guide,jdbcType=INTEGER},#{guideState,jdbcType=INTEGER},#{reimState,jdbcType=INTEGER},#{caseState,jdbcType=INTEGER},#{agingDay,jdbcType=INTEGER},
         #{subServiceId,jdbcType=BIGINT},#{performanceState,jdbcType=INTEGER}, #{performanceDate,jdbcType=TIMESTAMP},
-        #{performanceId,jdbcType=BIGINT},#{handleId})
+        #{performanceId,jdbcType=BIGINT},#{handleId},#{staffType})
     </insert>
     <insert id="insertSelective" parameterType="com.lefancrm.apicenter.model.SurveyRiskCaseInfo">
         <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
@@ -1926,7 +1928,8 @@
         s.cooperative_company as cooperativeCompany,s.subsidiary_company as subsidiaryCompany,s.health_insurance_company
         as healthInsuranceCompany,
         s.task_number as taskNumber,s.delegation_mode as delegationMode,s.transfer_type as
-        transferType,s.transfer_type_name as transferTypeName,s.hz_contact_name as hzContactName,s.hz_contact_tel as hzContactTel,s.insure_name as insureName,
+        transferType,s.transfer_type_name as transferTypeName,s.hz_contact_name as hzContactName,s.hz_contact_tel as hzContactTel,
+                     s.insure_name as insureName,s.main_insurance as mainInsurance,
         a.services_name as servicesName, c.org_attr as consignorOrgAttr, c.efficiency_attr as consignorEfficiencyAttr,
         a.entrust_ok_price_1 as entrustOkPrice1,b.remarkAll, t.areaType as areaType, a.services_id as servicesId,
         m.model_id as consignorModelId, s.policy_no as policyNo,
@@ -4085,8 +4088,9 @@
         </where>
     </select>
 
-    <update id="updatePerformanceState" parameterType="map">
-        update survey_risk_case_info set
+     <update id="updatePerformanceStatePerson" parameterType="map">
+        UPDATE survey_risk_case_info
+        SET
         performance_state = #{newPerformanceState,jdbcType=INTEGER}
         <if test="dateTime != null">
             ,performance_date = #{dateTime,jdbcType=TIMESTAMP}
@@ -4097,10 +4101,41 @@
         <if test="delStaffPerformanceId != null">
             ,performance_id = null
         </if>
+        WHERE
+        performance_state = #{oldPerformanceState,jdbcType=INTEGER}
+        AND date_format(entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR}
+        AND id IN (
+        SELECT sic.survey_info_id
+        FROM survey_investigator_case sic
+        WHERE sic.survey_user_id = #{userId,jdbcType=BIGINT}
+        )
+        <if test="performanceId != null">
+            AND performance_id = #{performanceId,jdbcType=BIGINT}
+        </if>
+    </update>
+
+    <update id="updatePerformanceState" parameterType="map">
+        update survey_risk_case_info set
+        performance_state = #{newPerformanceState,jdbcType=INTEGER}
+        <if test="dateTime != null">
+            ,performance_date = #{dateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="addStaffPerformanceId != null">
+            ,performance_id = #{addStaffPerformanceId,jdbcType=BIGINT}
+        </if>
+        <if test="addStaffType != null">
+            ,staff_type = #{addStaffType,jdbcType=VARCHAR}
+        </if>
+        <if test="delStaffPerformanceId != null">
+            ,performance_id = null
+        </if>
         where performance_state = #{oldPerformanceState,jdbcType=INTEGER}
         and date_format(entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR}
         <if test="performanceId != null">
             and performance_id = #{performanceId,jdbcType=BIGINT}
+        </if>
+        <if test="staffType != null">
+            and staff_type = #{staffType,jdbcType=VARCHAR}
         </if>
     </update>
 
@@ -4158,31 +4193,6 @@
         </foreach>
         ) t on r.id = t.survey_info_id
         set r.entrust_ok_price_1 = t.money,r.entrust_money = t.money where t.survey_info_id is not null
-    </update>
-    <update id="updatePerformanceStatePerson" parameterType="map">
-        UPDATE survey_risk_case_info
-        SET
-        performance_state = #{newPerformanceState,jdbcType=INTEGER}
-        <if test="dateTime != null">
-            ,performance_date = #{dateTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="addStaffPerformanceId != null">
-            ,performance_id = #{addStaffPerformanceId,jdbcType=BIGINT}
-        </if>
-        <if test="delStaffPerformanceId != null">
-            ,performance_id = null
-        </if>
-        WHERE
-        performance_state = #{oldPerformanceState,jdbcType=INTEGER}
-        AND date_format(entrust_report_end_date,'%Y-%m') &lt;= #{workTime,jdbcType=VARCHAR}
-        AND id IN (
-        SELECT sic.survey_info_id
-        FROM survey_investigator_case sic
-        WHERE sic.survey_user_id = #{userId,jdbcType=BIGINT}
-        )
-        <if test="performanceId != null">
-            AND performance_id = #{performanceId,jdbcType=BIGINT}
-        </if>
     </update>
 
 

@@ -1,8 +1,6 @@
 package com.lefancrm.backend.util;
 
-import com.aspose.words.Document;
-import com.aspose.words.License;
-import com.aspose.words.SaveFormat;
+import com.aspose.words.*;
 
 import java.io.*;
 
@@ -47,6 +45,20 @@ public class WordToPDF {
             File file = new File(outPath);
             os = new FileOutputStream(file);
             Document doc = new Document(inPath);
+            // 在转换前检查文档使用的字体
+            FontInfoCollection fonts = doc.getFontInfos();
+            for (FontInfo fontInfo : fonts) {
+                System.out.println("文档使用的字体1: " + fontInfo.getName());
+            }
+
+            FontSettings fontSettings = new FontSettings();
+            fontSettings.setFontsFolder("/usr/share/fonts/truetype/windows", true); // 指定字体目录
+            doc.setFontSettings(fontSettings);
+
+            fonts = doc.getFontInfos();
+            for (FontInfo fontInfo : fonts) {
+                System.out.println("文档使用的字体2: " + fontInfo.getName());
+            }
             doc.save(os, SaveFormat.PDF);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

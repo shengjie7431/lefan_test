@@ -92,17 +92,16 @@
   </update>
 
     <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map">
-        SELECT
-        fr.id,
-        fr.front_role_id,
-        fr.front_menu_id,
-        fr.create_time,
-        fr.update_time
-        FROM
-        front_role_menu AS fr
-        JOIN bus_user_role AS bu ON fr.front_role_id = bu.role_id
-        WHERE
-        bu.user_id = #{userId,jdbcType=BIGINT}
+      SELECT
+      fr.id,
+      fr.front_role_id,
+      fr.front_menu_id
+      FROM
+      front_role_menu AS fr
+      JOIN bus_user_role AS bu ON fr.front_role_id = bu.role_id
+      left join sys_menu m on fr.front_menu_id = m.id
+      WHERE
+      bu.user_id = #{userId,jdbcType=BIGINT} and m.is_delete = 0 and m.depth != 3
     </select>
 
 </mapper>

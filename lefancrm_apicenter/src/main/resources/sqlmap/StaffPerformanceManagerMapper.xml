@@ -166,7 +166,7 @@
         LEFT JOIN staff_organ o on p.organ_id = o.id
         where p.staff_state != 6 and p.delete_flag = 0 and p.relation != 5 and p.relation != 6
         and DATE_FORMAT(p.entry_time,'%Y-%m') &lt; DATE_FORMAT(#{entryTime,jdbcType=DATE},'%Y-%m')
-        and o.organ_manager_user_id is not null
+        and o.organ_manager_user_id is not null and o.performance = 0
         GROUP BY o.organ_manager_user_id,o.superior_manager_user_id
         ) a
     </insert>
@@ -183,7 +183,7 @@
         LEFT JOIN staff_organ o on p.organ_id = o.id
         where p.staff_state != 6 and p.delete_flag = 0 and p.relation != 5 and p.relation != 6
         and DATE_FORMAT(p.entry_time,'%Y-%m') &lt; DATE_FORMAT(#{entryTime,jdbcType=DATE},'%Y-%m')
-        and o.organ_manager_user_id is not null
+        and o.organ_manager_user_id is not null and o.performance = 0
         GROUP BY o.superior_manager_user_id
         ) a
     </insert>

@@ -60,7 +60,10 @@ public class BackendAdminApiImpl extends BaseServiceImpl implements BackendAdmin
 			return new ApiResponse(ApiMsgEnum.UserDosentExist);
 		}
         UserInfo u = this.userInfoMapper.selectByPrimaryKey(user.getUserId());
-		if (u.getDeleteFlag() == 1){
+        if (u.getUserState() == null){
+            u.setUserState(0);
+        }
+		if (u.getDeleteFlag() == 1 || u.getUserState() != 0){
             return new ApiResponse(ApiMsgEnum.UserDosentExist);
         }
 
@@ -89,6 +92,8 @@ public class BackendAdminApiImpl extends BaseServiceImpl implements BackendAdmin
                 u.setBusUserRoleIds(busUserRoles);
             }
 
+            u.setModifyTime(new Date());//记录最新的登录时间
+            userInfoMapper.updateByPrimaryKey(u);
 
         }
 		return new ApiResponse<UserInfo>(ApiMsgEnum.SUCCESS, 1, u);

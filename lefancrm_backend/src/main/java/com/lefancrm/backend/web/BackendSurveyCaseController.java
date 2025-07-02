@@ -3124,9 +3124,17 @@ public class BackendSurveyCaseController extends BackendBaseController {
         if (surveyRiskCaseInfoExportDtos.size() == 0) {
             return;
         }
+        surveyRiskCaseInfoExportDtos.forEach(e -> {
+            e.setDepartmentNameCopy(e.getDepartmentName());
+            if (e.getEntrustOrgId() == 45){//中宏一个部门生成一个sheet
+                e.setDepartmentName("中宏");
+                e.setDepartmentId(45L);
+            }
+        });
         // 创建excel
         WritableWorkbook book = null; // 创建jxl工作簿
         SurveyRiskCaseInfoExportDto dto = surveyRiskCaseInfoExportDtos.get(index);
+
 //        String departmentName =  dto.getDepartmentName() == null ? "" : dto.getDepartmentName().replace("/","-").replace("\\","-");
         String filename = dto.getEntrustOrgName() + "-" + dto.getDepartmentName() + "-" + year + "年" + month + "月" + "对账清单.xls";
         filename = filename.replace(" ", "").replace("\t", "").replace("/", "-").replace("\\", "-");
@@ -3339,27 +3347,33 @@ public class BackendSurveyCaseController extends BackendBaseController {
             int c = 0;
             if (consignorOrgAttr == 1) {
                 // 委托机构编号
-                if (entrustOrgId.intValue() == 52) {
+                if (entrustOrgId.intValue() == 52) {//太平洋健康保险股份有限公司
                     sheet.addCell(new Label(0, i, "合作公司", wcf));
                     sheet.addCell(new Label(1, i, "分公司", wcf));
                     sheet.addCell(new Label(2, i, "健康险公司", wcf));
                     sheet.addCell(new Label(3, i, "任务号", wcf));
                     c = 4;
                 }
-                if (entrustOrgId.intValue() == 67) {
+                if (entrustOrgId.intValue() == 67) {//复星联合健康保险股份有限公司
                     sheet.addCell(new Label(0, i, "委托类型", wcf));
                     sheet.addCell(new Label(1, i, "调查性质", wcf));
                     c = 2;
                 }
-                if (entrustOrgId.intValue() == 131){
+                if (entrustOrgId.intValue() == 45) {//中宏
+                    sheet.addCell(new Label(0, i, "委托人机构名称", wcf));
+                    sheet.addCell(new Label(1, i, "委托人名称", wcf));
+                    c = 2;
+                }
+                if (entrustOrgId.intValue() == 131){//同方全球人寿保险有限公司
                     sheet.addCell(new Label(0, i, "派案人", wcf));
                     sheet.addCell(new Label(1, i, "调查号", wcf));
                     sheet.addCell(new Label(2, i, "案件类型", wcf));
                     c = 3;
                 }
-                if(entrustOrgId.intValue() == 200){
+                if(entrustOrgId.intValue() == 200){//友邦人寿保险有限公司
                     sheet.addCell(new Label(0, i, "调查号", wcf));
-                    c = 1;
+                    sheet.addCell(new Label(1, i, "主险代码", wcf));
+                    c = 2;
                 }
 
                 sheet.addCell(new Label(0 + c, i, "部门", wcf));
@@ -3393,6 +3407,10 @@ public class BackendSurveyCaseController extends BackendBaseController {
                 if (entrustOrgId.intValue() == 67) {
                     sheet.addCell(new Label(j++, i, "任务结果", wcf));
                     sheet.addCell(new Label(j++, i, "区域", wcf));
+                }
+                if (entrustOrgId.intValue() == 45) {//中宏
+                    sheet.addCell(new Label(j++, i, "是否有纸质版调查资料", wcf));
+                    sheet.addCell(new Label(j++, i, "纸质版调查资料归档以及页数", wcf));
                 }
                 sheet.addCell(new Label(j++, i, "调查金额", wcf));
                 if (entrustOrgId.intValue() == 67) {
@@ -3451,6 +3469,18 @@ public class BackendSurveyCaseController extends BackendBaseController {
                     c = 2;
                 }
 
+                if (info.getEntrustOrgId().intValue() == 45) {
+                    sheet.mergeCells(i++, z, i2++, z + rowspan - 1);//跨行
+                    sheet.addCell(new Label(c++, z, info.getEntrustOrgName(), wcf));
+
+                    sheet.mergeCells(i++, z, i2++, z + rowspan - 1);//跨行
+                    sheet.addCell(new Label(c++, z, info.getEntrustUserName(), wcf));
+                    i = 2;
+                    i2 = 2;
+                    c = 2;
+                }
+
+
                 if (info.getEntrustOrgId().intValue() == 131) {
                     sheet.mergeCells(i++, z, i2++, z + rowspan - 1);//跨行
                     sheet.addCell(new Label(c++, z, StringUtils.defaultString(info.getHzContactTel()), wcf));
@@ -3468,13 +3498,16 @@ public class BackendSurveyCaseController extends BackendBaseController {
                 if (info.getEntrustOrgId().intValue() == 200) {
                     sheet.mergeCells(i++, z, i2++, z + rowspan - 1);//跨行
                     sheet.addCell(new Label(c++, z, StringUtils.defaultString(info.getHzContactName()), wcf));
-                    i = 1;
-                    i2 = 1;
-                    c = 1;
+
+                    sheet.mergeCells(i++, z, i2++, z + rowspan - 1);//跨行
+                    sheet.addCell(new Label(c++, z, StringUtils.defaultString(info.getMainInsurance()), wcf));
+                    i = 2;
+                    i2 = 2;
+                    c = 2;
                 }
 
                 sheet.mergeCells(0 + i, z, 0 + i2, z + rowspan - 1);//跨行
-                sheet.addCell(new Label(0 + c, z, StringUtils.defaultString(info.getDepartmentName()), wcf));
+                sheet.addCell(new Label(0 + c, z, StringUtils.defaultString(info.getDepartmentNameCopy() == null ? info.getDepartmentName() : info.getDepartmentNameCopy()), wcf));
 
 
                 sheet.mergeCells(1 + i, z, 1 + i2, z + rowspan - 1);//跨行
@@ -3608,6 +3641,12 @@ public class BackendSurveyCaseController extends BackendBaseController {
                                 sheet.addCell(new Label(k++, z, "县级市", wcf));//区域
                             }
                         }
+                        if (info.getEntrustOrgId().intValue() == 45){
+                            Integer materRaw = directionDtos.get(j).getMaterRaw();
+                            Integer materRawNumber = directionDtos.get(j).getMaterRawNumber();
+                            sheet.addCell(new Label(k++, z, materRaw != null && materRaw == 1 ? "是" : "否", wcf));//
+                            sheet.addCell(new Label(k++, z, materRawNumber != null && materRawNumber > 0 ? materRawNumber + "页" : "", wcf));//
+                        }
                         sheet.addCell(new Label(k++, z, directionDtos.get(j).getEntrustMoney() == null ? "" : directionDtos.get(j).getEntrustMoney() + "元", wcf));//案件时效
                         z = z + 1;
                     }
@@ -3616,14 +3655,21 @@ public class BackendSurveyCaseController extends BackendBaseController {
                     sheet.addCell(new Label(16 + c, z, "", wcf));//调查方向
                     int k = 17 + c;
                     if (info.getEntrustOrgId().intValue() == 67) {
-                        sheet.addCell(new Label(k++, z, "", wcf));//案件时效
-                        sheet.addCell(new Label(k++, z, "", wcf));//案件时效
+                        sheet.addCell(new Label(k++, z, "", wcf));//
+                        sheet.addCell(new Label(k++, z, "", wcf));//
                     }
-                    sheet.addCell(new Label(k++, z, "", wcf));//案件时效
+                    if (info.getEntrustOrgId().intValue() == 45) {
+                        sheet.addCell(new Label(k++, z, "", wcf));//
+                        sheet.addCell(new Label(k++, z, "", wcf));//
+                    }
+                    sheet.addCell(new Label(k++, z, "", wcf));//
                     z = z + 1;
                 }
                 int m = 18 + c;
                 if (info.getEntrustOrgId().intValue() == 67) {
+                    m = 20 + c;
+                }
+                if (info.getEntrustOrgId().intValue() == 45) {
                     m = 20 + c;
                 }
                 if (info.getEntrustOrgId().intValue() == 67) {

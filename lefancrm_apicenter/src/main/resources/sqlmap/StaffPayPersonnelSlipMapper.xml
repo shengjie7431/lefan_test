@@ -1223,8 +1223,7 @@
             from staff_personnel_info p
             left join staff_organ o on p.organ_id = o.id
             where p.delete_flag =0 and p.staff_state != 6 and p.relation != 2 and p.relation != 6
-            and DATE_FORMAT(p.entry_time,'%Y-%m') &lt; DATE_FORMAT(#{entryTime,jdbcType=DATE},'%Y-%m')
-
+              and DATE_FORMAT(p.entry_time,'%Y-%m') &lt; DATE_FORMAT(#{entryTime,jdbcType=DATE},'%Y-%m')
         ) a
     </insert>
 

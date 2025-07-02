@@ -49,7 +49,7 @@
         <result column="hz_confirm_disease" property="hzConfirmDisease" jdbcType="VARCHAR"/>
         <result column="hz_follow_info" property="hzFollowInfo" jdbcType="VARCHAR"/>
         <result column="investigation_area" property="investigationArea" jdbcType="INTEGER"/>
-        <result column="main_insurance" property="mainInsurance" jdbcType="VARCHAR"/>
+         <result column="main_insurance" property="mainInsurance" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
@@ -601,7 +601,8 @@
             hz_live_address          = #{hzLiveAddress,jdbcType=VARCHAR},
             hz_confirm_disease       = #{hzConfirmDisease,jdbcType=VARCHAR},
             investigation_area       = #{investigationArea,jdbcType=INTEGER},
-            hz_follow_info           = #{hzFollowInfo,jdbcType=VARCHAR}
+            hz_follow_info           = #{hzFollowInfo,jdbcType=VARCHAR},
+            main_insurance              = #{mainInsurance,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>
 

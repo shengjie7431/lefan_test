@@ -5,6 +5,7 @@ import com.lefancrm.apicenter.dao.*;
 import com.lefancrm.apicenter.dto.SurveyReInfoDto;
 import com.lefancrm.apicenter.enums.ReInfoEnum;
 import com.lefancrm.apicenter.model.*;
+import com.lefancrm.apicenter.service.RedisService;
 import com.lefancrm.apicenter.util.ConcurrentLockUtils;
 import com.lefancrm.apicenter.util.DateUtils;
 import com.lefancrm.apicenter.util.SerialNumberUtil;
@@ -49,6 +50,9 @@ public class ReTask {
     @Autowired
     private SurveyPayInfoDetailNewMapper surveyPayInfoDetailNewMapper;
 
+    @Autowired
+    private RedisService redisService;
+
     /**
      * 下发报销单
      */
@@ -62,6 +66,14 @@ public class ReTask {
         surveyReInfo.setDownTime(date);
         surveyReInfo.setCreateTime(date);
         surveyReInfo.setReDate(localDate.getYear()+"-"+(localDate.getMonthValue()<10?("0"+localDate.getMonthValue()):localDate.getMonthValue()));
+
+        synchronized (this){
+            if (redisService.get(reName) == null){
+                redisService.set(reName,reName,60 * 60);
+            }else{
+                return;
+            }
+        }
 
         ApiRequest apiRequest = new ApiRequest();
         apiRequest.put("reName",reName);
@@ -169,86 +181,83 @@ public class ReTask {
 
         String reName = startTime + "至" + endTime + "渠道费用报销";
 
-        Jedis jedis = new Jedis("127.0.0.1",6379);
-        jedis.auth("shlefan.com123");
-        if (!jedis.exists("channelName")) {
-            jedis.set("channelName",reName);
-            jedis.expire("channelName",60 * 10);//token缓存十分钟
-
-            List<SurveyChannelCostNew> costs = surveyChannelCostNewMapper.selectGeneratePayInfo(new HashMap<>());
-            for (SurveyChannelCostNew cost : costs) {
-                SurveyPayInfo surveyPayInfo = new SurveyPayInfo();
-                surveyPayInfo.setPayNo(SerialNumberUtil.toBuilNo("CH"));
-                surveyPayInfo.setOrgId(cost.getSurveyOrgId());
-                surveyPayInfo.setOrgName(cost.getSurveyOrgName());
-                surveyPayInfo.setSourceSupportType(null);
-                surveyPayInfo.setAppPayMoney(cost.getChnannelMoney());
-                surveyPayInfo.setRemark(reName);
-                surveyPayInfo.setAppStartDate(new Date());
-                surveyPayInfo.setAppEndDate(new Date());
-                surveyPayInfo.setAppType(1);
-                surveyPayInfo.setCreateUserId(null);
-                surveyPayInfo.setCreateBy(null);
-                surveyPayInfo.setPayState(1);
-                surveyPayInfo.setCreateTime(new Date());
-                surveyPayInfo.setDeleteFlag(0);
-                surveyPayInfo.setUpdateBy(null);
-                surveyPayInfo.setUpdateTime(null);
-                surveyPayInfo.setPayType(3);//渠道费用报销
-                surveyPayInfo.setPaySurveyUserId(null);
-                surveyPayInfo.setPaySurveyUserName(null);
-                surveyPayInfo.setPayKeyId(cost.getId());
-                if (!StringUtils.isEmpty(cost.getSurveyUsersStr())) {
-                    List<String> tempUsers = new ArrayList<String>();
-                    String[] users = cost.getSurveyUsersStr().split(",");
-                    for (String user : users) {
-                        if (!tempUsers.contains(user)) {
-                            tempUsers.add(user);
-                        }
-                    }
-                    String userNames = "";
-                    for (String tempUser : tempUsers) {
-                        userNames = userNames.concat(tempUser) + ",";
-                    }
-                    if (userNames.length() > 0){
-                        userNames = userNames.substring(0,userNames.length() - 1);
-                    }
-                    surveyPayInfo.setPaySurveyUserName(userNames);
-                }
-
-                surveyPayInfo.setUserId(cost.getSurveyUserId());
-                surveyPayInfo.setRealName(cost.getSurveyUserName());
-                surveyPayInfo.setSocialSecurityCompanyId(cost.getSocialSecurityCompanyId());
-                surveyPayInfo.setSocialSecurityCompany(cost.getSocialSecurityCompany());
-                surveyPayInfo.setOrganId(cost.getOrganId());
-                surveyPayInfo.setOrgan(cost.getOrgan());
-                surveyPayInfo.setDepartmentId(cost.getDepartmentId());
-                surveyPayInfo.setDepartment(cost.getDepartment());
-                surveyPayInfo.setTeam(cost.getTeam());
-                surveyPayInfo.setTeamId(cost.getTeamId());
-                surveyPayInfo.setJobPost(cost.getJobPost());
-                surveyPayInfo.setJobPostId(cost.getJobPostId());
-
-                surveyPayInfoMapper.insert(surveyPayInfo);
-                //修改公估付款申请状态
-                String ids = cost.getIds();
-                if (!StringUtils.isEmpty(ids)){
-                    surveyChannelCostNewMapper.updateProPayByIds(ids);
-                }
-
-                //插入付款申请业务关联表
-                Map<String,Object> paramMap =  new HashMap<String,Object>();
-                paramMap.put("payId",surveyPayInfo.getId());
-                paramMap.put("oprCode","channel");
-                if (!StringUtils.isEmpty(ids)){
-                    paramMap.put("ids",ids.split(","));
-                    surveyPayInfoDetailNewMapper.insertItems(paramMap);
-                }
+        synchronized (this){
+            if (redisService.get(reName) == null){
+                redisService.set(reName,reName,60 * 60);
+            }else{
+                return;
+            }
         }
+        List<SurveyChannelCostNew> costs = surveyChannelCostNewMapper.selectGeneratePayInfo(new HashMap<>());
+        for (SurveyChannelCostNew cost : costs) {
+            SurveyPayInfo surveyPayInfo = new SurveyPayInfo();
+            surveyPayInfo.setPayNo(SerialNumberUtil.toBuilNo("CH"));
+            surveyPayInfo.setOrgId(cost.getSurveyOrgId());
+            surveyPayInfo.setOrgName(cost.getSurveyOrgName());
+            surveyPayInfo.setSourceSupportType(null);
+            surveyPayInfo.setAppPayMoney(cost.getChnannelMoney());
+            surveyPayInfo.setRemark(reName);
+            surveyPayInfo.setAppStartDate(new Date());
+            surveyPayInfo.setAppEndDate(new Date());
+            surveyPayInfo.setAppType(1);
+            surveyPayInfo.setCreateUserId(null);
+            surveyPayInfo.setCreateBy(null);
+            surveyPayInfo.setPayState(1);
+            surveyPayInfo.setCreateTime(new Date());
+            surveyPayInfo.setDeleteFlag(0);
+            surveyPayInfo.setUpdateBy(null);
+            surveyPayInfo.setUpdateTime(null);
+            surveyPayInfo.setPayType(3);//渠道费用报销
+            surveyPayInfo.setPaySurveyUserId(null);
+            surveyPayInfo.setPaySurveyUserName(null);
+            surveyPayInfo.setPayKeyId(cost.getId());
+            if (!StringUtils.isEmpty(cost.getSurveyUsersStr())) {
+                List<String> tempUsers = new ArrayList<String>();
+                String[] users = cost.getSurveyUsersStr().split(",");
+                for (String user : users) {
+                    if (!tempUsers.contains(user)) {
+                        tempUsers.add(user);
+                    }
+                }
+                String userNames = "";
+                for (String tempUser : tempUsers) {
+                    userNames = userNames.concat(tempUser) + ",";
+                }
+                if (userNames.length() > 0){
+                    userNames = userNames.substring(0,userNames.length() - 1);
+                }
+                surveyPayInfo.setPaySurveyUserName(userNames);
+            }
 
+            surveyPayInfo.setUserId(cost.getSurveyUserId());
+            surveyPayInfo.setRealName(cost.getSurveyUserName());
+            surveyPayInfo.setSocialSecurityCompanyId(cost.getSocialSecurityCompanyId());
+            surveyPayInfo.setSocialSecurityCompany(cost.getSocialSecurityCompany());
+            surveyPayInfo.setOrganId(cost.getOrganId());
+            surveyPayInfo.setOrgan(cost.getOrgan());
+            surveyPayInfo.setDepartmentId(cost.getDepartmentId());
+            surveyPayInfo.setDepartment(cost.getDepartment());
+            surveyPayInfo.setTeam(cost.getTeam());
+            surveyPayInfo.setTeamId(cost.getTeamId());
+            surveyPayInfo.setJobPost(cost.getJobPost());
+            surveyPayInfo.setJobPostId(cost.getJobPostId());
 
+            surveyPayInfoMapper.insert(surveyPayInfo);
+            //修改公估付款申请状态
+            String ids = cost.getIds();
+            if (!StringUtils.isEmpty(ids)){
+                surveyChannelCostNewMapper.updateProPayByIds(ids);
+            }
 
-    }
+            //插入付款申请业务关联表
+            Map<String,Object> paramMap =  new HashMap<String,Object>();
+            paramMap.put("payId",surveyPayInfo.getId());
+            paramMap.put("oprCode","channel");
+            if (!StringUtils.isEmpty(ids)){
+                paramMap.put("ids",ids.split(","));
+                surveyPayInfoDetailNewMapper.insertItems(paramMap);
+            }
+        }
     }
 
     /**

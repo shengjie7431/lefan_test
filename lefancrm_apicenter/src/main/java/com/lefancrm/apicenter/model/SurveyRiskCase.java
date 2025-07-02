@@ -566,6 +566,7 @@ public class SurveyRiskCase {
         this.cooperativeCompany = cooperativeCompany;
     }
 
+    
 
     //    主险代码
     private String mainInsurance;

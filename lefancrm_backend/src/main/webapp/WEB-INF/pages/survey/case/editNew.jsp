@@ -458,26 +458,26 @@
             <%--正言、乐凡模板--%>
             <div class="form-group company company_lf" data-type="1">
                 <label class="col-sm-3 control-label">保险种类</label>
-                <div class="col-sm-9">
+                <div class="col-sm-6">
                     <input type="text" id="insureName" name="insureName" value="${dto.surveyRiskCase.insureName}"
                            placeholder="请输入保险种类" class="form-control editInfo">
                     <div id="insureBars" class="label-bars" data-name="none">
-                        <div class="label-bar">身份证号</div>
-                        <div class="label-bar">护照号码</div>
-                        <div class="label-bar">其它证件号码</div>
+<%--                        <div class="label-bar">身份证号</div>--%>
+<%--                        <div class="label-bar">护照号码</div>--%>
+<%--                        <div class="label-bar">其它证件号码</div>--%>
                     </div>
                 </div>
-            </div>
+<%--                 增加主险代码--%>
 
-            <div class="form-group">
-                <label class="col-sm-3 control-label">主险代码<em style="color: red;">*</em></label>
-                <div class="col-sm-9 input-group">
+                <label class="col-sm-1 control-label">主险代码</label>
+                <div class="col-sm-2">
                     <input type="text" class="form-control" id="mainInsurance" name="mainInsurance" value="${dto.surveyRiskCase.mainInsurance}"
-                            placeholder="请输入主险代码" required="required">
+                           placeholder="请输入主险代码">
                 </div>
+
+
+
             </div>
-
-
             <div class="form-group company company_lf" data-type="1">
                 <label class="col-sm-3 control-label">理赔编号<em style="color: red;">*</em></label>
                 <div class="col-sm-3">

@@ -75,8 +75,7 @@
                     <td>编号</td>
                     <td>${info.unmatchNo}</td>
                     <td>金额</td>
-<%--                    <td>${info.money}</td>--%>
-                    <td ><fmt:formatNumber type="number" value="${info.money}" maxFractionDigits="2"/></td>
+                    <td>${info.money}</td>
                     <td>交易时间</td>
                     <td><fmt:formatDate value="${info.payTime}" pattern="yyyy-MM-dd HH:mm" /></td>
                 </tr>
@@ -88,11 +87,9 @@
                         <c:if test="${info.state == 3}">部分认领</c:if>
                     </td>
                     <td>已认领金额</td>
-<%--                    <td>${info.matchMoney == null?0:info.matchMoney}</td>--%>
-                    <td ><fmt:formatNumber type="number" value="${info.matchMoney == null?0:info.matchMoney}" maxFractionDigits="2"/></td>
+                    <td>${info.matchMoney == null?0:info.matchMoney}</td>
                     <td>未认领金额</td>
-<%--                    <td>${info.unmatchMoney== null?0:info.unmatchMoney}</td>--%>
-                    <td ><fmt:formatNumber type="number" value="${info.unmatchMoney== null?0:info.unmatchMoney}" maxFractionDigits="2"/></td>
+                    <td>${info.unmatchMoney== null?0:info.unmatchMoney}</td>
                 </tr>
                 <tr>
                     <td>付款方</td>

@@ -275,4 +275,5 @@ public class StaffOrganDto {
     public void setWarnMoney(Double warnMoney) {
         this.warnMoney = warnMoney;
     }
+
 }

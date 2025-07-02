@@ -126,6 +126,8 @@ public class SurveyRiskCaseInfoExportDto {
 
     private String insureName;
 
+    private String mainInsurance;
+
     public String getTransferTypeName() {
         return transferTypeName;
     }
@@ -700,5 +702,13 @@ public class SurveyRiskCaseInfoExportDto {
 
     public void setInsureName(String insureName) {
         this.insureName = insureName;
+    }
+
+    public String getMainInsurance() {
+        return mainInsurance;
+    }
+
+    public void setMainInsurance(String mainInsurance) {
+        this.mainInsurance = mainInsurance;
     }
 }

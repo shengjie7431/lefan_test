@@ -604,6 +604,7 @@ public class BackendStaffPerformanceApiImpl extends BaseServiceImpl implements B
                     map.put("oldPerformanceState",1);// 结算绩效的状态 （0、未结算；1、结算中；2、已结算）
                     map.put("newPerformanceState",2);
                     map.put("performanceId",staffPerformance.getId());//绩效id
+                    map.put("staffType","performance");//绩效id
                     surveyRiskCaseInfoMapper.updatePerformanceState(map);
                     break;
                 case "no" :
@@ -742,6 +743,7 @@ public class BackendStaffPerformanceApiImpl extends BaseServiceImpl implements B
             map.put("newPerformanceState",0);
             map.put("performanceId",staffPerformance.getId());//绩效id
             map.put("delStaffPerformanceId",1);//删除绩效id
+            map.put("staffType","performance");//绩效id
             surveyRiskCaseInfoMapper.updatePerformanceState(map);
 
         }else if("passWord".equals(btnCode)){ //校准密码
@@ -885,54 +887,7 @@ public class BackendStaffPerformanceApiImpl extends BaseServiceImpl implements B
             e.printStackTrace();
         }
     }
-    /**
-     * 初始化绩效数据
-     * @param
-     * @param userInfo
-     * @param staffPaySlip  工资单对象（关联钉钉数据）
-     * 这个方法是在选择工资单发放绩效时，存入到绩效子表中
-     */
-    public StaffPerformancePersonnel generateAAAStaffPerformance(StaffPerformance staffPerformance, UserInfo userInfo, StaffPaySlip staffPaySlip,StaffPayPersonnelSlip staffPayPersonnelSlip){
-        try {
-            StaffWorkingDaysInfo staffWorkingDaysInfo = staffWorkingDaysInfoMapper.selectByWorkTime(staffPerformance.getWorkTime());;//根据workTime 查找出勤天数
 
-            Map<String,Object> map = new HashMap();
-            map.put("staffPerformanceId",staffPerformance.getId());//绩效单ID
-            map.put("userName",userInfo.getUserName());
-            map.put("staffPaySlipId",staffPaySlip.getId());//工资单ID
-            map.put("workTime",staffPerformance.getWorkTime());
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-            Date sDate = sdf.parse(staffPerformance.getWorkTime());
-            Calendar c = Calendar.getInstance();
-            c.setTime(sDate);
-            c.add(Calendar.MONTH, 1);
-            map.put("entryTime",c.getTime());
-            map.put("workingDays",staffWorkingDaysInfo.getWrokingDays());
-            map.put("performance",1);
-            map.put("staffPersonnelId",staffPayPersonnelSlip.getStaffPersonnelId());
-            map.put("staffPaySlipId",staffPaySlip.getId());
-            staffPerformancePersonnelMapper.generateOne(map);
-            Long newId = (Long) map.get("id");// 插入绩效子表  insert into select  // 2、新需求：2020年5月25日15:18:19  创建绩效时，状态为合伙的员工不进入绩效
-            map = new HashMap<>();
-            map.put("workTime",staffPerformance.getWorkTime());
-            map.put("oldPerformanceState",0);// 结算绩效的状态 （0、未结算；1、结算中；2、已结算）
-            map.put("newPerformanceState",1);
-            map.put("dateTime",new Date());
-            map.put("addStaffPerformanceId",staffPerformance.getId());//绩效id(此处为了录入绩效id)
-            map.put("userId",staffPayPersonnelSlip.getUserId());
-            surveyRiskCaseInfoMapper.updatePerformanceStatePerson(map);
-            map.clear();
-            map.put("staffPerformanceId",staffPerformance.getId());
-            StaffPerformancePersonnel item = staffPerformancePersonnelMapper.listOne(newId);
-            item.setStaffPersonnelInfo(staffPersonnelInfoMapper.selectStaffPersonelInfoByJobNo(item.getJobNo()));
-            item.setSurveyInvestigator(surveyInvestigatorMapper.selectByUserId(item.getStaffPersonnelInfo().getUserId()));
-            item = convertPersonnel(item,staffWorkingDaysInfo.getWrokingDays(),"init",staffPerformance.getWorkTime());
-                staffPerformancePersonnelMapper.updateByPrimaryKey(item);
-            return item;
-        } catch (ParseException e) {
-         return null;
-        }
-    }
     /**
      * 绩效迟到早退 矿工 等算法
      * @param item 绩效明细
@@ -996,7 +951,7 @@ public class BackendStaffPerformanceApiImpl extends BaseServiceImpl implements B
             //病假
             money = 0D;
             Double sickLeaveTime = item.getSickLeaveTime() == null ? 0D : item.getSickLeaveTime();
-            money = (A / D / 7.5) * sickLeaveTime * 0.3;
+            money = (A / D) * sickLeaveTime * 0.3;
             item.setSickLeaveMoney(money.intValue() != 0 ? -DecimalUtil.twoDecimalTOFourFromFive(money) : 0);
 
             //市内交通补贴 -- 是否新人达标 为否时 交通费补贴永远为0

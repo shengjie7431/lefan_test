@@ -1,7 +1,10 @@
 package com.lefancrm.backend.web;
 
 import com.google.gson.reflect.TypeToken;
-import com.lefancrm.backend.dto.*;
+import com.lefancrm.backend.dto.BillingApplyCorporationDto;
+import com.lefancrm.backend.dto.BusUserRoleDto;
+import com.lefancrm.backend.dto.SurveyQaDto;
+import com.lefancrm.backend.dto.UserInfo;
 import com.lefancrm.backend.dto.financial.FinancialReApply;
 import com.lefancrm.backend.dto.financial.FinancialReApplyDto;
 import com.lefancrm.backend.dto.staff.StaffPersonnelInfoDto;
@@ -10,21 +13,17 @@ import com.lefancrm.backend.util.PDFFinaancial;
 import com.lefancrm.base.dto.ApiFinalResponse;
 import com.lefancrm.base.enums.BackendApiMethodEnum;
 import com.lefancrm.base.utils.JsonUtil;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
+import org.springframework.beans.factory.annotation.Value;
+import java.io.File;
 
 /**
  * Created by wangwei on 2021/01/22.
@@ -34,13 +33,13 @@ import org.slf4j.LoggerFactory;
 @RequestMapping(value = "/financial/reApply/")
 public class BackendFinancialReApplyController extends BackendBaseController{
 
+
     @Value("${survey.file.path.sftp}")
     public String httpFilePath;
     @Value("${survey.file.source.sftp}")
     private String surveySource;
     @Value("${survey.temp.path}")
     private String realTempPath;
-
 
     /**
     *
@@ -112,7 +111,6 @@ public class BackendFinancialReApplyController extends BackendBaseController{
 
         return new ModelAndView("/financial/reApply/add",model);
     }
-
     /**
      * ajax获取list 列表
      * @param req
@@ -132,9 +130,8 @@ public class BackendFinancialReApplyController extends BackendBaseController{
     }
 
     @RequestMapping(value = "ajaxData")
-    public void ajaxData(HttpServletRequest req, HttpServletResponse rsp){
-        this.callApiAndOutput(BackendApiMethodEnum.BACKEND_AJAX_DATA_FINANCIAL_RE_APPLY, null, req, rsp);
-
+    public String ajaxData(HttpServletRequest req, HttpServletResponse rsp){
+        return this.callApiAndOutput(BackendApiMethodEnum.BACKEND_AJAX_DATA_FINANCIAL_RE_APPLY, null, req, rsp);
     }
 
     @RequestMapping(value = "operateView")
@@ -170,19 +167,19 @@ public class BackendFinancialReApplyController extends BackendBaseController{
 
     //导出
     @RequestMapping(value = "/downLoad")
-    public void   downLoad(HttpServletRequest req, HttpServletResponse rsp) {
+   public void   downLoad(HttpServletRequest req, HttpServletResponse rsp) {
         String dataType = req.getParameter("dataType");
         if("get-info".equals(dataType)) { // 打印分支
             Map<String,Object> jsonMap = new HashMap<>();
+
             TypeToken typeToken = new TypeToken<ApiFinalResponse<FinancialReApply>>() {};
             ApiFinalResponse apiFinalResponse = this.callApi(typeToken, BackendApiMethodEnum.BACKEND_AJAX_DATA_FINANCIAL_RE_APPLY, null, req);
             FinancialReApply data = (FinancialReApply) apiFinalResponse.getResults();
             File file = PDFFinaancial.generates(realTempPath + File.separator + "pdf" + File.separator + System.currentTimeMillis(), data);
+//            System.out.println(data);
             jsonMap.put("fileUrl",file.getPath().replace("/mnt/sftp/files/",httpFilePath));
             String json = sh.zj100.common.util.JsonUtil.objectToJson(jsonMap);
             this.outputJson(json, rsp);
-//                        System.out.println(data);
-//            return ;
         }else{//导出
             String surveyCode = req.getParameter("surveyCode");
             //每刻报销导出
@@ -191,6 +188,7 @@ public class BackendFinancialReApplyController extends BackendBaseController{
             }
         }
     }
+
     //每刻报销导出
     private void downLoadReAppleInfo(HttpServletRequest req, HttpServletResponse rsp,String surveyCode) {
         Map<String, Object> appendMap = new HashMap<String, Object>();

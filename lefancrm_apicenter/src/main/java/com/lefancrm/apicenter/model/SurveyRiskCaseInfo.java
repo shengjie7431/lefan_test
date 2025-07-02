@@ -193,6 +193,9 @@ public class SurveyRiskCaseInfo {
     private Long performanceId;//绩效id
 
 
+    private String staffType;//积分结算方式
+
+
     //调查工作流，字段
     private String stepName;//
     private Long dealUserId; //
@@ -1007,5 +1010,13 @@ public class SurveyRiskCaseInfo {
 
     public void setHandleId(Long handleId) {
         this.handleId = handleId;
+    }
+
+    public String getStaffType() {
+        return staffType;
+    }
+
+    public void setStaffType(String staffType) {
+        this.staffType = staffType;
     }
 }

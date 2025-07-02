@@ -1967,7 +1967,24 @@ public class BackendSurveyRiskCaseInfoApiImpl extends BaseServiceImpl implements
                     record.setUpdUserName(userInfo.getUserName());
                     surveyAttrUpdRecordMapper.insert(record);
                 }
-            } else if ("1200".equals(btnCode)) {//案件审核通过
+            }  else if ("updMainInsurance".equals(btnCode)) {
+                String mainInsurance = apiRequest.getString("mainInsurance");
+                SurveyRiskCase surveyRiskCase = surveyRiskCaseMapper.selectByPrimaryKey(surveyRiskCaseInfo.getSurveyId());
+                String beforeValue = surveyRiskCase.getMainInsurance();
+                surveyRiskCase.setMainInsurance(mainInsurance);
+                surveyRiskCaseMapper.updateByPrimaryKey(surveyRiskCase);
+
+                SurveyAttrUpdRecord record = new SurveyAttrUpdRecord();
+                record.setUpdBeforeValue(beforeValue == null ? "" : beforeValue);
+                record.setUpdAfterValue(surveyRiskCase.getMainInsurance() == null ? "" : surveyRiskCase.getMainInsurance());
+                if (!record.getUpdBeforeValue().equals(record.getUpdAfterValue())) {
+                    record.setSurveyInfoId(surveyRiskCaseInfo.getId());
+                    record.setUpdAttr("survey_risk_case_main_insurance");
+                    record.setUpdTime(new Date());
+                    record.setUpdUserName(userInfo.getUserName());
+                    surveyAttrUpdRecordMapper.insert(record);
+                }
+            }else if ("1200".equals(btnCode)) {//案件审核通过
                 //非授信的 验证预付金额不能为0
                 if (surveyRiskCaseInfo.getEntrustCredit() == null) {
                     surveyRiskCaseInfo.setEntrustCredit(1);

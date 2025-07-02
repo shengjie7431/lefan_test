@@ -197,6 +197,8 @@ public class SurveyCaseDirectionDto {
 
     private List<SurveyTaskDirectionResultDto> resultTypes;
 
+    private Integer materRawNumber;
+
 
     public Integer getProportion() {
         return proportion;
@@ -1037,5 +1039,13 @@ public class SurveyCaseDirectionDto {
 
     public void setMaterRaw(Integer materRaw) {
         this.materRaw = materRaw;
+    }
+
+    public Integer getMaterRawNumber() {
+        return materRawNumber;
+    }
+
+    public void setMaterRawNumber(Integer materRawNumber) {
+        this.materRawNumber = materRawNumber;
     }
 }

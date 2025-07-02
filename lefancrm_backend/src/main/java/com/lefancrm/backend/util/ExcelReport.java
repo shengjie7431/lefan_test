@@ -566,7 +566,7 @@ public class ExcelReport {
         row1.createCell(++index).setCellValue("工号");
         row1.createCell(++index).setCellValue("迟到次数");
         row1.createCell(++index).setCellValue("早退次数");
-        row1.createCell(++index).setCellValue("旷工次数");
+        row1.createCell(++index).setCellValue("补贴");
         row1.createCell(++index).setCellValue("事假");
         row1.createCell(++index).setCellValue("病假");
         row1.createCell(++index).setCellValue("加班工资");
@@ -574,8 +574,8 @@ public class ExcelReport {
         row1.createCell(++index).setCellValue("其他补发备注");
         row1.createCell(++index).setCellValue("其他扣款(均为负)");
         row1.createCell(++index).setCellValue("其他扣款备注");
-        row1.createCell(++index).setCellValue("员工福利(均为正)");
-        row1.createCell(++index).setCellValue("员工福利备注");
+        row1.createCell(++index).setCellValue("浮动绩效(均为正)");
+        row1.createCell(++index).setCellValue("浮动绩效备注");
 
 
         row1.createCell(++index).setCellValue("个税调整(正为正、负为负)");

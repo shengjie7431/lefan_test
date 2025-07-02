@@ -797,7 +797,7 @@ public class BackendStaffApiImpl extends BaseServiceImpl implements BackendStaff
                 StaffPostAppellation staffPostAppellation=staffPostAppellationMapper.selectByPrimaryKey(apiReq.getLong("postAppellationId"));
                 StaffBudgetCompanyOrgan staffBudgetCompanyOrgan = null;
                 if (staffOrgan != null){
-                    staffBudgetCompanyOrgan = staffBudgetCompanyOrganMapper.selectByOrganId(staffOrgan.getId());
+                     staffBudgetCompanyOrgan = staffBudgetCompanyOrganMapper.selectByOrganId(staffOrgan.getId());
                 }
 
                 String entryTime = apiReq.getString("entryTime");//入职时间
@@ -950,7 +950,7 @@ public class BackendStaffApiImpl extends BaseServiceImpl implements BackendStaff
                     staffPersonnelInfo.setHomeLbsY(apiReq.getDouble("homeLbsY"));
                     staffPersonnelInfo.setHomeAddress(apiReq.getString("homeAddress"));
                     staffPersonnelInfo.setHomeAddressName(apiReq.getString("homeAddressName"));
-                    //根据选择的机构的绩效方式，赋值给员工表
+                   //根据选择的机构的绩效方式，赋值给员工表
                     staffPersonnelInfo.setPerformance(staffOrgan.getPerformance());
                     staffPersonnelInfoMapper.insert(staffPersonnelInfo);
 
@@ -1817,7 +1817,7 @@ public class BackendStaffApiImpl extends BaseServiceImpl implements BackendStaff
                             }
 
                         }
-                        //各种计算
+                           //各种计算
                         staffPayPersonnelSlip = backendStaffPaySlipApiImpl.returnSlip(staffPersonnelInfo,staffPayPersonnelSlip,true);
                         staffPayPersonnelSlipMapper.updateByPrimaryKey(staffPayPersonnelSlip);
                     }
@@ -1864,6 +1864,8 @@ public class BackendStaffApiImpl extends BaseServiceImpl implements BackendStaff
                             }
                             staffPerformance.setDeleteFlag(1);
                             staffPerformanceMapper.updateByPrimaryKey(staffPerformance);
+                            //同时删除绩效明细
+                            staffPerformancePersonnelMapper.deleteByStaffPerformanceId(staffPerformance.getId());
                         }
                     }
 
