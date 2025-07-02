@@ -1269,8 +1269,7 @@
                         success: function(res) {
                             // showToast("打印成功");
                             // console.log('打印接口调用成功', response);
-                            console.log(res.fileUrl);
-                             return;
+                            // console.log(res.fileUrl);
                             res = JSON.parse(res)
                             if (res){
                                 if (res.fileUrl){

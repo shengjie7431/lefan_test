@@ -181,7 +181,7 @@ public class BackendFinancialReApplyController extends BackendBaseController{
             jsonMap.put("fileUrl",file.getPath().replace("/mnt/sftp/files/",httpFilePath));
             String json = sh.zj100.common.util.JsonUtil.objectToJson(jsonMap);
             this.outputJson(json, rsp);
-            //            System.out.println(data);
+//                        System.out.println(data);
 //            return ;
         }else{//导出
             String surveyCode = req.getParameter("surveyCode");
