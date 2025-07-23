@@ -49,15 +49,15 @@
 	<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
 
 	<task:scheduled-tasks>
-<!--		<task:scheduled ref="myJob" method="surveyCaseTaskTimer" cron="0 00 8 1/1 * ?"/>-->
+		<!--		<task:scheduled ref="myJob" method="surveyCaseTaskTimer" cron="0 00 8 1/1 * ?"/>-->
 		<task:scheduled ref="myJob" method="surveyCaseTaskTimer" cron="0 00 08 ? * *"/>
 		<task:scheduled ref="myJob" method="everyDayCaseRemind" cron="0 00 07 ? * *"/><!-- 每天早上7点 -->
 		<task:scheduled ref="synJob" method="synOrg" cron="0 00 02 ? * *"/>
 		<task:scheduled ref="synJob" method="synSurvey" cron="0 30 02 ? * *"/>
 		<task:scheduled ref="staffJob" method="staffPaySlip" cron="0 */5 * * * ?"/>
 		<task:scheduled ref="reJob" method="issuedReInfo" cron="0 30 3 1 * ?"/>
-<!--		<task:scheduled ref="reJob" method="channel" cron="0 30 4 1 * ?"/>  &lt;!&ndash; 每月1号凌晨4:30执行&ndash;&gt;-->
-<!--		<task:scheduled ref="reJob" method="channelNew" cron="0 30 4 ? * MON"/>  &lt;!&ndash; 每周周一凌晨4:30 &ndash;&gt;-->
+		<!--		<task:scheduled ref="reJob" method="channel" cron="0 30 4 1 * ?"/>  &lt;!&ndash; 每月1号凌晨4:30执行&ndash;&gt;-->
+		<!--		<task:scheduled ref="reJob" method="channelNew" cron="0 30 4 ? * MON"/>  &lt;!&ndash; 每周周一凌晨4:30 &ndash;&gt;-->
 		<!--	每月5号凌晨1点15分执行 2021年5月7日 需求由每周变成每月 -->
 		<task:scheduled ref="reJob" method="channelNew" cron="0 0 0 5 * ?"/>
 		<!--        <task:scheduled ref="myJob" method="http" cron="0/10 * * * * ? "/>-->
@@ -81,6 +81,7 @@
 	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" p:host-name="${redis.host}" p:port="${redis.port}" p:password="${redis.password}" p:usePool="false" />
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" p:connection-factory-ref="jedisConnectionFactory"/>
 	<bean id="redisService" class="com.lefancrm.apicenter.service.impl.RedisServiceImpl"></bean>
+	<bean id="apiSzdcService" class="com.lefancrm.apicenter.szdc.service.ApiSzdcServiceImpl"></bean>
 	<bean id="initProject" class="com.lefancrm.apicenter.util.tsign.utils.InitProject"></bean>
 	<!-- <bean id="stringRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
 	<bean id="jdkSerializationRedisSerializer" class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>	

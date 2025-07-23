@@ -6,20 +6,20 @@
 		<artifactId>lefancrm</artifactId>
 		<version>1.0</version>
 	</parent>
-	
+
 	<artifactId>lefancrm_apicenter</artifactId>
 	<packaging>war</packaging>
 	<name>lefancrm_apicenter</name>
-<!--	<properties>-->
-<!--		<deploy.mode>dev</deploy.mode>-->
-<!--	</properties>-->
+	<!--	<properties>-->
+	<!--		<deploy.mode>dev</deploy.mode>-->
+	<!--	</properties>-->
 	<url>http://maven.apache.org</url>
 	<dependencies>
-        <dependency>
-            <groupId>com.lefancrm</groupId>
-            <artifactId>lefancrm_base</artifactId>
-            <version>0.0.15</version>
-        </dependency>
+		<dependency>
+			<groupId>com.lefancrm</groupId>
+			<artifactId>lefancrm_base</artifactId>
+			<version>0.0.15</version>
+		</dependency>
 		<!-- Junit ref -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -47,11 +47,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 
 		<!-- Apache Commons -->
 		<dependency>
@@ -92,42 +92,42 @@
 		</dependency>
 
 		<!-- HttpClient -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>fluent-hc</artifactId>
-            <version>4.3.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient-cache</artifactId>
-            <version>4.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.4.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
-            <version>4.3.5</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ning</groupId>
-            <artifactId>async-http-client</artifactId>
-            <version>1.8.13</version>
-        </dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>fluent-hc</artifactId>
+			<version>4.3.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient-cache</artifactId>
+			<version>4.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.3.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ning</groupId>
+			<artifactId>async-http-client</artifactId>
+			<version>1.8.13</version>
+		</dependency>
 
-        <dependency>
-            <groupId>al</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.0.1</version>
-        </dependency>
+		<dependency>
+			<groupId>al</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.0.1</version>
+		</dependency>
 		<!-- log ref -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -230,27 +230,27 @@
 			<artifactId>qiniu-java-sdk</artifactId>
 			<version>7.0.4.2</version>
 		</dependency>
-        <dependency>
-            <groupId>sh.zj100</groupId>
-            <artifactId>common_util</artifactId>
-            <version>1.1.18</version>
-        </dependency>
+		<dependency>
+			<groupId>sh.zj100</groupId>
+			<artifactId>common_util</artifactId>
+			<version>1.1.18</version>
+		</dependency>
 
-        <dependency>
-            <groupId>sh.zj100</groupId>
-            <artifactId>common_code</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+		<dependency>
+			<groupId>sh.zj100</groupId>
+			<artifactId>common_code</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 		<!-- <dependency>
 		    <groupId>com.google.maps</groupId>
 		    <artifactId>google-maps-services</artifactId>
 		    <version>0.1.15</version>
 		</dependency> -->
 		<dependency>
-	        <groupId>org.springframework.data</groupId>
-	        <artifactId>spring-data-redis</artifactId>
-	        <version>2.0.0.M1</version>
-	    </dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>2.0.0.M1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-commons</artifactId>
@@ -288,123 +288,123 @@
 			<version>2.7</version>
 		</dependency>
 		<dependency>
-		  <groupId>com.alipay</groupId>
-		  <artifactId>alipay-sdk-java</artifactId>
-		  <version>1.0.0</version>
+			<groupId>com.alipay</groupId>
+			<artifactId>alipay-sdk-java</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
-		  <groupId>commons-logging</groupId>
-		  <artifactId>commons-logging</artifactId>
-		  <version>1.1.1</version>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
 		</dependency>
 
-        <dependency>
-            <groupId>com.tencent</groupId>
-            <artifactId>wxpay-scanpay-java-sdk</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.9</version>
-        </dependency>
-        <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
-            <version>1.4.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>jxl</groupId>
-            <artifactId>jxl</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.1.35</version>
-        </dependency>
-        <!-- 阿里云OSS云存储 -->
-        <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
-            <version>2.0.5</version>
-        </dependency>
-        <!-- e签宝 start-->
-        <dependency>
-            <groupId>cn.tsign.ching</groupId>
-            <artifactId>tech-sdk</artifactId>
-            <version>2.0.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.pdfbox</groupId>
-            <artifactId>pdfbox</artifactId>
-            <version>2.0.4</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.ezmorph</groupId>
-            <artifactId>ezmorph</artifactId>
-            <version>1.0.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.pdfbox</groupId>
-            <artifactId>fontbox</artifactId>
-            <version>2.0.4</version>
-        </dependency>
-        <dependency>
-            <groupId>tgtext</groupId>
-            <artifactId>tgtext</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.tsign.ching</groupId>
-            <artifactId>utils</artifactId>
-            <version>3.0.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcmail-jdk15on</artifactId>
-            <version>1.48</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk15on</artifactId>
-            <version>1.48</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.48</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>core</artifactId>
-            <version>2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.itext.xtra</groupId>
-            <artifactId>itext-xtra</artifactId>
-            <version>5.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.itext.pdfa</groupId>
-            <artifactId>itext-pdfa</artifactId>
-            <version>5.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.itext</groupId>
-            <artifactId>itext</artifactId>
-            <version>2.1.7</version>
-        </dependency>
-        <dependency>
-            <groupId>com.itext</groupId>
-            <artifactId>itext-asian</artifactId>
-            <version>V1.0.0</version>
-        </dependency>
+		<dependency>
+			<groupId>com.tencent</groupId>
+			<artifactId>wxpay-scanpay-java-sdk</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>jxl</groupId>
+			<artifactId>jxl</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.35</version>
+		</dependency>
+		<!-- 阿里云OSS云存储 -->
+		<dependency>
+			<groupId>com.aliyun.oss</groupId>
+			<artifactId>aliyun-sdk-oss</artifactId>
+			<version>2.0.5</version>
+		</dependency>
+		<!-- e签宝 start-->
+		<dependency>
+			<groupId>cn.tsign.ching</groupId>
+			<artifactId>tech-sdk</artifactId>
+			<version>2.0.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>2.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ezmorph</groupId>
+			<artifactId>ezmorph</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>fontbox</artifactId>
+			<version>2.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>tgtext</groupId>
+			<artifactId>tgtext</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.tsign.ching</groupId>
+			<artifactId>utils</artifactId>
+			<version>3.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcmail-jdk15on</artifactId>
+			<version>1.48</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpkix-jdk15on</artifactId>
+			<version>1.48</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.48</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itext.xtra</groupId>
+			<artifactId>itext-xtra</artifactId>
+			<version>5.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itext.pdfa</groupId>
+			<artifactId>itext-pdfa</artifactId>
+			<version>5.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itext</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itext</groupId>
+			<artifactId>itext-asian</artifactId>
+			<version>V1.0.0</version>
+		</dependency>
 
 
 		<dependency>
@@ -413,100 +413,100 @@
 			<version>1.4</version>
 		</dependency>
 
-        <dependency>
-            <groupId>com.mail</groupId>
-            <artifactId>javamail</artifactId>
-            <version>V1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.mailapi</groupId>
-            <artifactId>java.mailapi</artifactId>
-            <version>V1.0.0</version>
-        </dependency>
+		<dependency>
+			<groupId>com.mail</groupId>
+			<artifactId>javamail</artifactId>
+			<version>V1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mailapi</groupId>
+			<artifactId>java.mailapi</artifactId>
+			<version>V1.0.0</version>
+		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>javax.mail</groupId>-->
-<!--			<artifactId>mail</artifactId>-->
-<!--			<version>1.4.7</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>javax.activation</groupId>-->
-<!--			<artifactId>activation</artifactId>-->
-<!--			<version>1.1.1</version>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>javax.mail</groupId>-->
+		<!--			<artifactId>mail</artifactId>-->
+		<!--			<version>1.4.7</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>javax.activation</groupId>-->
+		<!--			<artifactId>activation</artifactId>-->
+		<!--			<version>1.1.1</version>-->
+		<!--		</dependency>-->
 
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>3.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>3.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml-schemas</artifactId>
-            <version>3.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-scratchpad</artifactId>
-            <version>3.8</version>
-        </dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>3.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+			<version>3.8</version>
+		</dependency>
 		<dependency>
 			<groupId>org.jdom</groupId>
 			<artifactId>jdom</artifactId>
 			<version>1.1</version>
 		</dependency>
-        <dependency>
-            <groupId>quartz</groupId>
-            <artifactId>quartz</artifactId>
-<!--            <version>1.5.2</version>-->
-        </dependency>
-        <dependency>
-            <groupId>quartz</groupId>
-            <artifactId>quartz</artifactId>
-            <version>2.2.1</version>
-        </dependency>
-        <!-- e签宝 end-->
+		<dependency>
+			<groupId>quartz</groupId>
+			<artifactId>quartz</artifactId>
+			<!--            <version>1.5.2</version>-->
+		</dependency>
+		<dependency>
+			<groupId>quartz</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<!-- e签宝 end-->
 
-        <dependency>
-            <groupId>com.aip</groupId>
-            <artifactId>aip-java-sdk</artifactId>
-<!--            <version>4.9.0</version>-->
-        </dependency>
-        <dependency>
-            <groupId>com.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20160810</version>
-        </dependency>
-        <dependency>
-            <groupId>com.commons.net</groupId>
-            <artifactId>commons-net</artifactId>
-            <version>3.4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.aip</groupId>
-            <artifactId>aip-java-sdk</artifactId>
-            <version>4.11.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.aip</groupId>
-            <artifactId>json</artifactId>
-            <version>20160810</version>
-        </dependency>
-        <dependency>
-            <groupId>com.aip</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
-        </dependency>
-        <dependency>
-            <groupId>com.aip</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.25</version>
-        </dependency>
+		<dependency>
+			<groupId>com.aip</groupId>
+			<artifactId>aip-java-sdk</artifactId>
+			<!--            <version>4.9.0</version>-->
+		</dependency>
+		<dependency>
+			<groupId>com.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
+		<dependency>
+			<groupId>com.commons.net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aip</groupId>
+			<artifactId>aip-java-sdk</artifactId>
+			<version>4.11.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aip</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aip</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aip</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.25</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.baidu.aip</groupId>
@@ -524,17 +524,35 @@
 			<version>1.0.15</version>
 		</dependency>
 
-		 <dependency>
+		<dependency>
 			<groupId>com.aspose</groupId>
 			<artifactId>aspose-words</artifactId>
 			<version>18.5</version>
 			<classifier>jdk16</classifier>
 		</dependency>
-<!--		  <dependency>-->
-<!--			  <groupId>com.aspose</groupId>-->
-<!--			  <artifactId>aspose.words</artifactId>-->
-<!--			  <version>14.2.0</version>-->
-<!--		  </dependency>-->
+		<!--		  <dependency>-->
+		<!--			  <groupId>com.aspose</groupId>-->
+		<!--			  <artifactId>aspose.words</artifactId>-->
+		<!--			  <version>14.2.0</version>-->
+		<!--		  </dependency>-->
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.30</version> <!-- 使用最新版本 -->
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-crypto</artifactId>
+			<version>5.8.23</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.70</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}-${deploy.mode}</finalName>
@@ -616,8 +634,8 @@
 				<configuration>
 					<port>8180</port>
 					<path>/</path>
-                    <uriEncoding>UTF-8</uriEncoding>
-                    <!--<systemProperties>
+					<uriEncoding>UTF-8</uriEncoding>
+					<!--<systemProperties>
                         <JAVA_OPTS>-Xms2048m -Xmx2048m -XX:PermSize=1024m -XX:MaxPermSize=1024m</JAVA_OPTS>
                     </systemProperties>-->
 				</configuration>
@@ -633,7 +651,7 @@
 					<include>applicationContext.xml</include>
 					<include>applicationContext-dataSource.xml</include>
 					<include>applicationContext-resources.xml</include>
-                    <include>applicationContext-timer.xml</include>
+					<include>applicationContext-timer.xml</include>
 					<include>log4j.properties</include>
 					<include>sms.properties</include>
 					<include>memcached.properties</include>
