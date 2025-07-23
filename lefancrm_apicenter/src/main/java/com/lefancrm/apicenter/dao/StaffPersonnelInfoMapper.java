@@ -28,6 +28,10 @@ public interface StaffPersonnelInfoMapper {
 
     StaffPersonnelInfo selectByInfo(Map map);
 
+
+    //离职待结算的人员 工资条完成之后 自动更新为已离职
+    int updateStaffStates(Long staffPerformanceId);
+
     //离职待结算的人员 绩效完成之后 自动更新为已离职
     int updateStaffState(Long staffPerformanceId);
 

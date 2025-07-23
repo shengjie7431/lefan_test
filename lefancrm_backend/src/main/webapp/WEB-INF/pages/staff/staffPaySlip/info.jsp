@@ -1265,7 +1265,7 @@
             },{
                 field: 'basePay',
                 width: 110,
-                title: '基本工资1',
+                title: '基本工资',
                 sort: true,
                 totalRow: true,
                 templet: function(d) {
@@ -1740,7 +1740,7 @@
             },{
                 field: 'basePay',
                 width: 110,
-                title: '基本工资2',
+                title: '基本工资',
                 sort: true,
                 totalRow: true,
                 templet: function(d) {
@@ -2204,7 +2204,7 @@
             },{
                 field: 'basePay',
                 width: 110,
-                title: '基本工资3',
+                title: '基本工资',
                 sort: true,
                 totalRow: true,
                 templet: function(d) {
@@ -2665,7 +2665,7 @@
             },{
                 field: 'basePay',
                 width: 110,
-                title: '基本工资4',
+                title: '基本工资',
                 totalRow: true,
                 templet: function(d) {
                     // 添加千分位分隔符
@@ -3075,7 +3075,7 @@
             },{
                 field: 'basePay',
                 width: 110,
-                title: '基本工资5',
+                title: '基本工资',
                 totalRow: true,
                 templet: function(d) {
                     // 添加千分位分隔符

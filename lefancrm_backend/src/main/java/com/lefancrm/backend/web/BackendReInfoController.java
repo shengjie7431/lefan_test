@@ -9,16 +9,20 @@ import com.lefancrm.backend.dto.SurveyInvestigatorDto;
 import com.lefancrm.backend.dto.SurveyUserClockDto;
 import com.lefancrm.backend.dto.feere.SurveyInvestigatorReInfoDto;
 import com.lefancrm.backend.dto.feere.SurveyReInfoDto;
+import com.lefancrm.backend.dto.financial.FinancialReApply;
 import com.lefancrm.backend.util.DateUtil;
+import com.lefancrm.backend.util.PDFFinaancial;
 import com.lefancrm.base.dto.ApiFinalResponse;
 import com.lefancrm.base.enums.BackendApiMethodEnum;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
@@ -26,6 +30,14 @@ import java.util.*;
 @Controller
 @RequestMapping(value = "/fee")
 public class BackendReInfoController extends BackendBaseController {
+
+    @Value("${survey.file.path.sftp}")
+    public String httpFilePath;
+    @Value("${survey.file.source.sftp}")
+    private String surveySource;
+    @Value("${survey.temp.path}")
+    private String realTempPath;
+
     @RequestMapping(value = "/list")
     public ModelAndView list(HttpServletRequest req, HttpServletResponse rsp) {
         String menuCode = req.getParameter("menuCode");
@@ -230,6 +242,25 @@ public class BackendReInfoController extends BackendBaseController {
                return this.callApiAndOutput(BackendApiMethodEnum.BACKEND_FEE_RE_LIST_NEW, appendMap, req,rsp);
             }else if ("preInfoList".equals(btnCode)){
                 return this.callApiAndOutput(BackendApiMethodEnum.BACKEND_PRE_FEE_RE_LIST, appendMap, req,rsp);
+            } else if ("print".equals(btnCode)){  //打印分支
+                Double cityinDrivingMoney = Double.valueOf(req.getParameter("cityinDrivingMoney"));
+                Double medicalHistoryMoney = Double.valueOf(req.getParameter("medicalHistoryMoney"));
+                Double accommodatioMoney = Double.valueOf(req.getParameter("accommodatioMoney"));
+                Map<String,Object> map = new HashMap<>();
+                map.put("cityinDrivingMoney",cityinDrivingMoney);
+                map.put("medicalHistoryMoney",medicalHistoryMoney);
+                map.put("accommodatioMoney",accommodatioMoney);
+                TypeToken typeToken = null;
+                typeToken = new TypeToken<ApiFinalResponse<List<SurveyInvestigatorReInfoDto>>>() {};
+                ApiFinalResponse apiFinalResponse = this.callApi(typeToken, BackendApiMethodEnum.BACKEND_FEE_RE_LIST_NEW, null, req);
+                List<SurveyInvestigatorReInfoDto> results = (List<SurveyInvestigatorReInfoDto>) apiFinalResponse.getResults();
+                SurveyInvestigatorReInfoDto surveyInvestigatorReInfoDto = results.get(0);
+                File file = PDFFinaancial.generatess(realTempPath + File.separator + "pdf" + File.separator + System.currentTimeMillis(), surveyInvestigatorReInfoDto,map);
+                Map<String,Object> jsonMap = new HashMap<>();
+                jsonMap.put("fileUrl",file.getPath().replace("/mnt/sftp/files/",httpFilePath));
+                String json = sh.zj100.common.util.JsonUtil.objectToJson(jsonMap);
+                this.outputJson(json, rsp);
+
             }
         }
         return this.callApiAndOutput(BackendApiMethodEnum.BACKEND_CAN_BE_SUED_LIST, appendMap, req, rsp);

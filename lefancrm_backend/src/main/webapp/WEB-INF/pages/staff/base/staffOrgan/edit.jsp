@@ -134,8 +134,9 @@
                     <td width="70%">
                         <%-- <div id="organType"></div>--%>
                         <select class="form-control" required="required" name="performance" id="performance">
-                            <option value="0" <c:if test="${staffOrgan.performance == 0}"> selected="selected" </c:if>>绩效发放</option>
-                            <option value="1" <c:if test="${staffOrgan.performance == 1}"> selected="selected" </c:if>>工资条发放</option>
+                            <option value="0" <c:if test="${staffOrgan.performance == 0}"> selected="selected" </c:if>>工资+绩效</option>
+                            <option value="1" <c:if test="${staffOrgan.performance == 1}"> selected="selected" </c:if>>工资+公估绩效</option>
+                            <option value="2" <c:if test="${staffOrgan.performance == 2}"> selected="selected" </c:if>>工资</option>
                         </select>
                     </td>
                 </tr>

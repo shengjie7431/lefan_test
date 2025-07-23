@@ -66,8 +66,9 @@
                         <c:if test="${item.organAttribute == 4}">业务销售</c:if>
                     </td>
                     <td>
-                        <c:if test="${item.performance == 0}">绩效发放</c:if>
-                        <c:if test="${item.performance == 1}">工资条发放</c:if>
+                        <c:if test="${item.performance == 0}">工资+绩效</c:if>
+                        <c:if test="${item.performance == 1}">工资+公估绩效</c:if>
+                        <c:if test="${item.performance == 2}">工资</c:if>
                     </td>
                    <%-- <td>${item.organProductName}</td>--%>
                     <c:if test="${item.state==0}">

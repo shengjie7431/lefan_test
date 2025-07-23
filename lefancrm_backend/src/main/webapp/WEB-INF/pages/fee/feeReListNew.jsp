@@ -540,6 +540,7 @@
                 if((d.reState == 9 || d.reState == 8) && (d.surveyUserId == currentUserId)){
                     _html += '<a class="editA" lay-event="showReason" >查看驳回原因</a><a class="editA" lay-event="bill_upd">提交机构审核</a>'
                 }
+                _html += '<a class="editA" lay-event="print">打印</a>'
             }
 
             return  _html
@@ -773,6 +774,37 @@
                         width: _width,
                         url: '${ctx}/fee/add?btnCode=billUpd&id='+obj.data.id+'&cityinDrivingMoney='+(obj.data.cityinDrivingMoney+obj.data.crossDrivingMoney+obj.data.selfDrivingMoney)+'&medicalHistoryMoney='+(obj.data.medicalHistoryMoney+obj.data.troubleshootingMoney+obj.data.opcTroubleshootingMoney+obj.data.printingMoney+obj.data.otherMoney)+'&accommodatioMoney='+obj.data.accommodatioMoney,
                         // load: true
+                    });
+                }else if (obj.event == 'print'){
+                    $.ajax({
+                        url: '${ctx}/staff/downLoad',
+                        type: 'POST',
+                        data: {
+                            reIds: obj.data.id,
+                            surveyCode: 'print',
+                            pageSize: 10,
+                            pageNum: 1,
+                            cityinDrivingMoney: obj.data.cityinDrivingMoney+obj.data.crossDrivingMoney+obj.data.selfDrivingMoney,
+                            medicalHistoryMoney:obj.data.medicalHistoryMoney+obj.data.troubleshootingMoney+obj.data.opcTroubleshootingMoney+obj.data.printingMoney+obj.data.otherMoney,
+                            accommodatioMoney:obj.data.accommodatioMoney,
+                        },
+                        success: function(res) {
+                            // showToast("打印成功");
+                            // console.log('打印接口调用成功', response);
+                            res = JSON.parse(res)
+                            if (res){
+                                if (res.fileUrl){
+                                    var tempwindow = window.open('_blank');
+                                    tempwindow.location = res.fileUrl
+                                    // window.location.href = res.fileUrl;
+                                }
+                            }else{
+                                alert("下载失败");
+                            }
+                        },
+                        error: function(error) {
+                            console.error('打印接口调用失败', error);
+                        }
                     });
                 }
             })

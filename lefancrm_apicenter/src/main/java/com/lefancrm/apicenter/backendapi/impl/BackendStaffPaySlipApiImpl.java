@@ -580,6 +580,8 @@ public class BackendStaffPaySlipApiImpl  extends BaseServiceImpl implements Back
                     map.put("staffPaySlipId",staffPaySlip.getId());
                     staffPayPersonnelSlipMapper.generateSurveyPayInfoDetailNew(map);
 
+                    //离职待结算的人员 绩效完成之后 自动更新为已离职
+                    staffPersonnelInfoMapper.updateStaffStates(staffPaySlip.getId());
                     //条件1、离职待结算；条件2、合伙的 ，这些人员工资条完成之后 自动更新为已离职
                     staffPersonnelInfoMapper.updateStaffStateByPaySlip(staffPaySlip.getId());
 

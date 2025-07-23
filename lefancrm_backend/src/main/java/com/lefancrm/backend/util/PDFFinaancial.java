@@ -1,6 +1,7 @@
 package com.lefancrm.backend.util;
 
 import com.aspose.words.BreakType;
+import com.lefancrm.backend.dto.feere.SurveyInvestigatorReInfoDto;
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.pdf.*;
@@ -15,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 import java.util.stream.Collectors;
 import com.lefancrm.backend.dto.financial.*;
 
@@ -349,8 +351,7 @@ public class PDFFinaancial {
             Paragraph paragraph = new Paragraph("日常费用报销"+data.getReNo(),font1);
             paragraph.setAlignment(Paragraph.ALIGN_CENTER);
             document.add(paragraph);
-
-            paragraph = new Paragraph(data.getCompanyTitle() ,font2);
+            paragraph = new Paragraph(data.getCompanyTitle()+"                         "+new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(data.getApplyTime()),font2);
             paragraph.setAlignment(Paragraph.ALIGN_LEFT);
             paragraph.setIndentationLeft(30);// 左缩进
 //            paragraph.setIndentationRight(6);// 右缩进
@@ -593,4 +594,243 @@ public class PDFFinaancial {
 
         return result.toString();
     }
+
+    public static File generatess(String filePath, SurveyInvestigatorReInfoDto surveyInvestigatorReInfoDto, Map map){
+            File file = new File(filePath);
+            if (!file.exists() && !file.isDirectory()){
+                file.mkdirs();
+            }
+            file = new File(filePath + File.separator +"费用报销清单打印.pdf");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Document document = new Document();
+            document.setPageSize(PageSize.A4);
+            document.addTitle("Title@sample");
+            document.addAuthor("Author@rensanning");
+            document.addSubject("Subject@iText sample");
+            document.addKeywords("Keywords@iText");
+            document.addCreator("Creator@iText");
+            document.setMargins(10, 20, 30, 40);
+            PdfWriter writer = null;
+            try {
+                writer = PdfWriter.getInstance(document,new FileOutputStream(file));
+            } catch (DocumentException e) {
+                e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            writer.setPdfVersion(PdfWriter.PDF_VERSION_1_2);
+            document.open();
+            try {
+                Font font1  = new Font(bfChinese, 16, Font.BOLD);//
+                Font font2 = new Font(bfChinese, 10, Font.NORMAL);
+                Font font3 = new Font(bfChinese,10,Font.BOLD);
+                Paragraph paragraph = new Paragraph("费用报销清单打印",font1);
+                paragraph.setAlignment(Paragraph.ALIGN_CENTER);
+                document.add(paragraph);
+
+//                paragraph = new Paragraph("111111111111111111111",font2);
+//                paragraph.setAlignment(Paragraph.ALIGN_LEFT);
+//                paragraph.setIndentationLeft(30);// 左缩进
+//            paragraph.setIndentationRight(6);// 右缩进
+//            paragraph.setFirstLineIndent(6);// 首行缩进
+//            paragraph.setSpacingBefore(5f);// 上留白
+//            paragraph.setSpacingAfter(5f);// 下留白
+//            paragraph.setLeading(5f);// 行间距
+//                document.add(paragraph);
+
+                PdfPTable table = new PdfPTable(3);
+                table.setTotalWidth(510);
+                int [] widths = {100,310,100};
+                table.setWidths(widths);
+                table.setLockedWidth(true);
+                table.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.getDefaultCell().setBorder(1);
+                table.getDefaultCell().setPadding(5f);
+//            table.setWidthPercentage(100);
+
+                PdfPCell cell = new PdfPCell(new Phrase("调查员",font2));
+                table.addCell(cell);
+                cell = new PdfPCell(new Phrase(surveyInvestigatorReInfoDto.getSurveyUserName(), font2));
+                cell.setColspan(2);
+                table.addCell(cell);
+
+                cell = new PdfPCell(new Phrase("公司",font2));
+                table.addCell(cell);
+                cell = new PdfPCell(new Phrase("江苏乐凡保险公估有限公司",font2));
+                cell.setColspan(2);
+                table.addCell(cell);
+
+                cell = new PdfPCell(new Phrase("调查机构",font2));
+                table.addCell(cell);
+                cell = new PdfPCell(new Phrase(surveyInvestigatorReInfoDto.getSurveyOrgName(),font2));
+                cell.setColspan(2);
+                table.addCell(cell);
+
+                cell = new PdfPCell(new Phrase("清单名称",font2));
+                table.addCell(cell);
+                cell = new PdfPCell(new Phrase(surveyInvestigatorReInfoDto.getReName(),font2));
+                cell.setColspan(2);
+                table.addCell(cell);
+
+                cell = new PdfPCell(new Phrase("报销状态",font2));
+                table.addCell(cell);
+                cell = new PdfPCell(new Phrase(surveyInvestigatorReInfoDto.getReStateStr(),font2));
+                cell.setColspan(2);
+                table.addCell(cell);
+
+
+                cell = new PdfPCell(new Phrase("关联案件数",font2));
+                table.addCell(cell);
+                cell = new PdfPCell(new Phrase(String.valueOf(surveyInvestigatorReInfoDto.getTotalCaseNum()),font2));
+                cell.setColspan(2);
+                table.addCell(cell);
+
+                cell = new PdfPCell(new Phrase("费用报销合计",font2));
+                table.addCell(cell);
+                cell = new PdfPCell(new Phrase(surveyInvestigatorReInfoDto.getTotalMoney().toString(),font2));
+                cell.setColspan(2);
+                table.addCell(cell);
+
+                cell = new PdfPCell(new Phrase("件均报销金额",font2));
+                table.addCell(cell);
+                cell = new PdfPCell(new Phrase(surveyInvestigatorReInfoDto.getAvgMoney()+"元/件",font2));
+                cell.setColspan(2);
+                table.addCell(cell);
+
+                cell = new PdfPCell(new Phrase("件均环比上月",font2));
+                table.addCell(cell);
+                cell = new PdfPCell(new Phrase(surveyInvestigatorReInfoDto.getHuanbiMoney()+"%",font2));
+                cell.setColspan(2);
+                table.addCell(cell);
+
+                cell = new PdfPCell(new Phrase("机构件均",font2));
+                table.addCell(cell);
+                String formattedAvgMoney = String.format("%.2f", surveyInvestigatorReInfoDto.getOrgAvgMoney());
+                cell = new PdfPCell(new Phrase(formattedAvgMoney+"元/件",font2));
+                cell.setColspan(2);
+                table.addCell(cell);
+
+//                cell = new PdfPCell(new Phrase("市内交通费",font2));
+//                table.addCell(cell);
+//                cell = new PdfPCell(new Phrase(String.valueOf(surveyInvestigatorReInfoDto.getCityinDrivingMoney()),font2));
+//                cell.setColspan(2);
+//                table.addCell(cell);
+////
+//                cell = new PdfPCell(new Phrase("病史费（含复印费）",font2));
+//                table.addCell(cell);
+//                cell = new PdfPCell(new Phrase(String.valueOf(surveyInvestigatorReInfoDto.getMedicalHistoryMoney()),font2));
+//                cell.setColspan(2);
+//                table.addCell(cell);
+//
+//                cell = new PdfPCell(new Phrase("住院排查费用",font2));
+//                table.addCell(cell);
+//                cell = new PdfPCell(new Phrase(String.valueOf(surveyInvestigatorReInfoDto.getTroubleshootingMoney()),font2));
+//                cell.setColspan(2);
+//                table.addCell(cell);
+//
+//                cell = new PdfPCell(new Phrase("门诊排查费用",font2));
+//                table.addCell(cell);
+//                cell = new PdfPCell(new Phrase(String.valueOf(surveyInvestigatorReInfoDto.getOpcTroubleshootingMoney()),font2));
+//                cell.setColspan(2);
+//                table.addCell(cell);
+//
+//                cell = new PdfPCell(new Phrase("体检报告打印费",font2));
+//                table.addCell(cell);
+//                cell = new PdfPCell(new Phrase(String.valueOf(surveyInvestigatorReInfoDto.getPrintingMoney()),font2));
+//                cell.setColspan(2);
+//                table.addCell(cell);
+//
+//                cell = new PdfPCell(new Phrase("住宿费",font2));
+//                table.addCell(cell);
+//                cell = new PdfPCell(new Phrase(String.valueOf(surveyInvestigatorReInfoDto.getAccommodatioMoney()),font2));
+//                cell.setColspan(2);
+//                table.addCell(cell);
+//
+//                cell = new PdfPCell(new Phrase("跨地市交通费（汽车、火车、飞机）",font2));
+//                table.addCell(cell);
+//                cell = new PdfPCell(new Phrase(String.valueOf(surveyInvestigatorReInfoDto.getCrossDrivingMoney()),font2));
+//                cell.setColspan(2);
+//                table.addCell(cell);
+//
+//                cell = new PdfPCell(new Phrase("跨地市交通费（自驾）",font2));
+//                table.addCell(cell);
+//                cell = new PdfPCell(new Phrase(String.valueOf(surveyInvestigatorReInfoDto.getSelfDrivingMoney()),font2));
+//                cell.setColspan(2);
+//                table.addCell(cell);
+//
+//                cell = new PdfPCell(new Phrase("其他费用",font2));
+//                table.addCell(cell);
+//                cell = new PdfPCell(new Phrase(String.valueOf(surveyInvestigatorReInfoDto.getOtherMoney()),font2));
+//                cell.setColspan(2);
+//                table.addCell(cell);
+
+
+                int count1 = 0;
+                Double value = (Double) map.get("cityinDrivingMoney");
+                if (value  != 0) {
+                    count1++;
+                }
+                Double value1 = (Double) map.get("medicalHistoryMoney");
+                if (value1  != 0) {
+                    count1++;
+                }
+                Double value2 = (Double) map.get("accommodatioMoney");
+                if (value2  != 0) {
+                    count1++;
+                }
+                cell = new PdfPCell(new Phrase("发票",font2));
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_MIDDLE);
+                cell.setRowspan(count1);
+                table.addCell(cell);
+
+                if (value  != 0) {
+                    cell = new PdfPCell(new Phrase("交通费", font2));
+                    table.addCell(cell);
+                    String costMoney = String.valueOf(map.get("cityinDrivingMoney"));
+                    cell = new PdfPCell(new Phrase(costMoney, font2));
+                    cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                    cell.disableBorderSide(Rectangle.LEFT);
+                    table.addCell(cell);
+                }
+                if (value1  != 0) {
+                    cell = new PdfPCell(new Phrase("病案调阅费", font2));
+                    table.addCell(cell);
+                    String costMoney = String.valueOf(map.get("medicalHistoryMoney"));
+                    cell = new PdfPCell(new Phrase(costMoney, font2));
+                    cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                    cell.disableBorderSide(Rectangle.LEFT);
+                    table.addCell(cell);
+                }
+                if (value2  != 0) {
+                    cell = new PdfPCell(new Phrase("住宿费", font2));
+                    table.addCell(cell);
+                    String costMoney = String.valueOf(map.get("accommodatioMoney"));
+                    cell = new PdfPCell(new Phrase(costMoney, font2));
+                    cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                    cell.disableBorderSide(Rectangle.LEFT);
+                    table.addCell(cell);
+                }
+
+
+                paragraph = new Paragraph();
+                paragraph.add(table);
+                paragraph.setIndentationLeft(6);// 左缩进
+                paragraph.setIndentationRight(6);// 右缩进
+                paragraph.setFirstLineIndent(6);// 首行缩进
+                paragraph.setSpacingBefore(5f);// 上留白
+                paragraph.setSpacingAfter(5f);// 下留白
+                paragraph.setLeading(5f);// 行间距
+                document.add(paragraph);
+
+                document.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return file;
+        }
 }

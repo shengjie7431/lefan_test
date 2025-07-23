@@ -373,8 +373,9 @@ public class BackendStaffPerformanceApiImpl extends BaseServiceImpl implements B
                 }
             }
 
-        }else if("superiorManager-first-step".equals(btnCode)){//分管总一审，待机构经理审核
-            //先更新自己的审核状态
+        }
+        else if("superiorManager-first-step".equals(btnCode)){//分管总一审，待机构经理审核
+
             Map map = new HashMap<>();
             map.put("staffPerformanceId",staffPerformance.getId());
             map.put("organManagerUserId",userInfo.getUserId());
@@ -448,8 +449,8 @@ public class BackendStaffPerformanceApiImpl extends BaseServiceImpl implements B
                     }
                 }
             }
-        }else if("organManager-step".equals(btnCode)){ //机构经理审核
-            //先更新自己的审核状态
+        }
+        else if("organManager-step".equals(btnCode)){ //机构经理审核
             Map map = new HashMap<>();
             map.put("staffPerformanceId",staffPerformance.getId());
             map.put("organManagerUserId",userInfo.getUserId());
@@ -508,8 +509,8 @@ public class BackendStaffPerformanceApiImpl extends BaseServiceImpl implements B
                 }
             }
             staffPerformanceMapper.updateByPrimaryKey(staffPerformance);
-        }else if("superiorManager-step".equals(btnCode)){ //分管总二审
-            //先更新自己的审核状态
+        }
+        else if("superiorManager-step".equals(btnCode)){ //分管总二审
             Map map = new HashMap<>();
             map.put("staffPerformanceId",staffPerformance.getId());
             map.put("organManagerUserId",userInfo.getUserId());

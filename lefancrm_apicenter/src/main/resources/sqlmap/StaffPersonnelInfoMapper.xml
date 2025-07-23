@@ -1379,11 +1379,18 @@
         limit 1;
     </select>
 
+    <update id="updateStaffStates" parameterType="java.lang.Long" >
+        update staff_personnel_info s
+            left JOIN (select staff_personnel_id from staff_pay_personnel_slip where staff_pay_slip_id = #{staffPerformanceId,jdbcType=BIGINT}) a on s.id = a.staff_personnel_id
+            set staff_state = 6
+        where s.staff_state =3 and a.staff_personnel_id is not null and s.performance=1;
+    </update>
+
     <update id="updateStaffState" parameterType="java.lang.Long" >
         update staff_personnel_info s
         left JOIN (select staff_personnel_id from staff_performance_personnel where staff_performance_id = #{staffPerformanceId,jdbcType=BIGINT}) a on s.id = a.staff_personnel_id
         set staff_state = 6
-        where s.staff_state =3 and a.staff_personnel_id is not null;
+        where s.staff_state =3 and a.staff_personnel_id is not null and s.performance=0;
     </update>
 
     <select id="selectStaffPersonelInfoByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">

@@ -4,11 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.google.gson.reflect.TypeToken;
 import com.lefancrm.backend.dto.*;
+import com.lefancrm.backend.dto.feere.SurveyInvestigatorReInfoDto;
 import com.lefancrm.backend.dto.hzReport.ScoreDto;
 import com.lefancrm.backend.dto.staff.*;
 import com.lefancrm.backend.dto.staff.StaffOrganDepartmentDto;
 import com.lefancrm.backend.util.ExcelReport;
 import com.lefancrm.backend.util.FileZipUtil;
+import com.lefancrm.backend.util.PDFFinaancial;
 import com.lefancrm.backend.util.StaffExcel;
 import com.lefancrm.base.dto.ApiFinalResponse;
 import com.lefancrm.base.enums.BackendApiMethodEnum;
@@ -51,6 +53,12 @@ public class BackendStaffController extends BackendBaseController{
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     @Value("${survey.account.path}")
     private String accountExcelPath;
+    @Value("${survey.file.path.sftp}")
+    public String httpFilePath;
+    @Value("${survey.file.source.sftp}")
+    private String surveySource;
+    @Value("${survey.temp.path}")
+    private String realTempPath;
 
     /**
     *   list
@@ -1450,6 +1458,24 @@ public class BackendStaffController extends BackendBaseController{
         //工资条模板导出
         else if("ddDataModel".equals(surveyCode)){
             ExcelReport.reportDdDataModel(null, new HashMap<>(), rsp);
+        }else if ("print".equals(surveyCode)){  //打印分支
+            Double cityinDrivingMoney = Double.valueOf(req.getParameter("cityinDrivingMoney"));
+            Double medicalHistoryMoney = Double.valueOf(req.getParameter("medicalHistoryMoney"));
+            Double accommodatioMoney = Double.valueOf(req.getParameter("accommodatioMoney"));
+            Map<String,Object> map = new HashMap<>();
+            map.put("cityinDrivingMoney",cityinDrivingMoney);
+            map.put("medicalHistoryMoney",medicalHistoryMoney);
+            map.put("accommodatioMoney",accommodatioMoney);
+            TypeToken typeToken = null;
+            typeToken = new TypeToken<ApiFinalResponse<List<SurveyInvestigatorReInfoDto>>>() {};
+            ApiFinalResponse apiFinalResponse = this.callApi(typeToken, BackendApiMethodEnum.BACKEND_FEE_RE_LIST_NEW, null, req);
+            List<SurveyInvestigatorReInfoDto> results = (List<SurveyInvestigatorReInfoDto>) apiFinalResponse.getResults();
+            SurveyInvestigatorReInfoDto surveyInvestigatorReInfoDto = results.get(0);
+            File file = PDFFinaancial.generatess(realTempPath + File.separator + "pdf" + File.separator + System.currentTimeMillis(), surveyInvestigatorReInfoDto,map);
+            Map<String,Object> jsonMap = new HashMap<>();
+            jsonMap.put("fileUrl",file.getPath().replace("/mnt/sftp/files/",httpFilePath));
+            String json = sh.zj100.common.util.JsonUtil.objectToJson(jsonMap);
+            this.outputJson(json, rsp);
         }
     }
 
